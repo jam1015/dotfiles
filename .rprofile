@@ -1,0 +1,11 @@
+invisible(
+	.libPaths(
+		c(file.path("/Users/jordanmandel/R_packs",R.Version()$major),.libPaths())
+	)
+)
+invisible(
+options(repos = c(options()$repos,BiocManager::repositories()))
+)
+
+
+print("welcome to R JordanadroJ R ot emoclew")

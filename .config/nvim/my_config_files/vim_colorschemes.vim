@@ -1,0 +1,8 @@
+		call minpac#add('bluz71/vim-moonfly-colors')
+		call minpac#add('morhetz/gruvbox')
+		call minpac#add('GlennLeo/cobalt2')
+		call minpac#add('gkjgh/cobalt')
+		call minpac#add('bluz71/vim-nightfly-guicolors')
+		call minpac#add('sickill/vim-sunburst')
+		call minpac#add('NLKNguyen/papercolor-theme')
+		call minpac#add('chriskempson/vim-tomorrow-theme')
