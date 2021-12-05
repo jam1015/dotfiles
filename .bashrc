@@ -130,7 +130,6 @@ alias l.='ls -d .* --color=auto'
 alias ll='ls -l --color=auto'
 export EDITOR=nvim
 alias vi='nvim'
-alias vim='nvim'
 export VISUAL=nvim #use nvim as default editor
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
