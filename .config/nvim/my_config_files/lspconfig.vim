@@ -4,6 +4,10 @@ require'lspconfig'.sqlls.setup{cmd = {"sql-language-server","up","--method","std
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.r_language_server.setup{}
 require'lspconfig'.texlab.setup{}
+require'lspconfig'.jsonls.setup{}
+require'lspconfig'.cssls.setup{}
+require'lspconfig'.eslint.setup{}
+require'lspconfig'.html.setup{}
 -- will switch to better markdown tool like neuron.nvim
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -46,7 +50,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<leader>gf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
 end
 
@@ -68,3 +72,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 end
 EOF
+
+"eslint
+autocmd BufWritePre <buffer> <cmd>EslintFixAll<CR>

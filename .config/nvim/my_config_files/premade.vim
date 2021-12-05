@@ -1,7 +1,6 @@
 " basic vimrc taken from https://dash9.dev/posts/nvim-1/
 " ~/.config/nvim/init.vim
 set nomodeline                  " security vulnerabiliy to enable
-set scrolloff=3                 " show a few lines around cursor
 set mouse=a			" enable mouse in all modes
 "set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 let c_comment_strings=1

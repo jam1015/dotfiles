@@ -1,5 +1,9 @@
 " basic vimrc taken from https://dash9.dev/posts/nvim-1/
 source ~/.config/nvim/my_config_files/premade.vim
+if has('nvim')
+else
+source ~/.vim/my_config_files/other_base_vim.vim
+endif "for having nvim
 "---- personal virc----------------------
 " defining cofmands based on minpac
 packadd minpac
@@ -19,6 +23,7 @@ source ~/.config/nvim/my_config_files/minpac_setup.vim
 
 source ~/.config/nvim/my_config_files/nvim_plugins.vim
 source ~/.config/nvim/my_config_files/nvim_colorschemes.vim
+
 
 		else "nvim packages
 		endif
@@ -53,13 +58,17 @@ nnoremap ^ 0
 "---------- setting other settings -----------
 "
 "to let vim have correct colors in tmux
-set termguicolors
+"set termguicolors
 
 "other colorscheme commands
 highlight Comment cterm=italic
 
 "Actually setting  the colorscheme ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+if has('nvim')
 colorscheme nightfox
+else
+endif
 
 set hlsearch
 "toggles relnum vs absnum
@@ -74,9 +83,17 @@ augroup END
 map Q gq
 set number
 set undofile "persistent undo
+if has('nvim')
 set undodir=~/.config/nvim/undodir "the folder where the undo history is kept rather than the local directory for the file
+else
+set undodir=~/.vim/undodir
+endif
+
+set nrformats-=octal
 set autoindent
-set smartindent
+set scrolloff=3                 " show a few lines around cursor
+set display=truncate
+"set smartindent
 set shiftwidth=4 "how much indentation from >
 set softtabstop=4 "lets us delete by tabs when expandtab is on
 set tabstop=4
@@ -92,7 +109,9 @@ set listchars=
 set ignorecase
 set smartcase
 set listchars+=tab:··░
+if has('nvim')
 set listchars+=lead:·
+endif
 set listchars+=trail:␣
 set listchars+=extends:»
 set listchars+=precedes:«
@@ -111,7 +130,7 @@ nmap <silent> <leader>* yiw<Esc>: let @/ = @"" <CR> :set hls <CR>
 "remap omnicomplete
 inoremap <C-j> <C-x><C-o>
 
-filetype plugin on
+filetype plugin indent on
 if exists('#vim_help') "formatting for vim help; show bars/asterisks
 	augroup! vim_help
 endif
@@ -137,4 +156,4 @@ cnoreabbrev <expr> relp  getcmdtype() == ":" && getcmdline() == "relp" ? "Relp" 
 cnoreabbrev <expr> telp  getcmdtype() == ":" && getcmdline() == "telp" ? "Telp" : "telp"
 cnoreabbrev <expr> belp  getcmdtype() == ":" && getcmdline() == "belp" ? "Belp" : "belp"
 
-echo "init.vim sourced"
+"echo "init.vim sourced"

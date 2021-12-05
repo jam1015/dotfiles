@@ -1,15 +1,13 @@
 
-		call minpac#add('overcache/NeoSolarized')
-		call minpac#add('folke/tokyonight.nvim', {'branch': 'main'})
 		call minpac#add('EdenEast/nightfox.nvim')
 		call minpac#add('eddyekofo94/gruvbox-flat.nvim')
 		call minpac#add('ishan9299/nvim-solarized-lua')
 		call minpac#add('tanvirtin/monokai.nvim')
-		call minpac#add('overcache/NeoSolarized')
 		call minpac#add('marko-cerovac/material.nvim')
 		"material -----------------
 		lua vim.g.material_style = 'deep ocean' 
 		"deep ocean, oceanic, palenight, lighter, darker
+
 		lua <<EOF
 		 require('material').setup({
 
@@ -54,7 +52,7 @@ EOF
 			"plugins for motion in nvim
 			call minpac#add('jalvesaq/Nvim-R',{'branch': 'stable','type': 'opt'}) 
 			call minpac#add('kyazdani42/nvim-web-devicons')
-
+call minpac#add('wuelnerdotexe/vim-enfocado')
 
 " gruvbox -----------------------------
 let g:gruvbox_contrast_light='soft'
@@ -64,9 +62,11 @@ let g:gruvbox_italic=1
 let g:gruvbox_improved_warnings=1
 
 "---- folke/tokyonight.nvim
+call minpac#add('folke/tokyonight.nvim', {'branch': 'main'})
 let g:tokyonight_style = "day"
 
  "------------------------- overcache/NeoSolarized
+		call minpac#add('overcache/NeoSolarized')
 " Default value is "normal", Setting this option to "high" or "low" does use the
 " same Solarized palette but simply shifts some values up or down in order to
 " expand or compress the tonal range displayed.
