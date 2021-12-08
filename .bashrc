@@ -136,6 +136,12 @@ export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more abou
 alias van="man -P 'nvim +Man!'" #use vim as man pager
 set -o vi #use vi editing mode in the terminal
 
+export todo="$HOME/Documents/diaries/to_do/to_do.md"
+export tododir="$HOME/Documents/diaries/to_do/"
+export vimrc="$HOME/.config/nvim/init.vim"
+export thoughts="$HOME/Documents/diaries/thoughts/thoughts.md"
+export thoughtsdir="$HOME/Documents/thoughts"
+
 export PATH=$PATH:~/doom-emacs/bin
 export PATH=$PATH:"/usr/local/opt/llvm/bin"
 #might help for sqlite

@@ -20,7 +20,7 @@ fi
 
 # ``````````Vim configuration things`````
 alias vi='nvim'
-alias vim='nvim'
+#alias vim='nvim'
 export VISUAL=nvim #use nvim as default editor
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
@@ -58,17 +58,28 @@ SAVEHIST=100000 #stting the history length
 bindkey "^R" history-incremental-pattern-search-backward
 
 # setting some useful environment variables
-export todo="$HOME/Documents/to_do/to_do.md"
+export todo="$HOME/Documents/diaries/to_do/to_do.md"
+export tododir="$HOME/Documents/diaries/to_do/"
 export vimrc="$HOME/.config/nvim/init.vim"
+export thoughts="$HOME/Documents/diaries/thoughts/thoughts.md"
+export thoughtsdir="$HOME/Documents/thoughts"
 export tokens=$HOME/tokens.txt
 export swap="$HOME/.local/share/nvim/swap"
 #setting purple prompt
 #PS1="%B%F{magenta}%n@%m %3~ %#%f%b "
+#
 PS1="%B%F{magenta}%3~ %#%f%b "
 alias cb=clipboard
 alias python='python3'
+alias ll='ls -lG'
+alias ls='ls -G'
 
 defaults write -g InitialKeyRepeat -int 15 #normal minimum is 15 (225 ms)
 defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
+
+if [[ $TERM == "xterm-kitty" ]]; then
+alias ssh="kitty +kitten ssh"
+echo "changed ssh for kitty"
+fi
 
 echo ".zshrc sourced"
