@@ -50,7 +50,6 @@ EOF
 		call minpac#add('mhartington/oceanic-next')
 		call minpac#add('projekt0n/github-nvim-theme')		
 			"plugins for motion in nvim
-			call minpac#add('jalvesaq/Nvim-R',{'branch': 'stable','type': 'opt'}) 
 			call minpac#add('kyazdani42/nvim-web-devicons')
 call minpac#add('wuelnerdotexe/vim-enfocado')
 
@@ -63,7 +62,7 @@ let g:gruvbox_improved_warnings=1
 
 "---- folke/tokyonight.nvim
 call minpac#add('folke/tokyonight.nvim', {'branch': 'main'})
-let g:tokyonight_style = "day"
+let g:tokyonight_style = "night"
 
  "------------------------- overcache/NeoSolarized
 		call minpac#add('overcache/NeoSolarized')

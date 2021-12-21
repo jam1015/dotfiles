@@ -20,9 +20,9 @@ tnoremap <Esc> <C-\><C-n>
 " ":augroup vimStartup | au! | augroup END"
 "silent! augroup! vimStartup
 
-if exists('#vimStartup')
-	augroup! vimStartup
-endif
+"if exists('#vimStartup')
+	"augroup! vimStartup
+"endif
 
 augroup vimStartup
 	autocmd!

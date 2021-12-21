@@ -1,5 +1,5 @@
-		call minpac#add('tpope/vim-unimpaired',{'type': 'opt'})
-		call minpac#add('lervag/vimtex',{'type': 'opt'}) 
+		call minpac#add('tpope/vim-unimpaired')",{'type': 'opt'})
+		call minpac#add('lervag/vimtex')",{'type': 'opt'}) 
 		call minpac#add("inkarkat/vim-visualrepeat")
 		call minpac#add('kana/vim-textobj-user')
 		call minpac#add('kana/vim-textobj-entire')
@@ -8,3 +8,5 @@
 		call minpac#add('tpope/vim-surround')
 		call minpac#add('bronson/vim-visual-star-search')
 		call minpac#add("tpope/vim-repeat")
+		call minpac#add('qpkorr/vim-bufkill')
+		call minpac#add("kevinoid/vim-jsonc")

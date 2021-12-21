@@ -1,0 +1,26 @@
+{
+	//	"languageserver": {
+	//		"R": {
+	//			"command": "/usr/bin/R",
+	//			"args": [
+	//				"--slave",
+	//				"-e",
+	//				"languageserver::run()"
+	//			],
+	//			"filetypes": [
+	//				"r"
+	//			]
+	//		}
+	//	},
+	// Sql formatting
+	"sql.formatOptions": {
+		"indent": "\t"
+	},
+	"python.formatting.provider": "yapf",
+	"python.formatting.autopep8Path": "/Library/Frameworks/Python.framework/Versions/3.8/bin/autopep8",
+	"python.formatting.yapfPath": "/Library/Frameworks/Python.framework/Versions/3.8/bin/yapf",
+	"html.autoClosingTags": true,
+	"diagnostic.virtualText": false,
+	"diagnostic.checkCurrentLine": false
+}
+
