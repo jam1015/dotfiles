@@ -2,37 +2,36 @@ font:
   # The normal (roman) font face to use.
   # Style can be specified to pick a specific face.
   normal:
-    family: Courier Prime
+    family: Courier
     style: Regular
-    # family: "Fira Mono"
-    # family: "Source Mono Pro"
-    # style: Retina
-
-  # The bold font face
   bold:
-    family: Courier Prime
+    family: Courier
     style: Bold
-    # family: "Fira Mono"
-    # family: "Source Mono Pro"
-
-  # The italic font face
   italic:
-    family: Courier Prime
+    family: Courier
     style: Italic
-      #style: "Light Italic"
-    # style: "Light Oblique"
-    # family: "Fira Mono"
-    # family: "Source Mono Pro"
-    # style: "Medium Italic"
   bold_italic:
-    family: Courier Prime
+    family: Courier
     style: Bold Italic
 
-  # Point size of the font
-  size: 15
+  #  normal:
+  #    family: Courier
+  #    style: Regular
+  #  bold:
+  #    family: Courier
+  #    style: Bold
+  #  italic:
+  #    family: Courier
+  #    style: Italic
+  #  bold_italic:
+  #    family: Courier
+  #    style: Bold Italic
 
-env:
-  TERM: alacritty-direct
+  # Point size of the font
+  size: 12
+
+#env:
+  #TERM: alacritty-direct
 
 
     ## github Alacritty Colors
@@ -178,9 +177,9 @@ env:
     # Font family
     #
     # Default:
-    #   - (macOS) Menlo
+    #   - (macOS) Courier
     #   - (Linux/BSD) monospace
-    #   - (Windows) Consolas
+    #   - (Windows) Courier
     #family: monospace
 
     # The `style` can be specified to pick a specific face.
