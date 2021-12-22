@@ -42,6 +42,11 @@ recursive_ln()
 		return 1
 	fi
 
+	if [ -L "$2" ]
+	then
+		echo_indent $3 "symlink already exists, not changing"
+		return 1
+	fi
 	# checking if the file already exists
 
 	if [ -d "$1" ] && [ -d "$2" ]
