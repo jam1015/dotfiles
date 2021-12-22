@@ -76,7 +76,7 @@ recursive_ln()
 		echo_indent $3 "both directories, system nonempty: recursively symlinking contents"
 		for flenme in "$1"/.*
 		do
-			echo "$flename"
+			echo "$flenme"
 		done
 
 		for fle in "$1"/.*
