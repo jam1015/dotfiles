@@ -99,4 +99,4 @@ recursive_ln()
 	fi
 }
 
-recursive_ln ~/dotfiles ~ 0
+recursive_ln ~/dotfiles/.config ~/.config 0
