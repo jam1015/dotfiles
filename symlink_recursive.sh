@@ -40,8 +40,7 @@ recursive_ln()
 			fle_used="$(basename -- $fle)"
 			if [ "$fle_used" != '..' ] && [ "$fle_used" != '.' ] && [ "$fle_used" != 'symlink_recursive.sh' ] && [ fle_used!="dotfiles" ]
 			then
-				base=$(basename "$fle")
-				recursive_ln "$1/$fle" "$2/$base"
+				recursive_ln "$1/$fle_used" "$2/$fle_used"
 			fi
 		done
 		return 0
