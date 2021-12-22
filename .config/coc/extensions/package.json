@@ -7,6 +7,7 @@
     "coc-lua": ">=1.0.1",
     "coc-pyright": ">=1.1.194",
     "coc-r-lsp": ">=1.2.1",
+    "coc-sh": ">=0.6.0",
     "coc-sql": ">=0.9.0",
     "coc-tsserver": ">=1.8.6",
     "coc-vimlsp": ">=0.12.5"
