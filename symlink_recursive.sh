@@ -52,47 +52,43 @@ recursive_ln()
 		return 1
 	fi
 
-	if [ -f "$1" ] &&  [ ! -f "$2" ]
-	then
-		echo_indent $n_indents "linking $1 to $2"
-		#ln -sv $1 $2
-		return 0
 
-	fi
 
 
 # Case where they are both directories
-	if [ -d "$1" ] && [ -d "$2" ]
+if [ -d "$1" ] && [ -d "$2" ]
+then
+	# if the existing system directory is empty
+	if [ $(ls -A "$2" | wc -l) -eq 0 ] 
 	then
-
-		# if the existing system directory is empty
-		if [ $(ls -A "$2" | wc -l) -eq 0 ] 
-		then
-			echo_indent $3 "linking directory to empty system directory"
-			#ln -svn $1 $2
-			return 0
-		fi
-
-		echo_indent $3 "both directories, system nonempty: recursively symlinking contents"
-
-		for fle in "$1"/.* "$1"/*
-		do
-			echo_indent $3 '------------------------------------------'
-			echo_indent $3 "file is $fle"
-			fle_used="$(basename -- $fle)"
-			echo_indent $3 "basename is $fle_used"
-			if [ "$fle_used" != '..' ] && [ "$fle_used" != '.' ] && [ "$fle_used" != 'symlink_recursive.sh' ] && [ "$fle_used" != "dotfiles" ] && [ "$fle_used" != "README.md" ] && [ "$fle_used" != "dotfiles/" ] && [ "$fle_used" != ".git" ]
-			then
-				echo_indent $3 "applying recursion"
-				#adding and subtracting indent because it is a global variable
-				n_indents=$((n_indents+1))
-				recursive_ln "$1/$fle_used" "$2/$fle_used" $((n_indents))
-				n_indents=$((n_indents-1))
-			else
-				echo_indent $3 "file rejected for recursion"
-			fi
-		done
+		echo_indent $3 "linking directory to empty system directory"
+		#ln -svn $1 $2
+		return 0
 	fi
+
+	echo_indent $3 "both directories, system nonempty: recursively symlinking contents"
+
+	for fle in "$1"/.* "$1"/*
+	do
+		echo_indent $3 '------------------------------------------'
+		echo_indent $3 "file is $fle"
+		fle_used="$(basename -- $fle)"
+		echo_indent $3 "basename is $fle_used"
+		if [ "$fle_used" != '..' ] && [ "$fle_used" != '.' ] && [ "$fle_used" != 'symlink_recursive.sh' ] && [ "$fle_used" != "dotfiles" ] && [ "$fle_used" != "README.md" ] && [ "$fle_used" != "dotfiles/" ] && [ "$fle_used" != ".git" ]
+		then
+			echo_indent $3 "applying recursion"
+			#adding and subtracting indent because it is a global variable
+			n_indents=$((n_indents+1))
+			recursive_ln "$1/$fle_used" "$2/$fle_used" $((n_indents))
+			n_indents=$((n_indents-1))
+		else
+			echo_indent $3 "file rejected for recursion"
+		fi
+	done
+	fi
+
+	echo "linking $1 and $2"
+	ln -sv $1 $2
 }
 
 recursive_ln ~/dotfiles/.config ~/.config 0
