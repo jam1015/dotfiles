@@ -62,7 +62,7 @@ then
 	if [ $(ls -A "$2" | wc -l) -eq 0 ] 
 	then
 		echo_indent $3 "linking directory to empty system directory"
-		#ln -svn $1 $2
+		ln -svn $1 $2
 		return 0
 	fi
 
@@ -85,10 +85,12 @@ then
 			echo_indent $3 "file rejected for recursion"
 		fi
 	done
+
+	return 0
 	fi
 
 	echo "linking $1 and $2"
 	ln -sv $1 $2
 }
 
-recursive_ln ~/dotfiles/.config ~/.config 0
+recursive_ln ~/dotfiles/ ~/ 0
