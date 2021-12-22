@@ -52,11 +52,11 @@ recursive_ln()
 		return 1
 	fi
 
-	if [ -f "$1" ] && ![ -f $2 ]
-		echo_indent $n_indents "linking $1 to $2"
-		ln -sv $1 $2
-		return 0
+	if [ -f "$1" ] &&  [ ! -f "$2" ]
 	then
+		echo_indent $n_indents "linking $1 to $2"
+		#ln -sv $1 $2
+		return 0
 
 	fi
 
@@ -67,10 +67,10 @@ recursive_ln()
 
 		# if the existing system directory is empty
 		if [ $(ls -A "$2" | wc -l) -eq 0 ] 
-			echo_indent $3 "linking directory to empty system directory"
-			ln -svn $1 $2
-			return 0
 		then
+			echo_indent $3 "linking directory to empty system directory"
+			#ln -svn $1 $2
+			return 0
 		fi
 
 		echo_indent $3 "both directories, system nonempty: recursively symlinking contents"
