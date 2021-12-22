@@ -53,7 +53,7 @@ recursive_ln()
 			echo_indent $3 "file is $fle"
 			fle_used="$(basename -- $fle)"
 			echo_indent $3 "basename is $fle_used"
-			if [ "$fle_used" != '..' ] && [ "$fle_used" != '.' ] && [ "$fle_used" != 'symlink_recursive.sh' ] && [ fle_used!="dotfiles" ] && [ fle_used!="README.md" ] &&[ fle_used!="dotfiles/" ]
+			if [ "$fle_used" != '..' ] && [ "$fle_used" != '.' ] && [ "$fle_used" != 'symlink_recursive.sh' ] && [ fle_used!="dotfiles" ] && [ fle_used!="README.md" ] && [ fle_used!="dotfiles/" ] && [ fle_used!=".git" ]
 			then
 				echo_indent $3 "applying recursion"
 				n_indents=$((n_indents+1))
