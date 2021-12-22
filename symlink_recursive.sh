@@ -5,6 +5,8 @@
 # then run this script to recursively copy all of the files
 # TODO use basename in declaration of loop rather than inside the loop
 # look up `--` syntax used with basename
+#ln: failed to create symbolic link ‘/ihome/eprochownik/jam526/.config/.config’: File exists
+#ln: failed to create symbolic link ‘/ihome/eprochownik/jam526/dotfiles’: File exists
 echo_indent()
 {
 	i=0
@@ -58,7 +60,7 @@ recursive_ln()
 			echo_indent $3 "file is $fle"
 			fle_used="$(basename -- $fle)"
 			echo_indent $3 "basename is $fle_used"
-			if [ "$fle_used" != '..' ] && [ "$fle_used" != '.' ] && [ "$fle_used" != 'symlink_recursive.sh' ] && [ fle_used!="dotfiles" ] && [ fle_used!="README.md" ] && [ fle_used!="dotfiles/" ] && [ fle_used!=".git" ]
+			if [ "$fle_used" != '..' ] && [ "$fle_used" != '.' ] && [ "$fle_used" != 'symlink_recursive.sh' ] && [ "$fle_used" != "dotfiles" ] && [ "$fle_used" !="README.md" ] && [ "fle_used" != "dotfiles/" ] && [ "$fle_used" != ".git" ]
 			then
 				echo_indent $3 "applying recursion"
 				n_indents=$((n_indents+1))
