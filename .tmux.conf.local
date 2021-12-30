@@ -1,6 +1,5 @@
 # -- user customizations -------------------------------------------------------
 # this is the place to override or undo settings
-set -g default-terminal 'tmux-256color' #colors!
 set -gs escape-time 1                     # faster command sequences
 set -sg repeat-time 300                   # increase repeat timeout
 set -g display-panes-time 1000 # slightly longer pane indicators display time

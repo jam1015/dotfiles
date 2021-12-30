@@ -19,6 +19,7 @@ fi
 # <<< conda initialize <<<
 
 # ``````````Vim configuration things`````
+export vimrc="$HOME/.config/nvim/init.vim"
 alias vi='nvim'
 #alias vim='nvim'
 export VISUAL=nvim #use nvim as default editor
@@ -33,6 +34,8 @@ export CFLAGS="-fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O
 
 export LDLIBS="-lcs50 -lm"
 
+export FLASK_DEBUG=1
+export API_KEY=pk_c16b282717334bbeaae03699c19a03e1
 
 # ````````````` Not sure what these settings are for
 export LIBRARY_PATH=/usr/local/lib
@@ -41,9 +44,9 @@ export LD_LIBRARY_PATH=/usr/local/lib
 export LDFLAGS="-L/usr/local/opt/sqlite/lib"
 export CPPFLAGS="-I/usr/local/opt/sqlite/include"
 export PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig"
-
 # ```````````````Path Settings ``````````````````
 #this is supposed to help with doom emacs
+#export PATH="/usr/bin:$PATH"
 export PATH=$PATH:~/doom-emacs/bin
 export PATH=$PATH:"/usr/local/opt/llvm/bin"
 #might help for sqlite
@@ -58,10 +61,11 @@ SAVEHIST=100000 #stting the history length
 bindkey "^R" history-incremental-pattern-search-backward
 
 # setting some useful environment variables
-export todo="$HOME/Documents/diaries/to_do/to_do.md"
-export tododir="$HOME/Documents/diaries/to_do/"
-export vimrc="$HOME/.config/nvim/init.vim"
-export thoughts="$HOME/Documents/diaries/thoughts/thoughts.md"
+export todo="$HOME/Documents/diaries/to_do.md"
+export diaries="$HOME/Documents/diaries/diaries.md"
+export tododir="$HOME/Documents/diaries/"
+export thoughts="$HOME/Documents/diaries/thoughts.md"
+export memories="$HOME/Documents/diaries/memories.md"
 export thoughtsdir="$HOME/Documents/thoughts"
 export tokens=$HOME/tokens.txt
 export swap="$HOME/.local/share/nvim/swap"
@@ -82,4 +86,15 @@ alias ssh="kitty +kitten ssh"
 echo "changed ssh for kitty"
 fi
 
+mkcd () {
+  mkdir "$1" && cd "$1"
+}
+
+mkcdp () {
+  mkdir -p "$1" && cd "$1"
+}
+
+cpc() {
+cp basic_headers.cpp $1
+}
 echo ".zshrc sourced"

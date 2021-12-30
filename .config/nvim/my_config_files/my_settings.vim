@@ -32,7 +32,7 @@ set undodir=~/.config/nvim/undodir "the folder where the undo history is kept ra
 else
 set undodir=~/.vim/undodir
 endif
-
+set gdefault
 set nrformats-=octal
 set autoindent
 set scrolloff=3                 " show a few lines around cursor

@@ -33,7 +33,7 @@ shopt -s checkwinsize
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
-
+#
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -131,15 +131,15 @@ alias ll='ls -l --color=auto'
 export EDITOR=nvim
 alias vi='nvim'
 export VISUAL=nvim #use nvim as default editor
+export vimrc="$HOME/.config/nvim/init.vim"
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
 alias van="man -P 'nvim +Man!'" #use vim as man pager
 set -o vi #use vi editing mode in the terminal
 
-export todo="$HOME/Documents/diaries/to_do/to_do.md"
-export tododir="$HOME/Documents/diaries/to_do/"
-export vimrc="$HOME/.config/nvim/init.vim"
-export thoughts="$HOME/Documents/diaries/thoughts/thoughts.md"
+export todo="$HOME/Documents/diaries/to_do.md"
+export tododir="$HOME/Documents/diaries/"
+export thoughts="$HOME/Documents/diaries/thoughts.md"
 export thoughtsdir="$HOME/Documents/thoughts"
 
 export PATH=$PATH:~/doom-emacs/bin

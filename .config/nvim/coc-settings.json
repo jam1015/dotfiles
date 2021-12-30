@@ -9,17 +9,6 @@
 				"sh"
 			]
 		}
-		//		"R": {
-		//			"command": "/usr/bin/R",
-		//			"args": [
-		//				"--slave",
-		//				"-e",
-		//				"languageserver::run()"
-		//			],
-		//			"filetypes": [
-		//				"r"
-		//			]
-		//		}
 	},
 	// Sql formatting
 	"sql.formatOptions": {
@@ -32,3 +21,14 @@
 	"diagnostic.virtualText": false,
 	"diagnostic.checkCurrentLine": false
 }
+//		"R": {
+//			"command": "/usr/bin/R",
+//			"args": [
+//				"--slave",
+//				"-e",
+//				"languageserver::run()"
+//			],
+//			"filetypes": [
+//				"r"
+//			]
+//		}
