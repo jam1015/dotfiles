@@ -97,4 +97,5 @@ mkcdp () {
 cpc() {
 cp basic_headers.cpp $1
 }
+export ght="https://gitlab.com/jam1015/ght.git/"
 echo ".zshrc sourced"
