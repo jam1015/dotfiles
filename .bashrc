@@ -134,7 +134,7 @@ export VISUAL=nvim #use nvim as default editor
 export vimrc="$HOME/.config/nvim/init.vim"
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
-alias van="man -P 'nvim +Man!'" #use vim as man pager
+alias van="man --pager='nvim +Man!'" #use vim as man pager
 set -o vi #use vi editing mode in the terminal
 
 export todo="$HOME/Documents/diaries/to_do.md"
@@ -149,9 +149,12 @@ export PATH="/usr/local/opt/sqlite/bin:$PATH"
 #alacrity colorcheme
 export PATH=$PATH:"/Users/jordanmandel/Library/Python/3.8/bin"
 export PATH=$PATH:"$HOME/.local/bin"
+
+export ght="https://gitlab.com/jam1015/ght.git/"
 #export MANPAGER="/bin/sh -c \"unset PAGER;col -b -x | \
 #    nvim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
 #    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
 #    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
 #export MANPAGER="nvim -c 'set ft=man' -"
+echo "bashrc sourced"

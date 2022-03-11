@@ -121,5 +121,7 @@ cpc() {
 cp basic_headers.cpp $1
 }
 xset r rate 250 45
+#=======
+export ght="https://gitlab.com/jam1015/ght.git/"
 echo ".zshrc sourced"
 
