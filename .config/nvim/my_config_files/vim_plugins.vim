@@ -10,3 +10,8 @@
 		call minpac#add("tpope/vim-repeat")
 		call minpac#add('qpkorr/vim-bufkill')
 		call minpac#add("kevinoid/vim-jsonc")
+		call minpac#add("jpalardy/vim-slime")
+		let g:slime_target = "tmux"
+		call minpac#add("mattn/emmet-vim",{'type': 'opt'})
+		packadd! matchit
+

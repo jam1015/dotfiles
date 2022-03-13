@@ -16,8 +16,11 @@
 	},
 	"python.formatting.provider": "yapf",
 	"python.formatting.autopep8Path": "/Library/Frameworks/Python.framework/Versions/3.8/bin/autopep8",
-	"python.formatting.yapfPath": "/Library/Frameworks/Python.framework/Versions/3.8/bin/yapf",
-	"html.autoClosingTags": true,
+	"python.formatting.yapfPath": "/usr/bin/yapf",
+	//html
+	//"html.autoClosingTags": true,
+	"html.format.wrapLineLength": 0,
+	"html.autoCreateQuotes": false,
 	"diagnostic.virtualText": false,
 	"diagnostic.checkCurrentLine": false
 }
@@ -32,3 +35,15 @@
 //				"r"
 //			]
 //		}
+//		"efm": {
+//			"command": "efm-langserver",
+//			"args": [],
+//			// custom config path
+//			// "args": ["-c", "~.config/efm-langserver/config.yaml"],
+//			"filetypes": [
+//				"vim",
+//				"eruby",
+//				"markdown",
+//				"yaml"
+//			]
+//		},
