@@ -15,25 +15,39 @@ let g:firenvim_config = {
 						\ }
 
 
+
 if exists('g:started_by_firenvim')
 	packadd firenvim
-	set guifont=Consolas:h18
+	set guifont=Consolas:h11
 endif
 
 " moving on -------------------
 call minpac#add('jalvesaq/Nvim-R',{'branch': 'stable'})",'type': 'opt'}) 
+"call minpac#add('hkupty/iron.nvim',{'type': 'opt'})
+
+" for telescope
 call minpac#add('BurntSushi/ripgrep')
 call minpac#add('nvim-telescope/telescope-fzf-native.nvim')
 call minpac#add('nvim-lua/plenary.nvim')
 call minpac#add('nvim-telescope/telescope.nvim')
+command -nargs=* Tff Telescope find_files
+command -nargs=* Tfg Telescope live_grep
+command -nargs=* Tfb Telescope buffers
+command -nargs=* Tfh Telescope help_tags
+
+cnoreabbrev <expr> tff  getcmdtype() == ":" && getcmdline() == "tff" ? "Tff" : "tff"
+cnoreabbrev <expr> tfg  getcmdtype() == ":" && getcmdline() == "tfg" ? "Tfg" : "tfg"
+cnoreabbrev <expr> tfb  getcmdtype() == ":" && getcmdline() == "tfb" ? "Tfb" : "tfb"
+cnoreabbrev <expr> tfh  getcmdtype() == ":" && getcmdline() == "tfh" ? "Tfh" : "tfh"
+
 call minpac#add('sharkdp/fd')
 
 call minpac#add("phaazon/hop.nvim") "see whether I can overwrite the s from lightspeed, keeping the f/t
 lua require'hop'.setup()
-nnoremap  <leader>w :HopWord<CR>
+nnoremap  <leader>ww :HopWord<CR>
 "nnoremap  <leader><leader>w :HopWord<CR>
-nnoremap  <leader>/ :HopPatternAC<CR>
-nnoremap  <leader>? :HopPatternBC<CR>
+nnoremap  <leader>// :HopPatternAC<CR>
+nnoremap  <leader>?? :HopPatternBC<CR>
 "nnoremap  <leader>s :HopChar2<CR>
 "nnoremap  S :HopChar2BC<CR>
 "nnoremap  <leader><leader>f :HopChar1<CR>
@@ -45,22 +59,24 @@ nnoremap  <leader>? :HopPatternBC<CR>
 
 "lightspeed
 call minpac#add("ggandor/lightspeed.nvim")
+nmap s <Plug>Lightspeed_omni_s
 
 
 lua <<EOF
 require'lightspeed'.setup{
+ignore_case = true,
 limit_ft_matches = 1000,
 exit_after_idle_msecs = {
-	labeled = 1500, unlabeled = 2000,
+	labeled = 3000, unlabeled = 2000,
 	},
 }
 
 EOF
 
-omap ; <Plug>Lightspeed_;_ft
-nmap ; <Plug>Lightspeed_;_ft
-omap , <Plug>Lightspeed_,_ft
-nmap , <Plug>Lightspeed_,_ft
+"omap ; <Plug>Lightspeed_;_ft
+"nmap ; <Plug>Lightspeed_;_ft
+"omap , <Plug>Lightspeed_,_ft
+"nmap , <Plug>Lightspeed_,_ft
 
 "trouble.nvim
 call minpac#add("folke/trouble.nvim")
@@ -116,11 +132,11 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>aa  <Plug>(coc-codeaction-selected)
+nmap <leader>aa  <Plug>(coc-codeaction-selected)
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
@@ -128,6 +144,8 @@ nmap <leader>ca  <Plug>(coc-fix-current)
 
 " Run the Code Lens action on the current line.
 nmap <leader>cl  <Plug>(coc-codelens-action)
+" formatting
+nmap <leader>ff <plug>(coc-format)
 
 
 " Use K to show documentation in preview window.
@@ -152,8 +170,7 @@ inoremap <silent><expr> <Tab>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 nmap <silent> gd <Plug>(coc-definition)
-" formatting
-nmap <leader>f <plug>(coc-format)
+
 
 """""""""" Native LSP """""""""""""""""""""""""""""""""""""""
 call minpac#add("neovim/nvim-lspconfig")

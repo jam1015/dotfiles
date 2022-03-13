@@ -2,7 +2,6 @@
 "---------- setting other settings -----------
 "
 "to let vim have correct colors in tmux
-"set termguicolors
 
 "other colorscheme commands
 highlight Comment cterm=italic
@@ -10,8 +9,10 @@ highlight Comment cterm=italic
 "Actually setting  the colorscheme ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 if has('nvim')
+set termguicolors
 colorscheme tokyonight
 else
+colorscheme pablo
 endif
 
 set hlsearch
@@ -44,6 +45,8 @@ set tabstop=4
 let g:python_recommended_style=0
 set noexpandtab
 set nosmarttab
+set nocindent
+set nosmartindent
 set wildmenu
 set wildmode=full
 "set cursorline
@@ -55,11 +58,27 @@ set smartcase
 set listchars+=tab:··░
 if has('nvim')
 set listchars+=lead:·
+		lua <<EOF
+-- highlight yanked text for 200ms using the "Visual" highlight group
+vim.cmd[[
+augroup highlight_yank
+autocmd!
+au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=200})
+augroup END
+]]
+EOF
 endif
 set listchars+=trail:␣
 set listchars+=extends:»
 set listchars+=precedes:«
 set listchars+=nbsp:⣿
+let g:netrw_liststyle= 3
+
+
+
+"set spell spelllang=en_us
+"hi clear SpellBad
+"hi clear SpellLocal
 "jset listchars+=space:·
 " onoremap K -J
 " always split windows vertically; need to learn vimscript to understand
