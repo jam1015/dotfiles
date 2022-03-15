@@ -90,9 +90,16 @@ export swap="$HOME/.local/share/nvim/swap"
 export exercism="$HOME/.local/share/nvim/swap"
 
 #setting purple prompt
-#PS1="%B%F{magenta}%n@%m %3~ %#%f%b "
 #
-PS1="%B%F{magenta}%3~ %#%f%b "
+# msgcat --color=test
+# for x in {0..8}; do for i in {30..37}; do for a in {40..47}; do echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; done; echo; done; done; echo ""
+#
+#PS1="%B%F{magenta}%n@%m %3~ %#%f%b "
+PS1="%B%F{172}%3~ %#%f%b "
+#PS1="%B%3~ %#%b "
+# see man zshmisc and man zshzle for some details on the zsh way of setting colors.
+#PS1=$'%{\033[0;31m%} > %{\033[0m%}'
+
 
 # setting other alases
 alias cb=clipboard

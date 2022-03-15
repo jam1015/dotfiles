@@ -8,11 +8,12 @@
 #include ~/.config/kitty/my_kitty_themes/dracula.conf
 
 disable_ligatures always
+# run kitty +kitten themes
+######
 #include ./kitty-themes/themes/LiquidCarbon.conf
 # vim:fileencoding=utf-8:ft=conf:foldmethod=marker
 
 #977
-clipboard_control write-primary write-clipboard no-append
 #: Fonts {{{
 
 #: kitty has very powerful font management. You can configure
@@ -36,6 +37,12 @@ clipboard_control write-primary write-clipboard no-append
 #italic_font      SF Mono Regular Italic
 #bold_italic_font SF Mono Bold Italic
 #font_size 6
+
+#font_family      SF Mono Regular
+#bold_font        SF Mono Bold
+#italic_font      SF Mono Regular Italic
+#bold_italic_font SF Mono Bold Italic
+#font_size 11
 
 #font_family      Hack Regular
 #bold_font        Hack Bold
@@ -73,6 +80,12 @@ italic_font      Iosevka Extended Italic
 bold_italic_font Iosevka Bold Extended Italic
 font_size 5.5
 
+#font_family      Iosevka Extended
+#bold_font        Iosevka Bold Extended
+#italic_font      Iosevka Extended Italic
+#bold_italic_font Iosevka Bold Extended Italic
+#font_size 5.5
+
 #font_family      Iosevka ixed Slab
 #bold_font        Iosevka Fixed Slab
 #italic_font      Iosevka Fixed Slab
@@ -94,6 +107,14 @@ font_size 5.5
 #bold_font        Menlo
 #italic_font      Menlo
 #bold_italic_font Menlo
+
+font_family      Menlo
+bold_font        Menlo
+italic_font      Menlo
+bold_italic_font Menlo
+font_size 10
+
+
 #finally
 #font_family      Courier Prime
 #bold_font        Courier Prime Bold
@@ -250,8 +271,8 @@ font_size 5.5
 
 #: }}}
 
-#: Cursor customization {{{
 
+#Cursor customization {{{
 # cursor #cccccc
 
 #: Default cursor color
@@ -288,7 +309,7 @@ font_size 5.5
 #: Stop blinking cursor after the specified number of seconds of
 #: keyboard inactivity.  Set to zero to never stop blinking.
 
-#: }}}
+#}}}
 
 #: Scrollback {{{
 
