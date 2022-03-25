@@ -8,12 +8,10 @@ highlight Comment cterm=italic
 
 "Actually setting  the colorscheme ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-if has('nvim')
 set termguicolors
+
+let g:tokyonight_style = "night"
 colorscheme tokyonight
-else
-colorscheme pablo
-endif
 
 set hlsearch
 "toggles relnum vs absnum

@@ -2,6 +2,7 @@
 nnoremap <Space> <Nop>
 let mapleader="\\"
 let maplocalleader=" "
+
 "add type these after a search to instantly move text
 "move to text
 "cnoremap $t <CR>:t''<CR>  
@@ -28,6 +29,7 @@ nnoremap ^ 0
 
 "<leader>l means no highlighting anymore
 nnoremap <silent> <leader>ll :noh<CR>
+
 "make * not move 
 nmap <silent> <leader>** yiw<Esc>: let @/ = @"" <CR> :set hls <CR>
 
@@ -46,7 +48,7 @@ augroup END
 
 "determine where help appears
 "not sure what <args means here>
-"command -nargs=* -complete=help Lelp vertical topleft help <args>
+command -nargs=* -complete=help Lelp vertical topleft help <args>
 command -nargs=* -complete=help Relp vertical belowright help <args>
 command -nargs=* -complete=help Telp  topleft help <args>
 command -nargs=* -complete=help Belp  belowright help <args>
@@ -72,4 +74,5 @@ function! Synctex()
     endif
     redraw!
 endfunction
+
 map <leader>st :call Synctex()<cr>

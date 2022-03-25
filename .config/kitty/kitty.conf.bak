@@ -14,6 +14,7 @@ disable_ligatures always
 # vim:fileencoding=utf-8:ft=conf:foldmethod=marker
 
 #977
+clipboard_control write-primary write-clipboard no-append
 #: Fonts {{{
 
 #: kitty has very powerful font management. You can configure
@@ -31,12 +32,6 @@ disable_ligatures always
 #: the OSes font system. Setting them manually is useful for font
 #: families that have many weight variants like Book, Medium, Thick,
 #: etc. For example::
-
-#font_family      SF Mono
-#bold_font        SF Mono Bold
-#italic_font      SF Mono Regular Italic
-#bold_italic_font SF Mono Bold Italic
-#font_size 6
 
 #font_family      SF Mono Regular
 #bold_font        SF Mono Bold
@@ -74,12 +69,6 @@ disable_ligatures always
 #bold_italic_font InputMono
 #font_size 5.5
 
-font_family      Iosevka Extended
-bold_font        Iosevka Bold Extended
-italic_font      Iosevka Extended Italic
-bold_italic_font Iosevka Bold Extended Italic
-font_size 5.5
-
 #font_family      Iosevka Extended
 #bold_font        Iosevka Bold Extended
 #italic_font      Iosevka Extended Italic
@@ -102,17 +91,11 @@ font_size 5.5
 #italic_font      Courier Oblique 
 #bold_italic_font Courier Bold Oblique 
 
-#finally
-#font_family      Menlo
-#bold_font        Menlo
-#italic_font      Menlo
-#bold_italic_font Menlo
-
 font_family      Menlo
 bold_font        Menlo
 italic_font      Menlo
 bold_italic_font Menlo
-font_size 10
+font_size 6
 
 
 #finally
@@ -270,7 +253,6 @@ font_size 10
 #: corresponding to thin, normal, thick, and very thick lines.
 
 #: }}}
-
 
 #Cursor customization {{{
 # cursor #cccccc
@@ -1569,6 +1551,6 @@ font_size 10
 
 
 # BEGIN_KITTY_THEME
-# Flatland
+# Default
 include current-theme.conf
 # END_KITTY_THEME

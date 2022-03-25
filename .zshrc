@@ -72,6 +72,7 @@ export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH=$PATH:"/Users/jordanmandel/Library/Python/4.8/bin"
 export PATH=$PATH:"$HOME/.local/bin"
 export PATH="${PATH}:${HOME}/bin"
+export PATH="${PATH}:${HOME}/Documents/lsps/lua-language-server/bin"
 
 #history settings
 SAVEHIST=100000 #stting the history length
@@ -127,8 +128,10 @@ mkcdp () {
 cpc() {
 cp basic_headers.cpp $1
 }
-xset r rate 250 45
+xset r rate 250 35
 #=======
 export ght="https://gitlab.com/jam1015/ght.git/"
 echo ".zshrc sourced"
 
+
+alias luamake=/home/jordan/Documents/lsps/lua-language-server/3rd/luamake/luamake

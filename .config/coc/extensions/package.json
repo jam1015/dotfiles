@@ -1,15 +1,8 @@
 {
   "dependencies": {
-    "coc-clangd": ">=0.17.0",
-    "coc-css": ">=1.2.6",
-    "coc-html": ">=1.4.1",
-    "coc-json": ">=1.3.6",
     "coc-lua": ">=1.0.1",
-    "coc-pyright": ">=1.1.194",
-    "coc-r-lsp": ">=1.2.1",
-    "coc-sh": ">=0.6.0",
-    "coc-sql": ">=0.9.0",
-    "coc-tsserver": ">=1.8.6",
-    "coc-vimlsp": ">=0.12.5"
+    "coc-rust-analyzer": ">=0.61.1",
+    "coc-sh": ">=0.6.1",
+    "coc-texlab": ">=3.2.0"
   }
 }
