@@ -41,7 +41,7 @@ alias vi='nvim'
 export VISUAL=nvim #use nvim as default editor
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
-alias van="man -P 'nvim +Man!'" #use vim as man pager
+alias van="man -P 'nvim -c call\ ToggleNumberToggle() -c set\ norelativenumber -c set\ nonumber  -c Man!'" #use vim as man pager
 set -o vi #use vi editing mode in the terminal
 
 #settings for cs50
@@ -109,29 +109,48 @@ alias ll='ls -lG'
 alias ls='ls -G'
 alias pd='pandoc'
 
+
 defaults write -g InitialKeyRepeat -int 15 #normal minimum is 15 (225 ms)
 defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
+
 
 if [[ $TERM == "xterm-kitty" ]]; then
 alias ssh="kitty +kitten ssh"
 echo "changed ssh for kitty"
 fi
 
+
 mkcd () {
   mkdir "$1" && cd "$1"
 }
+
 
 mkcdp () {
   mkdir -p "$1" && cd "$1"
 }
 
+
 cpc() {
 cp basic_headers.cpp $1
 }
-xset r rate 250 35
+#xset r rate 250 35
 #=======
 export ght="https://gitlab.com/jam1015/ght.git/"
-echo ".zshrc sourced"
 
 
 alias luamake=/home/jordan/Documents/lsps/lua-language-server/3rd/luamake/luamake
+alias pdflatex="pdflatex -synctex=1"
+alias j4-dmenu-desktop='j4-dmenu-desktop --dmenu="(cat ; (stest -flx $(echo $PATH | tr : ' ') | sort -u)) | dmenu"'
+ocl() {
+    "$@" &
+    disown
+    exit
+}
+
+
+cl() {
+    "$@" &
+    disown
+}
+
+echo ".zshrc sourced"

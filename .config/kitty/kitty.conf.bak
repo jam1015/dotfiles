@@ -95,7 +95,7 @@ font_family      Menlo
 bold_font        Menlo
 italic_font      Menlo
 bold_italic_font Menlo
-font_size 6
+font_size 7
 
 
 #finally
@@ -1394,8 +1394,8 @@ font_size 6
 #: You can change the font size for all top-level kitty OS windows at
 #: a time or only the current one.
 
-# map kitty_mod+equal     change_font_size all +2.0
-# map kitty_mod+minus     change_font_size all -2.0
+ map kitty_mod+equal     change_font_size all +0.5
+ map kitty_mod+minus     change_font_size all -0.5
 # map kitty_mod+backspace change_font_size all 0
 
 #: To setup shortcuts for specific font sizes::
@@ -1551,6 +1551,6 @@ font_size 6
 
 
 # BEGIN_KITTY_THEME
-# Default
+# PaperColor Dark
 include current-theme.conf
 # END_KITTY_THEME

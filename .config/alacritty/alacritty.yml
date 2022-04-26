@@ -9,7 +9,7 @@ font:
     style: Bold
   italic:
     family: Nimbus Mono
-    style: Italic
+    style: Oblique
   bold_italic:
     family: Nimbus Mono
     style: Bold Italic

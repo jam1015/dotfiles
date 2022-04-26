@@ -76,3 +76,4 @@ function! Synctex()
 endfunction
 
 map <leader>st :call Synctex()<cr>
+map <leader>lv :VimtexView<cr>
