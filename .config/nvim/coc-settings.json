@@ -1,15 +1,16 @@
 {
-	"languageserver": {
-		"bash": {
-			"command": "bash-language-server",
-			"args": [
-				"start"
-			],
-			"filetypes": [
-				"sh"
-			]
-		}
-	},
+//	"languageserver": {
+//		"bash": {
+//			"command": "coc-sh",
+//			// "ignoredRootPaths": "~",
+//			"args": [
+//				"start"
+//			],
+//			"filetypes": [
+//				"sh"
+//			]
+//		}
+//	},
 	// Sql formatting
 	"sql.formatOptions": {
 		"indent": "\t"

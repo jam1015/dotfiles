@@ -1,2 +1,4 @@
 set selection-clipboard clipboard
-set font "menlo 13"
+set synctex true
+set synctex-editor-command "nvr --remote-silent +%{line} %{input}"
+set show-recent 0

@@ -5,5 +5,7 @@
 
 ("evil" . ((user-emacs-directory . "~/.emacs.evil")))
 
+;; ("spacemacs" . ((user-emacs-directory . "~/spacemacs")
+;;                 (env . (("SPACEMACSDIR" . "~/.spacemacs.d"))))))
  ("spacemacs" . ((user-emacs-directory . "~/spacemacs")
                  (env . (("SPACEMACSDIR" . "~/.spacemacs.d"))))))

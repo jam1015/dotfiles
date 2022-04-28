@@ -3,8 +3,7 @@
     "check_arguments_to_r_function_calls": true,
     "soft_wrap_r_files": true,
     "syntax_color_console": true,
-    "font_size_points": 12,
-    "editor_theme": "Cobalt",
+    "editor_theme": "Tomorrow Night 80s",
     "default_project_location": "~",
     "source_with_echo": true,
     "save_workspace": "never",
@@ -48,5 +47,10 @@
     "editor_keybindings": "vim",
     "jobs_tab_visibility": "shown",
     "document_author": "jordan",
-    "shiny_viewer_type": "browser"
+    "shiny_viewer_type": "browser",
+    "pdf_previewer": "none",
+    "highlight_selected_line": true,
+    "show_margin": false,
+    "blinking_cursor": false,
+    "rainbow_parentheses": true
 }
