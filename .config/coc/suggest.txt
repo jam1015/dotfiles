@@ -1,3 +1,5 @@
+refer|referenceToAddition|tsc-javascript|v
+cons|console|tsc-javascript|v
 ToggleNumber|ToggleNumberToggle|around|
 |education|tsc-javascript|F
 di|div|tsc-javascript|m
