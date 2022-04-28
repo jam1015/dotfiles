@@ -45,10 +45,9 @@ alias van="man -P 'nvim -c call\ ToggleNumberToggle() -c set\ norelativenumber -
 set -o vi #use vi editing mode in the terminal
 
 #settings for cs50
-export CC="clang"
-export CFLAGS="-fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow"
-
-export LDLIBS="-lcs50 -lm"
+#export CC="clang"
+#export CFLAGS="-fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow"
+#export LDLIBS="-lcs50 -lm"
 
 export FLASK_DEBUG=1
 export FLASK_APP=application.py
