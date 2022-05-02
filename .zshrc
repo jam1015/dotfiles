@@ -43,6 +43,7 @@ export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
 alias van="man -P 'nvim -c call\ ToggleNumberToggle() -c set\ norelativenumber -c set\ nonumber  -c Man!'" #use vim as man pager
 set -o vi #use vi editing mode in the terminal
+bindkey '^?' backward-delete-char
 
 #settings for cs50
 #export CC="clang"
