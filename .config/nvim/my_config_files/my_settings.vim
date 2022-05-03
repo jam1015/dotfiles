@@ -37,21 +37,11 @@ endfunction
 
 call ToggleNumberToggle()
 
-
-
-
-
-
-
-
-
 " Don't use Ex mode, use Q for formatting.
 " Revert with ":unmap Q".
 map Q gq
 set number
 set undofile "persistent undo
-
-
 
 set undodir=~/.config/nvim/undodir "the folder where the undo history is kept rather than the local directory for the file
 set gdefault
@@ -88,6 +78,7 @@ au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=2
 augroup END
 ]]
 EOF
+
 set listchars+=trail:␣
 set listchars+=extends:»
 set listchars+=precedes:«

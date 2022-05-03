@@ -1,3 +1,5 @@
+Italic|Italic|around|
+Bold|BoldItalic|around|
 refer|referenceToAddition|tsc-javascript|v
 cons|console|tsc-javascript|v
 ToggleNumber|ToggleNumberToggle|around|

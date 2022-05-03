@@ -44,6 +44,7 @@ export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more abou
 alias van="man -P 'nvim -c call\ ToggleNumberToggle() -c set\ norelativenumber -c set\ nonumber  -c Man!'" #use vim as man pager
 set -o vi #use vi editing mode in the terminal
 bindkey '^?' backward-delete-char
+KEYTIMEOUT=1
 
 #settings for cs50
 #export CC="clang"
@@ -154,3 +155,8 @@ cl() {
 }
 
 echo ".zshrc sourced"
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
