@@ -57,5 +57,5 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 #set -g @easy-motion-prefix "Space"
 #set -g @easy-motion-verbose "true"
 #set -g @continuum-restore 'on'
-run -b '~/.tmux/plugins/tpm/tpm'
-
+#run -b '~/.tmux/plugins/tpm/tpm' #if installed directly from github
+run '/usr/share/tmux-plugin-manager/tpm' #if installed using yay

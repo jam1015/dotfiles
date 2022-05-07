@@ -110,7 +110,7 @@ alias ll='ls -lG'
 alias ls='ls -G'
 alias pd='pandoc'
 
-
+# to run these commands install gnustep-base
 defaults write -g InitialKeyRepeat -int 15 #normal minimum is 15 (225 ms)
 defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
@@ -154,9 +154,9 @@ cl() {
     disown
 }
 
+#init nvm
+source /usr/share/nvm/init-nvm.sh
+
 echo ".zshrc sourced"
 
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

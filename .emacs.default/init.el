@@ -1,4 +1,7 @@
-(add-to-list 'load-path "~/.emacs.default/evil")
+(require 'package)
+(add-to-list 'package-archives '("melpa" , "https://melpa.org/packages/") t)
+; (add-to-list 'load-path "~/.emacs.default/evil")
+(package-initalize)
 (require 'evil)
 (evil-mode 1)
 (blink-cursor-mode 0)

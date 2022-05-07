@@ -102,7 +102,7 @@ map <leader>lv :VimtexView<cr>
 highlight Comment cterm=italic
 
 "Actually setting  the colorscheme ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+colorscheme default
 "set termguicolors
 
 
