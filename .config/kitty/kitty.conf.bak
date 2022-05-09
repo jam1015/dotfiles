@@ -32,12 +32,13 @@ clipboard_control write-primary write-clipboard no-append
 #: the OSes font system. Setting them manually is useful for font
 #: families that have many weight variants like Book, Medium, Thick,
 #: etc. For example::
-
+#
 font_family      SF Mono Regular
 bold_font        SF Mono Bold
 italic_font      SF Mono Regular Italic
 bold_italic_font SF Mono Bold Italic
-font_size 8
+#font_size 11
+font_size 10
 
 #font_family      JetBrains Mono NL
 #bold_font        JetBrains Mono NL Bold
@@ -81,7 +82,7 @@ font_size 8
 #bold_italic_font Iosevka Bold Extended Italic
 #font_size 5.5
 
-#font_family      Iosevka ixed Slab
+#font_family      Iosevka Fixed Slab
 #bold_font        Iosevka Fixed Slab
 #italic_font      Iosevka Fixed Slab
 #bold_italic_font Iosevka Fixed Slab
@@ -101,20 +102,22 @@ font_size 8
 #bold_font        Menlo
 #italic_font      Menlo
 #bold_italic_font Menlo
+#font_size 10
+#=======
 #font_size 7
 
 
 #finally
-font_family      Courier Prime
-bold_font        Courier Prime Bold
-italic_font      Courier Prime Italic
-bold_italic_font Courier Prime Bold Italic
-font_size 9
-
-font_features CourierPrime-Regular -liga
-font_features CourierPrime-Bold -liga
-font_features CourierPrime-Italic -liga
-font_features CourierPrime-BoldItalic -liga
+#font_family      IBM Plex Mono
+#bold_font        IBM Plex Mono Bold
+#italic_font      IBM Plex Mono Italic
+#bold_italic_font IBM Plex Mono Bold Italic
+#font_size 10
+##
+#font_features IBM Plex Mono -liga
+#font_features IBM Plex Mono Bold -liga
+#font_features IBM Plex Mono Italic -liga
+#font_features IBM Plex Mono Bold Italic -liga
 
 
 
@@ -1108,7 +1111,7 @@ font_features CourierPrime-BoldItalic -liga
 #: you are probably better off just hiding the titlebar with
 #: hide_window_decorations.
 
-# macos_option_as_alt no
+  macos_option_as_alt yes
 
 #: Use the option key as an alt key. With this set to no, kitty will
 #: use the macOS native Option+Key = unicode character behavior. This

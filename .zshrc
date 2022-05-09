@@ -157,6 +157,23 @@ cl() {
 #init nvm
 source /usr/share/nvm/init-nvm.sh
 
+if [ -n "$TMUX" ]; then
+	function refresh {
+		 echo $(tmux show-environment | grep "^I3SOCK") > /dev/null
+		 echo $(tmux show-environment | grep "^SSH_AUTH_LOCK") > /dev/null
+		 echo $(tmux show-environment | grep "^SSH_CONNECTION") > /dev/null
+		 echo $(tmux show-environment | grep "^DISPLAY") > /dev/null
+	}
+
+else
+	function refresh { }
+fi
+
+function preexec {
+	refresh
+
+}
+
 echo ".zshrc sourced"
 
 

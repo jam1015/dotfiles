@@ -12,6 +12,9 @@ set -g visual-activity off #if on would cause message when activity happens
 bind p paste-buffer -p #the p adds paste bracket control codes if reqeusted by application
 bind-key -T copy-mode-vi r send-keys -X rectangle-toggle
 set -s set-clipboard on
+
+
+set-option -g update-environment "SSH_AUTH_SOCK SSH_CONNECTION DISPLAY I3SOCK"
 #
 #set -g display-panes-time 1000 # slightly longer pane indicators display time
 # increase history size
