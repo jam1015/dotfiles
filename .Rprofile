@@ -10,11 +10,11 @@
 #)
 #)
 
-invisible(
-options(
-languageserver.formatting_style = function(options) {
-styler::tidyverse_style(indent_by = 4)
-})
-)
+#invisible(
+#options(
+#languageserver.formatting_style = function(options) {
+#styler::tidyverse_style(indent_by = 4)
+#})
+#)
 
 print("welcome to R JordanadroJ R ot emoclew")

@@ -1,7 +1,7 @@
 "---custom keybindings go here--------
 nnoremap <Space> <Nop>
 let mapleader="\\"
-let maplocalleader=" "
+let maplocalleader="\<Space>"
 
 "add type these after a search to instantly move text
 "move to text

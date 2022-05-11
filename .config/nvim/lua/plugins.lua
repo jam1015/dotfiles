@@ -40,9 +40,9 @@ use 'kevinoid/vim-jsonc'
 use {'jpalardy/vim-slime', config = function() vim.g.slime_target = "tmux" end}
 use 'mattn/emmet-vim'
 
-use {
-    'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end,
+use { -- run 'call firenvim#install(0)' to perhaps fix issues when it is not running in browser
+    'glacambre/firenvim', 
+    run = function() vim.fn['firenvim#install'](0) end, 
 	config = function()
 	vim.cmd([[
 	let g:firenvim_config = {
@@ -160,7 +160,7 @@ require'nvim-treesitter.configs'.setup {
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
     -- the name of the parser)
     -- list of language that will be disabled
-     disable = { "vim", "java", "latex", "julia", "nix", "gleam", "lua" },
+     disable = { "latex"},
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
