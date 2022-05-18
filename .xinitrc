@@ -3,11 +3,12 @@
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
+pactl info > /dev/null #makes sure pulse audio is working
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
 # merge in defaults and keymaps
 # setting this first because otherwise it undoes the other ones.
-setxkbmap -option "terminate:ctrl_alt_bksp"
+setxkbmap -model kinesis -layout us -variant mac -option "terminate:ctrl_alt_bksp" #-option "ctrl:swapcaps"
 
 if [ -f $sysresources ]; then
 
