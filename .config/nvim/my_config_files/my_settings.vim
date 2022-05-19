@@ -87,9 +87,6 @@ set listchars+=nbsp:⣿
 let g:netrw_liststyle= 3
 
 " some things for zathura+synctex
-let g:vimtex_view_method = 'zathura'
-let g:latex_view_general_viewer = 'zathura'
-let g:vimtex_view_enabled=1
 "let g:vimtex_compiler_method='tectonic'
 
 "set spell spelllang=en_us

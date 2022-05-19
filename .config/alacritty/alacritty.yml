@@ -1,38 +1,41 @@
-#to change theme run npx aalacritty-themes, but back up this file
+#to change theme run npx alacritty-themes, but back up this file
+env:
+  TERM: xterm-256color
 font:
   normal:
-    family: Courier Prime
-    style: Regular
+    family: Cascadia Mono
   bold:
-    family: Courier Prime
-    style: Bold
+    family: Cascadia Mono
   italic:
-    family: Courier Prime
-    style: Oblique
+    family: Cascadia Mono
   bold_italic:
-    family: Courier Prime
-    style: Bold Italic
+    family: Cascadia Mono
   size: 9
 colors:
+  name: X::DotShare
+  author: crshd
   primary:
-    background: '0x24283b'
-    foreground: '0xa9b1d6'
+    background: "#151515"
+    foreground: "#D7D0C7"
+  cursor:
+    text: "#151515"
+    cursor: "#D7D0C7"
   normal:
-    black: '0x32344a'
-    red: '0xf7768e'
-    green: '0x9ece6a'
-    yellow: '0xe0af68'
-    blue: '0x7aa2f7'
-    magenta: '0xad8ee6'
-    cyan: '0x449dab'
-    white: '0x9699a8'
+    black: "#101010"
+    red: "#E84F4F"
+    green: "#B8D68C"
+    yellow: "#E1AA5D"
+    blue: "#7DC1CF"
+    magenta: "#9B64FB"
+    cyan: "#6D878D"
+    white: "#DDDDDD"
   bright:
-    black: '0x444b6a'
-    red: '0xff7a93'
-    green: '0xb9f27c'
-    yellow: '0xff9e64'
-    blue: '0x7da6ff'
-    magenta: '0xbb9af7'
-    cyan: '0x0db9d7'
-    white: '0xacb0d0'
-theme: Kitty
+    black: "#404040"
+    red: "#D23D3D"
+    green: "#A0CF5D"
+    yellow: "#F39D21"
+    blue: "#4E9FB1"
+    magenta: "#8542FF"
+    cyan: "#42717B"
+    white: "#DDDDDD"
+theme: X-dotshare

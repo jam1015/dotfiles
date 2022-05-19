@@ -26,7 +26,31 @@ vim.o.background = "dark"
 
 -- plugins
 use 'tpope/vim-unimpaired'
-use 'lervag/vimtex'
+use {'lervag/vimtex',
+
+config = function()
+ 	vim.cmd([[
+ 
+let g:vimtex_view_method = 'zathura'
+let g:latex_view_general_viewer = 'zathura'
+let g:vimtex_view_enabled=1
+
+function! Synctex()
+    let vimura_param = " --synctex-forward " . line('.') . ":" . col('.') . ":" . expand('%:p') . " " . substitute(expand('%:p'),"tex$","pdf", "")
+    if has('nvim')
+        call jobstart("vimura neovim" . vimura_param)
+    else
+        exe "silent !vimura vim" . vimura_param . "&"
+    endif
+    redraw!
+endfunction
+
+map <localleader>st :call Synctex()<cr>
+map <localleader>lv :VimtexView<cr>
+ 	]])
+ end
+
+}
 use 'inkarkat/vim-visualrepeat'
 use 'kana/vim-textobj-user'
 use 'kana/vim-textobj-entire'
@@ -71,29 +95,14 @@ use {'jalvesaq/Nvim-R', branch = 'stable'}
 
 use {
 'nvim-telescope/telescope.nvim',
-requires = { {'nvim-lua/plenary.nvim'} ,{'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-config = function()
-	vim.cmd([[
-
-" for telescope
-command -nargs=* Tff Telescope find_files
-command -nargs=* Tfg Telescope live_grep
-command -nargs=* Tfb Telescope buffers
-command -nargs=* Tfh Telescope help_tags
-
-cnoreabbrev <expr> tff  getcmdtype() == ":" && getcmdline() == "tff" ? "Tff" : "tff"
-cnoreabbrev <expr> tfg  getcmdtype() == ":" && getcmdline() == "tfg" ? "Tfg" : "tfg"
-cnoreabbrev <expr> tfb  getcmdtype() == ":" && getcmdline() == "tfb" ? "Tfb" : "tfb"
-cnoreabbrev <expr> tfh  getcmdtype() == ":" && getcmdline() == "tfh" ? "Tfh" : "tfh"
-	]])
-
-end
+requires = { {'nvim-lua/plenary.nvim'} ,{'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
 
 }
 }
 -- 
-use {"phaazon/hop.nvim", config = function()
+use {"phaazon/hop.nvim", 
+config = function()
  	vim.cmd([[
  lua require'hop'.setup()
  nnoremap  <leader>ww :HopWord<CR>

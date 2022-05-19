@@ -3,7 +3,7 @@
 
 ("default" . ((user-emacs-directory . "~/.emacs.default")))
 
-("evil" . ((user-emacs-directory . "~/.emacs.evil")))
+;; ("evil" . ((user-emacs-directory . "~/.emacs.evil")))
 
 ;; ("spacemacs" . ((user-emacs-directory . "~/spacemacs")
 ;;                 (env . (("SPACEMACSDIR" . "~/.spacemacs.d"))))))

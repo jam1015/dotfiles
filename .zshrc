@@ -78,7 +78,8 @@ export PATH="${PATH}:${HOME}/Documents/lsps/lua-language-server/bin"
 
 #history settings
 SAVEHIST=100000 #stting the history length
-HISTFILE=~/.zhistory
+HISTSIZE=100000 #stting the history length
+#HISTFILE=~/.zhistory
 bindkey "^R" history-incremental-pattern-search-backward
 
 # setting some useful environment variables

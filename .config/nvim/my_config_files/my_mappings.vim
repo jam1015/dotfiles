@@ -1,7 +1,7 @@
 "---custom keybindings go here--------
 nnoremap <Space> <Nop>
 let mapleader="\\"
-let maplocalleader="\<Space>"
+let maplocalleader=" "
 
 "add type these after a search to instantly move text
 "move to text
@@ -65,15 +65,3 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 
 
-function! Synctex()
-    let vimura_param = " --synctex-forward " . line('.') . ":" . col('.') . ":" . expand('%:p') . " " . substitute(expand('%:p'),"tex$","pdf", "")
-    if has('nvim')
-        call jobstart("vimura neovim" . vimura_param)
-    else
-        exe "silent !vimura vim" . vimura_param . "&"
-    endif
-    redraw!
-endfunction
-
-map <leader>st :call Synctex()<cr>
-map <leader>lv :VimtexView<cr>
