@@ -62,6 +62,12 @@ fi
 # xterm -geometry 80x50+494+51 &
 # xterm -geometry 80x20+494-0 &
 # exec xterm -geometry 80x66+0+0 -name login
+
+if [ $(pgrep xflux | wc -l) -lt 1 ]
+then
+  xflux -z 15217 -k 2000 > /dev/null
+fi
+
 source /home/jordan/.screenlayout/monitor_left.sh
 xset dpms 1200 1205 1210
 xset r rate 250 35

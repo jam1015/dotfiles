@@ -5,7 +5,5 @@ then
   xflux -z 15217 -k 2000 > /dev/null
 fi
 
-xset r rate 200 25
 export editor=usr/bin/nvim
-alias j4-dmenu-desktop='j4-dmenu-desktop --dmenu="(cat ; (stest -flx $(echo $PATH | tr : ' ') | sort -u)) | dmenu"'
-
+echo "profile sourced"

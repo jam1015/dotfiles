@@ -36,6 +36,7 @@ fi
 export vimrc="$HOME/.config/nvim/init.vim"
 alias nvim="NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim"
 alias vi='nvim'
+#alias tmux="tmux -u"
 
 #alias vim='nvim'
 export VISUAL=nvim #use nvim as default editor

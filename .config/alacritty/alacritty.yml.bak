@@ -1,0 +1,14 @@
+font:
+  normal:
+    family: Courier Prime
+    style: Regular
+  bold:
+    family: Courier Prime
+    style: Bold
+  italic:
+    family: Courier Prime
+    style: Oblique
+  bold_italic:
+    family: Courier Prime
+    style: Bold Italic
+  size: 9
