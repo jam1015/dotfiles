@@ -13,6 +13,10 @@ set termguicolors
 let g:tokyonight_style = "night"
 colorscheme tokyonight
 
+if $TERM == 'linux'
+	colorscheme default
+endif
+
 set hlsearch
 "toggles relnum vs absnum
 
@@ -54,7 +58,6 @@ set display=truncate
 set shiftwidth=4 "how much indentation from >
 set softtabstop=4 "lets us delete by tabs when expandtab is on
 set tabstop=4
-let g:python_recommended_style=0
 set noexpandtab
 set nosmarttab
 set nocindent

@@ -15,8 +15,8 @@
 	"sql.formatOptions": {
 		"indent": "\t"
 	},
-	"python.formatting.provider": "yapf",
-	"python.formatting.autopep8Path": "/Library/Frameworks/Python.framework/Versions/3.8/bin/autopep8",
+	"python.formatting.provider": "autopep8",
+	"python.formatting.autopep8Path": "/usr/bin/autopep8",
 	"python.formatting.yapfPath": "/usr/bin/yapf",
 	//html
 	//"html.autoClosingTags": true,

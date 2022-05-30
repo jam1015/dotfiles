@@ -36,6 +36,7 @@ fi
 export vimrc="$HOME/.config/nvim/init.vim"
 alias nvim="NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim"
 alias vi='nvim'
+alias python='ptpython --vi --dark-bg'
 #alias tmux="tmux -u"
 
 #alias vim='nvim'
@@ -107,7 +108,6 @@ PS1="%B%F{172}%3~ %#%f%b "
 
 # setting other alases
 alias cb=clipboard
-alias python='python3'
 alias ll='ls -lG'
 alias ls='ls -G'
 alias pd='pandoc'

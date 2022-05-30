@@ -617,7 +617,7 @@
 
 ## Shortcut style to use at the prompt. 'vi' or 'emacs'.
 #  Default: 'emacs'
-# c.TerminalInteractiveShell.editing_mode = 'emacs'
+c.TerminalInteractiveShell.editing_mode = 'vi'
 
 ## Set the editor used by IPython (default to $EDITOR/vi/notepad).
 #  Default: 'vi'
@@ -719,7 +719,7 @@
 # c.TerminalInteractiveShell.quiet = False
 
 #  See also: InteractiveShell.separate_in
-# c.TerminalInteractiveShell.separate_in = '\n'
+c.TerminalInteractiveShell.separate_in = ''
 
 #  See also: InteractiveShell.separate_out
 # c.TerminalInteractiveShell.separate_out = ''
