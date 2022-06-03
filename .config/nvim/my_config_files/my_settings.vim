@@ -11,10 +11,11 @@ highlight Comment cterm=italic
 set termguicolors
 
 let g:tokyonight_style = "night"
-colorscheme tokyonight
 
-if $TERM == 'linux'
-	colorscheme default
+if empty($DISPLAY)
+  colorscheme elflord
+else
+  colorscheme tokyonight
 endif
 
 set hlsearch

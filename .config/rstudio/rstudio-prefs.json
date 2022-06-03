@@ -31,7 +31,8 @@
             "Plots",
             "Packages",
             "Help",
-            "Viewer"
+            "Viewer",
+            "Presentations"
         ],
         "hiddenTabSet": [],
         "console_left_on_top": false,
@@ -52,5 +53,6 @@
     "highlight_selected_line": true,
     "show_margin": false,
     "blinking_cursor": false,
-    "rainbow_parentheses": true
+    "rainbow_parentheses": true,
+    "show_terminal_tab": false
 }
