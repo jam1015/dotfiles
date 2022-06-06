@@ -16,41 +16,41 @@ return require('packer').startup(function(use)
    use 'wbthomason/packer.nvim'
   --
 
- use {'folke/tokyonight.nvim', branc = 'main', config = function()
- 	vim.g.tokyonight_style = "night"
- end}
-
- use {"ellisonleao/gruvbox.nvim", config = function()
+use {'folke/tokyonight.nvim', branc = 'main', config = function()
+	vim.g.tokyonight_style = "night"
+end}
+-- 
+use {"ellisonleao/gruvbox.nvim", config = function()
 vim.o.background = "dark"
  end}
 
 -- plugins
 use 'tpope/vim-unimpaired'
-use {'lervag/vimtex',
-
-config = function()
- 	vim.cmd([[
+ use {'lervag/vimtex',
  
-let g:vimtex_view_method = 'zathura'
-let g:latex_view_general_viewer = 'zathura'
-let g:vimtex_view_enabled=1
-
-function! Synctex()
-    let vimura_param = " --synctex-forward " . line('.') . ":" . col('.') . ":" . expand('%:p') . " " . substitute(expand('%:p'),"tex$","pdf", "")
-    if has('nvim')
-        call jobstart("vimura neovim" . vimura_param)
-    else
-        exe "silent !vimura vim" . vimura_param . "&"
-    endif
-    redraw!
-endfunction
-
-map <localleader>st :call Synctex()<cr>
-map <localleader>lv :VimtexView<cr>
- 	]])
- end
-
-}
+ config = function()
+  	vim.cmd([[
+  
+ let g:vimtex_view_method = 'zathura'
+ let g:vimtex_view_general_viewer = 'zathura'
+ let g:vimtex_view_enabled=1
+ 
+ function! Synctex()
+     let vimura_param = " --synctex-forward " . line('.') . ":" . col('.') . ":" . expand('%:p') . " " . substitute(expand('%:p'),"tex$","pdf", "")
+     if has('nvim')
+         call jobstart("vimura neovim" . vimura_param)
+     else
+         exe "silent !vimura vim" . vimura_param . "&"
+     endif
+     redraw!
+ endfunction
+ 
+ map <localleader>st :call Synctex()<cr>
+ map <localleader>lv :VimtexView<cr>
+  	]])
+  end
+ 
+ }
 use 'inkarkat/vim-visualrepeat'
 use 'kana/vim-textobj-user'
 use 'kana/vim-textobj-entire'
@@ -154,6 +154,7 @@ require'nvim-treesitter.configs'.setup {
   },
   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = "all",
+  ignore_install = {"phpdoc", "tree-sitter-phpdoc"},
 
   -- Install languages synchronously (only applied to `ensure_installed`)
   sync_install = false,

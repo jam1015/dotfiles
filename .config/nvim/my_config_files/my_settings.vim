@@ -90,7 +90,7 @@ set listchars+=precedes:«
 set listchars+=nbsp:⣿
 let g:netrw_liststyle= 3
 
-" some things for zathura+synctex
+"" some things for zathura+synctex
 "let g:vimtex_compiler_method='tectonic'
 
 "set spell spelllang=en_us
