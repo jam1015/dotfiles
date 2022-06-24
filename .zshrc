@@ -40,7 +40,8 @@ alias python='ptpython --vi --dark-bg'
 #alias tmux="tmux -u"
 
 #alias vim='nvim'
-export VISUAL=nvim #use nvim as default editor
+export VISUAL=/usr/bin/nvim #use nvim as default editor
+export EDITOR=/usr/bin/nvim #use nvim as default editor
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
 alias van="man -P 'nvim -c call\ ToggleNumberToggle() -c set\ norelativenumber -c set\ nonumber  -c Man!'" #use vim as man pager
@@ -80,7 +81,7 @@ export PATH="${PATH}:${HOME}/Documents/lsps/lua-language-server/bin"
 #history settings
 SAVEHIST=100000 #stting the history length
 HISTSIZE=100000 #stting the history length
-#HISTFILE=~/.zhistory
+HISTFILE=~/.zhistory
 bindkey "^R" history-incremental-pattern-search-backward
 
 # setting some useful environment variables
@@ -139,11 +140,13 @@ cp basic_headers.cpp $1
 #xset r rate 250 35
 #=======
 export ght="https://gitlab.com/jam1015/ght.git/"
+#http-server -a localhost -p 8000
 
 
 alias luamake=/home/jordan/Documents/lsps/lua-language-server/3rd/luamake/luamake
 alias pdflatex="pdflatex -synctex=1"
 alias j4-dmenu-desktop='j4-dmenu-desktop --dmenu="(cat ; (stest -flx $(echo $PATH | tr : ' ') | sort -u)) | dmenu"'
+
 ocl() {
     "$@" &
     disown

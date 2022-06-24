@@ -53,6 +53,5 @@
     "highlight_selected_line": true,
     "show_margin": false,
     "blinking_cursor": false,
-    "rainbow_parentheses": true,
-    "show_terminal_tab": false
+    "rainbow_parentheses": true
 }

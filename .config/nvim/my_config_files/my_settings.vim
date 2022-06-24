@@ -53,7 +53,7 @@ set gdefault
 set nrformats-=octal
 set autoindent
 set scrolloff=3                 " show a few lines around cursor
-set synmaxcol=80
+"set synmaxcol=80
 set display=truncate
 "set smartindent
 set shiftwidth=4 "how much indentation from >
