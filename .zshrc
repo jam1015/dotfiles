@@ -13,8 +13,6 @@
 #  source /usr/share/zsh/manjaro-zsh-prompt
 #fi
 
-
-
 __conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
@@ -90,10 +88,10 @@ export diaries="$HOME/Documents/diaries/diaries.md"
 export tododir="$HOME/Documents/diaries/"
 export thoughts="$HOME/Documents/diaries/thoughts.md"
 export memories="$HOME/Documents/diaries/memories.md"
-export thoughtsdir="$HOME/Documents/thoughts"
+
 export tokens=$HOME/tokens.txt
 export swap="$HOME/.local/share/nvim/swap"
-export exercism="$HOME/.local/share/nvim/swap"
+
 
 #setting purple prompt
 #
@@ -160,7 +158,11 @@ cl() {
 }
 
 #init nvm
-source /usr/share/nvm/init-nvm.sh
+FILE=/usr/share/nvm/init-nvm.sh
+if test -f "$FILE"; then
+    source $FILE
+fi
+
 
 if [ -n "$TMUX" ]; then
 	function refresh {
