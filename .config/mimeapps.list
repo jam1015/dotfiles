@@ -1,3 +1,4 @@
 [Added Associations]
 image/jpeg=pinta.desktop;
 image/png=pinta.desktop;
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;sioyek.desktop;

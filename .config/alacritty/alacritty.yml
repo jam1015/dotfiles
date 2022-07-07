@@ -4,40 +4,41 @@ env:
 font:
   normal:
     family: Cascadia Mono PL
-    style: Light
+    style: Regular
   bold:
     family: Cascadia Mono PL
-    style: Regular
+    style: Bold
   italic:
     family: Cascadia Mono PL
   bold_italic:
     family: Cascadia Mono PL
   size: 9
 colors:
-  name: Mikado
-  author: ""
+  # Default colors
   primary:
-    background: "#000000"
-    foreground: "#ffffff"
-  cursor:
-    text: "#000000"
-    cursor: "#ffffff"
+    background: '#0A0E14'
+    foreground: '#B3B1AD'
+
+  # Normal colors
   normal:
-    black: "#322a2c"
-    red: "#a04363"
-    green: "#9b9329"
-    yellow: "#bf7a29"
-    blue: "#6a8c8c"
-    magenta: "#856774"
-    cyan: "#757978"
-    white: "#bcbcaf"
+    black: '#01060E'
+    red: '#EA6C73'
+    green: '#91B362'
+    yellow: '#F9AF4F'
+    blue: '#53BDFA'
+    magenta: '#FAE994'
+    cyan: '#90E1C6'
+    white: '#C7C7C7'
+
+  # Bright colors
   bright:
-    black: "#46423b"
-    red: "#ae837a"
-    green: "#b4aa30"
-    yellow: "#c7a551"
-    blue: "#74999e"
-    magenta: "#9c818e"
-    cyan: "#9fa590"
-    white: "#c1c4bc"
-theme: Mikado
+    black: '#686868'
+    red: '#F07178'
+    green: '#C2D94C'
+    yellow: '#FFB454'
+    blue: '#59C2FF'
+    magenta: '#FFEE99'
+    cyan: '#95E6CB'
+    white: '#FFFFFF'
+theme: Ayu-Dark
+heme: Baskerville - lost woods

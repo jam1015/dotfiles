@@ -1,7 +1,7 @@
 "---custom keybindings go here--------
-"nnoremap <Space> <Nop>
-"let mapleader="\\"
-"let maplocalleader=" "
+nnoremap <Space> <Nop>
+let mapleader="\\"
+let maplocalleader=" "
 "
 ""add type these after a search to instantly move text
 ""move to text
@@ -28,7 +28,7 @@
 ""nnoremap g^ ^
 "
 ""<leader>l means no highlighting anymore
-"nnoremap <silent> <leader>ll :noh<CR>
+nnoremap <silent> <leader>ll :noh<CR>
 "
 
 
