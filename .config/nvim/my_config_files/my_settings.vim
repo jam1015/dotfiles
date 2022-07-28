@@ -90,6 +90,9 @@ set listchars+=precedes:«
 set listchars+=nbsp:⣿
 let g:netrw_liststyle= 3
 
+
+autocmd BufNewFile,BufRead *.md setlocal iskeyword+=#
+
 "" some things for zathura+synctex
 "let g:vimtex_compiler_method='tectonic'
 

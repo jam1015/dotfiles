@@ -61,7 +61,7 @@ then
 fi
 
 source /home/jordan/.screenlayout/monitor_left.sh
-xset dpms 1200 1205 1210
+xset dpms 1201 1205 1210
 xset r rate 250 35
 sysctl -p /etc/sysctl.d/40-ipv6.conf
 exec i3
