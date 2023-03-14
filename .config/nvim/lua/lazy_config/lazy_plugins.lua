@@ -1,11 +1,22 @@
 return {
 	{
+		'willothy/flatten.nvim',
+		config = true,
+		-- or pass configuration with
+		 opts = require("plugin_configs.flatten")
+	},
+
+	{ "samjwill/nvim-unception",
+		enabled = false,
+		init = function()
+			require("plugin_configs.nvim-unception")
+		end },
+	{
 
 		'ludovicchabant/vim-gutentags',
 
 		config = function()
 			require("plugin_configs.vim-gutentags")
-
 		end
 	},
 	{ "lukas-reineke/indent-blankline.nvim", config = function() require("plugin_configs.indent-blankline") end,
@@ -27,11 +38,6 @@ return {
 	({
 		"ellisonleao/gruvbox.nvim", --event = "VeryLazy"
 	}),
-	{ "samjwill/nvim-unception",
-		enabled = false,
-		init = function()
-			require("plugin_configs.nvim-unception")
-		end },
 	{
 		"rcarriga/nvim-notify",
 
