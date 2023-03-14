@@ -88,6 +88,16 @@ endif
 set hlsearch
 set formatoptions-=cro
 
+if empty($DISPLAY)
+colorscheme elflord
+else
+	try
+		colorscheme monokai
+	catch
+		colorscheme habamax
+	endtry
+endif
+
 
 if has('langmap') && exists('+langremap')
   " Prevent that the langmap option applies to characters that result from a
