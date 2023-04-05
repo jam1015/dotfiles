@@ -158,3 +158,4 @@ export ght="https://gitlab.com/jam1015/ght.git/"
 
 #export MANPAGER="nvim -c 'set ft=man' -"
 echo "bashrc sourced"
+. "$HOME/.cargo/env"

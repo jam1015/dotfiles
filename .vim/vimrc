@@ -35,7 +35,7 @@ runtime config/indentline_config.vim
 Pack 'skywind3000/gutentags_plus'
 Pack 'ludovicchabant/vim-gutentags'
 runtime config/gutentagsconfig.vim
-"
+
 "" minpac
 ""Pack 'k-takata/minpac', {'type': 'opt'}
 ""
@@ -55,7 +55,7 @@ runtime config/gutentagsconfig.vim
 ""Pack 'tpope/vim-sensible', { 'rev': 'v1.2' }
 Pack 'vlime/vlime', {'rtp': 'vim/'}
 Pack 'kovisoft/paredit'
-"
+
 call plugpac#end()
 colorscheme monokai
 set wildoptions+=pum
