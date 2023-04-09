@@ -16,7 +16,7 @@ alias ls='ls -G'
 alias pd='pandoc'
 
 export BROWSER="/usr/bin/firefox-developer-edition"
-export VISUAL=/usr/bin/nvim #use nvim as default editor
+export VISUAL=/usr/local/bin/nvim
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
 export NVIM_SWAP="$HOME/.local/state/nvim/swap"
