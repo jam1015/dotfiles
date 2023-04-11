@@ -19,3 +19,4 @@ firenvim
 .emacs.*/elpa
 .config/.repro
 dotfiles
+dotfiles.git
