@@ -75,6 +75,7 @@ PS1='%B%F{magenta}%3~ ${vim_mode}%f%b '
 fi
 
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
+dots config --local status.showUntrackedFiles no
 setopt noauto_pushd
 
 echo ".zshrc sourced"
