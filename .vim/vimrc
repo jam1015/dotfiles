@@ -17,10 +17,10 @@ endif
 "map <leader>st :call Synctex()<cr>
 "map <leader>lv :VimtexView<cr>
 "
-""git clone https://github.com/k-takata/minpac.git \
-""    ~/.vim/pack/minpac/opt/minpac
-""curl -fLo ~/.vim/autoload/plugpac.vim --create-dirs \
-""    https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim
+"git clone https://github.com/k-takata/minpac.git \
+"    ~/.vim/pack/minpac/opt/minpac
+"curl -fLo ~/.vim/autoload/plugpac.vim --create-dirs \
+"    https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim
 "
 call plugpac#begin()
 Pack 'NLKNguyen/papercolor-theme'
