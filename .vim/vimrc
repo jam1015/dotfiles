@@ -57,6 +57,10 @@ Pack 'vlime/vlime', {'rtp': 'vim/'}
 Pack 'kovisoft/paredit'
 "
 call plugpac#end()
-colorscheme monokai
+try
+	colorscheme monokai
+catch /^Vim\%((\a\+)\)\=:E/	 " catch all Vim errors
+	colorscheme habamax
+endtry
 set wildoptions+=pum
 
