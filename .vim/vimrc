@@ -63,4 +63,4 @@ catch /^Vim\%((\a\+)\)\=:E/	 " catch all Vim errors
 	colorscheme habamax
 endtry
 set wildoptions+=pum
-
+"
