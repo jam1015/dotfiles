@@ -35,6 +35,7 @@ shopt -s checkwinsize
 #shopt -s globstar
 #
 # make less more friendly for non-text input files, see lesspipe(1)
+
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
@@ -156,6 +157,10 @@ export ght="https://gitlab.com/jam1015/ght.git/"
 #    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
 #    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
+<<<<<<< HEAD
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
 export MANPAGER="nvim -c 'set ft=man' -"
+=======
+#export MANPAGER="nvim -c 'set ft=man' -"
+>>>>>>> parent of 1c86186 (updated gitignore)
 echo "bashrc sourced"
