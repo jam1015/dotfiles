@@ -1,0 +1,66 @@
+runtime config/pluginkeymaps.vim
+runtime config/mysettings.vim
+runtime config/mappings.vim 
+runtime config/autocmds.vim 
+runtime config/directionalhelp.vim
+
+packadd gutentagsconfig
+if !empty($TMUX)
+	tnoremap <silent> <C-w> <C-\\><C-n><C-w>
+else
+	nmap <silent> <C-a> <C-w>
+	tmap <C-a> <C-\\><C-o>
+endif
+
+
+
+"map <leader>st :call Synctex()<cr>
+"map <leader>lv :VimtexView<cr>
+"
+"git clone https://github.com/k-takata/minpac.git \
+"    ~/.vim/pack/minpac/opt/minpac
+"curl -fLo ~/.vim/autoload/plugpac.vim --create-dirs \
+"    https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim
+"
+call plugpac#begin()
+Pack 'NLKNguyen/papercolor-theme'
+Pack 'sickill/vim-monokai'
+
+Pack 'tpope/vim-unimpaired'
+runtime config/vimunimpairedconfig.vim 
+
+Pack 'Yggdroot/indentLine'
+runtime config/indentline_config.vim
+
+Pack 'skywind3000/gutentags_plus'
+Pack 'ludovicchabant/vim-gutentags'
+runtime config/gutentagsconfig.vim
+"
+"" minpac
+""Pack 'k-takata/minpac', {'type': 'opt'}
+""
+""Pack 'junegunn/vim-easy-align'
+""
+""" On-demand loading
+""Pack 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+""Pack 'tpope/vim-fireplace', { 'for': 'clojure' }
+""
+""" Using a non-master branch
+""Pack 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+""
+""" Post-update hook
+""Pack 'Yggdroot/LeaderF', { 'do': {-> system('./install.sh')} }
+""
+""" Sepcify commit ID, branch name or tag name to be checked out.
+""Pack 'tpope/vim-sensible', { 'rev': 'v1.2' }
+Pack 'vlime/vlime', {'rtp': 'vim/'}
+Pack 'kovisoft/paredit'
+"
+call plugpac#end()
+try
+	colorscheme monokai
+catch /^Vim\%((\a\+)\)\=:E/	 " catch all Vim errors
+	colorscheme habamax
+endtry
+set wildoptions+=pum
+"
