@@ -156,11 +156,6 @@ export ght="https://gitlab.com/jam1015/ght.git/"
 #    nvim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
 #    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
 #    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
-
-<<<<<<< HEAD
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
 export MANPAGER="nvim -c 'set ft=man' -"
-=======
-#export MANPAGER="nvim -c 'set ft=man' -"
->>>>>>> parent of 1c86186 (updated gitignore)
 echo "bashrc sourced"
