@@ -3,14 +3,9 @@ return {
 		'willothy/flatten.nvim',
 		config = true,
 		-- or pass configuration with
-		 opts = require("plugin_configs.flatten")
+		opts = require("plugin_configs.flatten")
 	},
 
-	{ "samjwill/nvim-unception",
-		enabled = false,
-		init = function()
-			require("plugin_configs.nvim-unception")
-		end },
 	{
 
 		'ludovicchabant/vim-gutentags',
@@ -20,7 +15,8 @@ return {
 		end
 	},
 	{ "lukas-reineke/indent-blankline.nvim", config = function() require("plugin_configs.indent-blankline") end,
-		event = "VeryLazy" },
+		event = "VeryLazy"
+	},
 	"overcache/NeoSolarized",
 	({
 		"folke/tokyonight.nvim",
@@ -40,7 +36,7 @@ return {
 	}),
 	{
 		"rcarriga/nvim-notify",
-
+		event = "VeryLazy",
 		config = function() require("plugin_configs.notify") end,
 	},
 
@@ -50,7 +46,9 @@ return {
 		config = function() require("plugin_configs/vim-startuptime") end },
 	("nvim-lua/plenary.nvim"),
 	("nvim-lua/popup.nvim"),
-	({ "ethanholz/nvim-lastplace", config = function() require("plugin_configs.nvim-lastplace") end }),
+	({ "ethanholz/nvim-lastplace",
+		event = "VeryLazy",
+		config = function() require("plugin_configs.nvim-lastplace") end }),
 	{ "airblade/vim-rooter", config = function()
 		require("plugin_configs.vim-rooter")
 	end },
@@ -66,6 +64,8 @@ return {
 
 	{
 		"vlime/vlime", --install quicklisp on your system when you install this; do it manually rather than through a package manager, or find where the package manager installs the proper lisp script
+
+		event = "VeryLazy",
 		dependencies = "kovisoft/paredit",
 		config = function()
 			require("plugin_configs.vlime")
@@ -75,7 +75,8 @@ return {
 
 	{ 'famiu/bufdelete.nvim',     config = function() require("plugin_keymaps").pluginKeymaps("bufdelete.nvim") end },
 	{ "mzlogin/vim-markdown-toc", ft = { "markdown", "md", }, },
-	{ "jam1015/yanky.nvim",
+	{ "gbprod/yanky.nvim",
+		event = "VeryLazy",
 		--branch = "autocmd",
 		dependencies = { "kkharji/sqlite.lua" },
 
@@ -145,6 +146,8 @@ return {
 	}),
 	{
 		"jam1015/PushPop.vim",
+
+		event = "VeryLazy",
 		enabled = true,
 		dependencies = { "vim-scripts/genutils" },
 		config = function()
@@ -217,24 +220,28 @@ return {
 	}),
 
 	{ "ggandor/flit.nvim",
+
+		event = "VeryLazy",
+
 		--commit = "be110f9814a45788d10537fd59b3c76d956bb7ad",
 		config = function() require("plugin_configs.flit") end
 	},
 	({
 		"ggandor/leap.nvim",
-
+		event = "VeryLazy",
 		--commit = "9cc411481db859059ad66c8ad844b9386dc62d5c",
 		config = function()
 			require('plugin_configs.leap')
 		end,
 	}),
 
-	{ "andymass/vim-matchup",                        event = { "BufNewFile", "BufRead" }, },
+	{ "andymass/vim-matchup",                        event = { "VeryLazy" }, },
 	{ "numToStr/Comment.nvim",                       config = function() require("plugin_configs.Comment") end, event = "VeryLazy" },
 	{ "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy" },
 
 	({
-		"nvim-treesitter/nvim-treesitter", --event = "VeryLazy",
+		"nvim-treesitter/nvim-treesitter", event = "BufWinEnter",
+		--event = "VeryLazy",
 		config = vim.schedule(function()
 			require("plugin_configs.nvim-treesitter")
 		end),
@@ -261,17 +268,11 @@ return {
 	},
 
 
-	{ 'akinsho/bufferline.nvim',
-		enabled = false,
-		--tag = "v3.*",
-		config = function() require("plugin_configs.bufferline") end
-	},
-
 
 
 	{ "neovim/nvim-lspconfig",
 		enabled = true,
-		event = { "BufReadPre" },
+		event = { "VeryLazy" },
 		--	lazy = true,
 		--						event = {"InsertEnter"}
 		--
