@@ -7,14 +7,15 @@ return {
 	},
 
 	{
-
 		'ludovicchabant/vim-gutentags',
 
 		config = function()
 			require("plugin_configs.vim-gutentags")
 		end
 	},
-	{ "lukas-reineke/indent-blankline.nvim", config = function() require("plugin_configs.indent-blankline") end,
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = function() require("plugin_configs.indent-blankline") end,
 		event = "VeryLazy"
 	},
 	"overcache/NeoSolarized",
@@ -40,18 +41,23 @@ return {
 		config = function() require("plugin_configs.notify") end,
 	},
 
-	{ 'dstein64/vim-startuptime',
+	{
+		'dstein64/vim-startuptime',
 		enabled = true,
 		event = "VeryLazy",
-		config = function() require("plugin_configs/vim-startuptime") end },
+		config = function() require("plugin_configs/vim-startuptime") end
+	},
 	("nvim-lua/plenary.nvim"),
 	("nvim-lua/popup.nvim"),
 	({ "ethanholz/nvim-lastplace",
 		event = "VeryLazy",
 		config = function() require("plugin_configs.nvim-lastplace") end }),
-	{ "airblade/vim-rooter", config = function()
-		require("plugin_configs.vim-rooter")
-	end },
+	{
+		"airblade/vim-rooter",
+		config = function()
+			require("plugin_configs.vim-rooter")
+		end
+	},
 
 	({
 		"sitiom/nvim-numbertoggle",
@@ -72,10 +78,10 @@ return {
 			vim.cmd([[]])
 		end
 	},
-
 	{ 'famiu/bufdelete.nvim',     config = function() require("plugin_keymaps").pluginKeymaps("bufdelete.nvim") end },
 	{ "mzlogin/vim-markdown-toc", ft = { "markdown", "md", }, },
-	{ "gbprod/yanky.nvim",
+	{
+		"gbprod/yanky.nvim",
 		event = "VeryLazy",
 		--branch = "autocmd",
 		dependencies = { "kkharji/sqlite.lua" },
@@ -85,11 +91,13 @@ return {
 			require("plugin_configs.yanky")
 		end
 	},
-	{ "tpope/vim-unimpaired",
+	{
+		"tpope/vim-unimpaired",
 		config = function()
 			require("plugin_keymaps").pluginKeymaps("vim-unimpaired")
 		end,
-		event = "VeryLazy" },
+		event = "VeryLazy"
+	},
 	"tpope/vim-scriptease",
 	{
 		"windwp/nvim-autopairs",
@@ -107,7 +115,8 @@ return {
 	}),
 
 	{
-		"kana/vim-textobj-entire", event = "VeryLazy",
+		"kana/vim-textobj-entire",
+		event = "VeryLazy",
 		dependencies = "kana/vim-textobj-user",
 	},
 	({
@@ -203,8 +212,11 @@ return {
 	({
 		"nvim-telescope/telescope.nvim", event = "VeryLazy",
 		dependencies = { "nvim-lua/plenary.nvim",
-			{ "nvim-telescope/telescope-fzf-native.nvim",
-				build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build =
+				'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+			},
 			"nvim-telescope/telescope-file-browser.nvim" },
 		config = function()
 			require("plugin_configs.telescope")
@@ -219,7 +231,8 @@ return {
 		end,
 	}),
 
-	{ "ggandor/flit.nvim",
+	{
+		"ggandor/flit.nvim",
 
 		event = "VeryLazy",
 
@@ -236,7 +249,9 @@ return {
 	}),
 
 	{ "andymass/vim-matchup",                        event = { "VeryLazy" }, },
-	{ "numToStr/Comment.nvim",                       config = function() require("plugin_configs.Comment") end, event = "VeryLazy" },
+	{ "numToStr/Comment.nvim",                       config = function() require("plugin_configs.Comment") end,
+		                                                                                                            event =
+		"VeryLazy" },
 	{ "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy" },
 
 	({
@@ -259,7 +274,8 @@ return {
 	{ "lifecrisis/vim-difforig", event = "VeryLazy" },
 	{ "lewis6991/gitsigns.nvim", config = function() require("plugin_configs.gitsigns") end, lazy = true },
 	{
-		'nvim-tree/nvim-tree.lua', event = "VeryLazy",
+		'nvim-tree/nvim-tree.lua',
+		event = "VeryLazy",
 		dependencies = {
 		},
 		tag = 'nightly', -- optional, updated every week. (see issue #1193)
@@ -269,8 +285,8 @@ return {
 
 
 
-
-	{ "neovim/nvim-lspconfig",
+	{
+		"neovim/nvim-lspconfig",
 		enabled = true,
 		event = { "VeryLazy" },
 		--	lazy = true,
