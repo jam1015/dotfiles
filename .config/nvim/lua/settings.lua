@@ -4,15 +4,15 @@ vim.cmd([[ highlight Comment cterm=italic gui=italic]])
 
 set.bg = "dark"
 local colorscheme = "tokyonight"
-if not os.getenv("DISPLAY") then
-	vim.cmd([[colorscheme elflord]])
-else
+if os.getenv("DISPLAY") then
 	local status_ok = nil
 	status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 
 	if not status_ok then
 		vim.cmd([[colorscheme blue]])
 	end
+else
+	vim.cmd([[colorscheme elflord]])
 end
 -- add complete/completeopt
 set.modeline = false
@@ -31,9 +31,9 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 set.history = 2000
 set.autoread = true
-set.scrolloff = 3 -- show a few lines around cursor
+set.scrolloff = 3   -- show a few lines around cursor
 set.display = "lastline"
-set.shiftwidth = 4 --how much indentation from >
+set.shiftwidth = 4  --how much indentation from >
 set.softtabstop = 4 --lets us delete by tabs when expandtab is on
 set.tabstop = 4
 --set.path = set.path + "**"
