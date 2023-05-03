@@ -18,4 +18,5 @@ firenvim
 .emacs.*/elpa/*
 .emacs.*/elpa
 .config/.repro
+.config/nvim/lazy-lock.json
 dotfiles

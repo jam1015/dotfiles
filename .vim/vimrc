@@ -32,9 +32,9 @@ runtime config/vimunimpairedconfig.vim
 Pack 'Yggdroot/indentLine'
 runtime config/indentline_config.vim
 
-Pack 'skywind3000/gutentags_plus'
-Pack 'ludovicchabant/vim-gutentags'
-runtime config/gutentagsconfig.vim
+"Pack 'skywind3000/gutentags_plus'
+"Pack 'ludovicchabant/vim-gutentags'
+"runtime config/gutentagsconfig.vim
 "
 "" minpac
 ""Pack 'k-takata/minpac', {'type': 'opt'}

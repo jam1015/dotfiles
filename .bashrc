@@ -35,7 +35,8 @@ shopt -s checkwinsize
 #shopt -s globstar
 #
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 #if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -155,6 +156,6 @@ export ght="https://gitlab.com/jam1015/ght.git/"
 #    nvim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
 #    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
 #    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
-
-#export MANPAGER="nvim -c 'set ft=man' -"
+alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
+export MANPAGER="nvim -c 'set ft=man' -"
 echo "bashrc sourced"
