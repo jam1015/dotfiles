@@ -12,6 +12,7 @@ set -g visual-activity off #if on would cause message when activity happens
 bind p paste-buffer -p #the p adds paste bracket control codes if reqeusted by application
 bind-key -T copy-mode-vi r send-keys -X rectangle-toggle
 set -s set-clipboard on
+set-option -g default-shell /bin/zsh
 
 
 
