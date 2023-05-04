@@ -16,7 +16,6 @@ set-option -g default-shell /bin/zsh
 
 
 
-
 # Fix to ctrl+r in tmux
 #bind-key '^R' history-incremental-search-backward
 
