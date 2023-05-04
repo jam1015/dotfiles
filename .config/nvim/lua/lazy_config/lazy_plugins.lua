@@ -33,7 +33,7 @@ return {
 	},
 
 	({
-		"ellisonleao/gruvbox.nvim", --event = "VeryLazy"
+		"ellisonleao/gruvbox.nvim", event = "VeryLazy"
 	}),
 	{
 		"rcarriga/nvim-notify",
@@ -50,8 +50,8 @@ return {
 	("nvim-lua/plenary.nvim"),
 	("nvim-lua/popup.nvim"),
 	({ "ethanholz/nvim-lastplace",
-		event = "VeryLazy",
 		config = function() require("plugin_configs.nvim-lastplace") end }),
+
 	{
 		"airblade/vim-rooter",
 		config = function()
@@ -80,17 +80,6 @@ return {
 	},
 	{ 'famiu/bufdelete.nvim',     config = function() require("plugin_keymaps").pluginKeymaps("bufdelete.nvim") end },
 	{ "mzlogin/vim-markdown-toc", ft = { "markdown", "md", }, },
-	{
-		"gbprod/yanky.nvim",
-		event = "VeryLazy",
-		--branch = "autocmd",
-		dependencies = { "kkharji/sqlite.lua" },
-
-		--dir = "/home/jordan/Documents/yanky.nvim",
-		config = function()
-			require("plugin_configs.yanky")
-		end
-	},
 	{
 		"tpope/vim-unimpaired",
 		config = function()
@@ -248,10 +237,13 @@ return {
 		end,
 	}),
 
-	{ "andymass/vim-matchup",                        event = { "VeryLazy" }, },
-	{ "numToStr/Comment.nvim",                       config = function() require("plugin_configs.Comment") end,
-		                                                                                                            event =
-		"VeryLazy" },
+	{ "andymass/vim-matchup",     event = { "VeryLazy" }, },
+	{
+		"numToStr/Comment.nvim",
+		config = function() require("plugin_configs.Comment") end,
+		event =
+		"VeryLazy"
+	},
 	{ "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy" },
 
 	({
@@ -271,8 +263,12 @@ return {
 
 
 
-	{ "lifecrisis/vim-difforig", event = "VeryLazy" },
-	{ "lewis6991/gitsigns.nvim", config = function() require("plugin_configs.gitsigns") end, lazy = true },
+	{ "lifecrisis/vim-difforig",                     event = "VeryLazy" },
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function() require("plugin_configs.gitsigns") end,
+		lazy = true
+	},
 	{
 		'nvim-tree/nvim-tree.lua',
 		event = "VeryLazy",
@@ -349,4 +345,18 @@ return {
 		event = "VeryLazy",
 	}),
 
+	{
+		"gbprod/yanky.nvim",
+		lazy = true,
+		enabled = true,
+		--event = {"TextYankPost","CursorMoved","CursorHold"},
+		event = { "VeryLazy" },
+		--branch = "autocmd",
+		dependencies = { "kkharji/sqlite.lua", },
+
+		--dir = "/home/jordan/Documents/yanky.nvim",
+		config = function()
+			require("plugin_configs.yanky")
+		end
+	},
 }
