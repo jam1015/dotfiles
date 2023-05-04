@@ -21,3 +21,4 @@ firenvim
 .config/nvim/lazy-lock.json
 dotfiles
 dotfiles.git
+.ssh/config
