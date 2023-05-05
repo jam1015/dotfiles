@@ -57,10 +57,7 @@ set.listchars = set.listchars + 'extends:»'
 set.listchars = set.listchars + 'precedes:«'
 set.listchars = set.listchars + 'tab:   '
 set.listchars = set.listchars + 'nbsp:⣿'
-
-if os.getenv("DISPLAY") then
-	set.clipboard = 'unnamedplus'
-end
+set.clipboard = 'unnamedplus'
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
@@ -77,8 +74,8 @@ local function setup_tmux_clipboard()
   let g:clipboard = {
           \   'name': 'myClipboard',
           \   'copy': {
-          \      '+': ['tmux', 'load-buffer', '-'],
-          \      '*': ['tmux', 'load-buffer', '-'],
+          \      '+': ['tmux', 'load-buffer', '-w', '-'],
+          \      '*': ['tmux', 'load-buffer', '-w', '-'],
           \    },
           \   'paste': {
           \      '+': ['tmux', 'save-buffer', '-'],
