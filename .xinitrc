@@ -60,6 +60,10 @@ then
   xflux -z 15217 -k 2000 > /dev/null
 fi
 
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+
+
 source /home/jordan/.screenlayout/monitor_left.sh
 xset dpms 1201 1205 1210
 xset r rate 250 35
