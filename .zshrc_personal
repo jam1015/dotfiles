@@ -69,9 +69,9 @@ zle -N zle-line-finish
 
 if [[ "$EUID" = 0 ]]
 then 
-PS1='%B%F{green}su:%3~ ${vim_mode}%f%b '
+PS1='%B%F{green}%M:su:%3~ ${vim_mode}%f%b '
 else
-PS1='%B%F{magenta}%3~ ${vim_mode}%f%b '
+PS1='%B%F{magenta}%M:%3~ ${vim_mode}%f%b '
 fi
 
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
