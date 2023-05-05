@@ -57,7 +57,12 @@ set.listchars = set.listchars + 'extends:»'
 set.listchars = set.listchars + 'precedes:«'
 set.listchars = set.listchars + 'tab:   '
 set.listchars = set.listchars + 'nbsp:⣿'
-set.clipboard = 'unnamedplus'
+
+if os.getenv("DISPLAY") then
+	set.clipboard = 'unnamedplus'
+end
+
+
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
