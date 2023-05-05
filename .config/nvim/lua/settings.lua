@@ -84,7 +84,7 @@ local function setup_tmux_clipboard()
           \      '+': ['tmux', 'save-buffer', '-'],
           \      '*': ['tmux', 'save-buffer', '-'],
           \   },
-          \   'cache_enabled': 1,
+          \   'cache_enabled': 0,
           \ }
 
     ]])
