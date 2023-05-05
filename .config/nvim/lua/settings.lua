@@ -58,9 +58,9 @@ set.listchars = set.listchars + 'precedes:«'
 set.listchars = set.listchars + 'tab:   '
 set.listchars = set.listchars + 'nbsp:⣿'
 
---if not os.getenv("SSH_CONNECTION") then
+if not os.getenv("SSH_CONNECTION") then
 	set.clipboard = 'unnamedplus'
---end
+end
 
 
 vim.g.netrw_liststyle = 3
