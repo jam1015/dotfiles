@@ -68,3 +68,30 @@ vim.g.c_comment_strings = 1 --can be any value
 set.pumheight = 10
 set.inccommand = 'split'
 set.shada = "'1000,%"
+
+local function setup_tmux_clipboard()
+	local tmux = os.getenv("TMUX")
+	if tmux then
+		-- Configure Neovim to use tmux's clipboard
+		vim.cmd([[
+  let g:clipboard = {
+          \   'name': 'myClipboard',
+          \   'copy': {
+          \      '+': ['tmux', 'load-buffer', '-'],
+          \      '*': ['tmux', 'load-buffer', '-'],
+          \    },
+          \   'paste': {
+          \      '+': ['tmux', 'save-buffer', '-'],
+          \      '*': ['tmux', 'save-buffer', '-'],
+          \   },
+          \   'cache_enabled': 1,
+          \ }
+
+    ]])
+	else
+		return true
+	end
+end
+
+-- Call the function to set up the clipboard
+setup_tmux_clipboard()
