@@ -1,31 +1,42 @@
 local utils = require("yanky.utils")
 --local mapping_ok, mapping  = pcall(require, "yanky.telescope.mapping")
 
+
 local function telescope_mappings(mode)
 	local mapping_ok, mapping = pcall(require, "yanky.telescope.mapping")
 	if mapping_ok then
 		if mode == "i" then
 			return ({
-					["<c-p>"] = mapping.put("p"),
-					["<c-k>"] = mapping.put("P"),
-					["<c-x>"] = mapping.delete(),
-					["<c-r>"] = mapping.set_register(utils.get_default_register()),
-				})
+				["<c-p>"] = mapping.put("p"),
+				["<c-k>"] = mapping.put("P"),
+				["<c-x>"] = mapping.delete(),
+				["<c-r>"] = mapping.set_register(utils.get_default_register()),
+			})
 		elseif mode == "n" then
 			return ({
-					{
-						p = mapping.put("p"),
-						P = mapping.put("P"),
-						d = mapping.delete(),
-						r = mapping.set_register(utils.get_default_register())
-					}
-				})
+				{
+					p = mapping.put("p"),
+					P = mapping.put("P"),
+					d = mapping.delete(),
+					r = mapping.set_register(utils.get_default_register())
+				}
+			})
 		elseif mode == "default" then
 			return mapping.put("p")
 		else
 			return {}
 		end
 	end
+end
+
+local function in_ssh()
+	local shareclipboard
+	if os.getenv("SSH_CONNECTION") then
+		 shareclipboard = false
+	else
+		 shareclipboard = true
+	end
+	return shareclipboard
 end
 
 require("yanky").setup({
@@ -49,14 +60,14 @@ require("yanky").setup({
 	},
 
 	system_clipboard = {
-		sync_with_ring = true,
+		sync_with_ring = in_ssh(),
 	},
 	highlight = {
 		on_put = true,
 		on_yank = true,
 		timer = 200,
-	--	yank_higroup = "Visual",
-	--	put_higroup = "Visual",
+		--	yank_higroup = "Visual",
+		--	put_higroup = "Visual",
 	},
 	preserve_cursor_position = {
 		enabled = true,
