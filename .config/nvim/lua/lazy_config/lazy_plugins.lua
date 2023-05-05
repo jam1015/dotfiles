@@ -349,7 +349,7 @@ return {
 		lazy = true,
 		enabled = true,
 		--event = {"TextYankPost","CursorMoved","CursorHold"},
-		event = { "VeryLazy" },
+		event = "VeryLazy",--{"CursorMoved", "VeryLazy","VimEnter" },
 		--branch = "autocmd",
 		dependencies = { "kkharji/sqlite.lua", },
 
