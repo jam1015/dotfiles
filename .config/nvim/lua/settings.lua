@@ -71,6 +71,7 @@ set.pumheight = 10
 set.inccommand = 'split'
 set.shada = "'1000,%"
 
+
 local function setup_tmux_clipboard()
 	local tmux = os.getenv("TMUX")
 	if tmux then
