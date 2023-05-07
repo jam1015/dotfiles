@@ -75,7 +75,10 @@ PS1='%B%F{magenta}%M:%3~ ${vim_mode}%f%b '
 fi
 
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
+
+
 setopt noauto_pushd
+setopt completealiases
 
 echo ".zshrc sourced"
 

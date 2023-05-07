@@ -214,6 +214,9 @@ bar {
         status_command i3status
 }
 
+exec_always --no-startup-id ~/.screenlayout/dual_monitor.sh
+
+
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a
 # keysym-based config which used their favorite modifier (alt or windows)

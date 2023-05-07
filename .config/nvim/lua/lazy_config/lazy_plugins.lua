@@ -237,23 +237,24 @@ return {
 		end,
 	}),
 
-	{ "andymass/vim-matchup",     event = { "VeryLazy" }, },
+	{ "andymass/vim-matchup",     event = { "VeryLazy" }, enabled = false },
 	{
 		"numToStr/Comment.nvim",
+		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("plugin_configs.Comment") end,
 		event =
 		"VeryLazy"
 	},
-	{ "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy" },
 
 	({
 		"nvim-treesitter/nvim-treesitter", event = "BufWinEnter",
+		enabled = true,
 		--event = "VeryLazy",
 		config = vim.schedule(function()
 			require("plugin_configs.nvim-treesitter")
 		end),
 	}),
-
+	{ "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy", dependencies = "nvim-treesitter/nvim-treesitter" },
 	({
 		"folke/trouble.nvim", event = "VeryLazy",
 		config = function()
@@ -348,9 +349,9 @@ return {
 	{
 		"gbprod/yanky.nvim",
 		lazy = true,
-		enabled = true,
+		enabled = false,
 		--event = {"TextYankPost","CursorMoved","CursorHold"},
-		event = "VeryLazy",--{"CursorMoved", "VeryLazy","VimEnter" },
+		event = "VeryLazy", --{"CursorMoved", "VeryLazy","VimEnter" },
 		--branch = "autocmd",
 		dependencies = { "kkharji/sqlite.lua", },
 
