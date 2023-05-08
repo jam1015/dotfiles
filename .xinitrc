@@ -67,4 +67,5 @@ xrandr --auto
 xset dpms 1201 1205 1210
 xset r rate 250 35
 sysctl -p /etc/sysctl.d/40-ipv6.conf
+#nm-applet --sm-disable &
 exec i3
