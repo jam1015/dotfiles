@@ -45,6 +45,21 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 #exec --no-startup-id nm-applet 
 #--sm-disable
+
+ #sudo pacman -S nm-applet blueman-applet paysystray
+ #sudo pacman -S blueman
+ #sudo pacman -S pasystray
+ #sudo pacman -S pipewire
+ #sudo pacman -R libpulse
+ #sudo pacman -S pipewire-pulse
+ #sudo pacman -S pasystray netork-manager-applet blueman
+ #sudo pacman -S pasystray newtork-manager-applet blueman
+ #sudo pacman -S pasystray network-manager-applet blueman
+ #sudo pacman -S avahi
+ #sudo pacman -S pulseaudio
+ #sudo pacman -S bluez bluez-utils
+ #sudo pacman -S pavucontrol
+ #1453  paru -S nm-applet blueman-applet paysystray
 exec --no-startup-id blueman-applet
 exec --no-startup-id pasystray
 exec --no-startup-id nm-applet

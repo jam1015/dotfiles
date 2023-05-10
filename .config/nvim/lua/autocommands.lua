@@ -24,9 +24,11 @@ api.nvim_create_autocmd("SwapExists", {
 })
 
 vim.api.nvim_create_autocmd({ "FileChangedShellPost", "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
-	command = "if mode() != 'c' | checktime | endif",
+  command = "if mode() != 'c' &&  expand('%') !=# '[Command Line]' | checktime | endif",
 	pattern = { "*" },
 })
+
+
 vim.cmd([[
  autocmd FileChangedShellPost *
         \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
