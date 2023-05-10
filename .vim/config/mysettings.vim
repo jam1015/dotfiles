@@ -38,6 +38,7 @@ set listchars+=extends:»
 set listchars+=precedes:«
 set listchars+=nbsp:⣿
 let g:netrw_liststyle= 3
+set cmdheight=1
 
 " some things for zathura+synctex
 let g:vimtex_view_method = 'zathura'
@@ -64,6 +65,7 @@ endif
 "
 set timeout		" time out for key codes
 set ttimeoutlen=50	" wait up to 100ms after Esc for special key
+set guicursor=a:blinkoff0
 
 "other colorscheme commands
 highlight Comment cterm=italic
@@ -93,11 +95,12 @@ colorscheme elflord
 else
 	try
 		colorscheme monokai
-	catch
-		colorscheme habamax
+	catch /^Vim\%((\a\+)\)\=:E/	 " catch all Vim errors
+		colorscheme retrobox
 	endtry
 endif
 
+set wildoptions+=pum
 
 if has('langmap') && exists('+langremap')
   " Prevent that the langmap option applies to characters that result from a

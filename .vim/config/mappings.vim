@@ -1,7 +1,7 @@
 
 nnoremap <Space> <Nop>
-let maplocalleader="\\"
 let mapleader=" "
+let maplocalleader="\\"
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
@@ -26,8 +26,8 @@ endif
 map Q gq
 
 "force visual motion     
-nnoremap dj dvj
-nnoremap dk dvk
+"nnoremap dj dvj
+"nnoremap dk dvk
 nnoremap 0 ^
 nnoremap ^ 0
 "nnoremap $ g$

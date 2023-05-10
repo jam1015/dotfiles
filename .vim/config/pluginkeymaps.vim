@@ -46,6 +46,15 @@ function! s:configureKeymaps(plugin_in) abort
 		cnoreabbrev <expr> previous  getcmdtype() == ":" && getcmdline() == "prevous" ? "Aprev" : "previous"
 	elseif a:plugin_in == "blue"
 		colorscheme blue
+	elseif a:plugin_in == "vim-yankstack"
+		nmap <C-p> <Plug>yankstack_substitute_older_paste
+		nmap <C-n> <Plug>yankstack_substitute_newer_paste
+	elseif a:plugin_in == "vim-bbye"
+
+			cnoreabbrev <expr> bd  getcmdtype() == ":" && getcmdline() == "bd" ? "Bdelete" : "bd"
+			cnoreabbrev <expr> bw  getcmdtype() == ":" && getcmdline() == "bw" ? "Bwipeout" : "bw"
+			cnoreabbrev <expr> wbd  getcmdtype() == ":" && getcmdline() == "wbd" ? "w \| Bdelete" : "bd"
+			cnoreabbrev <expr> wbw  getcmdtype() == ":" && getcmdline() == "wbw" ? "w \| Bwipeout" : "bw"
 	else
 		echo "plugin " .. a:plugin_in .. " not found"
 	endif
