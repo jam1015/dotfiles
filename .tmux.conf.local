@@ -44,7 +44,7 @@ set -g history-limit 10000
  bind C-a send-prefix
 
 # move status line to top
-set -g status-position top
+set -g status-position bottom
 set -g status-bg magenta
 set -g status-fg black
 set -g pane-border-style fg=black

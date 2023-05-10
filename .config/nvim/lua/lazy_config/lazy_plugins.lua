@@ -1,3 +1,11 @@
+local lisp_lazy = function() --also done vi autocmd in the cmp config
+	if (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp") then
+		return false
+	else
+		return true
+	end
+end
+
 return {
 	{
 		'willothy/flatten.nvim',
@@ -38,7 +46,7 @@ return {
 	{
 		"rcarriga/nvim-notify",
 		event = "VeryLazy",
-		config = function() require("plugin_configs.notify") end,
+		config = function() require("plugin_configs.nvim-notify") end,
 	},
 
 	{
@@ -125,14 +133,14 @@ return {
 
 	{ "bronson/vim-visual-star-search", event = "VeryLazy" },
 	{ "tpope/vim-repeat",               event = "VeryLazy" },
-	{ "qpkorr/vim-bufkill",             event = "VeryLazy" },
+	{ "qpkorr/vim-bufkill",             event = "VeryLazy", enabled = false },
 	{ "kevinoid/vim-jsonc",             event = "VeryLazy" },
 
 	({
-		"jam1015/vim-slime",
-		branch = "vim_array",
+		--"jam1015/vim-slime",
+		--branch = "main",-- "vim_array",
 		event = "VeryLazy",
-		--dir = "/home/jordan/Documents/vim-slime",
+		dir = "/home/jordan/Documents/vim-slime",
 
 		init = function()
 			require("plugin_configs.vim-slime.initi")
@@ -237,13 +245,16 @@ return {
 		end,
 	}),
 
-	{ "andymass/vim-matchup",     event = { "VeryLazy" }, enabled = false },
+
+	{
+		"andymass/vim-matchup",
+		enabled = true,
+		--	event = { "VeryLazy" },
+	},
 	{
 		"numToStr/Comment.nvim",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("plugin_configs.Comment") end,
-		event =
-		"VeryLazy"
 	},
 
 	({
@@ -264,7 +275,7 @@ return {
 
 
 
-	{ "lifecrisis/vim-difforig",                     event = "VeryLazy" },
+	{ "lifecrisis/vim-difforig", event = "VeryLazy" },
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function() require("plugin_configs.gitsigns") end,
@@ -306,10 +317,11 @@ return {
 
 	({
 		"hrsh7th/nvim-cmp",
-		cond = function() --also done vi autocmd in the cmp config
-			return vim.bo.filetype ~= "lisp"
-		end,
+		--		cond = function() --also done vi autocmd in the cmp config
+		--			return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
+		--		end,
 		enabled = true,
+		lazy = true,
 		event = "VeryLazy",
 		dependencies = {
 			{ "onsails/lspkind.nvim", event = "VeryLazy" },
@@ -327,7 +339,7 @@ return {
 
 				event = "VeryLazy"
 			},
-			{ "saadparwaiz1/cmp_luasnip", }
+			{ "saadparwaiz1/cmp_luasnip", event = "VeryLazy" }
 		},
 		config = function()
 			require("plugin_configs.nvim-cmp")
@@ -347,6 +359,21 @@ return {
 	}),
 
 	{
+		-- does the same thing as vim-yankstack
+		"vim-scripts/YankRing.vim",
+		enabled = false,
+		event = "VeryLazy"
+	},
+	{
+		-- does the same thing as YankRing
+		'maxbrunsfeld/vim-yankstack',
+		enabled = true,
+		config = function()
+			require("plugin_configs.vim-yankstack")
+			require("plugin_keymaps").pluginKeymaps("vim-yankstack")
+		end
+	},
+	{
 		"gbprod/yanky.nvim",
 		lazy = true,
 		enabled = false,
@@ -359,5 +386,7 @@ return {
 		config = function()
 			require("plugin_configs.yanky")
 		end
+
+
 	},
 }
