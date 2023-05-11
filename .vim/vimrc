@@ -4,31 +4,21 @@ runtime config/mappings.vim
 runtime config/autocmds.vim 
 runtime config/directionalhelp.vim
 
-packadd gutentagsconfig
-if !empty($TMUX)
-	tnoremap <silent> <C-w> <C-\\><C-n><C-w>
-else
-	nmap <silent> <C-a> <C-w>
-	tmap <C-a> <C-\\><C-o>
-endif
 
 "
 "
 "
 "
 
-map <leader>st :call Synctex()<cr>
-map <leader>lv :VimtexView<cr>
-
-"git clone https://github.com/k-takata/minpac.git \
-"    ~/.vim/pack/minpac/opt/minpac
-"curl -fLo ~/.vim/autoload/plugpac.vim --create-dirs \
-"    https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim
+""git clone https://github.com/k-takata/minpac.git \
+""    ~/.vim/pack/minpac/opt/minpac
+""curl -fLo ~/.vim/autoload/plugpac.vim --create-dirs \
+""    https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim
 
 
 
-" plugin keymaps file:
-" ~/.vim/config/pluginkeymaps.vim
+"" plugin keymaps file:
+"" ~/.vim/config/pluginkeymaps.vim
 
 call plugpac#begin()
 
@@ -47,23 +37,36 @@ Pack 'tpope/vim-surround'
 "Pack 'vim-scripts/YankRing.vim'
 
 Pack 'Yggdroot/indentLine'
-runtime config/indentline_config.vim
+"runtime config/indentline_config.vim
 
 Pack 'machakann/vim-highlightedyank'
 runtime config/vim-highlightedyank.vim
 
+""" also hightlights yanks
 "runtime config/FYT.vim
 "Pack 'statox/FYT.vim'
 
 Pack 'maxbrunsfeld/vim-yankstack'
 runtime config/vim-yankstack.vim
+
+
+" need to install ctags and gnu global
 Pack 'skywind3000/gutentags_plus'
 Pack 'ludovicchabant/vim-gutentags'
 runtime config/gutentagsconfig.vim
 
-" minpac
-"Pack 'k-takata/minpac', {'type': 'opt'}
+
+"""" having problems with this plugin
+"Pack 'vlime/vlime', {'rtp': 'vim/'}
+""runtime config/vlime.vim
+
+Pack 'kovisoft/paredit'
 "
+" minpac
+Pack 'k-takata/minpac', {'type': 'opt'}
+
+
+""""""""""""""" EXAMPLE FEATRURES OF PLUGPAC
 "Pack 'junegunn/vim-easy-align'
 "
 "" On-demand loading
@@ -78,10 +81,7 @@ runtime config/gutentagsconfig.vim
 "
 "" Sepcify commit ID, branch name or tag name to be checked out.
 "Pack 'tpope/vim-sensible', { 'rev': 'v1.2' }
-Pack 'vlime/vlime', {'rtp': 'vim/'}
-runtime config/vlime.vim
 
-Pack 'kovisoft/paredit'
 "
 call plugpac#end()
-"
+""

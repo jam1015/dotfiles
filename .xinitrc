@@ -55,10 +55,10 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 # xterm -geometry 80x20+494-0 &
 # exec xterm -geometry 80x66+0+0 -name login
 
-if [ $(pgrep xflux | wc -l) -lt 1 ]
-then
-  xflux -z 15217 -k 2000 > /dev/null
-fi
+#if [ $(pgrep redshift | wc -l) -lt 1 ]
+#then
+#  redshift -l 40.44:-79.99 -t 3000:6500
+#fi
 
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
@@ -66,6 +66,5 @@ xrandr --auto
 
 xset dpms 1201 1205 1210
 xset r rate 250 35
-sysctl -p /etc/sysctl.d/40-ipv6.conf
 #nm-applet --sm-disable &
 exec i3

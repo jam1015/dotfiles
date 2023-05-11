@@ -16,6 +16,7 @@
 (god-mode)
 (global-set-key (kbd "<escape>") #'god-mode-all)
 (global-set-key (kbd "C-,") #'god-mode-all)
+(define-key god-local-mode-map (kbd ".") #'repeat)
 (setq god-exempt-major-modes nil)
 (setq god-exempt-predicates nil)
 ;;(custom-set-variables

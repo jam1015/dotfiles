@@ -1,5 +1,8 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
+let g:netrw_dirhistmax =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/jordan/.emacs.default'
+let g:netrw_dirhist_3='/home/jordan/.vim/pack/minpac/opt'
+let g:netrw_dirhist_2='/home/jordan/Documents/general_learning/lisp'
 let g:netrw_dirhist_1='/home/jordan/Documents/general_learning/lisp/vlime'
 let g:netrw_dirhist_0='/home/jordan/Documents/general_learning/lisp'
 let g:netrw_dirhist_9='/home/jordan/dotfiles/.vim/pack/jordan/opt/gutentagsConfig/plugin'
@@ -7,6 +10,3 @@ let g:netrw_dirhist_8='/home/jordan/dotfiles/.vim/pack/jordan/opt/gutentagsConfi
 let g:netrw_dirhist_7='/home/jordan/dotfiles/.vim/pack/jordan/opt/gutentagsConfig.vim'
 let g:netrw_dirhist_6='/home/jordan/dotfiles/.vim/pack/jordan/opt/vim-unimpaired_config/after/plugin'
 let g:netrw_dirhist_5='/home/jordan/dotfiles/.vim/pack/jordan/start/start_plugin/plugin'
-let g:netrw_dirhist_4='/home/jordan/dotfiles/.vim/pack/jordan/start/start_plugin/after'
-let g:netrw_dirhist_3='/home/jordan/dotfiles/.vim/pack/jordan/start/start_plugin'
-let g:netrw_dirhist_2='/home/jordan/dotfiles/.vim/pack/jordan/start'
