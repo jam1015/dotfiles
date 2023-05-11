@@ -20,3 +20,4 @@ firenvim
 .config/.repro
 .config/nvim/lazy-lock.json
 dotfiles
+.vim/.netrwhist
