@@ -45,6 +45,10 @@ function! s:configureKeymaps(plugin_in) abort
 		cnoreabbrev <expr> prev  getcmdtype() == ":" && getcmdline() == "prev" ? "Aprev" : "prev"
 		cnoreabbrev <expr> previous  getcmdtype() == ":" && getcmdline() == "prevous" ? "Aprev" : "previous"
 	elseif a:plugin_in == "blue"
+	elseif a:plugin_in == "vimted"
+
+		map <leader>st :call Synctex()<cr>
+		map <leader>lv :VimtexView<cr>
 		colorscheme blue
 	elseif a:plugin_in == "vim-yankstack"
 		nmap <C-p> <Plug>yankstack_substitute_older_paste

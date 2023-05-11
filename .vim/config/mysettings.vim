@@ -39,6 +39,7 @@ set listchars+=precedes:«
 set listchars+=nbsp:⣿
 let g:netrw_liststyle= 3
 set cmdheight=1
+set bg=dark
 
 " some things for zathura+synctex
 let g:vimtex_view_method = 'zathura'
@@ -94,7 +95,7 @@ if empty($DISPLAY)
 colorscheme elflord
 else
 	try
-		colorscheme monokai
+		colorscheme retrobox
 	catch /^Vim\%((\a\+)\)\=:E/	 " catch all Vim errors
 		colorscheme retrobox
 	endtry
