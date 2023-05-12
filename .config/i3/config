@@ -63,7 +63,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id blueman-applet
 exec --no-startup-id pasystray
 exec --no-startup-id nm-applet
-exec --no-startup-id redshift-gtk -l -79.99:40.44 -t 3000:6500
+exec --no-startup-id redshift-gtk -l -79.99:40.44 -t 6500:3000
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
