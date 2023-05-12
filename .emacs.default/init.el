@@ -36,6 +36,12 @@
 (unless (package-installed-p 'evil)
   (package-install 'evil))
 
+
+(unless (package-installed-p 'evil-leader)
+  (package-install 'evil-leader))
+
+(require 'evil-leader)
+(global-evil-leader-mode)
 ;; Enable Evil
 (require 'evil)
 (evil-mode 1)
