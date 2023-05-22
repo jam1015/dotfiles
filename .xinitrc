@@ -58,7 +58,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 # doing this in i3 config
 #if [ $(pgrep redshift | wc -l) -lt 1 ]
 #then
-#  redshift-gtk -l 40.44:-79.99 -t 6500:3000:
+#  redshift-gtk -l 40.44:-79.99 -t 6500:2000
 #fi
 
 xrandr --setprovideroutputsource modesetting NVIDIA-0
