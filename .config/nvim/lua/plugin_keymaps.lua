@@ -45,12 +45,16 @@ function M.pluginKeymaps(plugin, setup_type)
 		nnoremap ]a <Cmd>Anext<cr>
 		nnoremap [a <Cmd>Aprev<cr>
 
-
 		cnoreabbrev <expr> next  getcmdtype() == ":" && getcmdline() == "next" ? "Anext" : "next"
 		cnoreabbrev <expr> n  getcmdtype() == ":" && getcmdline() == "n" ? "Anext" : "n"
 		cnoreabbrev <expr> prev  getcmdtype() == ":" && getcmdline() == "prev" ? "Aprev" : "prev"
 		cnoreabbrev <expr> previous  getcmdtype() == ":" && getcmdline() == "prevous" ? "Aprev" : "previous"
 		]])
+	elseif plugin == "vim-slime" then
+keymap("n", "gz", "<Plug>SlimeMotionSend", { noremap = false, silent = true })
+keymap("n", "gzz", "<Plug>SlimeLineSend", { noremap = false, silent = true })
+keymap("x", "gz", "<Plug>SlimeRegionSend", { noremap = false, silent = true })
+
 	elseif plugin == "yanky.nvim" then
 		vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
 		vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")

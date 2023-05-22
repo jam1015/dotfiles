@@ -6,7 +6,7 @@ vim.g.mapleader = " "
 vim.g.mapllocaleader = "\\"
 
 -- defining functions that can be used to make command line abbreviations elsewhere
-keymap("n", "<leader>ll", ":nohlsearch<CR>", opts)
+keymap("n", "<leader>ll", "<cmd>nohlsearch<CR>", opts)
 
 if os.getenv("TMUX") then
 	keymap("t", "<C-w>", "<C-\\><C-n><C-w>", { noremap = false, silent = true })

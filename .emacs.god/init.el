@@ -1,5 +1,6 @@
 ;;;; Set up package.el to work with MELPA
 (blink-cursor-mode 0)
+(setq visible-bell 1)
 (require 'package)
 (add-to-list 'package-archives
 '("melpa" . "https://melpa.org/packages/"))
