@@ -55,10 +55,10 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 # xterm -geometry 80x20+494-0 &
 # exec xterm -geometry 80x66+0+0 -name login
 
-# doing this in i3 config
+# setting redshift in i3
 #if [ $(pgrep redshift | wc -l) -lt 1 ]
 #then
-#  redshift-gtk -l 40.44:-79.99 -t 6500:2000
+#  redshift-gtk -l 40.44:-79.99 -t 6500:3000:
 #fi
 
 xrandr --setprovideroutputsource modesetting NVIDIA-0

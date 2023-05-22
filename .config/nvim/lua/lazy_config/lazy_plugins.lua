@@ -78,6 +78,7 @@ return {
 
 	{
 		"vlime/vlime", --install quicklisp on your system when you install this; do it manually rather than through a package manager, or find where the package manager installs the proper lisp script
+		enabled = false,
 
 		event = "VeryLazy",
 		dependencies = "kovisoft/paredit",
@@ -231,14 +232,14 @@ return {
 	{
 		"ggandor/flit.nvim",
 
-		event = "VeryLazy",
+		--event = "VeryLazy",
 
 		--commit = "be110f9814a45788d10537fd59b3c76d956bb7ad",
 		config = function() require("plugin_configs.flit") end
 	},
 	({
 		"ggandor/leap.nvim",
-		event = "VeryLazy",
+		--event = "VeryLazy",
 		--commit = "9cc411481db859059ad66c8ad844b9386dc62d5c",
 		config = function()
 			require('plugin_configs.leap')
@@ -312,7 +313,7 @@ return {
 			require("plugin_configs.lsp")
 		end
 	},
-	--"mfussenegger/nvim-dap",
+      --"mfussenegger/nvim-dap",
 
 	({
 		"hrsh7th/nvim-cmp",
@@ -361,12 +362,12 @@ return {
 		-- does the same thing as vim-yankstack
 		"vim-scripts/YankRing.vim",
 		enabled = false,
-		event = "VeryLazy"
+		--event = "VeryLazy"
 	},
 	{
 		-- does the same thing as YankRing
 		'maxbrunsfeld/vim-yankstack',
-		enabled = true,
+		enabled = false,
 		config = function()
 			require("plugin_configs.vim-yankstack")
 			require("plugin_keymaps").pluginKeymaps("vim-yankstack")
@@ -374,8 +375,7 @@ return {
 	},
 	{
 		"gbprod/yanky.nvim",
-		lazy = true,
-		enabled = false,
+		enabled = true,
 		--event = {"TextYankPost","CursorMoved","CursorHold"},
 		event = "VeryLazy", --{"CursorMoved", "VeryLazy","VimEnter" },
 		--branch = "autocmd",
