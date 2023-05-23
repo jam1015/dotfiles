@@ -1,36 +1,42 @@
-;; Set up package.el to work with MELPA
+;;Set up package.el to work with MELPA
 (blink-cursor-mode 0)
 (setq visible-bell 1)
 (require 'package)
 
+(setq straight-use-package-by-default t)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(when (< emacs-major-version 24)
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
-(package-initialize)
 
 ;; Refresh package contents
 (unless package-archive-contents
   (package-refresh-contents))
 
-;; Install required packages
+ (straight-use-package
+ '(sly :type git :host github :repo "joaotavora/sly" :branch "master"))
 
- 
-(unless (package-installed-p 'god-mode)
-  (package-install 'god-mode))
+(straight-use-package 'god-mode)
 
-(unless (package-installed-p 'evil-god-state)
-  (package-install 'evil-god-state))
+;;(unless (package-installed-p 'slime)
+;;  (package-install 'slime))
 
-(unless (package-installed-p 'evil)
-  (package-install 'evil))
+(straight-use-package 'evil)
 
-(unless (package-installed-p 'evil-leader)
-  (package-install 'evil-leader))
 
-(unless (package-installed-p 'evil-collection)
-  (package-install 'evil-collection))
+(straight-use-package 'evil-leader)
+
+(straight-use-package 'evil-collection)
 
 ;; Load required packages
 (setq evil-want-keybinding nil)
@@ -101,8 +107,23 @@
     
     
     (require 'sly)
-    
-    (setq inferior-lisp-program "/usr/bin/sbcl")
+;;(require 'slime)
+
+
+
+		;; clisp doesn't work "-K full"
+        ;;(sbcl ("/usr/bin/sbcl") :coding-system utf-8-unix) 
+;;(setq sly-lisp-implementations
+;;      '(
+;;		(clisp ("/usr/bin/clisp" "-K full" ) )
+;;		)
+;;	  )
+(setq sly-lisp-implementations
+      '(
+        (sbcl ("/usr/bin/sbcl") :coding-system utf-8-unix) (clisp ("/usr/bin/clisp" "-K full") :coding-system utf-8-unix)))
+;;(eval-after-load 'sly
+;;  `(define-key sly-prefix-map (kbd "M-h") 'sly-documentation-lookup))
+
     (require 'evil)
     
     (require 'evil)
@@ -179,6 +200,7 @@
     
     (add-hook 'god-mode-enabled-hook 'my-god-mode-enabled-hook)
     (add-hook 'god-mode-disabled-hook 'my-god-mode-disabled-hook)
+
     ;; end escape hook
     
     
@@ -194,27 +216,31 @@
     (add-hook 'god-mode-enabled-hook 'my-enable-god-mode-cursor)
     (add-hook 'god-mode-disabled-hook 'my-disable-god-mode-cursor)
     
-    (custom-set-variables
-     ;; custom-set-variables was added by Custom.
-     ;; If you edit it by hand, you could mess it up, so be careful.
-     ;; Your init file should contain only one such instance.
-     ;; If there is more than one, they won't work right.
-     '(package-selected-packages '(sly macrostep evil-leader evil-god-state evil-collection)))
-    (custom-set-faces
-     ;; custom-set-faces was added by Custom.
-     ;; If you edit it by hand, you could mess it up, so be careful.
-     ;; Your init file should contain only one such instance.
-     ;; If there is more than one, they won't work right.
-     )
+
+
+
+(defun toggle-evil-mode ()
+  "Toggle evil-mode on and off."
+  (interactive)
+  (if (bound-and-true-p evil-mode)
+      (evil-mode 0)
+    (evil-mode 1)))
+
+(global-set-key (kbd "C-c t") 'toggle-evil-mode)
+
+    
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages '(sly macrostep evil-leader evil-god-state evil-collection)))
+    
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
