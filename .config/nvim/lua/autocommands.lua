@@ -1,11 +1,11 @@
 local api = vim.api
 
 -- Highlight on yank
---local aesthetics = api.nvim_create_augroup("aesthetic_settings", { clear = true })
---api.nvim_create_autocmd("TextYankPost", {
---	command = "silent! lua vim.highlight.on_yank({higroup = \"Visual\", timeout = 200})",
---	group = aesthetics,
---})
+local aesthetics = api.nvim_create_augroup("aesthetic_settings", { clear = true })
+api.nvim_create_autocmd("TextYankPost", {
+	command = "silent! lua vim.highlight.on_yank({higroup = \"Visual\", timeout = 200})",
+	group = aesthetics,
+})
 
 
 
@@ -24,9 +24,11 @@ api.nvim_create_autocmd("SwapExists", {
 })
 
 vim.api.nvim_create_autocmd({ "FileChangedShellPost", "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
-	command = "if mode() != 'c' | checktime | endif",
+  command = "if mode() != 'c' &&  expand('%') !=# '[Command Line]' | checktime | endif",
 	pattern = { "*" },
 })
+
+
 vim.cmd([[
  autocmd FileChangedShellPost *
         \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None

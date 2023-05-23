@@ -1,21 +1,23 @@
 ;;;; Set up package.el to work with MELPA
 (blink-cursor-mode 0)
+(setq visible-bell 1)
 (require 'package)
 (add-to-list 'package-archives
 '("melpa" . "https://melpa.org/packages/"))
 (when (< emacs-major-version 24)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
-;;(package-refresh-contents)
-;;;;
-;;(unless (package-installed-p 'god-mode)
-;;  (package-install 'god-mode))
-;;;;
-;;;; Enable god-mode
+(package-refresh-contents)
+;;
+(unless (package-installed-p 'god-mode)
+  (package-install 'god-mode))
+;;
+;; Enable god-mode
 (require 'god-mode)
 (god-mode)
 (global-set-key (kbd "<escape>") #'god-mode-all)
 (global-set-key (kbd "C-,") #'god-mode-all)
+(define-key god-local-mode-map (kbd ".") #'repeat)
 (setq god-exempt-major-modes nil)
 (setq god-exempt-predicates nil)
 ;;(custom-set-variables

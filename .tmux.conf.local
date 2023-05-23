@@ -1,5 +1,5 @@
 # -- user customizations -------------------------------------------------------
-# this is the place to override or undo settings
+ #this is the place to override or undo settings
 set -gs escape-time 1                     # faster command sequences
 set -sg repeat-time 300                   # increase repeat timeout
 set -g display-panes-time 1000 # slightly longer pane indicators display time
@@ -12,8 +12,10 @@ set -g visual-activity off #if on would cause message when activity happens
 bind p paste-buffer -p #the p adds paste bracket control codes if reqeusted by application
 bind-key -T copy-mode-vi r send-keys -X rectangle-toggle
 set -s set-clipboard on
-set-option -g default-shell /bin/zsh
-set-option -g default-command "reattach-to-user-namespace -l {$SHELL}"
+set-option -g default-shell /bin/zsh 
+
+
+#set-option -g default-command "reattach-to-user-namespace -l {$SHELL}" # for the mac config
 
 
 
@@ -24,7 +26,7 @@ set-option -g update-environment "SSH_AUTH_SOCK SSH_CONNECTION DISPLAY I3SOCK"
 #
 #set -g display-panes-time 1000 # slightly longer pane indicators display time
 # increase history size
-#set -g history-limit 10000
+set -g history-limit 10000
 
 # start with mouse mode enabled
 #set -g mouse on
@@ -35,14 +37,14 @@ set-option -g update-environment "SSH_AUTH_SOCK SSH_CONNECTION DISPLAY I3SOCK"
 #set -g mode-keys vi
 
 # replace C-b by C-a instead of using both prefixes
-# set -gu prefix2
-# unbind C-a
-# unbind C-b
-# set -g prefix C-a
-# bind C-a send-prefix
+ set -gu prefix2
+ unbind C-a
+ unbind C-b
+ set -g prefix C-a
+ bind C-a send-prefix
 
 # move status line to top
-#set -g status-position top
+set -g status-position bottom
 set -g status-bg magenta
 set -g status-fg black
 set -g pane-border-style fg=black
@@ -51,7 +53,7 @@ set -g pane-active-border-style "bg=default fg=magenta"
 set-option -g status-right-length 140
 set -g window-status-format "#I:#W"
 set -g window-status-current-format "#[italics]#[reverse] #I:#W "
-# -- tpm -----------------------------------------------------------------------
+ #-- tpm -----------------------------------------------------------------------
 
 set-option -g @tmux-weather-format "%C+%t+%w"#"%C+%w"
 set -g status-right '#{nordvpn_status} #{nordvpn_city}'

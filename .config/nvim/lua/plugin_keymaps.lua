@@ -45,12 +45,16 @@ function M.pluginKeymaps(plugin, setup_type)
 		nnoremap ]a <Cmd>Anext<cr>
 		nnoremap [a <Cmd>Aprev<cr>
 
-
 		cnoreabbrev <expr> next  getcmdtype() == ":" && getcmdline() == "next" ? "Anext" : "next"
 		cnoreabbrev <expr> n  getcmdtype() == ":" && getcmdline() == "n" ? "Anext" : "n"
 		cnoreabbrev <expr> prev  getcmdtype() == ":" && getcmdline() == "prev" ? "Aprev" : "prev"
 		cnoreabbrev <expr> previous  getcmdtype() == ":" && getcmdline() == "prevous" ? "Aprev" : "previous"
 		]])
+	elseif plugin == "vim-slime" then
+keymap("n", "gz", "<Plug>SlimeMotionSend", { noremap = false, silent = true })
+keymap("n", "gzz", "<Plug>SlimeLineSend", { noremap = false, silent = true })
+keymap("x", "gz", "<Plug>SlimeRegionSend", { noremap = false, silent = true })
+
 	elseif plugin == "yanky.nvim" then
 		vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
 		vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
@@ -71,7 +75,7 @@ function M.pluginKeymaps(plugin, setup_type)
 	elseif plugin == "emmet-vim" then
 		if setup_type == "config" then
 			return (function()
-					vim.cmd([[
+				vim.cmd([[
 				 nmap <leader>m,   <plug>(emmet-expand-abbr)
 				 nmap <leader>m;   <plug>(emmet-expand-word)
 				 nmap <leader>mu   <plug>(emmet-update-tag)
@@ -88,11 +92,11 @@ function M.pluginKeymaps(plugin, setup_type)
 				 nmap <leader>mm   <plug>(emmet-merge-lines)
 				 nmap <leader>mc   <plug>(emmet-code-pretty)
 				    ]])
-				end)
+			end)
 		elseif setup_type == "init" then
 			return (function()
-					vim.g.user_emmet_leader_key = "<C-B>" --use this followed by comma to expand emmet
-				end)
+				vim.g.user_emmet_leader_key = "<C-B>" --use this followed by comma to expand emmet
+			end)
 		else
 		end
 	elseif plugin == "bufdelete.nvim" then
@@ -117,7 +121,6 @@ function M.pluginKeymaps(plugin, setup_type)
 		end
 		vim.api.nvim_create_user_command('CmpEnable', cmp_enable, { bar = true })
 		vim.api.nvim_create_user_command('CmpDisable', cmp_disable, { bar = true })
-
 	elseif plugin == "telescope" then
 		keymap("n", "<leader>tf",
 			"<cmd>lua require'telescope.builtin'.find_files()<cr>",
@@ -154,6 +157,11 @@ function M.pluginKeymaps(plugin, setup_type)
 	    cnoreabbrev <expr> pud  getcmdtype() == ":" && getcmdline() == "pud" ? "Pushd" : "pud"
 		cnoreabbrev <expr> pod  getcmdtype() == ":" && getcmdline() == "pod" ? "Popd" : "pod"
 		cnoreabbrev <expr> dirs  getcmdtype() == ":" && getcmdline() == "dirs" ? "Dirs" : "dirs"
+		]])
+	elseif plugin == "vim-yankstack" then
+		vim.cmd([[
+		nmap <C-p> <Plug>yankstack_substitute_older_paste
+		nmap <C-n> <Plug>yankstack_substitute_newer_paste
 		]])
 	else
 		error("plugin " .. plugin .. " not found\n")

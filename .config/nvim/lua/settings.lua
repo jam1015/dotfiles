@@ -58,7 +58,7 @@ set.listchars = set.listchars + 'precedes:«'
 set.listchars = set.listchars + 'tab:   '
 set.listchars = set.listchars + 'nbsp:⣿'
 
-if os.getenv("DISPLAY") then
+if not os.getenv("SSH_CONNECTION") then
 	set.clipboard = 'unnamedplus'
 end
 
@@ -70,6 +70,7 @@ vim.g.c_comment_strings = 1 --can be any value
 set.pumheight = 10
 set.inccommand = 'split'
 set.shada = "'1000,%"
+
 
 local function setup_tmux_clipboard()
 	local tmux = os.getenv("TMUX")
