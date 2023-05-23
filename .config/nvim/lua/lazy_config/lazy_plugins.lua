@@ -33,6 +33,7 @@ return {
 		config = function()
 			require("plugin_configs.tokyonight")
 		end,
+		--
 		--event = "VeryLazy"
 	}),
 
