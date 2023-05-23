@@ -362,7 +362,7 @@ return {
 	{
 		-- does the same thing as vim-yankstack
 		"vim-scripts/YankRing.vim",
-		enabled = false,
+		enabled = true,
 		--event = "VeryLazy"
 	},
 	{
@@ -376,7 +376,7 @@ return {
 	},
 	{
 		"gbprod/yanky.nvim",
-		enabled = true,
+		enabled = false,
 		--event = {"TextYankPost","CursorMoved","CursorHold"},
 		event = "VeryLazy", --{"CursorMoved", "VeryLazy","VimEnter" },
 		--branch = "autocmd",
