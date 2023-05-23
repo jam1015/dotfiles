@@ -1,7 +1,7 @@
 
 
-export PATH="$PATH:/home/jordan/.local/bin"
-export PATH="$PATH:/home/jordan/bin"
+export PATH="$PATH:/Users/jordanmandel/.local/bin"
+export PATH="$PATH:/Users/jordanmandel/bin"
 
 
 # ``````````Vim configuration things`````
