@@ -11,13 +11,7 @@
 # )
 # )
 
-utils::chooseCRANmirror <- function(ind = NULL, local.only = FALSE, 
-                                    graphics = FALSE, 
-                                    CRAN = getOption("repos")[["CRAN"]]) 
-{
-  utils:::choose_mirror(ind = ind, local.only = local.only,
-                        graphics = graphics, CRAN = CRAN)
-}
+
 
 invisible(require(colorout))
 options(

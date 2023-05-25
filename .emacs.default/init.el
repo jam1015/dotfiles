@@ -17,33 +17,71 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(straight-use-package 'ace-window)
 
+;; Enable ace-window and assign a keybinding
+(global-set-key (kbd "M-o") 'ace-window)
 
-;; Refresh package contents
-(unless package-archive-contents
-  (package-refresh-contents))
+;; Install Zenburn theme
+(straight-use-package 'zenburn-theme)
+;; Load Zenburn theme on startup
+(load-theme 'zenburn t)
+
 
  (straight-use-package
  '(sly :type git :host github :repo "joaotavora/sly" :branch "master"))
 
-(straight-use-package 'god-mode)
+    (require 'sly-autoloads)
 
-;;(unless (package-installed-p 'slime)
-;;  (package-install 'slime))
+(setq sly-lisp-implementations
+      '(
+        (sbcl ("/usr/bin/sbcl") :coding-system utf-8-unix) (clisp ("/usr/bin/clisp" "-K full") :coding-system utf-8-unix)))
+
+(eval-after-load 'sly
+  `(define-key sly-prefix-map (kbd "M-h") 'sly-documentation-lookup))
+
+(straight-use-package 'god-mode)
+(setq god-exempt-major-modes nil)
+(setq god-exempt-predicates nil)
+(require 'god-mode)
+;;(god-mode)
+
+
 
 (straight-use-package 'evil)
 
+( use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+)
 
 (straight-use-package 'evil-leader)
 
-(straight-use-package 'evil-collection)
+(global-evil-leader-mode)
 
-;; Load required packages
 (setq evil-want-keybinding nil)
-(require 'god-mode)
 (require 'evil-leader)
-(require 'evil)
-(require 'evil-collection)
+
+(require 'evil
+	 )
+
+(unless (and (featurep 'evil) evil-mode)
+  (require 'evil)
+  (evil-mode 1)
+(setq evil-default-state 'emacs)
+  (evil-emacs-state))
+
+
+(straight-use-package 'evil-collection)
+(use-package evil-collection
+  :straight t
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init)
+  )
 
 ;; Define a function to toggle evil/emacs state and god-mode
 (defun my-toggle-evil-emacs-and-god-mode ()
@@ -87,47 +125,20 @@
    ))
 
 ;; Configure keybindings
-(global-evil-leader-mode)
-(evil-mode 1)
 
-(setq god-exempt-major-modes nil)
-(setq god-exempt-predicates nil)
 (define-key global-map (kbd "C-,") 'my-toggle-evil-emacs-and-god-mode)
 
-;;(global-set-key (kbd "C-,") #'god-mode-all)
-    ;; Enable evil-collection
-    ;;(evil-collection-init)
-    ;; Initialize SLIME
-    ;;(global-set-key (kbd "<escape>") #'god-mode-all)
-    ;;(global-set-key (kbd "C-,") #'god-mode-all)
     (define-key god-local-mode-map (kbd ".") #'repeat)
-    ;;(require 'slime)
-    ;;(setq inferior-lisp-program "/usr/bin/sbcl")
-    ;;(slime-setup '(slime-fancy))
+
+
+
     
-    
-    (require 'sly)
-;;(require 'slime)
-
-
-
-		;; clisp doesn't work "-K full"
-        ;;(sbcl ("/usr/bin/sbcl") :coding-system utf-8-unix) 
-;;(setq sly-lisp-implementations
-;;      '(
-;;		(clisp ("/usr/bin/clisp" "-K full" ) )
-;;		)
-;;	  )
-(setq sly-lisp-implementations
-      '(
-        (sbcl ("/usr/bin/sbcl") :coding-system utf-8-unix) (clisp ("/usr/bin/clisp" "-K full") :coding-system utf-8-unix)))
-;;(eval-after-load 'sly
-;;  `(define-key sly-prefix-map (kbd "M-h") 'sly-documentation-lookup))
 
     (require 'evil)
-    
-    (require 'evil)
-    
+(with-eval-after-load 'evil
+  (setq evil-motion-state-modes nil))
+
+ 
     ;; Define a custom operator
     (evil-define-operator my-evil-change-and-emacs-state (beg end type register yank-handler)
       "Change text from BEG to END with TYPE, REGISTER and YANK-HANDLER."
@@ -135,7 +146,6 @@
       (interactive "<R><x><y>")
       (evil-change beg end type register yank-handler)
       (evil-emacs-state))
-    
     ;; Define other custom commands
     (defun my-evil-append-line-and-emacs-state ()
       (interactive)
@@ -181,41 +191,63 @@
     (define-key evil-normal-state-map (kbd "O") 'my-evil-open-above-and-emacs-state)
     (define-key evil-operator-state-map (kbd "C") 'my-evil-change-and-emacs-state)
     
-    ;; Bind escape to switch back to normal state in emacs state
-    (defvar my-evil-normal-state-override-map (make-sparse-keymap)
-      "Keymap for overriding `evil-emacs-state-map' keys.")
-    
-    (define-key my-evil-normal-state-override-map [escape] 'evil-normal-state)
-    (define-key my-evil-normal-state-override-map (kbd "C-[") 'evil-normal-state)
-    
-    (define-minor-mode my-evil-normal-state-override-mode
-      "Minor mode for overriding `evil-emacs-state-map' keys."
-      :keymap my-evil-normal-state-override-map)
-    
-    (defun my-god-mode-enabled-hook ()
-      (my-evil-normal-state-override-mode -1))
-    
-    (defun my-god-mode-disabled-hook ()
-      (my-evil-normal-state-override-mode 1))
+
+(defvar my-override-keymap (make-sparse-keymap)
+  "Keymap for `my-override-mode'.")
+
+(define-key my-override-keymap (kbd "C-[") 'evil-normal-state)
+(define-key my-override-keymap [escape] 'evil-normal-state)
+(define-key evil-emacs-state-map (kbd "C-[") 'evil-normal-state)
+
+(define-minor-mode my-override-mode
+  "Minor mode for overriding key bindings."
+  :global t
+  :init-value t
+  :keymap my-override-keymap)
+(my-override-mode)
+
+
+    (defun my-god-mode-enabled-hook()
+  (my-override-mode -1)   ; disable override mode
+  (define-key my-override-keymap (kbd "C-[") nil)  ; remove C-[ binding in override keymap
+  (define-key evil-emacs-state-map (kbd "C-[") nil))  ; remove C-[ binding in emacs state
+
+(defun my-god-mode-disabled-hook ()
+  (my-override-mode 1)    ; enable override mode
+  (define-key my-override-keymap (kbd "C-[") 'evil-normal-state)   ; restore C-[ binding in override keymap
+  (define-key evil-emacs-state-map (kbd "C-[") 'evil-normal-state))   ; restore C-[ binding in emacs state
+
     
     (add-hook 'god-mode-enabled-hook 'my-god-mode-enabled-hook)
     (add-hook 'god-mode-disabled-hook 'my-god-mode-disabled-hook)
 
-    ;; end escape hook
     
-    
-    
-    (setq evil-emacs-state-cursor '("black" bar)) ; Set cursor to a red line in emacs state
-    
-    (defun my-enable-god-mode-cursor ()
-      (setq cursor-type 'box)) ; Set cursor to a box in god mode
-    
-    (defun my-disable-god-mode-cursor ()
-      (setq cursor-type '(bar . 1))) ; Set cursor to a line when not in god mode
-    
-    (add-hook 'god-mode-enabled-hook 'my-enable-god-mode-cursor)
-    (add-hook 'god-mode-disabled-hook 'my-disable-god-mode-cursor)
-    
+ (setq evil-emacs-state-cursor '("red" bar)) ; 
+(setq evil-insert-state-cursor '("red" bar))    ; Insert mode
+(setq evil-normal-state-cursor '("black" box))    ; Normal mode
+(setq evil-visual-state-cursor '("black" box))    ; Visual mode
+(setq evil-motion-state-cursor '("black" box))    ; Motion mode
+(setq evil-replace-state-cursor '("black" box))   ; Replace mode
+(setq evil-operator-state-cursor '("black" box))  ; Operator-pending mode
+
+
+(defun my-god-mode-cursor-change ()
+  "Changes the cursor to a box when entering god-mode."
+  (setq cursor-type 'box))
+
+(defun my-god-mode-cursor-restore ()
+  "Restores the cursor based on the current evil state when leaving god-mode."
+  (cond
+   ((eq evil-state 'emacs) (setq cursor-type 'bar))
+   ((eq evil-state 'insert) (setq cursor-type 'bar))
+   ((eq evil-state 'normal) (setq cursor-type 'box))
+   ((eq evil-state 'visual) (setq cursor-type 'box))
+   ((eq evil-state 'motion) (setq cursor-type 'box))
+   ((eq evil-state 'replace) (setq cursor-type 'box))
+   ((eq evil-state 'operator) (setq cursor-type 'box))))
+
+(add-hook 'god-mode-enabled-hook 'my-god-mode-cursor-change)
+(add-hook 'god-mode-disabled-hook 'my-god-mode-cursor-restore)
 
 
 
@@ -228,19 +260,7 @@
 
 (global-set-key (kbd "C-c t") 'toggle-evil-mode)
 
-    
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages '(sly macrostep evil-leader evil-god-state evil-collection)))
-    
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(set-frame-font "Input Mono-6.5" t t)
+
 
 

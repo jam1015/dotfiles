@@ -14,7 +14,6 @@
 ;;
 ;; Enable god-mode
 (require 'god-mode)
-(god-mode)
 (global-set-key (kbd "<escape>") #'god-mode-all)
 (global-set-key (kbd "C-,") #'god-mode-all)
 (define-key god-local-mode-map (kbd ".") #'repeat)
@@ -44,3 +43,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(defun my-enable-god-mode ()
+  (god-mode)
+  (message "God mode enabled."))
+
+(add-hook 'emacs-startup-hook 'my-enable-god-mode)
+(defun my-enable-god-mode ()
+  (god-mode-all)
+  (message "God mode enabled."))
+
+(add-hook 'after-init-hook 'my-enable-god-mode)
