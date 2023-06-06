@@ -8,7 +8,7 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 
 # merge in defaults and keymaps
 # setting this first because otherwise it undoes the other ones.
-setxkbmap -model kinesis -layout us -variant mac -option "terminate:ctrl_alt_bksp" #-option "ctrl:swapcaps"
+setxkbmap -model kinesis -layout us -variant mac -option "terminate:ctrl_alt_bksp" -option "ctrl:swapcaps"
 
 if [ -f $sysresources ]; then
 
