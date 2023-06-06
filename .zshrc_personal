@@ -1,8 +1,5 @@
-
-
 export PATH="$PATH:/home/jordan/.local/bin"
 export PATH="$PATH:/home/jordan/bin"
-
 
 # ``````````Vim configuration things`````
 export vimrc="$HOME/.config/nvim/init.lua"
@@ -27,7 +24,6 @@ KEYTIMEOUT=1 #get rid of pause after switching modes in vim mode
 mkcd () {
   mkdir "$1" && cd "$1"
 }
-
 
 mkcdp () {
   mkdir -p "$1" && cd "$1"
@@ -65,8 +61,6 @@ function zle-line-finish {
 }
 zle -N zle-line-finish
 
-
-
 if [[ "$EUID" = 0 ]]
 then 
 PS1='%B%F{green}%M:su:%3~ ${vim_mode}%f%b '
@@ -76,11 +70,13 @@ fi
 
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
 
-
 setopt noauto_pushd
 setopt completealiases
 
+function cheat ()
+{
+    curl cheat.sh/$1
+}
+
 echo ".zshrc sourced"
-
-
 
