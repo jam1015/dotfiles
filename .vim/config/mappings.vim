@@ -2,7 +2,7 @@
 nnoremap <Space> <Nop>
 let mapleader=" "
 let maplocalleader="\\"
-
+inoremap <C-;> <C-[>
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 " Revert with ":iunmap <C-U>".

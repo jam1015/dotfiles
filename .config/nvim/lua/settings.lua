@@ -58,10 +58,13 @@ set.listchars = set.listchars + 'precedes:«'
 set.listchars = set.listchars + 'tab:   '
 set.listchars = set.listchars + 'nbsp:⣿'
 
-if not os.getenv("SSH_CONNECTION") then
-	set.clipboard = 'unnamedplus'
-end
 
+if os.getenv("DISPLAY") then
+	--if not os.getenv("SSH_CONNECTION") then
+	set.clipboard = 'unnamedplus'
+	--end
+else
+end
 
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
@@ -77,20 +80,20 @@ local function setup_tmux_clipboard()
 	if tmux then
 		-- Configure Neovim to use tmux's clipboard
 		vim.cmd([[
-  let g:clipboard = {
-          \   'name': 'myClipboard',
-          \   'copy': {
-          \      '+': ['tmux', 'load-buffer', '-w', '-'],
-          \      '*': ['tmux', 'load-buffer', '-w', '-'],
-          \    },
-          \   'paste': {
-          \      '+': ['tmux', 'save-buffer', '-'],
-          \      '*': ['tmux', 'save-buffer', '-'],
-          \   },
-          \   'cache_enabled': 0,
-          \ }
+	 let g:clipboard = {
+		  \   'name': 'myClipboard',
+		  \   'copy': {
+		  \      '+': ['tmux', 'load-buffer', '-w', '-'],
+		  \      '*': ['tmux', 'load-buffer', '-w', '-'],
+		  \    },
+		  \   'paste': {
+		  \      '+': ['tmux', 'save-buffer', '-'],
+		  \      '*': ['tmux', 'save-buffer', '-'],
+		  \   },
+		  \   'cache_enabled': 0,
+		  \ }
 
-    ]])
+	]])
 	else
 		return true
 	end

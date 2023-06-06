@@ -106,9 +106,10 @@ return {
 	},
 
 	({
-		"lervag/vimtex", event = "VeryLazy",
+		"lervag/vimtex",
+		--event = "VeryLazy",
 
-		build = function()
+		config = function()
 			require("plugin_configs.vimtex")
 		end,
 	}),
@@ -241,7 +242,7 @@ return {
 	({
 		"ggandor/leap.nvim",
 		--event = "VeryLazy",
-		--commit = "9cc411481db859059ad66c8ad844b9386dc62d5c",
+		--commit ="9cc411481db859059ad66c8ad844b9386dc62d5c",
 		config = function()
 			require('plugin_configs.leap')
 		end,
@@ -314,7 +315,7 @@ return {
 			require("plugin_configs.lsp")
 		end
 	},
-      --"mfussenegger/nvim-dap",
+	--"mfussenegger/nvim-dap",
 
 	({
 		"hrsh7th/nvim-cmp",
@@ -347,7 +348,7 @@ return {
 		end,
 	}),
 
-
+	{ 'jghauser/mkdir.nvim' },
 	({
 		"neoclide/coc.nvim",
 		branch = "release",
@@ -362,21 +363,29 @@ return {
 	{
 		-- does the same thing as vim-yankstack
 		"vim-scripts/YankRing.vim",
-		enabled = false,
+		enabled = function()
+			return os.getenv("DISPLAY")
+		end
 		--event = "VeryLazy"
 	},
 	{
 		-- does the same thing as YankRing
 		'maxbrunsfeld/vim-yankstack',
 		enabled = false,
-		config = function()
+		init = function()
 			require("plugin_configs.vim-yankstack")
+		end,
+		config = function()
+			require("plugin_configs.vim-yankstack.config")
 			require("plugin_keymaps").pluginKeymaps("vim-yankstack")
 		end
 	},
+
 	{
 		"gbprod/yanky.nvim",
-		enabled = true,
+		enabled = function()
+			return not os.getenv("DISPLAY")
+		end,
 		--event = {"TextYankPost","CursorMoved","CursorHold"},
 		event = "VeryLazy", --{"CursorMoved", "VeryLazy","VimEnter" },
 		--branch = "autocmd",
