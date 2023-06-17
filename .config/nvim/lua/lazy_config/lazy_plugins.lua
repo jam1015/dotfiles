@@ -49,7 +49,7 @@ return {
 		event = "VeryLazy",
 		config = function() require("plugin_configs.nvim-notify") end,
 	},
-
+	---
 	{
 		'dstein64/vim-startuptime',
 		enabled = true,
@@ -69,11 +69,13 @@ return {
 	},
 
 	({
+		--"jeffkreeftmeijer/vim-numbertoggle",
 		"sitiom/nvim-numbertoggle",
-		lazy = true,
-		event = { "CursorMoved *", "CmdLineEnter *", "InsertEnter *" },
+		enabled = false,
+		--		lazy = true,
+		--event = "VeryLazy",--{ "CursorMoved *", "CmdLineEnter *", "InsertEnter *" },
 		init = function()
-			require("plugin_configs.nvim-numbertoggle_init")
+			require("plugin_configs.vim-numbertoggle_init")
 		end,
 	}),
 
@@ -92,11 +94,13 @@ return {
 	{ "mzlogin/vim-markdown-toc", ft = { "markdown", "md", }, },
 	{
 		"tpope/vim-unimpaired",
+		"tpope/vim-fugitive",
 		config = function()
 			require("plugin_keymaps").pluginKeymaps("vim-unimpaired")
 		end,
 		event = "VeryLazy"
 	},
+
 	"tpope/vim-scriptease",
 	{
 		"windwp/nvim-autopairs",
@@ -139,20 +143,7 @@ return {
 	{ "qpkorr/vim-bufkill",             event = "VeryLazy", enabled = false },
 	{ "kevinoid/vim-jsonc",             event = "VeryLazy" },
 
-	({
-		--"jam1015/vim-slime",
-		--branch = "main",-- "vim_array",
-		event = "VeryLazy",
-		dir = "/home/jordan/Documents/vim-slime",
 
-		init = function()
-			require("plugin_configs.vim-slime.initi")
-		end,
-
-		config = function()
-			require("plugin_configs.vim-slime.config")
-		end,
-	}),
 	{
 		"jam1015/PushPop.vim",
 
@@ -398,4 +389,39 @@ return {
 
 
 	},
+
+	--	({
+	--		"jam1015/vim-slime",
+	--		branch = "vim_array", --"main",--
+	--		event = "VeryLazy",
+	--		enabled = false,
+	--		--dir = "/home/jordan/Documents/vim-slime",
+	--
+	--		init = function()
+	--			require("plugin_configs.vim-slime.initi")
+	--		end,
+	--
+	--		config = function()
+	--			require("plugin_configs.vim-slime.config")
+	--		end,
+	--	}),
+	--
+	({
+		"jam1015/vim-slime-ext-neovim",
+		branch = "pid_input",
+		--"main",--
+		--event = "VeryLazy",
+		dependencies = { "jpalardy/vim-slime-ext-plugins", },
+
+		init = function()
+			require("plugin_configs.vim-slime-ext-plugins.initi")
+		end,
+
+		config = function()
+			require("plugin_configs.vim-slime-ext-plugins.config")
+		end,
+	}),
+
+
+
 }

@@ -5,7 +5,8 @@ export PATH="$PATH:/home/jordan/bin"
 export vimrc="$HOME/.config/nvim/init.lua"
 alias vi='nvim'
 alias ivi='nvim --cmd "let g:unception_disable=1"'
-alias python='ptpython --vi --dark-bg'
+alias ptpython='ptpython --vi --dark-bg'
+alias python='python'
 alias pdflatex="pdflatex -synctex=1"
 alias cb=clipboard
 alias ll='ls -lG'
