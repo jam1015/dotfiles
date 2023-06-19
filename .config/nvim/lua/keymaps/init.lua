@@ -25,26 +25,28 @@ keymap("i", "<C-j>", "<C-x><C-o>", { remap = false, silent = true }) -- activate
 --keymap("n", "<C-w>s", "<cmd>colorscheme blue<cr>", opts)
 
 keymap("n", "<leader>km", ":redir! > nvim_keys.txt<CR>:silent verbose map<CR>:redir END<CR>:edit nvim_keys.txt<CR>"
-	, opts) --output keymap
+, opts) --output keymap
 
 --https://neovim.io/doc/user/map.html#user-commands
 --https://neovim.io/doc/user/api.html and search nvim_create_user_command
 -- and section 40 of the manual
 
+
+
 local function term_vsplit()
-	if vim.bo.buftype == 'terminal' then
-		vim.cmd([[vsplit | term]])
-	else
-		vim.cmd([[vsplit]])
-	end
+    if vim.bo.buftype == 'terminal' then
+        vim.cmd([[vsplit | term sh -c 'cd "$PWD" && exec $SHELL']])
+    else
+        vim.cmd([[vsplit]])
+    end
 end
 
 local function term_hsplit()
-	if vim.bo.buftype == 'terminal' then
-		vim.cmd([[split | term]])
-	else
-		vim.cmd([[split]])
-	end
+    if vim.bo.buftype == 'terminal' then
+        vim.cmd([[split | term sh -c 'cd "$PWD" && exec $SHELL']])
+    else
+        vim.cmd([[split]])
+    end
 end
 
 vim.api.nvim_create_user_command('Tsplit', term_hsplit, { bar = true })
@@ -61,8 +63,10 @@ keymap("t", "<localleader><Esc>", "<C-\\><C-N>", opts)
 keymap("n", "<leader>tt", "<cmd>terminal<cr>i", opts)
 keymap("n", "<leader>tv", "<C-w>v<cmd>terminal<cr>i", opts)
 keymap("n", "<leader>ts", "<C-w>s<cmd>terminal<cr>i", opts)
+
+
 keymap("i", "<C-r>", "<C-r><C-p>", opts) --helpw sith pasting from insert moce
-keymap("c", "%%", "getcmdtype() == ':' ? expand('%:h').'/' : '%%'", {expr = true, remap=false})
+keymap("c", "%%", "getcmdtype() == ':' ? expand('%:h').'/' : '%%'", { expr = true, remap = false })
 
 keymap("n", "<leader>gt", "<cmd>tabprev<cr>", { remap = true, silent = true, expr = true })
 

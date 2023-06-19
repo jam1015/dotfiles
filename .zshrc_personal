@@ -81,3 +81,7 @@ function cheat ()
 
 echo ".zshrc sourced"
 
+function precmd {
+    PWD=$(pwd)
+    export PWD
+}

@@ -52,6 +52,7 @@ for _, server in ipairs(servers) do
 --	--vim.notify("setting up " .. server )
 	lspconfig[server].setup(opts)
 end
+
 handlers_obj.setup()
 vim.api.nvim_exec_autocmds("FileType", {})
 --require "plugin_configs.lsp.null-ls"

@@ -158,4 +158,11 @@ export ght="https://gitlab.com/jam1015/ght.git/"
 #    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
 export MANPAGER="nvim -c 'set ft=man' -"
+
+
+
+
+PROMPT_COMMAND='PWD=$(pwd)'
+
+
 echo "bashrc sourced"
