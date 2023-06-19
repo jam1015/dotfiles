@@ -1,6 +1,6 @@
 return {
 	settings = {
-		filetypes = { "r", "R", "rmd", "Rmd" }, log_level = { 2 }, cmd = { "R", "--slave", "-e", "languageserver::run()" }
+		filetypes = { "r", "R", "rmd", "Rmd", "Rprofile" }, log_level = { 2 }, cmd = { "R", "--slave", "-e", "languageserver::run()" }
 	}
 }
 -- styling is performed by lintr in the .lintr file

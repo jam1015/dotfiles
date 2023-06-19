@@ -255,9 +255,9 @@ return {
 		"nvim-treesitter/nvim-treesitter", event = "BufWinEnter",
 		enabled = true,
 		--event = "VeryLazy",
-		config = vim.schedule(function()
+		config = function()
 			require("plugin_configs.nvim-treesitter")
-		end),
+		end,
 	}),
 	{ "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy", dependencies = "nvim-treesitter/nvim-treesitter" },
 	({
@@ -310,9 +310,9 @@ return {
 
 	({
 		"hrsh7th/nvim-cmp",
-		--		cond = function() --also done vi autocmd in the cmp config
-		--			return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
-		--		end,
+		cond = function() --also done vi autocmd in the cmp config
+			return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
+		end,
 		enabled = true,
 		lazy = true,
 		event = "VeryLazy",
@@ -390,22 +390,20 @@ return {
 
 	},
 
-	--	({
-	--		"jam1015/vim-slime",
-	--		branch = "vim_array", --"main",--
-	--		event = "VeryLazy",
-	--		enabled = false,
-	--		--dir = "/home/jordan/Documents/vim-slime",
-	--
-	--		init = function()
-	--			require("plugin_configs.vim-slime.initi")
-	--		end,
-	--
-	--		config = function()
-	--			require("plugin_configs.vim-slime.config")
-	--		end,
-	--	}),
-	--
+	({
+		"jam1015/vim-slime",
+		branch = "vim_array", --"main",--
+		event = "VeryLazy",
+		enabled = false,
+		init = function()
+			require("plugin_configs.vim-slime.initi")
+		end,
+
+		config = function()
+			require("plugin_configs.vim-slime.config")
+		end,
+	}),
+
 	({
 		"jam1015/vim-slime-ext-neovim",
 		branch = "pid_input",
