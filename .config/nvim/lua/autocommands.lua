@@ -24,7 +24,7 @@ api.nvim_create_autocmd("SwapExists", {
 })
 
 vim.api.nvim_create_autocmd({ "FileChangedShellPost", "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
-  command = "if mode() != 'c' &&  expand('%') !=# '[Command Line]' | checktime | endif",
+	command = "if mode() != 'c' &&  expand('%') !=# '[Command Line]' | checktime | endif",
 	pattern = { "*" },
 })
 
@@ -50,29 +50,19 @@ api.nvim_create_autocmd("TermOpen", {
 
 api.nvim_create_autocmd("TermClose", {
 	pattern = "*",
-	command = "if !v:event.status | exe 'Bdelete! '..expand('<abuf>') | endif",
+	--command = "if !v:event.status | exe 'Bdelete! '..expand('<abuf>') | endif",
+	command = "if !v:event.status | exe 'Bdelete!' | endif",
 	group = term_autocmds
 })
 
-api.nvim_create_autocmd("TermOpen", {
-	pattern = "*",
-	command = "",
-	group = term_autocmds
-})
---api.nvim_create_autocmd({
---"BufWritePost", "VimEnter"
---}, {
---	callback = function()
+
+
+--local function set_status_line()
+--	vim.opt_local.statusline = "%{bufname()}%=id: %{b:terminal_job_id} pid: %{b:terminal_job_pid}"
+--end
 --
---		local hr = tonumber(os.date('%H', os.time()))
---		if hr > 6 and hr < 18 then -- day between 6am and 9pm
---			vim.cmd([[colorscheme gruvbox]])
---			vim.opt.background = 'light'
---		else -- night
---			vim.cmd([[colorscheme tokyonight]])
---			vim.opt.background = 'dark'
---		end
---
---	end,
---	group = aesthetics,
+--api.nvim_create_autocmd("TermOpen", {
+--	pattern = "*",
+--	callback = set_status_line,
+--	group = term_autocmds,
 --})

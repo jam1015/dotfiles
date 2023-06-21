@@ -71,7 +71,7 @@ return {
 	({
 		--"jeffkreeftmeijer/vim-numbertoggle",
 		"sitiom/nvim-numbertoggle",
-		enabled = false,
+		enabled = true,
 		--		lazy = true,
 		--event = "VeryLazy",--{ "CursorMoved *", "CmdLineEnter *", "InsertEnter *" },
 		init = function()
@@ -391,7 +391,7 @@ return {
 	},
 
 	({
-		"jam1015/vim-slime",
+		"jpalardy/vim-slime",
 		branch = "vim_array", --"main",--
 		event = "VeryLazy",
 		enabled = false,
@@ -405,8 +405,9 @@ return {
 	}),
 
 	({
-		"jam1015/vim-slime-ext-neovim",
-		branch = "pid_input",
+		--"jam1015/vim-slime-ext-neovim",
+		--branch = "windows_compatibility",
+		dir= "~/Documents/vim-slime-ext-neovim",
 		--"main",--
 		--event = "VeryLazy",
 		dependencies = { "jpalardy/vim-slime-ext-plugins", },

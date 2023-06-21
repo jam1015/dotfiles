@@ -19,6 +19,9 @@ export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
 export NVIM_SWAP="$HOME/.local/state/nvim/swap"
 alias van="man -P 'nvim -c Man! -c set\ nonumber -c set\ norelativenumber'" 
+
+bindkey -e -r '^[x'
+bindkey -a -r ':'
 set -o vi #use vi editing mode in the terminal
 KEYTIMEOUT=1 #get rid of pause after switching modes in vim mode
 
@@ -82,6 +85,10 @@ function cheat ()
 echo ".zshrc sourced"
 
 function precmd {
+	OLDPWD=$PWD
+	export OLDPWD
     PWD=$(pwd)
     export PWD
 }
+
+

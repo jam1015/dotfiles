@@ -59,6 +59,7 @@ set.listchars = set.listchars + 'tab:   '
 set.listchars = set.listchars + 'nbsp:⣿'
 
 
+
 if os.getenv("DISPLAY") then
 	--if not os.getenv("SSH_CONNECTION") then
 	set.clipboard = 'unnamedplus'

@@ -7,6 +7,7 @@ vim.g.mapllocaleader = "\\"
 
 -- defining functions that can be used to make command line abbreviations elsewhere
 keymap("n", "<leader>ll", "<cmd>nohlsearch<CR>", opts)
+
 keymap("i", "<C-;>", "<C-[>", opts)
 keymap("x", "<C-;>", "<C-[>", opts)
 keymap("v", "<C-;>", "<C-[>", opts)
@@ -18,9 +19,11 @@ if os.getenv("TMUX") then
 else
 	--using my favored tmux prefix
 	keymap("n", "<C-a>", "<C-w>", { remap = true, silent = true })
-	keymap("t", "<C-a>", "<C-\\><C-n><C-w>", { remap = true, silent = true })
+	keymap("t", "<C-a>", "<C-w>", { remap = true, silent = true })
+	keymap("t", "<C-w>",  "<C-\\><C-n><C-w>", { remap = true, silent = true })
 end
 
+keymap("t", "<C-;>", "<C-\\><C-n>", opts)
 keymap("i", "<C-j>", "<C-x><C-o>", { remap = false, silent = true }) -- activate omni completeion
 --keymap("n", "<C-w>s", "<cmd>colorscheme blue<cr>", opts)
 
@@ -32,21 +35,41 @@ keymap("n", "<leader>km", ":redir! > nvim_keys.txt<CR>:silent verbose map<CR>:re
 -- and section 40 of the manual
 
 
-
 local function term_vsplit()
-    if vim.bo.buftype == 'terminal' then
-        vim.cmd([[vsplit | term sh -c 'cd "$PWD" && exec $SHELL']])
-    else
-        vim.cmd([[vsplit]])
-    end
+	if vim.bo.buftype == 'terminal' then
+		local pid = vim.fn.jobpid(vim.b.terminal_job_id)
+		local pwd
+		if vim.fn.has('win32') == 1 then    -- For Windows
+			vim.cmd('vsplit | term')
+		elseif vim.fn.has('unix') == 1 then -- For Unix/Linux
+			pwd = vim.fn.systemlist('readlink /proc/' .. pid .. '/cwd')[1]
+			vim.cmd('vsplit | term sh -c \'cd "' .. pwd .. '" && exec $SHELL\'')
+		else -- For MacOS
+			pwd = vim.fn.systemlist('lsof -p ' .. pid .. ' | grep cwd | awk \'{print $NF}\'')[1]
+			vim.cmd('vsplit | term sh -c \'cd "' .. pwd .. '" && exec $SHELL\'')
+		end
+	else
+		vim.cmd('vsplit')
+	end
 end
-
+--
 local function term_hsplit()
-    if vim.bo.buftype == 'terminal' then
-        vim.cmd([[split | term sh -c 'cd "$PWD" && exec $SHELL']])
-    else
-        vim.cmd([[split]])
-    end
+	if vim.bo.buftype == 'terminal' then
+
+		local pid = vim.fn.jobpid(vim.b.terminal_job_id)
+		local pwd
+		if vim.fn.has('win32') == 1 then    -- For Windows
+			vim.cmd('split | term')
+		elseif vim.fn.has('unix') == 1 then -- For Unix/Linux
+			pwd = vim.fn.systemlist('readlink /proc/' .. pid .. '/cwd')[1]
+			vim.cmd('split | term sh -c \'cd "' .. pwd .. '" && exec $SHELL\'')
+		else -- For MacOS
+			pwd = vim.fn.systemlist('lsof -p ' .. pid .. ' | grep cwd | awk \'{print $NF}\'')[1]
+			vim.cmd('split | term sh -c \'cd "' .. pwd .. '" && exec $SHELL\'')
+		end
+	else
+		vim.cmd('split')
+	end
 end
 
 vim.api.nvim_create_user_command('Tsplit', term_hsplit, { bar = true })
