@@ -1,6 +1,5 @@
-set editorcmd neovide
-
-
+set editorcmd nvim-qt
+bind ;d hint -V
 
 " " bovine3dom's dogfood
 "
