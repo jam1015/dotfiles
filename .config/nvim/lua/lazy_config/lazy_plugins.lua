@@ -49,7 +49,7 @@ return {
 		event = "VeryLazy",
 		config = function() require("plugin_configs.nvim-notify") end,
 	},
-
+	---
 	{
 		'dstein64/vim-startuptime',
 		enabled = true,
@@ -69,11 +69,13 @@ return {
 	},
 
 	({
+		--"jeffkreeftmeijer/vim-numbertoggle",
 		"sitiom/nvim-numbertoggle",
-		lazy = true,
-		event = { "CursorMoved *", "CmdLineEnter *", "InsertEnter *" },
+		enabled = true,
+		--		lazy = true,
+		--event = "VeryLazy",--{ "CursorMoved *", "CmdLineEnter *", "InsertEnter *" },
 		init = function()
-			require("plugin_configs.nvim-numbertoggle_init")
+			require("plugin_configs.vim-numbertoggle_init")
 		end,
 	}),
 
@@ -92,11 +94,13 @@ return {
 	{ "mzlogin/vim-markdown-toc", ft = { "markdown", "md", }, },
 	{
 		"tpope/vim-unimpaired",
+		"tpope/vim-fugitive",
 		config = function()
 			require("plugin_keymaps").pluginKeymaps("vim-unimpaired")
 		end,
 		event = "VeryLazy"
 	},
+
 	"tpope/vim-scriptease",
 	{
 		"windwp/nvim-autopairs",
@@ -106,9 +110,10 @@ return {
 	},
 
 	({
-		"lervag/vimtex", event = "VeryLazy",
+		"lervag/vimtex",
+		--event = "VeryLazy",
 
-		build = function()
+		config = function()
 			require("plugin_configs.vimtex")
 		end,
 	}),
@@ -138,20 +143,7 @@ return {
 	{ "qpkorr/vim-bufkill",             event = "VeryLazy", enabled = false },
 	{ "kevinoid/vim-jsonc",             event = "VeryLazy" },
 
-	({
-		--"jam1015/vim-slime",
-		--branch = "main",-- "vim_array",
-		event = "VeryLazy",
-		dir = "/home/jordan/Documents/vim-slime",
 
-		init = function()
-			require("plugin_configs.vim-slime.initi")
-		end,
-
-		config = function()
-			require("plugin_configs.vim-slime.config")
-		end,
-	}),
 	{
 		"jam1015/PushPop.vim",
 
@@ -241,7 +233,7 @@ return {
 	({
 		"ggandor/leap.nvim",
 		--event = "VeryLazy",
-		--commit = "9cc411481db859059ad66c8ad844b9386dc62d5c",
+		--commit ="9cc411481db859059ad66c8ad844b9386dc62d5c",
 		config = function()
 			require('plugin_configs.leap')
 		end,
@@ -318,9 +310,9 @@ return {
 
 	({
 		"hrsh7th/nvim-cmp",
-		--		cond = function() --also done vi autocmd in the cmp config
-		--			return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
-		--		end,
+		cond = function() --also done vi autocmd in the cmp config
+			return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
+		end,
 		enabled = true,
 		lazy = true,
 		event = "VeryLazy",
@@ -347,7 +339,7 @@ return {
 		end,
 	}),
 
-
+	{ 'jghauser/mkdir.nvim' },
 	({
 		"neoclide/coc.nvim",
 		branch = "release",
@@ -362,21 +354,30 @@ return {
 	{
 		-- does the same thing as vim-yankstack
 		"vim-scripts/YankRing.vim",
-		enabled = true,
+		enabled = function()
+			return os.getenv("DISPLAY")
+		end
 		--event = "VeryLazy"
 	},
 	{
 		-- does the same thing as YankRing
 		'maxbrunsfeld/vim-yankstack',
 		enabled = false,
-		config = function()
+		init = function()
 			require("plugin_configs.vim-yankstack")
+		end,
+		config = function()
+			require("plugin_configs.vim-yankstack.config")
 			require("plugin_keymaps").pluginKeymaps("vim-yankstack")
 		end
 	},
+
 	{
 		"gbprod/yanky.nvim",
-		enabled = false,
+		enabled = function()
+			return not os.getenv("DISPLAY")
+		end,
+
 		--event = {"TextYankPost","CursorMoved","CursorHold"},
 		event = "VeryLazy", --{"CursorMoved", "VeryLazy","VimEnter" },
 		--branch = "autocmd",
@@ -389,4 +390,38 @@ return {
 
 
 	},
+
+	({
+		"jpalardy/vim-slime",
+		branch = "vim_array", --"main",--
+		event = "VeryLazy",
+		enabled = false,
+		init = function()
+			require("plugin_configs.vim-slime.initi")
+		end,
+
+		config = function()
+			require("plugin_configs.vim-slime.config")
+		end,
+	}),
+
+	({
+		"jam1015/vim-slime-ext-neovim",
+		branch = "status_override",
+		--dir= "~/Documents/vim-slime-ext-neovim",
+		--"main",--
+		--event = "VeryLazy",
+		dependencies = { "jpalardy/vim-slime-ext-plugins", },
+
+		init = function()
+			require("plugin_configs.vim-slime-ext-plugins.initi")
+		end,
+
+		config = function()
+			require("plugin_configs.vim-slime-ext-plugins.config")
+		end,
+	}),
+
+
+
 }

@@ -8,7 +8,7 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 
 # merge in defaults and keymaps
 # setting this first because otherwise it undoes the other ones.
-setxkbmap -model kinesis -layout us -variant mac -option "terminate:ctrl_alt_bksp" #-option "ctrl:swapcaps"
+setxkbmap -model kinesis -layout us -variant mac -option "terminate:ctrl_alt_bksp" -option "ctrl:nocaps"
 
 if [ -f $sysresources ]; then
 
@@ -66,6 +66,6 @@ xrandr --auto
 
 
 xset dpms 1201 1205 1210
-xset r rate 250 35
+xset r rate 200 50
 #nm-applet --sm-disable &
 exec i3

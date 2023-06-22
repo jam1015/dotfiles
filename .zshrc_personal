@@ -1,14 +1,12 @@
-
-
 export PATH="$PATH:/Users/jordanmandel/.local/bin"
 export PATH="$PATH:/Users/jordanmandel/bin"
-
 
 # ``````````Vim configuration things`````
 export vimrc="$HOME/.config/nvim/init.lua"
 alias vi='nvim'
 alias ivi='nvim --cmd "let g:unception_disable=1"'
-alias python='ptpython --vi --dark-bg'
+alias ptpython='ptpython --vi --dark-bg'
+alias python='python'
 alias pdflatex="pdflatex -synctex=1"
 alias cb=clipboard
 alias ll='ls -lG'
@@ -21,13 +19,15 @@ export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
 export NVIM_SWAP="$HOME/.local/state/nvim/swap"
 alias van="man -P 'nvim -c Man! -c set\ nonumber -c set\ norelativenumber'" 
+
+bindkey -e -r '^[x'
+bindkey -a -r ':'
 set -o vi #use vi editing mode in the terminal
 KEYTIMEOUT=1 #get rid of pause after switching modes in vim mode
 
 mkcd () {
   mkdir "$1" && cd "$1"
 }
-
 
 mkcdp () {
   mkdir -p "$1" && cd "$1"
@@ -65,8 +65,6 @@ function zle-line-finish {
 }
 zle -N zle-line-finish
 
-
-
 if [[ "$EUID" = 0 ]]
 then 
 PS1='%B%F{green}%M:su:%3~ ${vim_mode}%f%b '
@@ -78,7 +76,18 @@ alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
 setopt noauto_pushd
 setopt completealiases
 
+function cheat ()
+{
+    curl cheat.sh/$1
+}
+
 echo ".zshrc sourced"
 
+function precmd {
+	OLDPWD=$PWD
+	export OLDPWD
+    PWD=$(pwd)
+    export PWD
+}
 
 
