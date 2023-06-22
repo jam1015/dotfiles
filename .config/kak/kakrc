@@ -1,1 +1,3 @@
 set -add global autoinfo normal
+map global insert <c-[> <esc>
+map global prompt <c-[> <esc>
