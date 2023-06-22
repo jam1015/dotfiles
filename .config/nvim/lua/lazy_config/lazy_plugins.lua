@@ -405,9 +405,9 @@ return {
 	}),
 
 	({
-		--"jam1015/vim-slime-ext-neovim",
-		--branch = "windows_compatibility",
-		dir= "~/Documents/vim-slime-ext-neovim",
+		"jam1015/vim-slime-ext-neovim",
+		branch = "status_override",
+		--dir= "~/Documents/vim-slime-ext-neovim",
 		--"main",--
 		--event = "VeryLazy",
 		dependencies = { "jpalardy/vim-slime-ext-plugins", },

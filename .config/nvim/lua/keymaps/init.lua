@@ -27,7 +27,7 @@ keymap("t", "<C-;>", "<C-\\><C-n>", opts)
 keymap("i", "<C-j>", "<C-x><C-o>", { remap = false, silent = true }) -- activate omni completeion
 --keymap("n", "<C-w>s", "<cmd>colorscheme blue<cr>", opts)
 
-keymap("n", "<leader>km", ":redir! > nvim_keys.txt<CR>:silent verbose map<CR>:redir END<CR>:edit nvim_keys.txt<CR>"
+keymap("n", "<leader>km", ":redir! > nvim_keys.txt<CR>:silent map<CR>:redir END<CR>:edit nvim_keys.txt<CR>:g/^<Plug>\\|^<SNR>/d<CR>"
 , opts) --output keymap
 
 --https://neovim.io/doc/user/map.html#user-commands
