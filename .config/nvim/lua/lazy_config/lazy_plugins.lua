@@ -251,7 +251,7 @@ return {
 	{
 		"andymass/vim-matchup",
 		enabled = true,
-		--	event = { "VeryLazy" },
+			event = { "VeryLazy" },
 	},
 	{
 		"numToStr/Comment.nvim",
@@ -263,9 +263,9 @@ return {
 		"nvim-treesitter/nvim-treesitter", event = "BufWinEnter",
 		enabled = true,
 		--event = "VeryLazy",
-		config = vim.schedule(function()
+		config = function()
 			require("plugin_configs.nvim-treesitter")
-		end),
+		end,
 	}),
 	{ "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy", dependencies = "nvim-treesitter/nvim-treesitter" },
 	({
@@ -314,7 +314,7 @@ return {
 			require("plugin_configs.lsp")
 		end
 	},
-      --"mfussenegger/nvim-dap",
+	--"mfussenegger/nvim-dap",
 
 	({
 		"hrsh7th/nvim-cmp",

@@ -96,7 +96,7 @@
 
 ;;(global-set-key (kbd "C-,") #'god-mode-all)
     ;; Enable evil-collection
-    ;;(evil-collection-init)
+    (evil-collection-init)
     ;; Initialize SLIME
     ;;(global-set-key (kbd "<escape>") #'god-mode-all)
     ;;(global-set-key (kbd "C-,") #'god-mode-all)
@@ -120,7 +120,7 @@
 ;;	  )
 (setq sly-lisp-implementations
       '(
-        (sbcl ("/usr/bin/sbcl") :coding-system utf-8-unix) (clisp ("/usr/bin/clisp" "-K full") :coding-system utf-8-unix)))
+        (sbcl ("/usr/local/bin/sbcl") :coding-system utf-8-unix) (clisp ("/usr/local/bin/clisp" "-K full") :coding-system utf-8-unix)))
 ;;(eval-after-load 'sly
 ;;  `(define-key sly-prefix-map (kbd "M-h") 'sly-documentation-lookup))
 

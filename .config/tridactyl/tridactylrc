@@ -1,6 +1,4 @@
-set editorcmd neovide
-
-
+set editorcmd /usr/local/bin/neovide
 
 " " bovine3dom's dogfood
 "
