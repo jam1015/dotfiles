@@ -421,7 +421,11 @@ return {
 			require("plugin_configs.vim-slime-ext-plugins.config")
 		end,
 	}),
-
-
-
+	{
+		"norcalli/nvim-colorizer.lua",
+		enabled = false,
+		init = function() vim.opt.termguicolors = true end,
+		config = function() require('colorizer').setup() end
+	},
+	"powerman/vim-plugin-AnsiEsc"
 }

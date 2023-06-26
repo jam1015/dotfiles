@@ -47,6 +47,7 @@ for _, server in ipairs(servers) do
 	local require_ok, conf_opts = pcall(require, "plugin_configs.lsp.settings." .. server)
 	if require_ok then
 		opts = vim.tbl_deep_extend("force", conf_opts, opts)
+	else
 	end
 --
 --	--vim.notify("setting up " .. server )
