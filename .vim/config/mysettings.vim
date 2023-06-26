@@ -97,7 +97,7 @@ else
 	try
 		colorscheme retrobox
 	catch /^Vim\%((\a\+)\)\=:E/	 " catch all Vim errors
-		colorscheme retrobox
+		colorscheme elflord
 	endtry
 endif
 
