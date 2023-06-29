@@ -7,6 +7,7 @@ local lisp_lazy = function() --also done vi autocmd in the cmp config
 end
 
 return {
+
 	{
 		'willothy/flatten.nvim',
 		config = true,
@@ -15,11 +16,26 @@ return {
 	},
 
 	{
-		'ludovicchabant/vim-gutentags',
+		'dhananjaylatkar/vim-gutentags',
+		--dependencies = "dhananjaylatkar/cscope_maps.nvim",
+
 
 		config = function()
 			require("plugin_configs.vim-gutentags")
 		end
+	},
+	{
+		"dhananjaylatkar/cscope_maps.nvim",
+		dependencies = {
+			"folke/which-key.nvim", -- optional [for whichkey hints]
+			"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
+			"ibhagwan/fzf-lua",     -- optional [for picker="fzf-lua"]
+			"nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
+			"dhananjaylatkar/cscope_maps.nvim",
+		},
+
+		opts = require("plugin_configs.cscope_maps")
+		,
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
