@@ -1,15 +1,6 @@
-vim.cmd([[
-
-let g:gutentags_modules = ['ctags' , 'gtags_cscope']
-
-" config project root markers.
-let g:gutentags_project_root = ['.root']
-
-" generate datebases in my cache directory, prevent gtags files polluting my project
-let g:gutentags_cache_dir = expand('~/.cache/tags')
-
-" change focus to quickfix window after search (optional).
-let g:gutentags_plus_switch = 1
-
-"set statusline+=%{gutentags#statusline()}
-]])
+vim.g.gutentags_modules = { "ctags", "cscope_maps" } -- This is required. Other config is optional
+vim.g.gutentags_cscope_build_inverted_index_maps = 1
+vim.g.gutentags_project_root = { '.root' }
+vim.g.gutentags_cache_dir = vim.fn.expand("~/code/.gutentags")
+vim.g.gutentags_file_list_command = "fd -e c -e h"
+vim.g.gutentags_plus_switch = 1

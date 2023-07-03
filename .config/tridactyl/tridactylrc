@@ -1,5 +1,9 @@
 set editorcmd nvim-qt
 bind ;d hint -V
+bind j scrollline 5
+bind k scrollline -5
+
+
 
 " " bovine3dom's dogfood
 "
