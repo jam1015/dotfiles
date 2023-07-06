@@ -18,24 +18,9 @@ cnoreabbrev <expr> olp  getcmdtype() == ":" && getcmdline() == "olp" ? "Olp" : "
 
 
 " causes warning when you open help.txt
-command -bar -nargs=? -complete=help HCW execute HCW(<q-args>) | bdelete help.txt
-let s:did_open_help = v:false
-
-function HCW(subject) abort
-  let mods = 'silent noautocmd keepalt'
-  if !s:did_open_help
-    execute mods .. ' help'
-    execute mods .. ' helpclose'
-    let s:did_open_help = v:true
-  endif
-  if !empty(getcompletion(a:subject, 'help'))
-    execute mods .. ' edit ' .. &helpfile
-    set buftype=help
-  endif
-  return 'keepjumps help ' .. a:subject
-endfunction
-
-cnoreabbrev <expr> hh  getcmdtype() == ":" && getcmdline() == "hh" ? "HCW" : "hh"
-
+"command -bar -nargs=? -complete=help HCW execute HCW(<q-args>) | bdelete help.txt
 """""""""""""""" End directional Help """"""""""""""""""""""""
+"https://stackoverflow.com/a/26431632/5879985
+command! -nargs=? -complete=help HCW :enew | :set buftype=help | :h <args>
+cnoreabbrev <expr> hh  getcmdtype() == ":" && getcmdline() == "hh" ? "HCW" : "hh"
 ]])

@@ -57,9 +57,12 @@ set.listchars = set.listchars + 'extends:»'
 set.listchars = set.listchars + 'precedes:«'
 set.listchars = set.listchars + 'tab:   '
 set.listchars = set.listchars + 'nbsp:⣿'
+set.number = true
+set.relativenumber = true
 
-
-
+set.foldmethod = "expr"
+set.foldexpr = "nvim_treesitter#foldexpr()"
+set.foldlevelstart = 99
 
 if os.getenv("DISPLAY") then
 	--if not os.getenv("SSH_CONNECTION") then

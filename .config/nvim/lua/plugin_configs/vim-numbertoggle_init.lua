@@ -1,4 +1,4 @@
-vim.cmd([[
-  	set number
-  	set relativenumber
-  	]])
+--vim.cmd([[
+--  	set number
+--  	set relativenumber
+--  	]])

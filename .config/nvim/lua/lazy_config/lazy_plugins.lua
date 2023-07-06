@@ -7,6 +7,8 @@ local lisp_lazy = function() --also done vi autocmd in the cmp config
 end
 
 return {
+
+
 	{
 		'willothy/flatten.nvim',
 		config = true,
@@ -15,16 +17,41 @@ return {
 	},
 
 	{
-		'ludovicchabant/vim-gutentags',
+		'dhananjaylatkar/vim-gutentags',
+		dependencies = "dhananjaylatkar/cscope_maps.nvim",
+		event = "VeryLazy",
+
 
 		config = function()
 			require("plugin_configs.vim-gutentags")
 		end
 	},
 	{
+		"dhananjaylatkar/cscope_maps.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"folke/which-key.nvim", -- optional [for whichkey hints]
+			"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
+			"ibhagwan/fzf-lua",     -- optional [for picker="fzf-lua"]
+			"nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
+			"dhananjaylatkar/cscope_maps.nvim",
+		},
+
+		opts = require("plugin_configs.cscope_maps")
+		,
+	},
+	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = function() require("plugin_configs.indent-blankline") end,
 		event = "VeryLazy"
+	},
+	{
+		'kevinhwang91/nvim-ufo',
+		enabled = false,
+		dependencies = 'kevinhwang91/promise-async',
+		config = function()
+			require("plugin_configs.nvim-ufo")
+		end
 	},
 	"overcache/NeoSolarized",
 	({
@@ -92,15 +119,16 @@ return {
 	},
 	{ 'famiu/bufdelete.nvim',     config = function() require("plugin_keymaps").pluginKeymaps("bufdelete.nvim") end },
 	{ "mzlogin/vim-markdown-toc", ft = { "markdown", "md", }, },
+
 	{
 		"tpope/vim-unimpaired",
-		"tpope/vim-fugitive",
+		event = "VeryLazy",
 		config = function()
 			require("plugin_keymaps").pluginKeymaps("vim-unimpaired")
 		end,
-		event = "VeryLazy"
 	},
 
+	{ "tpope/vim-fugitive",             event = "VeryLazy" },
 	"tpope/vim-scriptease",
 	{
 		"windwp/nvim-autopairs",
@@ -216,7 +244,6 @@ return {
 
 	({
 		"phaazon/hop.nvim", event = "VeryLazy",
-		disable = true,
 		config = function()
 			require('plugin_configs.hop')
 		end,
@@ -225,14 +252,14 @@ return {
 	{
 		"ggandor/flit.nvim",
 
-		--event = "VeryLazy",
+		event = "VeryLazy",
 
 		--commit = "be110f9814a45788d10537fd59b3c76d956bb7ad",
 		config = function() require("plugin_configs.flit") end
 	},
 	({
 		"ggandor/leap.nvim",
-		--event = "VeryLazy",
+		event = "VeryLazy",
 		--commit ="9cc411481db859059ad66c8ad844b9386dc62d5c",
 		config = function()
 			require('plugin_configs.leap')
@@ -243,23 +270,36 @@ return {
 	{
 		"andymass/vim-matchup",
 		enabled = true,
-			event = { "VeryLazy" },
+		event = { "BufWinEnter" },
 	},
 	{
 		"numToStr/Comment.nvim",
+		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("plugin_configs.Comment") end,
 	},
 
+	{
+		"mfussenegger/nvim-treehopper",
+		event = "VeryLazy",
+		dependencies = "phaazon/hop.nvim",
+		config = function() require("plugin_configs.nvim-treehopper") end,
+	},
+
 	({
-		"nvim-treesitter/nvim-treesitter", event = "BufWinEnter",
+		"nvim-treesitter/nvim-treesitter",
+		event = "BufWinEnter",
 		enabled = true,
-		--event = "VeryLazy",
 		config = function()
 			require("plugin_configs.nvim-treesitter")
 		end,
 	}),
-	{ "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy", dependencies = "nvim-treesitter/nvim-treesitter" },
+	{
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		event = "VeryLazy",
+		dependencies = "nvim-treesitter/nvim-treesitter"
+	},
+
 	({
 		"folke/trouble.nvim", event = "VeryLazy",
 		config = function()
@@ -267,14 +307,14 @@ return {
 		end,
 	}),
 
+	{ "lifecrisis/vim-difforig",  event = "VeryLazy" },
 
-
-	{ "lifecrisis/vim-difforig", event = "VeryLazy" },
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function() require("plugin_configs.gitsigns") end,
 		lazy = true
 	},
+
 	{
 		'nvim-tree/nvim-tree.lua',
 		event = "VeryLazy",
@@ -356,8 +396,8 @@ return {
 		"vim-scripts/YankRing.vim",
 		enabled = function()
 			return os.getenv("DISPLAY")
-		end
-		--event = "VeryLazy"
+		end,
+		event = "BufWinEnter"
 	},
 	{
 		-- does the same thing as YankRing
@@ -410,8 +450,8 @@ return {
 		branch = "status_override",
 		--dir= "~/Documents/vim-slime-ext-neovim",
 		--"main",--
-		--event = "VeryLazy",
-		dependencies = { "jpalardy/vim-slime-ext-plugins", },
+		event = "VeryLazy",
+		dependencies = { { "jpalardy/vim-slime-ext-plugins", event = "VeryLazy" }, },
 
 		init = function()
 			require("plugin_configs.vim-slime-ext-plugins.initi")
