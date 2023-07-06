@@ -1,4 +1,4 @@
-set editorcmd nvim-qt
+set editorcmd /usr/bin/nvim-qt
 bind ;d hint -V
 bind j scrollline 5
 bind k scrollline -5
