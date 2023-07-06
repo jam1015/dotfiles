@@ -10,6 +10,7 @@ api.nvim_create_autocmd("TextYankPost", {
 
 
 
+
 -- concurrency ----------------------------
 local function set_concurrent() --lets you edit multiple files at the same time
 	vim.v.swapchoice = "e"
