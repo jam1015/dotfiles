@@ -20,6 +20,7 @@ cnoreabbrev <expr> olp  getcmdtype() == ":" && getcmdline() == "olp" ? "Olp" : "
 " causes warning when you open help.txt
 "command -bar -nargs=? -complete=help HCW execute HCW(<q-args>) | bdelete help.txt
 """""""""""""""" End directional Help """"""""""""""""""""""""
+"https://stackoverflow.com/a/26431632/5879985
 command! -nargs=? -complete=help HCW :enew | :set buftype=help | :h <args>
 cnoreabbrev <expr> hh  getcmdtype() == ":" && getcmdline() == "hh" ? "HCW" : "hh"
 ]])
