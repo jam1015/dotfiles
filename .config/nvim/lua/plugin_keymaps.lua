@@ -4,6 +4,7 @@ M = {}
 function M.pluginKeymaps(plugin, setup_type)
 	local keymap = vim.keymap.set
 	local opts = { remap = false, silent = true }
+	local wk = require("which-key")
 	if plugin == "vim-unimpaired" then
 		vim.cmd([[
 					function! s:ArgNext(...)
@@ -86,6 +87,7 @@ function M.pluginKeymaps(plugin, setup_type)
 			"<cmd>Telescope yank_history<cr>", opts)
 	elseif plugin == "emmet-vim" then
 		if setup_type == "config" then
+			wk.register({ ["<leader>m"] = { name = "emmet" } })
 			return (function()
 				vim.cmd([[
 					nmap <leader>m,   <plug>(emmet-expand-abbr)
