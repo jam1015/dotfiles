@@ -2,8 +2,8 @@
 -- function that returns keymaps based on name of plugin supplied
 M = {}
 function M.pluginKeymaps(plugin, setup_type)
-	local keymap = vim.api.nvim_set_keymap
-	local opts = { noremap = true, silent = true }
+	local keymap = vim.keymap.set
+	local opts = { remap = false, silent = true }
 	if plugin == "vim-unimpaired" then
 		vim.cmd([[
 					function! s:ArgNext(...)
@@ -51,19 +51,22 @@ function M.pluginKeymaps(plugin, setup_type)
 					cnoreabbrev <expr> previous  getcmdtype() == ":" && getcmdline() == "prevous" ? "Aprev" : "previous"
 
 			]])
+	elseif plugin == "cscope_maps" then
+
+
 	elseif plugin == "nvim-treehopper" then
 		vim.cmd([[
 	omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
 	xnoremap <silent> m :lua require('tsht').nodes()<CR>
 		    ]])
 	elseif plugin == "vim-slime" then
-		keymap("n", "gz", "<Plug>SlimeMotionSend", { noremap = false, silent = false })
-		keymap("n", "gzz", "<Plug>SlimeLineSend", { noremap = false, silent = false })
-		keymap("x", "gz", "<Plug>SlimeRegionSend", { noremap = false, silent = false })
+		keymap("n", "gz", "<Plug>SlimeMotionSend", { remap = true, silent = false })
+		keymap("n", "gzz", "<Plug>SlimeLineSend", { remap = true, silent = false })
+		keymap("x", "gz", "<Plug>SlimeRegionSend", { remap = true, silent = false })
 	elseif plugin == "vim-slime-ext-plugins" then
-		keymap("n", "gz", "<Plug>SlimeMotionSend", { noremap = false, silent = false })
-		keymap("n", "gzz", "<Plug>SlimeLineSend", { noremap = false, silent = false })
-		keymap("x", "gz", "<Plug>SlimeRegionSend", { noremap = false, silent = false })
+		keymap("n", "gz", "<Plug>SlimeMotionSend", { remap = true, silent = false })
+		keymap("n", "gzz", "<Plug>SlimeLineSend", { remap = true, silent = false })
+		keymap("x", "gz", "<Plug>SlimeRegionSend", { remap = true, silent = false })
 	elseif plugin == "yanky.nvim" then
 		vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
 		vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")

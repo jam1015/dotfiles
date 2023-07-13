@@ -165,6 +165,15 @@
 
 
 
+(evil-set-initial-state 'Info-mode 'insert)
+
+
+(defun my-info-mode-settings ()
+  (god-local-mode 1))
+
+(add-hook 'Info-mode-hook 'my-info-mode-settings)
+
+
 
 (require 'evil)
 

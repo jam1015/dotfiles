@@ -1,3 +1,4 @@
+local wk = require("which-key")
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
 
@@ -15,7 +16,7 @@ keymap("o", "<C-;>", "<C-[>", opts)
 keymap("n", "<C-;>", "<C-[>", opts)
 
 if os.getenv("TMUX") then
-	keymap("t", "<C-w>", "<C-\\><C-n><C-w>", { noremap = false, silent = true })
+	keymap("t", "<C-w>", "<C-\\><C-n><C-w>", { remap = true, silent = true })
 else
 	--using my favored tmux prefix
 	keymap("n", "<C-a>", "<C-w>", { remap = true, silent = true })
