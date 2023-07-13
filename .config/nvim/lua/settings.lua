@@ -59,6 +59,7 @@ set.listchars = set.listchars + 'tab:   '
 set.listchars = set.listchars + 'nbsp:⣿'
 set.number = true
 set.relativenumber = true
+set.equalalways = false
 
 set.foldmethod = "expr"
 set.foldexpr = "nvim_treesitter#foldexpr()"

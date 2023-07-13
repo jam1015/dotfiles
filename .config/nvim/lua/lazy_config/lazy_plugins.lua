@@ -26,9 +26,12 @@ return {
 			require("plugin_configs.vim-gutentags")
 		end
 	},
+
 	{
-		"dhananjaylatkar/cscope_maps.nvim",
-		event = "VeryLazy",
+		"dhananjaylatkar/cscope_maps.nvim", --"jam1015/cscope_maps.nvim",
+		--"jam1015/cscope_maps.nvim",
+		--enabled = false,
+		--event = "VeryLazy",
 		dependencies = {
 			"folke/which-key.nvim", -- optional [for whichkey hints]
 			"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
@@ -36,10 +39,13 @@ return {
 			"nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
 			"dhananjaylatkar/cscope_maps.nvim",
 		},
-
-		opts = require("plugin_configs.cscope_maps")
+		opts = require("plugin_configs.cscope_maps.options")
 		,
+		config = function()
+			require("plugin_configs.cscope_maps.maps")
+		end
 	},
+
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = function() require("plugin_configs.indent-blankline") end,
@@ -114,7 +120,6 @@ return {
 		dependencies = "kovisoft/paredit",
 		config = function()
 			require("plugin_configs.vlime")
-			vim.cmd([[]])
 		end
 	},
 	{ 'famiu/bufdelete.nvim',     config = function() require("plugin_keymaps").pluginKeymaps("bufdelete.nvim") end },
@@ -139,6 +144,7 @@ return {
 
 	({
 		"lervag/vimtex",
+		enabled = true,
 		--event = "VeryLazy",
 
 		config = function()
@@ -254,13 +260,14 @@ return {
 
 		event = "VeryLazy",
 
-		--commit = "be110f9814a45788d10537fd59b3c76d956bb7ad",
+		commit = "5c9a78b97f7f4301473ea5e37501b5b1d4da167b",
 		config = function() require("plugin_configs.flit") end
 	},
+
 	({
 		"ggandor/leap.nvim",
 		event = "VeryLazy",
-		--commit ="9cc411481db859059ad66c8ad844b9386dc62d5c",
+		commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
 		config = function()
 			require('plugin_configs.leap')
 		end,
@@ -466,5 +473,5 @@ return {
 		init = function() vim.opt.termguicolors = true end,
 		config = function() require('colorizer').setup() end
 	},
-	"powerman/vim-plugin-AnsiEsc"
+	"powerman/vim-plugin-AnsiEsc",
 }

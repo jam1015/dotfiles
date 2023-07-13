@@ -1,12 +1,12 @@
 local status_ok, _ = pcall(require, "lspconfig")
 
 if not status_ok then
-  return
+	return
 end
 
-local servers = { "tsserver", "vimls", "clangd", "r_language_server", "texlab", "pyright", "jsonls", "cssls", "eslint",
-	"emmet_ls", "html", "lua_ls", "julials" }
-
+local servers = { "tsserver", "vimls", "clangd", "r_language_server", "pyright", "jsonls", "cssls", "eslint",
+	"emmet_ls", "texlab", "html", "lua_ls", "julials" }
+--"texlab",
 --local mason_settings_ok, settings_obj = pcall(require,"plugin_configs.lsp.lsp_handlerss")
 local settings_obj = require("plugin_configs.lsp.mason_settings")
 --if not mason_settings_ok then
@@ -30,7 +30,7 @@ if not lspconfig_status_ok then
 	return
 end
 --local cmp_lsp = require("cmp-nvim-lsp")
-local handlers_obj = require( "plugin_configs.lsp.lsp_handlers")
+local handlers_obj = require("plugin_configs.lsp.lsp_handlers")
 
 handlers_obj.buf_keymaps()
 --
@@ -42,15 +42,15 @@ for _, server in ipairs(servers) do
 		flags = handlers_obj.lsp_flags
 	}
 
---
---	--vim.notify("trying to set up " .. server )
+	--
+	--	--vim.notify("trying to set up " .. server )
 	local require_ok, conf_opts = pcall(require, "plugin_configs.lsp.settings." .. server)
 	if require_ok then
 		opts = vim.tbl_deep_extend("force", conf_opts, opts)
 	else
 	end
---
---	--vim.notify("setting up " .. server )
+	--
+	--	--vim.notify("setting up " .. server )
 	lspconfig[server].setup(opts)
 end
 
