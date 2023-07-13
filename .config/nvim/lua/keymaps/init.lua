@@ -1,5 +1,5 @@
 local wk = require("which-key")
-local opts = { noremap = true, silent = true }
+local opts = { remap = false, silent = true }
 local keymap = vim.keymap.set
 
 keymap("n", "<Space>", "", opts)
@@ -7,7 +7,8 @@ vim.g.mapleader = " "
 vim.g.mapllocaleader = "\\"
 
 -- defining functions that can be used to make command line abbreviations elsewhere
-keymap("n", "<leader>ll", "<cmd>nohlsearch<CR>", opts)
+wk.register({ ["<leader>ll"] = { "<cmd>nohlsearch<CR>", "nohighlight" } ,["<leader>l"] = { name = "aesthetics"}})
+
 
 keymap("i", "<C-;>", "<C-[>", opts)
 keymap("x", "<C-;>", "<C-[>", opts)
@@ -21,15 +22,16 @@ else
 	--using my favored tmux prefix
 	keymap("n", "<C-a>", "<C-w>", { remap = true, silent = true })
 	keymap("t", "<C-a>", "<C-w>", { remap = true, silent = true })
-	keymap("t", "<C-w>",  "<C-\\><C-n><C-w>", { remap = true, silent = true })
+	keymap("t", "<C-w>", "<C-\\><C-n><C-w>", { remap = true, silent = true })
 end
 
 keymap("t", "<C-;>", "<C-\\><C-n>", opts)
 keymap("i", "<C-j>", "<C-x><C-o>", { remap = false, silent = true }) -- activate omni completeion
 --keymap("n", "<C-w>s", "<cmd>colorscheme blue<cr>", opts)
 
-keymap("n", "<leader>km", ":redir! > nvim_keys.txt<CR>:silent map<CR>:redir END<CR>:edit nvim_keys.txt<CR>:g/^<Plug>\\|^<SNR>/d<CR>"
-, opts) --output keymap
+keymap("n", "<leader>km",
+	":redir! > nvim_keys.txt<CR>:silent map<CR>:redir END<CR>:edit nvim_keys.txt<CR>:g/^<Plug>\\|^<SNR>/d<CR>"
+	, opts) --output keymap
 
 --https://neovim.io/doc/user/map.html#user-commands
 --https://neovim.io/doc/user/api.html and search nvim_create_user_command
@@ -40,7 +42,7 @@ local function term_vsplit()
 	if vim.bo.buftype == 'terminal' then
 		local pid = vim.fn.jobpid(vim.b.terminal_job_id)
 		local pwd
-		if vim.fn.has('win32') == 1 then    -- For Windows
+		if vim.fn.has('win32') == 1 then -- For Windows
 			vim.cmd('vsplit | term')
 		elseif vim.fn.has('unix') == 1 then -- For Unix/Linux
 			pwd = vim.fn.systemlist('readlink /proc/' .. pid .. '/cwd')[1]
@@ -56,10 +58,9 @@ end
 --
 local function term_hsplit()
 	if vim.bo.buftype == 'terminal' then
-
 		local pid = vim.fn.jobpid(vim.b.terminal_job_id)
 		local pwd
-		if vim.fn.has('win32') == 1 then    -- For Windows
+		if vim.fn.has('win32') == 1 then -- For Windows
 			vim.cmd('split | term')
 		elseif vim.fn.has('unix') == 1 then -- For Unix/Linux
 			pwd = vim.fn.systemlist('readlink /proc/' .. pid .. '/cwd')[1]

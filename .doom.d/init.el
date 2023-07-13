@@ -194,7 +194,6 @@
        (default +bindings +smartparens))
 
 ;;(setq doom-font (font-spec :family "ComicCode" :size 15 :weight normal))
-(set-frame-font "Input Mono-100" t t)
 
 (after! sly
   (setq inferior-lisp-program "/usr/bin/sbcl")
