@@ -7,6 +7,7 @@ vim.g.mapleader = " "
 vim.g.mapllocaleader = "\\"
 
 -- defining functions that can be used to make command line abbreviations elsewhere
+--
 wk.register({ ["<leader>ll"] = { "<cmd>nohlsearch<CR>", "nohighlight" } ,["<leader>l"] = { name = "aesthetics"}})
 
 
