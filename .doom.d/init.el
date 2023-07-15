@@ -57,7 +57,7 @@
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
        ;;(format +onsave)  ; automated prettiness
-       god               ; run Emacs commands without modifier keys
+       ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
        ;;multiple-cursors  ; editing in many places at once
        ;;objed             ; text object editing for the innocent
@@ -117,7 +117,7 @@
        ;;beancount         ; mind the GAAP
        ;;(cc +lsp)         ; C > C++ == 1
        ;;clojure           ; java with a lisp
-       (common-lisp +sly)       ; if you've seen one lisp, you've seen them all
+       (common-lisp)       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
@@ -195,8 +195,8 @@
 
 ;;(setq doom-font (font-spec :family "ComicCode" :size 15 :weight normal))
 
-(after! sly
-  (setq inferior-lisp-program "/usr/bin/clisp")
-)
+;;(after! sly
+;;  (setq inferior-lisp-program "/usr/bin/clisp")
+;;)
 
  
