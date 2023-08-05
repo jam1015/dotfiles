@@ -22,6 +22,8 @@ runtime config/directionalhelp.vim
 
 call plugpac#Begin()
 
+Pack 'vim/colorschemes'
+
 Pack 'moll/vim-bbye'
 runtime config/vim-bbye.vim
 
