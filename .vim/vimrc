@@ -20,7 +20,7 @@ runtime config/directionalhelp.vim
 "" plugin keymaps file:
 "" ~/.vim/config/pluginkeymaps.vim
 
-call plugpac#begin()
+call plugpac#Begin()
 
 Pack 'moll/vim-bbye'
 runtime config/vim-bbye.vim
@@ -83,5 +83,5 @@ Pack 'k-takata/minpac', {'type': 'opt'}
 "Pack 'tpope/vim-sensible', { 'rev': 'v1.2' }
 
 "
-call plugpac#end()
+call plugpac#End()
 ""
