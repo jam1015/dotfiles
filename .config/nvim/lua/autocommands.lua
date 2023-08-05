@@ -15,7 +15,7 @@ api.nvim_create_autocmd("TextYankPost", {
 local function set_concurrent() --lets you edit multiple files at the same time
 	vim.v.swapchoice = "e"
 	require("notify")("concurrent editing", vim.log.levels.WARN,
-	{ timeout = 1000, animate = false, render = "minimal" })
+		{ timeout = 1000, animate = false, render = "minimal" })
 end
 
 local concurrent = api.nvim_create_augroup("concurrent_editing", { clear = true })
@@ -56,6 +56,9 @@ api.nvim_create_autocmd("TermOpen", {
 --api.nvim_create_autocmd("TermClose", {
 --	pattern = "*",
 --	command = "if !v:event.status | exe 'Bdelete! '..expand('<abuf>') | endif",
+--
+--	--command =
+--	--"if !v:event.status && len(getbufline(expand('<abuf>'), 1, '$')) == 0 | exe 'bdelete! '..expand('<abuf>') | endif",
 --	--command = "if !v:event.status | exe 'Bdelete!' | endif",
 --	group = term_autocmds
 --})
@@ -63,11 +66,11 @@ api.nvim_create_autocmd("TermOpen", {
 
 
 --local function set_status_line()
-	--	vim.opt_local.statusline = "%{bufname()}%=id: %{b:terminal_job_id} pid: %{b:terminal_job_pid}"
-	--end
-	--
-	--api.nvim_create_autocmd("TermOpen", {
-		--	pattern = "*",
-		--	callback = set_status_line,
-		--	group = term_autocmds,
-		--})
+--	vim.opt_local.statusline = "%{bufname()}%=id: %{b:terminal_job_id} pid: %{b:terminal_job_pid}"
+--end
+--
+--api.nvim_create_autocmd("TermOpen", {
+--	pattern = "*",
+--	callback = set_status_line,
+--	group = term_autocmds,
+--})

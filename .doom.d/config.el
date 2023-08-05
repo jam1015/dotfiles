@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Jordan Mandel"
-      user-mail-address "jordan.mandel@live.com")
+	  user-mail-address "jordan.mandel@live.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -22,7 +22,7 @@
 ;; accept. For example:
 ;;
 (setq doom-font (font-spec :family "Fira Code" :size 9 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Fira Code" :size 8))
+	  doom-variable-pitch-font (font-spec :family "Fira Code" :size 8))
 ;;
 
 ;;(setq doom-font (font-spec :family "Menlo" :size 6))
@@ -77,3 +77,9 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+
+
+(with-eval-after-load 'evil-maps
+  (define-key evil-normal-state-map (kbd "C-a") 'evil-window-map)
+  (define-key evil-normal-state-map (kbd "C-w") nil))

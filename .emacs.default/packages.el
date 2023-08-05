@@ -1,5 +1,3 @@
-(setq straight-repository-branch "develop")
-(defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
       (bootstrap-version 6))
@@ -76,7 +74,6 @@
 (setq god-exempt-predicates nil)
 (require 'god-mode)
 ;;(god-mode)
-
 (use-package undo-tree)
 
 ( use-package evil
@@ -106,17 +103,59 @@
   ;;(evil-emacs-state)
   )
 
-
 (straight-use-package 'evil-collection)
 (use-package evil-collection
   :straight t
   :after evil
-  :ensure t
   :config
   (evil-collection-init)
   )
 
+;;(load-file "~/.emacs.default/evil-god_config.el")
 
+(straight-use-package 'emmet-mode)
+(straight-use-package 'web-mode)
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-enable-auto-closing t)
+  (setq web-mode-enable-auto-quoting t)
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+  ;; Enable Emmet mode: https://github.com/smihica/emmet-mode
+  (emmet-mode)
+  )
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+;; Associate jsx files with web-mode
+(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+;; Enable JSX in emmet-mode
+(with-eval-after-load 'emmet-mode
+  (add-to-list 'emmet-jsx-major-modes 'web-mode))
 
-(load-file "~/.emacs.default/evil-god_config.el")
+(straight-use-package 'which-key)
+(which-key-mode 1)
+(setq which-key-allow-evil-operators t)
+(setq which-key-show-operator-state-maps t)
+(which-key-enable-god-mode-support)
 
+(use-package
+ evil-god-state 
+:straight `(evil-god-state
+ :type git 
+ :repo "file://~/Documents/evil-god-state"
+    :local-repo  "~/Documents/evil-god-state"
+    :branch "persistent"
+	)
+:config
+
+(progn
+(require 'evil-god-state)
+(global-set-key (kbd "C-,") 'evil-toggle)
+;;(evil-define-key 'god global-map "C-," 'evil-toggle)
+(evil-define-key 'god global-map [escape] 'evil-god-state-bail)
+
+(setq evil-god-state-cursor '(box "Red"))
+(setq evil-insert-state-cursor '(bar "Red"))
+(setq evil-visual-state-cursor '(hollow "Red"))
+(setq evil-normal-state-cursor '(box "White"))
+)
+ )

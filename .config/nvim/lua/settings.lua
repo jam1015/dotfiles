@@ -86,24 +86,24 @@ local function setup_tmux_clipboard()
 	if tmux then
 		-- Configure Neovim to use tmux's clipboard
 		vim.cmd([[
-	 let g:clipboard = {
-		  \   'name': 'myClipboard',
-		  \   'copy': {
-		  \      '+': ['tmux', 'load-buffer', '-w', '-'],
-		  \      '*': ['tmux', 'load-buffer', '-w', '-'],
-		  \    },
-		  \   'paste': {
-		  \      '+': ['tmux', 'save-buffer', '-'],
-		  \      '*': ['tmux', 'save-buffer', '-'],
-		  \   },
-		  \   'cache_enabled': 0,
-		  \ }
+		let g:clipboard = {
+			\   'name': 'myClipboard',
+			\   'copy': {
+				\      '+': ['tmux', 'load-buffer', '-w', '-'],
+				\      '*': ['tmux', 'load-buffer', '-w', '-'],
+				\    },
+				\   'paste': {
+					\      '+': ['tmux', 'save-buffer', '-'],
+					\      '*': ['tmux', 'save-buffer', '-'],
+					\   },
+					\   'cache_enabled': 0,
+					\ }
 
-	]])
-	else
-		return true
-	end
-end
+					]])
+				else
+					return true
+				end
+			end
 
--- Call the function to set up the clipboard
-setup_tmux_clipboard()
+			-- Call the function to set up the clipboard
+			setup_tmux_clipboard()

@@ -27,11 +27,26 @@ return {
 		end
 	},
 
+	({ "ibhagwan/fzf-lua", event = "VeryLazy", config = function() require('plugin_configs.fzf-lua') end }),
+
+	({
+		"nvim-telescope/telescope.nvim", event = "VeryLazy",
+		dependencies = { "nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build =
+				'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+			},
+			"nvim-telescope/telescope-file-browser.nvim" },
+		config = function()
+			require("plugin_configs.telescope")
+		end
+	}),
 	{
 		"dhananjaylatkar/cscope_maps.nvim", --"jam1015/cscope_maps.nvim",
 		--"jam1015/cscope_maps.nvim",
 		--enabled = false,
-		--event = "VeryLazy",
+		event = "VeryLazy",
 		dependencies = {
 			"folke/which-key.nvim", -- optional [for whichkey hints]
 			"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
@@ -232,21 +247,7 @@ return {
 	},
 	{ "equalsraf/neovim-gui-shim" },
 
-	({ "ibhagwan/fzf-lua", event = "VeryLazy" }),
 
-	({
-		"nvim-telescope/telescope.nvim", event = "VeryLazy",
-		dependencies = { "nvim-lua/plenary.nvim",
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				build =
-				'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-			},
-			"nvim-telescope/telescope-file-browser.nvim" },
-		config = function()
-			require("plugin_configs.telescope")
-		end
-	}),
 
 	({
 		"phaazon/hop.nvim", event = "VeryLazy",
@@ -260,14 +261,14 @@ return {
 
 		event = "VeryLazy",
 
-		commit = "5c9a78b97f7f4301473ea5e37501b5b1d4da167b",
+		--commit = "5c9a78b97f7f4301473ea5e37501b5b1d4da167b",
 		config = function() require("plugin_configs.flit") end
 	},
 
 	({
 		"ggandor/leap.nvim",
 		event = "VeryLazy",
-		commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
+		--commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
 		config = function()
 			require('plugin_configs.leap')
 		end,

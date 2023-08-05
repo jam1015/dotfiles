@@ -49,5 +49,5 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 ;; ~/.doom.d/packages.el
-
+(package! undo-tree)
 (package! god-mode)

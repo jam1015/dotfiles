@@ -89,6 +89,10 @@ telescope.setup {
 		-- builtin picker
 		find_files = {
 			--theme = "ivy"
+			hidden = true,
+		},
+		buffers = {
+			theme = "ivy"
 		}
 	},
 	extensions = {
@@ -133,8 +137,8 @@ telescope.setup {
 }
 
 telescope.load_extension('file_browser')
+telescope.load_extension('fzf')
 
 require("plugin_keymaps").pluginKeymaps("telescope", "config")
 
---telescope.load_extension('fzf')
 --telescope.load_extension('arecibo')

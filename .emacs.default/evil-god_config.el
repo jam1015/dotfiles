@@ -31,7 +31,7 @@
 
 ;; Configure keybindings
 
-(define-key global-map (kbd "C-,") 'my-toggle-evil-emacs-and-god-mode)
+;;(define-key global-map (kbd "C-,") 'my-toggle-evil-emacs-and-god-mode)
 
 (define-key god-local-mode-map (kbd ".") #'repeat)
 

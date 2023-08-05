@@ -136,16 +136,24 @@ function M.pluginKeymaps(plugin, setup_type)
 		vim.api.nvim_create_user_command('CmpEnable', cmp_enable, { bar = true })
 		vim.api.nvim_create_user_command('CmpDisable', cmp_disable, { bar = true })
 	elseif plugin == "telescope" then
-		keymap("n", "<leader>tf",
-			"<cmd>lua require'telescope.builtin'.find_files()<cr>",
+		local builtin = require('telescope.builtin')
+		--		vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+		--		vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+		--		vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+		--		vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+		--
+		keymap("n", "<leader>th",
+			"<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>",
 			opts)
 
-		keymap("n", "<leader>tg", "<cmd>Telescope live_grep<cr>", opts)
+		keymap("n", "<leader>tf",
+			"<cmd>lua require('telescope.builtin').find_files({hidden = false})<CR>", opts)
 
-		keymap("n", "<leader>bb", "<cmd>Telescope buffers<cr>", opts)
-		keymap("n", "<leader>bb",
-			"<cmd>lua require'telescope.builtin'.buffers(require('telescope.themes').get_ivy())<cr>", opts)
-		--:lua require'telescope.builtin'.buffers(equire('telescope.themes').get_cursor()<cr>)
+		keymap("n", "<leader>tg", builtin.live_grep, opts)
+		keymap("n", "<leader>ts", builtin.grep_string, opts)
+		keymap("v", "<leader>ts", builtin.grep_string, opts)
+
+		keymap("n", "<leader>bb", builtin.buffers, opts)
 	elseif plugin == "mason" then
 		return {
 			toggle_package_expand = "<CR>",
