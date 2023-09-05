@@ -5,6 +5,17 @@ function M.pluginKeymaps(plugin, setup_type)
 	local keymap = vim.keymap.set
 	local opts = { remap = false, silent = true }
 	local wk = require("which-key")
+	local wk_opts =     {
+      mode = "n", -- NORMAL mode
+      -- prefix: use "<leader>f" for example for mapping everything related to finding files
+      -- the prefix is prepended to every mapping part of `mappings`
+      prefix = "",
+      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+      silent = true, -- use `silent` when creating keymaps
+      noremap = true, -- use `noremap` when creating keymaps
+      nowait = false, -- use `nowait` when creating keymaps
+      expr = false, -- use `expr` when creating keymaps
+    }
 	if plugin == "vim-unimpaired" then
 		vim.cmd([[
 					function! s:ArgNext(...)
@@ -56,8 +67,11 @@ function M.pluginKeymaps(plugin, setup_type)
 
 
 	elseif plugin == "nvim-treehopper" then
+			wk.register({ ["<leader>h"] = { name = "Hopping" } ,
+["<leader>ht"] = {"<cmd> lua require('tsht').move({ side = 'start' })<cr>" ,"Treehopper Move"},
+		})
 		vim.cmd([[
-	omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
+		omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
 	xnoremap <silent> m :lua require('tsht').nodes()<CR>
 		    ]])
 	elseif plugin == "vim-slime" then
@@ -142,18 +156,27 @@ function M.pluginKeymaps(plugin, setup_type)
 		--		vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 		--		vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 		--
-		keymap("n", "<leader>th",
-			"<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>",
-			opts)
+--		keymap("n", "<leader>th",
+--			"<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>",
+--			opts)
+--		keymap("n", "<leader>tf",
+--			"<cmd>lua require('telescope.builtin').find_files({hidden = false})<CR>", opts)
+--		keymap("v", "<leader>ts", builtin.grep_string, opts)
+--		keymap("n", "<leader>bb", builtin.buffers, opts)
+--		keymap("n", "<leader>tg", builtin.live_grep, opts)
+--		keymap("n", "<leader>ts", builtin.grep_string, opts)
 
-		keymap("n", "<leader>tf",
-			"<cmd>lua require('telescope.builtin').find_files({hidden = false})<CR>", opts)
-
-		keymap("n", "<leader>tg", builtin.live_grep, opts)
-		keymap("n", "<leader>ts", builtin.grep_string, opts)
-		keymap("v", "<leader>ts", builtin.grep_string, opts)
-
-		keymap("n", "<leader>bb", builtin.buffers, opts)
+    wk.register({
+      ["<leader>t"] = {name = "+telescope/terminals"},
+      ["<leader>tf"] = {"<cmd>lua require('telescope.builtin').find_files({hidden = true}) <cr>", "Find Files"},
+      ["<leader>th"] = {"<cmd>lua require('telescope.builtin').find_files({hidden = false}) <cr>", "Find Hidden Files"},
+      ["<leader>tg"] = {"<cmd>lua require('telescope.builtin').live_grep() <cr>", "Live Grep"},
+      ["<leader>ts"] = {"<cmd>lua require('telescope.builtin').grep_string() <cr>", "Grep String"},
+      ["<leader>tb"] = {"<cmd>lua require('telescope.builtin').buffers() <cr>", "Buffers"},
+    })
+    wk.register({
+      ["<leader>ts"] = {"<cmd>lua require('telescope.builtin').grep_string() <cr>", "Grep String"},
+    },{mode = "v"})
 	elseif plugin == "mason" then
 		return {
 			toggle_package_expand = "<CR>",

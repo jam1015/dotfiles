@@ -1,4 +1,3 @@
-local wk = require("which-key")
 local opts = { remap = false, silent = true }
 local keymap = vim.keymap.set
 
@@ -8,7 +7,8 @@ vim.g.mapllocaleader = "\\"
 
 -- defining functions that can be used to make command line abbreviations elsewhere
 --
-wk.register({ ["<leader>ll"] = { "<cmd>nohlsearch<CR>", "nohighlight" } ,["<leader>l"] = { name = "aesthetics"}})
+
+
 
 
 keymap("i", "<C-;>", "<C-[>", opts)
@@ -56,7 +56,7 @@ local function term_vsplit()
 		vim.cmd('vsplit')
 	end
 end
---
+
 local function term_hsplit()
 	if vim.bo.buftype == 'terminal' then
 		local pid = vim.fn.jobpid(vim.b.terminal_job_id)
@@ -86,9 +86,6 @@ keymap("t", "<C-w>v", term_vsplit, opts)
 
 keymap("t", "<C-o>", "<C-\\><C-o>", { remap = false, silent = true }) --issue single terminal command
 keymap("t", "<localleader><Esc>", "<C-\\><C-N>", opts)
-keymap("n", "<leader>tt", "<cmd>terminal<cr>i", opts)
-keymap("n", "<leader>tv", "<C-w>v<cmd>terminal<cr>i", opts)
-keymap("n", "<leader>ts", "<C-w>s<cmd>terminal<cr>i", opts)
 
 
 keymap("i", "<C-r>", "<C-r><C-p>", opts) --helpw sith pasting from insert moce
@@ -138,12 +135,25 @@ inoremap <C-U> <C-G>u<C-U>
 ""force visual motion
 "nnoremap dj dvj
 "nnoremap dk dvk
-"nnoremap 0 ^
-"nnoremap ^ 0
+
 ""nnoremap $ g$
-""nnoremap g$ $
 ""nnoremap 0 g0
-""nnoremap g0 0
 ""nnoremap ^ g^
-""nnoremap g^ ^
+""nnoremap ^ g^
+""nnoremap ^ g^
+
+
+let g:toggle_mappings = 1
+
+function! ToggleMappings()
+  let g:toggle_mappings = !g:toggle_mappings
+endfunction
+
+nnoremap <expr> $ g:toggle_mappings ? 'g$' : '$'
+nnoremap <expr> 0 g:toggle_mappings ? 'g0' : '0'
+nnoremap <expr> ^ g:toggle_mappings ? 'g^' : '^'
+
+command! ToggleMyMappings call ToggleMappings()
+
+
 ]])

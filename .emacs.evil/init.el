@@ -6,17 +6,17 @@
 (when (< emacs-major-version 24)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
-;;(package-refresh-contents)
+(package-refresh-contents)
 
 
 ;; Download Evil
 (unless (package-installed-p 'evil)
   (package-install 'evil))
-;(unless (package-installed-p 'god-mode)
-;  (package-install 'god-mode))
+(unless (package-installed-p 'god-mode)
+  (package-install 'god-mode))
 ;
-;(unless (package-installed-p 'evil-god-state)
-;  (package-install 'evil-god-state))
+(unless (package-installed-p 'evil-god-state)
+  (package-install 'evil-god-state))
 
 
 ;; Enable Evil
@@ -34,4 +34,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
 (global-set-key (kbd "C-,") 'evil-execute-in-god-state)

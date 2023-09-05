@@ -61,7 +61,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 #  redshift-gtk -l 40.44:-79.99 -t 6500:3000:
 #fi
 
-xrandr --setprovideroutputsource modesetting NVIDIA-0
+#xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
 
 

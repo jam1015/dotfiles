@@ -7,10 +7,6 @@ api.nvim_create_autocmd("TextYankPost", {
 	group = aesthetics,
 })
 
-
-
-
-
 -- concurrency ----------------------------
 local function set_concurrent() --lets you edit multiple files at the same time
 	vim.v.swapchoice = "e"
@@ -24,10 +20,12 @@ api.nvim_create_autocmd("SwapExists", {
 	group = concurrent,
 })
 
+-- to check if we want to reload the file
 vim.api.nvim_create_autocmd({ "FileChangedShellPost", "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
 	command = "if mode() != 'c' &&  expand('%') !=# '[Command Line]' | checktime | endif",
 	pattern = { "*" },
 })
+
 
 
 vim.cmd([[

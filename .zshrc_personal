@@ -3,6 +3,7 @@ export PATH="$PATH:/home/jordan/bin"
 
 # ``````````Vim configuration things`````
 export vimrc="$HOME/.config/nvim/init.lua"
+export zshrc="$HOME/.zshrc_personal"
 alias vi='nvim'
 alias ivi='nvim --cmd "let g:unception_disable=1"'
 alias ptpython='ptpython --vi --dark-bg'
@@ -16,6 +17,7 @@ alias glog="git log --all --graph --decorate --oneline"
 
 export BROWSER="/usr/bin/firefox-developer-edition"
 export VISUAL=/usr/bin/nvim #use nvim as default editor
+export EDITOR="nvim"
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
 export NVIM_SWAP="$HOME/.local/state/nvim/swap"
@@ -41,11 +43,16 @@ HISTFILE=~/.zhistory
 bindkey "^R" history-incremental-pattern-search-backward
 
 # setting some useful environment variables
-export todo="$HOME/Documents/diaries/to_do.md"
-export diaries="$HOME/Documents/diaries/diaries.md"
+
 export tododir="$HOME/Documents/diaries/"
-export thoughts="$HOME/Documents/diaries/thoughts.md"
-export memories="$HOME/Documents/diaries/memories.md"
+export diaries_thoughts="$HOME/Documents/diaries/diaries_thoughts.md"
+export diaries_todo="$HOME/Documents/diaries/to_do_short.md"
+export diaries_plans="$HOME/Documents/diaries/to_do_long.md"
+export diaries_memories="$HOME/Documents/diaries/diaries_memories.md"
+export diaries_musings="$HOME/Documents/diaries/thoughts_unstructured.md"
+export diaries_affirmations="$HOME/Documents/diaries/affirmations.md"
+export diaries_dreams="$HOME/Documents/diaries/diaries_dreams.md"
+export diaries_events="$HOME/Documents/diaries/diaries_events.md"
 
 ############ making custom prompt #################
 # perform parameter expansion/command substitution in prompt definition
@@ -74,6 +81,7 @@ PS1='%B%F{magenta}%M:%3~ ${vim_mode}%f%b '
 fi
 
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
+alias glog='git log --oneline --all --graph --decorate'
 
 setopt noauto_pushd
 setopt completealiases

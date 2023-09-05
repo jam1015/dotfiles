@@ -11,6 +11,7 @@ set shiftwidth=4 "how much indentation from >
 set softtabstop=4 "lets us delete by tabs when expandtab is on
 set tabstop=4
 let g:python_recommended_style=0
+let g:vim_json_conceal=0
 set hidden
 set ruler
 set noexpandtab
