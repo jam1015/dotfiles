@@ -4,7 +4,7 @@ set mouse=a
 " Set Editor Font
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
-    GuiFont IBM\ Plex\ Mono:h10
+    GuiFont! Comic\ Code:h8
 endif
 
 " Disable GUI Tabline

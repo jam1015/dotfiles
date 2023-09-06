@@ -1,5 +1,3 @@
-(setq straight-repository-branch "develop")
-(defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
       (bootstrap-version 6))
@@ -76,7 +74,6 @@
 (setq god-exempt-predicates nil)
 (require 'god-mode)
 ;;(god-mode)
-
 (use-package undo-tree)
 
 ( use-package evil
@@ -106,83 +103,59 @@
   ;;(evil-emacs-state)
   )
 
-
 (straight-use-package 'evil-collection)
 (use-package evil-collection
   :straight t
   :after evil
-  :ensure t
   :config
   (evil-collection-init)
   )
 
+;;(load-file "~/.emacs.default/evil-god_config.el")
 
-
-
-;; Define a function to toggle evil/emacs state and god-mode
-(defun my-toggle-evil-emacs-and-god-mode ()
-  "Toggle between evil and emacs state, then toggle god-mode."
-  (interactive)
-  (cond
-   
-   ( (eq evil-state 'insert) 
-     (god-mode-all))
-   ;; (insert, on) -> (emacs, off)
-   ;;((and (eq evil-state 'insert) (bound-and-true-p god-local-mode))
-    ;;(evil-insert-state)
-    ;;(god-mode-all)
-    ;;)
-   ;;;; (insert, off) -> (emacs, off)
-   ;;((and (eq evil-state 'insert) (not (bound-and-true-p god-local-mode)))
-    ;;(evil-insert-state)
-    ;;)
-   ;; (normal+ , on) -> (emacs, on)
-   ((and (not (or (eq evil-state 'insert) (eq evil-state 'emacs))) (bound-and-true-p god-local-mode))
-    (evil-insert-state)
-    )
-   ;; (normal+ , off) -> (emacs, on)
-   ((and (not (or (eq evil-state 'insert) (eq evil-state 'emacs))) (not (bound-and-true-p god-local-mode)))
-    (evil-insert-state)
-    (god-mode-all))
-   (t (god-mode-all))
-
-   )
+(straight-use-package 'emmet-mode)
+(straight-use-package 'web-mode)
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-enable-auto-closing t)
+  (setq web-mode-enable-auto-quoting t)
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+  ;; Enable Emmet mode: https://github.com/smihica/emmet-mode
+  (emmet-mode)
   )
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+;; Associate jsx files with web-mode
+(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+;; Enable JSX in emmet-mode
+(with-eval-after-load 'emmet-mode
+  (add-to-list 'emmet-jsx-major-modes 'web-mode))
 
-;; Configure keybindings
+(straight-use-package 'which-key)
+(which-key-mode 1)
+(setq which-key-allow-evil-operators t)
+(setq which-key-show-operator-state-maps t)
+(which-key-enable-god-mode-support)
 
-(define-key global-map (kbd "C-,") 'my-toggle-evil-emacs-and-god-mode)
+(use-package
+ evil-god-state 
+:straight `(evil-god-state
+ :type git 
+ :repo "file://~/Documents/evil-god-state"
+    :local-repo  "~/Documents/evil-god-state"
+    :branch "persistent"
+	)
+:config
 
-(define-key god-local-mode-map (kbd ".") #'repeat)
+(progn
+(require 'evil-god-state)
+(global-set-key (kbd "C-,") 'evil-toggle)
+;;(evil-define-key 'god global-map "C-," 'evil-toggle)
+(evil-define-key 'god global-map [escape] 'evil-god-state-bail)
 
-(defun disable-god-mode-in-evil-normal-state ()
-  "Disable `god-mode' when entering `evil-normal-state'."
-  (when (and (bound-and-true-p god-global-mode)
-	     (eq evil-state 'normal))
-    (god-mode-all)))
-
-(add-hook 'evil-normal-state-entry-hook 'disable-god-mode-in-evil-normal-state)
-
-
-
-
-(require 'evil)
-
-
-(defun update-cursor-according-to-mode ()
-  (cond
-   ((and (eq evil-state 'insert) god-local-mode)
-    (setq cursor-type 'box)
-    (set-cursor-color "red"))
-   ((or (eq evil-state 'insert) god-local-mode)
-    (setq cursor-type 'bar)
-    (set-cursor-color "red"))
-   (t
-    (setq cursor-type 'box)
-    (set-cursor-color "black"))))
-
-(add-hook 'post-command-hook 'update-cursor-according-to-mode)
-(add-hook 'buffer-list-update-hook 'update-cursor-according-to-mode)
-
-(custom-set-faces
- '(god-mode-lighter ((t (:inherit error)))))
+(setq evil-god-state-cursor '(box "Red"))
+(setq evil-insert-state-cursor '(bar "Red"))
+(setq evil-visual-state-cursor '(hollow "Red"))
+(setq evil-normal-state-cursor '(box "White"))
+)
+ )

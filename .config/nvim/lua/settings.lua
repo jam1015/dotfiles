@@ -59,6 +59,7 @@ set.listchars = set.listchars + 'tab:   '
 set.listchars = set.listchars + 'nbsp:⣿'
 set.number = true
 set.relativenumber = true
+set.equalalways = false
 
 set.foldmethod = "expr"
 set.foldexpr = "nvim_treesitter#foldexpr()"
@@ -85,24 +86,24 @@ local function setup_tmux_clipboard()
 	if tmux then
 		-- Configure Neovim to use tmux's clipboard
 		vim.cmd([[
-	 let g:clipboard = {
-		  \   'name': 'myClipboard',
-		  \   'copy': {
-		  \      '+': ['tmux', 'load-buffer', '-w', '-'],
-		  \      '*': ['tmux', 'load-buffer', '-w', '-'],
-		  \    },
-		  \   'paste': {
-		  \      '+': ['tmux', 'save-buffer', '-'],
-		  \      '*': ['tmux', 'save-buffer', '-'],
-		  \   },
-		  \   'cache_enabled': 0,
-		  \ }
+		let g:clipboard = {
+			\   'name': 'myClipboard',
+			\   'copy': {
+				\      '+': ['tmux', 'load-buffer', '-w', '-'],
+				\      '*': ['tmux', 'load-buffer', '-w', '-'],
+				\    },
+				\   'paste': {
+					\      '+': ['tmux', 'save-buffer', '-'],
+					\      '*': ['tmux', 'save-buffer', '-'],
+					\   },
+					\   'cache_enabled': 0,
+					\ }
 
-	]])
-	else
-		return true
-	end
-end
+					]])
+				else
+					return true
+				end
+			end
 
--- Call the function to set up the clipboard
-setup_tmux_clipboard()
+			-- Call the function to set up the clipboard
+			setup_tmux_clipboard()

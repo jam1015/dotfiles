@@ -31,16 +31,21 @@ vim.api.nvim_create_autocmd({ "FileChangedShellPost", "BufEnter", "CursorHold", 
 
 
 vim.cmd([[
- autocmd FileChangedShellPost *
-        \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
-		]])
+autocmd FileChangedShellPost *
+\ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+]])
 -- terminal related --------------------
 local term_autocmds = api.nvim_create_augroup("term_autocomds", { clear = true })
 
 
 local function no_term_num()
-	vim.opt_local.number = false
-	vim.opt_local.relativenumber = false
+	local bufnr = vim.api.nvim_get_current_buf()
+	local buftype = vim.api.nvim_buf_get_option(bufnr, 'buftype')
+	if buftype == 'terminal' then
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+	else
+	end
 end
 
 api.nvim_create_autocmd("TermOpen", {
@@ -48,13 +53,15 @@ api.nvim_create_autocmd("TermOpen", {
 	group = term_autocmds,
 })
 
-
-api.nvim_create_autocmd("TermClose", {
-	pattern = "*",
-	--command = "if !v:event.status | exe 'Bdelete! '..expand('<abuf>') | endif",
-	command = "if !v:event.status | exe 'Bdelete!' | endif",
-	group = term_autocmds
-})
+--api.nvim_create_autocmd("TermClose", {
+--	pattern = "*",
+--	command = "if !v:event.status | exe 'Bdelete! '..expand('<abuf>') | endif",
+--
+--	--command =
+--	--"if !v:event.status && len(getbufline(expand('<abuf>'), 1, '$')) == 0 | exe 'bdelete! '..expand('<abuf>') | endif",
+--	--command = "if !v:event.status | exe 'Bdelete!' | endif",
+--	group = term_autocmds
+--})
 
 
 

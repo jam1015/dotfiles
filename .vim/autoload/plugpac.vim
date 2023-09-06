@@ -1,18 +1,46 @@
-" Author:  Ben Yip (yebenmy@protonmail.com)
-" URL:     https://github.com/bennyyip/plugpac.vim
-" Version: 1.0
-" License: MIT
-" ---------------------------------------------------------------------
-let s:TYPE = {
-      \   'string':  type(''),
-      \   'list':    type([]),
-      \   'dict':    type({}),
-      \   'funcref': type(function('call'))
-      \ }
+vim9script
+# Author:  Ben Yip (yebenmy@gmail.com)
+# URL:     http//github.com/bennyyip/plugpac.vim
+# Version: 2.2
+#
+# Copyright (c) 2023 Ben Yip
+#
+# MIT License
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following condition
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+# ---------------------------------------------------------------------
 
-function! plugpac#begin()
-  let s:lazy = { 'ft': {}, 'map': {}, 'cmd': {} }
-  let s:repos = {}
+var lazy = { 'ft': {}, 'map': {}, 'cmd': {}, 'delay': {} }
+var repos = {}
+
+var cached_installed_plugins = {}
+
+var minpac_init_opts = {}
+
+const plugpac_plugin_conf_path = get(g:, 'plugpac_plugin_conf_path', '')
+
+export def Begin(opts: dict<any> = {})
+  lazy = { 'ft': {}, 'map': {}, 'cmd': {}, 'delay': {} }
+  repos = {}
+
+  minpac_init_opts = opts
 
   if exists('#PlugPac')
     augroup PlugPac
@@ -21,23 +49,24 @@ function! plugpac#begin()
     augroup! PlugPac
   endif
 
-  call s:setup_command()
-endfunction
+  call Setup_command()
+enddef
 
-function! plugpac#end()
-  for [l:name, l:cmds] in items(s:lazy.cmd)
-    for l:cmd in l:cmds
-      execute printf("command! -nargs=* -range -bang %s packadd %s | call s:do_cmd('%s', \"<bang>\", <line1>, <line2>, <q-args>)", l:cmd, l:name, l:cmd)
+
+export def End()
+  for [name, cmds] in items(lazy.cmd)
+    for cmd in cmds
+      execute printf("command! -nargs=* -range -bang %s call DoCmd('%s', '%s', \"<bang>\", <line1>, <line2>, <q-args>)", cmd, name, cmd)
     endfor
   endfor
 
-  for [l:name, l:maps] in items(s:lazy.map)
-    for l:map in l:maps
-      for [l:mode, l:map_prefix, l:key_prefix] in
-            \ [['i', '<C-O>', ''], ['n', '', ''], ['v', '', 'gv'], ['o', '', '']]
+  for [name, maps] in items(lazy.map)
+    for map_ in maps
+      for [mode_, map_prefix, key_prefix] in
+        [['i', '<C-\><C-O>', ''], ['n', '', ''], ['v', '', 'gv'], ['o', '', '']]
         execute printf(
-        \ '%snoremap <silent> %s %s:<C-U>packadd %s<bar>call <SID>do_map(%s, %s, "%s")<CR>',
-        \  l:mode, l:map, l:map_prefix, l:name, string(l:map), l:mode != 'i', l:key_prefix)
+          '%snoremap <silent> %s %s:<C-U>call <SID>DoMap("%s", %s, v:%s, "%s")<CR>',
+          mode_, map_, map_prefix, name, string(map_), mode_ != 'i', key_prefix)
       endfor
     endfor
   endfor
@@ -45,138 +74,279 @@ function! plugpac#end()
   runtime! OPT ftdetect/**/*.vim
   runtime! OPT after/ftdetect/**/*.vim
 
-  for [name, fts] in items(s:lazy.ft)
-    augroup PlugPac
-      execute printf('autocmd FileType %s packadd %s', fts, name)
-    augroup END
+  for [name, fts] in items(lazy.ft)
+    autocmd_add([{
+      event: 'FileType',
+      pattern: fts,
+      group: 'PlugPac',
+      once: true,
+      cmd: $'packadd {name}',
+    }])
   endfor
-endfunction
 
-" https://github.com/k-takata/minpac/issues/28
-function! plugpac#add(repo, ...) abort
-  let l:opts = get(a:000, 0, {})
-  let l:name = substitute(a:repo, '^.*/', '', '')
+  for name in keys(lazy.delay)
+    autocmd_add([{
+      event: 'VimEnter',
+      pattern: '*',
+      group: 'PlugPac',
+      once: true,
+      cmd: $'timer_start(lazy.delay["{name}"].delay, (_) => lazy.delay["{name}"].load())',
+    }])
+  endfor
 
-  " `for` and `on` implies optional
-  if has_key(l:opts, 'for') || has_key(l:opts, 'on')
-    let l:opts['type'] = 'opt'
+  timer_start(0, (timer) => {
+    for [k, v] in items(lazy.delay)
+      if !v.done
+        return
+      endif
+    endfor
+    doautocmd VimEnter
+    timer_stop(timer)
+  }, { repeat: -1 })
+
+enddef
+
+export def Add(repo: string, opts: dict<any> = {})
+  const name = substitute(repo, '^.*/', '', '')
+  const default_type = get(g:, 'plugpac_default_type', 'start')
+  var type = get(opts, 'type', default_type)
+  if opts->has_key('delay')
+    type = 'delay'
   endif
 
-  if has_key(l:opts, 'for')
-    let l:ft = type(l:opts.for) == s:TYPE.list ? join(l:opts.for, ',') : l:opts.for
-    let s:lazy.ft[l:name] = l:ft
+  # `for` and `on` implies optional and override delay
+  if has_key(opts, 'for') || has_key(opts, 'on')
+    type = 'opt'
+    opts['type'] = 'opt'
   endif
 
-  if has_key(l:opts, 'on')
-    for l:cmd in s:to_a(l:opts.on)
-      if l:cmd =~? '^<Plug>.\+'
-        if empty(mapcheck(l:cmd)) && empty(mapcheck(l:cmd, 'i'))
-          call s:assoc(s:lazy.map, l:name, l:cmd)
+  if type == 'delay'
+    opts['type'] = 'opt'
+  endif
+
+  repos[repo] = opts
+
+  if !HasPlugin(name)
+    timer_start(20, (_) => {
+      echow $'Missing plugin `{repo}`. Run :PackInstall to install it.'
+    })
+    return
+  endif
+
+  if has_key(opts, 'for')
+    const ft = type(opts.for) == v:t_list ? join(opts.for, ',') : opts.for
+    lazy.ft[name] = ft
+  endif
+
+  if has_key(opts, 'on')
+    for cmd in ToArray(opts.on)
+      if cmd =~? '^<Plug>.\+'
+        if empty(mapcheck(cmd)) && empty(mapcheck(cmd, 'i'))
+          call Assoc(lazy.map, name, cmd)
         endif
       elseif cmd =~# '^[A-Z]'
-        if exists(":".l:cmd) != 2
-          call s:assoc(s:lazy.cmd, l:name, l:cmd)
+        if exists(":" .. cmd) != 2
+          call Assoc(lazy.cmd, name, cmd)
         endif
       else
-        call s:err('Invalid `on` option: '.cmd.
-              \ '. Should start with an uppercase letter or `<Plug>`.')
+        call Err('Invalid `on` option: ' .. cmd ..
+          '. Should start with an uppercase letter or `<Plug>`.')
       endif
     endfor
   endif
 
-  let s:repos[a:repo] = l:opts
-endfunction
+  const pre_rc_path = GetRcPath(name, true)
+  const rc_path = GetRcPath(name, false)
+  if filereadable(pre_rc_path)
+    execute $'source {pre_rc_path}'
+  endif
+  if filereadable(rc_path)
+    if type == 'delay' || type == 'start'
+      lazy.delay[name] = {
+        delay: opts->get('delay', 0),
+        done: false,
+        load: () => {
+          execute $'packadd {name}'
+          execute $'source {rc_path}'
+          lazy.delay[name].done = true
+        }
+      }
+    endif
+  endif
 
-function! plugpac#has_plugin(plugin)
-  return index(s:get_plugin_list(), a:plugin) != -1
-endfunction
+  if type == 'delay' && !has_key(lazy.delay, name)
+    lazy.delay[name] = {
+      delay: opts->get('delay', 0),
+      done: false,
+      load: () => {
+        execute $'packadd {name}'
+        lazy.delay[name].done = true
+      }
+    }
+  endif
+enddef
 
-function! s:assoc(dict, key, val)
-  let a:dict[a:key] = add(get(a:dict, a:key, []), a:val)
-endfunction
+def GetRcPath(plugin: string, is_pre: bool = false): string
+  if plugpac_plugin_conf_path != '' && HasPlugin(plugin)
+    const prefix = is_pre ? 'pre-' : ''
+    return expand(plugpac_plugin_conf_path .. '/' .. prefix .. substitute(plugin, '\.n\?vim$', '', '') .. '.vim')
+  else
+    return ''
+  endif
+enddef
 
-function! s:to_a(v)
-  return type(a:v) == s:TYPE.list ? a:v : [a:v]
-endfunction
+export def HasPlugin(plugin: string): bool
+  return has_key(GetInstalledPlugins(), plugin)
+enddef
 
-function! s:err(msg)
+def Assoc(dict: dict<any>, key: string, val: any)
+  dict[key] = add(get(dict, key, []), val)
+enddef
+
+def ToArray(v: any): list<string>
+  return type(v) == v:t_list ? v : [v]
+enddef
+
+def Err(msg: any)
   echohl ErrorMsg
-  echom '[plugpac] '.a:msg
+  echom '[plugpac] ' .. msg
   echohl None
-endfunction
+enddef
 
-function! s:do_cmd(cmd, bang, start, end, args)
-  exec printf('%s%s%s %s', (a:start == a:end ? '' : (a:start.','.a:end)), a:cmd, a:bang, a:args)
-endfunction
 
-function! s:do_map(map, with_prefix, prefix)
-  let extra = ''
+def DoCmd(plugin: string, cmd: any, bang: any, start_: number, end_: number, args_: any)
+  execute $'delcommand {cmd}'
+  execute $'packadd {plugin}'
+
+  const rc_path = GetRcPath(plugin)
+  if filereadable(rc_path)
+    execute $'source {rc_path}'
+  endif
+
+  execute printf('%s%s%s %s', (start_ == end_ ? '' : (start_ .. ',' .. end_)), cmd, bang, args_)
+enddef
+
+def DoMap(plugin: string, map_: any, with_prefix: any, prefix_: any)
+  execute $'unmap {map_}'
+  execute $'iunmap {map_}'
+  execute $'packadd {plugin}'
+
+  const rc_path = GetRcPath(plugin)
+  if filereadable(rc_path)
+    execute $'source {rc_path}'
+  endif
+
+  var extra = ''
   while 1
-    let c = getchar(0)
+    const c = getchar(0)
     if c == 0
       break
     endif
-    let l:extra .= nr2char(c)
+    extra = extra .. nr2char(c)
   endwhile
 
-  if a:with_prefix
-    let prefix = v:count ? v:count : ''
-    let prefix .= '"'.v:register.a:prefix
+
+  if with_prefix
+    var prefix = v:count ? v:count : ''
+    prefix ..= '"' .. v:register .. prefix_
     if mode(1) == 'no'
       if v:operator == 'c'
-        let prefix = "\<esc>" . prefix
+        prefix = "\<esc>" .. prefix
       endif
-      let prefix .= v:operator
+      prefix ..= v:operator
     endif
-    call feedkeys(prefix, 'n')
+    feedkeys(prefix, 'n')
   endif
-  call feedkeys(substitute(a:map, '^<Plug>', "\<Plug>", '') . extra)
-endfunction
+  feedkeys(substitute(map_, '^<Plug>', "\<Plug>", '') .. extra)
+enddef
 
-function! s:setup_command()
-  command! -bar -nargs=+ Pack call plugpac#add(<args>)
+def Setup_command()
+  command! -bar -nargs=+ Pack call Add(<args>)
+  command! -bar PackInstall call Init() |
+        \ call minpac#update(
+        \ minpac#pluglist
+        \ ->copy()
+        \ ->filter((k, v) => !isdirectory(v.dir .. '/.git'))
+        \ ->keys()
+        \ )
+  command! -bar PackUpdate  call Init() | call minpac#update('', {'do': 'call minpac#status()'})
+  command! -bar PackClean   call Init() | call minpac#clean()
+  command! -bar PackStatus  call Init() | call minpac#status()
+  command! -bar -nargs=1 -complete=customlist,StartPluginComplete PackDisable call DisableEnablePlugin(<q-args>, v:true)
+  command! -bar -nargs=1 -complete=customlist,OptPluginComplete PackEnable call DisableEnablePlugin(<q-args>, v:false)
+enddef
 
-  command! -bar PackInstall call s:init_minpac() | call minpac#update(keys(filter(copy(minpac#pluglist), {-> !isdirectory(v:val.dir . '/.git')})))
-  command! -bar PackUpdate  call s:init_minpac() | call minpac#update('', {'do': 'call minpac#status()'})
-  command! -bar PackClean   call s:init_minpac() | call minpac#clean()
-  command! -bar PackStatus  call s:init_minpac() | call minpac#status()
-  command! -bar -nargs=1 -complete=customlist,s:plugin_dir_complete PackDisable call s:disable_plugin(<q-args>)
-endfunction
-
-function! s:init_minpac()
+export def Init()
   packadd minpac
 
-  call minpac#init()
-  for [repo, opts] in items(s:repos)
+  minpac#init(minpac_init_opts)
+  for [repo, opts] in items(repos)
     call minpac#add(repo, opts)
   endfor
-endfunction
 
-function s:disable_plugin(plugin_dir, ...) abort
-  if !isdirectory(a:plugin_dir)
-    s:err(a:plugin_dir . 'not exists.')
+  cached_installed_plugins = {}
+enddef
+
+def DisableEnablePlugin(plugin: string, disable: bool)
+  var src_ = 'opt'
+  var dst = 'start'
+
+  if disable
+    src_ = 'start'
+    dst = 'opt'
+  endif
+
+  const plugins = GetInstalledPlugins(src_)
+  if !has_key(plugins, plugin)
+    Err(plugin .. ' does not exists.')
     return
   endif
-  let l:dst_dir = substitute(a:plugin_dir, '/start/\ze[^/]\+$', '/opt/', '')
-  if isdirectory(l:dst_dir)
-    s:err(l:dst_dir . 'exists.')
+
+  const plugin_dir = plugins[plugin]
+
+  const dst_dir = substitute(plugin_dir, '[/\\]' .. src_ .. '[/\\]\ze[^/]\+$', '/' .. dst .. '/', '')
+  if isdirectory(dst_dir)
+    Err(dst_dir .. 'exists.')
     return
   endif
-  call rename(a:plugin_dir, l:dst_dir)
-endfunction
+  call rename(plugin_dir, dst_dir)
+enddef
 
-function! s:plugin_dir_complete(A, L, P)
-  let l:pat = 'pack/minpac/start/*'
-  let l:plugin_list = filter(globpath(&packpath, l:pat, 0, 1), {-> isdirectory(v:val)})
-  return filter(l:plugin_list, 'v:val =~ "'. a:A .'"')
-endfunction
-
-function! s:get_plugin_list()
-  if exists("s:plugin_list")
-    return s:plugin_list
+def Matchfuzzy(l: list<string>, str: string): list<string>
+  if str == ''
+    return l
+  else
+    return matchfuzzy(l, str)
   endif
-  let l:pat = 'pack/*/*/*'
-  let s:plugin_list = filter(globpath(&packpath, l:pat, 0, 1), {-> isdirectory(v:val)})
-  call map(s:plugin_list, {-> substitute(v:val, '^.*[/\\]', '', '')})
-  return s:plugin_list
-endfunction
+enddef
+
+def StartPluginComplete(A: string, L: string, P: number): list<string>
+  const plugins = GetInstalledPlugins('start')->keys()
+  return plugins->Matchfuzzy(A)
+enddef
+
+def OptPluginComplete(A: string, L: string, P: number): list<string>
+  const plugins = GetInstalledPlugins('opt')->keys()
+  return plugins->Matchfuzzy(A)
+enddef
+
+def GetInstalledPlugins(type_: string = 'all'): dict<string>
+  if has_key(cached_installed_plugins, type_)
+    return cached_installed_plugins[type_]
+  endif
+
+  var t = type_
+  if type_ == 'all'
+    t = '*'
+  endif
+
+  const pat = 'pack/minpac/' .. t .. '/*'
+  final plugin_paths = filter(globpath(&packpath, pat, 0, 1), (k, v) => isdirectory(v))
+  final result = {}
+  for p in plugin_paths
+    result[substitute(p, '^.*[/\\]', '', '')] = p
+  endfor
+
+  cached_installed_plugins[type_] = result
+  return result
+enddef
