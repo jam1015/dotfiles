@@ -14,6 +14,10 @@ alias ls='ls -G'
 alias pd='pandoc'
 alias glog="git log --all --graph --decorate --oneline"
 
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    alias vim="mvim -v"
+fi
+
 export BROWSER="/usr/bin/firefox-developer-edition"
 export VISUAL=/usr/local/bin/nvim
 export VIMCONFIG=~/.config/nvim #vim configuration directory
