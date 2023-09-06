@@ -415,17 +415,24 @@ return {
 	{
 		-- does the same thing as vim-yankstack
 		"vim-scripts/YankRing.vim",
-		enabled = function()
-			return os.getenv("DISPLAY")
-		end,
+		enabled = false,
+--		enabled = function()
+--			return os.getenv("DISPLAY")
+--		end,
 		event = "BufWinEnter"
 	},
 	{
 		-- does the same thing as YankRing
 		'maxbrunsfeld/vim-yankstack',
-		enabled = false,
+
+	enabled = false,
+
+	--		enabled = function()
+	--			return os.getenv("DISPLAY")
+	--		end,
+
 		init = function()
-			require("plugin_configs.vim-yankstack")
+			--require("plugin_configs.vim-yankstack")
 		end,
 		config = function()
 			require("plugin_configs.vim-yankstack.config")
@@ -435,9 +442,12 @@ return {
 
 	{
 		"gbprod/yanky.nvim",
-		enabled = function()
-			return not os.getenv("DISPLAY")
-		end,
+		enabled = true,
+
+		--enabled = function()
+		--	return not os.getenv("DISPLAY")
+		--end,
+		
 		--event = {"TextYankPost","CursorMoved","CursorHold"},
 		event = "VeryLazy", --{"CursorMoved", "VeryLazy","VimEnter" },
 		--branch = "autocmd",

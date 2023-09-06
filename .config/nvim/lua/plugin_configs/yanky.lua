@@ -42,7 +42,7 @@ end
 require("yanky").setup({
 	ring = {
 		history_length = 100,
-		storage = "sqlite",
+		storage = "shada",
 		sync_with_numbered_registers = true,
 		cancel_event = "update",
 	},
@@ -63,8 +63,8 @@ require("yanky").setup({
 		sync_with_ring = in_ssh(),
 	},
 	highlight = {
-		on_put = false,
-		on_yank = false,
+		on_put = true,
+		on_yank = true,
 		timer = 200,
 		--	yank_higroup = "Visual",
 		--	put_higroup = "Visual",
@@ -73,5 +73,7 @@ require("yanky").setup({
 		enabled = true,
 	},
 })
+vim.api.nvim_set_hl(0, "YankyPut", { link = "Visual" })
+vim.api.nvim_set_hl(0, "YankyYanked", { link = "Visual" })
 
 require("plugin_keymaps").pluginKeymaps("yanky.nvim")
