@@ -3,23 +3,16 @@ runtime config/mysettings.vim
 runtime config/mappings.vim
 runtime config/autocmds.vim
 runtime config/directionalhelp.vim
-
-
 "
 "
 "
 "
-
 ""git clone https://github.com/k-takata/minpac.git \
 ""    ~/.vim/pack/minpac/opt/minpac
 ""curl -fLo ~/.vim/autoload/plugpac.vim --create-dirs \
 ""    https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim
-
-
-
 "" plugin keymaps file:
 "" ~/.vim/config/pluginkeymaps.vim
-
 call plugpac#Begin()
 
 Pack 'vim/colorschemes'
