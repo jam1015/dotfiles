@@ -12,6 +12,7 @@ alias cb=clipboard
 alias ll='ls -lG'
 alias ls='ls -G'
 alias pd='pandoc'
+alias glog="git log --all --graph --decorate --oneline"
 
 export BROWSER="/usr/bin/firefox-developer-edition"
 export VISUAL=/usr/bin/nvim #use nvim as default editor
@@ -82,7 +83,9 @@ function cheat ()
     curl cheat.sh/$1
 }
 
-echo ".zshrc sourced"
+
+export FZF_DEFAULT_COMMAND='fd --type f --color=never'
+export FZF_ALT_C_COMMAND='fd --type d . --color=never'
 
 function precmd {
 	OLDPWD=$PWD
@@ -91,4 +94,4 @@ function precmd {
     export PWD
 }
 
-
+echo ".zshrc sourced"

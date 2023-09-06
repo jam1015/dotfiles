@@ -2,8 +2,9 @@
 -- function that returns keymaps based on name of plugin supplied
 M = {}
 function M.pluginKeymaps(plugin, setup_type)
-	local keymap = vim.api.nvim_set_keymap
-	local opts = { noremap = true, silent = true }
+	local keymap = vim.keymap.set
+	local opts = { remap = false, silent = true }
+	local wk = require("which-key")
 	if plugin == "vim-unimpaired" then
 		vim.cmd([[
 					function! s:ArgNext(...)
@@ -51,19 +52,22 @@ function M.pluginKeymaps(plugin, setup_type)
 					cnoreabbrev <expr> previous  getcmdtype() == ":" && getcmdline() == "prevous" ? "Aprev" : "previous"
 
 			]])
+	elseif plugin == "cscope_maps" then
+
+
 	elseif plugin == "nvim-treehopper" then
 		vim.cmd([[
 	omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
 	xnoremap <silent> m :lua require('tsht').nodes()<CR>
 		    ]])
 	elseif plugin == "vim-slime" then
-		keymap("n", "gz", "<Plug>SlimeMotionSend", { noremap = false, silent = false })
-		keymap("n", "gzz", "<Plug>SlimeLineSend", { noremap = false, silent = false })
-		keymap("x", "gz", "<Plug>SlimeRegionSend", { noremap = false, silent = false })
+		keymap("n", "gz", "<Plug>SlimeMotionSend", { remap = true, silent = false })
+		keymap("n", "gzz", "<Plug>SlimeLineSend", { remap = true, silent = false })
+		keymap("x", "gz", "<Plug>SlimeRegionSend", { remap = true, silent = false })
 	elseif plugin == "vim-slime-ext-plugins" then
-		keymap("n", "gz", "<Plug>SlimeMotionSend", { noremap = false, silent = false })
-		keymap("n", "gzz", "<Plug>SlimeLineSend", { noremap = false, silent = false })
-		keymap("x", "gz", "<Plug>SlimeRegionSend", { noremap = false, silent = false })
+		keymap("n", "gz", "<Plug>SlimeMotionSend", { remap = true, silent = false })
+		keymap("n", "gzz", "<Plug>SlimeLineSend", { remap = true, silent = false })
+		keymap("x", "gz", "<Plug>SlimeRegionSend", { remap = true, silent = false })
 	elseif plugin == "yanky.nvim" then
 		vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
 		vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
@@ -83,6 +87,7 @@ function M.pluginKeymaps(plugin, setup_type)
 			"<cmd>Telescope yank_history<cr>", opts)
 	elseif plugin == "emmet-vim" then
 		if setup_type == "config" then
+			wk.register({ ["<leader>m"] = { name = "emmet" } })
 			return (function()
 				vim.cmd([[
 					nmap <leader>m,   <plug>(emmet-expand-abbr)
@@ -131,16 +136,24 @@ function M.pluginKeymaps(plugin, setup_type)
 		vim.api.nvim_create_user_command('CmpEnable', cmp_enable, { bar = true })
 		vim.api.nvim_create_user_command('CmpDisable', cmp_disable, { bar = true })
 	elseif plugin == "telescope" then
-		keymap("n", "<leader>tf",
-			"<cmd>lua require'telescope.builtin'.find_files()<cr>",
+		local builtin = require('telescope.builtin')
+		--		vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+		--		vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+		--		vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+		--		vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+		--
+		keymap("n", "<leader>th",
+			"<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>",
 			opts)
 
-		keymap("n", "<leader>tg", "<cmd>Telescope live_grep<cr>", opts)
+		keymap("n", "<leader>tf",
+			"<cmd>lua require('telescope.builtin').find_files({hidden = false})<CR>", opts)
 
-		keymap("n", "<leader>bb", "<cmd>Telescope buffers<cr>", opts)
-		keymap("n", "<leader>bb",
-			"<cmd>lua require'telescope.builtin'.buffers(require('telescope.themes').get_ivy())<cr>", opts)
-		--:lua require'telescope.builtin'.buffers(equire('telescope.themes').get_cursor()<cr>)
+		keymap("n", "<leader>tg", builtin.live_grep, opts)
+		keymap("n", "<leader>ts", builtin.grep_string, opts)
+		keymap("v", "<leader>ts", builtin.grep_string, opts)
+
+		keymap("n", "<leader>bb", builtin.buffers, opts)
 	elseif plugin == "mason" then
 		return {
 			toggle_package_expand = "<CR>",

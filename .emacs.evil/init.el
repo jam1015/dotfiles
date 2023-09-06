@@ -9,15 +9,15 @@
 ;;(package-refresh-contents)
 
 
+;; Download Evil
+(unless (package-installed-p 'evil)
+  (package-install 'evil))
 ;(unless (package-installed-p 'god-mode)
 ;  (package-install 'god-mode))
 ;
 ;(unless (package-installed-p 'evil-god-state)
 ;  (package-install 'evil-god-state))
 
-;; Download Evil
-(unless (package-installed-p 'evil)
-  (package-install 'evil))
 
 ;; Enable Evil
 (require 'evil)
@@ -34,4 +34,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-;(global-set-key (kbd "C-,") 'evil-execute-in-god-state)
+(global-set-key (kbd "C-,") 'evil-execute-in-god-state)

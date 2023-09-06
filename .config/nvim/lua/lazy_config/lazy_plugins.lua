@@ -26,8 +26,26 @@ return {
 			require("plugin_configs.vim-gutentags")
 		end
 	},
+
+	({ "ibhagwan/fzf-lua", event = "VeryLazy", config = function() require('plugin_configs.fzf-lua') end }),
+
+	({
+		"nvim-telescope/telescope.nvim", event = "VeryLazy",
+		dependencies = { "nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build =
+				'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+			},
+			"nvim-telescope/telescope-file-browser.nvim" },
+		config = function()
+			require("plugin_configs.telescope")
+		end
+	}),
 	{
-		"dhananjaylatkar/cscope_maps.nvim",
+		"dhananjaylatkar/cscope_maps.nvim", --"jam1015/cscope_maps.nvim",
+		--"jam1015/cscope_maps.nvim",
+		--enabled = false,
 		event = "VeryLazy",
 		dependencies = {
 			"folke/which-key.nvim", -- optional [for whichkey hints]
@@ -36,10 +54,13 @@ return {
 			"nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
 			"dhananjaylatkar/cscope_maps.nvim",
 		},
-
-		opts = require("plugin_configs.cscope_maps")
+		opts = require("plugin_configs.cscope_maps.options")
 		,
+		config = function()
+			require("plugin_configs.cscope_maps.maps")
+		end
 	},
+
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = function() require("plugin_configs.indent-blankline") end,
@@ -114,7 +135,6 @@ return {
 		dependencies = "kovisoft/paredit",
 		config = function()
 			require("plugin_configs.vlime")
-			vim.cmd([[]])
 		end
 	},
 	{ 'famiu/bufdelete.nvim',     config = function() require("plugin_keymaps").pluginKeymaps("bufdelete.nvim") end },
@@ -139,6 +159,7 @@ return {
 
 	({
 		"lervag/vimtex",
+		enabled = true,
 		--event = "VeryLazy",
 
 		config = function()
@@ -226,21 +247,7 @@ return {
 	},
 	{ "equalsraf/neovim-gui-shim" },
 
-	({ "ibhagwan/fzf-lua", event = "VeryLazy" }),
 
-	({
-		"nvim-telescope/telescope.nvim", event = "VeryLazy",
-		dependencies = { "nvim-lua/plenary.nvim",
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				build =
-				'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-			},
-			"nvim-telescope/telescope-file-browser.nvim" },
-		config = function()
-			require("plugin_configs.telescope")
-		end
-	}),
 
 	({
 		"phaazon/hop.nvim", event = "VeryLazy",
@@ -254,13 +261,14 @@ return {
 
 		event = "VeryLazy",
 
-		--commit = "be110f9814a45788d10537fd59b3c76d956bb7ad",
+		--commit = "5c9a78b97f7f4301473ea5e37501b5b1d4da167b",
 		config = function() require("plugin_configs.flit") end
 	},
+
 	({
 		"ggandor/leap.nvim",
 		event = "VeryLazy",
-		--commit ="9cc411481db859059ad66c8ad844b9386dc62d5c",
+		--commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
 		config = function()
 			require('plugin_configs.leap')
 		end,
@@ -466,5 +474,5 @@ return {
 		init = function() vim.opt.termguicolors = true end,
 		config = function() require('colorizer').setup() end
 	},
-	"powerman/vim-plugin-AnsiEsc"
+	"powerman/vim-plugin-AnsiEsc",
 }
