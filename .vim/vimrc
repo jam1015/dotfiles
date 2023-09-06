@@ -1,7 +1,7 @@
 runtime config/pluginkeymaps.vim
 runtime config/mysettings.vim
-runtime config/mappings.vim 
-runtime config/autocmds.vim 
+runtime config/mappings.vim
+runtime config/autocmds.vim
 runtime config/directionalhelp.vim
 
 
