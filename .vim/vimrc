@@ -39,7 +39,7 @@ Pack 'tpope/vim-surround'
 "Pack 'vim-scripts/YankRing.vim'
 
 Pack 'Yggdroot/indentLine'
-"runtime config/indentline_config.vim
+runtime config/indentline_config.vim
 
 Pack 'machakann/vim-highlightedyank'
 runtime config/vim-highlightedyank.vim
