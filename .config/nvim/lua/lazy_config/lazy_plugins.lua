@@ -7,6 +7,8 @@ local lisp_lazy = function() --also done vi autocmd in the cmp config
 end
 
 return {
+({ "ethanholz/nvim-lastplace",
+		config = function() require("plugin_configs.nvim-lastplace") end }),
 
 	{
 		'willothy/flatten.nvim',
@@ -46,7 +48,7 @@ return {
 			require("plugin_configs.cscope_maps.maps")
 		end
 	},
-
+--
 	({ "ibhagwan/fzf-lua", event = "VeryLazy", config = function() require('plugin_configs.fzf-lua') end }),
 
 	({
@@ -108,9 +110,7 @@ return {
 	},
 	("nvim-lua/plenary.nvim"),
 	("nvim-lua/popup.nvim"),
-	({ "ethanholz/nvim-lastplace",
-		config = function() require("plugin_configs.nvim-lastplace") end }),
-
+	
 	{
 		"airblade/vim-rooter",
 		config = function()
@@ -441,7 +441,7 @@ return {
 	},
 
 	{
-		"gbprod/yanky.nvim",
+		--"gbprod/yanky.nvim",
 		enabled = true,
 
 		--enabled = function()
@@ -449,11 +449,11 @@ return {
 		--end,
 		
 		--event = {"TextYankPost","CursorMoved","CursorHold"},
-		event = "VeryLazy", --{"CursorMoved", "VeryLazy","VimEnter" },
+		--event = "VeryLazy", --{"CursorMoved", "VeryLazy","VimEnter" },
 		--branch = "autocmd",
 		dependencies = { "kkharji/sqlite.lua", },
 
-		--dir = "/home/jordan/Documents/yanky.nvim",
+		dir = "/home/jordan/Documents/yanky.nvim",
 		config = function()
 			require("plugin_configs.yanky")
 		end
