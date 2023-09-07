@@ -21,7 +21,7 @@ set nosmartindent
 set showcmd
 set wildmenu
 set wildmode=longest:full,full
-set clipboard=unnamedplus
+set clipboard=unnamed
 set laststatus=2
 set shortmess=IFw
 
