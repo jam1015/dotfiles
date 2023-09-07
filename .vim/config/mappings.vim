@@ -59,3 +59,16 @@ else
 	nmap <silent> <C-a> <C-w>
 	tmap <C-a> <C-\\><C-o>
 endif
+
+let g:toggle_mappings = 1
+
+function! ToggleMappings()
+  let g:toggle_mappings = !g:toggle_mappings
+endfunction
+
+nnoremap <expr> $ g:toggle_mappings ? 'g$' : '$'
+nnoremap <expr> 0 g:toggle_mappings ? 'g0' : '0'
+nnoremap <expr> ^ g:toggle_mappings ? 'g^' : '^'
+
+command! ToggleMyMappings call ToggleMappings()
+

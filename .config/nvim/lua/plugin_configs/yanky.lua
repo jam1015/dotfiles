@@ -73,5 +73,7 @@ require("yanky").setup({
 		enabled = true,
 	},
 })
+vim.api.nvim_set_hl(0, "YankyPut", { link = "Visual" })
+vim.api.nvim_set_hl(0, "YankyYanked", { link = "Visual" })
 
 require("plugin_keymaps").pluginKeymaps("yanky.nvim")

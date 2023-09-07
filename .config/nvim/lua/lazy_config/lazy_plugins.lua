@@ -7,13 +7,19 @@ local lisp_lazy = function() --also done vi autocmd in the cmp config
 end
 
 return {
-
+({ "ethanholz/nvim-lastplace",
+		config = function() require("plugin_configs.nvim-lastplace") end }),
 
 	{
 		'willothy/flatten.nvim',
+
 		config = true,
 		-- or pass configuration with
-		opts = require("plugin_configs.flatten")
+		--opts = require("plugin_configs.flatten"),
+		opts = require("plugin_configs.flatten"),
+		lazy = false,
+		priority = 1001,
+		commit = "07e9496191653587336b4c8f8cab02e5c34c7c44",
 	},
 
 	{
@@ -27,6 +33,22 @@ return {
 		end
 	},
 
+	{
+		"dhananjaylatkar/cscope_maps.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"folke/which-key.nvim", -- optional [for whichkey hints]
+			"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
+			"ibhagwan/fzf-lua",    -- optional [for picker="fzf-lua"]
+			"nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
+		},
+		opts = require("plugin_configs.cscope_maps.options")
+		,
+		init = function()
+			require("plugin_configs.cscope_maps.maps")
+		end
+	},
+--
 	({ "ibhagwan/fzf-lua", event = "VeryLazy", config = function() require('plugin_configs.fzf-lua') end }),
 
 	({
@@ -42,24 +64,6 @@ return {
 			require("plugin_configs.telescope")
 		end
 	}),
-	{
-		"dhananjaylatkar/cscope_maps.nvim", --"jam1015/cscope_maps.nvim",
-		--"jam1015/cscope_maps.nvim",
-		--enabled = false,
-		event = "VeryLazy",
-		dependencies = {
-			"folke/which-key.nvim", -- optional [for whichkey hints]
-			"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
-			"ibhagwan/fzf-lua",     -- optional [for picker="fzf-lua"]
-			"nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
-			"dhananjaylatkar/cscope_maps.nvim",
-		},
-		opts = require("plugin_configs.cscope_maps.options")
-		,
-		config = function()
-			require("plugin_configs.cscope_maps.maps")
-		end
-	},
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -106,9 +110,7 @@ return {
 	},
 	("nvim-lua/plenary.nvim"),
 	("nvim-lua/popup.nvim"),
-	({ "ethanholz/nvim-lastplace",
-		config = function() require("plugin_configs.nvim-lastplace") end }),
-
+	
 	{
 		"airblade/vim-rooter",
 		config = function()
@@ -181,7 +183,8 @@ return {
 
 
 	({
-		"folke/which-key.nvim", event = "VeryLazy",
+		"folke/which-key.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("plugin_configs.which-key")
 		end,
@@ -277,7 +280,7 @@ return {
 
 	{
 		"andymass/vim-matchup",
-		enabled = true,
+		enabled = false,
 		event = { "BufWinEnter" },
 	},
 	{
@@ -331,6 +334,7 @@ return {
 		tag = 'nightly', -- optional, updated every week. (see issue #1193)
 		config = function() require("plugin_configs.nvim-tree") end
 
+
 	},
 
 
@@ -355,13 +359,22 @@ return {
 		end
 	},
 	--"mfussenegger/nvim-dap",
+	{
+		'echasnovski/mini.completion',
+		version = "*",
+		enabled = false,
+		config = function()
+			require('mini.completion')
+				.setup()
+		end
+	},
 
 	({
 		"hrsh7th/nvim-cmp",
+		enabled = true,
 		cond = function() --also done vi autocmd in the cmp config
 			return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
 		end,
-		enabled = true,
 		lazy = true,
 		event = "VeryLazy",
 		dependencies = {
@@ -402,17 +415,24 @@ return {
 	{
 		-- does the same thing as vim-yankstack
 		"vim-scripts/YankRing.vim",
-		enabled = function()
-			return os.getenv("DISPLAY")
-		end,
+		enabled = false,
+--		enabled = function()
+--			return os.getenv("DISPLAY")
+--		end,
 		event = "BufWinEnter"
 	},
 	{
 		-- does the same thing as YankRing
 		'maxbrunsfeld/vim-yankstack',
-		enabled = false,
+
+	enabled = false,
+
+	--		enabled = function()
+	--			return os.getenv("DISPLAY")
+	--		end,
+
 		init = function()
-			require("plugin_configs.vim-yankstack")
+			--require("plugin_configs.vim-yankstack")
 		end,
 		config = function()
 			require("plugin_configs.vim-yankstack.config")
@@ -421,17 +441,18 @@ return {
 	},
 
 	{
-		"gbprod/yanky.nvim",
-		enabled = function()
-			return not os.getenv("DISPLAY")
-		end,
+		--"gbprod/yanky.nvim",
+		enabled = true,
 
+		--enabled = function()
+		--	return not os.getenv("DISPLAY")
+		--end,
+		
 		--event = {"TextYankPost","CursorMoved","CursorHold"},
-		event = "VeryLazy", --{"CursorMoved", "VeryLazy","VimEnter" },
 		--branch = "autocmd",
 		dependencies = { "kkharji/sqlite.lua", },
 
-		--dir = "/home/jordan/Documents/yanky.nvim",
+		dir = "/home/jordan/Documents/yanky.nvim",
 		config = function()
 			require("plugin_configs.yanky")
 		end

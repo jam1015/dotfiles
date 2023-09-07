@@ -28,7 +28,6 @@ runtime config/vimunimpairedconfig.vim
 
 Pack 'tpope/vim-surround'
 
-
 "Pack 'vim-scripts/YankRing.vim'
 
 Pack 'Yggdroot/indentLine'

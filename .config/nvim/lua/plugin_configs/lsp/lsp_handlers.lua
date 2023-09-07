@@ -1,10 +1,9 @@
 local M = {}
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
-	vim.cmd([[colorscheme delek]])
+if not status_ok and vim.g.debug then
+	--vim.cmd([[colorscheme delek]])
 	vim.notify("Failed to load cmp_nvim_lsp\n")
-	return
 end
 
 M.buf_keymaps = function()
@@ -57,7 +56,10 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true -- need to see what this does
-M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+
+if status_ok then
+	M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+end
 
 M.lsp_flags = {
 	-- Allow using incremental sync for buffer edits
