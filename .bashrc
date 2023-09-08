@@ -165,3 +165,4 @@ PROMPT_COMMAND='PWD=$(pwd)'
 
 
 echo "bashrc sourced"
+. "$HOME/.cargo/env"

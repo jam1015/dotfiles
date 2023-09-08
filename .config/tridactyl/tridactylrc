@@ -1,5 +1,4 @@
-set editorcmd /usr/bin/nvim-qt
-bind ;d hint -V
+set editorcmd /usr/local/bin/neovide
 bind j scrollline 5
 bind k scrollline -5
 

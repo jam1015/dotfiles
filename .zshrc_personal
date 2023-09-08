@@ -1,5 +1,5 @@
-export PATH="$PATH:/home/jordan/.local/bin"
-export PATH="$PATH:/home/jordan/bin"
+export PATH="$PATH:/Users/jordanmandel/.local/bin"
+export PATH="$PATH:/Users/jordanmandel/bin"
 
 # ``````````Vim configuration things`````
 export vimrc="$HOME/.config/nvim/init.lua"
@@ -15,9 +15,21 @@ alias ls='ls -G'
 alias pd='pandoc'
 alias glog="git log --all --graph --decorate --oneline"
 
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    alias vim="mvim -v"
+fi
+
 export BROWSER="/usr/bin/firefox-developer-edition"
-export VISUAL=/usr/bin/nvim #use nvim as default editor
 export EDITOR="nvim"
+
+case "$OSTYPE" in
+    darwin*)    VISUAL="/usr/local/bin/nvim" ;;   # macOS
+    linux*)     VISUAL="/usr/bin/nvim" ;;         # Linux
+esac
+
+export VISUAL
+
+
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
 export NVIM_SWAP="$HOME/.local/state/nvim/swap"

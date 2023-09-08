@@ -45,9 +45,9 @@ runtime config/vim-yankstack.vim
 
 
 " need to install ctags and gnu global
+runtime config/gutentagsconfig.vim
 Pack 'skywind3000/gutentags_plus'
 Pack 'ludovicchabant/vim-gutentags'
-runtime config/gutentagsconfig.vim
 
 
 """" having problems with this plugin

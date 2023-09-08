@@ -63,8 +63,7 @@ return {
 							return "make"
 						elseif os_name == "Linux" then
 							-- Linux specific value
-							return
-							"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+							return "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
 						else
 							return "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
 						end
@@ -460,7 +459,6 @@ return {
 		--end,
 
 		--event = {"TextYankPost","CursorMoved","CursorHold"},
-		--event = "VeryLazy", --{"CursorMoved", "VeryLazy","VimEnter" },
 		--branch = "autocmd",
 		dependencies = { "kkharji/sqlite.lua", },
 
