@@ -1,11 +1,11 @@
 local api = vim.api
 
 -- Highlight on yank
---local aesthetics = api.nvim_create_augroup("aesthetic_settings", { clear = true })
---api.nvim_create_autocmd("TextYankPost", {
---	command = "silent! lua vim.highlight.on_yank({higroup = \"Visual\", timeout = 200})",
---	group = aesthetics,
---})
+local aesthetics = api.nvim_create_augroup("aesthetic_settings", { clear = true })
+api.nvim_create_autocmd("TextYankPost", {
+	command = "silent! lua vim.highlight.on_yank({higroup = \"Visual\", timeout = 200})",
+	group = aesthetics,
+})
 
 -- concurrency ----------------------------
 local function set_concurrent() --lets you edit multiple files at the same time

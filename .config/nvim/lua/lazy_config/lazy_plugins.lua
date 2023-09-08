@@ -39,7 +39,7 @@ return {
 		event = "VeryLazy",
 		dependencies = {
 			"folke/which-key.nvim", -- optional [for whichkey hints]
-			"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
+			--"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
 			"ibhagwan/fzf-lua",     -- optional [for picker="fzf-lua"]
 			"nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
 		},
@@ -423,19 +423,11 @@ return {
 	}),
 
 	{
-		-- does the same thing as vim-yankstack
-		"vim-scripts/YankRing.vim",
-		enabled = false,
-		--		enabled = function()
-		--			return os.getenv("DISPLAY")
-		--		end,
-		event = "BufWinEnter"
-	},
-	{
 		-- does the same thing as YankRing
 		'maxbrunsfeld/vim-yankstack',
+		event = "VeryLazy",
 
-		enabled = false,
+		enabled = true,
 
 		--		enabled = function()
 		--			return os.getenv("DISPLAY")
@@ -450,25 +442,6 @@ return {
 		end
 	},
 
-	{
-		--"gbprod/yanky.nvim",
-		enabled = true,
-
-		--enabled = function()
-		--	return not os.getenv("DISPLAY")
-		--end,
-
-		--event = {"TextYankPost","CursorMoved","CursorHold"},
-		--branch = "autocmd",
-		dependencies = { "kkharji/sqlite.lua", },
-
-		dir = "/home/jordan/Documents/yanky.nvim",
-		config = function()
-			require("plugin_configs.yanky")
-		end
-
-
-	},
 
 	({
 		"jpalardy/vim-slime",
