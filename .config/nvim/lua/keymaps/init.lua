@@ -98,9 +98,6 @@ require("keymaps.directional_help")
 
 vim.cmd([[
 
-
-
-
 " changing size
 if bufwinnr(1)
   map + <C-W>+

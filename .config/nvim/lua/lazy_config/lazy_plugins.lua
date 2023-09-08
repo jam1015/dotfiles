@@ -40,7 +40,7 @@ return {
 		dependencies = {
 			"folke/which-key.nvim", -- optional [for whichkey hints]
 			--"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
-			"ibhagwan/fzf-lua",     -- optional [for picker="fzf-lua"]
+			"ibhagwan/fzf-lua",   -- optional [for picker="fzf-lua"]
 			"nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
 		},
 		opts = require("plugin_configs.cscope_maps.options")
@@ -52,28 +52,31 @@ return {
 	--
 	({ "ibhagwan/fzf-lua", event = "VeryLazy", config = function() require('plugin_configs.fzf-lua') end }),
 
-	({
-		"nvim-telescope/telescope.nvim", event = "VeryLazy",
-		dependencies = { "nvim-lua/plenary.nvim",
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				build = (function()
-						if os_name == "Darwin" then
-							-- macOS specific value
-							return "make"
-						elseif os_name == "Linux" then
-							-- Linux specific value
-							return "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
-						else
-							return "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
-						end
-					end)()
-			},
-			"nvim-telescope/telescope-file-browser.nvim" },
-		config = function()
-			require("plugin_configs.telescope")
-		end
-	}),
+--	({
+--		"nvim-telescope/telescope.nvim",
+--		event = "VeryLazy",
+--		dependencies = { "nvim-lua/plenary.nvim",
+--			{
+--				"nvim-telescope/telescope-fzf-native.nvim",
+--				build = (function()
+--					if os_name == "Darwin" then
+--						-- macOS specific value
+--						return "make"
+--					elseif os_name == "Linux" then
+--						-- Linux specific value
+--						return
+--						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+--					else
+--						return
+--						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+--					end
+--				end)()
+--			},
+--			"nvim-telescope/telescope-file-browser.nvim" },
+--		config = function()
+--			require("plugin_configs.telescope")
+--		end
+--	}),
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -457,6 +460,13 @@ return {
 		end,
 	}),
 
+	{
+		"gbprod/substitute.nvim",
+		config = function()
+			require("plugin_configs.substitute_nvim")
+			require("plugin_keymaps").pluginKeymaps("substitute_nvim")
+		end
+	},
 	({
 		"jam1015/vim-slime-ext-neovim",
 		branch = "status_override",
@@ -471,6 +481,7 @@ return {
 
 		config = function()
 			require("plugin_configs.vim-slime-ext-plugins.config")
+
 		end,
 	}),
 	{
