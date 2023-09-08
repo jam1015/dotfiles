@@ -1,6 +1,7 @@
 local set = vim.opt
 
 vim.cmd([[ highlight Comment cterm=italic gui=italic]])
+vim.g.debug = false
 
 set.bg = "dark"
 local colorscheme = "tokyonight"
@@ -9,7 +10,7 @@ if os.getenv("DISPLAY") then
 	status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 
 	if not status_ok then
-		vim.cmd([[colorscheme blue]])
+		vim.cmd([[colorscheme elflord]])
 	end
 else
 	vim.cmd([[colorscheme elflord]])
@@ -60,6 +61,7 @@ set.listchars = set.listchars + 'nbsp:⣿'
 set.number = true
 set.relativenumber = true
 set.equalalways = false
+set.spelllang = "en_us"
 
 set.foldmethod = "expr"
 set.foldexpr = "nvim_treesitter#foldexpr()"
@@ -72,6 +74,7 @@ if os.getenv("DISPLAY") then
 else
 end
 
+vim.g.vim_json_syntax_conceal = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
@@ -79,6 +82,8 @@ vim.g.c_comment_strings = 1 --can be any value
 set.pumheight = 10
 set.inccommand = 'split'
 set.shada = "'1000,%"
+
+
 
 
 local function setup_tmux_clipboard()

@@ -49,6 +49,7 @@ firenvim
 .config/nvim/lazy-lock.json
 dotfiles
 .vim/.netrwhist
+.emacs.default/straight/build/undo-tree/.gitignore
 .cache/tags
 
 .netrwhist

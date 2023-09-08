@@ -17,7 +17,4 @@ let g:gutentags_cache_dir = expand('~/.cache/tags')
 let g:gutentags_plus_switch = 1
 
 "set statusline+=%{gutentags#statusline()}
-
-
-
-"let g:gutentags_trace = 1
+let g:gutentags_trace = 1
