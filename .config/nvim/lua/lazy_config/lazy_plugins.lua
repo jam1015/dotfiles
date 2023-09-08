@@ -63,13 +63,11 @@ return {
 							return "make"
 						elseif os_name == "Linux" then
 							-- Linux specific value
-							return
-							"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+							return "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
 						else
 							return "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
 						end
 					end)()
-					'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
 			},
 			"nvim-telescope/telescope-file-browser.nvim" },
 		config = function()
