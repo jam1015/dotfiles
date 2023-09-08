@@ -1,3 +1,4 @@
+local os_name = vim.loop.os_uname().sysname
 local lisp_lazy = function() --also done vi autocmd in the cmp config
 	if (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp") then
 		return false
@@ -7,7 +8,7 @@ local lisp_lazy = function() --also done vi autocmd in the cmp config
 end
 
 return {
-({ "ethanholz/nvim-lastplace",
+	({ "ethanholz/nvim-lastplace",
 		config = function() require("plugin_configs.nvim-lastplace") end }),
 
 	{
@@ -39,7 +40,7 @@ return {
 		dependencies = {
 			"folke/which-key.nvim", -- optional [for whichkey hints]
 			"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
-			"ibhagwan/fzf-lua",    -- optional [for picker="fzf-lua"]
+			"ibhagwan/fzf-lua",     -- optional [for picker="fzf-lua"]
 			"nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
 		},
 		opts = require("plugin_configs.cscope_maps.options")
@@ -48,7 +49,7 @@ return {
 			require("plugin_configs.cscope_maps.maps")
 		end
 	},
---
+	--
 	({ "ibhagwan/fzf-lua", event = "VeryLazy", config = function() require('plugin_configs.fzf-lua') end }),
 
 	({
@@ -56,8 +57,19 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim",
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
-				build =
-				'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+				build = (function()
+						if os_name == "Darwin" then
+							-- macOS specific value
+							return "make"
+						elseif os_name == "Linux" then
+							-- Linux specific value
+							return
+							"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+						else
+							return "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+						end
+					end)()
+					'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
 			},
 			"nvim-telescope/telescope-file-browser.nvim" },
 		config = function()
@@ -110,7 +122,7 @@ return {
 	},
 	("nvim-lua/plenary.nvim"),
 	("nvim-lua/popup.nvim"),
-	
+
 	{
 		"airblade/vim-rooter",
 		config = function()
@@ -416,20 +428,20 @@ return {
 		-- does the same thing as vim-yankstack
 		"vim-scripts/YankRing.vim",
 		enabled = false,
---		enabled = function()
---			return os.getenv("DISPLAY")
---		end,
+		--		enabled = function()
+		--			return os.getenv("DISPLAY")
+		--		end,
 		event = "BufWinEnter"
 	},
 	{
 		-- does the same thing as YankRing
 		'maxbrunsfeld/vim-yankstack',
 
-	enabled = false,
+		enabled = false,
 
-	--		enabled = function()
-	--			return os.getenv("DISPLAY")
-	--		end,
+		--		enabled = function()
+		--			return os.getenv("DISPLAY")
+		--		end,
 
 		init = function()
 			--require("plugin_configs.vim-yankstack")
@@ -447,7 +459,7 @@ return {
 		--enabled = function()
 		--	return not os.getenv("DISPLAY")
 		--end,
-		
+
 		--event = {"TextYankPost","CursorMoved","CursorHold"},
 		--branch = "autocmd",
 		dependencies = { "kkharji/sqlite.lua", },
