@@ -25,8 +25,8 @@ return {
 
 	{
 		'dhananjaylatkar/vim-gutentags',
-		dependencies = "dhananjaylatkar/cscope_maps.nvim",
-		event = "VeryLazy",
+		dependencies = {"dhananjaylatkar/cscope_maps.nvim",  "skywind3000/gutentags_plus"},
+		--event = "VeryLazy",
 
 
 		config = function()
@@ -36,7 +36,7 @@ return {
 
 	{
 		"dhananjaylatkar/cscope_maps.nvim",
-		event = "VeryLazy",
+		--event = "VeryLazy",
 		dependencies = {
 			"folke/which-key.nvim", -- optional [for whichkey hints]
 			--"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
@@ -115,12 +115,6 @@ return {
 		config = function() require("plugin_configs.nvim-notify") end,
 	},
 	---
-	{
-		'dstein64/vim-startuptime',
-		enabled = true,
-		event = "VeryLazy",
-		config = function() require("plugin_configs/vim-startuptime") end
-	},
 	("nvim-lua/plenary.nvim"),
 	("nvim-lua/popup.nvim"),
 
