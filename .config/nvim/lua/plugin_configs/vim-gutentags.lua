@@ -5,5 +5,5 @@ vim.g.gutentags_define_advanced_commands = 1
 vim.g.gutentags_cache_dir = vim.fn.expand("~/code/.gutentags")
 vim.g.gutentags_file_list_command = "fd -e c -e h"
 vim.g.gutentags_plus_switch = 1
-vim.g.gutentags_trace = 1
+vim.g.gutentags_trace = 0
 vim.g.gutentags_ctags_extra_args = {'--fields=+niazS', '--extra=+q'}
