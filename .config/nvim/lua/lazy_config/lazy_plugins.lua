@@ -26,8 +26,9 @@ return {
 	{
 		'dhananjaylatkar/vim-gutentags',
 		enabled = false,
-		dependencies = "dhananjaylatkar/cscope_maps.nvim",
 		event = "VeryLazy",
+		dependencies = {"dhananjaylatkar/cscope_maps.nvim",  "skywind3000/gutentags_plus"},
+		--event = "VeryLazy",
 
 
 		config = function()
@@ -37,11 +38,11 @@ return {
 
 	{
 		"dhananjaylatkar/cscope_maps.nvim",
-		event = "VeryLazy",
+		--event = "VeryLazy",
 		dependencies = {
 			"folke/which-key.nvim", -- optional [for whichkey hints]
-			"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
-			"ibhagwan/fzf-lua",     -- optional [for picker="fzf-lua"]
+			--"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
+			"ibhagwan/fzf-lua",   -- optional [for picker="fzf-lua"]
 			"nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
 		},
 		opts = require("plugin_configs.cscope_maps.options")
@@ -53,28 +54,31 @@ return {
 	--
 	({ "ibhagwan/fzf-lua", event = "VeryLazy", config = function() require('plugin_configs.fzf-lua') end }),
 
-	({
-		"nvim-telescope/telescope.nvim", event = "VeryLazy",
-		dependencies = { "nvim-lua/plenary.nvim",
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				build = (function()
-						if os_name == "Darwin" then
-							-- macOS specific value
-							return "make"
-						elseif os_name == "Linux" then
-							-- Linux specific value
-							return "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
-						else
-							return "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
-						end
-					end)()
-			},
-			"nvim-telescope/telescope-file-browser.nvim" },
-		config = function()
-			require("plugin_configs.telescope")
-		end
-	}),
+--	({
+--		"nvim-telescope/telescope.nvim",
+--		event = "VeryLazy",
+--		dependencies = { "nvim-lua/plenary.nvim",
+--			{
+--				"nvim-telescope/telescope-fzf-native.nvim",
+--				build = (function()
+--					if os_name == "Darwin" then
+--						-- macOS specific value
+--						return "make"
+--					elseif os_name == "Linux" then
+--						-- Linux specific value
+--						return
+--						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+--					else
+--						return
+--						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+--					end
+--				end)()
+--			},
+--			"nvim-telescope/telescope-file-browser.nvim" },
+--		config = function()
+--			require("plugin_configs.telescope")
+--		end
+--	}),
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -113,12 +117,6 @@ return {
 		config = function() require("plugin_configs.nvim-notify") end,
 	},
 	---
-	{
-		'dstein64/vim-startuptime',
-		enabled = true,
-		event = "VeryLazy",
-		config = function() require("plugin_configs/vim-startuptime") end
-	},
 	("nvim-lua/plenary.nvim"),
 	("nvim-lua/popup.nvim"),
 
@@ -281,6 +279,7 @@ return {
 
 	({
 		"ggandor/leap.nvim",
+		enabled = false,
 		event = "VeryLazy",
 		--commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
 		config = function()
@@ -424,19 +423,11 @@ return {
 	}),
 
 	{
-		-- does the same thing as vim-yankstack
-		"vim-scripts/YankRing.vim",
-		enabled = false,
-		--		enabled = function()
-		--			return os.getenv("DISPLAY")
-		--		end,
-		event = "BufWinEnter"
-	},
-	{
 		-- does the same thing as YankRing
 		'maxbrunsfeld/vim-yankstack',
+		event = "VeryLazy",
 
-		enabled = false,
+		enabled = true,
 
 		--		enabled = function()
 		--			return os.getenv("DISPLAY")
@@ -451,26 +442,6 @@ return {
 		end
 	},
 
-	{
-		"gbprod/yanky.nvim",
-		enabled = true,
-
-		--enabled = function()
-		--	return not os.getenv("DISPLAY")
-		--end,
-
-		--event = {"TextYankPost","CursorMoved","CursorHold"},
-		--event = "VeryLazy",
-		--branch = "autocmd",
-		dependencies = { "kkharji/sqlite.lua", },
-
-		--dir = "/home/jordan/Documents/yanky.nvim",
-		config = function()
-			require("plugin_configs.yanky")
-		end
-
-
-	},
 
 	({
 		"jpalardy/vim-slime",
@@ -486,6 +457,13 @@ return {
 		end,
 	}),
 
+	{
+		"gbprod/substitute.nvim",
+		config = function()
+			require("plugin_configs.substitute_nvim")
+			require("plugin_keymaps").pluginKeymaps("substitute_nvim")
+		end
+	},
 	({
 		"jam1015/vim-slime-ext-neovim",
 		branch = "status_override",
@@ -500,6 +478,7 @@ return {
 
 		config = function()
 			require("plugin_configs.vim-slime-ext-plugins.config")
+
 		end,
 	}),
 

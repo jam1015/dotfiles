@@ -237,7 +237,7 @@ bar {
 		#status_command i3blocks -c ~/.config/i3blocks/config
 }
 
-exec_always --no-startup-id ~/.screenlayout/dual_monitor.sh
+exec_always --no-startup-id ~/.screenlayout/dual_monitor_again.sh
 
 
 #######################################################################

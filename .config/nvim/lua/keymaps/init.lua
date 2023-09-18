@@ -98,9 +98,6 @@ require("keymaps.directional_help")
 
 vim.cmd([[
 
-
-
-
 " changing size
 if bufwinnr(1)
   map + <C-W>+
@@ -152,6 +149,8 @@ endfunction
 nnoremap <expr> $ g:toggle_mappings ? 'g$' : '$'
 nnoremap <expr> 0 g:toggle_mappings ? 'g0' : '0'
 nnoremap <expr> ^ g:toggle_mappings ? 'g^' : '^'
+nnoremap <expr> j g:toggle_mappings ? 'gj' : 'j'
+nnoremap <expr> k g:toggle_mappings ? 'gk' : 'k'
 
 command! ToggleMyMappings call ToggleMappings()
 
