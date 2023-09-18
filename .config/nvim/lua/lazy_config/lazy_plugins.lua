@@ -25,6 +25,7 @@ return {
 
 	{
 		'dhananjaylatkar/vim-gutentags',
+		enabled = false,
 		dependencies = "dhananjaylatkar/cscope_maps.nvim",
 		event = "VeryLazy",
 
@@ -451,7 +452,7 @@ return {
 	},
 
 	{
-		--"gbprod/yanky.nvim",
+		"gbprod/yanky.nvim",
 		enabled = true,
 
 		--enabled = function()
@@ -459,10 +460,11 @@ return {
 		--end,
 
 		--event = {"TextYankPost","CursorMoved","CursorHold"},
+		--event = "VeryLazy",
 		--branch = "autocmd",
 		dependencies = { "kkharji/sqlite.lua", },
 
-		dir = "/home/jordan/Documents/yanky.nvim",
+		--dir = "/home/jordan/Documents/yanky.nvim",
 		config = function()
 			require("plugin_configs.yanky")
 		end
@@ -500,6 +502,7 @@ return {
 			require("plugin_configs.vim-slime-ext-plugins.config")
 		end,
 	}),
+
 	{
 		"norcalli/nvim-colorizer.lua",
 		enabled = false,
