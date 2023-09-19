@@ -279,7 +279,6 @@ return {
 
 	({
 		"ggandor/leap.nvim",
-		enabled = false,
 		event = "VeryLazy",
 		--commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
 		config = function()
