@@ -34,7 +34,7 @@
 
 
 (use-package evil-god-toggle
-  :straight (:local-repo "~/Documents/evil_god_toggle_container/evil-god-toggle")
+  :straight (:local-repo "evil-god-toggle")
   :config
   (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle t)))
   (global-set-key (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
