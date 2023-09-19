@@ -96,7 +96,7 @@ if empty($DISPLAY)
 colorscheme elflord
 else
 	try
-		colorscheme retrobox
+		colorscheme sorbet
 	catch /^Vim\%((\a\+)\)\=:E/	 " catch all Vim errors
 		colorscheme elflord
 	endtry
