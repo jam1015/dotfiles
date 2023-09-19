@@ -25,6 +25,8 @@ return {
 
 	{
 		'dhananjaylatkar/vim-gutentags',
+		enabled = false,
+		event = "VeryLazy",
 		dependencies = {"dhananjaylatkar/cscope_maps.nvim",  "skywind3000/gutentags_plus"},
 		--event = "VeryLazy",
 
@@ -277,7 +279,6 @@ return {
 
 	({
 		"ggandor/leap.nvim",
-		enabled = false,
 		event = "VeryLazy",
 		--commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
 		config = function()
@@ -479,6 +480,7 @@ return {
 
 		end,
 	}),
+
 	{
 		"norcalli/nvim-colorizer.lua",
 		enabled = false,
