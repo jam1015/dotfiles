@@ -10,6 +10,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
 
 (use-package straight
@@ -33,7 +34,7 @@
 
 
 (use-package evil-god-toggle
-  :straight (:local-repo "evil-god-toggle")
+  :straight (:local-repo "~/Documents/evil_god_toggle_container/evil-god-toggle")
   :config
   (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle t)))
   (global-set-key (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
