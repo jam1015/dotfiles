@@ -22,6 +22,7 @@
   (setq auto-package-update-hide-results t)
   (auto-package-update-maybe))
 
+(straight-use-package 'use-package)
 (straight-use-package 'god-mode)
 
 (use-package evil
