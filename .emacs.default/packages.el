@@ -48,3 +48,4 @@
   (setq evil-insert-state-cursor '(bar "Red"))
   (setq evil-visual-state-cursor '(hollow "Red"))
   (setq evil-normal-state-cursor '(box "White")))
+
