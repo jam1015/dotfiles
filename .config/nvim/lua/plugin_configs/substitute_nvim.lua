@@ -16,7 +16,7 @@ require("substitute").setup({
 			suffix = "",
 		},
 		exchange = {
-			motion = false,
+			motion = true,
 			use_esc_to_cancel = true,
 		},
 	}
