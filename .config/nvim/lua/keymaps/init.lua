@@ -47,9 +47,9 @@ local function term_vsplit()
 			vim.cmd('vsplit | term')
 		elseif vim.fn.has('unix') == 1 then -- For Unix/Linux
 			pwd = vim.fn.systemlist('readlink /proc/' .. pid .. '/cwd')[1]
-			vim.cmd('vsplit | term sh -c \'cd "' .. pwd .. '" && exec $SHELL\'')
-		else -- For MacOS
-			pwd = vim.fn.systemlist('lsof -p ' .. pid .. ' | grep cwd | awk \'{print $NF}\'')[1]
+			if pwd == "" then
+				pwd = vim.fn.systemlist('lsof -p ' .. pid .. ' | grep cwd | awk \'{print $NF}\'')[1]
+			end
 			vim.cmd('vsplit | term sh -c \'cd "' .. pwd .. '" && exec $SHELL\'')
 		end
 	else
@@ -65,9 +65,9 @@ local function term_hsplit()
 			vim.cmd('split | term')
 		elseif vim.fn.has('unix') == 1 then -- For Unix/Linux
 			pwd = vim.fn.systemlist('readlink /proc/' .. pid .. '/cwd')[1]
-			vim.cmd('split | term sh -c \'cd "' .. pwd .. '" && exec $SHELL\'')
-		else -- For MacOS
-			pwd = vim.fn.systemlist('lsof -p ' .. pid .. ' | grep cwd | awk \'{print $NF}\'')[1]
+			if pwd == "" then
+				pwd = vim.fn.systemlist('lsof -p ' .. pid .. ' | grep cwd | awk \'{print $NF}\'')[1]
+			end
 			vim.cmd('split | term sh -c \'cd "' .. pwd .. '" && exec $SHELL\'')
 		end
 	else
