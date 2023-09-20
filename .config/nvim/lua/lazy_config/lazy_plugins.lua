@@ -308,7 +308,7 @@ return {
 
 	({
 		"nvim-treesitter/nvim-treesitter",
-		event = "BufWinEnter",
+		event = "VeryLazy",
 		enabled = true,
 		config = function()
 			require("plugin_configs.nvim-treesitter")
