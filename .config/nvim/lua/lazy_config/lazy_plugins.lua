@@ -38,7 +38,7 @@ return {
 
 	{
 		"dhananjaylatkar/cscope_maps.nvim",
-		--event = "VeryLazy",
+		event = "VeryLazy",
 		dependencies = {
 			"folke/which-key.nvim", -- optional [for whichkey hints]
 			--"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
