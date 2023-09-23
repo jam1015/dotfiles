@@ -38,7 +38,7 @@
   :config
   (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle t)))
   (global-set-key (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
-  (setq god_entry_strategy "default")
+  (setq insert-to-god-cursor-strategy "same")
   (setq persist_visual t)
   (setq persist_visual_to_evil t)
   (setq persist_visual_to_god t)
