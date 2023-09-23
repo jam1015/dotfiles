@@ -8,6 +8,24 @@ local lisp_lazy = function() --also done vi autocmd in the cmp config
 end
 
 return {
+
+	{
+		"ggandor/flit.nvim",
+
+		event = "VeryLazy",
+
+		--commit = "5c9a78b97f7f4301473ea5e37501b5b1d4da167b",
+		config = function() require("plugin_configs.flit") end
+	},
+
+	({
+		"ggandor/leap.nvim",
+		--event = "VeryLazy",
+		--commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
+		config = function()
+			require('plugin_configs.leap')
+		end,
+	}),
 	({ "ethanholz/nvim-lastplace",
 		config = function() require("plugin_configs.nvim-lastplace") end }),
 
@@ -268,23 +286,6 @@ return {
 		end,
 	}),
 
-	{
-		"ggandor/flit.nvim",
-
-		event = "VeryLazy",
-
-		--commit = "5c9a78b97f7f4301473ea5e37501b5b1d4da167b",
-		config = function() require("plugin_configs.flit") end
-	},
-
-	({
-		"ggandor/leap.nvim",
-		event = "VeryLazy",
-		--commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
-		config = function()
-			require('plugin_configs.leap')
-		end,
-	}),
 
 
 	{
