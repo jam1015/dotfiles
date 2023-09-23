@@ -38,7 +38,7 @@ return {
 
 	{
 		"dhananjaylatkar/cscope_maps.nvim",
-		--event = "VeryLazy",
+		event = "VeryLazy",
 		dependencies = {
 			"folke/which-key.nvim", -- optional [for whichkey hints]
 			--"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
@@ -308,7 +308,7 @@ return {
 
 	({
 		"nvim-treesitter/nvim-treesitter",
-		event = "BufWinEnter",
+		event = "VeryLazy",
 		enabled = true,
 		config = function()
 			require("plugin_configs.nvim-treesitter")
