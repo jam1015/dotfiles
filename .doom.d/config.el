@@ -83,3 +83,22 @@
 (with-eval-after-load 'evil-maps
   (define-key evil-normal-state-map (kbd "C-a") 'evil-window-map)
   (define-key evil-normal-state-map (kbd "C-w") nil))
+
+
+
+;; In your ~/.doom.d/config.el or ~/.config/doom/config.el
+
+(after! (evil-god-toggle evil god-mode)
+  (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle t)))
+  (global-set-key (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
+  (setq god_entry_strategy "default")
+  (setq persist_visual t)
+  (setq persist_visual_to_evil t)
+  (setq persist_visual_to_god t)
+  (evil-define-key 'god global-map (kbd "C-;") (lambda () (interactive) (god-toggle t)))
+  (evil-define-key 'god global-map (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
+  (evil-define-key 'god global-map [escape] (lambda () (interactive) (evil-stop-execute-in-god-state nil)))
+  (setq evil-god-state-cursor '(box "Red"))
+  (setq evil-insert-state-cursor '(bar "Red"))
+  (setq evil-visual-state-cursor '(hollow "Red"))
+  (setq evil-normal-state-cursor '(box "White")))

@@ -51,3 +51,9 @@
 ;; ~/.doom.d/packages.el
 (package! undo-tree)
 (package! god-mode)
+
+
+(package! evil-god-toggle :recipe (:local-repo "~/Documents/evil_god_state_container/evil-god-toggle"))
+
+
+
