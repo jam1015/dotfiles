@@ -24,12 +24,11 @@ export BROWSER="/usr/bin/firefox-developer-edition"
 export EDITOR="nvim"
 
 case "$OSTYPE" in
-    darwin*)    VISUAL="/usr/local/bin/nvim" ;;   # macOS
-    linux*)     VISUAL="/usr/bin/nvim" ;;         # Linux
+    darwin*)    VISUAL='/usr/local/bin/nvim  --cmd "let g:flatten_allow_nesting = v:true"' ;;   # macOS
+    linux*)     VISUAL='/usr/bin/nvim --cmd "let g:flatten_allow_nesting = v:true"';;         # Linux
 esac
 
 export VISUAL
-
 
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
