@@ -422,8 +422,9 @@ return {
 
 	{
 		-- does the same thing as YankRing
-		'maxbrunsfeld/vim-yankstack',
+		'jam1015/vim-yankstack',
 		--event = "VeryLazy",
+		dir = "~/Documents/vim-yankstack",
 
 		enabled = true,
 
@@ -432,7 +433,7 @@ return {
 		--		end,
 
 		init = function()
-			--require("plugin_configs.vim-yankstack")
+			require("plugin_configs.vim-yankstack.initi")
 		end,
 		config = function()
 			require("plugin_configs.vim-yankstack.config")
