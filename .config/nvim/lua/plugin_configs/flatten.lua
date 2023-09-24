@@ -30,7 +30,10 @@ return {
 			if vim.g.flatten_allow_nesting == true then
 				return true
 			end
-
+			local filetype = vim.bo.filetype
+			if filetype == "gitcommit" or filetype == "gitrebase" then
+				return true
+			end
 			if vim.env.NVIM ~= nil then
 				return false
 			end

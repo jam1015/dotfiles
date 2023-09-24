@@ -37,7 +37,7 @@ return {
 		--opts = require("plugin_configs.flatten"),
 		opts = require("plugin_configs.flatten"),
 		lazy = false,
-		priority = 1001,
+		--priority = 1001,
 		--commit = "07e9496191653587336b4c8f8cab02e5c34c7c44",
 	},
 

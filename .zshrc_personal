@@ -2,6 +2,7 @@ export PATH="$PATH:/Users/jordanmandel/.local/bin"
 export PATH="$PATH:/Users/jordanmandel/bin"
 
 # ``````````Vim configuration things`````
+
 export vimrc="$HOME/.config/nvim/init.lua"
 export zshrc="$HOME/.zshrc_personal"
 alias vi='nvim'
