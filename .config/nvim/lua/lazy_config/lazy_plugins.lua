@@ -32,13 +32,13 @@ return {
 	{
 		'willothy/flatten.nvim',
 
-		config = true,
+		--config = true,
 		-- or pass configuration with
 		--opts = require("plugin_configs.flatten"),
 		opts = require("plugin_configs.flatten"),
 		lazy = false,
 		priority = 1001,
-		commit = "07e9496191653587336b4c8f8cab02e5c34c7c44",
+		--commit = "07e9496191653587336b4c8f8cab02e5c34c7c44",
 	},
 
 	{
@@ -422,8 +422,9 @@ return {
 
 	{
 		-- does the same thing as YankRing
-		'maxbrunsfeld/vim-yankstack',
+		'jam1015/vim-yankstack',
 		--event = "VeryLazy",
+		dir = "~/Documents/vim-yankstack",
 
 		enabled = true,
 
@@ -432,7 +433,7 @@ return {
 		--		end,
 
 		init = function()
-			--require("plugin_configs.vim-yankstack")
+			require("plugin_configs.vim-yankstack.initi")
 		end,
 		config = function()
 			require("plugin_configs.vim-yankstack.config")
