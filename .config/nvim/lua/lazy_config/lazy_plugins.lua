@@ -422,9 +422,9 @@ return {
 
 	{
 		-- does the same thing as YankRing
-		'jam1015/vim-yankstack',
+		'maxbrunsfeld/vim-yankstack',
 		--event = "VeryLazy",
-		dir = "~/Documents/vim-yankstack",
+		--dir = "~/Documents/vim-yankstack",
 
 		enabled = true,
 
