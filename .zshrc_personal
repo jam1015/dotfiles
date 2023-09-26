@@ -2,10 +2,11 @@ export PATH="$PATH:/Users/jordanmandel/.local/bin"
 export PATH="$PATH:/Users/jordanmandel/bin"
 
 # ``````````Vim configuration things`````
+
 export vimrc="$HOME/.config/nvim/init.lua"
 export zshrc="$HOME/.zshrc_personal"
 alias vi='nvim'
-alias ivi='nvim --cmd "let g:unception_disable=1"'
+alias vin='nvim --cmd "let g:flatten_allow_nesting = v:true"'
 alias ptpython='ptpython --vi --dark-bg'
 alias python='python'
 alias pdflatex="pdflatex -synctex=1"
@@ -23,12 +24,11 @@ export BROWSER="/usr/bin/firefox-developer-edition"
 export EDITOR="nvim"
 
 case "$OSTYPE" in
-    darwin*)    VISUAL="/usr/local/bin/nvim" ;;   # macOS
-    linux*)     VISUAL="/usr/bin/nvim" ;;         # Linux
+    darwin*)    VISUAL='/usr/local/bin/nvim  --cmd "let g:flatten_allow_nesting = v:true"' ;;   # macOS
+    linux*)     VISUAL='/usr/bin/nvim --cmd "let g:flatten_allow_nesting = v:true"';;         # Linux
 esac
 
 export VISUAL
-
 
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)

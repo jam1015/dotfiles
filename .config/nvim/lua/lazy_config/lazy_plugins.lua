@@ -32,20 +32,20 @@ return {
 	{
 		'willothy/flatten.nvim',
 
-		config = true,
+		--config = true,
 		-- or pass configuration with
 		--opts = require("plugin_configs.flatten"),
 		opts = require("plugin_configs.flatten"),
 		lazy = false,
-		priority = 1001,
-		commit = "07e9496191653587336b4c8f8cab02e5c34c7c44",
+		--priority = 1001,
+		--commit = "07e9496191653587336b4c8f8cab02e5c34c7c44",
 	},
 
 	{
 		'dhananjaylatkar/vim-gutentags',
 		enabled = false,
 		event = "VeryLazy",
-		dependencies = {"dhananjaylatkar/cscope_maps.nvim",  "skywind3000/gutentags_plus"},
+		dependencies = { "dhananjaylatkar/cscope_maps.nvim", "skywind3000/gutentags_plus" },
 		--event = "VeryLazy",
 
 
@@ -72,31 +72,31 @@ return {
 	--
 	({ "ibhagwan/fzf-lua", event = "VeryLazy", config = function() require('plugin_configs.fzf-lua') end }),
 
---	({
---		"nvim-telescope/telescope.nvim",
---		event = "VeryLazy",
---		dependencies = { "nvim-lua/plenary.nvim",
---			{
---				"nvim-telescope/telescope-fzf-native.nvim",
---				build = (function()
---					if os_name == "Darwin" then
---						-- macOS specific value
---						return "make"
---					elseif os_name == "Linux" then
---						-- Linux specific value
---						return
---						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
---					else
---						return
---						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
---					end
---				end)()
---			},
---			"nvim-telescope/telescope-file-browser.nvim" },
---		config = function()
---			require("plugin_configs.telescope")
---		end
---	}),
+	--	({
+	--		"nvim-telescope/telescope.nvim",
+	--		event = "VeryLazy",
+	--		dependencies = { "nvim-lua/plenary.nvim",
+	--			{
+	--				"nvim-telescope/telescope-fzf-native.nvim",
+	--				build = (function()
+	--					if os_name == "Darwin" then
+	--						-- macOS specific value
+	--						return "make"
+	--					elseif os_name == "Linux" then
+	--						-- Linux specific value
+	--						return
+	--						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+	--					else
+	--						return
+	--						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+	--					end
+	--				end)()
+	--			},
+	--			"nvim-telescope/telescope-file-browser.nvim" },
+	--		config = function()
+	--			require("plugin_configs.telescope")
+	--		end
+	--	}),
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -177,8 +177,8 @@ return {
 		end,
 	},
 
-	{ "tpope/vim-fugitive",             event = "VeryLazy" },
-	"tpope/vim-scriptease",
+	{ "tpope/vim-fugitive",   event = "VeryLazy" },
+	{ "tpope/vim-scriptease", enabled = false }, -- messes with s mapping of leap
 	{
 		"windwp/nvim-autopairs",
 		enabled = false,
@@ -285,8 +285,6 @@ return {
 			require('plugin_configs.hop')
 		end,
 	}),
-
-
 
 	{
 		"andymass/vim-matchup",
@@ -424,8 +422,9 @@ return {
 
 	{
 		-- does the same thing as YankRing
-		'maxbrunsfeld/vim-yankstack',
-		event = "VeryLazy",
+		'jam1015/vim-yankstack',
+		--event = "VeryLazy",
+		dir = "~/Documents/vim-yankstack",
 
 		enabled = true,
 
@@ -434,7 +433,7 @@ return {
 		--		end,
 
 		init = function()
-			--require("plugin_configs.vim-yankstack")
+			require("plugin_configs.vim-yankstack.initi")
 		end,
 		config = function()
 			require("plugin_configs.vim-yankstack.config")
@@ -459,6 +458,7 @@ return {
 
 	{
 		"gbprod/substitute.nvim",
+		enabled = false,
 		config = function()
 			require("plugin_configs.substitute_nvim")
 			require("plugin_keymaps").pluginKeymaps("substitute_nvim")
@@ -478,7 +478,6 @@ return {
 
 		config = function()
 			require("plugin_configs.vim-slime-ext-plugins.config")
-
 		end,
 	}),
 
