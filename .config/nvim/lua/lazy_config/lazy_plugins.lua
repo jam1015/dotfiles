@@ -349,7 +349,7 @@ return {
 
 	{
 		"neovim/nvim-lspconfig",
-		enabled = true,
+		enabled = false,
 		event = { "VeryLazy" },
 		--	lazy = true,
 		--						event = {"InsertEnter"}
