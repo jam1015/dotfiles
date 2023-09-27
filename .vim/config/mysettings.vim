@@ -92,7 +92,8 @@ endif
 set hlsearch
 set formatoptions-=cro
 
-if empty($DISPLAY)
+"if empty($DISPLAY)
+if v:false
 colorscheme elflord
 else
 	try

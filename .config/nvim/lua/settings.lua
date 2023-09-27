@@ -5,7 +5,8 @@ vim.g.debug = false
 
 set.bg = "dark"
 local colorscheme = "tokyonight"
-if os.getenv("DISPLAY") then
+--if os.getenv("DISPLAY") then
+if true then
 	local status_ok = nil
 	status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 
