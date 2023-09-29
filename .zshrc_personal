@@ -7,6 +7,8 @@ export vimrc="$HOME/.config/nvim/init.lua"
 export zshrc="$HOME/.zshrc_personal"
 alias vi='nvim'
 alias vin='nvim --cmd "let g:flatten_allow_nesting = v:true"'
+
+alias van="man -P 'nvim -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'" 
 alias ptpython='ptpython --vi --dark-bg'
 alias python='python'
 alias pdflatex="pdflatex -synctex=1"
@@ -33,7 +35,6 @@ export VISUAL
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
 export NVIM_SWAP="$HOME/.local/state/nvim/swap"
-alias van="man -P 'nvim -c Man! -c set\ nonumber -c set\ norelativenumber'" 
 
 bindkey -e -r '^[x'
 bindkey -a -r ':'

@@ -20,6 +20,7 @@ set.modeline = false
 set.completeopt = 'menu,menuone,noselect'
 set.shortmess = "IFw"
 set.hlsearch = true
+set.mouse = "a"
 set.undofile = true --persistent undo
 set.gdefault = true
 set.nrformats = set.nrformats - 'octal'
@@ -62,6 +63,7 @@ set.number = true
 set.relativenumber = true
 set.equalalways = false
 set.spelllang = "en_us"
+set.termguicolors = true
 
 set.foldmethod = "expr"
 set.foldexpr = "nvim_treesitter#foldexpr()"
@@ -105,10 +107,12 @@ local function setup_tmux_clipboard()
 					\ }
 
 					]])
-				else
-					return true
-				end
-			end
+	else
+		return true
+	end
+end
 
-			-- Call the function to set up the clipboard
-			setup_tmux_clipboard()
+-- Call the function to set up the clipboard
+setup_tmux_clipboard()
+
+
