@@ -36,12 +36,23 @@
 (use-package evil-god-toggle
   :straight (:local-repo "evil-god-toggle")
   :config
+
   (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle t)))
   (global-set-key (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
+
+  ;;(global-set-key (kbd "C-z") 'evil-emacs-state)
   (setq insert-to-god-cursor-strategy "same")
   (setq persist_visual t)
   (setq persist_visual_to_evil t)
   (setq persist_visual_to_god t)
+
+  (define-key evil-god-state-map (kbd "C-z") 'evil-emacs-state)  ;; Bind C-z to evil-emacs-state
+  ;; also works
+  ;;(global-set-key (kbd "C-z") 'save-buffer)
+  ;; for some reasos these bindings don't work
+  ;;(evil-define-key 'god evil-god-state-map (kbd "C-z") nil)
+  ;;(evil-define-key 'god evil-god-state-map (kbd "C-z") 'evil-emacs-state)
+
   (evil-define-key 'god global-map "C-;" (lambda () (interactive) (god-toggle t)))
   (evil-define-key 'god global-map "C-," (lambda () (interactive) (god-toggle nil)))
   (evil-define-key 'god global-map [escape] (lambda () (interactive) (evil-stop-execute-in-god-state nil)))
