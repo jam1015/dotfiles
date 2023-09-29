@@ -20,10 +20,12 @@ augroup END
 
 augroup start_at_bottom
     autocmd!
-    autocmd VimEnter * normal G
+	autocmd VimEnter * normal G$
 augroup END
 
 augroup prevent_insert
     autocmd!
     autocmd TermEnter * stopinsert
 augroup END
+runtime! ~/.config/nvim/init.lua
+
