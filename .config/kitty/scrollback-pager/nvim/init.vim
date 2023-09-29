@@ -20,7 +20,7 @@ augroup END
 
 augroup start_at_bottom
     autocmd!
-	autocmd VimEnter * normal G{}
+	autocmd VimEnter * normal G{}k$
 augroup END
 
 augroup prevent_insert
