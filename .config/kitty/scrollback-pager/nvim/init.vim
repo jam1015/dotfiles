@@ -9,6 +9,7 @@ set laststatus=0
 set background=dark
 set ignorecase
 set scrolloff=8
+set list
 
 map <silent> q :qa!<CR>
 

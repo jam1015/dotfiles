@@ -72,36 +72,39 @@ return {
 	--
 	({ "ibhagwan/fzf-lua", event = "VeryLazy", config = function() require('plugin_configs.fzf-lua') end }),
 
-	--	({
-	--		"nvim-telescope/telescope.nvim",
-	--		event = "VeryLazy",
-	--		dependencies = { "nvim-lua/plenary.nvim",
-	--			{
-	--				"nvim-telescope/telescope-fzf-native.nvim",
-	--				build = (function()
-	--					if os_name == "Darwin" then
-	--						-- macOS specific value
-	--						return "make"
-	--					elseif os_name == "Linux" then
-	--						-- Linux specific value
-	--						return
-	--						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
-	--					else
-	--						return
-	--						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
-	--					end
-	--				end)()
-	--			},
-	--			"nvim-telescope/telescope-file-browser.nvim" },
-	--		config = function()
-	--			require("plugin_configs.telescope")
-	--		end
-	--	}),
+	({
+		"nvim-telescope/telescope.nvim",
+		event = "VeryLazy",
+		dependencies = { "nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = (function()
+					if os_name == "Darwin" then
+						-- macOS specific value
+						return "make"
+					elseif os_name == "Linux" then
+						-- Linux specific value
+						return
+						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+					else
+						return
+						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+					end
+				end)()
+			},
+			"nvim-telescope/telescope-file-browser.nvim" },
+		config = function()
+			require("plugin_configs.telescope")
+		end
+	}),
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {},
+		--commit = "9637670896b68805430e2f72cf5d16be5b97a22a",
 		config = function() require("plugin_configs.indent-blankline") end,
-		event = "VeryLazy"
+		--event = "VeryLazy"
 	},
 	{
 		'kevinhwang91/nvim-ufo',
@@ -288,7 +291,7 @@ return {
 
 	{
 		"andymass/vim-matchup",
-		enabled = false,
+		enabled = true,
 		event = { "BufWinEnter" },
 	},
 	{
@@ -409,6 +412,7 @@ return {
 	}),
 
 	{ 'jghauser/mkdir.nvim' },
+
 	({
 		"neoclide/coc.nvim",
 		branch = "release",
@@ -421,12 +425,33 @@ return {
 	}),
 
 	{
+		"gbprod/yanky.nvim",
+		enabled = true,
+
+		--enabled = function()
+		--	return not os.getenv("DISPLAY")
+		--end,
+
+		--event = {"TextYankPost","CursorMoved","CursorHold"},
+		--branch = "autocmd",
+		dependencies = { "kkharji/sqlite.lua", },
+
+		--dir = "/home/jordan/Documents/yanky.nvim",
+		config = function()
+			require("plugin_configs.yanky")
+			require("plugin_keymaps").pluginKeymaps("yanky.nvim")
+		end
+
+
+	},
+
+	{
 		-- does the same thing as YankRing
 		'maxbrunsfeld/vim-yankstack',
 		--event = "VeryLazy",
 		--dir = "~/Documents/vim-yankstack",
 
-		enabled = true,
+		enabled = false,
 
 		--		enabled = function()
 		--			return os.getenv("DISPLAY")

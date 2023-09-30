@@ -60,7 +60,7 @@ require("yanky").setup({
 	},
 
 	system_clipboard = {
-		sync_with_ring = in_ssh(),
+		sync_with_ring = true,--in_ssh(),
 	},
 	highlight = {
 		on_put = true,
@@ -76,4 +76,3 @@ require("yanky").setup({
 vim.api.nvim_set_hl(0, "YankyPut", { link = "Visual" })
 vim.api.nvim_set_hl(0, "YankyYanked", { link = "Visual" })
 
-require("plugin_keymaps").pluginKeymaps("yanky.nvim")

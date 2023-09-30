@@ -57,7 +57,8 @@ set.listchars = set.listchars + 'trail:␣'
 set.listchars = set.listchars + 'lead:·'
 set.listchars = set.listchars + 'extends:»'
 set.listchars = set.listchars + 'precedes:«'
-set.listchars = set.listchars + 'tab:   '
+set.listchars = set.listchars + 'tab:▕  '
+
 set.listchars = set.listchars + 'nbsp:⣿'
 set.number = true
 set.relativenumber = true

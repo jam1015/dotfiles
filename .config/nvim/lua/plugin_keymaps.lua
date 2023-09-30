@@ -97,14 +97,15 @@ function M.pluginKeymaps(plugin, setup_type)
 		vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleBackward)")
 		vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)")
 
-		local _, telescope = pcall(require, "telescope")
-		telescope.load_extension("yank_history")
-		--		vim.api.nvim_create_user_command("YankyRingHistory",
-		--			function() require("telescope").extensions.yank_history.yank_history(require('telescope.themes').get_ivy()) end,
-		--			{})
+		local has_tele, telescope = pcall(require, "telescope")
+		if has_tele then
+			telescope.load_extension("yank_history")
+			--		vim.api.nvim_create_user_command("YankyRingHistory",
+			--			function() require("telescope").extensions.yank_history.yank_history(require('telescope.themes').get_ivy()) end,
+			--			{})
 
-		keymap("n", "<leader>yr",
-			"<cmd>Telescope yank_history<cr>", opts)
+			keymap("n", "<leader>yr", "<cmd>Telescope yank_history<cr>", opts)
+		end
 	elseif plugin == "emmet-vim" then
 		if setup_type == "config" then
 			wk.register({ ["<leader>m"] = { name = "emmet" } })
