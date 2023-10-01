@@ -108,25 +108,21 @@ return {
 	},
 	{
 		"marko-cerovac/material.nvim",
-	
 		init = function()
 			require("plugin_configs.material.initi")
 		end,
-
 		config = function()
 			require("plugin_configs.material.config")
 		end
 
 	},
+
 	{
-		'kevinhwang91/nvim-ufo',
-		enabled = false,
-		dependencies = 'kevinhwang91/promise-async',
+		"Tsuzat/NeoSolarized.nvim",
 		config = function()
-			require("plugin_configs.nvim-ufo")
+			require("plugin_configs.neosolarized")
 		end
 	},
-
 
 	({
 		"folke/tokyonight.nvim",
