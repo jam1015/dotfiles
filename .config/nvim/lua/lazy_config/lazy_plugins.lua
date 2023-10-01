@@ -513,4 +513,5 @@ return {
 		config = function() require('colorizer').setup() end
 	},
 	"powerman/vim-plugin-AnsiEsc",
+
 }
