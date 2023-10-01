@@ -107,6 +107,18 @@ return {
 		--event = "VeryLazy"
 	},
 	{
+		"marko-cerovac/material.nvim",
+	
+		init = function()
+			require("plugin_configs.material.initi")
+		end,
+
+		config = function()
+			require("plugin_configs.material.config")
+		end
+
+	},
+	{
 		'kevinhwang91/nvim-ufo',
 		enabled = false,
 		dependencies = 'kevinhwang91/promise-async',
@@ -114,7 +126,8 @@ return {
 			require("plugin_configs.nvim-ufo")
 		end
 	},
-	"overcache/NeoSolarized",
+
+
 	({
 		"folke/tokyonight.nvim",
 		branch = "main",
@@ -129,6 +142,14 @@ return {
 		'pappasam/papercolor-theme-slim'
 	},
 
+	{
+		"navarasu/onedark.nvim",
+
+		config = function()
+			require("plugin_configs.onedark")
+			--plugin_configs.nvim-notify
+		end
+	},
 	({
 		"ellisonleao/gruvbox.nvim", event = "VeryLazy"
 	}),
