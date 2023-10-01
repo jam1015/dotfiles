@@ -309,7 +309,7 @@ return {
 	{
 		"andymass/vim-matchup",
 		enabled = true,
-		event = { "BufWinEnter" },
+		event = { "VeryLazy" },
 	},
 	{
 		"numToStr/Comment.nvim",
@@ -449,7 +449,7 @@ return {
 		--	return not os.getenv("DISPLAY")
 		--end,
 
-		--event = {"TextYankPost","CursorMoved","CursorHold"},
+		event = "UIEnter",
 		--branch = "autocmd",
 		dependencies = { "kkharji/sqlite.lua", },
 
