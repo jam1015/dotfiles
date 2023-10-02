@@ -106,6 +106,8 @@ return {
 		config = function() require("plugin_configs.indent-blankline") end,
 		--event = "VeryLazy"
 	},
+
+
 	{
 		"marko-cerovac/material.nvim",
 		init = function()
