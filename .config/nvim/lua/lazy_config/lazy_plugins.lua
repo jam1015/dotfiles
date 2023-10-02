@@ -55,6 +55,12 @@ return {
 	},
 
 	{
+		"dzfrias/arena.nvim",
+		event = "BufWinEnter",
+		-- Calls `.setup()` automatically
+		config = true,
+	},
+	{
 		"dhananjaylatkar/cscope_maps.nvim",
 		event = "VeryLazy",
 		dependencies = {
@@ -72,7 +78,7 @@ return {
 	--
 	({ "ibhagwan/fzf-lua", event = "VeryLazy", config = function() require('plugin_configs.fzf-lua') end }),
 
-	({
+	{
 		"nvim-telescope/telescope.nvim",
 		event = "VeryLazy",
 		dependencies = { "nvim-lua/plenary.nvim",
@@ -96,7 +102,7 @@ return {
 		config = function()
 			require("plugin_configs.telescope")
 		end
-	}),
+	},
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -106,7 +112,12 @@ return {
 		config = function() require("plugin_configs.indent-blankline") end,
 		--event = "VeryLazy"
 	},
-
+	{
+		"dzfrias/arena.nvim",
+		event = "BufWinEnter",
+		-- Calls `.setup()` automatically
+		config = true,
+	},
 
 	{
 		"marko-cerovac/material.nvim",

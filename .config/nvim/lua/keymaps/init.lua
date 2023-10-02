@@ -9,13 +9,20 @@ vim.g.mapllocaleader = "\\"
 --
 
 
-
-
 keymap("i", "<C-;>", "<C-[>", opts)
 keymap("x", "<C-;>", "<C-[>", opts)
 keymap("v", "<C-;>", "<C-[>", opts)
 keymap("o", "<C-;>", "<C-[>", opts)
 keymap("n", "<C-;>", "<C-[>", opts)
+
+
+keymap("i", "<C-j>", "<C-x><C-o>", { remap = false, silent = true }) -- activate omni completeion
+--keymap("n", "<C-w>s", "<cmd>colorscheme blue<cr>", opts)
+
+keymap("n", "<leader>km",
+	":redir! > nvim_keys.txt<CR>:silent map<CR>:redir END<CR>:edit nvim_keys.txt<CR>:g/^<Plug>\\|^<SNR>/d<CR>"
+	, opts) --output keymap
+
 
 if os.getenv("TMUX") then
 	keymap("t", "<C-w>", "<C-\\><C-n><C-w>", { remap = true, silent = true })
@@ -26,19 +33,13 @@ else
 	keymap("t", "<C-w>", "<C-\\><C-n><C-w>", { remap = true, silent = true })
 end
 
-keymap("t", "<C-;>", "<C-\\><C-n>", opts)
-keymap("i", "<C-j>", "<C-x><C-o>", { remap = false, silent = true }) -- activate omni completeion
---keymap("n", "<C-w>s", "<cmd>colorscheme blue<cr>", opts)
-
-keymap("n", "<leader>km",
-	":redir! > nvim_keys.txt<CR>:silent map<CR>:redir END<CR>:edit nvim_keys.txt<CR>:g/^<Plug>\\|^<SNR>/d<CR>"
-	, opts) --output keymap
 
 --https://neovim.io/doc/user/map.html#user-commands
 --https://neovim.io/doc/user/api.html and search nvim_create_user_command
 -- and section 40 of the manual
 
 
+keymap("t", "<C-;>", "<C-\\><C-n>", opts)
 local function term_vsplit()
 	if vim.bo.buftype == 'terminal' then
 		local pid = vim.fn.jobpid(vim.b.terminal_job_id)
@@ -84,8 +85,10 @@ keymap("n", "<C-w>v", term_vsplit, opts)
 keymap("t", "<C-w>v", term_vsplit, opts)
 
 
+
 keymap("t", "<C-o>", "<C-\\><C-o>", { remap = false, silent = true }) --issue single terminal command
 keymap("t", "<localleader><Esc>", "<C-\\><C-N>", opts)
+
 
 
 keymap("i", "<C-r>", "<C-r><C-p>", opts) --helpw sith pasting from insert moce
