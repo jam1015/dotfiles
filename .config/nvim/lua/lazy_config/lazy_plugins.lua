@@ -449,7 +449,7 @@ return {
 		--	return not os.getenv("DISPLAY")
 		--end,
 
-		event = {"VeryLazy"},
+		event = {"UIEnter"},
 		--branch = "autocmd",
 		dependencies = { "kkharji/sqlite.lua", },
 
