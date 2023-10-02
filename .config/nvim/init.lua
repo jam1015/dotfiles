@@ -6,5 +6,3 @@ require('settings')     -- ~/.config/nvim/lua/settings.lua
 require('keymaps.post')      -- ~/.config/nvim/lua/keymaps/post.lua
 
 
-
-

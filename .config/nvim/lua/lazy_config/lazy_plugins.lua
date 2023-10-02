@@ -55,6 +55,12 @@ return {
 	},
 
 	{
+		"dzfrias/arena.nvim",
+		event = "BufWinEnter",
+		-- Calls `.setup()` automatically
+		config = true,
+	},
+	{
 		"dhananjaylatkar/cscope_maps.nvim",
 		event = "VeryLazy",
 		dependencies = {
@@ -72,46 +78,65 @@ return {
 	--
 	({ "ibhagwan/fzf-lua", event = "VeryLazy", config = function() require('plugin_configs.fzf-lua') end }),
 
-	--	({
-	--		"nvim-telescope/telescope.nvim",
-	--		event = "VeryLazy",
-	--		dependencies = { "nvim-lua/plenary.nvim",
-	--			{
-	--				"nvim-telescope/telescope-fzf-native.nvim",
-	--				build = (function()
-	--					if os_name == "Darwin" then
-	--						-- macOS specific value
-	--						return "make"
-	--					elseif os_name == "Linux" then
-	--						-- Linux specific value
-	--						return
-	--						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
-	--					else
-	--						return
-	--						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
-	--					end
-	--				end)()
-	--			},
-	--			"nvim-telescope/telescope-file-browser.nvim" },
-	--		config = function()
-	--			require("plugin_configs.telescope")
-	--		end
-	--	}),
+	{
+		"nvim-telescope/telescope.nvim",
+		event = "VeryLazy",
+		dependencies = { "nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = (function()
+					if os_name == "Darwin" then
+						-- macOS specific value
+						return "make"
+					elseif os_name == "Linux" then
+						-- Linux specific value
+						return
+						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+					else
+						return
+						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+					end
+				end)()
+			},
+			"nvim-telescope/telescope-file-browser.nvim" },
+		config = function()
+			require("plugin_configs.telescope")
+		end
+	},
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {},
+		--commit = "9637670896b68805430e2f72cf5d16be5b97a22a",
 		config = function() require("plugin_configs.indent-blankline") end,
-		event = "VeryLazy"
+		--event = "VeryLazy"
 	},
 	{
-		'kevinhwang91/nvim-ufo',
-		enabled = false,
-		dependencies = 'kevinhwang91/promise-async',
+		"dzfrias/arena.nvim",
+		event = "BufWinEnter",
+		-- Calls `.setup()` automatically
+		config = true,
+	},
+
+	{
+		"marko-cerovac/material.nvim",
+		init = function()
+			require("plugin_configs.material.initi")
+		end,
 		config = function()
-			require("plugin_configs.nvim-ufo")
+			require("plugin_configs.material.config")
+		end
+
+	},
+
+	{
+		"Tsuzat/NeoSolarized.nvim",
+		config = function()
+			require("plugin_configs.neosolarized")
 		end
 	},
-	"overcache/NeoSolarized",
+
 	({
 		"folke/tokyonight.nvim",
 		branch = "main",
@@ -126,6 +151,14 @@ return {
 		'pappasam/papercolor-theme-slim'
 	},
 
+	{
+		"navarasu/onedark.nvim",
+
+		config = function()
+			require("plugin_configs.onedark")
+			--plugin_configs.nvim-notify
+		end
+	},
 	({
 		"ellisonleao/gruvbox.nvim", event = "VeryLazy"
 	}),
@@ -288,8 +321,8 @@ return {
 
 	{
 		"andymass/vim-matchup",
-		enabled = false,
-		event = { "BufWinEnter" },
+		enabled = true,
+		event = { "VeryLazy" },
 	},
 	{
 		"numToStr/Comment.nvim",
@@ -409,6 +442,7 @@ return {
 	}),
 
 	{ 'jghauser/mkdir.nvim' },
+
 	({
 		"neoclide/coc.nvim",
 		branch = "release",
@@ -421,12 +455,33 @@ return {
 	}),
 
 	{
+		"gbprod/yanky.nvim",
+		enabled = true,
+
+		--enabled = function()
+		--	return not os.getenv("DISPLAY")
+		--end,
+
+		event = "UIEnter",
+		--branch = "autocmd",
+		dependencies = { "kkharji/sqlite.lua", },
+
+		--dir = "/home/jordan/Documents/yanky.nvim",
+		config = function()
+			require("plugin_configs.yanky")
+			require("plugin_keymaps").pluginKeymaps("yanky.nvim")
+		end
+
+
+	},
+
+	{
 		-- does the same thing as YankRing
 		'maxbrunsfeld/vim-yankstack',
 		--event = "VeryLazy",
 		--dir = "~/Documents/vim-yankstack",
 
-		enabled = true,
+		enabled = false,
 
 		--		enabled = function()
 		--			return os.getenv("DISPLAY")
@@ -464,6 +519,9 @@ return {
 			require("plugin_keymaps").pluginKeymaps("substitute_nvim")
 		end
 	},
+
+
+
 	({
 		"jam1015/vim-slime-ext-neovim",
 		branch = "status_override",
@@ -488,4 +546,21 @@ return {
 		config = function() require('colorizer').setup() end
 	},
 	"powerman/vim-plugin-AnsiEsc",
+
+	{
+
+		"jam1015/vim_consistency",
+		event = "VeryLazy"
+	},
+
+	{
+
+		"jam1015/vim_create_goto",
+		dir = "~/Documents/vim_create_goto",
+		event = "VeryLazy",
+		config = function()
+			require("plugin_keymaps").pluginKeymaps("vim_create_goto")
+		end
+	}
+
 }

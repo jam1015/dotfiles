@@ -1,5 +1,5 @@
 return {
-	disable_maps = false,    -- "true" disables default keymaps
+	disable_maps = true,    -- "true" disables default keymaps
 	skip_input_prompt = false, -- "true" doesn't ask for input
 
 	-- cscope related defaults

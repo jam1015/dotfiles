@@ -1,7 +1,6 @@
 local utils = require("yanky.utils")
 --local mapping_ok, mapping  = pcall(require, "yanky.telescope.mapping")
 
-
 local function telescope_mappings(mode)
 	local mapping_ok, mapping = pcall(require, "yanky.telescope.mapping")
 	if mapping_ok then
@@ -32,9 +31,9 @@ end
 local function in_ssh()
 	local shareclipboard
 	if os.getenv("SSH_CONNECTION") then
-		 shareclipboard = false
+		shareclipboard = false
 	else
-		 shareclipboard = true
+		shareclipboard = true
 	end
 	return shareclipboard
 end
@@ -51,6 +50,7 @@ require("yanky").setup({
 			action = nil, -- nil to use default put action
 		},
 		telescope = {
+			use_default_mappiings = false,
 			mappings = {
 				default = telescope_mappings("default"),
 				i = telescope_mappings("i"),
@@ -75,5 +75,3 @@ require("yanky").setup({
 })
 vim.api.nvim_set_hl(0, "YankyPut", { link = "Visual" })
 vim.api.nvim_set_hl(0, "YankyYanked", { link = "Visual" })
-
-require("plugin_keymaps").pluginKeymaps("yanky.nvim")

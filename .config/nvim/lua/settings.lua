@@ -4,7 +4,7 @@ vim.cmd([[ highlight Comment cterm=italic gui=italic]])
 vim.g.debug = false
 
 set.bg = "dark"
-local colorscheme = "tokyonight"
+local colorscheme = "NeoSolarized"
 if os.getenv("DISPLAY") then
 	local status_ok = nil
 	status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
@@ -20,6 +20,7 @@ set.modeline = false
 set.completeopt = 'menu,menuone,noselect'
 set.shortmess = "IFw"
 set.hlsearch = true
+set.mouse = "a"
 set.undofile = true --persistent undo
 set.gdefault = true
 set.nrformats = set.nrformats - 'octal'
@@ -56,12 +57,13 @@ set.listchars = set.listchars + 'trail:␣'
 set.listchars = set.listchars + 'lead:·'
 set.listchars = set.listchars + 'extends:»'
 set.listchars = set.listchars + 'precedes:«'
-set.listchars = set.listchars + 'tab:   '
+set.listchars = set.listchars + 'tab:│  '
 set.listchars = set.listchars + 'nbsp:⣿'
 set.number = true
 set.relativenumber = true
 set.equalalways = false
 set.spelllang = "en_us"
+set.termguicolors = true
 
 set.foldmethod = "expr"
 set.foldexpr = "nvim_treesitter#foldexpr()"
@@ -105,10 +107,12 @@ local function setup_tmux_clipboard()
 					\ }
 
 					]])
-				else
-					return true
-				end
-			end
+	else
+		return true
+	end
+end
 
-			-- Call the function to set up the clipboard
-			setup_tmux_clipboard()
+-- Call the function to set up the clipboard
+setup_tmux_clipboard()
+
+

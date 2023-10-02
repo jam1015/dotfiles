@@ -1,11 +1,11 @@
 local api = vim.api
 
 -- Highlight on yank
-local aesthetics = api.nvim_create_augroup("aesthetic_settings", { clear = true })
-api.nvim_create_autocmd("TextYankPost", {
-	command = "silent! lua vim.highlight.on_yank({higroup = \"Visual\", timeout = 200})",
-	group = aesthetics,
-})
+--local aesthetics = api.nvim_create_augroup("aesthetic_settings", { clear = true })
+--api.nvim_create_autocmd("TextYankPost", {
+--	command = "silent! lua vim.highlight.on_yank({higroup = \"Visual\", timeout = 200})",
+--	group = aesthetics,
+--})
 
 -- concurrency ----------------------------
 local function set_concurrent() --lets you edit multiple files at the same time
@@ -36,21 +36,22 @@ autocmd FileChangedShellPost *
 local term_autocmds = api.nvim_create_augroup("term_autocomds", { clear = true })
 
 
-local function no_term_num()
-	local bufnr = vim.api.nvim_get_current_buf()
-	local buftype = vim.api.nvim_buf_get_option(bufnr, 'buftype')
-	if buftype == 'terminal' then
-		vim.opt_local.number = false
-		vim.opt_local.relativenumber = false
-	else
+
+
+	local function no_term_num()
+		local bufnr = vim.api.nvim_get_current_buf()
+		local buftype = vim.api.nvim_buf_get_option(bufnr, 'buftype')
+		if buftype == 'terminal' then
+			vim.opt_local.number = false
+			vim.opt_local.relativenumber = false
+		else
+		end
 	end
-end
 
-api.nvim_create_autocmd("TermOpen", {
-	callback = no_term_num,
-	group = term_autocmds,
-})
-
+	api.nvim_create_autocmd("TermOpen", {
+		callback = no_term_num,
+		group = term_autocmds,
+	})
 --api.nvim_create_autocmd("TermClose", {
 --	pattern = "*",
 --	command = "if !v:event.status | exe 'Bdelete! '..expand('<abuf>') | endif",
@@ -72,3 +73,17 @@ api.nvim_create_autocmd("TermOpen", {
 --	callback = set_status_line,
 --	group = term_autocmds,
 --})
+
+
+
+
+
+
+
+
+
+
+
+
+
+

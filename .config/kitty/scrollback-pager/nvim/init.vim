@@ -9,21 +9,24 @@ set laststatus=0
 set background=dark
 set ignorecase
 set scrolloff=8
+set list
 
 map <silent> q :qa!<CR>
 
 " Short highlight on yanked text
 augroup highlight_yank
-    autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+	autocmd!
+	autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
 augroup END
 
 augroup start_at_bottom
-    autocmd!
-    autocmd VimEnter * normal G
+	autocmd!
+	autocmd VimEnter * $
 augroup END
 
 augroup prevent_insert
-    autocmd!
-    autocmd TermEnter * stopinsert
+	autocmd!
+	autocmd TermEnter * stopinsert
 augroup END
+runtime! ~/.config/nvim/init.lua
+
