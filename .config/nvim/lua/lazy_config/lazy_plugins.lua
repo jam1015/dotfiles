@@ -506,6 +506,9 @@ return {
 			require("plugin_keymaps").pluginKeymaps("substitute_nvim")
 		end
 	},
+
+
+
 	({
 		"jam1015/vim-slime-ext-neovim",
 		branch = "status_override",
@@ -530,5 +533,21 @@ return {
 		config = function() require('colorizer').setup() end
 	},
 	"powerman/vim-plugin-AnsiEsc",
+
+	{
+
+		"jam1015/vim_consistency",
+		event = "VeryLazy"
+	},
+
+	{
+
+		"jam1015/vim_create_goto",
+		dir = "~/Documents/vim_create_goto",
+		event = "VeryLazy",
+		config = function()
+			require("plugin_keymaps").pluginKeymaps("vim_create_goto")
+		end
+	}
 
 }

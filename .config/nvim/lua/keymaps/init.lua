@@ -106,7 +106,6 @@ if bufwinnr(1)
   map <leader>, <C-W>>
 endif
 
-noremap <leader>cf :call CreateFile(expand("<cfile>"))<CR>
 
 map Q gq
 " get current file

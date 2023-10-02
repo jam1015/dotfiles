@@ -63,14 +63,48 @@ function M.pluginKeymaps(plugin, setup_type)
 					cnoreabbrev <expr> previous  getcmdtype() == ":" && getcmdline() == "prevous" ? "Aprev" : "previous"
 
 			]])
+	elseif plugin == "vim_create_goto" then
+		vim.keymap.set('n', '<leader>fc', '<Plug>(CreateGoTo)', { remap = true })
 	elseif plugin == "substitute_nvim" then
-		vim.keymap.set("n", "sx", require('substitute.exchange').operator, { noremap = true })
-		vim.keymap.set("n", "sxx", require('substitute.exchange').line, { noremap = true })
-		vim.keymap.set("x", "X", require('substitute.exchange').visual, { noremap = true })
-		vim.keymap.set("n", "sxc", require('substitute.exchange').cancel, { noremap = true })
+		vim.keymap.set("n", "sx", require('substitute.exchange').operator, { remap = false })
+		vim.keymap.set("n", "sxx", require('substitute.exchange').line, { remap = false })
+		vim.keymap.set("x", "X", require('substitute.exchange').visual, { remap = false })
+		vim.keymap.set("n", "sxc", require('substitute.exchange').cancel, { remap = false })
 	elseif plugin == "cscope_maps" then
+		local get_cscope_prompt_cmd = function(operation, selection)
+			local sel = "cword" -- word under cursor
+			if selection == "f" then -- file under cursor
+				sel = "cfile"
+			end
 
-
+			return string.format(
+				[[<cmd>lua require('cscope_maps').cscope_prompt('%s', vim.fn.expand("<%s>"))<cr>]],
+				operation,
+				sel
+			)
+		end
+		local sym_map = {
+			s = "Find this symbol",
+			g = "Find this global defination",
+			c = "Find functions calling this function",
+			t = "Find this text string",
+			e = "Find this egrep pattern",
+			f = "Find this file",
+			i = "Find files #including this file",
+			d = "Find functions called by this function",
+			a = "Find places where this symbol is assigned a value",
+			b = "Build database",
+		}
+		keymap("n", "<leader>cs", get_cscope_prompt_cmd("s", "w"), { noremap = true, silent = true, desc = sym_map.s })
+		keymap("n", "<leader>cg", get_cscope_prompt_cmd("g", "w"), { noremap = true, silent = true, desc = sym_map.g })
+		keymap("n", "<leader>cc", get_cscope_prompt_cmd("c", "w"), { noremap = true, silent = true, desc = sym_map.c })
+		keymap("n", "<leader>ct", get_cscope_prompt_cmd("t", "w"), { noremap = true, silent = true, desc = sym_map.t })
+		keymap("n", "<leader>ce", get_cscope_prompt_cmd("e", "w"), { noremap = true, silent = true, desc = sym_map.e })
+		keymap("n", "<leader>cf", get_cscope_prompt_cmd("f", "f"), { noremap = true, silent = true, desc = sym_map.f })
+		keymap("n", "<leader>ci", get_cscope_prompt_cmd("i", "f"), { noremap = true, silent = true, desc = sym_map.i })
+		keymap("n", "<leader>cd", get_cscope_prompt_cmd("d", "w"), { noremap = true, silent = true, desc = sym_map.d })
+		keymap("n", "<leader>ca", get_cscope_prompt_cmd("a", "w"), { noremap = true, silent = true, desc = sym_map.a })
+		keymap("n", "<leader>cb", "<cmd>Cscope build<cr>", { noremap = true, silent = true, desc = sym_map.b })
 	elseif plugin == "nvim-treehopper" then
 		wk.register({
 			["<leader>h"] = { name = "Hopping" },
