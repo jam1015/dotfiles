@@ -1,28 +1,19 @@
+-------- setting up mapping scheme
 local opts = { remap = false, silent = true }
 local keymap = vim.keymap.set
 
+-------- setting leader
 keymap("n", "<Space>", "", opts)
 vim.g.mapleader = " "
 vim.g.mapllocaleader = "\\"
 
--- defining functions that can be used to make command line abbreviations elsewhere
---
 
 
-keymap("i", "<C-;>", "<C-[>", opts)
-keymap("x", "<C-;>", "<C-[>", opts)
-keymap("v", "<C-;>", "<C-[>", opts)
-keymap("o", "<C-;>", "<C-[>", opts)
-keymap("n", "<C-;>", "<C-[>", opts)
 
 
-keymap("i", "<C-j>", "<C-x><C-o>", { remap = false, silent = true }) -- activate omni completeion
---keymap("n", "<C-w>s", "<cmd>colorscheme blue<cr>", opts)
+--------------------------------------------- commands to be moved to terminal/navigation plugin
 
-keymap("n", "<leader>km",
-	":redir! > nvim_keys.txt<CR>:silent map<CR>:redir END<CR>:edit nvim_keys.txt<CR>:g/^<Plug>\\|^<SNR>/d<CR>"
-	, opts) --output keymap
-
+keymap("t", "<C-;>", "<C-\\><C-n>", opts)
 
 if os.getenv("TMUX") then
 	keymap("t", "<C-w>", "<C-\\><C-n><C-w>", { remap = true, silent = true })
@@ -34,12 +25,9 @@ else
 end
 
 
---https://neovim.io/doc/user/map.html#user-commands
---https://neovim.io/doc/user/api.html and search nvim_create_user_command
--- and section 40 of the manual
 
 
-keymap("t", "<C-;>", "<C-\\><C-n>", opts)
+keymap("t", "<localleader><Esc>", "<C-\\><C-N>", opts)
 local function term_vsplit()
 	if vim.bo.buftype == 'terminal' then
 		local pid = vim.fn.jobpid(vim.b.terminal_job_id)
@@ -87,7 +75,6 @@ keymap("t", "<C-w>v", term_vsplit, opts)
 
 
 keymap("t", "<C-o>", "<C-\\><C-o>", { remap = false, silent = true }) --issue single terminal command
-keymap("t", "<localleader><Esc>", "<C-\\><C-N>", opts)
 
 
 
@@ -96,9 +83,14 @@ keymap("c", "%%", "getcmdtype() == ':' ? expand('%:h').'/' : '%%'", { expr = tru
 
 keymap("n", "<leader>gt", "<cmd>tabprev<cr>", { remap = true, silent = true, expr = true })
 
+
+
+
+------------------------------ directional help should be moved to plugin
 require("keymaps.directional_help")
 
 
+------------------------------- general keymaps that can stay
 vim.cmd([[
 
 " changing size
@@ -110,7 +102,7 @@ if bufwinnr(1)
 endif
 
 
-map Q gq
+
 " get current file
 cnoreabbr <expr> %% fnameescape(expand('%:p'))
 " new windows
@@ -119,29 +111,7 @@ cnoreabbr <expr> %% fnameescape(expand('%:p'))
 inoremap <C-U> <C-G>u<C-U>
 
 
-""add type these after a search to instantly move text
-""move to text
-"cnoremap $t <CR>:t''<CR>
-""move text to
-"cnoremap $m <CR>:m''<CR>
-""delete
-"cnoremap $d <CR>:d<CR>``
-"
-"" makes count up and down motions actual lines if a number is given
-"nnoremap <expr> k (v:count == -1 ? 'gk' : 'k')
-"nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
-"
-""force visual motion
-"nnoremap dj dvj
-"nnoremap dk dvk
-
-""nnoremap $ g$
-""nnoremap 0 g0
-""nnoremap ^ g^
-""nnoremap ^ g^
-""nnoremap ^ g^
-
-
+" motion based on visual lines
 let g:toggle_mappings = 1
 
 function! ToggleMappings()
@@ -153,8 +123,22 @@ nnoremap <expr> 0 g:toggle_mappings ? 'g0' : '0'
 nnoremap <expr> ^ g:toggle_mappings ? 'g^' : '^'
 nnoremap <expr> j g:toggle_mappings ? 'gj' : 'j'
 nnoremap <expr> k g:toggle_mappings ? 'gk' : 'k'
-
 command! ToggleMyMappings call ToggleMappings()
-
-
 ]])
+
+
+
+---------    setting C-; as escape like in terminal, can remove if I find a better use
+keymap("i", "<C-;>", "<C-[>", opts)
+keymap("x", "<C-;>", "<C-[>", opts)
+keymap("v", "<C-;>", "<C-[>", opts)
+keymap("o", "<C-;>", "<C-[>", opts)
+keymap("n", "<C-;>", "<C-[>", opts)
+
+
+keymap("i", "<C-j>", "<C-x><C-o>", { remap = false, silent = true }) -- activate omni completeion
+--keymap("n", "<C-w>s", "<cmd>colorscheme blue<cr>", opts)
+
+keymap("n", "<leader>km",
+	":redir! > nvim_keys.txt<CR>:silent map<CR>:redir END<CR>:edit nvim_keys.txt<CR>:g/^<Plug>\\|^<SNR>/d<CR>"
+	, opts) --output keymap

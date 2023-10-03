@@ -58,7 +58,10 @@ return {
 		"dzfrias/arena.nvim",
 		event = "BufWinEnter",
 		-- Calls `.setup()` automatically
-		config = true,
+		config = function()
+			require("plugin_configs.arena")
+		end
+,
 	},
 	{
 		"dhananjaylatkar/cscope_maps.nvim",
@@ -110,7 +113,7 @@ return {
 		opts = {},
 		--commit = "9637670896b68805430e2f72cf5d16be5b97a22a",
 		config = function() require("plugin_configs.indent-blankline") end,
-		--event = "VeryLazy"
+		event = "VeryLazy"
 	},
 	{
 		"dzfrias/arena.nvim",
@@ -126,7 +129,8 @@ return {
 		end,
 		config = function()
 			require("plugin_configs.material.config")
-		end
+		end,
+		event = "VeryLazy"
 
 	},
 
@@ -144,7 +148,7 @@ return {
 			require("plugin_configs.tokyonight")
 		end,
 		--
-		--event = "VeryLazy"
+		event = "VeryLazy"
 	}),
 
 	{
@@ -157,7 +161,8 @@ return {
 		config = function()
 			require("plugin_configs.onedark")
 			--plugin_configs.nvim-notify
-		end
+		end,
+		event = "VeryLazy"
 	},
 	({
 		"ellisonleao/gruvbox.nvim", event = "VeryLazy"
@@ -175,6 +180,7 @@ return {
 		"airblade/vim-rooter",
 		config = function()
 			require("plugin_configs.vim-rooter")
+			require("plugin_keymaps").pluginKeymaps("vim-rooter")
 		end
 	},
 

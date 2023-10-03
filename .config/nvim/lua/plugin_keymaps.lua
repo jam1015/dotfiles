@@ -122,6 +122,8 @@ function M.pluginKeymaps(plugin, setup_type)
 		keymap("n", "gz", "<Plug>SlimeMotionSend", { remap = true, silent = false })
 		keymap("n", "gzz", "<Plug>SlimeLineSend", { remap = true, silent = false })
 		keymap("x", "gz", "<Plug>SlimeRegionSend", { remap = true, silent = false })
+	elseif plugin == "vim-rooter" then
+		keymap("n", "<leader>rf", ":cd <c-r>=FindRootDirectory()<CR>", { remap = true, silent = false })
 	elseif plugin == "yanky.nvim" then
 		vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
 		vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
