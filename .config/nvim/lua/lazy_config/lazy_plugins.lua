@@ -58,7 +58,10 @@ return {
 		"dzfrias/arena.nvim",
 		event = "BufWinEnter",
 		-- Calls `.setup()` automatically
-		config = true,
+		config = function()
+			require("plugin_configs.arena")
+		end
+,
 	},
 	{
 		"dhananjaylatkar/cscope_maps.nvim",
@@ -177,6 +180,7 @@ return {
 		"airblade/vim-rooter",
 		config = function()
 			require("plugin_configs.vim-rooter")
+			require("plugin_keymaps").pluginKeymaps("vim-rooter")
 		end
 	},
 

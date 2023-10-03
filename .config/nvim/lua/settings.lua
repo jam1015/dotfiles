@@ -4,7 +4,7 @@ vim.cmd([[ highlight Comment cterm=italic gui=italic]])
 vim.g.debug = false
 
 set.bg = "dark"
-local colorscheme = "NeoSolarized"
+local colorscheme = "gruvbox"
 if os.getenv("DISPLAY") then
 	local status_ok = nil
 	status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
