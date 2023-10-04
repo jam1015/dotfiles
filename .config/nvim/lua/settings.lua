@@ -68,14 +68,8 @@ set.termguicolors = true
 set.foldmethod = "expr"
 set.foldexpr = "nvim_treesitter#foldexpr()"
 set.foldlevelstart = 99
-
-if os.getenv("DISPLAY") then
-	--if not os.getenv("SSH_CONNECTION") then
-	set.clipboard = 'unnamedplus'
-	--end
-else
-end
-
+--
+--
 vim.g.vim_json_syntax_conceal = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
@@ -85,34 +79,6 @@ set.pumheight = 10
 set.inccommand = 'split'
 set.shada = "'1000,%"
 
-
-
-
-local function setup_tmux_clipboard()
-	local tmux = os.getenv("TMUX")
-	if tmux then
-		-- Configure Neovim to use tmux's clipboard
-		vim.cmd([[
-		let g:clipboard = {
-			\   'name': 'myClipboard',
-			\   'copy': {
-				\      '+': ['tmux', 'load-buffer', '-w', '-'],
-				\      '*': ['tmux', 'load-buffer', '-w', '-'],
-				\    },
-				\   'paste': {
-					\      '+': ['tmux', 'save-buffer', '-'],
-					\      '*': ['tmux', 'save-buffer', '-'],
-					\   },
-					\   'cache_enabled': 0,
-					\ }
-
-					]])
-	else
-		return true
-	end
-end
-
--- Call the function to set up the clipboard
-setup_tmux_clipboard()
+-- see yanky config for clipbaord settingss
 
 

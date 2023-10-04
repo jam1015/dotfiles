@@ -75,3 +75,53 @@ require("yanky").setup({
 })
 vim.api.nvim_set_hl(0, "YankyPut", { link = "Visual" })
 vim.api.nvim_set_hl(0, "YankyYanked", { link = "Visual" })
+
+
+
+
+-- setting clipboard settings
+if os.getenv("DISPLAY") then
+	if not os.getenv("SSH_CONNECTION") then
+		vim.opt.clipboard = 'unnamedplus'
+	end
+else
+end
+
+
+local function setup_tmux_clipboard()
+	local tmux = os.getenv("TMUX")
+	if tmux then
+		-- Configure Neovim to use tmux's clipboard
+		vim.cmd([[
+		let g:clipboard = {
+			\   'name': 'myClipboard',
+			\   'copy': {
+				\      '+': ['tmux', 'load-buffer', '-w', '-'],
+				\      '*': ['tmux', 'load-buffer', '-w', '-'],
+				\    },
+				\   'paste': {
+					\      '+': ['tmux', 'save-buffer', '-'],
+					\      '*': ['tmux', 'save-buffer', '-'],
+					\   },
+					\   'cache_enabled': 0,
+					\ }
+
+					]])
+	else
+		return true
+	end
+end
+
+-- Call the function to set up the clipboard
+setup_tmux_clipboard()
+
+
+
+
+
+
+
+
+
+
+

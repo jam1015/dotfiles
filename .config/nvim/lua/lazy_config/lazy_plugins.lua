@@ -84,6 +84,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		event = "VeryLazy",
+		enabled = false,
 		dependencies = { "nvim-lua/plenary.nvim",
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
@@ -332,6 +333,7 @@ return {
 	},
 	{
 		"numToStr/Comment.nvim",
+		enabled = false,
 		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("plugin_configs.Comment") end,
@@ -347,16 +349,20 @@ return {
 	({
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
-		enabled = true,
+		enabled = false,
 		config = function()
 			require("plugin_configs.nvim-treesitter")
 		end,
 	}),
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
+		enabled = false,
 		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter"
 	},
+
+
+------------------------------------------------------------------------------------------
 
 	({
 		"folke/trouble.nvim", event = "VeryLazy",
@@ -384,27 +390,25 @@ return {
 
 	},
 
+  {
+  	"neovim/nvim-lspconfig",
+  	enabled = true,
+  	--event = { "VeryLazy" },
+  	--	lazy = true,
+  	--						event = {"InsertEnter"}
+  	--
+  	--event = { "BufReadPre", "BufNewFile", "BufRead" },
 
+  	dependencies = { "onsails/lspkind.nvim",
+  		"williamboman/mason.nvim",
+  		"williamboman/mason-lspconfig.nvim",
+  		"folke/neodev.nvim"
 
-	{
-		"neovim/nvim-lspconfig",
-		enabled = true,
-		event = { "VeryLazy" },
-		--	lazy = true,
-		--						event = {"InsertEnter"}
-		--
-		--event = { "BufReadPre", "BufNewFile", "BufRead" },
-
-		dependencies = { "onsails/lspkind.nvim",
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-			"folke/neodev.nvim"
-
-		}, -- "RRethy/vim-illuminate" },
-		config = function()
-			require("plugin_configs.lsp")
-		end
-	},
+  	}, -- "RRethy/vim-illuminate" },
+  	config = function()
+  		require("plugin_configs.lsp")
+  	end
+  },
 	--"mfussenegger/nvim-dap",
 	{
 		'echasnovski/mini.completion',
@@ -468,9 +472,9 @@ return {
 		--	return not os.getenv("DISPLAY")
 		--end,
 
-		event = "UIEnter",
+		event = "VeryLazy",
 		--branch = "autocmd",
-		dependencies = { "kkharji/sqlite.lua", },
+		--dependencies = { "kkharji/sqlite.lua", },
 
 		--dir = "/home/jordan/Documents/yanky.nvim",
 		config = function()

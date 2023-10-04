@@ -38,20 +38,20 @@ local term_autocmds = api.nvim_create_augroup("term_autocomds", { clear = true }
 
 
 
-	local function no_term_num()
-		local bufnr = vim.api.nvim_get_current_buf()
-		local buftype = vim.api.nvim_buf_get_option(bufnr, 'buftype')
-		if buftype == 'terminal' then
-			vim.opt_local.number = false
-			vim.opt_local.relativenumber = false
-		else
-		end
+local function no_term_num()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local buftype = vim.api.nvim_buf_get_option(bufnr, 'buftype')
+	if buftype == 'terminal' then
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+	else
 	end
+end
 
-	api.nvim_create_autocmd("TermOpen", {
-		callback = no_term_num,
-		group = term_autocmds,
-	})
+api.nvim_create_autocmd("TermOpen", {
+	callback = no_term_num,
+	group = term_autocmds,
+})
 --api.nvim_create_autocmd("TermClose", {
 --	pattern = "*",
 --	command = "if !v:event.status | exe 'Bdelete! '..expand('<abuf>') | endif",
@@ -73,17 +73,3 @@ local term_autocmds = api.nvim_create_augroup("term_autocomds", { clear = true }
 --	callback = set_status_line,
 --	group = term_autocmds,
 --})
-
-
-
-
-
-
-
-
-
-
-
-
-
-

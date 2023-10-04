@@ -5,7 +5,9 @@ if not status_ok then
 end
 
 local servers = { "tsserver", "vimls", "clangd",  "pyright", "jsonls", "cssls", "eslint",
-	"emmet_ls", "texlab", "html", "lua_ls", "julials" }
+	"emmet_ls", "texlab", "html", 
+	"lua_ls", 
+	"julials" }
 --"r_language_server",
 --"texlab",
 --local mason_settings_ok, settings_obj = pcall(require,"plugin_configs.lsp.lsp_handlerss")
