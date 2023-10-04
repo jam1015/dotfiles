@@ -8,6 +8,7 @@ local api = vim.api
 --})
 
 -- concurrency ----------------------------
+
 local function set_concurrent() --lets you edit multiple files at the same time
 	vim.v.swapchoice = "e"
 	require("notify")("concurrent editing", vim.log.levels.WARN,
@@ -21,37 +22,42 @@ api.nvim_create_autocmd("SwapExists", {
 })
 
 -- to check if we want to reload the file
-vim.api.nvim_create_autocmd({ "FileChangedShellPost", "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
-	command = "if mode() != 'c' &&  expand('%') !=# '[Command Line]' | checktime | endif",
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+	--command = "if mode() != 'c' &&  expand('%') !=# '[Command Line]' | checktime | endif",
+	command = " checktime ",
 	pattern = { "*" },
+	group = concurrent
 })
 
-
-
 vim.cmd([[
-autocmd FileChangedShellPost *
-\ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+autocmd FileChangedShellPost * execute 'echohl WarningMsg | echo "File " . fnameescape(expand("<afile>")) . " changed on disk. Buffer reloaded." | echohl None'
 ]])
+
+vim.api.nvim_create_autocmd({ "FileChangedShellPost" },
+	{ command = 'echohl WarningMsg | echo "File changed on disk. Buffer reloaded."', pattern = { "*" },
+		group = concurrent })
+
+
 -- terminal related --------------------
 local term_autocmds = api.nvim_create_augroup("term_autocomds", { clear = true })
 
 
 
 
-	local function no_term_num()
-		local bufnr = vim.api.nvim_get_current_buf()
-		local buftype = vim.api.nvim_buf_get_option(bufnr, 'buftype')
-		if buftype == 'terminal' then
-			vim.opt_local.number = false
-			vim.opt_local.relativenumber = false
-		else
-		end
+local function no_term_num()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local buftype = vim.api.nvim_buf_get_option(bufnr, 'buftype')
+	if buftype == 'terminal' then
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+	else
 	end
+end
 
-	api.nvim_create_autocmd("TermOpen", {
-		callback = no_term_num,
-		group = term_autocmds,
-	})
+api.nvim_create_autocmd("TermOpen", {
+	callback = no_term_num,
+	group = term_autocmds,
+})
 --api.nvim_create_autocmd("TermClose", {
 --	pattern = "*",
 --	command = "if !v:event.status | exe 'Bdelete! '..expand('<abuf>') | endif",
@@ -73,17 +79,3 @@ local term_autocmds = api.nvim_create_augroup("term_autocomds", { clear = true }
 --	callback = set_status_line,
 --	group = term_autocmds,
 --})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
