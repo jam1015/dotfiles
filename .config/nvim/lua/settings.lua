@@ -4,7 +4,7 @@ vim.cmd([[ highlight Comment cterm=italic gui=italic]])
 vim.g.debug = false
 
 set.bg = "dark"
-local colorscheme = "NeoSolarized"
+local colorscheme = "gruvbox"
 if os.getenv("DISPLAY") then
 	local status_ok = nil
 	status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
@@ -57,7 +57,7 @@ set.listchars = set.listchars + 'trail:␣'
 set.listchars = set.listchars + 'lead:·'
 set.listchars = set.listchars + 'extends:»'
 set.listchars = set.listchars + 'precedes:«'
-set.listchars = set.listchars + 'tab:▕  '
+set.listchars = set.listchars + 'tab:│  '
 set.listchars = set.listchars + 'nbsp:⣿'
 set.number = true
 set.relativenumber = true
