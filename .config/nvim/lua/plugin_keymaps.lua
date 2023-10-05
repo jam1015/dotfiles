@@ -66,10 +66,10 @@ function M.pluginKeymaps(plugin, setup_type)
 	elseif plugin == "vim_create_goto" then
 		vim.keymap.set('n', '<leader>fc', '<Plug>(CreateGoTo)', { remap = true })
 	elseif plugin == "substitute_nvim" then
-		vim.keymap.set("n", "sx", require('substitute.exchange').operator, { remap = false })
-		vim.keymap.set("n", "sxx", require('substitute.exchange').line, { remap = false })
-		vim.keymap.set("x", "X", require('substitute.exchange').visual, { remap = false })
-		vim.keymap.set("n", "sxc", require('substitute.exchange').cancel, { remap = false })
+		vim.keymap.set("n", "<leader>xc", require('substitute.exchange').operator, { remap = false })
+		vim.keymap.set("n", "<leacer>xx", require('substitute.exchange').line, { remap = false })
+		vim.keymap.set("x", "<leader>X", require('substitute.exchange').visual, { remap = false })
+		vim.keymap.set("n", "<leader>xq", require('substitute.exchange').cancel, { remap = false })
 	elseif plugin == "cscope_maps" then
 		local get_cscope_prompt_cmd = function(operation, selection)
 			local sel = "cword" -- word under cursor

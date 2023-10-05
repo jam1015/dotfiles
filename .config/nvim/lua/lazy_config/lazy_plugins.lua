@@ -18,14 +18,14 @@ return {
 		config = function() require("plugin_configs.flit") end
 	},
 
-	({
-		"ggandor/leap.nvim",
-		--event = "VeryLazy",
-		--commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
-		config = function()
-			require('plugin_configs.leap')
-		end,
-	}),
+  ({
+  	"ggandor/leap.nvim",
+  	--event = "VeryLazy",
+  	--commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
+  	config = function()
+  		require('plugin_configs.leap')
+  	end,
+  }),
 	({ "ethanholz/nvim-lastplace",
 		config = function() require("plugin_configs.nvim-lastplace") end }),
 
@@ -61,7 +61,7 @@ return {
 		config = function()
 			require("plugin_configs.arena")
 		end
-,
+		,
 	},
 	{
 		"dhananjaylatkar/cscope_maps.nvim",
@@ -142,15 +142,15 @@ return {
 		end
 	},
 
-	({
-		"folke/tokyonight.nvim",
-		branch = "main",
-		config = function()
-			require("plugin_configs.tokyonight")
-		end,
-		--
-		event = "VeryLazy"
-	}),
+  ({
+  	"folke/tokyonight.nvim",
+  	branch = "main",
+  	config = function()
+  		require("plugin_configs.tokyonight")
+  	end,
+  	--
+  	event = "VeryLazy"
+  }),
 
 	{
 		'pappasam/papercolor-theme-slim'
@@ -349,7 +349,7 @@ return {
 	({
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
-		enabled = false,
+		enabled = true,
 		config = function()
 			require("plugin_configs.nvim-treesitter")
 		end,
@@ -362,7 +362,7 @@ return {
 	},
 
 
-------------------------------------------------------------------------------------------
+	------------------------------------------------------------------------------------------
 
 	({
 		"folke/trouble.nvim", event = "VeryLazy",
@@ -390,25 +390,25 @@ return {
 
 	},
 
-  {
-  	"neovim/nvim-lspconfig",
-  	enabled = true,
-  	--event = { "VeryLazy" },
-  	--	lazy = true,
-  	--						event = {"InsertEnter"}
-  	--
-  	--event = { "BufReadPre", "BufNewFile", "BufRead" },
+	{
+		"neovim/nvim-lspconfig",
+		enabled = true,
+		--event = { "VeryLazy" },
+		--	lazy = true,
+		--						event = {"InsertEnter"}
+		--
+		--event = { "BufReadPre", "BufNewFile", "BufRead" },
 
-  	dependencies = { "onsails/lspkind.nvim",
-  		"williamboman/mason.nvim",
-  		"williamboman/mason-lspconfig.nvim",
-  		"folke/neodev.nvim"
+		dependencies = { "onsails/lspkind.nvim",
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"folke/neodev.nvim"
 
-  	}, -- "RRethy/vim-illuminate" },
-  	config = function()
-  		require("plugin_configs.lsp")
-  	end
-  },
+		}, -- "RRethy/vim-illuminate" },
+		config = function()
+			require("plugin_configs.lsp")
+		end
+	},
 	--"mfussenegger/nvim-dap",
 	{
 		'echasnovski/mini.completion',
@@ -466,7 +466,7 @@ return {
 
 	{
 		"gbprod/yanky.nvim",
-		enabled = true,
+		enabled = false,
 
 		--enabled = function()
 		--	return not os.getenv("DISPLAY")
@@ -484,14 +484,14 @@ return {
 
 
 	},
-
+	{ "svban/YankAssassin.vim", enabled = false },
 	{
 		-- does the same thing as YankRing
 		'maxbrunsfeld/vim-yankstack',
 		--event = "VeryLazy",
 		--dir = "~/Documents/vim-yankstack",
 
-		enabled = false,
+		enabled = true,
 
 		--		enabled = function()
 		--			return os.getenv("DISPLAY")
@@ -523,7 +523,7 @@ return {
 
 	{
 		"gbprod/substitute.nvim",
-		enabled = false,
+		enabled = true,
 		config = function()
 			require("plugin_configs.substitute_nvim")
 			require("plugin_keymaps").pluginKeymaps("substitute_nvim")

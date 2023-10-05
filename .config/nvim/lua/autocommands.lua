@@ -1,13 +1,16 @@
 local api = vim.api
 
 -- Highlight on yank
---local aesthetics = api.nvim_create_augroup("aesthetic_settings", { clear = true })
---api.nvim_create_autocmd("TextYankPost", {
---	command = "silent! lua vim.highlight.on_yank({higroup = \"Visual\", timeout = 200})",
---	group = aesthetics,
---})
+local aesthetics = api.nvim_create_augroup("aesthetic_settings", { clear = true })
+api.nvim_create_autocmd("TextYankPost", {
+	command = "silent! lua vim.highlight.on_yank({higroup = \"Visual\", timeout = 200})",
+	group = aesthetics,
+})
 
 -- concurrency ----------------------------
+
+
+local concurrent = api.nvim_create_augroup("concurrent_editing", { clear = true })
 
 local function set_concurrent() --lets you edit multiple files at the same time
 	vim.v.swapchoice = "e"
@@ -15,7 +18,6 @@ local function set_concurrent() --lets you edit multiple files at the same time
 		{ timeout = 1000, animate = false, render = "minimal" })
 end
 
-local concurrent = api.nvim_create_augroup("concurrent_editing", { clear = true })
 api.nvim_create_autocmd("SwapExists", {
 	callback = set_concurrent,
 	group = concurrent,
@@ -29,19 +31,17 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 	group = concurrent
 })
 
-vim.cmd([[
-autocmd FileChangedShellPost * execute 'echohl WarningMsg | echo "File " . fnameescape(expand("<afile>")) . " changed on disk. Buffer reloaded." | echohl None'
-]])
-
 vim.api.nvim_create_autocmd({ "FileChangedShellPost" },
-	{ command = 'echohl WarningMsg | echo "File changed on disk. Buffer reloaded."', pattern = { "*" },
-		group = concurrent })
+	{
+		command =
+		'execute \'echohl WarningMsg | echo "File " . fnameescape(expand("<afile>")) . " changed on disk. Buffer reloaded." | echohl None\'',
+		pattern = { "*" },
+		group = concurrent
+	})
 
 
 -- terminal related --------------------
 local term_autocmds = api.nvim_create_augroup("term_autocomds", { clear = true })
-
-
 
 
 local function no_term_num()
@@ -58,6 +58,25 @@ api.nvim_create_autocmd("TermOpen", {
 	callback = no_term_num,
 	group = term_autocmds,
 })
+
+
+
+-- clipboard ---------------------------
+
+local clipboard_acg = api.nvim_create_augroup("cb_autocmds", { clear = true })
+
+
+
+--api.nvim_create_autocmd("FocusLost", {
+--	callback = function() vim.opt.clipboard = "" end,
+--	group = clipboard_acg,
+--})
+--
+--api.nvim_create_autocmd("FocusGained", {
+--	callback = function() vim.opt.clipboard = "unnamedplus" end,
+--	group = clipboard_acg,
+--})
+
 --api.nvim_create_autocmd("TermClose", {
 --	pattern = "*",
 --	command = "if !v:event.status | exe 'Bdelete! '..expand('<abuf>') | endif",
