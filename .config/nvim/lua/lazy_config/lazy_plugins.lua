@@ -18,19 +18,20 @@ return {
 		config = function() require("plugin_configs.flit") end
 	},
 
-  ({
-  	"ggandor/leap.nvim",
-  	--event = "VeryLazy",
-  	--commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
-  	config = function()
-  		require('plugin_configs.leap')
-  	end,
-  }),
+	({
+		"ggandor/leap.nvim",
+		event = "VeryLazy",
+		--commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
+		config = function()
+			require('plugin_configs.leap')
+		end,
+	}),
 	({ "ethanholz/nvim-lastplace",
 		config = function() require("plugin_configs.nvim-lastplace") end }),
 
 	{
 		'willothy/flatten.nvim',
+		event = "VeryLazy",
 
 		--config = true,
 		-- or pass configuration with
@@ -56,7 +57,7 @@ return {
 
 	{
 		"dzfrias/arena.nvim",
-		event = "BufWinEnter",
+		event = "VeryLazy",
 		-- Calls `.setup()` automatically
 		config = function()
 			require("plugin_configs.arena")
@@ -123,34 +124,24 @@ return {
 		config = true,
 	},
 
-	{
-		"marko-cerovac/material.nvim",
-		init = function()
-			require("plugin_configs.material.initi")
-		end,
-		config = function()
-			require("plugin_configs.material.config")
-		end,
-		event = "VeryLazy"
-
-	},
 
 	{
 		"Tsuzat/NeoSolarized.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("plugin_configs.neosolarized")
 		end
 	},
 
-  ({
-  	"folke/tokyonight.nvim",
-  	branch = "main",
-  	config = function()
-  		require("plugin_configs.tokyonight")
-  	end,
-  	--
-  	event = "VeryLazy"
-  }),
+	({
+		"folke/tokyonight.nvim",
+		branch = "main",
+		config = function()
+			require("plugin_configs.tokyonight")
+		end,
+		--
+		event = "VeryLazy"
+	}),
 
 	{
 		'pappasam/papercolor-theme-slim'
@@ -165,9 +156,6 @@ return {
 		end,
 		event = "VeryLazy"
 	},
-	({
-		"ellisonleao/gruvbox.nvim", event = "VeryLazy"
-	}),
 	{
 		"rcarriga/nvim-notify",
 		event = "VeryLazy",
@@ -275,8 +263,8 @@ return {
 	},
 
 	({
-		"mattn/emmet-vim", event = "VeryLazy",
-		lazy = true,
+		"mattn/emmet-vim",
+		event = "VeryLazy",
 		init = function()
 			require("plugin_configs.emmet-vim.initi")
 		end,
@@ -484,7 +472,7 @@ return {
 
 
 	},
-	{ "svban/YankAssassin.vim", enabled = false },
+	{ "svban/YankAssassin.vim", enabled = true },
 	{
 		-- does the same thing as YankRing
 		'maxbrunsfeld/vim-yankstack',
@@ -534,11 +522,11 @@ return {
 
 	({
 		"jam1015/vim-slime-ext-neovim",
-		branch = "status_override",
+		dir = "~/Documents/vim-slime-ext-neovim",
 		--dir= "~/Documents/vim-slime-ext-neovim",
 		--"main",--
 		event = "VeryLazy",
-		dependencies = { { "jpalardy/vim-slime-ext-plugins", event = "VeryLazy" }, },
+		dependencies = { { "jpalardy/vim-slime-ext-plugins", dir = "~/Documents/vim-slime-ext-plugins",event = "VeryLazy" }, },
 
 		init = function()
 			require("plugin_configs.vim-slime-ext-plugins.initi")
