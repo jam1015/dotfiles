@@ -41,6 +41,7 @@ vim.api.nvim_create_autocmd({ "FileChangedShellPost" },
 
 
 -- terminal related --------------------
+
 local term_autocmds = api.nvim_create_augroup("term_autocomds", { clear = true })
 
 
@@ -61,6 +62,27 @@ api.nvim_create_autocmd("TermOpen", {
 
 
 
+local function entertermmode()
+	if vim.fn.mode() == 'n' then -- and not vim.b.splitting_term then
+		vim.cmd([[startinsert]])
+	end
+end
+
+
+api.nvim_create_autocmd("TermOpen", {
+	callback = entertermmode,
+	group = term_autocmds,
+})
+
+--api.nvim_create_autocmd("TermClose", {
+--	pattern = "*",
+--	command = "if !v:event.status | exe 'Bdelete! '..expand('<abuf>') | endif",
+--
+--	--command = "if !v:event.status && len(getbufline(expand('<abuf>'), 1, '$')) == 0 | exe 'bdelete! '..expand('<abuf>') | endif",
+--	--command = "if !v:event.status | exe 'Bdelete!' | endif",
+--	group = term_autocmds
+--})
+
 -- clipboard ---------------------------
 
 local clipboard_acg = api.nvim_create_augroup("cb_autocmds", { clear = true })
@@ -75,26 +97,4 @@ local clipboard_acg = api.nvim_create_augroup("cb_autocmds", { clear = true })
 --api.nvim_create_autocmd("FocusGained", {
 --	callback = function() vim.opt.clipboard = "unnamedplus" end,
 --	group = clipboard_acg,
---})
-
---api.nvim_create_autocmd("TermClose", {
---	pattern = "*",
---	command = "if !v:event.status | exe 'Bdelete! '..expand('<abuf>') | endif",
---
---	--command =
---	--"if !v:event.status && len(getbufline(expand('<abuf>'), 1, '$')) == 0 | exe 'bdelete! '..expand('<abuf>') | endif",
---	--command = "if !v:event.status | exe 'Bdelete!' | endif",
---	group = term_autocmds
---})
-
-
-
---local function set_status_line()
---	vim.opt_local.statusline = "%{bufname()}%=id: %{b:terminal_job_id} pid: %{b:terminal_job_pid}"
---end
---
---api.nvim_create_autocmd("TermOpen", {
---	pattern = "*",
---	callback = set_status_line,
---	group = term_autocmds,
 --})

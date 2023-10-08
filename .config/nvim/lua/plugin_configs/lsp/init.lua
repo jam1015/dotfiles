@@ -1,4 +1,4 @@
-local status_ok, _ = pcall(require, "lspconfig")
+local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 
 if not status_ok then
 	return
@@ -27,9 +27,9 @@ require("mason-lspconfig").setup({
 })
 
 
-local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status_ok then
 	vim.notify("failed to load lspconfig")
+	vim.cmd([[colorscheme blue]])
 	return
 end
 --local cmp_lsp = require("cmp-nvim-lsp")
@@ -58,5 +58,4 @@ for _, server in ipairs(servers) do
 end
 
 handlers_obj.setup()
-vim.api.nvim_exec_autocmds("FileType", {})
---require "plugin_configs.lsp.null-ls"
+--vim.api.nvim_exec_autocmds("FileType", {})

@@ -4,7 +4,9 @@ M = {}
 function M.pluginKeymaps(plugin, setup_type)
 	local keymap = vim.keymap.set
 	local opts = { remap = false, silent = true }
-	local wk = require("which-key")
+
+	local has_wk, wk = pcall(require, "which-key")
+	if has_wk then
 	local wk_opts = {
 		mode = "n", -- NORMAL mode
 		-- prefix: use "<leader>f" for example for mapping everything related to finding files
@@ -16,6 +18,8 @@ function M.pluginKeymaps(plugin, setup_type)
 		nowait = false, -- use `nowait` when creating keymaps
 		expr = false, -- use `expr` when creating keymaps
 	}
+	end
+
 	if plugin == "vim-unimpaired" then
 		vim.cmd([[
 					function! s:ArgNext(...)
