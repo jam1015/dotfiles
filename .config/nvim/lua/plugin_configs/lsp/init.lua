@@ -1,6 +1,6 @@
-local lspconfig_status_ok, lspconfig = pcall(require, "nvim-lspconfig")
+ local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 
-if not status_ok then
+if not lspconfig_status_ok then
 	vim.cmd([[colorscheme blue]])
 	vim.notify("failed to load lspconfig", vim.log.levels.DEBUG)
 	return
@@ -12,16 +12,14 @@ local servers = { "tsserver", "vimls", "clangd",  "pyright", "jsonls", "cssls", 
 	"julials" }
 --"r_language_server",
 --"texlab",
---local mason_settings_ok, settings_obj = pcall(require,"plugin_configs.lsp.lsp_handlerss")
---
+
+
 local settings_obj = require("plugin_configs.lsp.mason_settings")
---if not mason_settings_ok then
---	vim.notify("failed to load mason settings\n")
---	vim.cmd([[colorscheme delek]])
---	return
---end
+
+
 
 local settings = settings_obj.settings()
+
 require("mason").setup(settings)
 
 require("mason-lspconfig").setup({
@@ -30,11 +28,6 @@ require("mason-lspconfig").setup({
 })
 
 
-if not lspconfig_status_ok then
-	vim.notify("failed to load lspconfig", vim.log.levels.DEBUG)
-	vim.cmd([[colorscheme peachpuff]])
-	return
-end
 --local cmp_lsp = require("cmp-nvim-lsp")
 local handlers_obj = require("plugin_configs.lsp.lsp_handlers")
 
@@ -54,7 +47,6 @@ for _, server in ipairs(servers) do
 	if require_ok then
 		opts = vim.tbl_deep_extend("force", conf_opts, opts)
 	else
-		vim.cmd([[colorscheme delek]])
 	end
 	--
 	--	--vim.notify("setting up " .. server )

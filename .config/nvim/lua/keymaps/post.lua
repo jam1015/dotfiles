@@ -1,6 +1,6 @@
 local ok, wk = pcall(require, 'which-key')
 if not ok then
-	vim.notify("whic-key not installed", vim.log.levels.ERROR)
+	vim.notify("which-key not installed", vim.log.levels.DEBUG)
 else
 	local wk_opts = {
 		mode = "n", -- NORMAL mode
