@@ -32,6 +32,9 @@ return {
 			telemetry = {
 				enable = false,
 			},
+
+			semantic = { enable = false },
 		},
+
 	},
 }

@@ -9,6 +9,31 @@ end
 
 return {
 
+
+	{
+		"example/example",
+		dir = "~/Documents/example",
+		config = function()
+			vim.api.nvim_exec_autocmds("FileType", {})
+		end
+
+
+
+	},
+	{
+		"neovim/nvim-lspconfig",
+		--event = { "VeryLazy" },
+		dependencies = { "onsails/lspkind.nvim",
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"folke/neodev.nvim"
+
+		}, -- "RRethy/vim-illuminate" },
+		config = function()
+			require("plugin_configs.lsp")
+		end
+	},
+
 	{
 		"ggandor/flit.nvim",
 
@@ -20,7 +45,7 @@ return {
 
 	({
 		"ggandor/leap.nvim",
-		--event = "VeryLazy",
+		event = "VeryLazy",
 		--commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
 		config = function()
 			require('plugin_configs.leap')
@@ -31,6 +56,7 @@ return {
 
 	{
 		'willothy/flatten.nvim',
+		event = "VeryLazy",
 
 		--config = true,
 		-- or pass configuration with
@@ -56,12 +82,12 @@ return {
 
 	{
 		"dzfrias/arena.nvim",
-		event = "BufWinEnter",
+		event = "VeryLazy",
 		-- Calls `.setup()` automatically
 		config = function()
 			require("plugin_configs.arena")
 		end
-,
+		,
 	},
 	{
 		"dhananjaylatkar/cscope_maps.nvim",
@@ -69,7 +95,7 @@ return {
 		dependencies = {
 			"folke/which-key.nvim", -- optional [for whichkey hints]
 			--"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
-			"ibhagwan/fzf-lua",   -- optional [for picker="fzf-lua"]
+			"ibhagwan/fzf-lua",  -- optional [for picker="fzf-lua"]
 			"nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
 		},
 		opts = require("plugin_configs.cscope_maps.options")
@@ -84,6 +110,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		event = "VeryLazy",
+		enabled = false,
 		dependencies = { "nvim-lua/plenary.nvim",
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
@@ -122,20 +149,10 @@ return {
 		config = true,
 	},
 
-	{
-		"marko-cerovac/material.nvim",
-		init = function()
-			require("plugin_configs.material.initi")
-		end,
-		config = function()
-			require("plugin_configs.material.config")
-		end,
-		event = "VeryLazy"
-
-	},
 
 	{
 		"Tsuzat/NeoSolarized.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("plugin_configs.neosolarized")
 		end
@@ -143,6 +160,7 @@ return {
 
 	({
 		"folke/tokyonight.nvim",
+		priority = 1000,
 		branch = "main",
 		config = function()
 			require("plugin_configs.tokyonight")
@@ -164,9 +182,6 @@ return {
 		end,
 		event = "VeryLazy"
 	},
-	({
-		"ellisonleao/gruvbox.nvim", event = "VeryLazy"
-	}),
 	{
 		"rcarriga/nvim-notify",
 		event = "VeryLazy",
@@ -274,8 +289,8 @@ return {
 	},
 
 	({
-		"mattn/emmet-vim", event = "VeryLazy",
-		lazy = true,
+		"mattn/emmet-vim",
+		event = "VeryLazy",
 		init = function()
 			require("plugin_configs.emmet-vim.initi")
 		end,
@@ -332,6 +347,7 @@ return {
 	},
 	{
 		"numToStr/Comment.nvim",
+		enabled = false,
 		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("plugin_configs.Comment") end,
@@ -354,9 +370,13 @@ return {
 	}),
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
+		enabled = false,
 		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter"
 	},
+
+
+	------------------------------------------------------------------------------------------
 
 	({
 		"folke/trouble.nvim", event = "VeryLazy",
@@ -386,25 +406,17 @@ return {
 
 
 
-	{
-		"neovim/nvim-lspconfig",
-		enabled = true,
-		event = { "VeryLazy" },
-		--	lazy = true,
-		--						event = {"InsertEnter"}
-		--
-		--event = { "BufReadPre", "BufNewFile", "BufRead" },
 
-		dependencies = { "onsails/lspkind.nvim",
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-			"folke/neodev.nvim"
 
-		}, -- "RRethy/vim-illuminate" },
-		config = function()
-			require("plugin_configs.lsp")
-		end
-	},
+
+
+
+
+
+
+
+
+
 	--"mfussenegger/nvim-dap",
 	{
 		'echasnovski/mini.completion',
@@ -462,15 +474,15 @@ return {
 
 	{
 		"gbprod/yanky.nvim",
-		enabled = true,
+		enabled = false,
 
 		--enabled = function()
 		--	return not os.getenv("DISPLAY")
 		--end,
 
-		event = "UIEnter",
+		event = "VeryLazy",
 		--branch = "autocmd",
-		dependencies = { "kkharji/sqlite.lua", },
+		--dependencies = { "kkharji/sqlite.lua", },
 
 		--dir = "/home/jordan/Documents/yanky.nvim",
 		config = function()
@@ -480,14 +492,14 @@ return {
 
 
 	},
-
+	{ "svban/YankAssassin.vim", enabled = true },
 	{
 		-- does the same thing as YankRing
 		'maxbrunsfeld/vim-yankstack',
 		--event = "VeryLazy",
 		--dir = "~/Documents/vim-yankstack",
 
-		enabled = false,
+		enabled = true,
 
 		--		enabled = function()
 		--			return os.getenv("DISPLAY")
@@ -503,47 +515,16 @@ return {
 	},
 
 
-	({
-		"jpalardy/vim-slime",
-		branch = "vim_array", --"main",--
-		event = "VeryLazy",
-		enabled = false,
-		init = function()
-			require("plugin_configs.vim-slime.initi")
-		end,
-
-		config = function()
-			require("plugin_configs.vim-slime.config")
-		end,
-	}),
 
 	{
 		"gbprod/substitute.nvim",
-		enabled = false,
+		enabled = true,
 		config = function()
 			require("plugin_configs.substitute_nvim")
 			require("plugin_keymaps").pluginKeymaps("substitute_nvim")
 		end
 	},
 
-
-
-	({
-		"jam1015/vim-slime-ext-neovim",
-		branch = "status_override",
-		--dir= "~/Documents/vim-slime-ext-neovim",
-		--"main",--
-		event = "VeryLazy",
-		dependencies = { { "jpalardy/vim-slime-ext-plugins", event = "VeryLazy" }, },
-
-		init = function()
-			require("plugin_configs.vim-slime-ext-plugins.initi")
-		end,
-
-		config = function()
-			require("plugin_configs.vim-slime-ext-plugins.config")
-		end,
-	}),
 
 	{
 		"norcalli/nvim-colorizer.lua",
@@ -567,6 +548,39 @@ return {
 		config = function()
 			require("plugin_keymaps").pluginKeymaps("vim_create_goto")
 		end
-	}
+	},
 
+
+
+	({
+		"jpalardy/vim-slime",
+		branch = "vim_array", --"main",--
+		event = "VeryLazy",
+		enabled = false,
+		init = function()
+			require("plugin_configs.vim-slime.initi")
+		end,
+
+		config = function()
+			require("plugin_configs.vim-slime.config")
+		end,
+	}),
+
+	({
+		"jam1015/vim-slime-ext-neovim",
+		dir = "~/Documents/slimes/vim-slime-ext-neovim",
+		--dir= "~/Documents/vim-slime-ext-neovim",
+		--"main",--
+		event = "VeryLazy",
+		dependencies = {
+			{ "jpalardy/vim-slime-ext-plugins", dir = "~/Documents/slimes/vim-slime-ext-plugins", event = "VeryLazy" }, },
+
+		init = function()
+			require("plugin_configs.vim-slime-ext-plugins.initi")
+		end,
+
+		config = function()
+			require("plugin_configs.vim-slime-ext-plugins.config")
+		end,
+	}),
 }

@@ -7,7 +7,7 @@ require("substitute").setup({
 			timer = 500,
 		},
 		range = {
-			prefix = "s",
+			prefix = nil,
 			prompt_current_text = false,
 			confirm = false,
 			complete_word = false,

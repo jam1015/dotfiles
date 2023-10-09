@@ -116,4 +116,6 @@ function precmd {
     export PWD
 }
 
+
 echo ".zshrc sourced"
+

@@ -4,7 +4,7 @@ vim.cmd([[ highlight Comment cterm=italic gui=italic]])
 vim.g.debug = false
 
 set.bg = "dark"
-local colorscheme = "gruvbox"
+local colorscheme = "tokyonight"
 if os.getenv("DISPLAY") then
 	local status_ok = nil
 	status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
@@ -68,14 +68,8 @@ set.termguicolors = true
 set.foldmethod = "expr"
 set.foldexpr = "nvim_treesitter#foldexpr()"
 set.foldlevelstart = 99
-
-if os.getenv("DISPLAY") then
-	--if not os.getenv("SSH_CONNECTION") then
-	set.clipboard = 'unnamedplus'
-	--end
-else
-end
-
+--
+--
 vim.g.vim_json_syntax_conceal = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
@@ -85,8 +79,16 @@ set.pumheight = 10
 set.inccommand = 'split'
 set.shada = "'1000,%"
 
+-- see yanky config for clipbaord settingss
 
 
+-- setting clipboard settings
+if os.getenv("DISPLAY") then
+	if not os.getenv("SSH_CONNECTION") then
+		vim.opt.clipboard = 'unnamedplus'
+	end
+else
+end
 
 local function setup_tmux_clipboard()
 	local tmux = os.getenv("TMUX")
@@ -114,5 +116,4 @@ end
 
 -- Call the function to set up the clipboard
 setup_tmux_clipboard()
-
 
