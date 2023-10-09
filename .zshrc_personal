@@ -115,14 +115,6 @@ function precmd {
     export PWD
 }
 
-find_in_path() {
-  name="$1"
-  IFS=':' read -ra PATHS <<< "$PATH"
-  for path in "${PATHS[@]}"; do
-    find "$path" -maxdepth 1 -name "$name" -type f -executable
-  done
-}
-
 
 echo ".zshrc sourced"
 
