@@ -54,4 +54,4 @@ for _, server in ipairs(servers) do
 end
 
 handlers_obj.setup()
---vim.api.nvim_exec_autocmds("FileType", {})
+vim.api.nvim_exec_autocmds("FileType")
