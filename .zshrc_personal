@@ -1,5 +1,6 @@
 export PATH="$PATH:/Users/jordanmandel/.local/bin"
 export PATH="$PATH:/Users/jordanmandel/bin"
+export PATH="$PATH:/usr/local/bin"
 
 # ``````````Vim configuration things`````
 
