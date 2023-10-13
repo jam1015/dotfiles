@@ -8,6 +8,11 @@ export zshrc="$HOME/.zshrc_personal"
 alias vi='nvim'
 alias vin='nvim --cmd "let g:flatten_allow_nesting = v:true"'
 
+# `````````````````` asdf neovim commands
+alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
+alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
+alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovim ref:master'
+
 alias van="man -P 'nvim -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'" 
 alias ptpython='ptpython --vi --dark-bg'
 alias python='python'
