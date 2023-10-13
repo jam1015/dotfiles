@@ -19,15 +19,15 @@ alias pd='pandoc'
 alias glog="git log --all --graph --decorate --oneline"
 
 if [[ "$(uname -s)" == "Darwin" ]]; then
-    alias vim="mvim -v"
+	alias vim="mvim -v"
 fi
 
 export BROWSER="/usr/bin/firefox-developer-edition"
 export EDITOR="nvim"
 
 case "$OSTYPE" in
-    darwin*)    VISUAL='/usr/local/bin/nvim  --cmd "let g:flatten_allow_nesting = v:true"' ;;   # macOS
-    linux*)     VISUAL='/usr/bin/nvim --cmd "let g:flatten_allow_nesting = v:true"';;         # Linux
+	darwin*)    VISUAL='/usr/local/bin/nvim  --cmd "let g:flatten_allow_nesting = v:true"' ;;   # macOS
+	linux*)     VISUAL='/usr/bin/nvim --cmd "let g:flatten_allow_nesting = v:true"';;         # Linux
 esac
 
 export VISUAL
@@ -42,11 +42,11 @@ set -o vi #use vi editing mode in the terminal
 KEYTIMEOUT=1 #get rid of pause after switching modes in vim mode
 
 mkcd () {
-  mkdir "$1" && cd "$1"
+	mkdir "$1" && cd "$1"
 }
 
 mkcdp () {
-  mkdir -p "$1" && cd "$1"
+	mkdir -p "$1" && cd "$1"
 }
 
 #history settings
@@ -75,22 +75,22 @@ vim_cmd_mode="%%"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {
-  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-  zle reset-prompt
+vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+zle reset-prompt
 }
 
 zle -N zle-keymap-select
 
 function zle-line-finish {
-  vim_mode=$vim_ins_mode
+vim_mode=$vim_ins_mode
 }
 zle -N zle-line-finish
 
 if [[ "$EUID" = 0 ]]
 then 
-PS1='%B%F{green}%M:su:%3~ ${vim_mode}%f%b '
+	PS1='%B%F{green}%M:su:%3~ ${vim_mode}%f%b '
 else
-PS1='%B%F{magenta}%M:%3~ ${vim_mode}%f%b '
+	PS1='%B%F{magenta}%M:%3~ ${vim_mode}%f%b '
 fi
 
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
@@ -101,7 +101,7 @@ setopt completealiases
 
 function cheat ()
 {
-    curl cheat.sh/$1
+	curl cheat.sh/$1
 }
 
 
@@ -111,8 +111,19 @@ export FZF_ALT_C_COMMAND='fd --type d . --color=never'
 function precmd {
 	OLDPWD=$PWD
 	export OLDPWD
-    PWD=$(pwd)
-    export PWD
+	PWD=$(pwd)
+	export PWD
 }
+
+
+
+
+
+if command -v pacman > /dev/null 2>&1; then
+	. /opt/asdf-vm/asdf.sh
+fi
+
+
+
 
 echo ".zshrc sourced"
