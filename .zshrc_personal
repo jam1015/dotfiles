@@ -22,6 +22,9 @@ alias glog="git log --all --graph --decorate --oneline"
 
 # ````````````````` asdf  `````````````````
 
+if command -v pacman > /dev/null 2>&1; then
+	. /opt/asdf-vm/asdf.sh
+fi
 alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
 alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
 alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovim ref:master'
@@ -130,9 +133,6 @@ function precmd {
 
 
 
-if command -v pacman > /dev/null 2>&1; then
-	. /opt/asdf-vm/asdf.sh
-fi
 
 
 
