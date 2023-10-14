@@ -1,6 +1,8 @@
-local status_ok, _ = pcall(require, "lspconfig")
+ local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 
-if not status_ok then
+if not lspconfig_status_ok then
+	vim.cmd([[colorscheme blue]])
+	vim.notify("failed to load lspconfig", vim.log.levels.DEBUG)
 	return
 end
 
@@ -10,15 +12,14 @@ local servers = { "tsserver", "vimls", "clangd",  "pyright", "jsonls", "cssls", 
 	"julials" }
 --"r_language_server",
 --"texlab",
---local mason_settings_ok, settings_obj = pcall(require,"plugin_configs.lsp.lsp_handlerss")
+
+
 local settings_obj = require("plugin_configs.lsp.mason_settings")
---if not mason_settings_ok then
---	vim.notify("failed to load mason settings\n")
---	vim.cmd([[colorscheme delek]])
---	return
---end
+
+
 
 local settings = settings_obj.settings()
+
 require("mason").setup(settings)
 
 require("mason-lspconfig").setup({
@@ -27,11 +28,6 @@ require("mason-lspconfig").setup({
 })
 
 
-local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_status_ok then
-	vim.notify("failed to load lspconfig")
-	return
-end
 --local cmp_lsp = require("cmp-nvim-lsp")
 local handlers_obj = require("plugin_configs.lsp.lsp_handlers")
 
@@ -58,5 +54,4 @@ for _, server in ipairs(servers) do
 end
 
 handlers_obj.setup()
-vim.api.nvim_exec_autocmds("FileType", {})
---require "plugin_configs.lsp.null-ls"
+vim.api.nvim_exec_autocmds("FileType",{})

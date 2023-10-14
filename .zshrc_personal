@@ -18,6 +18,20 @@ alias ls='ls -G'
 alias pd='pandoc'
 alias glog="git log --all --graph --decorate --oneline"
 
+
+
+# ````````````````` asdf  `````````````````
+
+if command -v pacman > /dev/null 2>&1; then
+	. /opt/asdf-vm/asdf.sh
+fi
+
+alias update-nvim-stable='asdf uninstall neovim stable || asdf install neovim stable'
+alias update-nvim-nightly='asdf uninstall neovim nightly || asdf install neovim nightly'
+alias update-nvim-master='asdf uninstall neovim ref:master || asdf install neovim ref:master'
+
+
+
 if [[ "$(uname -s)" == "Darwin" ]]; then
 	alias vim="mvim -v"
 fi
@@ -58,6 +72,7 @@ bindkey "^R" history-incremental-pattern-search-backward
 # setting some useful environment variables
 
 export tododir="$HOME/Documents/diaries/"
+export diaries="$HOME/Documents/diaries/"
 export diaries_thoughts="$HOME/Documents/diaries/diaries_thoughts.md"
 export diaries_todo="$HOME/Documents/diaries/to_do_short.md"
 export diaries_plans="$HOME/Documents/diaries/to_do_long.md"
@@ -119,9 +134,6 @@ function precmd {
 
 
 
-if command -v pacman > /dev/null 2>&1; then
-	. /opt/asdf-vm/asdf.sh
-fi
 
 
 

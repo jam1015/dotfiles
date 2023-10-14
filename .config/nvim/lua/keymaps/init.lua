@@ -28,6 +28,7 @@ end
 
 
 keymap("t", "<localleader><Esc>", "<C-\\><C-N>", opts)
+
 local function term_vsplit()
 	if vim.bo.buftype == 'terminal' then
 		local pid = vim.fn.jobpid(vim.b.terminal_job_id)
