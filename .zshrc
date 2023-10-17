@@ -107,3 +107,5 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+-e 
+alias luamake=/Users/jordanmandel/Documents/lua-language-server/3rd/luamake/luamake
