@@ -18,9 +18,11 @@ return {
 			},
 			workspace = {
 				library = {
+					--vim.env.VIMRUNTIME,
 					[current_file_dir] = true,
-					vim.api.nvim_get_runtime_file('', true),
-					"${3rd}/luassert/library",
+					-- these were causing problems and I'm not sure why they're there
+					--vim.api.nvim_get_runtime_file('', true),
+					--"${3rd}/luassert/library",
 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 					[vim.fn.stdpath("config") .. "/lua"] = true,
 				},
