@@ -1,4 +1,4 @@
-require("plugin_keymaps").pluginKeymaps("vim-slime")
+require("plugin_keymaps").pluginKeymaps("vim-slime-ext-plugins")
 	vim.g.slime_target_send = "slime_neovim#send"
 	vim.g.slime_target_config = "slime_neovim#config"
 	vim.g.slime_input_pid=0
