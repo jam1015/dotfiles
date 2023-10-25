@@ -62,7 +62,7 @@ api.nvim_create_autocmd("TermOpen", {
 
 
 
-local function entertermmode()
+local function enterternmode()
 	if vim.fn.mode() == 'n' then -- and not vim.b.splitting_term then
 		vim.cmd([[startinsert]])
 	end
@@ -70,7 +70,7 @@ end
 
 
 api.nvim_create_autocmd("TermOpen", {
-	callback = entertermmode,
+	callback = enterternmode,
 	group = term_autocmds,
 })
 
@@ -85,9 +85,7 @@ api.nvim_create_autocmd("TermOpen", {
 
 -- clipboard ---------------------------
 
-local clipboard_acg = api.nvim_create_augroup("cb_autocmds", { clear = true })
-
-
+--local clipboard_acg = api.nvim_create_augroup("cb_autocmds", { clear = true })
 
 --api.nvim_create_autocmd("FocusLost", {
 --	callback = function() vim.opt.clipboard = "" end,

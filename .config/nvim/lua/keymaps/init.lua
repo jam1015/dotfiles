@@ -14,6 +14,7 @@ vim.g.mapllocaleader = "\\"
 --------------------------------------------- commands to be moved to terminal/navigation plugin
 
 keymap("t", "<C-;>", "<C-\\><C-n>", opts)
+keymap("t", "<localleader><Esc>", "<C-\\><C-N>", opts)
 
 if os.getenv("TMUX") then
 	keymap("t", "<C-w>", "<C-\\><C-n><C-w>", { remap = true, silent = true })
@@ -27,7 +28,45 @@ end
 
 
 
-keymap("t", "<localleader><Esc>", "<C-\\><C-N>", opts)
+local function terminal_close_autocmd()
+	local current_buf = vim.api.nvim_get_current_buf()
+	local augroup_name = tostring(current_buf) ..
+		"_" .. vim.fn.jobpid(vim.b.terminal_job_id) .. "_" .. string.format('%x', os.time() + math.random(1000))
+
+	local function delete_term_buf_autocmd(ev_outer)
+		local function close_term_buffer(ev_inner)
+			local buf = ev_inner.buf
+			vim.cmd([[bdelete ]] .. buf)
+
+			return true
+		end
+		vim.api.nvim_create_autocmd("TermClose",
+			{
+				group = augroup_name,
+				buffer = ev_outer.buf,
+				callback = close_term_buffer,
+				once = true
+			})
+		return true
+	end
+
+	vim.api.nvim_create_augroup(augroup_name, { clear = false })
+
+	vim.api.nvim_create_autocmd("TermOpen",
+		{
+			group = augroup_name,
+			callback = delete_term_buf_autocmd,
+			once = true,
+		})
+end
+
+
+
+
+
+
+
+
 
 local function term_vsplit()
 	if vim.bo.buftype == 'terminal' then
@@ -40,7 +79,9 @@ local function term_vsplit()
 			if pwd == "" or pwd == nil then
 				pwd = vim.fn.systemlist('lsof -p ' .. pid .. ' | grep cwd | awk \'{print $NF}\'')[1]
 			end
-			vim.cmd('vsplit | term sh -c \'cd "' .. pwd .. '" && exec $SHELL\'')
+			vim.cmd('vsplit')
+			terminal_close_autocmd()
+			vim.cmd('term sh -c \'cd "' .. pwd .. '" && exec $SHELL\'')
 		end
 	else
 		vim.cmd('vsplit')
@@ -58,12 +99,15 @@ local function term_hsplit()
 			if pwd == "" or pwd == nil then
 				pwd = vim.fn.systemlist('lsof -p ' .. pid .. ' | grep cwd | awk \'{print $NF}\'')[1]
 			end
-			vim.cmd('split | term sh -c \'cd "' .. pwd .. '" && exec $SHELL\'')
+			vim.cmd('split')
+			terminal_close_autocmd()
+			vim.cmd('term sh -c \'cd "' .. pwd .. '" && exec $SHELL\'')
 		end
 	else
 		vim.cmd('split')
 	end
 end
+
 
 vim.api.nvim_create_user_command('Tsplit', term_hsplit, { bar = true })
 vim.api.nvim_create_user_command('Tvsplit', term_vsplit, { bar = true })
@@ -96,36 +140,36 @@ vim.cmd([[
 
 " changing size
 if bufwinnr(1)
-  map + <C-W>+
-  map - <C-W>-
-  map <leader>. <C-W><
-  map <leader>, <C-W>>
-endif
+	map + <C-W>+
+	map - <C-W>-
+	map <leader>. <C-W><
+	map <leader>, <C-W>>
+	endif
 
 
 
-" get current file
-cnoreabbr <expr> %% fnameescape(expand('%:p'))
-" new windows
+	" get current file
+	cnoreabbr <expr> %% fnameescape(expand('%:p'))
+	" new windows
 
-" in insert mode control u deletes to beginning of line, this makes it part of a new change
-inoremap <C-U> <C-G>u<C-U>
+	" in insert mode control u deletes to beginning of line, this makes it part of a new change
+	inoremap <C-U> <C-G>u<C-U>
 
 
-" motion based on visual lines
-let g:toggle_mappings = 1
+	" motion based on visual lines
+	let g:toggle_mappings = 1
 
-function! ToggleMappings()
-  let g:toggle_mappings = !g:toggle_mappings
-endfunction
+	function! ToggleMappings()
+	let g:toggle_mappings = !g:toggle_mappings
+	endfunction
 
-nnoremap <expr> $ g:toggle_mappings ? 'g$' : '$'
-nnoremap <expr> 0 g:toggle_mappings ? 'g0' : '0'
-nnoremap <expr> ^ g:toggle_mappings ? 'g^' : '^'
-nnoremap <expr> j g:toggle_mappings ? 'gj' : 'j'
-nnoremap <expr> k g:toggle_mappings ? 'gk' : 'k'
-command! ToggleMyMappings call ToggleMappings()
-]])
+	nnoremap <expr> $ g:toggle_mappings ? 'g$' : '$'
+	nnoremap <expr> 0 g:toggle_mappings ? 'g0' : '0'
+	nnoremap <expr> ^ g:toggle_mappings ? 'g^' : '^'
+	nnoremap <expr> j g:toggle_mappings ? 'gj' : 'j'
+	nnoremap <expr> k g:toggle_mappings ? 'gk' : 'k'
+	command! ToggleMyMappings call ToggleMappings()
+	]])
 
 
 

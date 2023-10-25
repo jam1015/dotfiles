@@ -9,7 +9,7 @@ require 'nvim-treesitter.configs'.setup {
 		},
 	},
 	-- One of "all", "maintained" (parsers with maintainers), or a list of languages
-	ensure_installed = { "markdown_inline","markdown", "vim", "r", "lua", "c", "python", "html", "typescript", "javascript", "bash",
+	ensure_installed = { "markdown_inline","markdown", "vim", "r", "lua", "c", "python", "html", "typescript", "javascript", "bash", "make",
 		"commonlisp"},
 	autopairs = true,
 

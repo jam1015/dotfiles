@@ -28,5 +28,4 @@ augroup prevent_insert
 	autocmd!
 	autocmd TermEnter * stopinsert
 augroup END
-runtime! ~/.config/nvim/init.lua
 
