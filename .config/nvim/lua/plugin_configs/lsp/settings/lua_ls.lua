@@ -5,7 +5,7 @@ table.insert(runtime_path, 'lua/?/init.lua')
 local current_file_dir = vim.fn.expand('%:p:h')
 return {
 	on_init = function(client)
-		print("Initializing client...")
+		--print("Initializing client...")
 
 		-- Print workspace folders
 		for i, folder in ipairs(client.workspace_folders) do
@@ -13,7 +13,7 @@ return {
 		end
 
 		local path = client.workspace_folders[1].name
-		print("Checking for config files in: " .. path)
+		--print("Checking for config files in: " .. path)
 
 		local hasLuarcJson = vim.loop.fs_stat(path .. '/.luarc.json') ~= nil
 		local hasLuarcJsonc = vim.loop.fs_stat(path .. '/.luarc.jsonc') ~= nil
@@ -29,10 +29,10 @@ return {
 			})
 
 			client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-			print("Configurations updated.")
+			--print("Configurations updated.")
 		end
 
-		print("Client initialized.")
+		--print("Client initialized.")
 		return true
 	end,
 	settings = {
