@@ -18,8 +18,8 @@ return {
 		local hasLuarcJson = vim.loop.fs_stat(path .. '/.luarc.json') ~= nil
 		local hasLuarcJsonc = vim.loop.fs_stat(path .. '/.luarc.jsonc') ~= nil
 
-		print(".luarc.json exists: " .. tostring(hasLuarcJson))
-		print(".luarc.jsonc exists: " .. tostring(hasLuarcJsonc))
+		--print(".luarc.json exists: " .. tostring(hasLuarcJson))
+		--print(".luarc.jsonc exists: " .. tostring(hasLuarcJsonc))
 
 		if not hasLuarcJson and not hasLuarcJsonc then
 			print("No config files found. Setting up default configurations.")
