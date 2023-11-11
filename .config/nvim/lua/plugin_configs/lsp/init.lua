@@ -7,8 +7,8 @@ if not lspconfig_status_ok then
 end
 
 local servers = { "tsserver", "vimls", "clangd",  "pyright", "jsonls", "cssls", "eslint",
-	"emmet_ls", "texlab", "html", 
-	"lua_ls", 
+	"emmet_ls", "texlab", "html",
+	"lua_ls",
 	"julials" }
 --"r_language_server",
 --"texlab",

@@ -575,11 +575,11 @@ return {
 		dependencies = {
 			{ "jpalardy/vim-slime-ext-plugins", dir = "~/Documents/slimes/vim-slime-ext-plugins", event = "VeryLazy" }, },
 
-		init = function()
+		config = function()
 			require("plugin_configs.vim-slime-ext-plugins.initi")
 		end,
 
-		config = function()
+		init = function()
 			require("plugin_configs.vim-slime-ext-plugins.config")
 		end,
 	}),
