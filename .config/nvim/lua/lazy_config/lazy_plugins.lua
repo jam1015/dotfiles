@@ -551,42 +551,21 @@ return {
 		end
 	},
 
-
-
---	({
---		"jpalardy/vim-slime",
---		--branch = "vim_array", --"main",--
---		--event = "VeryLazy",
---		enabled = false,
---		init = function()
---			require("plugin_configs.vim-slime.initi")
---		end,
---
---		config = function()
---			require("plugin_configs.vim-slime.config")
---		end,
---	}),
-
 	({
-		"jam1015/vim-slime-ext-neovim",
-		--branch = "remove_internal",
-		dir = "~/Documents/slimes/vim-slime-ext-neovim",
-		--dir= "~/Documents/vim-slime-ext-neovim",
-		--"main",--
-		dependencies = {
-			{
-				"jam1015/vim-slime-ext-plugins",
-					dir = "~/Documents/slimes/vim-slime-ext-plugins",
-				--branch = "validate",
-				--		event = "VeryLazy"
-			}, },
-
+		"jpalardy/vim-slime",
+		event = "VeryLazy",
 		init = function()
-			require("plugin_configs.vim-slime-ext-plugins.initi")
+			require("plugin_configs.vim-slime.initi")
 		end,
 
 		config = function()
-			require("plugin_configs.vim-slime-ext-plugins.config")
+			require("plugin_configs.vim-slime.config")
 		end,
 	}),
+
+
+
+
+
+
 }

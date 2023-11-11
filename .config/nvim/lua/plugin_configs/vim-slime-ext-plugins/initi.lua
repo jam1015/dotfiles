@@ -15,7 +15,7 @@ vim.g.slime_no_mappings = true
 
 
 -- use Neovim's internal Job ID rather than PID to select a terminal
-vim.g.slime_input_pid = false
+vim.g.slime_input_pid = true
 
 -- Show the Job ID and PID in the status bar of a terminal
 vim.g.override_status = true
