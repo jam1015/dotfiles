@@ -363,7 +363,7 @@ return {
 
 	({
 		"nvim-treesitter/nvim-treesitter",
-		event = "VeryLazy",
+		--event = "VeryLazy",
 		enabled = true,
 		config = function()
 			require("plugin_configs.nvim-treesitter")
