@@ -527,12 +527,6 @@ return {
 	},
 
 
-	{
-		"norcalli/nvim-colorizer.lua",
-		enabled = false,
-		init = function() vim.opt.termguicolors = true end,
-		config = function() require('colorizer').setup() end
-	},
 	"powerman/vim-plugin-AnsiEsc",
 
 	{
@@ -551,42 +545,66 @@ return {
 		end
 	},
 
-
-
---	({
---		"jpalardy/vim-slime",
---		--branch = "vim_array", --"main",--
---		--event = "VeryLazy",
---		enabled = false,
---		init = function()
---			require("plugin_configs.vim-slime.initi")
---		end,
---
---		config = function()
---			require("plugin_configs.vim-slime.config")
---		end,
---	}),
+	{
+		'nvim-lualine/lualine.nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+		config = function()
+			require('plugin_configs.lualine')
+		end,
+	},
 
 	({
-		"jam1015/vim-slime-ext-neovim",
-		--branch = "remove_internal",
-		dir = "~/Documents/slimes/vim-slime-ext-neovim",
-		--dir= "~/Documents/vim-slime-ext-neovim",
-		--"main",--
-		dependencies = {
-			{
-				"jam1015/vim-slime-ext-plugins",
-					dir = "~/Documents/slimes/vim-slime-ext-plugins",
-				--branch = "validate",
-				--		event = "VeryLazy"
-			}, },
-
+		--"jpalardy/vim-slime",
+		"jam1015/vim-slime",
+		dir = "~/Documents/slimes/vim-slime",
+		--branch = "vim_array", --"main",--
+		--event = "VeryLazy",
 		init = function()
-			require("plugin_configs.vim-slime-ext-plugins.initi")
+			require("plugin_configs.vim-slime.initi")
 		end,
 
 		config = function()
-			require("plugin_configs.vim-slime-ext-plugins.config")
+			require("plugin_configs.vim-slime.config")
 		end,
 	}),
+
+	--	({
+	--		"jam1015/vim-slime-ext-neovim",
+	--		--branch = "remove_internal",
+	--		dir = "~/Documents/slimes/vim-slime-ext-neovim",
+	--		--dir= "~/Documents/vim-slime-ext-neovim",
+	--		--"main",--
+	--		dependencies = {
+	--			{
+	--				"jam1015/vim-slime-ext-plugins",
+	--					dir = "~/Documents/slimes/vim-slime-ext-plugins",
+	--				--branch = "validate",
+	--				--		event = "VeryLazy"
+	--			}, },
+	--
+	--		init = function()
+	--			require("plugin_configs.vim-slime-ext-plugins.initi")
+	--		end,
+	--
+	--		config = function()
+	--			require("plugin_configs.vim-slime-ext-plugins.config")
+	--		end,
+	--	}),
+
+
+
+
+
+	{
+		"norcalli/nvim-colorizer.lua",
+		enabled = false,
+		init = function() vim.opt.termguicolors = true end,
+		config = function() require('colorizer').setup() end
+	},
+
+
+
+
+
+
 }

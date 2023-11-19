@@ -77,7 +77,7 @@ vim.g.netrw_liststyle = 3
 vim.g.c_comment_strings = 1 --can be any value
 set.pumheight = 10
 set.inccommand = 'split'
-set.shada = "'1000,%"
+--set.shada = "'1000,%"
 
 -- see yanky config for clipbaord settingss
 
