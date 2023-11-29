@@ -38,6 +38,7 @@ set.display = "lastline"
 set.shiftwidth = 4  --how much indentation from >
 set.softtabstop = 4 --lets us delete by tabs when expandtab is on
 set.tabstop = 4
+set.showcmd = false
 --set.path = set.path + "**"
 set.expandtab = false
 set.smarttab = false
