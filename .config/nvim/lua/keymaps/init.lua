@@ -163,11 +163,11 @@ if bufwinnr(1)
 	let g:toggle_mappings = !g:toggle_mappings
 	endfunction
 
-	nnoremap <expr> $ g:toggle_mappings ? 'g$' : '$'
-	nnoremap <expr> 0 g:toggle_mappings ? 'g0' : '0'
-	nnoremap <expr> ^ g:toggle_mappings ? 'g^' : '^'
-	nnoremap <expr> j g:toggle_mappings ? 'gj' : 'j'
-	nnoremap <expr> k g:toggle_mappings ? 'gk' : 'k'
+	nnoremap <silent> <expr> $ g:toggle_mappings ? 'g$' : '$'
+	nnoremap <silent> <expr> 0 g:toggle_mappings ? 'g0' : '0'
+	nnoremap <silent> <expr> ^ g:toggle_mappings ? 'g^' : '^'
+	nnoremap <silent> <expr> j g:toggle_mappings ? 'gj' : 'j'
+	nnoremap <silent> <expr> k g:toggle_mappings ? 'gk' : 'k'
 	command! ToggleMyMappings call ToggleMappings()
 	]])
 

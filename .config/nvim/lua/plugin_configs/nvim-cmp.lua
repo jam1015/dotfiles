@@ -1,12 +1,13 @@
+local cmp = require 'cmp'
 local not_has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 	return col == 0 or vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") --== nil
 end
 
---local check_backspace = function()
---	local col = vim.fn.col "." - 1
---	return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
---end
+local check_backspace = function()
+	local col = vim.fn.col "." - 1
+	return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+end
 
 local in_comment = function()
 	local context = require("cmp.config.context")
@@ -15,13 +16,12 @@ local in_comment = function()
 	)
 end
 local luasnip = require("luasnip") -- Set up nvim-cmp.
-local cmp = require 'cmp'
 
 local lspkind = require('lspkind')
 require("luasnip.loaders.from_vscode").lazy_load()
 
 -- Set the behavior of tab
-vim.cmd([[set completeopt=menu,menuone,noselect]])
+--vim.cmd([[set completeopt=menu,menuone,noselect]])
 
 cmp.setup({
 	view = { entries = { name = 'custom', selection_order = 'near_cursor' } },
@@ -59,8 +59,7 @@ cmp.setup({
 			end
 		end, { "i", "s" }),
 	},
-	formatting =
-	{
+	formatting = {
 		fields = { "kind", "abbr", "menu" },
 		format = function(outer_entry, outer_vim_item) -- should be a function that returns a completed item
 			local kind = lspkind.cmp_format({
@@ -89,13 +88,13 @@ cmp.setup({
 		end,
 
 	},
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		{ name = "nvim_lua" },
-		{ name = "luasnip" },
-		{ name = "buffer" },
-		{ name = "path" }, --
-	}),
+  sources = cmp.config.sources({
+  	{ name = "nvim_lsp" },
+  	{ name = "nvim_lua" },
+  	{ name = "luasnip" },
+  	{ name = "buffer" },
+  	{ name = "path" }, --
+  }),
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
 		select = false,
@@ -115,7 +114,7 @@ cmp.setup({
 	},
 })
 
--- Set configuration for specific filetype.
+ --Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
 	sources = cmp.config.sources({
 		{ name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.

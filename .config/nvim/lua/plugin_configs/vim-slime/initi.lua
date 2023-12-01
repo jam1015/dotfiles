@@ -4,7 +4,9 @@ if os.getenv("TMUX") then
 	vim.g.slime_default_config = { socket_name = "default", target_pane = "{next}" }
 else
 	vim.g.slime_target = "neovim"
-	vim.g.autoconfig = "true"
+	vim.g.override_status = true
+	vim.g.ruled_terminal = true
+
 --	vim.g.slime_target_send = "slime_neovim#send"
 --	vim.g.slime_target_config = "slime_neovim#config"
 	--	local slime_autocmds = vim.api.nvim_create_augroup("slime_autocomds", { clear = true })

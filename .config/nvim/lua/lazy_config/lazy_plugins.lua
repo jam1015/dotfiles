@@ -10,6 +10,38 @@ end
 return {
 
 
+	({
+		"hrsh7th/nvim-cmp",
+		enabled = true,
+		cond = function() --also done vi autocmd in the cmp config
+			return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
+		end,
+		lazy = true,
+		event = "VeryLazy",
+		dependencies = {
+			{ "onsails/lspkind.nvim", event = "VeryLazy" },
+			{ "hrsh7th/cmp-nvim-lsp", event = "VeryLazy" },
+			{ "hrsh7th/cmp-nvim-lua", event = "VeryLazy" },
+			{ "hrsh7th/cmp-buffer",   event = "VeryLazy" },
+			{ "hrsh7th/cmp-path",     event = "VeryLazy" },
+			{ "hrsh7th/cmp-cmdline",  event = "VeryLazy" },
+			{
+				"L3MON4D3/LuaSnip", -- tag = "v<CurrentMajor>.*",
+				dependencies = { "rafamadriz/friendly-snippets" },
+				config = function()
+					require("plugin_configs.LuaSnip")
+				end,
+
+				event = "VeryLazy"
+			},
+			{ "saadparwaiz1/cmp_luasnip", event = "VeryLazy" }
+		},
+		config = function()
+			require("plugin_configs.nvim-cmp")
+		end,
+	}),
+
+
 	{
 		"example/example",
 		dir = "~/Documents/example",
@@ -428,38 +460,6 @@ return {
 				.setup()
 		end
 	},
-
-	({
-		"hrsh7th/nvim-cmp",
-		enabled = true,
-		cond = function() --also done vi autocmd in the cmp config
-			return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
-		end,
-		lazy = true,
-		event = "VeryLazy",
-		dependencies = {
-			{ "onsails/lspkind.nvim", event = "VeryLazy" },
-			{ "hrsh7th/cmp-nvim-lsp", event = "VeryLazy" },
-			{ "hrsh7th/cmp-nvim-lua", event = "VeryLazy" },
-			{ "hrsh7th/cmp-buffer",   event = "VeryLazy" },
-			{ "hrsh7th/cmp-path",     event = "VeryLazy" },
-			{ "hrsh7th/cmp-cmdline",  event = "VeryLazy" },
-			{
-				"L3MON4D3/LuaSnip", -- tag = "v<CurrentMajor>.*",
-				dependencies = { "rafamadriz/friendly-snippets" },
-				config = function()
-					require("plugin_configs.LuaSnip")
-				end,
-
-				event = "VeryLazy"
-			},
-			{ "saadparwaiz1/cmp_luasnip", event = "VeryLazy" }
-		},
-		config = function()
-			require("plugin_configs.nvim-cmp")
-		end,
-	}),
-
 	{ 'jghauser/mkdir.nvim' },
 
 	({
@@ -527,12 +527,6 @@ return {
 	},
 
 
-	{
-		"norcalli/nvim-colorizer.lua",
-		enabled = false,
-		init = function() vim.opt.termguicolors = true end,
-		config = function() require('colorizer').setup() end
-	},
 	"powerman/vim-plugin-AnsiEsc",
 
 	{
@@ -551,9 +545,21 @@ return {
 		end
 	},
 
-	({
-		"jpalardy/vim-slime",
+	{
+		'nvim-lualine/lualine.nvim',
 		event = "VeryLazy",
+		dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+		config = function()
+			require('plugin_configs.lualine')
+		end,
+	},
+
+	({
+		--"jpalardy/vim-slime",
+		"jam1015/vim-slime",
+		dir = "~/Documents/slimes/vim-slime",
+		--branch = "vim_array", --"main",--
+		--event = "VeryLazy",
 		init = function()
 			require("plugin_configs.vim-slime.initi")
 		end,
@@ -562,10 +568,6 @@ return {
 			require("plugin_configs.vim-slime.config")
 		end,
 	}),
-
-
-
-
 
 
 }

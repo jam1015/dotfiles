@@ -38,6 +38,7 @@ set.display = "lastline"
 set.shiftwidth = 4  --how much indentation from >
 set.softtabstop = 4 --lets us delete by tabs when expandtab is on
 set.tabstop = 4
+set.showcmd = false
 --set.path = set.path + "**"
 set.expandtab = false
 set.smarttab = false
@@ -77,7 +78,7 @@ vim.g.netrw_liststyle = 3
 vim.g.c_comment_strings = 1 --can be any value
 set.pumheight = 10
 set.inccommand = 'split'
-set.shada = "'1000,%"
+--set.shada = "'1000,%"
 
 -- see yanky config for clipbaord settingss
 
