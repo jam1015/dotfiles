@@ -2,7 +2,6 @@ local ok, my_custom_theme = pcall(require, 'plugin_configs.lualine.my_auto_theme
 
 local used_theme = nil
 if ok then
-	print('using custom theme')
 	used_theme = my_custom_theme('normal')
 	--vim.cmd([[colorscheme delek]])
 else
@@ -33,7 +32,7 @@ require('lualine').setup {
 		}
 	},
 	sections = {
-		lualine_a = { 'mode' },
+		lualine_a = {'   ' },
 		lualine_b = { 'branch', 'diff', 'diagnostics' },
 		lualine_c = { 'filename' },
 		lualine_x = { 'encoding', 'fileformat', 'filetype' },
