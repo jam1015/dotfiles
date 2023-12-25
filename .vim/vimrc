@@ -76,3 +76,26 @@ Pack 'k-takata/minpac', {'type': 'opt'}
 "
 call plugpac#End()
 ""
+
+
+
+
+
+
+
+function s:Func()
+    echomsg 'hello from s:Func'
+endfunction
+nnoremap o :call s:Func()<CR>
+
+
+
+
+
+
+
+
+
+
+
+
