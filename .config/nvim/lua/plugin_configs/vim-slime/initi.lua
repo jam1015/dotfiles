@@ -4,8 +4,9 @@ if os.getenv("TMUX") then
 	vim.g.slime_default_config = { socket_name = "default", target_pane = "{next}" }
 else
 	vim.g.slime_target = "neovim"
-	vim.g.override_status = true
-	vim.g.ruled_terminal = true
+	vim.g.slime_no_mappings = true
+  vim.g.slime_input_pid = false
+
 
 --	vim.g.slime_target_send = "slime_neovim#send"
 --	vim.g.slime_target_config = "slime_neovim#config"

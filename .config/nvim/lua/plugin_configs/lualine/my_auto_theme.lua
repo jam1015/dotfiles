@@ -15,12 +15,14 @@ local function my_theme_fun(mode_color)
 		-- If there is load that instead of generating a new one
 		local ok, theme = pcall(loader.load_theme, color_name)
 		if ok and theme then
-
 			for section, _ in pairs(theme) do
-				theme[section].a.bg = theme[mode_color].a.bg
-				theme[section].b.fg = theme[mode_color].b.fg
+				if section ~= 'inactive' then
+					theme[section].a.bg = theme[mode_color].a.bg
+					theme[section].b.fg = theme[mode_color].b.fg
+				end
 			end
 
+			theme.inactive = theme.normal
 			return theme
 		end
 	end

@@ -26,9 +26,6 @@ if command -v pacman > /dev/null 2>&1; then
 	. /opt/asdf-vm/asdf.sh
 fi
 
-alias update-nvim-stable='asdf uninstall neovim stable || asdf install neovim stable'
-alias update-nvim-nightly='asdf uninstall neovim nightly || asdf install neovim nightly'
-alias update-nvim-master='asdf uninstall neovim ref:master || asdf install neovim ref:master'
 
 
 
@@ -37,15 +34,13 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 fi
 
 export BROWSER="/usr/bin/firefox-developer-edition"
-export EDITOR="nvim"
+export EDITOR="nano"
 
 case "$OSTYPE" in
 	darwin*)    VISUAL='/usr/local/bin/nvim  --cmd "let g:flatten_allow_nesting = v:true"' ;;   # macOS
-	#linux*)     VISUAL="/usr/bin/nvim --cmd 'let g:flatten_allow_nesting=v:true'";;         # Linux
-	linux*)     VISUAL='nvim';;         # Linux
+	linux*)     VISUAL="$HOME/.visual_editor.bash" ;;         # Linux
 esac
 
-export VISUAL
 
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
