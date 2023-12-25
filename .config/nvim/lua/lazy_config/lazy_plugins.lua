@@ -88,13 +88,12 @@ return {
 
 	{
 		'willothy/flatten.nvim',
-		event = "VeryLazy",
+		--event = "VeryLazy",
 
 		--config = true,
 		-- or pass configuration with
 		--opts = require("plugin_configs.flatten"),
 		opts = require("plugin_configs.flatten"),
-		lazy = false,
 		--priority = 1001,
 		--commit = "07e9496191653587336b4c8f8cab02e5c34c7c44",
 	},
@@ -547,6 +546,7 @@ return {
 
 	{
 		'nvim-lualine/lualine.nvim',
+		enabled = true,
 		event = "VeryLazy",
 		dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
 		config = function()
@@ -568,6 +568,6 @@ return {
 			require("plugin_configs.vim-slime.config")
 		end,
 	}),
-
+	'embear/vim-localvimrc'
 
 }

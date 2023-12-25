@@ -41,7 +41,8 @@ export EDITOR="nvim"
 
 case "$OSTYPE" in
 	darwin*)    VISUAL='/usr/local/bin/nvim  --cmd "let g:flatten_allow_nesting = v:true"' ;;   # macOS
-	linux*)     VISUAL='nvim --cmd "let g:flatten_allow_nesting = v:true"';;         # Linux
+	#linux*)     VISUAL="/usr/bin/nvim --cmd 'let g:flatten_allow_nesting=v:true'";;         # Linux
+	linux*)     VISUAL='nvim';;         # Linux
 esac
 
 export VISUAL
