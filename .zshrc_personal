@@ -128,10 +128,4 @@ function precmd {
 
 
 
-
-
-
-
-
-
 echo ".zshrc sourced"
