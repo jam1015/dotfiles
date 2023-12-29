@@ -88,13 +88,13 @@ cmp.setup({
 		end,
 
 	},
-  sources = cmp.config.sources({
-  	{ name = "nvim_lsp" },
-  	{ name = "nvim_lua" },
-  	{ name = "luasnip" },
-  	{ name = "buffer" },
-  	{ name = "path" }, --
-  }),
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
+		{ name = "nvim_lua" },
+		{ name = "luasnip" },
+		{ name = "buffer" },
+		{ name = "path" }, --
+	}),
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
 		select = false,
@@ -114,7 +114,7 @@ cmp.setup({
 	},
 })
 
- --Set configuration for specific filetype.
+--Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
 	sources = cmp.config.sources({
 		{ name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
@@ -133,11 +133,40 @@ cmp.setup.cmdline({ '/', '?' }, {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline(),
+	mapping = cmp.mapping.preset.cmdline(
+		{
+			--			['<C-b>'] = cmp.mapping(function(fallback)
+			--				vim.cmd([[colorscheme blue]])
+			--				if cmp.visible() then
+			--					cmp.select_prev_item()
+			--				elseif luasnip.jumpable(-1) then
+			--					luasnip.jump(-1)
+			--				else
+			--					fallback()
+			--				end
+			--			end, { "i", "s", "c" }),
+
+			--	['<C-b>'] = cmp.mapping(function(fallback)
+			--		vim.cmd([[colorscheme blue]])
+			--		cmp.complete({
+
+			--			config = { sources = { name = 'path' } }
+
+			--		})
+			--end, { "i", "s", "c" })
+		}),
 	sources = cmp.config.sources({
 		{ name = 'path' }
 	}, {
-		{ name = 'cmdline' }
+		{
+			name = 'cmdline',
+			option =
+			{
+				ignore_cmds = {
+				--	'edit'
+				}
+			}
+		}
 	})
 })
 

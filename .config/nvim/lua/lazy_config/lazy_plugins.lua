@@ -428,10 +428,11 @@ return {
 	{
 		'nvim-tree/nvim-tree.lua',
 		event = "VeryLazy",
-		dependencies = {
-		},
 		tag = 'nightly', -- optional, updated every week. (see issue #1193)
-		config = function() require("plugin_configs.nvim-tree") end
+		config = function()
+			require("plugin_configs.nvim-tree")
+			require("plugin_keymaps").pluginKeymaps("nvim-tree")
+		end
 
 
 	},
@@ -446,10 +447,7 @@ return {
 
 
 
-
-
-
-	--"mfussenegger/nvim-dap",
+--"mfussenegger/nvim-dap",
 	{
 		'echasnovski/mini.completion',
 		version = "*",
