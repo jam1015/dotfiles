@@ -39,7 +39,7 @@ require('lualine').setup {
 	sections = {
 		lualine_a = { '   ' },
 		lualine_b = { 'branch', 'diff', 'diagnostics' },
-		lualine_c = { 'filename' },
+		lualine_c = { '%f' },
 		lualine_x = { 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
 		lualine_z = { 'location', 'b:terminal_job_id', 'b:terminal_job_pid' }
@@ -48,7 +48,7 @@ require('lualine').setup {
 
 		lualine_a = { '   ' },
 		lualine_b = { 'branch', 'diff', 'diagnostics' },
-		lualine_c = { 'filename' },
+		lualine_c = { '%f' },
 		lualine_x = { 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
 		lualine_z = { 'location', 'b:terminal_job_id', 'b:terminal_job_pid' }

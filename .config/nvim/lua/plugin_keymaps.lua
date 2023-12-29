@@ -82,7 +82,7 @@ function M.pluginKeymaps(plugin, setup_type)
 			end
 
 			return string.format(
-				[[<cmd>lua require('cscope_maps').cscope_prompt('%s', vim.fn.expand("<%s>"))<cr>]],
+				[[<Cmd>lua require('cscope_maps').cscope_prompt('%s', vim.fn.expand("<%s>"))<cr>]],
 				operation,
 				sel
 			)
@@ -108,11 +108,13 @@ function M.pluginKeymaps(plugin, setup_type)
 		keymap("n", "<leader>ci", get_cscope_prompt_cmd("i", "f"), { noremap = true, silent = true, desc = sym_map.i })
 		keymap("n", "<leader>cd", get_cscope_prompt_cmd("d", "w"), { noremap = true, silent = true, desc = sym_map.d })
 		keymap("n", "<leader>ca", get_cscope_prompt_cmd("a", "w"), { noremap = true, silent = true, desc = sym_map.a })
-		keymap("n", "<leader>cb", "<cmd>Cscope build<cr>", { noremap = true, silent = true, desc = sym_map.b })
+		keymap("n", "<leader>cb", "<Cmd>Cscope build<cr>", { noremap = true, silent = true, desc = sym_map.b })
+	elseif plugin == "nvim-tree" then
+		keymap("n", "<leader>nt", "<Cmd>NvimTreeToggle<CR>", opts)
 	elseif plugin == "nvim-treehopper" then
 		wk.register({
 			["<leader>h"] = { name = "Hopping" },
-			["<leader>ht"] = { "<cmd> lua require('tsht').move({ side = 'start' })<cr>", "Treehopper Move" },
+			["<leader>ht"] = { "<Cmd> lua require('tsht').move({ side = 'start' })<cr>", "Treehopper Move" },
 		})
 		vim.cmd([[
 		omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
@@ -144,7 +146,7 @@ function M.pluginKeymaps(plugin, setup_type)
 			--			function() require("telescope").extensions.yank_history.yank_history(require('telescope.themes').get_ivy()) end,
 			--			{})
 
-			keymap("n", "<leader>yr", "<cmd>Telescope yank_history<cr>", opts)
+			keymap("n", "<leader>yr", "<Cmd>Telescope yank_history<cr>", opts)
 		end
 	elseif plugin == "emmet-vim" then
 		if setup_type == "config" then
@@ -204,10 +206,10 @@ function M.pluginKeymaps(plugin, setup_type)
 		--		vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 		--
 		--		keymap("n", "<leader>th",
-		--			"<cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>",
+		--			"<Cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>",
 		--			opts)
 		--		keymap("n", "<leader>tf",
-		--			"<cmd>lua require('telescope.builtin').find_files({hidden = false})<CR>", opts)
+		--			"<Cmd>lua require('telescope.builtin').find_files({hidden = false})<CR>", opts)
 		--		keymap("v", "<leader>ts", builtin.grep_string, opts)
 		--		keymap("n", "<leader>bb", builtin.buffers, opts)
 		--		keymap("n", "<leader>tg", builtin.live_grep, opts)
@@ -215,15 +217,15 @@ function M.pluginKeymaps(plugin, setup_type)
 
 		wk.register({
 			["<leader>t"] = { name = "+telescope/terminals" },
-			["<leader>tf"] = { "<cmd>lua require('telescope.builtin').find_files({hidden = true}) <cr>", "Find Files" },
-			["<leader>th"] = { "<cmd>lua require('telescope.builtin').find_files({hidden = false}) <cr>",
+			["<leader>tf"] = { "<Cmd>lua require('telescope.builtin').find_files({hidden = true}) <cr>", "Find Files" },
+			["<leader>th"] = { "<Cmd>lua require('telescope.builtin').find_files({hidden = false}) <cr>",
 				"Find Hidden Files" },
-			["<leader>tg"] = { "<cmd>lua require('telescope.builtin').live_grep() <cr>", "Live Grep" },
-			["<leader>ts"] = { "<cmd>lua require('telescope.builtin').grep_string() <cr>", "Grep String" },
-			["<leader>tb"] = { "<cmd>lua require('telescope.builtin').buffers() <cr>", "Buffers" },
+			["<leader>tg"] = { "<Cmd>lua require('telescope.builtin').live_grep() <cr>", "Live Grep" },
+			["<leader>ts"] = { "<Cmd>lua require('telescope.builtin').grep_string() <cr>", "Grep String" },
+			["<leader>tb"] = { "<Cmd>lua require('telescope.builtin').buffers() <cr>", "Buffers" },
 		})
 		wk.register({
-			["<leader>ts"] = { "<cmd>lua require('telescope.builtin').grep_string() <cr>", "Grep String" },
+			["<leader>ts"] = { "<Cmd>lua require('telescope.builtin').grep_string() <cr>", "Grep String" },
 		}, { mode = "v" })
 	elseif plugin == "mason" then
 		return {
