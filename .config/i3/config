@@ -91,7 +91,9 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec kitty -o allow_remote_control=yes
-bindsym $mod+Return exec ~/.config/i3/split_same_dir.bash
+#bindsym $mod+Return exec "source ~/.config/i3/split_same_dir.bash kitty"
+bindsym $mod+Return exec ~/.config/i3/tiny_samedir.bash
+bindsym $alt+Return exec kitty
 # kill focused window
 bindsym $mod+Shift+q kill
 
