@@ -1,12 +1,8 @@
 -- see ~/.config/nvim/lua/keymaps/init.lua for other plugins
 -- function that returns keymaps based on name of plugin supplied
-M = {}
-function M.pluginKeymaps(plugin, setup_type)
-	local keymap = vim.keymap.set
-	local opts = { remap = false, silent = true }
 
-	local has_wk, wk = pcall(require, "which-key")
-	if has_wk then
+local has_wk, wk = pcall(require, "which-key")
+if has_wk then
 	local wk_opts = {
 		mode = "n", -- NORMAL mode
 		-- prefix: use "<leader>f" for example for mapping everything related to finding files
@@ -18,56 +14,14 @@ function M.pluginKeymaps(plugin, setup_type)
 		nowait = false, -- use `nowait` when creating keymaps
 		expr = false, -- use `expr` when creating keymaps
 	}
-	end
+end
+M = {}
+function M.pluginKeymaps(plugin, setup_type)
+	local keymap = vim.keymap.set
+	local opts = { remap = false, silent = true }
 
-	if plugin == "vim-unimpaired" then
-		vim.cmd([[
-					function! s:ArgNext(...)
-						try
-							let l:files = ""
-							for file in a:000
-								let l:files .= file .. " "
-							endfor
-							execute "next" l:files
-							args
-						catch /^Vim\%((\a\+)\)\=:E163:/
-							first
-							args
-						catch /^Vim\%((\a\+)\)\=:E165:/
-							first
-							args
-						finally
-						endtry
-					endfunction
-					
-					function! s:ArgPrev(...)
-						try
-							previous
-							args
-						catch /^Vim\%((\a\+)\)\=:E163:/
-							last
-							args
-						catch /^Vim\%((\a\+)\)\=:E164:/
-							last
-							args
-						finally
-						endtry
-					endfunction
-					
-					command -nargs=* Anext call <SID>ArgNext(<f-args>)
-					command Aprev call <SID>ArgPrev(<f-args>)
-					
-					
-					nnoremap ]a <Cmd>Anext<cr>
-					nnoremap [a <Cmd>Aprev<cr>
-					
-					cnoreabbrev <expr> next  getcmdtype() == ":" && getcmdline() == "next" ? "Anext" : "next"
-					cnoreabbrev <expr> n  getcmdtype() == ":" && getcmdline() == "n" ? "Anext" : "n"
-					cnoreabbrev <expr> prev  getcmdtype() == ":" && getcmdline() == "prev" ? "Aprev" : "prev"
-					cnoreabbrev <expr> previous  getcmdtype() == ":" && getcmdline() == "prevous" ? "Aprev" : "previous"
 
-			]])
-	elseif plugin == "vim_create_goto" then
+	if plugin == "vim_create_goto" then
 		vim.keymap.set('n', '<leader>fc', '<Plug>(CreateGoTo)', { remap = true })
 	elseif plugin == "substitute_nvim" then
 		vim.keymap.set("n", "<leader>xc", require('substitute.exchange').operator, { remap = false })
@@ -149,33 +103,6 @@ function M.pluginKeymaps(plugin, setup_type)
 			keymap("n", "<leader>yr", "<Cmd>Telescope yank_history<cr>", opts)
 		end
 	elseif plugin == "emmet-vim" then
-		if setup_type == "config" then
-			wk.register({ ["<leader>m"] = { name = "emmet" } })
-			return (function()
-				vim.cmd([[
-					nmap <leader>m,   <plug>(emmet-expand-abbr)
-					nmap <leader>m;   <plug>(emmet-expand-word)
-					nmap <leader>mu   <plug>(emmet-update-tag)
-					nmap <leader>md   <plug>(emmet-balance-tag-inward)
-					nmap <leader>mD   <plug>(emmet-balance-tag-outward)
-					nmap <leader>mn   <plug>(emmet-move-next)
-					nmap <leader>mN   <plug>(emmet-move-prev)
-					nmap <leader>mi   <plug>(emmet-image-size)
-					nmap <leader>m/   <plug>(emmet-toggle-comment)
-					nmap <leader>mj   <plug>(emmet-split-join-tag)
-					nmap <leader>mk   <plug>(emmet-remove-tag)
-					nmap <leader>ma   <plug>(emmet-anchorize-url)
-					nmap <leader>mA   <plug>(emmet-anchorize-summary)
-					nmap <leader>mm   <plug>(emmet-merge-lines)
-					nmap <leader>mc   <plug>(emmet-code-pretty)
-					]])
-			end)
-		elseif setup_type == "init" then
-			return (function()
-				vim.g.user_emmet_leader_key = "<C-B>" --use this followed by comma to expand emmet
-			end)
-		else
-		end
 	elseif plugin == "bufdelete.nvim" then
 		vim.cmd([[
 			cnoreabbrev <expr> bd  getcmdtype() == ":" && getcmdline() == "bd" ? "Bdelete" : "bd"
@@ -253,14 +180,91 @@ function M.pluginKeymaps(plugin, setup_type)
 			cnoreabbrev <expr> pod  getcmdtype() == ":" && getcmdline() == "pod" ? "Popd" : "pod"
 			cnoreabbrev <expr> dirs  getcmdtype() == ":" && getcmdline() == "dirs" ? "Dirs" : "dirs"
 			]])
-	elseif plugin == "vim-yankstack" then
-		vim.cmd([[
-			nmap <C-p> <Plug>yankstack_substitute_older_paste
-			nmap <C-n> <Plug>yankstack_substitute_newer_paste
-			]])
 	else
 		error("plugin " .. plugin .. " not found\n")
 	end
+end
+
+function M.vim_yankstack()
+	vim.cmd([[
+			nmap <C-p> <Plug>yankstack_substitute_older_paste
+			nmap <C-n> <Plug>yankstack_substitute_newer_paste
+			]])
+end
+
+function M.emmet_vim(setup_type)
+	if setup_type == "config" then
+		wk.register({ ["<leader>m"] = { name = "emmet" } })
+		vim.cmd([[
+					nmap <leader>m,   <plug>(emmet-expand-abbr)
+					nmap <leader>m;   <plug>(emmet-expand-word)
+					nmap <leader>mu   <plug>(emmet-update-tag)
+					nmap <leader>md   <plug>(emmet-balance-tag-inward)
+					nmap <leader>mD   <plug>(emmet-balance-tag-outward)
+					nmap <leader>mn   <plug>(emmet-move-next)
+					nmap <leader>mN   <plug>(emmet-move-prev)
+					nmap <leader>mi   <plug>(emmet-image-size)
+					nmap <leader>m/   <plug>(emmet-toggle-comment)
+					nmap <leader>mj   <plug>(emmet-split-join-tag)
+					nmap <leader>mk   <plug>(emmet-remove-tag)
+					nmap <leader>ma   <plug>(emmet-anchorize-url)
+					nmap <leader>mA   <plug>(emmet-anchorize-summary)
+					nmap <leader>mm   <plug>(emmet-merge-lines)
+					nmap <leader>mc   <plug>(emmet-code-pretty)
+					]])
+	elseif setup_type == "init" then
+		vim.g.user_emmet_leader_key = "<C-B>" --use this followed by comma to expand emmet
+	else
+	end
+end
+
+function M.vim_unimpaired()
+	vim.cmd([[
+					function! s:ArgNext(...)
+						try
+							let l:files = ""
+							for file in a:000
+								let l:files .= file .. " "
+							endfor
+							execute "next" l:files
+							args
+						catch /^Vim\%((\a\+)\)\=:E163:/
+							first
+							args
+						catch /^Vim\%((\a\+)\)\=:E165:/
+							first
+							args
+						finally
+						endtry
+					endfunction
+					
+					function! s:ArgPrev(...)
+						try
+							previous
+							args
+						catch /^Vim\%((\a\+)\)\=:E163:/
+							last
+							args
+						catch /^Vim\%((\a\+)\)\=:E164:/
+							last
+							args
+						finally
+						endtry
+					endfunction
+					
+					command -nargs=* Anext call <SID>ArgNext(<f-args>)
+					command Aprev call <SID>ArgPrev(<f-args>)
+					
+					
+					nnoremap ]a <Cmd>Anext<cr>
+					nnoremap [a <Cmd>Aprev<cr>
+					
+					cnoreabbrev <expr> next  getcmdtype() == ":" && getcmdline() == "next" ? "Anext" : "next"
+					cnoreabbrev <expr> n  getcmdtype() == ":" && getcmdline() == "n" ? "Anext" : "n"
+					cnoreabbrev <expr> prev  getcmdtype() == ":" && getcmdline() == "prev" ? "Aprev" : "prev"
+					cnoreabbrev <expr> previous  getcmdtype() == ":" && getcmdline() == "prevous" ? "Aprev" : "previous"
+
+			]])
 end
 
 return M

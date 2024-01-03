@@ -90,8 +90,8 @@ bindsym $mod+space focus mode_toggle
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
-
+#bindsym $mod+Return exec kitty -o allow_remote_control=yes
+bindsym $mod+Return exec ~/.config/i3/split_same_dir.bash
 # kill focused window
 bindsym $mod+Shift+q kill
 
