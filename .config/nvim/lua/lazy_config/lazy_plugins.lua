@@ -565,6 +565,5 @@ return {
 			require("plugin_configs.vim-slime.config")
 		end,
 	}),
-	'embear/vim-localvimrc'
 
 }
