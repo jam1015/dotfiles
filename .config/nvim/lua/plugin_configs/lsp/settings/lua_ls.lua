@@ -9,7 +9,7 @@ return {
 
 		-- Print workspace folders
 		for i, folder in ipairs(client.workspace_folders) do
-			print("Workspace folder " .. i .. ": " .. folder.name .. ", URI: " .. folder.uri)
+			print("LuaLS Workspace folder " .. i .. ": " .. folder.name .. ", URI: " .. folder.uri)
 		end
 
 		local path = client.workspace_folders[1].name

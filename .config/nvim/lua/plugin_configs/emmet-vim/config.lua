@@ -1,2 +1,2 @@
 -- line wasn't showing before
-require("plugin_keymaps").pluginKeymaps("emmet-vim", "config")()
+require("plugin_keymaps").emmet_vim("config")

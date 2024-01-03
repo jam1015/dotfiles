@@ -258,7 +258,7 @@ return {
 		"tpope/vim-unimpaired",
 		event = "VeryLazy",
 		config = function()
-			require("plugin_keymaps").pluginKeymaps("vim-unimpaired")
+			require("plugin_keymaps").vim_unimpaired()
 		end,
 	},
 
@@ -306,7 +306,7 @@ return {
 	{ "bronson/vim-visual-star-search", event = "VeryLazy" },
 	{ "tpope/vim-repeat",               event = "VeryLazy" },
 	{ "qpkorr/vim-bufkill",             event = "VeryLazy", enabled = false },
-	{ "kevinoid/vim-jsonc",             event = "VeryLazy" },
+	{ "kevinoid/vim-jsonc",             event = "VeryLazy" , enabled = false},
 
 
 	{
@@ -508,7 +508,6 @@ return {
 		end,
 		config = function()
 			require("plugin_configs.vim-yankstack.config")
-			require("plugin_keymaps").pluginKeymaps("vim-yankstack")
 		end
 	},
 

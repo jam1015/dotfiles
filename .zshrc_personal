@@ -17,6 +17,7 @@ alias ll='ls -lG'
 alias ls='ls -G'
 alias pd='pandoc'
 alias glog="git log --all --graph --decorate --oneline"
+export TERMINAL="kitty"
 
 
 
@@ -34,7 +35,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 fi
 
 export BROWSER="/usr/bin/firefox-developer-edition"
-export EDITOR="nano"
+export EDITOR="nvim"
 
 case "$OSTYPE" in
 	darwin*)    VISUAL='/usr/local/bin/nvim  --cmd "let g:flatten_allow_nesting = v:true"' ;;   # macOS
@@ -104,6 +105,7 @@ else
 	PS1='%B%F{magenta}%M:%3~ ${vim_mode}%f%b '
 fi
 
+## done making prompt
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
 alias glog='git log --oneline --all --graph --decorate'
 
@@ -125,6 +127,17 @@ function precmd {
 	PWD=$(pwd)
 	export PWD
 }
+
+
+
+# Define a function that writes the current working directory to /tmp/[pid]
+function write_cwd_to_file {
+    echo $PWD > /tmp/whereami
+}
+
+# Add the function to precmd_functions
+precmd_functions+=(write_cwd_to_file)
+
 
 
 
