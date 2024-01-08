@@ -546,8 +546,11 @@ return {
 		'nvim-lualine/lualine.nvim',
 		event = "VeryLazy",
 		dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+		init = function()
+			require('plugin_configs.lualine.initi')
+		end,
 		config = function()
-			require('plugin_configs.lualine')
+			require('plugin_configs.lualine.config')
 		end,
 	},
 
@@ -565,6 +568,8 @@ return {
 			require("plugin_configs.vim-slime.config")
 		end,
 	}),
+
+
 
 
 
