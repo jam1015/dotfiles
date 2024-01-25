@@ -80,12 +80,14 @@ set.pumheight = 10
 set.inccommand = 'split'
 set.shada = "'1000,%"
 
--- see yanky config for clipbaord settingss
+-- see yanky config for clipboard settingss
 
 
--- setting clipboard settings
+
+--setting clipboard settings
 if os.getenv("DISPLAY") then
-	if not os.getenv("SSH_CONNECTION") then
+	if not os.getenv("SSH_CONNECTION") and not os.getenv("CHROME_REMOTE_DESKTOP_SESSION")
+	then
 		vim.opt.clipboard = 'unnamedplus'
 	end
 else
@@ -114,7 +116,6 @@ local function setup_tmux_clipboard()
 		return true
 	end
 end
---
+
 ---- Call the function to set up the clipboard
 setup_tmux_clipboard()
-

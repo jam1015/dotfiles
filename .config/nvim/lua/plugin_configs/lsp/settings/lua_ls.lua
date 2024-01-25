@@ -22,7 +22,7 @@ return {
 		--print(".luarc.jsonc exists: " .. tostring(hasLuarcJsonc))
 
 		if not hasLuarcJson and not hasLuarcJsonc then
-			print("No config files found. Setting up default configurations.")
+			print("No LuaLS config files found. Setting up default configurations.")
 
 			client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
 				-- Your settings here

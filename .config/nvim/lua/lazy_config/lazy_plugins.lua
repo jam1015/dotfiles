@@ -555,10 +555,10 @@ return {
 	},
 
 	({
-		--"jpalardy/vim-slime",
 		"jam1015/vim-slime",
-		dir = "~/Documents/slimes/vim-slime",
-		--branch = "vim_array", --"main",--
+		--"jam1015/vim-slime",
+		--dir = "~/Documents/slimes/vim-slime",
+		branch = "track_channels", --"main",--
 		--event = "VeryLazy",
 		init = function()
 			require("plugin_configs.vim-slime.initi")
