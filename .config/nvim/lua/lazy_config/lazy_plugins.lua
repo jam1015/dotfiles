@@ -546,16 +546,19 @@ return {
 		enabled = true,
 		event = "VeryLazy",
 		dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+		init = function()
+			require('plugin_configs.lualine.initi')
+		end,
 		config = function()
-			require('plugin_configs.lualine')
+			require('plugin_configs.lualine.config')
 		end,
 	},
 
 	({
-		--"jpalardy/vim-slime",
 		"jam1015/vim-slime",
-		dir = "~/Documents/slimes/vim-slime",
-		--branch = "vim_array", --"main",--
+		--"jam1015/vim-slime",
+		--dir = "~/Documents/slimes/vim-slime",
+		branch = "track_channels", --"main",--
 		--event = "VeryLazy",
 		init = function()
 			require("plugin_configs.vim-slime.initi")
@@ -565,5 +568,23 @@ return {
 			require("plugin_configs.vim-slime.config")
 		end,
 	}),
+
+
+
+
+
+
+	{
+		"norcalli/nvim-colorizer.lua",
+		enabled = false,
+		init = function() vim.opt.termguicolors = true end,
+		config = function() require('colorizer').setup() end
+	},
+
+
+
+
+
+
 
 }

@@ -77,18 +77,18 @@ api.nvim_create_autocmd("TermOpen", {
 -- showcmd related ----------------
 -- Set 'showcmd' when entering any visual mode
 vim.api.nvim_create_autocmd("ModeChanged", {
-    pattern = "*:[vV\x16]*",
-    callback = function()
-        vim.opt.showcmd = true
-    end,
+	pattern = "*:[vV\x16]*",
+	callback = function()
+		vim.opt.showcmd = true
+	end,
 })
 
 -- Unset 'showcmd' when leaving any visual mode
 vim.api.nvim_create_autocmd("ModeChanged", {
-    pattern = "[vV\x16]*:*",
-    callback = function()
-        vim.opt.showcmd = false
-    end,
+	pattern = "[vV\x16]*:*",
+	callback = function()
+		vim.opt.showcmd = false
+	end,
 })
 
 
@@ -126,3 +126,12 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 --	callback = function() vim.opt.clipboard = "unnamedplus" end,
 --	group = clipboard_acg,
 --})
+
+
+
+
+
+
+
+
+
