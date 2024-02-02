@@ -400,7 +400,6 @@ return {
 			require("plugin_configs.nvim-treesitter")
 		end,
 	}),
-<<<<<<< HEAD
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		enabled = false,
@@ -519,7 +518,7 @@ return {
 		enabled = true,
 		config = function()
 			require("plugin_configs.substitute_nvim")
-			require("plugin_keymaps").pluginKeymaps("substitute_nvim")
+			require("plugin_keymaps").substitute_nvim()
 		end
 	},
 
@@ -557,6 +556,7 @@ return {
 
 	({
 		"jam1015/vim-slime",
+		enabled = false,
 		--"jam1015/vim-slime",
 		--dir = "~/Documents/slimes/vim-slime",
 		branch = "track_channels", --"main",--
