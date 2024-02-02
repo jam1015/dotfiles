@@ -1,6 +1,2 @@
-require("plugin_keymaps").pluginKeymaps("nvim-treehopper")
-
-
-
-
+require("plugin_keymaps").nvim_treehopper()
 
