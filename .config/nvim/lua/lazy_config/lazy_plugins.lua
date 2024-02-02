@@ -400,6 +400,7 @@ return {
 			require("plugin_configs.nvim-treesitter")
 		end,
 	}),
+<<<<<<< HEAD
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		enabled = false,

@@ -23,11 +23,6 @@ function M.pluginKeymaps(plugin, setup_type)
 
 	if plugin == "vim_create_goto" then
 		vim.keymap.set('n', '<leader>fc', '<Plug>(CreateGoTo)', { remap = true })
-	elseif plugin == "substitute_nvim" then
-		vim.keymap.set("n", "<leader>xc", require('substitute.exchange').operator, { remap = false })
-		vim.keymap.set("n", "<leacer>xx", require('substitute.exchange').line, { remap = false })
-		vim.keymap.set("x", "<leader>X", require('substitute.exchange').visual, { remap = false })
-		vim.keymap.set("n", "<leader>xq", require('substitute.exchange').cancel, { remap = false })
 	elseif plugin == "cscope_maps" then
 		local get_cscope_prompt_cmd = function(operation, selection)
 			local sel = "cword" -- word under cursor
@@ -65,15 +60,6 @@ function M.pluginKeymaps(plugin, setup_type)
 		keymap("n", "<leader>cb", "<Cmd>Cscope build<cr>", { noremap = true, silent = true, desc = sym_map.b })
 	elseif plugin == "nvim-tree" then
 		keymap("n", "<leader>nt", "<Cmd>NvimTreeToggle<CR>", opts)
-	elseif plugin == "nvim-treehopper" then
-		wk.register({
-			["<leader>h"] = { name = "Hopping" },
-			["<leader>ht"] = { "<Cmd> lua require('tsht').move({ side = 'start' })<cr>", "Treehopper Move" },
-		})
-		vim.cmd([[
-		omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
-	xnoremap <silent> m :lua require('tsht').nodes()<CR>
-		    ]])
 	elseif plugin == "vim-slime" then
 		keymap("n", "gz", "<Plug>SlimeMotionSend", { remap = true, silent = false })
 		keymap("n", "gzz", "<Plug>SlimeLineSend", { remap = true, silent = false })
@@ -218,6 +204,25 @@ function M.emmet_vim(setup_type)
 	end
 end
 
+function M.nvim_treehopper()
+	wk.register({
+		["<leader>h"] = { name = "Hopping" },
+		["<leader>ht"] = { "<cmd>lua require('tsht').move({ side = 'start' })<cr>", "Treehopper Move" },
+	})
+
+	wk.register({
+		["<leader>h"] = { name = "Hopping" },
+		["<leader>ht"] = { ":<C-U>lua require('tsht').nodes()<cr>", "Treehopper Move" },
+	}, { mode = "o", noremap = false }) -- 'o' for operator-pending mode
+
+	wk.register({
+		["<leader>h"] = { name = "Hopping" },
+		["<leader>ht"] = { "<cmd>lua require('tsht').nodes()<cr>", "Treehopper Move" },
+	}, { mode = "x" }) -- 'x' for visual mode
+
+end
+
+
 function M.vim_unimpaired()
 	vim.cmd([[
 					function! s:ArgNext(...)
@@ -265,6 +270,20 @@ function M.vim_unimpaired()
 					cnoreabbrev <expr> previous  getcmdtype() == ":" && getcmdline() == "prevous" ? "Aprev" : "previous"
 
 			]])
+end
+
+
+function M.substitute_nvim()
+
+	wk.register({
+		["<leader>xc"] = { require('substitute.exchange').operator, "Exchange operator", noremap = true },
+		["<leader>xx"] = { require('substitute.exchange').line, "Exchange line", noremap = true },
+		["<leader>xq"] = { require('substitute.exchange').cancel, "Cancel exchange", noremap = true },
+	}, { mode = "n" }) -- 'n' for normal mode
+
+	wk.register({
+		["<leader>X"] = { require('substitute.exchange').visual, "Exchange in visual mode", noremap = true },
+	}, { mode = "x" }) -- 'x' for visual mode
 end
 
 return M
