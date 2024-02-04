@@ -48,6 +48,7 @@ set.wildmenu = true
 set.wildmode = 'longest:full,full'
 set.wildignorecase = true
 set.wildignore = '*.git/*,*.tags,tags,*.o,*.class,*.ccls-cache'
+set.wildoptions = "fuzzy,pum,tagfile"
 set.ignorecase = true
 set.smartcase = true
 set.splitbelow = true

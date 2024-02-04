@@ -101,16 +101,6 @@ function M.pluginKeymaps(plugin, setup_type)
 			onoremap <leader>ww :HopWord<CR>
 			nnoremap <leader>ww :HopWord<CR>
 			]])
-	elseif plugin == "nvim-cmp" then
-		local function cmp_disable()
-			require('cmp').setup.buffer { enabled = false }
-		end
-
-		local function cmp_enable()
-			require('cmp').setup.buffer { enabled = true }
-		end
-		vim.api.nvim_create_user_command('CmpEnable', cmp_enable, { bar = true })
-		vim.api.nvim_create_user_command('CmpDisable', cmp_disable, { bar = true })
 	elseif plugin == "telescope" then
 		local builtin = require('telescope.builtin')
 		--		vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -272,6 +262,17 @@ function M.vim_unimpaired()
 			]])
 end
 
+function M.nvim_cmp()
+		local function cmp_disable()
+			require('cmp').setup.buffer { enabled = false }
+		end
+
+		local function cmp_enable()
+			require('cmp').setup.buffer { enabled = true }
+		end
+		vim.api.nvim_create_user_command('CmpEnable', cmp_enable, { bar = true })
+		vim.api.nvim_create_user_command('CmpDisable', cmp_disable, { bar = true })
+end
 
 function M.substitute_nvim()
 
