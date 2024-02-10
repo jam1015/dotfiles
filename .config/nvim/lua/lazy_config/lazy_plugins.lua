@@ -12,7 +12,6 @@ return {
 
 	({
 		"hrsh7th/nvim-cmp",
-		enabled = true,
 		cond = function() --also done vi autocmd in the cmp config
 			return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
 		end,
@@ -307,8 +306,8 @@ return {
 
 	{ "bronson/vim-visual-star-search", event = "VeryLazy" },
 	{ "tpope/vim-repeat",               event = "VeryLazy" },
-	{ "qpkorr/vim-bufkill",             event = "VeryLazy",  enabled = false },
-	{ "kevinoid/vim-jsonc",             event = "VeryLazy",  enabled = false },
+	{ "qpkorr/vim-bufkill",             event = "VeryLazy", enabled = false },
+	{ "kevinoid/vim-jsonc",             event = "VeryLazy", enabled = false },
 
 
 	{
@@ -560,20 +559,26 @@ return {
 		end,
 	},
 
-	({
-		"jpalardy/vim-slime",
-		--"jam1015/vim-slime",
-		--dir = "~/Documents/slimes/vim-slime",
-		--branch = "track_channels", --"main",--
-		--event = "VeryLazy",
-		init = function()
-			require("plugin_configs.vim-slime.initi")
-		end,
 
-		config = function()
-			require("plugin_configs.vim-slime.config")
+	{
+		"jam1015/vim-slime",
+		branch = "validate_config",
+		init = function()
+			-- these two should be set before the plugin loads
+			vim.g.slime_target = "neovim"
+			vim.g.slime_no_mappings = true
 		end,
-	}),
+		config = function()
+			vim.g.slime_input_pid = false
+			vim.g.slime_suggest_default = true
+			vim.g.slime_menu_config = false
+			vim.keymap.set("n", "gz", "<Plug>SlimeMotionSend", { remap = true, silent = false })
+			vim.keymap.set("n", "gzz", "<Plug>SlimeLineSend", { remap = true, silent = false })
+			vim.keymap.set("x", "gz", "<Plug>SlimeRegionSend", { remap = true, silent = false })
+			vim.keymap.set("n", "gzc", "<Plug>SlimeConfig", { remap = true, silent = false })
+		end
+	}
+	,
 
 
 

@@ -5,11 +5,14 @@ if os.getenv("TMUX") then
 else
 	vim.g.slime_target = "neovim"
 	vim.g.slime_no_mappings = true
-  vim.g.slime_input_pid = false
+	vim.g.slime_input_pid = false
+	vim.g.slime_suggest_default = true
+
+	vim.g.slime_menu_config = false
 
 
---	vim.g.slime_target_send = "slime_neovim#send"
---	vim.g.slime_target_config = "slime_neovim#config"
+	--	vim.g.slime_target_send = "slime_neovim#send"
+	--	vim.g.slime_target_config = "slime_neovim#config"
 	--	local slime_autocmds = vim.api.nvim_create_augroup("slime_autocomds", { clear = true })
 	--	vim.api.nvim_create_autocmd("TermOpen", {
 	--		pattern = "*",

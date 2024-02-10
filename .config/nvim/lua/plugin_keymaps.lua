@@ -25,7 +25,7 @@ function M.pluginKeymaps(plugin, setup_type)
 		vim.keymap.set('n', '<leader>fc', '<Plug>(CreateGoTo)', { remap = true })
 	elseif plugin == "cscope_maps" then
 		local get_cscope_prompt_cmd = function(operation, selection)
-			local sel = "cword" -- word under cursor
+			local sel = "cword"   -- word under cursor
 			if selection == "f" then -- file under cursor
 				sel = "cfile"
 			end
@@ -60,14 +60,6 @@ function M.pluginKeymaps(plugin, setup_type)
 		keymap("n", "<leader>cb", "<Cmd>Cscope build<cr>", { noremap = true, silent = true, desc = sym_map.b })
 	elseif plugin == "nvim-tree" then
 		keymap("n", "<leader>nt", "<Cmd>NvimTreeToggle<CR>", opts)
-	elseif plugin == "vim-slime" then
-		keymap("n", "gz", "<Plug>SlimeMotionSend", { remap = true, silent = false })
-		keymap("n", "gzz", "<Plug>SlimeLineSend", { remap = true, silent = false })
-		keymap("x", "gz", "<Plug>SlimeRegionSend", { remap = true, silent = false })
-	elseif plugin == "vim-slime-ext-plugins" then
-		keymap("n", "gz", "<Plug>SlimeMotionSend", { remap = true, silent = false })
-		keymap("n", "gzz", "<Plug>SlimeLineSend", { remap = true, silent = false })
-		keymap("x", "gz", "<Plug>SlimeRegionSend", { remap = true, silent = false })
 	elseif plugin == "vim-rooter" then
 		keymap("n", "<leader>rf", ":cd <c-r>=FindRootDirectory()<CR>", { remap = true, silent = false })
 	elseif plugin == "yanky.nvim" then
@@ -209,9 +201,7 @@ function M.nvim_treehopper()
 		["<leader>h"] = { name = "Hopping" },
 		["<leader>ht"] = { "<cmd>lua require('tsht').nodes()<cr>", "Treehopper Move" },
 	}, { mode = "x" }) -- 'x' for visual mode
-
 end
-
 
 function M.vim_unimpaired()
 	vim.cmd([[
@@ -262,20 +252,26 @@ function M.vim_unimpaired()
 			]])
 end
 
-function M.nvim_cmp()
-		local function cmp_disable()
-			require('cmp').setup.buffer { enabled = false }
-		end
+function M.vim_slime()
+		vim.keymap.set("n", "gz", "<Plug>SlimeMotionSend", { remap = true, silent = false })
+		vim.keymap.set("n", "gzz", "<Plug>SlimeLineSend", { remap = true, silent = false })
+		vim.keymap.set("x", "gz", "<Plug>SlimeRegionSend", { remap = true, silent = false })
+		vim.keymap.set("x", "gzc", "<Plug>SlimeConfig", { remap = true, silent = false })
+end
 
-		local function cmp_enable()
-			require('cmp').setup.buffer { enabled = true }
-		end
-		vim.api.nvim_create_user_command('CmpEnable', cmp_enable, { bar = true })
-		vim.api.nvim_create_user_command('CmpDisable', cmp_disable, { bar = true })
+function M.nvim_cmp()
+	local function cmp_disable()
+		require('cmp').setup.buffer { enabled = false }
+	end
+
+	local function cmp_enable()
+		require('cmp').setup.buffer { enabled = true }
+	end
+	vim.api.nvim_create_user_command('CmpEnable', cmp_enable, { bar = true })
+	vim.api.nvim_create_user_command('CmpDisable', cmp_disable, { bar = true })
 end
 
 function M.substitute_nvim()
-
 	wk.register({
 		["<leader>xc"] = { require('substitute.exchange').operator, "Exchange operator", noremap = true },
 		["<leader>xx"] = { require('substitute.exchange').line, "Exchange line", noremap = true },
