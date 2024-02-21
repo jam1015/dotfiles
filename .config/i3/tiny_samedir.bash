@@ -1,3 +1,4 @@
 #!/bin/bash
 WHEREAMI=$(cat /tmp/whereami)
-kitty --directory=$WHEREAMI
+#/home/jordan/Documents/kitty/kitty/launcher/kitty --directory=$WHEREAMI
+/usr/bin/kitty --directory=$WHEREAMI

@@ -559,30 +559,32 @@ return {
 		end,
 	},
 
+	({
+		--"jpalardy/vim-slime",
+		"jam1015/vim-slime",
+		dir = "~/Documents/slimes/vim-slime",
+		--branch = "track_channels", --"main",--
+		--event = "VeryLazy",
+		init = function()
+			require("plugin_configs.vim-slime.initi")
+		end,
+
+		config = function()
+			require("plugin_configs.vim-slime.config")
+		end,
+	}),
+
 
 	{
-		"jam1015/vim-slime",
-		branch = "validate_config",
+		"mbbill/undotree",
 		init = function()
-			-- these two should be set before the plugin loads
-			vim.g.slime_target = "neovim"
-			vim.g.slime_no_mappings = true
+			require("plugin_configs.undotree.initi")
 		end,
+
 		config = function()
-			vim.g.slime_input_pid = false
-			vim.g.slime_suggest_default = true
-			vim.g.slime_menu_config = false
-			vim.keymap.set("n", "gz", "<Plug>SlimeMotionSend", { remap = true, silent = false })
-			vim.keymap.set("n", "gzz", "<Plug>SlimeLineSend", { remap = true, silent = false })
-			vim.keymap.set("x", "gz", "<Plug>SlimeRegionSend", { remap = true, silent = false })
-			vim.keymap.set("n", "gzc", "<Plug>SlimeConfig", { remap = true, silent = false })
-		end
-	}
-	,
-
-
-
-
+			require("plugin_configs.undotree.config")
+		end,
+	},
 
 
 	{
@@ -591,10 +593,6 @@ return {
 		init = function() vim.opt.termguicolors = true end,
 		config = function() require('colorizer').setup() end
 	},
-
-
-
-
 
 
 }

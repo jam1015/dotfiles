@@ -87,10 +87,9 @@ set.shada = "'1000,%"
 
 --setting clipboard settings
 if os.getenv("DISPLAY") then
-	if not os.getenv("SSH_CONNECTION") and not os.getenv("CHROME_REMOTE_DESKTOP_SESSION")
-	then
+	--if not os.getenv("SSH_CONNECTION") and not os.getenv("CHROME_REMOTE_DESKTOP_SESSION") then
 		vim.opt.clipboard = 'unnamedplus'
-	end
+	--end
 else
 end
 

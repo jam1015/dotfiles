@@ -107,7 +107,8 @@ fi
 
 ## done making prompt
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
-alias glog='git log --oneline --all --graph --decorate'
+#alias glog='git log --oneline --all --graph --decorate'
+alias glog="git log --graph --all --decorate --oneline --pretty=format:'%C(auto)%h %d %s %cd' --date=short"
 
 setopt noauto_pushd
 setopt completealiases

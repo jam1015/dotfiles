@@ -253,10 +253,10 @@ function M.vim_unimpaired()
 end
 
 function M.vim_slime()
-		vim.keymap.set("n", "gz", "<Plug>SlimeMotionSend", { remap = true, silent = false })
-		vim.keymap.set("n", "gzz", "<Plug>SlimeLineSend", { remap = true, silent = false })
-		vim.keymap.set("x", "gz", "<Plug>SlimeRegionSend", { remap = true, silent = false })
-		vim.keymap.set("x", "gzc", "<Plug>SlimeConfig", { remap = true, silent = false })
+	vim.keymap.set("n", "gz", "<Plug>SlimeMotionSend", { remap = true, silent = false })
+	vim.keymap.set("n", "gzz", "<Plug>SlimeLineSend", { remap = true, silent = false })
+	vim.keymap.set("x", "gz", "<Plug>SlimeRegionSend", { remap = true, silent = false })
+	vim.keymap.set("n", "gzc", "<Plug>SlimeConfig", { remap = true, silent = false })
 end
 
 function M.nvim_cmp()
@@ -269,6 +269,10 @@ function M.nvim_cmp()
 	end
 	vim.api.nvim_create_user_command('CmpEnable', cmp_enable, { bar = true })
 	vim.api.nvim_create_user_command('CmpDisable', cmp_disable, { bar = true })
+end
+
+function M.undotree()
+	vim.keymap.set('n', '<leader>uu', vim.cmd.UndotreeToggle)
 end
 
 function M.substitute_nvim()
