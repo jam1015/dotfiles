@@ -112,6 +112,16 @@ cmp.setup({
 	experimental = {
 		ghost_text = false,
 	},
+  matching = {
+    disallow_fuzzy_matching = false,
+    disallow_partial_fuzzy_matching = false,
+    disallow_fullfuzzy_matching = false,
+    disallow_partial_matching = false,
+    disallow_prefix_unmatching = false,
+
+  },
+
+    preselect = cmp.PreselectMode.Item
 })
 
 --Set configuration for specific filetype.
@@ -185,4 +195,4 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = cmp_grp,
 })
 
-require("plugin_keymaps").pluginKeymaps("nvim-cmp")
+require("plugin_keymaps").nvim_cmp()

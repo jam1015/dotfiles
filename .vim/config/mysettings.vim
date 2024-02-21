@@ -103,6 +103,8 @@ else
 endif
 
 set wildoptions+=pum
+set wildoptions+=fuzzy
+set wildoptions+=tagfile
 
 if has('langmap') && exists('+langremap')
   " Prevent that the langmap option applies to characters that result from a

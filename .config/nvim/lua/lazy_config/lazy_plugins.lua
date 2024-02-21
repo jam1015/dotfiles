@@ -12,7 +12,6 @@ return {
 
 	({
 		"hrsh7th/nvim-cmp",
-		enabled = true,
 		cond = function() --also done vi autocmd in the cmp config
 			return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
 		end,
@@ -114,6 +113,7 @@ return {
 	{
 		"dzfrias/arena.nvim",
 		event = "VeryLazy",
+		enabled = false,
 		-- Calls `.setup()` automatically
 		config = function()
 			require("plugin_configs.arena")
@@ -124,9 +124,9 @@ return {
 		"dhananjaylatkar/cscope_maps.nvim",
 		event = "VeryLazy",
 		dependencies = {
-			"folke/which-key.nvim", -- optional [for whichkey hints]
+			"folke/which-key.nvim",     -- optional [for whichkey hints]
 			--"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
-			"ibhagwan/fzf-lua",   -- optional [for picker="fzf-lua"]
+			"ibhagwan/fzf-lua",         -- optional [for picker="fzf-lua"]
 			"nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
 		},
 		opts = require("plugin_configs.cscope_maps.options")
@@ -306,7 +306,7 @@ return {
 	{ "bronson/vim-visual-star-search", event = "VeryLazy" },
 	{ "tpope/vim-repeat",               event = "VeryLazy" },
 	{ "qpkorr/vim-bufkill",             event = "VeryLazy", enabled = false },
-	{ "kevinoid/vim-jsonc",             event = "VeryLazy" , enabled = false},
+	{ "kevinoid/vim-jsonc",             event = "VeryLazy", enabled = false },
 
 
 	{
@@ -586,6 +586,158 @@ return {
 
 
 
+
+	{
+		"jam1015/preview_colorscheme",
+		enabled = false,
+		config = function()
+			require('preview_colorscheme').setup()
+		end
+	},
+
+
+
+
+
+	--"mfussenegger/nvim-dap",
+	{
+		'echasnovski/mini.completion',
+		version = "*",
+		enabled = false,
+		config = function()
+			require('mini.completion').setup()
+		end
+	},
+	{ 'jghauser/mkdir.nvim' },
+
+	({
+		"neoclide/coc.nvim",
+		branch = "release",
+		enabled = false,
+		dependencies = { "neoclide/coc-snippets" },
+		init = function()
+			require("plugin_configs.coc")
+		end,
+		event = "VeryLazy",
+	}),
+
+	{
+		"gbprod/yanky.nvim",
+		enabled = false,
+
+		--enabled = function()
+		--	return not os.getenv("DISPLAY")
+		--end,
+
+		event = "VeryLazy",
+		--branch = "autocmd",
+		--dependencies = { "kkharji/sqlite.lua", },
+
+		--dir = "/home/jordan/Documents/yanky.nvim",
+		config = function()
+			require("plugin_configs.yanky")
+			require("plugin_keymaps").pluginKeymaps("yanky.nvim")
+		end
+
+
+	},
+	{ "svban/YankAssassin.vim", enabled = true },
+	{
+		-- does the same thing as YankRing
+		'maxbrunsfeld/vim-yankstack',
+		--event = "VeryLazy",
+		--dir = "~/Documents/vim-yankstack",
+
+		enabled = true,
+
+		--		enabled = function()
+		--			return os.getenv("DISPLAY")
+		--		end,
+
+		init = function()
+			require("plugin_configs.vim-yankstack.initi")
+		end,
+		config = function()
+			require("plugin_configs.vim-yankstack.config")
+		end
+	},
+
+
+
+	{
+		"gbprod/substitute.nvim",
+		enabled = true,
+		config = function()
+			require("plugin_configs.substitute_nvim")
+			require("plugin_keymaps").substitute_nvim()
+		end
+	},
+
+
+	"powerman/vim-plugin-AnsiEsc",
+
+	{
+
+		"jam1015/vim_consistency",
+		event = "VeryLazy"
+	},
+
+	{
+
+		"jam1015/vim_create_goto",
+		dir = "~/Documents/vim_create_goto",
+		event = "VeryLazy",
+		config = function()
+			require("plugin_keymaps").pluginKeymaps("vim_create_goto")
+		end
+	},
+
+	{
+		'nvim-lualine/lualine.nvim',
+		event = "VeryLazy",
+		dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+		init = function()
+			require('plugin_configs.lualine.initi')
+		end,
+		config = function()
+			require('plugin_configs.lualine.config')
+		end,
+	},
+
+	({
+		--"jpalardy/vim-slime",
+		"jam1015/vim-slime",
+		dir = "~/Documents/slimes/vim-slime",
+		--branch = "track_channels", --"main",--
+		--event = "VeryLazy",
+		init = function()
+			require("plugin_configs.vim-slime.initi")
+		end,
+
+		config = function()
+			require("plugin_configs.vim-slime.config")
+		end,
+	}),
+
+
+	{
+		"mbbill/undotree",
+		init = function()
+			require("plugin_configs.undotree.initi")
+		end,
+
+		config = function()
+			require("plugin_configs.undotree.config")
+		end,
+	},
+
+
+	{
+		"norcalli/nvim-colorizer.lua",
+		enabled = false,
+		init = function() vim.opt.termguicolors = true end,
+		config = function() require('colorizer').setup() end
+	},
 
 
 }

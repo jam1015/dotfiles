@@ -1,1 +1,1 @@
-require("plugin_keymaps").pluginKeymaps("vim-slime")
+require("plugin_keymaps").vim_slime()
