@@ -33,7 +33,7 @@ fi
 if [[ "$(uname -s)" == "Darwin" ]]; then
 	alias vim="mvim -v"
 fi
-
+#
 export BROWSER="/usr/bin/firefox-developer-edition"
 export EDITOR="nvim"
 
@@ -82,27 +82,32 @@ export diaries_events="$HOME/Documents/diaries/diaries_events.md"
 ############ making custom prompt #################
 # perform parameter expansion/command substitution in prompt definition
 setopt PROMPT_SUBST
+
 vim_ins_mode=">"
 vim_cmd_mode="%%"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {
-vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-zle reset-prompt
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  zle reset-prompt
 }
 
 zle -N zle-keymap-select
 
 function zle-line-finish {
-vim_mode=$vim_ins_mode
+  vim_mode=$vim_ins_mode
 }
 zle -N zle-line-finish
 
-if [[ "$EUID" = 0 ]]
-then 
-	PS1='%B%F{green}%M:su:%3~ ${vim_mode}%f%b '
+# Define ANSI color variables outside precmd to avoid redefinition
+export LIGHT_MAGENTA=$'\e[95m'
+export RESET_COLOR=$'\e[0m'
+
+
+if [[ "$EUID" = 0 ]]; then 
+  PS1='%B%F{green}%M:su:%3~ ${vim_mode}%f%b '
 else
-	PS1='%B%F{magenta}%M:%3~ ${vim_mode}%f%b '
+  PS1='%{$LIGHT_MAGENTA%}%B%M:%3~ ${vim_mode}%{$RESET_COLOR%}%b '
 fi
 
 ## done making prompt
@@ -111,7 +116,6 @@ alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
 alias glog="git log --graph --all --decorate --oneline --pretty=format:'%C(auto)%h %d %s %cd' --date=short"
 
 setopt noauto_pushd
-setopt completealiases
 
 function cheat ()
 {
@@ -141,7 +145,13 @@ function write_cwd_to_file {
 # Add the function to precmd_functions
 precmd_functions+=(write_cwd_to_file)
 
+alias luamake=/Users/jordanmandel/Documents/lua-language-server/3rd/luamake/luamake
 
 
+
+eval "$(zoxide init --cmd cd zsh)"
+
+
+setopt completealiases
 
 echo ".zshrc sourced"

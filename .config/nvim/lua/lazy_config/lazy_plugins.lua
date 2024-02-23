@@ -595,4 +595,13 @@ return {
 	},
 
 
+	{
+		"goolord/alpha-nvim",
+		cond = require("plugin_configs.alpha-nvim.cond"),
+		config = function()
+			require("plugin_configs.alpha-nvim.config")
+		end,
+
+
+	}
 }
