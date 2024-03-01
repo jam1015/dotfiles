@@ -9,6 +9,7 @@ alias vi='nvim'
 alias vin='nvim --cmd "let g:flatten_allow_nesting = v:true"'
 
 alias van="man -P 'nvim -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'" 
+export MANPAGER='nvim -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'
 alias ptpython='ptpython --vi --dark-bg'
 alias python='python'
 alias pdflatex="pdflatex -synctex=1"

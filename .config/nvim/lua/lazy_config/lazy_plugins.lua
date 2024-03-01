@@ -594,7 +594,7 @@ return {
 		config = function() require('colorizer').setup() end
 	},
 
-
+	'sainnhe/gruvbox-material',
 	{
 		"goolord/alpha-nvim",
 		cond = require("plugin_configs.alpha-nvim.cond"),
