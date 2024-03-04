@@ -1,4 +1,5 @@
 #Ctrl-shift-f5 to reload on linux
+#Ctrl-command+, to reload on mac
 
 
 #include ~/.config/kitty/kitty-themes/themes/Monokai_Pro_(Filter_Spectrum).conf
@@ -84,11 +85,11 @@ clipboard_control write-primary write-clipboard no-append
 #bold_italic_font Fantasque Sans Mono Bold Italic
 #font_size 13
 
-#font_family      Comic Code Regular
-#bold_font        Comic Code Bold
-#italic_font      Comic Code Italic
-#bold_italic_font Comic Code Bold Italic
-#font_size 8
+font_family      InputMono
+bold_font        InputMono Bold
+italic_font      InputMono Italic
+bold_italic_font InputMono BoldIta
+font_size 7
 
 #font_family      Iosevka Extended
 #bold_font        Iosevka Bold Extended
@@ -108,11 +109,17 @@ clipboard_control write-primary write-clipboard no-append
 #bold_italic_font Consolas Bold Italic
 #font_size 8
 
-font_family      Iosevka
-bold_font        Iosevka Bold
-italic_font      Iosevka Italic
-bold_italic_font Iosevka Bold Italic
-font_size 8
+#font_family      Iosevka
+#bold_font        Iosevka Bold
+#italic_font      Iosevka Italic
+#bold_italic_font Iosevka Bold Italic
+#font_size 8
+
+#font_family      Iosevka Fixed Slab
+#bold_font        Iosevka Fixed Slab  Bold
+#italic_font      Iosevka Fixed Slab  Italic
+#bold_italic_font Iosevka Fixed Slab  Bold Italic
+#font_size 8
 
 #font_family      Intel One Mono
 #bold_font        Intel One Mono Bold
@@ -211,8 +218,41 @@ font_size 8
 #: than 100% to reduce sizes (but this might cause rendering
 #: artifacts).
 
- symbol_map U+E0A0-U+E0A3,U+E0C0-U+E0C7 PowerlineSymbols
-symbol_map U+23FB-U+23FE,U+2665,U+26A1,U+2B58,U+E000-U+E00A,U+E0A0-U+E0A3,U+E0B0-U+E0C8,U+E0CA,U+E0CC-U+E0D2,U+E0D4,U+E200-U+E2A9,U+E300-U+E3E3,U+E5FA-U+E62F,U+E700-U+E7C5,U+F000-U+F2E0,U+F300-U+F31C,U+F400-U+F4A9,U+F500-U+F8FF Symbols Nerd Font
+#symbol_map U+E0A0-U+E0A3,U+E0C0-U+E0C7 PowerlineSymbols
+#symbol_map U+23FB-U+23FE,U+2665,U+26A1,U+2B58,U+E000-U+E00A,U+E0A0-U+E0A3,U+E0B0-U+E0C8,U+E0CA,U+E0CC-U+E0D2,U+E0D4,U+E200-U+E2A9,U+E300-U+E3E3,U+E5FA-U+E62F,U+E700-U+E7C5,U+F000-U+F2E0,U+F300-U+F31C,U+F400-U+F4A9,U+F500-U+F8FF Symbols Nerd Font Mono
+# Nerd Fonts v2.3.3
+
+symbol_map U+23FB-U+23FE,U+2665,U+26A1,U+2B58,U+E000-U+E00A,U+E0A0-U+E0A3,U+E0B0-U+E0D4,U+E200-U+E2A9,U+E300-U+E3E3,U+E5FA-U+E6AA,U+E700-U+E7C5,U+EA60-U+EBEB,U+F000-U+F2E0,U+F300-U+F32F,U+F400-U+F4A9,U+F500-U+F8FF,U+F0001-U+F1AF0 Symbols Nerd Font
+
+#symbol_map U+F900-U+FFFF Symbols Nerd Font Mono
+
+#symbol_map = {
+#      Text = "󰉿",
+#      Method = "󰆧",
+#      Function = "󰊕",
+#      Constructor = "",
+#      Field = "󰜢",
+#      Variable = "󰀫",
+#      Class = "󰠱",
+#      Interface = "",
+#      Module = "",
+#      Property = "󰜢",
+#      Unit = "󰑭",
+#      Value = "󰎠",
+#      Enum = "",
+#      Keyword = "󰌋",
+#      Snippet = "",
+#      Color = "󰏘",
+#      File = "󰈙",
+#      Reference = "󰈇",
+#      Folder = "󰉋",
+#      EnumMember = "",
+#      Constant = "󰏿",
+#      Struct = "󰙅",
+#      Event = "",
+#      Operator = "󰆕",
+#      TypeParameter = "",
+#symbol_map U+0000-U+FFFF Symbols Nerd Font Mono
 #: Map the specified unicode codepoints to a particular font. Useful
 #: if you need special rendering for some symbols, such as for
 #: Powerline. Avoids the need for patched fonts. Each unicode code
@@ -597,7 +637,7 @@ scrollback_pager nvim --noplugin -u ~/.config/kitty/scrollback-pager/nvim/init.v
 
 #: }}}
 
- Terminal bell {{{
+ #Terminal bell {{{
 
  enable_audio_bell no
 
@@ -624,7 +664,7 @@ scrollback_pager nvim --noplugin -u ~/.config/kitty/scrollback-pager/nvim/init.v
 
 #: Program to run when a bell occurs.
 
- }}}
+ #}}}
 
 #: Window layout {{{
 
@@ -1036,7 +1076,7 @@ scrollback_pager nvim --noplugin -u ~/.config/kitty/scrollback-pager/nvim/init.v
 #: to yes means that any background processes still using the terminal
 #: can fail silently because their stdout/stderr/stdin no longer work.
 
-# allow_remote_control no
+allow_remote_control yes
 
 #: Allow other programs to control kitty. If you turn this on other
 #: programs can control all aspects of kitty, including sending text
@@ -1603,6 +1643,6 @@ scrollback_pager nvim --noplugin -u ~/.config/kitty/scrollback-pager/nvim/init.v
 
 
 # BEGIN_KITTY_THEME
-# Ubuntu
+# Alacritty
 include current-theme.conf
 # END_KITTY_THEME

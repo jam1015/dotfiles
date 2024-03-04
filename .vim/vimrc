@@ -46,7 +46,8 @@ Pack 'skywind3000/gutentags_plus'
 Pack 'ludovicchabant/vim-gutentags'
 runtime config/gutentagsconfig.vim
 
-
+Pack 'jpalardy/vim-slime'
+runtime config/vim-slime.vim
 """" having problems with this plugin
 "Pack 'vlime/vlime', {'rtp': 'vim/'}
 ""runtime config/vlime.vim

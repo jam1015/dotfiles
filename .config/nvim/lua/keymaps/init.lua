@@ -21,7 +21,7 @@ if os.getenv("TMUX") then
 else
 	--using my favored tmux prefix
 	keymap("n", "<C-a>", "<C-w>", { remap = true, silent = true })
-	keymap("t", "<C-a>", "<C-w>", { remap = true, silent = true })
+	keymap("t", "<C-a>", "<C-\\><C-n><C-a>", { remap = true, silent = true })
 	keymap("t", "<C-w>", "<C-\\><C-n><C-w>", { remap = true, silent = true })
 end
 
@@ -59,14 +59,6 @@ local function terminal_close_autocmd()
 			once = true,
 		})
 end
-
-
-
-
-
-
-
-
 
 local function term_vsplit()
 	if vim.bo.buftype == 'terminal' then
@@ -112,10 +104,10 @@ end
 vim.api.nvim_create_user_command('Tsplit', term_hsplit, { bar = true })
 vim.api.nvim_create_user_command('Tvsplit', term_vsplit, { bar = true })
 
-keymap("n", "<C-w>s", term_hsplit, opts)
-keymap("t", "<C-w>s", term_hsplit, opts)
-keymap("n", "<C-w>v", term_vsplit, opts)
-keymap("t", "<C-w>v", term_vsplit, opts)
+keymap("n", "<C-a>s", term_hsplit, opts)
+keymap("t", "<C-a>s", term_hsplit, opts)
+keymap("n", "<C-a>v", term_vsplit, opts)
+keymap("t", "<C-a>v", term_vsplit, opts)
 
 
 
@@ -163,11 +155,11 @@ if bufwinnr(1)
 	let g:toggle_mappings = !g:toggle_mappings
 	endfunction
 
-	nnoremap <expr> $ g:toggle_mappings ? 'g$' : '$'
-	nnoremap <expr> 0 g:toggle_mappings ? 'g0' : '0'
-	nnoremap <expr> ^ g:toggle_mappings ? 'g^' : '^'
-	nnoremap <expr> j g:toggle_mappings ? 'gj' : 'j'
-	nnoremap <expr> k g:toggle_mappings ? 'gk' : 'k'
+	nnoremap <silent> <expr> $ g:toggle_mappings ? 'g$' : '$'
+	nnoremap <silent> <expr> 0 g:toggle_mappings ? 'g0' : '0'
+	nnoremap <silent> <expr> ^ g:toggle_mappings ? 'g^' : '^'
+	nnoremap <silent> <expr> j g:toggle_mappings ? 'gj' : 'j'
+	nnoremap <silent> <expr> k g:toggle_mappings ? 'gk' : 'k'
 	command! ToggleMyMappings call ToggleMappings()
 	]])
 

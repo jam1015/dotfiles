@@ -35,9 +35,10 @@ set.history = 2000
 set.autoread = true
 set.scrolloff = 3   -- show a few lines around cursor
 set.display = "lastline"
-set.shiftwidth = 4  --how much indentation from >
-set.softtabstop = 4 --lets us delete by tabs when expandtab is on
-set.tabstop = 4
+set.shiftwidth = 2  --how much indentation from >
+set.softtabstop = 2 --lets us delete by tabs when expandtab is on
+set.tabstop = 2
+set.showcmd = false
 --set.path = set.path + "**"
 set.expandtab = false
 set.smarttab = false
@@ -47,6 +48,7 @@ set.wildmenu = true
 set.wildmode = 'longest:full,full'
 set.wildignorecase = true
 set.wildignore = '*.git/*,*.tags,tags,*.o,*.class,*.ccls-cache'
+set.wildoptions = "fuzzy,pum,tagfile"
 set.ignorecase = true
 set.smartcase = true
 set.splitbelow = true
@@ -68,8 +70,8 @@ set.termguicolors = true
 set.foldmethod = "expr"
 set.foldexpr = "nvim_treesitter#foldexpr()"
 set.foldlevelstart = 99
---
---
+
+
 vim.g.vim_json_syntax_conceal = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
@@ -79,14 +81,15 @@ set.pumheight = 10
 set.inccommand = 'split'
 --set.shada = "'1000,%"
 
--- see yanky config for clipbaord settingss
+-- see yanky config for clipboard settingss
 
 
--- setting clipboard settings
+
+--setting clipboard settings
 if os.getenv("DISPLAY") then
-	if not os.getenv("SSH_CONNECTION") then
+	--if not os.getenv("SSH_CONNECTION") and not os.getenv("CHROME_REMOTE_DESKTOP_SESSION") then
 		vim.opt.clipboard = 'unnamedplus'
-	end
+	--end
 else
 end
 
@@ -114,6 +117,5 @@ local function setup_tmux_clipboard()
 	end
 end
 
--- Call the function to set up the clipboard
+---- Call the function to set up the clipboard
 setup_tmux_clipboard()
-

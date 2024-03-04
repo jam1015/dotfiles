@@ -10,6 +10,37 @@ end
 return {
 
 
+	({
+		"hrsh7th/nvim-cmp",
+		cond = function() --also done vi autocmd in the cmp config
+			return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
+		end,
+		lazy = true,
+		event = "VeryLazy",
+		dependencies = {
+			{ "onsails/lspkind.nvim", event = "VeryLazy" },
+			{ "hrsh7th/cmp-nvim-lsp", event = "VeryLazy" },
+			{ "hrsh7th/cmp-nvim-lua", event = "VeryLazy" },
+			{ "hrsh7th/cmp-buffer",   event = "VeryLazy" },
+			{ "hrsh7th/cmp-path",     event = "VeryLazy" },
+			{ "hrsh7th/cmp-cmdline",  event = "VeryLazy" },
+			{
+				"L3MON4D3/LuaSnip", -- tag = "v<CurrentMajor>.*",
+				dependencies = { "rafamadriz/friendly-snippets" },
+				config = function()
+					require("plugin_configs.LuaSnip")
+				end,
+
+				event = "VeryLazy"
+			},
+			{ "saadparwaiz1/cmp_luasnip", event = "VeryLazy" }
+		},
+		config = function()
+			require("plugin_configs.nvim-cmp")
+		end,
+	}),
+
+
 	{
 		"example/example",
 		dir = "~/Documents/example",
@@ -83,6 +114,7 @@ return {
 	{
 		"dzfrias/arena.nvim",
 		event = "VeryLazy",
+		enabled = false,
 		-- Calls `.setup()` automatically
 		config = function()
 			require("plugin_configs.arena")
@@ -93,9 +125,9 @@ return {
 		"dhananjaylatkar/cscope_maps.nvim",
 		event = "VeryLazy",
 		dependencies = {
-			"folke/which-key.nvim", -- optional [for whichkey hints]
+			"folke/which-key.nvim",     -- optional [for whichkey hints]
 			--"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
-			"ibhagwan/fzf-lua",  -- optional [for picker="fzf-lua"]
+			"ibhagwan/fzf-lua",         -- optional [for picker="fzf-lua"]
 			"nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
 		},
 		opts = require("plugin_configs.cscope_maps.options")
@@ -166,7 +198,7 @@ return {
 			require("plugin_configs.tokyonight")
 		end,
 		--
-		event = "VeryLazy"
+		--event = "VeryLazy"
 	}),
 
 	{
@@ -227,7 +259,7 @@ return {
 		"tpope/vim-unimpaired",
 		event = "VeryLazy",
 		config = function()
-			require("plugin_keymaps").pluginKeymaps("vim-unimpaired")
+			require("plugin_keymaps").vim_unimpaired()
 		end,
 	},
 
@@ -256,7 +288,8 @@ return {
 		dependencies = "kana/vim-textobj-user",
 	},
 	({
-		"kylechui/nvim-surround", event = "VeryLazy",
+		"kylechui/nvim-surround",
+		event = "VeryLazy",
 		config = function()
 			require("plugin_configs.nvim-surround")
 		end,
@@ -274,7 +307,7 @@ return {
 	{ "bronson/vim-visual-star-search", event = "VeryLazy" },
 	{ "tpope/vim-repeat",               event = "VeryLazy" },
 	{ "qpkorr/vim-bufkill",             event = "VeryLazy", enabled = false },
-	{ "kevinoid/vim-jsonc",             event = "VeryLazy" },
+	{ "kevinoid/vim-jsonc",             event = "VeryLazy", enabled = false },
 
 
 	{
@@ -396,10 +429,11 @@ return {
 	{
 		'nvim-tree/nvim-tree.lua',
 		event = "VeryLazy",
-		dependencies = {
-		},
 		tag = 'nightly', -- optional, updated every week. (see issue #1193)
-		config = function() require("plugin_configs.nvim-tree") end
+		config = function()
+			require("plugin_configs.nvim-tree")
+			require("plugin_keymaps").pluginKeymaps("nvim-tree")
+		end
 
 
 	},
@@ -408,10 +442,13 @@ return {
 
 
 
-
-
-
-
+	{
+		"jam1015/preview_colorscheme",
+		enabled = false,
+		config = function()
+			require('preview_colorscheme').setup()
+		end
+	},
 
 
 
@@ -423,42 +460,9 @@ return {
 		version = "*",
 		enabled = false,
 		config = function()
-			require('mini.completion')
-				.setup()
+			require('mini.completion').setup()
 		end
 	},
-
-	({
-		"hrsh7th/nvim-cmp",
-		enabled = true,
-		cond = function() --also done vi autocmd in the cmp config
-			return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
-		end,
-		lazy = true,
-		event = "VeryLazy",
-		dependencies = {
-			{ "onsails/lspkind.nvim", event = "VeryLazy" },
-			{ "hrsh7th/cmp-nvim-lsp", event = "VeryLazy" },
-			{ "hrsh7th/cmp-nvim-lua", event = "VeryLazy" },
-			{ "hrsh7th/cmp-buffer",   event = "VeryLazy" },
-			{ "hrsh7th/cmp-path",     event = "VeryLazy" },
-			{ "hrsh7th/cmp-cmdline",  event = "VeryLazy" },
-			{
-				"L3MON4D3/LuaSnip", -- tag = "v<CurrentMajor>.*",
-				dependencies = { "rafamadriz/friendly-snippets" },
-				config = function()
-					require("plugin_configs.LuaSnip")
-				end,
-
-				event = "VeryLazy"
-			},
-			{ "saadparwaiz1/cmp_luasnip", event = "VeryLazy" }
-		},
-		config = function()
-			require("plugin_configs.nvim-cmp")
-		end,
-	}),
-
 	{ 'jghauser/mkdir.nvim' },
 
 	({
@@ -510,7 +514,6 @@ return {
 		end,
 		config = function()
 			require("plugin_configs.vim-yankstack.config")
-			require("plugin_keymaps").pluginKeymaps("vim-yankstack")
 		end
 	},
 
@@ -521,17 +524,11 @@ return {
 		enabled = true,
 		config = function()
 			require("plugin_configs.substitute_nvim")
-			require("plugin_keymaps").pluginKeymaps("substitute_nvim")
+			require("plugin_keymaps").substitute_nvim()
 		end
 	},
 
 
-	{
-		"norcalli/nvim-colorizer.lua",
-		enabled = false,
-		init = function() vim.opt.termguicolors = true end,
-		config = function() require('colorizer').setup() end
-	},
 	"powerman/vim-plugin-AnsiEsc",
 
 	{
@@ -550,13 +547,24 @@ return {
 		end
 	},
 
-
+	{
+		'nvim-lualine/lualine.nvim',
+		event = "VeryLazy",
+		dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+		init = function()
+			require('plugin_configs.lualine.initi')
+		end,
+		config = function()
+			require('plugin_configs.lualine.config')
+		end,
+	},
 
 	({
-		"jpalardy/vim-slime",
-		branch = "vim_array", --"main",--
-		event = "VeryLazy",
-		enabled = false,
+		--"jpalardy/vim-slime",
+		"jam1015/vim-slime",
+		dir = "~/Documents/slimes/vim-slime",
+		--branch = "track_channels", --"main",--
+		--event = "VeryLazy",
 		init = function()
 			require("plugin_configs.vim-slime.initi")
 		end,
@@ -566,21 +574,34 @@ return {
 		end,
 	}),
 
-	({
-		"jam1015/vim-slime-ext-neovim",
-		dir = "~/Documents/slimes/vim-slime-ext-neovim",
-		--dir= "~/Documents/vim-slime-ext-neovim",
-		--"main",--
-		event = "VeryLazy",
-		dependencies = {
-			{ "jpalardy/vim-slime-ext-plugins", dir = "~/Documents/slimes/vim-slime-ext-plugins", event = "VeryLazy" }, },
+
+	{
+		"mbbill/undotree",
+		init = function()
+			require("plugin_configs.undotree.initi")
+		end,
 
 		config = function()
-			require("plugin_configs.vim-slime-ext-plugins.initi")
+			require("plugin_configs.undotree.config")
+		end,
+	},
+
+
+	{
+		"norcalli/nvim-colorizer.lua",
+		enabled = false,
+		init = function() vim.opt.termguicolors = true end,
+		config = function() require('colorizer').setup() end
+	},
+
+	'sainnhe/gruvbox-material',
+	{
+		"goolord/alpha-nvim",
+		cond = require("plugin_configs.alpha-nvim.cond"),
+		config = function()
+			require("plugin_configs.alpha-nvim.config")
 		end,
 
-		init = function()
-			require("plugin_configs.vim-slime-ext-plugins.config")
-		end,
-	}),
+
+	}
 }

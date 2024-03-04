@@ -163,6 +163,7 @@ export MANPAGER="nvim -c 'set ft=man' -"
 
 PROMPT_COMMAND='PWD=$(pwd)'
 
+eval "$(zoxide init bash)"
 
 echo "bashrc sourced"
 . "$HOME/.cargo/env"

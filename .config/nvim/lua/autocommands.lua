@@ -74,6 +74,36 @@ api.nvim_create_autocmd("TermOpen", {
 	group = term_autocmds,
 })
 
+-- showcmd related ----------------
+-- Set 'showcmd' when entering any visual mode
+vim.api.nvim_create_autocmd("ModeChanged", {
+	pattern = "*:[vV\x16]*",
+	callback = function()
+		vim.opt.showcmd = true
+	end,
+})
+
+-- Unset 'showcmd' when leaving any visual mode
+vim.api.nvim_create_autocmd("ModeChanged", {
+	pattern = "[vV\x16]*:*",
+	callback = function()
+		vim.opt.showcmd = false
+	end,
+})
+
+
+--vim.api.nvim_create_autocmd("ModeChanged", {
+--    pattern = "*",
+--    callback = function(args)
+--        -- Check if entering any visual mode (v, V, or Ctrl-V)
+--        if args.new_mode:match("^v") then
+--            vim.opt.showcmd = true
+--        else
+--            vim.opt.showcmd = false
+--        end
+--    end,
+--})
+
 --api.nvim_create_autocmd("TermClose", {
 --	pattern = "*",
 --	command = "if !v:event.status | exe 'Bdelete! '..expand('<abuf>') | endif",
@@ -96,3 +126,12 @@ api.nvim_create_autocmd("TermOpen", {
 --	callback = function() vim.opt.clipboard = "unnamedplus" end,
 --	group = clipboard_acg,
 --})
+
+
+
+
+
+
+
+
+

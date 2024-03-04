@@ -1,2 +1,2 @@
-require("plugin_keymaps").pluginKeymaps("emmet-vim", "init")()
+require("plugin_keymaps").emmet_vim("initi")
 

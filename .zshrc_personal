@@ -10,6 +10,7 @@ alias vi='nvim'
 alias vin='nvim --cmd "let g:flatten_allow_nesting = v:true"'
 
 alias van="man -P 'nvim -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'" 
+export MANPAGER='nvim -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'
 alias ptpython='ptpython --vi --dark-bg'
 alias python='python'
 alias pdflatex="pdflatex -synctex=1"
@@ -18,6 +19,7 @@ alias ll='ls -lG'
 alias ls='ls -G'
 alias pd='pandoc'
 alias glog="git log --all --graph --decorate --oneline"
+export TERMINAL="kitty"
 
 
 
@@ -26,25 +28,22 @@ alias glog="git log --all --graph --decorate --oneline"
 if command -v pacman > /dev/null 2>&1; then
 	. /opt/asdf-vm/asdf.sh
 fi
-alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
-alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
-alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovim ref:master'
+
 
 
 
 if [[ "$(uname -s)" == "Darwin" ]]; then
 	alias vim="mvim -v"
 fi
-
+#
 export BROWSER="/usr/bin/firefox-developer-edition"
 export EDITOR="nvim"
 
 case "$OSTYPE" in
 	darwin*)    VISUAL='/usr/local/bin/nvim  --cmd "let g:flatten_allow_nesting = v:true"' ;;   # macOS
-	linux*)     VISUAL='/usr/bin/nvim --cmd "let g:flatten_allow_nesting = v:true"';;         # Linux
+	linux*)     VISUAL="$HOME/.visual_editor.bash" ;;         # Linux
 esac
 
-export VISUAL
 
 export VIMCONFIG=~/.config/nvim #vim configuration directory
 export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
@@ -85,34 +84,40 @@ export diaries_events="$HOME/Documents/diaries/diaries_events.md"
 ############ making custom prompt #################
 # perform parameter expansion/command substitution in prompt definition
 setopt PROMPT_SUBST
+
 vim_ins_mode=">"
 vim_cmd_mode="%%"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {
-vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-zle reset-prompt
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  zle reset-prompt
 }
 
 zle -N zle-keymap-select
 
 function zle-line-finish {
-vim_mode=$vim_ins_mode
+  vim_mode=$vim_ins_mode
 }
 zle -N zle-line-finish
 
-if [[ "$EUID" = 0 ]]
-then 
-	PS1='%B%F{green}%M:su:%3~ ${vim_mode}%f%b '
+# Define ANSI color variables outside precmd to avoid redefinition
+export LIGHT_MAGENTA=$'\e[95m'
+export RESET_COLOR=$'\e[0m'
+
+
+if [[ "$EUID" = 0 ]]; then 
+  PS1='%B%F{green}%M:su:%3~ ${vim_mode}%f%b '
 else
-	PS1='%B%F{magenta}%M:%3~ ${vim_mode}%f%b '
+  PS1='%{$LIGHT_MAGENTA%}%B%M:%3~ ${vim_mode}%{$RESET_COLOR%}%b '
 fi
 
+## done making prompt
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
-alias glog='git log --oneline --all --graph --decorate'
+#alias glog='git log --oneline --all --graph --decorate'
+alias glog="git log --graph --all --decorate --oneline --pretty=format:'%C(auto)%h %d %s %cd' --date=short"
 
 setopt noauto_pushd
-setopt completealiases
 
 function cheat ()
 {
@@ -134,8 +139,21 @@ function precmd {
 
 
 
+# Define a function that writes the current working directory to /tmp/[pid]
+function write_cwd_to_file {
+    echo $PWD > /tmp/whereami
+}
+
+# Add the function to precmd_functions
+precmd_functions+=(write_cwd_to_file)
+
+alias luamake=/Users/jordanmandel/Documents/lua-language-server/3rd/luamake/luamake
 
 
 
+eval "$(zoxide init --cmd cd zsh)"
+
+
+setopt completealiases
 
 echo ".zshrc sourced"

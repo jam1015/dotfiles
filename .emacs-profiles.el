@@ -1,9 +1,17 @@
 (
+ (
+	"spacemacs" . (
+								 (user-emacs-directory . "~/spacemacs") 
+								 (env . (("SPACEMACSDIR" . "~/.spacemacs.d")))
+								 )
+ )
 
- ("spacemacs" . ((user-emacs-directory . "~/spacemacs")
-				 (env . (("SPACEMACSDIR" . "~/.spacemacs.d")))))
- ("doom" . ((user-emacs-directory . "~/.emacs.doom")
-			(env . (("DOOMDIR" . "~/.doom.d")))))
+ (
+	"doom" . (
+			(user-emacs-directory . "~/.emacs.doom")
+			(env . (("DOOMDIR" . "~/.doom.d")))
+			)
+	)
 
  ("default" . ((user-emacs-directory . "~/.emacs.default")))
  ("default_old" . ((user-emacs-directory . "~/.emacs.default_old")))
@@ -12,7 +20,7 @@
  ("meow" . ((user-emacs-directory . "~/.emacs.meow")))
  ("god" . ((user-emacs-directory . "~/.emacs.god")))
 
- )
+)
 
 
 

@@ -109,4 +109,4 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias luamake=/Users/jordanmandel/Documents/lua-language-server/3rd/luamake/luamake
+
