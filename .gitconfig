@@ -10,6 +10,7 @@
 	path = /usr/bin/icdiff
 	cmd = icdiff --highlight --line-numbers $LOCAL $REMOTE
 [core]
-	pager = man -P 'nvim -c Man! -c set\\ nonumber -c set\\ norelativenumber --cmd let\\ g:flatten_allow_nesting=v:true'
+	#pager = man -P 'nvim -c Man! -c set\\ nonumber -c set\\ norelativenumber --cmd let\\ g:flatten_allow_nesting=v:true'
+	pater = nvim
 [difftool]
 	prompt = false
