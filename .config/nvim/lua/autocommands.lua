@@ -1,9 +1,13 @@
 local api = vim.api
 
 -- Highlight on yank
+local function hilite()
+	vim.highlight.on_yank({higroup = "Visual", timeout = 100})
+end
+
 local aesthetics = api.nvim_create_augroup("aesthetic_settings", { clear = true })
 api.nvim_create_autocmd("TextYankPost", {
-	command = "silent! lua vim.highlight.on_yank({higroup = \"Visual\", timeout = 200})",
+	callback = hilite,
 	group = aesthetics,
 })
 
@@ -126,12 +130,3 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 --	callback = function() vim.opt.clipboard = "unnamedplus" end,
 --	group = clipboard_acg,
 --})
-
-
-
-
-
-
-
-
-
