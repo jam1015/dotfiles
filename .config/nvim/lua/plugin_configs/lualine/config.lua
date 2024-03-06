@@ -9,6 +9,7 @@ else
 	--vim.cmd([[colorscheme blue]])
 end
 
+-- for getting terminal configuration info
 vim.cmd([[
 function! Get_chan_jobid() abort
 try
@@ -41,15 +42,6 @@ end
 
 
 
-local function getVcsIcon()
-	-- Check if 'vcs_icon' exists in the current buffer's namespace
-	if vim.b.vcs_icon ~= nil then
-		return vim.b.vcs_icon
-	else
-		-- Return an empty string if 'vcs_icon' does not exist
-		return ""
-	end
-end
 
 
 
@@ -100,7 +92,7 @@ require('lualine').setup {
 	sections = {
 		lualine_a = {},
 		lualine_b = { { 'branch', padding = { left = 0, right = 0 } }, {'diff',padding = { left = 1, right = 0 }}, {'diagnostics',padding = { left = 1, right = 0 }}},
-		lualine_c = { { "b:vcs_icon", padding = { left = 1, right = 0 } }, { "b:vcs_base_dir" }, { '%f', padding = { left = 0, right = 0 } } },
+		lualine_c = {  { "b:vcs_base_dir" , icon =vim.b.vcs_icon}, { '%f', padding = { left = 0, right = 0 } } },
 		lualine_x = { 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
 		lualine_z = { 'location', get_chan_jobid , get_chan_jobpid, get_slime_jobid, get_slime_pid}

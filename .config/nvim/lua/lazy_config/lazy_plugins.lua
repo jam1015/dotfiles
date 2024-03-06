@@ -597,6 +597,7 @@ return {
 	'sainnhe/gruvbox-material',
 	{
 		"goolord/alpha-nvim",
+		enabled = false,
 		cond = require("plugin_configs.alpha-nvim.cond"),
 		config = function()
 			require("plugin_configs.alpha-nvim.config")
