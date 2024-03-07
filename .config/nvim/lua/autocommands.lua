@@ -2,7 +2,7 @@ local api = vim.api
 
 -- Highlight on yank
 local function hilite()
-	vim.highlight.on_yank({higroup = "Visual", timeout = 100})
+	vim.highlight.on_yank({ higroup = "Visual", timeout = 100 })
 end
 
 local aesthetics = api.nvim_create_augroup("aesthetic_settings", { clear = true })
@@ -17,9 +17,10 @@ api.nvim_create_autocmd("TextYankPost", {
 local concurrent = api.nvim_create_augroup("concurrent_editing", { clear = true })
 
 local function set_concurrent() --lets you edit multiple files at the same time
+	-- Variable exists and is true
 	vim.v.swapchoice = "e"
 	require("notify")("concurrent editing", vim.log.levels.WARN,
-		{ timeout = 1000, animate = false, render = "minimal" })
+		{ timeout = 1000, animate = false, render = "minimal", })
 end
 
 api.nvim_create_autocmd("SwapExists", {
@@ -42,6 +43,7 @@ vim.api.nvim_create_autocmd({ "FileChangedShellPost" },
 		pattern = { "*" },
 		group = concurrent
 	})
+
 
 
 -- terminal related --------------------

@@ -287,4 +287,18 @@ function M.substitute_nvim()
 	}, { mode = "x" }) -- 'x' for visual mode
 end
 
+function M.nvim_smart_termsplit()
+	local termsplit = require('nvim-smart-termsplit')
+
+	wk.register({
+		["<C-a>s"] = { termsplit.term_hsplit, "Split Term Horizontally", mode = "n", noremap = true, silent = true },
+		["<C-a>v"] = { termsplit.term_vsplit, "Split Term Vertically", mode = "n", noremap = true, silent = true },
+	})
+
+	wk.register({
+		["<C-a>s"] = { termsplit.term_hsplit, "Split Term Horizontally", mode = "t", noremap = true, silent = true },
+		["<C-a>v"] = { termsplit.term_vsplit, "Split Term Vertically", mode = "t", noremap = true, silent = true },
+	})
+end
+
 return M
