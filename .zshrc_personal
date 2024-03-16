@@ -136,8 +136,6 @@ function precmd {
 
 
 
-
-
 # Define a function that writes the current working directory to /tmp/[pid]
 function write_cwd_to_file {
     echo $PWD > /tmp/whereami
