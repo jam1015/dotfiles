@@ -8,7 +8,15 @@ local lisp_lazy = function() --also done vi autocmd in the cmp config
 end
 
 return {
+	{'jam1015/vim-directional-help'},
 
+	{
+		'jam1015/nvim-smart-termsplit',
+		config = function()
+      require('nvim-smart-termsplit').setup()
+			require('plugin_configs.nvim_smart_termsplit')
+		end
+	},
 
 	({
 		"hrsh7th/nvim-cmp",
@@ -172,12 +180,6 @@ return {
 		--commit = "9637670896b68805430e2f72cf5d16be5b97a22a",
 		config = function() require("plugin_configs.indent-blankline") end,
 		event = "VeryLazy"
-	},
-	{
-		"dzfrias/arena.nvim",
-		event = "BufWinEnter",
-		-- Calls `.setup()` automatically
-		config = true,
 	},
 
 
@@ -685,7 +687,7 @@ return {
 	{
 
 		"jam1015/vim_create_goto",
-		dir = "~/Documents/vim_create_goto",
+		--dir = "~/Documents/vim_create_goto",
 		event = "VeryLazy",
 		config = function()
 			require("plugin_keymaps").pluginKeymaps("vim_create_goto")
@@ -707,7 +709,7 @@ return {
 	({
 		--"jpalardy/vim-slime",
 		"jam1015/vim-slime",
-		dir = "~/Documents/slimes/vim-slime",
+		dir = "~/Documents/vim_plugins/slimes/vim-slime",
 		--branch = "track_channels", --"main",--
 		--event = "VeryLazy",
 		init = function()

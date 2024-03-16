@@ -35,7 +35,7 @@ local function get_chan_jobpid()
       catch /^Vim\%((\a\+)\)\=:E900/
       endtry
 			echo pid_out
-	]], {output = true})
+	]], { output = true })
 	return out["output"] --returns as string
 end
 
@@ -46,23 +46,48 @@ end
 
 
 local function get_slime_jobid()
-  if vim.b.slime_config and vim.b.slime_config.jobid then
-    return vim.b.slime_config.jobid
-  else
-    return ""
-  end
+	if vim.b.slime_config and vim.b.slime_config.jobid then
+		return vim.b.slime_config.jobid
+	else
+		return ""
+	end
 end
 
 local function get_slime_pid()
-  if vim.b.slime_config and vim.b.slime_config.pid then
-    return vim.b.slime_config.pid
-  else
-    return ""
-  end
+	if vim.b.slime_config and vim.b.slime_config.pid then
+		return vim.b.slime_config.pid
+	else
+		return ""
+	end
 end
 
 
 
+--- concurency for lualine --
+local lualine_concurrent = vim.api.nvim_create_augroup("concurrent_lualine", { clear = true })
+
+local function set_concurrent_lualine() --lets you edit multiple files at the same time
+	if vim.v.swapname and vim.v.swapname ~= "" then
+		vim.b.has_swap = true
+	else
+		vim.b.has_swap = false
+	end
+end
+
+vim.api.nvim_create_autocmd("SwapExists", {
+	callback = set_concurrent_lualine,
+	group = lualine_concurrent,
+})
+local function checkSwapFile()
+	-- set in the autcmds file
+	--vim.api.nvim_exec_autocmds("SwapExists", { group = lualine_concurrent })
+	if vim.b.has_swap then
+		--return "𝐶"
+		return ""
+	else
+		return ""
+	end
+end
 
 
 
@@ -90,21 +115,21 @@ require('lualine').setup {
 		}
 	},
 	sections = {
-		lualine_a = {},
-		lualine_b = { { 'branch', padding = { left = 0, right = 0 } }, {'diff',padding = { left = 1, right = 0 }}, {'diagnostics',padding = { left = 1, right = 0 }}},
-		lualine_c = {  { "b:vcs_base_dir" , icon =vim.b.vcs_icon}, { '%f', padding = { left = 0, right = 0 } } },
+		lualine_a = { checkSwapFile },
+		lualine_b = { { 'branch', padding = { left = 0, right = 0 } }, { 'diff', padding = { left = 1, right = 0 } }, { 'diagnostics', padding = { left = 1, right = 0 } } },
+		lualine_c = { { "b:vcs_base_dir", icon = vim.b.vcs_icon }, { '%f', padding = { left = 0, right = 0 } } },
 		lualine_x = { 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
-		lualine_z = { 'location', get_chan_jobid , get_chan_jobpid, get_slime_jobid, get_slime_pid}
+		lualine_z = { 'location', get_chan_jobid, get_chan_jobpid, get_slime_jobid, get_slime_pid }
 	},
 	inactive_sections = {
 
-		lualine_a = {},
-		lualine_b = { { 'branch', padding = { left = 0, right = 0 } }, {'diff',padding = { left = 1, right = 0 }}, {'diagnostics',padding = { left = 1, right = 0 }}},
-		lualine_c = { { "b:vcs_icon", padding = { left = 1, right = 0 } }, { "b:vcs_base_dir" }, { '%f', padding = { left = 0, right = 0 } } },
+		lualine_a = { checkSwapFile },
+		lualine_b = { { 'branch', padding = { left = 0, right = 0 } }, { 'diff', padding = { left = 1, right = 0 } }, { 'diagnostics', padding = { left = 1, right = 0 } } },
+		lualine_c = { { "b:vcs_base_dir", icon = vim.b.vcs_icon }, { '%f', padding = { left = 0, right = 0 } } },
 		lualine_x = { 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
-		lualine_z = { 'location', get_chan_jobid , get_chan_jobpid, get_slime_jobid, get_slime_pid}
+		lualine_z = { 'location', get_chan_jobid, get_chan_jobpid, get_slime_jobid, get_slime_pid }
 		--		lualine_a = {},
 		--		lualine_b = {},
 		--		lualine_c = { 'filename' },
