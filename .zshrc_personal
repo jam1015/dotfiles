@@ -22,11 +22,6 @@ export TERMINAL="kitty"
 
 
 
-# ````````````````` asdf  `````````````````
-
-if command -v pacman > /dev/null 2>&1; then
-	. /opt/asdf-vm/asdf.sh
-fi
 
 
 
