@@ -58,8 +58,6 @@ function M.pluginKeymaps(plugin, setup_type)
 		keymap("n", "<leader>cd", get_cscope_prompt_cmd("d", "w"), { noremap = true, silent = true, desc = sym_map.d })
 		keymap("n", "<leader>ca", get_cscope_prompt_cmd("a", "w"), { noremap = true, silent = true, desc = sym_map.a })
 		keymap("n", "<leader>cb", "<Cmd>Cscope build<cr>", { noremap = true, silent = true, desc = sym_map.b })
-	elseif plugin == "nvim-tree" then
-		keymap("n", "<leader>nt", "<Cmd>NvimTreeToggle<CR>", opts)
 	elseif plugin == "vim-rooter" then
 		keymap("n", "<leader>rf", ":cd <c-r>=FindRootDirectory()<CR>", { remap = true, silent = false })
 	elseif plugin == "yanky.nvim" then
@@ -299,6 +297,10 @@ function M.nvim_smart_termsplit()
 		["<C-a>s"] = { termsplit.term_hsplit, "Split Term Horizontally", mode = "t", noremap = true, silent = true },
 		["<C-a>v"] = { termsplit.term_vsplit, "Split Term Vertically", mode = "t", noremap = true, silent = true },
 	})
+end
+
+function M.nvim_tree()
+		vim.keymap.set("n", "<leader>nt", "<Cmd>NvimTreeToggle<CR>", { remap = false, silent = true })
 end
 
 return M

@@ -434,7 +434,7 @@ return {
 		tag = 'nightly', -- optional, updated every week. (see issue #1193)
 		config = function()
 			require("plugin_configs.nvim-tree")
-			require("plugin_keymaps").pluginKeymaps("nvim-tree")
+			require("plugin_keymaps").nvim_tree()
 		end
 
 
