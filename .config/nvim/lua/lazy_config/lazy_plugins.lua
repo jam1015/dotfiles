@@ -95,13 +95,12 @@ return {
 
 	{
 		'willothy/flatten.nvim',
-		event = "VeryLazy",
+		--event = "VeryLazy",
 
 		--config = true,
 		-- or pass configuration with
 		--opts = require("plugin_configs.flatten"),
 		opts = require("plugin_configs.flatten"),
-		lazy = false,
 		--priority = 1001,
 		--commit = "07e9496191653587336b4c8f8cab02e5c34c7c44",
 	},
@@ -397,7 +396,7 @@ return {
 
 	({
 		"nvim-treesitter/nvim-treesitter",
-		event = "VeryLazy",
+		--event = "VeryLazy",
 		enabled = true,
 		config = function()
 			require("plugin_configs.nvim-treesitter")
@@ -439,6 +438,152 @@ return {
 
 
 	},
+
+
+
+
+
+
+
+
+
+
+
+--"mfussenegger/nvim-dap",
+	{
+		'echasnovski/mini.completion',
+		version = "*",
+		enabled = false,
+		config = function()
+			require('mini.completion')
+				.setup()
+		end
+	},
+	{ 'jghauser/mkdir.nvim' },
+
+	({
+		"neoclide/coc.nvim",
+		branch = "release",
+		enabled = false,
+		dependencies = { "neoclide/coc-snippets" },
+		init = function()
+			require("plugin_configs.coc")
+		end,
+		event = "VeryLazy",
+	}),
+
+	{
+		"gbprod/yanky.nvim",
+		enabled = false,
+
+		--enabled = function()
+		--	return not os.getenv("DISPLAY")
+		--end,
+
+		event = "VeryLazy",
+		--branch = "autocmd",
+		--dependencies = { "kkharji/sqlite.lua", },
+
+		--dir = "/home/jordan/Documents/yanky.nvim",
+		config = function()
+			require("plugin_configs.yanky")
+			require("plugin_keymaps").pluginKeymaps("yanky.nvim")
+		end
+
+
+	},
+	{ "svban/YankAssassin.vim", enabled = true },
+	{
+		-- does the same thing as YankRing
+		'maxbrunsfeld/vim-yankstack',
+		--event = "VeryLazy",
+		--dir = "~/Documents/vim-yankstack",
+
+		enabled = true,
+
+		--		enabled = function()
+		--			return os.getenv("DISPLAY")
+		--		end,
+
+		init = function()
+			require("plugin_configs.vim-yankstack.initi")
+		end,
+		config = function()
+			require("plugin_configs.vim-yankstack.config")
+		end
+	},
+
+
+
+	{
+		"gbprod/substitute.nvim",
+		enabled = true,
+		config = function()
+			require("plugin_configs.substitute_nvim")
+			require("plugin_keymaps").substitute_nvim()
+		end
+	},
+
+
+	"powerman/vim-plugin-AnsiEsc",
+
+	{
+
+		"jam1015/vim_consistency",
+		event = "VeryLazy"
+	},
+
+	{
+
+		"jam1015/vim_create_goto",
+		dir = "~/Documents/vim_create_goto",
+		event = "VeryLazy",
+		config = function()
+			require("plugin_keymaps").pluginKeymaps("vim_create_goto")
+		end
+	},
+
+	{
+		'nvim-lualine/lualine.nvim',
+		enabled = true,
+		event = "VeryLazy",
+		dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+		init = function()
+			require('plugin_configs.lualine.initi')
+		end,
+		config = function()
+			require('plugin_configs.lualine.config')
+		end,
+	},
+
+	({
+		"jam1015/vim-slime",
+		enabled = false,
+		--"jam1015/vim-slime",
+		--dir = "~/Documents/slimes/vim-slime",
+		branch = "track_channels", --"main",--
+		--event = "VeryLazy",
+		init = function()
+			require("plugin_configs.vim-slime.initi")
+		end,
+
+		config = function()
+			require("plugin_configs.vim-slime.config")
+		end,
+	}),
+
+
+
+
+
+
+	{
+		"norcalli/nvim-colorizer.lua",
+		enabled = false,
+		init = function() vim.opt.termguicolors = true end,
+		config = function() require('colorizer').setup() end
+	},
+
 
 
 
