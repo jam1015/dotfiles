@@ -8,12 +8,12 @@ local lisp_lazy = function() --also done vi autocmd in the cmp config
 end
 
 return {
-	{'jam1015/vim-directional-help'},
+	{ 'jam1015/vim-directional-help' },
 
 	{
 		'jam1015/nvim-smart-termsplit',
 		config = function()
-      require('nvim-smart-termsplit').setup()
+			require('nvim-smart-termsplit').setup()
 			require('plugin_configs.nvim_smart_termsplit')
 		end
 	},
@@ -253,8 +253,8 @@ return {
 			require("plugin_configs.vlime")
 		end
 	},
-	{ 'famiu/bufdelete.nvim',     config = function() require("plugin_keymaps").pluginKeymaps("bufdelete.nvim") end },
-	{ "mzlogin/vim-markdown-toc", ft = { "markdown", "md", }, },
+	{ 'famiu/bufdelete.nvim',        config = function() require("plugin_keymaps").pluginKeymaps("bufdelete.nvim") end },
+	{ "mzlogin/vim-markdown-toc",    ft = { "markdown", "md", }, },
 
 	{
 		"tpope/vim-unimpaired",
@@ -448,14 +448,14 @@ return {
 
 
 
---"mfussenegger/nvim-dap",
+	--"mfussenegger/nvim-dap",
 	{
 		'echasnovski/mini.completion',
 		version = "*",
 		enabled = false,
 		config = function()
 			require('mini.completion')
-				.setup()
+					.setup()
 		end
 	},
 	{ 'jghauser/mkdir.nvim' },
@@ -555,21 +555,6 @@ return {
 		end,
 	},
 
-	({
-		"jam1015/vim-slime",
-		enabled = false,
-		--"jam1015/vim-slime",
-		--dir = "~/Documents/slimes/vim-slime",
-		branch = "track_channels", --"main",--
-		--event = "VeryLazy",
-		init = function()
-			require("plugin_configs.vim-slime.initi")
-		end,
-
-		config = function()
-			require("plugin_configs.vim-slime.config")
-		end,
-	}),
 
 
 
@@ -707,6 +692,7 @@ return {
 
 	({
 		--"jpalardy/vim-slime",
+		enabled = false,
 		"jam1015/vim-slime",
 		dir = "~/Documents/vim_plugins/slimes/vim-slime",
 		--branch = "track_channels", --"main",--
@@ -716,7 +702,8 @@ return {
 		end,
 
 		config = function()
-			require("plugin_configs.vim-slime.config")
+			require("plugin_keymaps").vim_slime()
+			--require("plugin_configs.vim-slime.config")
 		end,
 	}),
 
