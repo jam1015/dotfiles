@@ -692,7 +692,7 @@ return {
 
 	({
 		--"jpalardy/vim-slime",
-		enabled = false,
+		enabled = true,
 		"jam1015/vim-slime",
 		dir = "~/Documents/vim_plugins/slimes/vim-slime",
 		--branch = "track_channels", --"main",--
