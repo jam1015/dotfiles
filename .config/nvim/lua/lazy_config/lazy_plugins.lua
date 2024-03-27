@@ -711,7 +711,7 @@ return {
 		end,
 	},
 
-
+'yorickpeterse/vim-paper',
 	{
 		"norcalli/nvim-colorizer.lua",
 		enabled = false,
