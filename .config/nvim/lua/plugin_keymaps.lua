@@ -194,6 +194,23 @@ function M.nvim_treehopper()
 	}, { mode = "x" }) -- 'x' for visual mode
 end
 
+function M.leap_ast()
+	wk.register({
+		["<leader>h"] = { name = "Hopping" },
+		["<leader>ht"] = {function() require'leap-ast'.leap() end, "leap-ast move" },
+	})
+
+	wk.register({
+		["<leader>h"] = { name = "Hopping" },
+		["<leader>ht"] = {function() require'leap-ast'.leap() end, "leap-ast move" },
+	}, { mode = "o", noremap = false }) -- 'o' for operator-pending mode
+
+	wk.register({
+		["<leader>h"] = { name = "Hopping" },
+		["<leader>ht"] = {function() require'leap-ast'.leap() end, "leap-ast move" },
+	}, { mode = "x" }) -- 'x' for visual mode
+end
+
 function M.vim_unimpaired()
 	vim.cmd([[
 					function! s:ArgNext(...)

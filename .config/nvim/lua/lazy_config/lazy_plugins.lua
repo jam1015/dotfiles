@@ -56,8 +56,6 @@ return {
 			vim.api.nvim_exec_autocmds("FileType", {})
 		end
 
-
-
 	},
 	{
 		"neovim/nvim-lspconfig",
@@ -268,7 +266,7 @@ return {
 	{ "tpope/vim-scriptease", enabled = false }, -- messes with s mapping of leap
 	{
 		"windwp/nvim-autopairs",
-		enabled = false,
+		enabled = true,
 		event = "VeryLazy",
 		config = function() require("plugin_configs.nvim-autopairs") end
 	},
@@ -388,7 +386,15 @@ return {
 	},
 
 	{
+		'ggandor/leap-ast.nvim',
+		-- right now prefer treehopper because it gives more hints
+		config = function() require("plugin_keymaps").leap_ast() end,
+		enabled = false,
+
+	},
+	{
 		"mfussenegger/nvim-treehopper",
+		enabled = true,
 		event = "VeryLazy",
 		dependencies = "phaazon/hop.nvim",
 		config = function() require("plugin_configs.nvim-treehopper") end,
@@ -402,6 +408,7 @@ return {
 			require("plugin_configs.nvim-treesitter")
 		end,
 	}),
+	{ 'windwp/nvim-ts-autotag', enabled = true },
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		enabled = true,
@@ -422,7 +429,7 @@ return {
 		end,
 	}),
 
-	{ "lifecrisis/vim-difforig",  event = "VeryLazy" },
+	{ "lifecrisis/vim-difforig", event = "VeryLazy" },
 
 	{
 		"lewis6991/gitsigns.nvim",
@@ -739,6 +746,7 @@ return {
 		"yorickpeterse/nvim-window",
 		enabled = true,
 		config = function()
+			require("plugin_configs.nvim_window")
 			require("plugin_keymaps").nvim_window()
 			return true
 		end,
