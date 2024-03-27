@@ -1,4 +1,5 @@
 local cmp = require 'cmp'
+local has_autopairs, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
 local not_has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 	return col == 0 or vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") --== nil
@@ -113,17 +114,17 @@ cmp.setup({
 	experimental = {
 		ghost_text = false,
 	},
-  matching = {
-    disallow_fuzzy_matching = false,
-    disallow_partial_fuzzy_matching = false,
-    disallow_fullfuzzy_matching = false,
-    disallow_partial_matching = false,
-    disallow_prefix_unmatching = false,
+	matching = {
+		disallow_fuzzy_matching = false,
+		disallow_partial_fuzzy_matching = false,
+		disallow_fullfuzzy_matching = false,
+		disallow_partial_matching = false,
+		disallow_prefix_unmatching = false,
 		disallow_symbol_nonprefix_matching = false,
 
-  },
+	},
 
-    preselect = cmp.PreselectMode.Item
+	preselect = cmp.PreselectMode.Item
 })
 
 --Set configuration for specific filetype.
@@ -175,7 +176,7 @@ cmp.setup.cmdline(':', {
 			option =
 			{
 				ignore_cmds = {
-				--	'edit'
+					--	'edit'
 				}
 			}
 		}
@@ -196,5 +197,10 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 	group = cmp_grp,
 })
-
+if has_autopairs then
+	cmp.event:on(
+		'confirm_done',
+		cmp_autopairs.on_confirm_done()
+	)
+end
 require("plugin_keymaps").nvim_cmp()

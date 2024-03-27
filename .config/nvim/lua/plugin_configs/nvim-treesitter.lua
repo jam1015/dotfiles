@@ -12,6 +12,7 @@ require 'nvim-treesitter.configs'.setup {
 	ensure_installed = { "vimdoc","markdown_inline","markdown", "vim", "r", "lua", "c", "python", "html", "typescript", "javascript", "bash", "make",
 		"commonlisp", "json"},
 	autopairs = true,
+	autotag = {enable = true},
 
 	-- Install languages synchronously (only applied to `ensure_installed`)
 	sync_install = false,
