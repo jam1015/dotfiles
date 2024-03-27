@@ -711,7 +711,7 @@ return {
 		end,
 	},
 
-'yorickpeterse/vim-paper',
+"https://gitlab.com/yorickpeterse/vim-paper.git",
 	{
 		"norcalli/nvim-colorizer.lua",
 		enabled = false,
