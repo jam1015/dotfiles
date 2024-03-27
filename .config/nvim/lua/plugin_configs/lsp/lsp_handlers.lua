@@ -6,16 +6,16 @@ if not status_ok and vim.g.debug then
 	vim.notify("Failed to load cmp_nvim_lsp\n")
 end
 
-M.buf_keymaps = function()
+M.global_keymaps = function()
 	local opts = { noremap = true, silent = false, }
 	vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, opts)
 	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
+	vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, opts)
 end
 
 
-local function lsp_keymaps(bufnr)
+local function local_keymaps(bufnr)
 	-- Enable completion triggered by <c-x><c-o>
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 	local bufopts = { noremap = true, silent = false, buffer = bufnr }
@@ -42,7 +42,7 @@ M.on_attach = function(client, bufnr)
 	--  if client.name == "tsserver" then
 	--    client.server_capabilities.documentFormattingProvider = false
 	--  end
-	lsp_keymaps(bufnr)
+	local_keymaps(bufnr)
 	--vim.cmd([[colorscheme delek]])
 
 	--		local status_ok, illuminate = pcall(require, "illuminate")

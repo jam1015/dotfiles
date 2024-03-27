@@ -48,7 +48,7 @@ vim.api.nvim_create_autocmd({ "FileChangedShellPost" },
 
 -- terminal related --------------------
 
-local term_autocmds = api.nvim_create_augroup("term_autocomds", { clear = true })
+local term_autocmds = api.nvim_create_augroup("nvim_terminal", { clear = true })
 
 
 local function no_term_num()
@@ -64,6 +64,20 @@ end
 api.nvim_create_autocmd("TermOpen", {
 	callback = no_term_num,
 	group = term_autocmds,
+})
+vim.api.nvim_create_autocmd("ModeChanged", {
+	pattern = "*:[vV\x16]*",
+	callback = function()
+		vim.opt.showcmd = true
+	end,
+})
+
+-- Unset 'showcmd' when leaving any visual mode
+vim.api.nvim_create_autocmd("ModeChanged", {
+	pattern = "[vV\x16]*:*",
+	callback = function()
+		vim.opt.showcmd = false
+	end,
 })
 
 
@@ -109,7 +123,37 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 --        end
 --    end,
 --})
+vim.api.nvim_create_autocmd({ 'TermClose' }, {
+	group = term_autocmds,
+	desc = 'Automatically close terminal buffers when started with no arguments and exiting without an error',
+	callback = function(args)
+		if vim.v.event.status == 0 then
+			local info = vim.api.nvim_get_chan_info(vim.bo[args.buf].channel)
+			local argv = info.argv or {}
+			if #argv == 1 and argv[1] == vim.o.shell then
+				vim.cmd({ cmd = 'Bdelete', args = { args.buf }, bang = true })
+			end
+		end
+	end,
+})
 
+-- Create or clear an autocmd group for this purpose
+
+
+-- Create the TermOpen autocmd
+vim.api.nvim_create_autocmd("TermOpen", {
+	group = term_autocmds,
+	-- No pattern is needed; TermOpen inherently targets terminal buffers
+	callback = function(args)
+		-- Directly apply the mapping to the opened terminal buffer
+		vim.api.nvim_buf_set_keymap(args.buf, 'n', 'q', '<cmd>Bdelete!<CR>', {
+			-- Make the mapping silent and buffer-local
+			silent = true,
+			noremap = true,
+			nowait = true,
+		})
+	end,
+})
 --api.nvim_create_autocmd("TermClose", {
 --	pattern = "*",
 --	command = "if !v:event.status | exe 'Bdelete! '..expand('<abuf>') | endif",

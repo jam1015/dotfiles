@@ -60,6 +60,7 @@ cmp.setup({
 		end, { "i", "s" }),
 	},
 	formatting = {
+		expandable_indicator = true,
 		fields = { "kind", "abbr", "menu" },
 		format = function(outer_entry, outer_vim_item) -- should be a function that returns a completed item
 			local kind = lspkind.cmp_format({
@@ -118,6 +119,7 @@ cmp.setup({
     disallow_fullfuzzy_matching = false,
     disallow_partial_matching = false,
     disallow_prefix_unmatching = false,
+		disallow_symbol_nonprefix_matching = false,
 
   },
 

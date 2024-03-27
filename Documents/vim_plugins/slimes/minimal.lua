@@ -15,7 +15,29 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup(
 
 	{
-		{ 'akinsho/toggleterm.nvim', version = "*",  config = true },
+		{
+			"nvim-neotest/neotest",
+			dependencies = {
+				"nvim-neotest/nvim-nio",
+				"nvim-lua/plenary.nvim",
+				"antoinemadec/FixCursorHold.nvim",
+				"nvim-treesitter/nvim-treesitter",
+				"nvim-neotest/neotest-python",
+				"nvim-neotest/neotest-plenary",
+				"nvim-neotest/neotest-vim-test"
+			},
+			config = function()
+				require("neotest").setup({
+					adapters = {
+						require("neotest-python")({
+							dap = { justMyCode = false },
+						}),
+						require("neotest-plenary"),
+					},
+				})
+			end
+		},
+		{ 'akinsho/toggleterm.nvim', version = "*", config = true },
 		{ 'chengzeyi/multiterm.vim', enabled = true },
 		{
 			"jam1015/vim-slime",
@@ -34,6 +56,7 @@ require("lazy").setup(
 					vim.g.slime_no_mappings = true
 					vim.g.slime_input_pid = false
 					vim.g.slime_suggest_default = true
+
 
 					vim.g.slime_menu_config = false
 				end
@@ -73,6 +96,7 @@ vim.cmd([[
 
 let g:slime_neovim_menu_delimiter = " | "
 let g:slime_neovim_menu_order = [{'pid': 'pid: '},{'term_title':''},{'name':''},{'jobid':'zebra: '}]
+let g:slime_neovim_ignore_unlisted = 1
 
 function! WriteFormattedBufInfo()
     " Get buffer info and convert to JSON string

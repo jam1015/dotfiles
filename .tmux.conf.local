@@ -60,6 +60,13 @@ set -g status-right '#{nordvpn_status} #{nordvpn_city}'
 set -ag status-right '  '
 set-option -ag status-right "#{weather}"
 set-option -g @tmux-weather-interval 1
+
+# Set the pane border status to be always visible
+set -g pane-border-status top
+
+# Customize the pane border format to include pane index
+set -g pane-border-format "#P"
+
 # to enable a plugin, use the 'set -g @plugin' syntax:
 # visit https://github.com/tmux-plugins for available plugins
 #set -g @plugin 'tmux-plugins/tmux-copycat'

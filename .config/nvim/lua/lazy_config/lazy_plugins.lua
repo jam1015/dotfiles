@@ -253,7 +253,7 @@ return {
 			require("plugin_configs.vlime")
 		end
 	},
-	{ 'famiu/bufdelete.nvim',        config = function() require("plugin_keymaps").pluginKeymaps("bufdelete.nvim") end },
+	{ 'famiu/bufdelete.nvim',        config = function() require("plugin_keymaps").bufdelete() end },
 	{ "mzlogin/vim-markdown-toc",    ft = { "markdown", "md", }, },
 
 	{
@@ -381,7 +381,7 @@ return {
 	},
 	{
 		"numToStr/Comment.nvim",
-		enabled = false,
+		enabled = true,
 		event = "VeryLazy",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function() require("plugin_configs.Comment") end,
@@ -404,9 +404,12 @@ return {
 	}),
 	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
-		enabled = false,
+		enabled = true,
 		event = "VeryLazy",
-		dependencies = "nvim-treesitter/nvim-treesitter"
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		setup = function()
+			require('plugin_configs.nvim-ts-context-commentstring')
+		end
 	},
 
 
@@ -439,25 +442,7 @@ return {
 	},
 
 
-
-
-
-
-
-
-
-
-
 	--"mfussenegger/nvim-dap",
-	{
-		'echasnovski/mini.completion',
-		version = "*",
-		enabled = false,
-		config = function()
-			require('mini.completion')
-					.setup()
-		end
-	},
 	{ 'jghauser/mkdir.nvim' },
 
 	({
@@ -736,6 +721,26 @@ return {
 			require("plugin_configs.alpha-nvim.config")
 		end,
 
-
-	}
+	},
+	{
+		'Shatur/neovim-session-manager',
+		enabled = false
+	},
+	{
+		'jam1015/winshift.nvim',
+		enabled = true,
+		--dir = "~/Documents/vim_plugins/winshift.nvim",
+		branch = "preserve_win_sizes",
+		config = function()
+			require("plugin_configs.winshift")
+		end
+	},
+	{
+		"yorickpeterse/nvim-window",
+		enabled = true,
+		config = function()
+			require("plugin_keymaps").nvim_window()
+			return true
+		end,
+	},
 }

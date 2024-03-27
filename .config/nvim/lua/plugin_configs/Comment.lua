@@ -3,12 +3,12 @@ local ft = require('Comment.ft')
 
 -- 1. Using set function
 
-ft
-	-- Set only line comment
-	.set('yaml', '#%s')
-	-- Or set both line and block commentstring
-	.set('javascript', { '//%s', '/*%s*/' })
-	.set('c', { '//%s', '/*%s*/' })
+
+-- Set only line comment
+ft.set('yaml', '#%s')
+-- Or set both line and block commentstring
+ft.set('javascript', { '//%s', '/*%s*/' })
+ft.set('c', { '//%s', '/*%s*/' })
 
 -- 2. Metatable magic
 
@@ -33,16 +33,16 @@ comment.setup {
 	---LHS of toggle mappings in NORMAL mode
 	toggler = {
 		---Line-comment toggle keymap
-		line = '<leader>co',
+		line = 'gcc',
 		---Block-comment toggle keymap
-		block = '<leader>bc',
+		block = 'gbc',
 	},
 	---LHS of operator-pending mappings in NORMAL and VISUAL mode
 	opleader = {
 		---Line-comment keymap
-		line = '<localleader>co',
+		line = 'gc',
 		---Block-comment keymap
-		block = '<localleacer>bc',
+		block = 'gb',
 	},
 	---LHS of extra mappings
 	extra = {
@@ -59,10 +59,10 @@ comment.setup {
 		---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
 		basic = true,
 		---Extra mapping; `gco`, `gcO`, `gcA`
-		extra = false,
+		extra = true,
 	},
 	---Function to call before (un)comment
-	pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+	pre_hook = nil,
 	---Function to call after (un)comment
 	post_hook = nil,
 }

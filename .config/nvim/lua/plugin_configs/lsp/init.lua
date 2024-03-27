@@ -1,4 +1,7 @@
- local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
+-- for in-depth neovim lua development
+--require('neodev').setup()
+
+local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 
 if not lspconfig_status_ok then
 	vim.cmd([[colorscheme blue]])
@@ -6,9 +9,9 @@ if not lspconfig_status_ok then
 	return
 end
 
-local servers = { "tsserver", "vimls", "clangd",  "pyright", "jsonls", "cssls", "eslint",
-	"emmet_ls", "texlab", "html", 
-	"lua_ls", 
+local servers = { "tsserver", "vimls", "clangd", "pyright", "jsonls", "cssls", "eslint",
+	"emmet_ls", "texlab", "html",
+	"lua_ls",
 	"julials" }
 --"r_language_server",
 --"texlab",
@@ -31,7 +34,7 @@ require("mason-lspconfig").setup({
 --local cmp_lsp = require("cmp-nvim-lsp")
 local handlers_obj = require("plugin_configs.lsp.lsp_handlers")
 
-handlers_obj.buf_keymaps()
+handlers_obj.global_keymaps()
 --
 local opts = {}
 for _, server in ipairs(servers) do
@@ -54,4 +57,4 @@ for _, server in ipairs(servers) do
 end
 
 handlers_obj.setup()
-vim.api.nvim_exec_autocmds("FileType",{})
+vim.api.nvim_exec_autocmds("FileType", {})

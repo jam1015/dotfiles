@@ -79,13 +79,6 @@ function M.pluginKeymaps(plugin, setup_type)
 			keymap("n", "<leader>yr", "<Cmd>Telescope yank_history<cr>", opts)
 		end
 	elseif plugin == "emmet-vim" then
-	elseif plugin == "bufdelete.nvim" then
-		vim.cmd([[
-			cnoreabbrev <expr> bd  getcmdtype() == ":" && getcmdline() == "bd" ? "Bdelete" : "bd"
-			cnoreabbrev <expr> bw  getcmdtype() == ":" && getcmdline() == "bw" ? "Bwipeout" : "bw"
-			cnoreabbrev <expr> wbd  getcmdtype() == ":" && getcmdline() == "wbd" ? "w \| Bdelete" : "bd"
-			cnoreabbrev <expr> wbw  getcmdtype() == ":" && getcmdline() == "wbw" ? "w \| Bwipeout" : "bw"
-			]])
 	elseif plugin == "hop" then
 		vim.cmd([[
 			onoremap <leader>ww :HopWord<CR>
@@ -300,7 +293,30 @@ function M.nvim_smart_termsplit()
 end
 
 function M.nvim_tree()
-		vim.keymap.set("n", "<leader>nt", "<Cmd>NvimTreeToggle<CR>", { remap = false, silent = true })
+	vim.keymap.set("n", "<leader>nt", "<Cmd>NvimTreeToggle<CR>", { remap = false, silent = true })
+end
+
+function M.nvim_window()
+	--vim.keymap.set("n","<C-a>g", "<cmd>lua require('nvim-window').pick()<cr>", { remap = false, silent = true })
+	wk.register({
+		["<C-w>g"] = { require('nvim-window').pick, "Select window by label", noremap = true },
+	}, { mode = "n" }) -- 'n' for normal mode
+end
+
+function M.nvim_winshift()
+	--vim.keymap.del('n', '<C-w>x')
+	wk.register({
+		["<C-w>x"] = { "<cmd>WinShift swap<CR>", "Exchange operator", noremap = true },
+	}, { mode = "n" }) -- 'n' for normal mode
+end
+
+function M.bufdelete()
+	vim.cmd([[
+			cnoreabbrev <expr> bd  getcmdtype() == ":" && getcmdline() == "bd" ? "Bdelete" : "bd"
+			cnoreabbrev <expr> bw  getcmdtype() == ":" && getcmdline() == "bw" ? "Bwipeout" : "bw"
+			cnoreabbrev <expr> wbd  getcmdtype() == ":" && getcmdline() == "wbd" ? "w \| Bdelete" : "bd"
+			cnoreabbrev <expr> wbw  getcmdtype() == ":" && getcmdline() == "wbw" ? "w \| Bwipeout" : "bw"
+			]])
 end
 
 return M

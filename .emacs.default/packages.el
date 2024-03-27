@@ -38,7 +38,7 @@
   (global-set-key (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
   (evil-define-key 'god global-map [escape] (lambda () (interactive) (evil-stop-execute-in-god-state "normal")))
   (setq god_entry_strategy "default")
-  (setq persist_visual nil)
+  (setq persist_visual t )
   (setq evil-god-state-cursor '(box "Red"))
   (setq evil-insert-state-cursor '(bar "Red"))
   (setq evil-visual-state-cursor '(hollow "Red"))
