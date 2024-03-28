@@ -2,8 +2,8 @@ local api = vim.api
 
 -- Configuration options for floating window appearance
 local float_config = {
-	float_height = 1,
-	float_width = 4,
+	float_height = 3,
+	float_width = 6,
 	chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
 	hint_hl = "Bold",
 	normal_hl = "Normal",
