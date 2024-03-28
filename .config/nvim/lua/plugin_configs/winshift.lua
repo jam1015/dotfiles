@@ -16,8 +16,12 @@ local function create_hint_floats(selectable, chars)
 		local key = chars:sub(i, i)
 		local win_width = api.nvim_win_get_width(win_id)
 		local win_height = api.nvim_win_get_height(win_id)
-		local row = math.floor((win_height - float_config.float_height) / 2)
-		local col = math.floor((win_width - float_config.float_width) / 2)
+
+		--local row = math.floor((win_height - float_config.float_height) / 2)
+		local row = math.max(0, math.floor((win_height / 2) - 1))
+
+		--local col = math.floor((win_width - float_config.float_width) / 2)
+		local col = math.max(0, math.floor((win_width / 2) - float_config.float_width))
 
 		api.nvim_buf_set_lines(bufnr, 0, -1, true, { " " .. key .. " " })
 		api.nvim_buf_add_highlight(bufnr, 0, float_config.hint_hl, 0, 0, -1)
