@@ -65,8 +65,10 @@ set.number = true
 set.relativenumber = true
 set.equalalways = false
 set.spelllang = "en_us"
-set.termguicolors = true
-
+if os.getenv("DISPLAY") then
+	set.termguicolors = true
+else
+end
 set.foldmethod = "expr"
 set.foldexpr = "nvim_treesitter#foldexpr()"
 set.foldlevelstart = 99
@@ -88,7 +90,7 @@ set.shada = "'1000,%"
 --setting clipboard settings
 if os.getenv("DISPLAY") then
 	--if not os.getenv("SSH_CONNECTION") and not os.getenv("CHROME_REMOTE_DESKTOP_SESSION") then
-		vim.opt.clipboard = 'unnamedplus'
+	vim.opt.clipboard = 'unnamedplus'
 	--end
 else
 end
