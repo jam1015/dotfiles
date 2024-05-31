@@ -1,0 +1,142 @@
+# -------------------------
+# General/System Files
+# -------------------------
+*.lock
+*.log
+*.bak
+*.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Thumbs.db:encryptable
+$RECYCLE.BIN/
+*.lnk
+*.db
+*.dir-locals.el
+
+# -------------------------
+# Development Tools & Editors
+# -------------------------
+# Vim/Neovim
+.*.sw[a-z]
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.vim/undodir/*
+.vim/.netrwhist
+local/share/nvim
+nvim.shada
+.tmux/plugins/*
+.config/gh/*
+nvim_chris
+nvim_rayx
+tags
+firenvim
+/.repro/data/nvim/lazy/*
+/nvim_matchup_reprex/.repro/plugins/*
+/.repro/plugins/*
+.vim/undodir/*
+.cfg
+.config/google-chrome/*
+.config/libreoffice/*
+.vim/pack/minpac/*
+.emacs.*/elpa/*
+.config/.repro
+.config/nvim/lazy-lock.json
+dotfiles
+.vim/.netrwhist
+.emacs.default/straight/build/undo-tree/.gitignore
+.cache/tags
+
+.netrwhist
+
+xmonad-x86_64-linux
+xmonad.errors
+xmonad.state
+xmonad.hi
+xmonad.o
+# Tmux
+.tmuxp
+.tmux/resurrect
+# Zsh & Bash
+.zcompdump*
+.zsh_history
+.bash_history
+# Git
+.gitconfig.local
+.gitconfig
+# irssi
+irssi/irssi/config.autosave
+# ruby
+ruby/bundle/cache
+
+# Emacs
+emacs/emacs.d/network-security.data
+emacs/emacs.d/.org-id-locations
+emacs/emacs.d/ac-comphist.dat
+emacs/emacs.d/auto-save-list/
+emacs/emacs.d/smex-items
+emacs/emacs.d/%backup%~
+emacs/emacs.d/bookmarks
+emacs/emacs.d/eln-cache
+emacs/emacs.d/secret.el
+emacs/emacs.d/transient
+emacs/emacs.d/projects
+emacs/emacs.d/session*
+emacs/emacs.d/history
+emacs/emacs.d/recentf
+emacs/emacs.d/recentf~
+emacs/emacs.d/eshell
+emacs/emacs.d/games
+emacs/emacs.d/tramp
+emacs/emacs.d/elpa
+emacs/emacs.d/url
+
+## straight.el
+emacs/emacs.d/straight/build
+emacs/emacs.d/straight/build-cache.el
+emacs/emacs.d/straight/modified
+emacs/emacs.d/straight/repos
+
+# -------------------------
+# Miscellaneous
+# -------------------------
+# AWS CLI (if you have AWS configs among your dotfiles)
+.aws/credentials
+# SSH (never track your private keys!)
+*.ssh/id_rsa
+*.ssh/id_ecdsa
+*.ssh/id_ed25519
+# GPG (if you store GPG configs or related)
+*.gpg
+# Certificates
+*.pem
+*.cer
+*.crt
+*.key
+# Large media & backups
+*.iso
+*.tar.*
+*.backup
+*.bak
+# Personal or sensitive data placeholders
+.private/
+.secrets/
+.passwords/
+.idea/
+.vscode/
+*.pyc
+__pycache__/
+node_modules/
+.cache/
+*cache*
+*.bak
+*.swp
+*.swo
+tags
+*.lock
+*.log

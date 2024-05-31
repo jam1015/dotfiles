@@ -1,0 +1,13 @@
+[submodule ".config/emacs"]
+	path = .config/emacs
+	url = git@github.com:plexus/chemacs2
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = git@github.com:ohmyzsh/ohmyzsh.git
+[submodule ".spacemacs"]
+	path = .spacemacs
+	url = https://github.com/syl20bnr/spacemacs
+	branch = develop
+[submodule ".doomemacs"]
+	path = .doomemacs
+	url = https://github.com/doomemacs/doomemacs
