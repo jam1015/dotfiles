@@ -10,6 +10,6 @@ WORK_TREE="$HOME"
 mkdir -p "$GIT_DIR/hooks"
 
 # Create symlinks for hooks
-ln -sf "$WORK_TREE/dots_hooks/post_commit.bash" "$GIT_DIR/hooks/post-commit"
-ln -sf "$WORK_TREE/dots_hooks/post_merge.bash" "$GIT_DIR/hooks/post-merge"
+ln -sf "$WORK_TREE/.dots_hooks/post_commit.bash" "$GIT_DIR/hooks/post-commit"
+ln -sf "$WORK_TREE/.dots_hooks/post_merge.bash" "$GIT_DIR/hooks/post-merge"
 #
