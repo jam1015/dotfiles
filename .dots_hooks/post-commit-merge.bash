@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Source configuration
 source ~/.dots_hooks/config.bash
 
