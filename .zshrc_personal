@@ -155,94 +155,9 @@ precmd_functions+=(write_cwd_to_file)
 
 alias luamake=/Users/jordanmandel/Documents/lua-language-server/3rd/luamake/luamake
 
-# Toggle git hooks symlinks
-dotstogglehooks() {
-  local git_dir="$HOME/dotfiles.git/hooks"
-  local work_tree="$HOME"
-  local post_commit_hook="$git_dir/post-commit"
-  local post_merge_hook="$git_dir/post-merge"
-
-  # Check if at least one of the symlinks exists
-  if [[ -L "$post_commit_hook" || -L "$post_merge_hook" ]]; then
-    # Remove symlinks if they exist
-    [[ -L "$post_commit_hook" ]] && rm -f "$post_commit_hook"
-    [[ -L "$post_merge_hook" ]] && rm -f "$post_merge_hook"
-    echo "Dotfiles hooks removed."
-  else
-    # Create symlinks if they do not exist
-    ln -sf "$work_tree/.dots_hooks/post_commit.bash" "$post_commit_hook"
-    ln -sf "$work_tree/.dots_hooks/post_merge.bash" "$post_merge_hook"
-    echo "Dotfiles hooks created."
-  fi
-}
-
-# Toggler for DOTSREMOTEACTIONS
-dotstoggleremoteactions() {
-  if [[ -n "$DOTSREMOTEACTIONS" ]]; then
-    unset DOTSREMOTEACTIONS
-    echo "DOTSREMOTEACTIONS is now disabled."
-  else
-    export DOTSREMOTEACTIONS=true
-    echo "DOTSREMOTEACTIONS is now enabled."
-  fi
-}
-
-
-# Toggler for DOTSTRYREBASE
-dotstogglerebase() {
-  if [[ -n "$DOTSTRYREBASE" ]]; then
-    unset DOTSTRYREBASE
-    echo "DOTSTRYREBASE is now disabled."
-  else
-    export DOTSTRYREBASE=true
-    echo "DOTSTRYREBASE is now enabled."
-  fi
-}
 
 dotsrunhooks() {
   $HOME/.dots_hooks/post-commit-merge.bash
-}
-
-dotscheckhooks() {
-  local git_dir="$HOME/dotfiles.git/hooks"
-  local post_commit_hook="$git_dir/post-commit"
-  local post_merge_hook="$git_dir/post-merge"
-
-  # Check the existence of symlinks
-  local post_commit_active=-1
-  local post_merge_active=-1
-
-  [[ -L "$post_commit_hook" ]] && post_commit_active=1
-  [[ -L "$post_merge_hook" ]] && post_merge_active=1
-
-  # Check if only one hook is active
-  if [[ $post_commit_active -ne $post_merge_active ]]; then
-    echo "Inconsistent hook state detected. Disabling both hooks."
-    # Remove any existing symlinks
-    [[ -L "$post_commit_hook" ]] && rm -f "$post_commit_hook"
-    [[ -L "$post_merge_hook" ]] && rm -f "$post_merge_hook"
-  else
-    # Check if both are active or both are inactive
-    if [[ $post_commit_active -eq 1 ]]; then
-      echo "Both hooks are active."
-    else
-      echo "Both hooks are inactive."
-    fi
-  fi
-
-  # Check for DOTSREMOTEACTIONS
-  if [[ -z "$DOTSREMOTEACTIONS" ]]; then
-    echo "DOTSREMOTEACTIONS is not set. Remote actions are disabled."
-  else
-    echo "DOTSREMOTEACTIONS is set. Remote actions are enabled."
-  fi
-
-  # Check for DOTSTRYREBASE
-  if [[ -z "$DOTSTRYREBASE" ]]; then
-    echo "DOTSTRYREBASE is not set. Rebasing is disabled."
-  else
-    echo "DOTSTRYREBASE is set. Rebasing is enabled."
-  fi
 }
 
 
