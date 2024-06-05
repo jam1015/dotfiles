@@ -103,29 +103,16 @@ else
 fi
 
 ## done making prompt
-# Define the 'dots' function to use as an alias for your specific Git setup
-dots() {
-  /usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME "$@"
-}
 
 # Define the 'glog' function
 glog() {
   git log --graph --all --decorate --oneline --pretty=format:'%C(auto)%h %d %s %cd' --date=short "$@"
 }
 
-# Define the 'dlog' function
-dlog() {
-  /usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME log --graph --all --decorate --oneline --pretty=format:'%C(auto)%h %d %s %cd' --date=short "$@"
-}
-
-# Enable git completion for the 'dots' function
-compdef dots=git
 
 # Enable git completion for the 'glog' function
 compdef glog=git
 
-# Enable git completion for the 'dlog' function
-compdef dlog=git
 
 setopt noauto_pushd
 
@@ -156,9 +143,6 @@ precmd_functions+=(write_cwd_to_file)
 alias luamake=/Users/jordanmandel/Documents/lua-language-server/3rd/luamake/luamake
 
 
-dotsrunhooks() {
-  $HOME/.dots_hooks/post-commit-merge.bash
-}
 
 
 if command -v zoxide >/dev/null 2>&1; then
