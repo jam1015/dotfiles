@@ -236,6 +236,7 @@ return {
 
   {
     'dhananjaylatkar/vim-gutentags',
+    enabled = false,
     event = "VeryLazy",
     dependencies = { "dhananjaylatkar/cscope_maps.nvim", "skywind3000/gutentags_plus" },
     --event = "VeryLazy",
