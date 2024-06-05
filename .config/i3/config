@@ -78,6 +78,12 @@ bindsym Next exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $r
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
+# User-added function keys:
+bindsym XF86AudioMute         exec --no-startup-id pamixer -t     && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume  exec --no-startup-id pamixer -d 3   && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pamixer -i 3   && pkill -RTMIN+1 i3blocks
+
+
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
 focus_follows_mouse no
@@ -243,8 +249,9 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 
+    position top
 		tray_output primary
-		status_command i3status
+		status_command blocks
 		#status_command i3blocks -c ~/.config/i3blocks/config
 }
 
