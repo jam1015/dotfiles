@@ -249,6 +249,7 @@ bar {
 }
 
 exec_always --no-startup-id ~/.screenlayout/dual_monitor_again.sh
+exec --no-startup-id ~/set_wallpaper.sh
 
 
 #######################################################################
