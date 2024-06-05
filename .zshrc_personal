@@ -187,7 +187,6 @@ dotstoggleremoteactions() {
   fi
 }
 
-export DOTSREMOTEACTIONS=true
 
 # Toggler for DOTSTRYREBASE
 dotstogglerebase() {
