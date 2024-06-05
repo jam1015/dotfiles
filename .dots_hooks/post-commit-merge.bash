@@ -1,7 +1,13 @@
 #!/bin/bash
 
+# Define git command for convenience
+git_cmd="git"
+
+# Get the top-level directory of the repository
+repo_base=$($git_cmd rev-parse --show-toplevel)
+
 # Source configuration
-source ~/.dots_hooks/config.bash
+source "$repo_base/.dots_hooks/config.bash"
 
 if [[ -n "$RUN" ]]; then
 	if [[ -n "$DOTSREMOTEACTIONS" ]]; then
@@ -13,9 +19,6 @@ if [[ -n "$RUN" ]]; then
 	# Add your SSH key and set a timeout (in seconds)
 	unset DISPLAY
 	ssh-add -t 3600 ~/.ssh/id_ed25519
-
-	# Define git command for convenience
-	git_cmd="git"
 
 	# Function to check if a branch exists locally
 	branch_exists() {
@@ -170,8 +173,8 @@ if [[ -n "$RUN" ]]; then
 
 	merge_switch
 
-	ln -sf "$($git_cmd rev-parse --show-toplevel)/.dots_hooks/post_commit.bash" "$($git_cmd rev-parse --git-dir)/hooks/post-commit"
-	ln -sf "$($git_cmd rev-parse --show-toplevel)/.dots_hooks/post_merge.bash" "$($git_cmd rev-parse --git-dir)/hooks/post-merge"
+	ln -sf "$repo_base/.dots_hooks/post_commit.bash" "$($git_cmd rev-parse --git-dir)/hooks/post-commit"
+	ln -sf "$repo_base/.dots_hooks/post_merge.bash" "$($git_cmd rev-parse --git-dir)/hooks/post-merge"
 
 	export DISPLAY=$original_display
 else
