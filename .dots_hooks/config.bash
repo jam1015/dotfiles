@@ -8,4 +8,4 @@ export DOTSTRYREBASE=true
 export DOTSREBASESTRATEGY="theirs"
 
 # whether to run
-export RUN=true
+#export RUN=true

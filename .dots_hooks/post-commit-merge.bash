@@ -1,5 +1,13 @@
 #!/bin/bash
 
+frame_echo() {
+	local arg="$1"
+	local line="========================================================="
+	echo "$line"
+	echo "$arg"
+	echo "$line"
+}
+
 # Define git command for convenience
 git_cmd="git"
 
@@ -29,14 +37,6 @@ if [[ -n "$RUN" ]]; then
 		fi
 	}
 
-	frame_echo() {
-		local arg="$1"
-		local line="========================================================="
-		echo "$line"
-		echo "$arg"
-		echo "$line"
-	}
-
 	rebase_or_merge() {
 		local source_branch=$1
 		local target_branch=$2
@@ -45,12 +45,12 @@ if [[ -n "$RUN" ]]; then
 		# Determine rebase strategy from configuration
 		local rebase_strategy=""
 		case "$DOTSREBASESTRATEGY" in
-			"theirs")
-				rebase_strategy="-X theirs"
-				;;
-			"ours")
-				rebase_strategy="-X ours"
-				;;
+		"theirs")
+			rebase_strategy="-X theirs"
+			;;
+		"ours")
+			rebase_strategy="-X ours"
+			;;
 		esac
 
 		if [[ "$source_branch" == "$target_branch" ]]; then
