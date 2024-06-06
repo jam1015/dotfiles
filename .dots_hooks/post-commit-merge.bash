@@ -178,5 +178,5 @@ if [[ -n "$RUN" ]]; then
 
 	export DISPLAY=$original_display
 else
-	frame_echo "Hook Disabled."
+	frame_echo "Hook are disabled."
 fi
