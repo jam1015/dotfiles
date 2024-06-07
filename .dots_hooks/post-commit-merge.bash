@@ -15,8 +15,8 @@ git_cmd="git"
 # Get the top-level directory of the repository
 repo_base=$($git_cmd rev-parse --show-toplevel)
 
-rm "$repo_base/.dots_hooks/post_commit.bash" "$($git_cmd rev-parse --git-dir)/hooks/post-commit"
-rm "$repo_base/.dots_hooks/post_merge.bash" "$($git_cmd rev-parse --git-dir)/hooks/post-merge"
+rm "$($git_cmd rev-parse --git-dir)/hooks/post-commit"
+rm "$($git_cmd rev-parse --git-dir)/hooks/post-merge"
 
 # Source configuration
 source "$repo_base/.dots_hooks/config.bash"
