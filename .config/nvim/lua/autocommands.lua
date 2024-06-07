@@ -29,7 +29,7 @@ api.nvim_create_autocmd("SwapExists", {
 })
 
 -- to check if we want to reload the file
-vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+vim.api.nvim_create_autocmd({ "BufEnter",  "FocusGained" }, {
   -- needed because checktieme doesn't work in command line window
   command = "if mode() != 'c' &&  expand('%') !=# '[Command Line]' | checktime | endif",
   pattern = { "*" },
