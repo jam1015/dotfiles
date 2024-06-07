@@ -1,13 +1,4 @@
-
-#export DOTSREMOTEACTIONS=true
-
-
 export DOTSTRYREBASE="true"
-
-
-export DOTSREBASESTRATEGY=""
-
-# whether to run
+export DOTSREBASESTRATEGY="theirs"
 export RUN="true"
-
 export STOW="true"

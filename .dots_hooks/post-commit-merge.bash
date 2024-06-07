@@ -188,11 +188,12 @@ if [[ -n "$RUN" ]]; then
 		# Change to the root directory of the dotfiles repo
 		cd "$(git rev-parse --show-toplevel)"
 
-		# Run stow for all directories within the dotfiles repo
-		stow --target="$HOME" *
 
 		# Change back to the original directory
 		cd "$original_dir"
+
+		# Run stow for all directories within the dotfiles repo
+		stow --target="$HOME" *
 	fi
 
 else
