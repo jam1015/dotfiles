@@ -1,4 +1,5 @@
 .dots_hooks
+.dots_hooks/*
 .gitmodules
 
 # Comments and blank lines are allowed.
@@ -23,4 +24,5 @@ _darcs
 
 ^/README.*
 ^/LICENSE.*
+LICENSE.txt
 ^/COPYING

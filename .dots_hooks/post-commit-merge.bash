@@ -1,4 +1,5 @@
 #!/bin/bash
+original_dir=$(pwd)
 
 frame_echo() {
 	local arg="$1"
@@ -173,19 +174,11 @@ if [[ -n "$RUN" ]]; then
 
 	merge_switch
 
-	ln -sf "$repo_base/.dots_hooks/post_commit.bash" "$($git_cmd rev-parse --git-dir)/hooks/post-commit"
-	ln -sf "$repo_base/.dots_hooks/post_merge.bash" "$($git_cmd rev-parse --git-dir)/hooks/post-merge"
 
 	export DISPLAY=$original_display
 
 	if [[ -n "$STOW" ]]; then
 
-		#!/bin/sh
-
-		# Store the original directory
-		original_dir=$(pwd)
-
-		# Change to the root directory of the dotfiles repo
 		cd "$(git rev-parse --show-toplevel)"
 
 
@@ -195,6 +188,9 @@ if [[ -n "$RUN" ]]; then
 		# Run stow for all directories within the dotfiles repo
 		stow --target="$HOME" *
 	fi
+
+	ln -sf "$repo_base/.dots_hooks/post_commit.bash" "$($git_cmd rev-parse --git-dir)/hooks/post-commit"
+	ln -sf "$repo_base/.dots_hooks/post_merge.bash" "$($git_cmd rev-parse --git-dir)/hooks/post-merge"
 
 else
 
