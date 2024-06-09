@@ -70,9 +70,28 @@ export diaries_affirmations="$HOME/Documents/diaries/affirmations.md"
 export diaries_dreams="$HOME/Documents/diaries/diaries_dreams.md"
 export diaries_events="$HOME/Documents/diaries/diaries_events.md"
 
+################### VCS info ########################
+
+# Enabling and setting git info var to be used in prompt config.
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git svn hg
+# This line obtains information from the vcs.
+zstyle ':vcs_info:git*' formats "⎇%b"
+
+
+get_vcs () {
+    vcs_info
+}
+
+
+precmd_functions+=(get_vcs)
+
+
 ############ making custom prompt #################
 # perform parameter expansion/command substitution in prompt definition
 setopt PROMPT_SUBST
+
+
 
 vim_ins_mode=">"
 vim_cmd_mode="%%"
@@ -95,17 +114,16 @@ export LIGHT_MAGENTA=$'\e[95m'
 export RESET_COLOR=$'\e[0m'
 
 
-if [[ "$EUID" = 0 ]]; then 
-
-  PS1='%B%F{green}%M:su:%3~ ${vim_mode}%f%b%{$RESET_COLOR%} '
+if [[ "$EUID" = 0 ]]; then
+  PS1='%B%F{green}%M:su:%3~%f%b%${vcs_info_msg_0_}%B%F{green}${vim_mode}%f%b%'
 else
-  PS1='%{$LIGHT_MAGENTA%}%B%M:%3~ ${vim_mode}%{$RESET_COLOR%}%b '
+  PS1='%{$LIGHT_MAGENTA%}%B%M:%3~%{$RESET_COLOR%}${vcs_info_msg_0_}%{$LIGHT_MAGENTA%}${vim_mode}%{$RESET_COLOR%}%b'
 fi
 
 ## done making prompt
 
 # Define the 'glog' function
-glog() {
+glog () {
   git log --graph --all --decorate --oneline --pretty=format:'%C(auto)%h %d %s %cd' --date=short "$@"
 }
 
@@ -124,15 +142,17 @@ function cheat ()
 export FZF_DEFAULT_COMMAND='fd --type f --color=never'
 export FZF_ALT_C_COMMAND='fd --type d . --color=never'
 
-function precmd {
+function setpwd {
   OLDPWD=$PWD
   export OLDPWD
   PWD=$(pwd)
   export PWD
 }
 
+precmd_functions+=(setpwd)
+
 # Define a function that writes the current working directory to /tmp/[pid]
-write_cwd_to_file() {
+write_cwd_to_file () {
   local USER=$(whoami)  # Capture the username
   echo $PWD > /tmp/whereami_$USER  # write the current directory to a user-specific file
 }

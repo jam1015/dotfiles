@@ -117,7 +117,7 @@ require('lualine').setup {
 	},
 	sections = {
 		lualine_a = { checkSwapFile },
-		lualine_b = { { 'branch', padding = { left = 0, right = 0 } }, { 'diff', padding = { left = 1, right = 0 } }, { 'diagnostics', padding = { left = 1, right = 0 } } },
+		lualine_b = { { 'branch', padding = { left = 0, right = 0 }, icon = "⎇" }, { 'diff', padding = { left = 1, right = 0 } }, { 'diagnostics', padding = { left = 1, right = 0 } } },
 		lualine_c = { { "b:vcs_base_dir", icon = vim.b.vcs_icon }, { '%f', padding = { left = 0, right = 0 } } },
 		lualine_x = { 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
@@ -126,7 +126,7 @@ require('lualine').setup {
 	inactive_sections = {
 
 		lualine_a = { checkSwapFile },
-		lualine_b = { { 'branch', padding = { left = 0, right = 0 } }, { 'diff', padding = { left = 1, right = 0 } }, { 'diagnostics', padding = { left = 1, right = 0 } } },
+		lualine_b = { { 'branch', padding = { left = 0, right = 0,   }, icon = "⎇" }, { 'diff', padding = { left = 1, right = 0 } }, { 'diagnostics', padding = { left = 1, right = 0 } } },
 		lualine_c = { { "b:vcs_base_dir", icon = vim.b.vcs_icon }, { '%f', padding = { left = 0, right = 0 } } },
 		lualine_x = { 'encoding', 'fileformat', 'filetype' },
 		lualine_y = { 'progress' },
