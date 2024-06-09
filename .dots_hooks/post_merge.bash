@@ -11,3 +11,4 @@ if [ -f "$GIT_DIR/.git/MERGE_HEAD" ] && [ "$(git rev-parse HEAD)" == "$(git rev-
 else
     echo "Non-fast-forward merge completed; no additional actions required."
 fi
+

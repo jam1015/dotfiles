@@ -7,3 +7,4 @@ GIT_DIR=$(git rev-parse --show-toplevel)
 # Run post-commit actions for all normal commits
 echo "Running post-commit actions for a normal commit."
 "$GIT_DIR/.dots_hooks/post-commit-merge.bash"
+

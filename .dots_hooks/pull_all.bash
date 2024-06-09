@@ -29,3 +29,4 @@ done
 # Checkout the original branch
 git checkout "$current_branch"
 echo "Returned to the original branch: $current_branch"
+
