@@ -21,6 +21,7 @@ rm "$($git_cmd rev-parse --git-dir)/hooks/post-merge"
 # Source configuration
 source "$repo_base/.dots_hooks/config.bash"
 
+
 if [[ -n "$RUN" ]]; then
 	if [[ -n "$DOTSREMOTEACTIONS" ]]; then
 		eval "$(ssh-agent -s)"
@@ -46,6 +47,12 @@ if [[ -n "$RUN" ]]; then
 		local target_branch=$2
 		local rebased=""
 
+    if  [[ -n "$REAPPLYCHERRYPICKS" ]]; then
+      reapply_cherry_picks = "--reapply-cherry-picks"
+    else
+      reapply_cherry_picks = ""
+    fi
+
 		# Determine rebase strategy from configuration
 		local rebase_strategy=""
 		case "$DOTSREBASESTRATEGY" in
@@ -63,7 +70,7 @@ if [[ -n "$RUN" ]]; then
 		fi
 
 		if [[ -n "$DOTSTRYREBASE" ]]; then
-			if ! $git_cmd rebase $rebase_strategy "${source_branch}"; then
+			if ! $git_cmd rebase $reapply_cherry_picks $rebase_strategy "${source_branch}"; then
 				frame_echo "Rebase from ${source_branch} to ${target_branch} failed. Handle conflicts manually."
 				# Removed git rebase --abort to allow manual conflict resolution
 			else
