@@ -47,7 +47,7 @@ if [[ -n "$RUN" ]]; then
 		local target_branch=$2
 		local rebased=""
 
-    local reapply_cherry_picks = ""
+    local reapply_cherry_picks=""
     if  [[ -n "$REAPPLYCHERRYPICKS" ]]; then
       reapply_cherry_picks = "--reapply-cherry-picks"
     else
