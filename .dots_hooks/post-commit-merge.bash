@@ -49,9 +49,9 @@ if [[ -n "$RUN" ]]; then
 
     local reapply_cherry_picks=""
     if  [[ -n "$REAPPLYCHERRYPICKS" ]]; then
-      reapply_cherry_picks = "--reapply-cherry-picks"
+      reapply_cherry_picks="--reapply-cherry-picks"
     else
-      reapply_cherry_picks = ""
+      reapply_cherry_picks=""
     fi
 
 		# Determine rebase strategy from configuration
