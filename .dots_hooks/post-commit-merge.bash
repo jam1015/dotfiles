@@ -21,7 +21,6 @@ rm "$($git_cmd rev-parse --git-dir)/hooks/post-merge"
 # Source configuration
 source "$repo_base/.dots_hooks/config.bash"
 
-
 if [[ -n "$RUN" ]]; then
 	if [[ -n "$DOTSREMOTEACTIONS" ]]; then
 		eval "$(ssh-agent -s)"
@@ -31,7 +30,10 @@ if [[ -n "$RUN" ]]; then
 
 	# Add your SSH key and set a timeout (in seconds)
 	unset DISPLAY
-	ssh-add -t 3600 ~/.ssh/id_ed25519
+	if [[ -n "$DOTSREMOTEACTIONS" ]]; then
+		ssh-add -t 3600 ~/.ssh/id_ed25519
+		eval "$(ssh-agent -s)"
+	fi
 
 	# Function to check if a branch exists locally
 	branch_exists() {
@@ -47,12 +49,12 @@ if [[ -n "$RUN" ]]; then
 		local target_branch=$2
 		local rebased=""
 
-    local reapply_cherry_picks=""
-    if  [[ -n "$REAPPLYCHERRYPICKS" ]]; then
-      reapply_cherry_picks="--reapply-cherry-picks"
-    else
-      reapply_cherry_picks=""
-    fi
+		local reapply_cherry_picks=""
+		if [[ -n "$REAPPLYCHERRYPICKS" ]]; then
+			reapply_cherry_picks="--reapply-cherry-picks"
+		else
+			reapply_cherry_picks=""
+		fi
 
 		# Determine rebase strategy from configuration
 		local rebase_strategy=""
@@ -185,7 +187,6 @@ if [[ -n "$RUN" ]]; then
 
 	merge_switch
 
-
 	export DISPLAY=$original_display
 
 	if [[ -n "$STOW" ]]; then
@@ -207,4 +208,3 @@ else
 
 	frame_echo "Hook are disabled."
 fi
-
