@@ -7,13 +7,15 @@ current_branch=$(git rev-parse --abbrev-ref HEAD)
 
 # Function to pull from origin
 pull_branch() {
-  local branch="$1"
+  local remote_branch="$1"
+  local branch="${remote_branch#origin/}"  # Remove 'origin/' from the branch name
+
   echo "Pulling updates for branch: $branch"
   # Check if the branch is already local
   if git rev-parse --verify --quiet "$branch"; then
     git checkout "$branch"
   else
-    git checkout -b "$branch" "origin/$branch"
+    git checkout -b "$branch" "$remote_branch"
   fi
   if git pull origin "$branch"; then
     echo "Updates pulled successfully for branch: $branch"
@@ -23,11 +25,10 @@ pull_branch() {
   fi
 }
 
-# Get all remote branches and iterate over them
+# Fetch all remote branches and iterate over them
 git fetch --all
 git branch -r | grep -v '\->' | while read -r remote_branch; do
-  local branch=${remote_branch#origin/}
-  if ! pull_branch "$branch"; then
+  if ! pull_branch "$remote_branch"; then
     echo "Stopping the script due to a conflict."
     exit 1  # Exit the script entirely if a conflict occurs
   fi
