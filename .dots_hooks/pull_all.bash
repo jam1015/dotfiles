@@ -2,6 +2,10 @@
 
 set -e  # Exit on any command failure
 
+# Initialize SSH Agent
+eval "$(ssh-agent -s)"  # Start the SSH agent
+ssh-add ~/.ssh/id_ed25519  # Add your SSH key; replace id_ed25519 with your key file
+
 # Save the current branch name
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 
@@ -37,3 +41,6 @@ done
 # Checkout the original branch
 git checkout "$current_branch"
 echo "Returned to the original branch: $current_branch"
+
+# Kill the SSH agent
+eval "$(ssh-agent -k)"
