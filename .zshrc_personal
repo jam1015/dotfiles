@@ -74,6 +74,7 @@ export diaries_events="$HOME/Documents/diaries/diaries_events.md"
 
 # Enabling and setting git info var to be used in prompt config.
 autoload -Uz vcs_info
+
 zstyle ':vcs_info:*' enable git svn hg
 # This line obtains information from the vcs.
 zstyle ':vcs_info:git*' formats "⎇%b"
@@ -129,6 +130,7 @@ glog () {
 
 
 # Enable git completion for the 'glog' function
+autoload -Uz compinit && compinit -i
 compdef glog=git
 
 
