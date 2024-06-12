@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 original_dir=$(pwd)
 
 frame_echo() {
@@ -19,6 +18,7 @@ repo_base=$($git_cmd rev-parse --show-toplevel)
 rm "$($git_cmd rev-parse --git-dir)/hooks/post-commit"
 rm "$($git_cmd rev-parse --git-dir)/hooks/post-merge"
 
+set -e
 # Source configuration
 source "$repo_base/.dots_hooks/config.bash"
 
