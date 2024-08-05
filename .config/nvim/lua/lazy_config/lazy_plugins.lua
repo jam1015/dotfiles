@@ -34,11 +34,11 @@ return {
       require("plugin_configs.vim-yankstack.config")
     end
   },
-  {
 
+
+  {
     "ggandor/flit.nvim",
     enabled = true,
-
     event = "VeryLazy",
 
     --commit = "f60e4b3d49bb5a5e97cfffe66f2e671eb422078e",
