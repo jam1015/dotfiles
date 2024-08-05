@@ -1,0 +1,78 @@
+runtime config/pluginkeymaps.vim
+runtime config/mysettings.vim
+runtime config/mappings.vim
+runtime config/autocmds.vim
+runtime config/directionalhelp.vim
+"
+"
+"
+"
+"git clone https://github.com/k-takata/minpac.git  ~/.vim/pack/minpac/opt/minpac
+"curl -fLo ~/.vim/autoload/plugpac.vim --create-dirs   https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim
+
+call plugpac#Begin()
+
+Pack 'vim/colorschemes'
+
+Pack 'moll/vim-bbye'
+runtime config/vim-bbye.vim
+
+Pack 'NLKNguyen/papercolor-theme'
+Pack 'sickill/vim-monokai'
+
+Pack 'tpope/vim-unimpaired'
+runtime config/vimunimpairedconfig.vim 
+
+Pack 'tpope/vim-surround'
+
+"Pack 'vim-scripts/YankRing.vim'
+
+Pack 'Yggdroot/indentLine'
+runtime config/indentline_config.vim
+
+Pack 'machakann/vim-highlightedyank'
+runtime config/vim-highlightedyank.vim
+
+""" also hightlights yanks
+"runtime config/FYT.vim
+"Pack 'statox/FYT.vim'
+
+Pack 'maxbrunsfeld/vim-yankstack'
+runtime config/vim-yankstack.vim
+
+
+" need to install ctags and gnu global
+Pack 'skywind3000/gutentags_plus'
+Pack 'ludovicchabant/vim-gutentags'
+runtime config/gutentagsconfig.vim
+
+Pack 'jpalardy/vim-slime'
+runtime config/vim-slime.vim
+"""" having problems with this plugin
+"Pack 'vlime/vlime', {'rtp': 'vim/'}
+""runtime config/vlime.vim
+
+Pack 'kovisoft/paredit'
+"
+" minpac
+Pack 'k-takata/minpac', {'type': 'opt'}
+
+
+""""""""""""""" EXAMPLE FEATRURES OF PLUGPAC
+"Pack 'junegunn/vim-easy-align'
+"
+"" On-demand loading
+"Pack 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Pack 'tpope/vim-fireplace', { 'for': 'clojure' }
+"
+"" Using a non-master branch
+"Pack 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+"
+"" Post-update hook
+"Pack 'Yggdroot/LeaderF', { 'do': {-> system('./install.sh')} }
+"
+"" Sepcify commit ID, branch name or tag name to be checked out.
+"Pack 'tpope/vim-sensible', { 'rev': 'v1.2' }
+
+"
+call plugpac#End()

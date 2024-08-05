@@ -1,0 +1,1 @@
+ConfigureKeymaps vim-unimpaired

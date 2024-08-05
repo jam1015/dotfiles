@@ -1,0 +1,190 @@
+# dummy comment 1
+#to install ohmyzsh
+#sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+export PATH="$PATH:/Users/jordanmandel/.local/bin"
+export PATH="$PATH:/Users/jordanmandel/bin"
+
+# ``````````Vim configuration things`````
+
+export vimrc="$HOME/dotfiles/.config/nvim/init.lua"
+export zshrc="$HOME/dotfiles/.zshrc_personal"
+alias vi='nvim'
+alias vin='nvim --cmd "let g:flatten_allow_nesting = v:true"'
+
+alias van="man -P 'nvim -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'" 
+export MANPAGER='nvim --clean -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'
+alias ptpython='ptpython --vi --dark-bg'
+alias python='python'
+alias pdflatex="pdflatex -synctex=1"
+alias cb=clipboard
+alias ll='ls -lG'
+alias ls='ls -G'
+alias pd='pandoc'
+export TERMINAL="kitty"
+
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  alias vim="mvim -v"
+fi
+
+export BROWSER="/usr/bin/firefox-developer-edition"
+export EDITOR="nvim"
+
+case "$OSTYPE" in
+  darwin*)    VISUAL='/usr/local/bin/nvim  --cmd "let g:flatten_allow_nesting = v:true"' ;;   # macOS
+  linux*)     VISUAL="$HOME/.visual_editor.bash" ;;         # Linux
+esac
+
+export VIMCONFIG=~/.config/nvim #vim configuration directory
+export VIMDATA=~/.local/share/nvim # vim data directory (need to learn more about this)
+export NVIM_SWAP="$HOME/.local/state/nvim/swap"
+
+bindkey -e -r '^[x'
+bindkey -a -r ':'
+set -o vi #use vi editing mode in the terminal
+KEYTIMEOUT=1 #get rid of pause after switching modes in vim mode
+
+mkcd () {
+  mkdir "$1" && cd "$1"
+}
+
+mkcdp () {
+  mkdir -p "$1" && cd "$1"
+}
+
+#history settings
+SAVEHIST=100000 #stting the history length
+HISTSIZE=100000 #stting the history length
+HISTFILE=~/.zhistory
+bindkey "^R" history-incremental-pattern-search-backward
+
+# setting some useful environment variables
+
+export tododir="$HOME/Documents/diaries/"
+export diaries="$HOME/Documents/diaries/"
+export diaries_thoughts="$HOME/Documents/diaries/diaries_thoughts.md"
+export diaries_todo="$HOME/Documents/diaries/to_do_short.md"
+export diaries_plans="$HOME/Documents/diaries/to_do_long.md"
+export diaries_memories="$HOME/Documents/diaries/diaries_memories.md"
+export diaries_musings="$HOME/Documents/diaries/thoughts_unstructured.md"
+export diaries_affirmations="$HOME/Documents/diaries/affirmations.md"
+export diaries_dreams="$HOME/Documents/diaries/diaries_dreams.md"
+export diaries_events="$HOME/Documents/diaries/diaries_events.md"
+
+################### VCS info ########################
+
+# Enabling and setting git info var to be used in prompt config.
+autoload -Uz vcs_info
+
+zstyle ':vcs_info:*' enable git svn hg
+# This line obtains information from the vcs.
+zstyle ':vcs_info:git*' formats "⎇%b"
+
+
+get_vcs () {
+    vcs_info
+}
+
+
+precmd_functions+=(get_vcs)
+
+
+############ making custom prompt #################
+# perform parameter expansion/command substitution in prompt definition
+setopt PROMPT_SUBST
+
+
+
+vim_ins_mode=">"
+vim_cmd_mode="%%"
+vim_mode=$vim_ins_mode
+
+function zle-keymap-select {
+vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+zle reset-prompt
+}
+
+zle -N zle-keymap-select
+
+function zle-line-finish {
+vim_mode=$vim_ins_mode
+}
+zle -N zle-line-finish
+
+# Define ANSI color variables outside precmd to avoid redefinition
+export LIGHT_MAGENTA=$'\e[95m'
+export RESET_COLOR=$'\e[0m'
+
+
+if [[ "$EUID" = 0 ]]; then
+  PS1='%B%F{green}%M:su:%3~%f%b${vcs_info_msg_0_}%B%F{green}${vim_mode}%f%b '
+else
+  PS1='%{$LIGHT_MAGENTA%}%B%M:%3~%{$RESET_COLOR%}${vcs_info_msg_0_}%{$LIGHT_MAGENTA%}${vim_mode}%{$RESET_COLOR%}%b '
+fi
+
+## done making prompt
+
+# Define the 'glog' function
+glog () {
+  git log --graph --all --decorate --oneline --pretty=format:'%C(auto)%h %d %s %cd' --date=short "$@"
+}
+
+
+# Enable git completion for the 'glog' function
+autoload -Uz compinit && compinit -i
+compdef glog=git
+
+
+setopt noauto_pushd
+
+function cheat ()
+{
+  curl cheat.sh/$1
+}
+
+export FZF_DEFAULT_COMMAND='fd --type f --color=never'
+export FZF_ALT_C_COMMAND='fd --type d . --color=never'
+
+function setpwd {
+  OLDPWD=$PWD
+  export OLDPWD
+  PWD=$(pwd)
+  export PWD
+}
+
+precmd_functions+=(setpwd)
+
+# Define a function that writes the current working directory to /tmp/[pid]
+write_cwd_to_file () {
+  local USER=$(whoami)  # Capture the username
+  echo $PWD > /tmp/whereami_$USER  # write the current directory to a user-specific file
+}
+
+# find in file
+fif() {
+  if [ $# -eq 0 ]; then
+    echo "Need a string to search for!"
+    return 1
+  fi
+
+  local search_string="$1"
+
+  rg --files-with-matches --no-messages "$search_string" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$search_string' || rg --ignore-case --pretty --context 10 '$search_string' {}"
+}
+
+# Add the function to precmd_functions
+precmd_functions+=(write_cwd_to_file)
+
+alias luamake=/Users/jordanmandel/Documents/lua-language-server/3rd/luamake/luamake
+
+
+
+
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init --cmd cd zsh)"
+else
+  echo "zoxide is not installed, falling back to standard cd"
+fi
+
+setopt completealiases
+
+echo ".zshrc sourced"

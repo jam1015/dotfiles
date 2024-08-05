@@ -1,0 +1,6 @@
+(setq inhibit-startup-screen t)
+(blink-cursor-mode 0)
+(setq visible-bell 1)
+(set-frame-font "Input Mono-6.5" t t)
+(setq scroll-margin 3)
+(setq scroll-conservatively 10000)

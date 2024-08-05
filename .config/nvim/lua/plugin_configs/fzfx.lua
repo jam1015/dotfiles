@@ -1,0 +1,66 @@
+require("fzfx").setup({
+--	users = {
+--		ls = {
+--			--- @type CommandConfig
+--			command = {
+--				name = "FzfxLs",
+--				desc = "File Explorer (ls -1)",
+--			},
+--			variants = {
+--				{
+--					name = "args",
+--					feed = "args",
+--					default_provider = "filter_hiddens",
+--				},
+--				{
+--					name = "hidden_args",
+--					feed = "args",
+--					default_provider = "include_hiddens",
+--				},
+--			},
+--			--- @type table<string, ProviderConfig>
+--			providers = {
+--				filter_hiddens = {
+--					key = "ctrl-h",
+--					provider = { "ls", "--color=always", "-1" },
+--				},
+--				include_hiddens = {
+--					key = "ctrl-u",
+--					provider = { "ls", "--color=always", "-1a" },
+--				},
+--			},
+--			--- @type table<string, PreviewerConfig>
+--			previewers = {
+--				filter_hiddens = {
+--					previewer = function(line)
+--						-- each line is either a folder or a file
+--						return vim.fn.isdirectory(line) > 0 and { "ls", "--color=always", "-lha", line }
+--								or { "cat", line }
+--					end,
+--					previewer_type = "command_list",
+--				},
+--				include_hiddens = {
+--					previewer = function(line)
+--						return vim.fn.isdirectory(line) > 0 and { "ls", "--color=always", "-lha", line }
+--								or { "cat", line }
+--					end,
+--					previewer_type = "command_list",
+--				},
+--			},
+--			actions = {
+--				["esc"] = function(lines)
+--					-- do nothing
+--				end,
+--				["enter"] = function(lines)
+--					for _, line in ipairs(lines) do
+--						vim.cmd(string.format([[edit %s]], line))
+--					end
+--				end,
+--			},
+--			fzf_opts = {
+--				"--multi",
+--				{ "--prompt", "Ls > " },
+--			},
+--		},
+--	},
+})
