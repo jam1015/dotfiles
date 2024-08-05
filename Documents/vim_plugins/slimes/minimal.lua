@@ -17,16 +17,16 @@ require("lazy").setup(
     {
       "jam1015/vim-slime",
       dir = "~/Documents/vim_plugins/slimes/vim-slime",
+      branch = "remove-paste-file-neovim",
       init = function()
-        --require("plugin_configs.vim-slime.initi")
-
-
-        vim.g.slime_target = "neovim"
-        vim.g.slime_python_ipython = true
+        require("plugin_configs.vim-slime.initi")
+        vim.g.slime_target = "tmux"
+        vim.g.slime_python_ipython = false
         vim.g.slime_no_mappings = true
         vim.g.slime_input_pid = false
         vim.g.slime_suggest_default = true
         vim.g.slime_menu_config = false
+        vim.g.slime_bracketed_paste = true
       end,
 
       config = function()
