@@ -188,3 +188,4 @@ fi
 setopt completealiases
 
 echo ".zshrc sourced"
+export PATH=~/.npm-global/bin:$PATH

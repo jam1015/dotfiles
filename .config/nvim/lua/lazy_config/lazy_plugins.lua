@@ -36,8 +36,26 @@ return {
   },
   {
 
-    "ggandor/flit.nvim",
-    enabled = true,
+    "jam1015/vim_create_goto",
+    --event = "VeryLazy",
+    config = function()
+      require("plugin_keymaps").vim_create_goto()
+    end
+  },
+  ({
+    "folke/which-key.nvim",
+    --event = "VeryLazy",
+    config = function()
+      require("plugin_configs.which-key")
+    end,
+  }),
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = require("plugin_configs.flash"),
+    config = function()
+      require("plugin_keymaps").flash()
+    end,
 
     event = "VeryLazy",
 

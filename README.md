@@ -1,2 +1,2 @@
-# Dotfiles: Arch
-Dotfiles for my Arch Linux systems
+# Dotfiles: termux
+my dotfiles for termux
