@@ -1,2 +1,2 @@
-# Dotfiles: master
-Dotfiles compatible across all my linux systems.
+# Dotfiles: Linux
+Dotfiles compatible across all my Linux systems.
