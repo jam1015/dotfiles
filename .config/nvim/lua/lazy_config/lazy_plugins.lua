@@ -8,13 +8,13 @@ local lisp_lazy = function() --also done vi autocmd in the cmp config
 end
 
 return {
-{
-  "leath-dub/snipe.nvim",
-  keys = {
-    {"<leader>bb", function () require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu"}
+  {
+    "leath-dub/snipe.nvim",
+    keys = {
+      { "<leader>bb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu" }
+    },
+    opts = require("plugin_configs.snipe_opts")
   },
-  opts = require("plugin_configs.snipe_opts")
-},
   {
     -- does the same thing as YankRing
     'maxbrunsfeld/vim-yankstack',
@@ -24,211 +24,211 @@ return {
     enabled = true,
 
     --		enabled = function()
-      --			return os.getenv("DISPLAY")
-      --		end,
+    --			return os.getenv("DISPLAY")
+    --		end,
 
-      init = function()
-        require("plugin_configs.vim-yankstack.initi")
-      end,
-      config = function()
-        require("plugin_configs.vim-yankstack.config")
-      end
-    },
-    {
+    init = function()
+      require("plugin_configs.vim-yankstack.initi")
+    end,
+    config = function()
+      require("plugin_configs.vim-yankstack.config")
+    end
+  },
+  {
 
-      "ggandor/flit.nvim",
-      enabled = true,
+    "ggandor/flit.nvim",
+    enabled = true,
 
-      event = "VeryLazy",
+    event = "VeryLazy",
 
-      --commit = "f60e4b3d49bb5a5e97cfffe66f2e671eb422078e",
-      config = function() require("plugin_configs.flit") end,
-      dependencies = { { 'tpope/vim-repeat' }, { 'ggandor/leap.nvim' } }
+    --commit = "f60e4b3d49bb5a5e97cfffe66f2e671eb422078e",
+    config = function() require("plugin_configs.flit") end,
+    dependencies = { { 'tpope/vim-repeat' }, { 'ggandor/leap.nvim' } }
 
-    },
+  },
 
-    {
-      "ggandor/leap.nvim",
-      enabled = true,
-      event = "VeryLazy",
-      --commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
-      config = function()
-        require('plugin_keymaps').leap()
-      end
-    },
-    {
-      'jam1015/winshift.nvim',
-      enabled = true,
-      --dir = "~/Documents/vim_plugins/winshift.nvim",
-      branch = "my_merged",
-      config = function()
-        require("plugin_configs.winshift")
-        require("plugin_keymaps").nvim_winshift()
-      end
-    },
-    {
+  {
+    "ggandor/leap.nvim",
+    enabled = true,
+    event = "VeryLazy",
+    --commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
+    config = function()
+      require('plugin_keymaps').leap()
+    end
+  },
+  {
+    'jam1015/winshift.nvim',
+    enabled = true,
+    --dir = "~/Documents/vim_plugins/winshift.nvim",
+    branch = "my_merged",
+    config = function()
+      require("plugin_configs.winshift")
+      require("plugin_keymaps").nvim_winshift()
+    end
+  },
+  {
 
-      "jam1015/nvim-window",
-      branch = "only_uppercase",
-      enabled = true,
-      config = function()
-        require("plugin_configs.nvim_window")
-        require("plugin_keymaps").nvim_window()
-        return true
-      end,
-    },
-    {
+    "jam1015/nvim-window",
+    branch = "only_uppercase",
+    enabled = true,
+    config = function()
+      require("plugin_configs.nvim_window")
+      require("plugin_keymaps").nvim_window()
+      return true
+    end,
+  },
+  {
 
-      'jam1015/buf_hint_nvim',
-      dir = "~/Documents/vim_plugins/buf_hint_nvim",
-      config = function()
-        --require("buf_hint_nvim").setup()
-      end
+    'jam1015/buf_hint_nvim',
+    dir = "~/Documents/vim_plugins/buf_hint_nvim",
+    config = function()
+      --require("buf_hint_nvim").setup()
+    end
 
-    },
-    {
-      'nvimdev/lspsaga.nvim',
-      enabled = false,
-      config = function()
-        require('lspsaga').setup({})
-      end,
-      dependencies = {
-        'nvim-treesitter/nvim-treesitter', -- optional
-        'nvim-tree/nvim-web-devicons',     -- optional
-      }
-    },
-    {
+  },
+  {
+    'nvimdev/lspsaga.nvim',
+    enabled = false,
+    config = function()
+      require('lspsaga').setup({})
+    end,
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',   -- optional
+      'nvim-tree/nvim-web-devicons',       -- optional
+    }
+  },
+  {
 
-      "jam1015/vim-slime",
-      --"jpalardy/vim-slime",
-      enabled = true,
-      --dir = "~/Documents/vim_plugins/slimes/vim-slime",
-      --branch = "track_channels", --"main",--
-      --event = "VeryLazy",
-      init = function()
-        require("plugin_configs.vim-slime.initi")
-      end,
+    "jam1015/vim-slime",
+    --"jpalardy/vim-slime",
+    enabled = true,
+    --dir = "~/Documents/vim_plugins/slimes/vim-slime",
+    --branch = "track_channels", --"main",--
+    --event = "VeryLazy",
+    init = function()
+      require("plugin_configs.vim-slime.initi")
+    end,
 
-      config = function()
-        require("plugin_keymaps").vim_slime()
-        --require("plugin_configs.vim-slime.config")
-      end,
-    },
-    {
-      "jam1015/vim_consistency",
-      event = "VeryLazy"
-    },
-    {
-      "jam1015/PushPop.vim",
+    config = function()
+      require("plugin_keymaps").vim_slime()
+      --require("plugin_configs.vim-slime.config")
+    end,
+  },
+  {
+    "jam1015/vim_consistency",
+    event = "VeryLazy"
+  },
+  {
+    "jam1015/PushPop.vim",
 
-      event = "VeryLazy",
-      enabled = true,
-      dependencies = { "vim-scripts/genutils" },
-      config = function()
-        require("plugin_keymaps").pushpop()
-      end
-    },
-    { 'jam1015/vim-directional-help' },
-    {
-      'jam1015/nvim-smart-termsplit',
-      config = function()
-        require('nvim-smart-termsplit').setup()
-        require('plugin_configs.nvim_smart_termsplit')
-      end
-    },
-    {
+    event = "VeryLazy",
+    enabled = true,
+    dependencies = { "vim-scripts/genutils" },
+    config = function()
+      require("plugin_keymaps").pushpop()
+    end
+  },
+  { 'jam1015/vim-directional-help' },
+  {
+    'jam1015/nvim-smart-termsplit',
+    config = function()
+      require('nvim-smart-termsplit').setup()
+      require('plugin_configs.nvim_smart_termsplit')
+    end
+  },
+  {
 
-      "jam1015/vim_consistency",
-      event = "VeryLazy"
-    },
+    "jam1015/vim_consistency",
+    event = "VeryLazy"
+  },
 
-    {
+  {
 
-      "jam1015/vim_create_goto",
-      --event = "VeryLazy",
-      config = function()
-        require("plugin_keymaps").vim_create_goto()
-      end
-    },
-    ({
-      "folke/which-key.nvim",
-      --event = "VeryLazy",
-      opts = require ("plugin_configs.which-key")
-    }),
-    {
-      "folke/flash.nvim",
-      event = "VeryLazy",
-      opts = require("plugin_configs.flash"),
-      config = function()
-        require("plugin_keymaps").flash()
-      end
+    "jam1015/vim_create_goto",
+    --event = "VeryLazy",
+    config = function()
+      require("plugin_keymaps").vim_create_goto()
+    end
+  },
+  ({
+    "folke/which-key.nvim",
+    --event = "VeryLazy",
+    opts = require("plugin_configs.which-key")
+  }),
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = require("plugin_configs.flash"),
+    config = function()
+      require("plugin_keymaps").flash()
+    end
 
-    },
+  },
 
-    { 'sainnhe/everforest',          event = "VeryLazy" },
-    { 'rose-pine/neovim',            name = "rose-pine" },
-    ({
-      "folke/tokyonight.nvim",
-      priority = 1000,
-      branch = "main",
-      config = function()
-        require("plugin_configs.tokyonight")
-      end,
-      --
-      --event = "VeryLazy"
-    }),
-    ({
-      "nvim-treesitter/nvim-treesitter",
-      --event = "VeryLazy",
-      enabled = true,
-      config = function()
-        require("plugin_configs.nvim-treesitter")
-      end,
-    }),
-    ({
-      "hrsh7th/nvim-cmp",
-      cond = function() --also done vi autocmd in the cmp config
-        return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
-      end,
-      lazy = true,
-      event = "VeryLazy",
-      dependencies = {
-        { "onsails/lspkind.nvim",       event = "VeryLazy" },
-        { "hrsh7th/cmp-nvim-lsp",       event = "VeryLazy" },
-        { "R-nvim/cmp-r",               event = "VeryLazy" },
-        { "hrsh7th/cmp-nvim-lua",       event = "VeryLazy" },
-        { "hrsh7th/cmp-buffer",         event = "VeryLazy" },
-        { "hrsh7th/cmp-path",           event = "VeryLazy" },
-        { "hrsh7th/cmp-cmdline",        event = "VeryLazy" },
-        { "kdheepak/cmp-latex-symbols", event = "VeryLazy" },
-        {
-          "L3MON4D3/LuaSnip", -- tag = "v<CurrentMajor>.*",
-          build = "make install_jsregexp",
-          dependencies = { "rafamadriz/friendly-snippets" },
-          config = function()
-            require("plugin_configs.LuaSnip")
-          end,
+  { 'sainnhe/everforest',          event = "VeryLazy" },
+  { 'rose-pine/neovim',            name = "rose-pine" },
+  ({
+    "folke/tokyonight.nvim",
+    priority = 1000,
+    branch = "main",
+    config = function()
+      require("plugin_configs.tokyonight")
+    end,
+    --
+    --event = "VeryLazy"
+  }),
+  ({
+    "nvim-treesitter/nvim-treesitter",
+    --event = "VeryLazy",
+    enabled = true,
+    config = function()
+      require("plugin_configs.nvim-treesitter")
+    end,
+  }),
+  ({
+    "hrsh7th/nvim-cmp",
+    cond = function()   --also done vi autocmd in the cmp config
+      return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
+    end,
+    lazy = true,
+    event = "VeryLazy",
+    dependencies = {
+      { "onsails/lspkind.nvim",       event = "VeryLazy" },
+      { "hrsh7th/cmp-nvim-lsp",       event = "VeryLazy" },
+      { "R-nvim/cmp-r",               event = "VeryLazy" },
+      { "hrsh7th/cmp-nvim-lua",       event = "VeryLazy" },
+      { "hrsh7th/cmp-buffer",         event = "VeryLazy" },
+      { "hrsh7th/cmp-path",           event = "VeryLazy" },
+      { "hrsh7th/cmp-cmdline",        event = "VeryLazy" },
+      { "kdheepak/cmp-latex-symbols", event = "VeryLazy" },
+      {
+        "L3MON4D3/LuaSnip",   -- tag = "v<CurrentMajor>.*",
+        build = "make install_jsregexp",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        config = function()
+          require("plugin_configs.LuaSnip")
+        end,
 
-          event = "VeryLazy"
-        },
-        { "saadparwaiz1/cmp_luasnip", event = "VeryLazy" }
+        event = "VeryLazy"
       },
-      config = function()
-        require("plugin_configs.nvim-cmp")
-      end,
-    }),
-    {
-      "Rentib/cliff.nvim",
-      keys = {
-        { '<c-j>', mode = { 'n', 'v', 'o' }, function() require("cliff").go_down() end },
-        { '<c-k>', mode = { 'n', 'v', 'o' }, function() require("cliff").go_up() end },
-      },
+      { "saadparwaiz1/cmp_luasnip", event = "VeryLazy" }
     },
+    config = function()
+      require("plugin_configs.nvim-cmp")
+    end,
+  }),
+  {
+    "Rentib/cliff.nvim",
+    keys = {
+      { '<c-j>', mode = { 'n', 'v', 'o' }, function() require("cliff").go_down() end },
+      { '<c-k>', mode = { 'n', 'v', 'o' }, function() require("cliff").go_up() end },
+    },
+  },
 
-    {
-      "neovim/nvim-lspconfig",
-      event = { "VeryLazy" },
-      dependencies = { "onsails/lspkind.nvim",
+  {
+    "neovim/nvim-lspconfig",
+    event = { "VeryLazy" },
+    dependencies = { "onsails/lspkind.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "folke/neodev.nvim"
@@ -314,8 +314,8 @@ return {
     event = "VeryLazy",
     enabled = true,
     dependencies = { "nvim-lua/plenary.nvim",
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    "nvim-telescope/telescope-file-browser.nvim" },
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+      "nvim-telescope/telescope-file-browser.nvim" },
     config = function()
       require("plugin_configs.telescope")
       require("plugin_keymaps").telescope()
@@ -618,11 +618,6 @@ return {
     end,
   },
 
-
-
-
-
-
   {
     "norcalli/nvim-colorizer.lua",
     enabled = false,
@@ -680,209 +675,213 @@ return {
     enabled = true,
 
     --		enabled = function()
-      --			return os.getenv("DISPLAY")
-      --		end,
+    --			return os.getenv("DISPLAY")
+    --		end,
 
-      init = function()
-        require("plugin_configs.vim-yankstack.initi")
-      end,
-      config = function()
-        require("plugin_configs.vim-yankstack.config")
-      end
+    init = function()
+      require("plugin_configs.vim-yankstack.initi")
+    end,
+    config = function()
+      require("plugin_configs.vim-yankstack.config")
+    end
+  },
+
+  {
+    "gbprod/substitute.nvim",
+    enabled = true,
+    config = function()
+      require("plugin_configs.substitute_nvim")
+      require("plugin_keymaps").substitute_nvim()
+    end
+  },
+
+  {
+    "powerman/vim-plugin-AnsiEsc",
+  },
+  {
+
+    'nvim-lualine/lualine.nvim',
+    event = "VeryLazy",
+    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+    init = function()
+      require('plugin_configs.lualine.initi')
+    end,
+    config = function()
+      require('plugin_configs.lualine.config')
+    end,
+
+  },
+  {
+    'stevearc/quicker.nvim',
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {},
+  },
+  {
+    "jam1015/vim-slime",
+    --"jpalardy/vim-slime",
+    enabled = true,
+    --dir = "~/Documents/vim_plugins/slimes/vim-slime",
+    --branch = "track_channels", --"main",--
+    --event = "VeryLazy",
+    init = function()
+      require("plugin_configs.vim-slime.initi")
+    end,
+
+    config = function()
+      require("plugin_keymaps").vim_slime()
+      --require("plugin_configs.vim-slime.config")
+    end,
+  },
+  {
+    "mbbill/undotree",
+    init = function()
+      require("plugin_configs.undotree.initi")
+    end,
+
+    config = function()
+      require("plugin_configs.undotree.config")
+    end,
+  },
+  {
+
+    "https://gitlab.com/yorickpeterse/vim-paper.git",
+  },
+  {
+    "norcalli/nvim-colorizer.lua",
+    enabled = false,
+    init = function() vim.opt.termguicolors = true end,
+    config = function() require('colorizer').setup() end
+  },
+  {
+    'Shatur/neovim-session-manager',
+    enabled = false
+  },
+  {
+
+    'jam1015/winshift.nvim',
+    enabled = true,
+    --dir = "~/Documents/vim_plugins/winshift.nvim",
+    branch = "my_merged_rough",
+    config = function()
+      require("plugin_configs.winshift")
+      require("plugin_keymaps").nvim_winshift()
+    end
+  },
+  {
+
+    "jam1015/nvim-window",
+    branch = "only_uppercase",
+    enabled = true,
+    config = function()
+      require("plugin_configs.nvim_window")
+      require("plugin_keymaps").nvim_window()
+      return true
+    end,
+  },
+  {
+
+    'jam1015/buf_hint_nvim',
+    dir = "~/Documents/vim_plugins/buf_hint_nvim",
+    config = function()
+      --require("buf_hint_nvim").setup()
+    end
+
+  },
+  {
+
+    'FluxxField/bionic-reading.nvim',
+    config = function()
+      require('plugin_configs.bionic-reading')
+    end,
+
+  },
+  {
+    'JellyApple102/easyread.nvim',
+    enabled = false,
+    config = function()
+      require('plugin_configs.easyread')
+    end,
+
+  },
+  {
+
+    "kwkarlwang/bufjump.nvim",
+    dependencies = {
+      "folke/which-key.nvim",   -- optional [for whichkey hints]
     },
+    config = function()
+      require("plugin_configs.bufjump")
+    end,
 
-    {
-      "gbprod/substitute.nvim",
-      enabled = true,
-      config = function()
-        require("plugin_configs.substitute_nvim")
-        require("plugin_keymaps").substitute_nvim()
-      end
-    },
-
-    {
-      "powerman/vim-plugin-AnsiEsc",
-    },
-    {
-
-      'nvim-lualine/lualine.nvim',
-      event = "VeryLazy",
-      dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
-      init = function()
-        require('plugin_configs.lualine.initi')
-      end,
-      config = function()
-        require('plugin_configs.lualine.config')
-      end,
-
-    },
-    {
+  },
 
 
-      "jam1015/vim-slime",
-      --"jpalardy/vim-slime",
-      enabled = true,
-      --dir = "~/Documents/vim_plugins/slimes/vim-slime",
-      --branch = "track_channels", --"main",--
-      --event = "VeryLazy",
-      init = function()
-        require("plugin_configs.vim-slime.initi")
-      end,
-
-      config = function()
-        require("plugin_keymaps").vim_slime()
-        --require("plugin_configs.vim-slime.config")
-      end,
-    },
-    {
-      "mbbill/undotree",
-      init = function()
-        require("plugin_configs.undotree.initi")
-      end,
-
-      config = function()
-        require("plugin_configs.undotree.config")
-      end,
-    },
-    {
-
-      "https://gitlab.com/yorickpeterse/vim-paper.git",
-    },
-    {
-      "norcalli/nvim-colorizer.lua",
-      enabled = false,
-      init = function() vim.opt.termguicolors = true end,
-      config = function() require('colorizer').setup() end
-    },
-    {
-      'Shatur/neovim-session-manager',
-      enabled = false
-    },
-    {
-
-      'jam1015/winshift.nvim',
-      enabled = true,
-      --dir = "~/Documents/vim_plugins/winshift.nvim",
-      branch = "my_merged_rough",
-      config = function()
-        require("plugin_configs.winshift")
-        require("plugin_keymaps").nvim_winshift()
-      end
-    },
-    {
-
-      "jam1015/nvim-window",
-      branch = "only_uppercase",
-      enabled = true,
-      config = function()
-        require("plugin_configs.nvim_window")
-        require("plugin_keymaps").nvim_window()
-        return true
-      end,
-    },
-    {
-
-      'jam1015/buf_hint_nvim',
-      dir = "~/Documents/vim_plugins/buf_hint_nvim",
-      config = function()
-        --require("buf_hint_nvim").setup()
-      end
-
-    },
-    {
-
-      'FluxxField/bionic-reading.nvim',
-      config = function()
-        require('plugin_configs.bionic-reading')
-      end,
-
-    },
-    {
-      'JellyApple102/easyread.nvim',
-      enabled = false,
-      config = function()
-        require('plugin_configs.easyread')
-      end,
-
-    },
-    {
-
-      "kwkarlwang/bufjump.nvim",
-      dependencies = {
-        "folke/which-key.nvim", -- optional [for whichkey hints]
-      },
-      config = function()
-        require("plugin_configs.bufjump")
-      end,
-
-    },
-
-
-    --
-    --  ------------- disabled ----------
-    --
-    --  {
-      --    'nvim-tree/nvim-tree.lua',
-      --    enabled = false,
-      --    event = "VeryLazy",
-      --    config = function()
-        --      require("plugin_configs.nvim-tree")
-        --      require("plugin_keymaps").nvim_tree()
-        --    end
-        --
-        --
-        --  },
-        --
-        --  {
-          --    'ggandor/leap-ast.nvim',
-          --    -- right now prefer treehopper because it gives more hints
-          --    config = function() require("plugin_keymaps").leap_ast() end,
-          --    enabled = false,
-          --
-          --  },
-          --  {
-            --    "mfussenegger/nvim-treehopper",
-            --    enabled = true,
-            --    event = "VeryLazy",
-            --    dependencies = "phaazon/hop.nvim",
-            --    config = function() require("plugin_configs.nvim-treehopper") end,
-            --  },
-            --  {
-              --    'altermo/nxwm',
-              --    enabled = false,
-              --    branch = 'x11',
-              --    config = function()
-                --      require('plugin_configs.nxwm')
-                --    end
-                --  },
-                --  {
-                  --    -- startup screen
-                  --    "goolord/alpha-nvim",
-                  --    enabled = false,
-                  --    cond = require("plugin_configs.alpha-nvim.cond"),
-                  --    config = function()
-                    --      require("plugin_configs.alpha-nvim.config")
-                    --    end,
-                    --
-                    --  },
-                    --  ({
-                      --    "neoclide/coc.nvim",
-                      --    branch = "release",
-                      --    enabled = false,
-                      --    dependencies = { "neoclide/coc-snippets" },
-                      --    init = function()
-                        --      require("plugin_configs.coc")
-                        --    end,
-                        --    event = "VeryLazy",
-                        --  }),
-                        --
-                        --  { "tpope/vim-scriptease", enabled = false }, -- messes with s mapping of leap
-                        --
-                        --  {
-                          --    "josa42/nvim-gx",
-                          --    enabled = false,
-                          --    config = function()
-                            --      vim.keymap.set('n', 'gx', require('gx').gx)
-                            --    end
-                            --  },
-                          }
+  --
+  --  ------------- disabled ----------
+  --
+  --  {
+  --    'nvim-tree/nvim-tree.lua',
+  --    enabled = false,
+  --    event = "VeryLazy",
+  --    config = function()
+  --      require("plugin_configs.nvim-tree")
+  --      require("plugin_keymaps").nvim_tree()
+  --    end
+  --
+  --
+  --  },
+  --
+  --  {
+  --    'ggandor/leap-ast.nvim',
+  --    -- right now prefer treehopper because it gives more hints
+  --    config = function() require("plugin_keymaps").leap_ast() end,
+  --    enabled = false,
+  --
+  --  },
+  --  {
+  --    "mfussenegger/nvim-treehopper",
+  --    enabled = true,
+  --    event = "VeryLazy",
+  --    dependencies = "phaazon/hop.nvim",
+  --    config = function() require("plugin_configs.nvim-treehopper") end,
+  --  },
+  --  {
+  --    'altermo/nxwm',
+  --    enabled = false,
+  --    branch = 'x11',
+  --    config = function()
+  --      require('plugin_configs.nxwm')
+  --    end
+  --  },
+  --  {
+  --    -- startup screen
+  --    "goolord/alpha-nvim",
+  --    enabled = false,
+  --    cond = require("plugin_configs.alpha-nvim.cond"),
+  --    config = function()
+  --      require("plugin_configs.alpha-nvim.config")
+  --    end,
+  --
+  --  },
+  --  ({
+  --    "neoclide/coc.nvim",
+  --    branch = "release",
+  --    enabled = false,
+  --    dependencies = { "neoclide/coc-snippets" },
+  --    init = function()
+  --      require("plugin_configs.coc")
+  --    end,
+  --    event = "VeryLazy",
+  --  }),
+  --
+  --  { "tpope/vim-scriptease", enabled = false }, -- messes with s mapping of leap
+  --
+  --  {
+  --    "josa42/nvim-gx",
+  --    enabled = false,
+  --    config = function()
+  --      vim.keymap.set('n', 'gx', require('gx').gx)
+  --    end
+  --  },
+}
