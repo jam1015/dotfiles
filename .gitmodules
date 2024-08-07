@@ -6,8 +6,8 @@
 	url = git@github.com:ohmyzsh/ohmyzsh.git
 [submodule ".spacemacs"]
 	path = .spacemacs
-	url = https://github.com/syl20bnr/spacemacs
+	url = git@github.com:syl20bnr/spacemacs
 	branch = develop
 [submodule ".doomemacs"]
 	path = .doomemacs
-	url = https://github.com/doomemacs/doomemacs
+	url = git@github.com:doomemacs/doomemacs
