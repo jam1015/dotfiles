@@ -1,2 +1,2 @@
-# Dotfiles: master
-Dotfiles compatible across all my linux systems.
+# Dotfiles: Arch
+Dotfiles for my Arch Linux systems
