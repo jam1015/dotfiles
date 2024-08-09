@@ -31,7 +31,7 @@ return {
     --print(".luarc.jsonc exists: " .. tostring(hasLuarcJsonc))
 
     if not hasLuarcJson and not hasLuarcJsonc then
-      print("No LuaLS config files found. Setting up default configurations.")
+      --print("No LuaLS config files found. Setting up default configurations.")
 
       client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
         -- Your settings here
@@ -44,39 +44,5 @@ return {
     --print("Client initialized.")
     return true
   end,
-  settings = {
-    runtime = {
-      -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-      version = 'LuaJIT',
-      -- Setup your lua path
-      path = runtime_path,
-    },
-
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = {
-        library = {
-          --vim.env.VIMRUNTIME,
-          [current_file_dir] = true,
-          -- these were causing problems and I'm not sure why they're there
-          --vim.api.nvim_get_runtime_file('', true),
-          --"${3rd}/luassert/library",
-          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          [vim.fn.stdpath("config") .. "/lua"] = true,
-        },
-        checkThirdParty = false,
-        --library = {
-        --	  -- Make the server aware of Neovim runtime files
-        --},
-      },
-      telemetry = {
-        enable = false,
-      },
-
-      semantic = { enable = false },
-    },
-
-  },
+  settings = {},
 }
