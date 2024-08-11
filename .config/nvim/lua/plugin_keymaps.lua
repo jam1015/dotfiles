@@ -26,14 +26,14 @@ function M.pluginKeymaps(plugin, setup_type)
     }, { mode = "n", silent = true })
   elseif plugin == "mason" then
     return {
-      { toggle_package_expand = "<CR>", desc = "Toggle package expand" },
-      { install_package = "i", desc = "Install package" },
-      { update_package = "u", desc = "Update package" },
-      { check_package_version = "c", desc = "Check package version" },
-      { update_all_packages = "U", desc = "Update all packages" },
-      { check_outdated_packages = "C", desc = "Check outdated packages" },
-      { uninstall_package = "X", desc = "Uninstall package" },
-      { cancel_installation = "<C-c>", desc = "Cancel installation" },
+      { toggle_package_expand = "<CR>",  desc = "Toggle package expand" },
+      { install_package = "i",           desc = "Install package" },
+      { update_package = "u",            desc = "Update package" },
+      { check_package_version = "c",     desc = "Check package version" },
+      { update_all_packages = "U",       desc = "Update all packages" },
+      { check_outdated_packages = "C",   desc = "Check outdated packages" },
+      { uninstall_package = "X",         desc = "Uninstall package" },
+      { cancel_installation = "<C-c>",   desc = "Cancel installation" },
       { apply_language_filter = "<C-f>", desc = "Apply language filter" },
     }
   else
@@ -51,21 +51,21 @@ end
 function M.emmet_vim(setup_type)
   if setup_type == "config" then
     wk.add({
-      { "<leader>m,", "<plug>(emmet-expand-abbr)", desc = "Emmet expand abbreviation" },
-      { "<leader>m;", "<plug>(emmet-expand-word)", desc = "Emmet expand word" },
-      { "<leader>mu", "<plug>(emmet-update-tag)", desc = "Emmet update tag" },
-      { "<leader>md", "<plug>(emmet-balance-tag-inward)", desc = "Emmet balance tag inward" },
+      { "<leader>m,", "<plug>(emmet-expand-abbr)",         desc = "Emmet expand abbreviation" },
+      { "<leader>m;", "<plug>(emmet-expand-word)",         desc = "Emmet expand word" },
+      { "<leader>mu", "<plug>(emmet-update-tag)",          desc = "Emmet update tag" },
+      { "<leader>md", "<plug>(emmet-balance-tag-inward)",  desc = "Emmet balance tag inward" },
       { "<leader>mD", "<plug>(emmet-balance-tag-outward)", desc = "Emmet balance tag outward" },
-      { "<leader>mn", "<plug>(emmet-move-next)", desc = "Emmet move next" },
-      { "<leader>mN", "<plug>(emmet-move-prev)", desc = "Emmet move previous" },
-      { "<leader>mi", "<plug>(emmet-image-size)", desc = "Emmet image size" },
-      { "<leader>m/", "<plug>(emmet-toggle-comment)", desc = "Emmet toggle comment" },
-      { "<leader>mj", "<plug>(emmet-split-join-tag)", desc = "Emmet split join tag" },
-      { "<leader>mk", "<plug>(emmet-remove-tag)", desc = "Emmet remove tag" },
-      { "<leader>ma", "<plug>(emmet-anchorize-url)", desc = "Emmet anchorize url" },
-      { "<leader>mA", "<plug>(emmet-anchorize-summary)", desc = "Emmet anchorize summary" },
-      { "<leader>mm", "<plug>(emmet-merge-lines)", desc = "Emmet merge lines" },
-      { "<leader>mc", "<plug>(emmet-code-pretty)", desc = "Emmet code pretty" },
+      { "<leader>mn", "<plug>(emmet-move-next)",           desc = "Emmet move next" },
+      { "<leader>mN", "<plug>(emmet-move-prev)",           desc = "Emmet move previous" },
+      { "<leader>mi", "<plug>(emmet-image-size)",          desc = "Emmet image size" },
+      { "<leader>m/", "<plug>(emmet-toggle-comment)",      desc = "Emmet toggle comment" },
+      { "<leader>mj", "<plug>(emmet-split-join-tag)",      desc = "Emmet split join tag" },
+      { "<leader>mk", "<plug>(emmet-remove-tag)",          desc = "Emmet remove tag" },
+      { "<leader>ma", "<plug>(emmet-anchorize-url)",       desc = "Emmet anchorize url" },
+      { "<leader>mA", "<plug>(emmet-anchorize-summary)",   desc = "Emmet anchorize summary" },
+      { "<leader>mm", "<plug>(emmet-merge-lines)",         desc = "Emmet merge lines" },
+      { "<leader>mc", "<plug>(emmet-code-pretty)",         desc = "Emmet code pretty" },
     }, { mode = "n", silent = true })
   elseif setup_type == "init" then
     vim.g.user_emmet_leader_key = "<C-B>" --use this followed by comma to expand emmet
@@ -75,7 +75,7 @@ end
 
 function M.nvim_treehopper()
   wk.add({
-    { "<leader>h", name = "Hopping" },
+    { "<leader>h",  name = "Hopping" },
     { "<leader>ht", "<cmd>lua require('tsht').move({ side = 'start' })<cr>", desc = "Treehopper Move" },
   }, { mode = "n", silent = true })
 
@@ -90,7 +90,7 @@ end
 
 function M.leap_ast()
   wk.add({
-    { "<leader>h", name = "Hopping" },
+    { "<leader>h",  name = "Hopping" },
     { "<leader>ht", function() require 'leap-ast'.leap() end, desc = "Leap AST Move" },
   }, { mode = { "n", "o", "x" }, silent = true }) -- Registering for normal, operator-pending, and visual modes
 end
@@ -104,8 +104,8 @@ end
 
 function M.vim_slime()
   wk.add({
-    { "gz", "<Plug>SlimeMotionSend", desc = "Slime Motion Send" },
-    { "gzz", "<Plug>SlimeLineSend", desc = "Slime Line Send" },
+    { "gz",  "<Plug>SlimeMotionSend", desc = "Slime Motion Send" },
+    { "gzz", "<Plug>SlimeLineSend",   desc = "Slime Line Send" },
   }, { mode = "n", silent = false })
 
   wk.add({
@@ -134,8 +134,8 @@ end
 function M.substitute_nvim()
   wk.add({
     { "<leader>xc", require('substitute.exchange').operator, desc = "Exchange operator" },
-    { "<leader>xx", require('substitute.exchange').line, desc = "Exchange line" },
-    { "<leader>xq", require('substitute.exchange').cancel, desc = "Cancel exchange" },
+    { "<leader>xx", require('substitute.exchange').line,     desc = "Exchange line" },
+    { "<leader>xq", require('substitute.exchange').cancel,   desc = "Cancel exchange" },
   }, { mode = "n", silent = true })
 end
 
@@ -167,9 +167,9 @@ end
 
 function M.bufdelete()
   wk.add({
-    { 'bd', "Bdelete", desc = "Buffer Delete" },
-    { 'bw', "Bwipeout", desc = "Buffer Wipeout" },
-    { 'wbd', "w \\| Bdelete", desc = "Write and Buffer Delete" },
+    { 'bd',  "Bdelete",        desc = "Buffer Delete" },
+    { 'bw',  "Bwipeout",       desc = "Buffer Wipeout" },
+    { 'wbd', "w \\| Bdelete",  desc = "Write and Buffer Delete" },
     { 'wbw', "w \\| Bwipeout", desc = "Write and Buffer Wipeout" },
   }, { mode = "c", silent = false })
 end
@@ -216,60 +216,59 @@ function M.cscope_maps()
     { "<leader>ci", get_cscope_prompt_cmd("i", "f"), desc = sym_map.i },
     { "<leader>cd", get_cscope_prompt_cmd("d", "w"), desc = sym_map.d },
     { "<leader>ca", get_cscope_prompt_cmd("a", "w"), desc = sym_map.a },
-    { "<leader>cb", "<Cmd>Cscope build<cr>", desc = sym_map.b },
+    { "<leader>cb", "<Cmd>Cscope build<cr>",         desc = sym_map.b },
   }, { mode = "n", silent = true })
 end
 
 function M.fzfx()
-wk.add({
-  { "<leader>f", group = "files-flash"},
-  { "<leader>fs", "<cmd>FzfxFiles<cr>", desc = "Find files" },
-  { "<leader>fw", "<cmd>FzfxFiles cword<cr>", desc = "Find files by cursor word" },
-  { "<leader>fp", "<cmd>FzfxFiles put<cr>", desc = "Find files by yank text" },
-  { "<leader>fr", "<cmd>FzfxFiles resume<cr>", desc = "Find files by resume last" },
+  wk.add({
+    { "<leader>f",   group = "files-flash" },
+    { "<leader>fs",  "<cmd>FzfxFiles<cr>",              desc = "Find files" },
+    { "<leader>fw",  "<cmd>FzfxFiles cword<cr>",        desc = "Find files by cursor word" },
+    { "<leader>fp",  "<cmd>FzfxFiles put<cr>",          desc = "Find files by yank text" },
+    { "<leader>fr",  "<cmd>FzfxFiles resume<cr>",       desc = "Find files by resume last" },
 
-  { "<leader>f", group = "live grep"},
-  { "<leader>lg", "<cmd>FzfxLiveGrep<cr>", desc = "Live grep" },
-  { "<leader>lw", "<cmd>FzfxLiveGrep cword<cr>", desc = "Live grep by cursor word" },
-  { "<leader>lp", "<cmd>FzfxLiveGrep put<cr>", desc = "Live grep by yank text" },
-  { "<leader>lr", "<cmd>FzfxLiveGrep resume<cr>", desc = "Live grep by resume last" },
+    { "<leader>f",   group = "live grep" },
+    { "<leader>lg",  "<cmd>FzfxLiveGrep<cr>",           desc = "Live grep" },
+    { "<leader>lw",  "<cmd>FzfxLiveGrep cword<cr>",     desc = "Live grep by cursor word" },
+    { "<leader>lp",  "<cmd>FzfxLiveGrep put<cr>",       desc = "Live grep by yank text" },
+    { "<leader>lr",  "<cmd>FzfxLiveGrep resume<cr>",    desc = "Live grep by resume last" },
 
-  --{ "<leader>bb", "<cmd>FzfxBuffers<cr>", desc = "Find buffers" },
-  { "<leader>gf", "<cmd>FzfxGFiles<cr>", desc = "Find git files" },
+    --{ "<leader>bb", "<cmd>FzfxBuffers<cr>", desc = "Find buffers" },
+    { "<leader>gf",  "<cmd>FzfxGFiles<cr>",             desc = "Find git files" },
 
-  { "<leader>gl", group = "git live grep"},
-  { "<leader>gll", "<cmd>FzfxGLiveGrep<cr>", desc = "Git live grep" },
-  { "<leader>glw", "<cmd>FzfxGLiveGrep cword<cr>", desc = "Git live grep by cursor word" },
-  { "<leader>glp", "<cmd>FzfxGLiveGrep put<cr>", desc = "Git live grep by yank text" },
-  { "<leader>glr", "<cmd>FzfxGLiveGrep resume<cr>", desc = "Git live grep by resume last" },
+    { "<leader>gl",  group = "git live grep" },
+    { "<leader>gll", "<cmd>FzfxGLiveGrep<cr>",          desc = "Git live grep" },
+    { "<leader>glw", "<cmd>FzfxGLiveGrep cword<cr>",    desc = "Git live grep by cursor word" },
+    { "<leader>glp", "<cmd>FzfxGLiveGrep put<cr>",      desc = "Git live grep by yank text" },
+    { "<leader>glr", "<cmd>FzfxGLiveGrep resume<cr>",   desc = "Git live grep by resume last" },
 
-  { "<leader>gs", "<cmd>FzfxGStatus<cr>", desc = "Find git changed files (status)" },
-  { "<leader>br", "<cmd>FzfxGBranches<cr>", desc = "Search git branches" },
-  { "<leader>gc", "<cmd>FzfxGCommits<cr>", desc = "Search git commits" },
-  { "<leader>gb", "<cmd>FzfxGBlame<cr>", desc = "Search git blame" },
-  { "<leader>dg", "<cmd>FzfxLspDiagnostics<cr>", desc = "Search lsp diagnostics" },
-  { "<leader>gd", "<cmd>FzfxLspDefinitions<cr>", desc = "Goto lsp definitions" },
-  { "<leader>gt", "<cmd>FzfxLspTypeDefinitions<cr>", desc = "Goto lsp type definitions" },
-  { "<leader>gr", "<cmd>FzfxLspReferences<cr>", desc = "Goto lsp references" },
-  { "<leader>gi", "<cmd>FzfxLspImplementations<cr>", desc = "Goto lsp implementations" },
-  { "<leader>gI", "<cmd>FzfxLspIncomingCalls<cr>", desc = "Goto lsp incoming calls" },
-  { "<leader>gO", "<cmd>FzfxLspOutgoingCalls<cr>", desc = "Goto lsp outgoing calls" },
-  { "<leader>cm", "<cmd>FzfxCommands<cr>", desc = "Search vim commands" },
-  { "<leader>km", "<cmd>FzfxKeyMaps<cr>", desc = "Search vim keymaps" },
-  { "<leader>mk", "<cmd>FzfxMarks<cr>", desc = "Search vim marks" },
-  { "<leader>xp", "<cmd>FzfxFileExplorer<cr>", desc = "File explorer" },
-})
+    { "<leader>gs",  "<cmd>FzfxGStatus<cr>",            desc = "Find git changed files (status)" },
+    { "<leader>br",  "<cmd>FzfxGBranches<cr>",          desc = "Search git branches" },
+    { "<leader>gc",  "<cmd>FzfxGCommits<cr>",           desc = "Search git commits" },
+    { "<leader>gb",  "<cmd>FzfxGBlame<cr>",             desc = "Search git blame" },
+    { "<leader>dg",  "<cmd>FzfxLspDiagnostics<cr>",     desc = "Search lsp diagnostics" },
+    { "<leader>gd",  "<cmd>FzfxLspDefinitions<cr>",     desc = "Goto lsp definitions" },
+    { "<leader>gt",  "<cmd>FzfxLspTypeDefinitions<cr>", desc = "Goto lsp type definitions" },
+    { "<leader>gr",  "<cmd>FzfxLspReferences<cr>",      desc = "Goto lsp references" },
+    { "<leader>gi",  "<cmd>FzfxLspImplementations<cr>", desc = "Goto lsp implementations" },
+    { "<leader>gI",  "<cmd>FzfxLspIncomingCalls<cr>",   desc = "Goto lsp incoming calls" },
+    { "<leader>gO",  "<cmd>FzfxLspOutgoingCalls<cr>",   desc = "Goto lsp outgoing calls" },
+    { "<leader>cm",  "<cmd>FzfxCommands<cr>",           desc = "Search vim commands" },
+    { "<leader>km",  "<cmd>FzfxKeyMaps<cr>",            desc = "Search vim keymaps" },
+    { "<leader>mk",  "<cmd>FzfxMarks<cr>",              desc = "Search vim marks" },
+    { "<leader>xp",  "<cmd>FzfxFileExplorer<cr>",       desc = "File explorer" },
+  })
 
 
 
--- Register visual select bindings
-wk.add({
-  { "<leader>f", group = "files-flash", mode = "x"},        -- for visual select
-  { "<leader>ff", "<cmd>fzfxfiles visual<cr>", desc = "Find files", mode = "x" },        -- for visual select
-  { "<leader>fg", "<cmd>fzfxglivegrep visual<cr>", desc = "Git live grep", mode = "x" }, -- for visual select
-  { "<leader>fl", "<cmd>FzfxLiveGrep visual<cr>", desc = "Live grep", mode = "x" },      -- for visual select
-} )
-
+  -- Register visual select bindings
+  wk.add({
+    { "<leader>f",  group = "files-flash",           mode = "x" },                       -- for visual select
+    { "<leader>ff", "<cmd>fzfxfiles visual<cr>",     desc = "Find files",    mode = "x" }, -- for visual select
+    { "<leader>fg", "<cmd>fzfxglivegrep visual<cr>", desc = "Git live grep", mode = "x" }, -- for visual select
+    { "<leader>fl", "<cmd>FzfxLiveGrep visual<cr>",  desc = "Live grep",     mode = "x" }, -- for visual select
+  })
 end
 
 function M.flash_keys()
@@ -284,29 +283,29 @@ end
 
 function M.flash()
   wk.add({
-    { "<leader>f", name = "files-flash" },
-    { "<leader>ft", "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash TreeSitter" },
+    { "<leader>f",  name = "files-flash" },
+    { "<leader>ft", "<cmd>lua require('flash').treesitter()<cr>",        desc = "Flash TreeSitter" },
     { "<leader>fr", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSitter Search" },
   }, { mode = "n", silent = true })
 
   wk.add({
-    { "<leader>f", name = "files-flash" },
-    { "<leader>ft", "<cmd><C-U>lua require('flash').treesitter()<cr>", desc = "Flash TreeSitter" },
-    { "<leader>fR", "<cmd>lua require('flash').remote()<cr>", desc = "Flash TreeSister Search" },
+    { "<leader>f",  name = "files-flash" },
+    { "<leader>ft", "<cmd><C-U>lua require('flash').treesitter()<cr>",   desc = "Flash TreeSitter" },
+    { "<leader>fR", "<cmd>lua require('flash').remote()<cr>",            desc = "Flash TreeSister Search" },
     { "<leader>fr", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSister Search" },
   }, { mode = "o", silent = true }) -- 'o' for operator-pending mode
 
   wk.add({
-    { "<leader>f", name = "files-flash" },
-    { "<leader>ft", "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash TreeSister" },
+    { "<leader>f",  name = "files-flash" },
+    { "<leader>ft", "<cmd>lua require('flash').treesitter()<cr>",        desc = "Flash TreeSister" },
     { "<leader>fr", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSister Search" },
   }, { mode = "x", silent = true }) -- 'x' for visual mode
 end
 
 function M.leap()
   wk.add({
-    { 's', '<Plug>(leap-forward)', desc = "Leap Forward" },
-    { 'S', '<Plug>(leap-backward)', desc = "Leap Backward" },
+    { 's',  '<Plug>(leap-forward)',     desc = "Leap Forward" },
+    { 'S',  '<Plug>(leap-backward)',    desc = "Leap Backward" },
     { 'gs', '<Plug>(leap-from-window)', desc = "Leap From Window" },
   }, { mode = { 'n', 'x', 'o' }, silent = true })
 end
@@ -314,7 +313,7 @@ end
 function M.bufjump()
   wk.add({
     { "[b", "<cmd>lua require('bufjump').backward()<cr>", desc = "Jump Back Buffer" },
-    { "]b", "<cmd>lua require('bufjump').forward()<cr>", desc = "Jump Forward Buffer" },
+    { "]b", "<cmd>lua require('bufjump').forward()<cr>",  desc = "Jump Forward Buffer" },
   }, { prefix = "<leader>", mode = "n" })
 end
 
@@ -323,15 +322,15 @@ function M.telescope()
   local builtin = require('telescope.builtin')
 
   wk.add({
-    { "<leader>ff", builtin.find_files, desc = "Find files" },
-    { "<leader>fg", builtin.live_grep, desc = "Live grep" },
-    { "<leader>fb", builtin.buffers, desc = "List buffers" },
-    { "<leader>fh", builtin.help_tags, desc = "Help tags" },
-    { "<leader>th", function() builtin.find_files({hidden = true}) end, desc = "Find hidden files" },
-    { "<leader>tf", function() builtin.find_files({hidden = false}) end, desc = "Find files (no hidden)" },
+    { "<leader>ff", builtin.find_files,                                                           desc = "Find files" },
+    { "<leader>fg", builtin.live_grep,                                                            desc = "Live grep" },
+    { "<leader>fb", builtin.buffers,                                                              desc = "List buffers" },
+    { "<leader>fh", builtin.help_tags,                                                            desc = "Help tags" },
+    { "<leader>th", function() builtin.find_files({ hidden = true }) end,                         desc = "Find hidden files" },
+    { "<leader>tf", function() builtin.find_files({ hidden = false }) end,                        desc = "Find files (no hidden)" },
     { "<leader>ts", function() builtin.grep_string({ search = vim.fn.input("Grep for > ") }) end, desc = "Grep string" },
-    { "<leader>tg", builtin.live_grep, desc = "Live grep" },
-    { "<leader>tb", builtin.buffers, desc = "Buffers" },
+    { "<leader>tg", builtin.live_grep,                                                            desc = "Live grep" },
+    { "<leader>tb", builtin.buffers,                                                              desc = "Buffers" },
   }, { prefix = "<leader>", mode = "n", silent = true })
 
   -- Visual mode bindings using new format
@@ -347,11 +346,11 @@ function M.vim_rooter()
 end
 
 function M.pushpop()
-  wk.add({
-    { 'pud', "Pushd", desc = "Push directory" },
-    { 'pod', "Popd", desc = "Pop directory" },
-    { 'dirs', "Dirs", desc = "List directories" },
-  }, { mode = "c", silent = false })
+  vim.cmd([[
+cnoreabbrev <expr> pud getcmdtype() == ":" && getcmdline() == "pud" ? "Pushd" : "pud"
+cnoreabbrev <expr> pod getcmdtype() == ":" && getcmdline() == "pod" ? "Popd" : "pod"
+cnoreabbrev <expr> dirs getcmdtype() == ":" && getcmdline() == "dirs" ? "Dirs" : "dirs"
+]])
 end
 
 function M.gx()
