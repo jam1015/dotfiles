@@ -166,12 +166,12 @@ function M.nvim_winshift()
 end
 
 function M.bufdelete()
-  wk.add({
-    { 'bd',  "Bdelete",        desc = "Buffer Delete" },
-    { 'bw',  "Bwipeout",       desc = "Buffer Wipeout" },
-    { 'wbd', "w \\| Bdelete",  desc = "Write and Buffer Delete" },
-    { 'wbw', "w \\| Bwipeout", desc = "Write and Buffer Wipeout" },
-  }, { mode = "c", silent = false })
+  vim.cmd([[
+cnoreabbrev <expr> bd getcmdtype() == ":" && getcmdline() == "bd" ? "Bdelete" : "bd"
+cnoreabbrev <expr> bw getcmdtype() == ":" && getcmdline() == "bw" ? "Bwipeout" : "bw"
+cnoreabbrev <expr> wbd getcmdtype() == ":" && getcmdline() == "wbd" ? "w \| Bdelete" : "wbd"
+cnoreabbrev <expr> wbw getcmdtype() == ":" && getcmdline() == "wbw" ? "w \| Bwipeout" : "wbw"
+]])
 end
 
 function M.vim_create_goto()
