@@ -107,7 +107,7 @@ bindsym $mod+Return exec ~/.config/i3/tiny_samedir.bash
 #bindsym $alt+Return exec /home/jordan/Documents/kitty/kitty/launcher/kitty
 bindsym $alt+Return exec /usr/bin/kitty
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 #--no-startup-id
