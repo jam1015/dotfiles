@@ -70,5 +70,4 @@ xrandr --auto
 xset dpms 1201 1205 1210
 xset r rate 200 50
 #nm-applet --sm-disable &
-~/.screenlayout/dual_monitor.sh
 exec i3
