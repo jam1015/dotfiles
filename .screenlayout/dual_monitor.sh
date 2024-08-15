@@ -21,5 +21,5 @@ else
            --output DisplayPort-9 --off \
            --output DisplayPort-10 --mode 1920x1080 --pos 0x0 --rotate normal \
            --output DisplayPort-11 --off \
-           --output DisplayPort-12 --primary --mode 1920x1080 --pos 1920x0 --rotate normal \
+           --output DisplayPort-12 --primary --mode 1920x1080 --pos 1920x0 --rotate normal
 fi
