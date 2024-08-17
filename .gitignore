@@ -85,6 +85,35 @@ ruby/bundle/cache
 .emacs.d/straight/modified
 .emacs.d/straight/repos
 
+
+.config/emacs/network-security.data
+.config/emacs/.org-id-locations
+.config/emacs/ac-comphist.dat
+.config/emacs/auto-save-list/
+.config/emacs/smex-items
+.config/emacs/%backup%~
+.config/emacs/bookmarks
+.config/emacs/eln-cache
+.config/emacs/secret.el
+.config/emacs/transient
+.config/emacs/projects
+.config/emacs/session*
+.config/emacs/history
+.config/emacs/recentf
+.config/emacs/eshell
+.config/emacs/games
+.config/emacs/tramp
+.config/emacs/elpa
+.config/emacs/url
+.config/emacs/straight/build
+.config/emacs/straight/build-cache.el
+.config/emacs/straight/modified
+.config/emacs/straight/repos
+
+
+
+.emacs.default/.last-package-update-day
+.emacs.default/straight/
 # -------------------------
 # Miscellaneous
 # -------------------------
