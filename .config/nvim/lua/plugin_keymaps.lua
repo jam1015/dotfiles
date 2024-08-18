@@ -3,17 +3,6 @@
 
 local has_wk, wk = pcall(require, "which-key")
 if has_wk then
-  local wk_opts = {
-    mode = "n", -- NORMAL mode
-    -- prefix: use "<leader>f" for example for mapping everything related to finding files
-    -- the prefix is prepended to every mapping part of `mappings`
-    prefix = "",
-    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true,  -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
-    expr = false,   -- use `expr` when creating keymaps
-  }
 end
 M = {}
 function M.pluginKeymaps(plugin, setup_type)
@@ -264,8 +253,8 @@ function M.fzfx()
 
   -- Register visual select bindings
   wk.add({
-    { "<leader>f",  group = "files-flash",           mode = "x" },                       -- for visual select
-    { "<leader>ff", "<cmd>fzfxfiles visual<cr>",     desc = "Find files",    mode = "x" }, -- for visual select
+    { "<leader>f",  group = "files-flash",           mode = "x" },                         -- for visual select
+    { "<leader>fs", "<cmd>fzfxfiles visual<cr>",     desc = "Find files",    mode = "x" }, -- for visual select
     { "<leader>fg", "<cmd>fzfxglivegrep visual<cr>", desc = "Git live grep", mode = "x" }, -- for visual select
     { "<leader>fl", "<cmd>FzfxLiveGrep visual<cr>",  desc = "Live grep",     mode = "x" }, -- for visual select
   })
@@ -312,31 +301,28 @@ end
 
 function M.bufjump()
   wk.add({
-    { "[b", "<cmd>lua require('bufjump').backward()<cr>", desc = "Jump Back Buffer" },
-    { "]b", "<cmd>lua require('bufjump').forward()<cr>",  desc = "Jump Forward Buffer" },
-  }, { prefix = "<leader>", mode = "n" })
+    { "<leader>[b", "<cmd>lua require('bufjump').backward()<cr>", desc = "Jump Back Buffer" },
+    { "<leader>]b", "<cmd>lua require('bufjump').forward()<cr>",  desc = "Jump Forward Buffer" },
+  })
 end
 
 function M.telescope()
-  local has_wk, wk = pcall(require, "which-key")
   local builtin = require('telescope.builtin')
-
   wk.add({
-    { "<leader>ff", builtin.find_files,                                                           desc = "Find files" },
-    { "<leader>fg", builtin.live_grep,                                                            desc = "Live grep" },
-    { "<leader>fb", builtin.buffers,                                                              desc = "List buffers" },
-    { "<leader>fh", builtin.help_tags,                                                            desc = "Help tags" },
-    { "<leader>th", function() builtin.find_files({ hidden = true }) end,                         desc = "Find hidden files" },
-    { "<leader>tf", function() builtin.find_files({ hidden = false }) end,                        desc = "Find files (no hidden)" },
-    { "<leader>ts", function() builtin.grep_string({ search = vim.fn.input("Grep for > ") }) end, desc = "Grep string" },
-    { "<leader>tg", builtin.live_grep,                                                            desc = "Live grep" },
-    { "<leader>tb", builtin.buffers,                                                              desc = "Buffers" },
-  }, { prefix = "<leader>", mode = "n", silent = true })
+    { "<leader>fg", builtin.live_grep,                                                            mode = "n", desc = "Live grep" },
+    { "<leader>fb", builtin.buffers,                                                              mode = "n", desc = "List buffers" },
+    { "<leader>fh", builtin.help_tags,                                                            mode = "n", desc = "Help tags" },
+    { "<leader>th", function() builtin.find_files({ hidden = true }) end,                         mode = "n", desc = "Find hidden files" },
+    { "<leader>tf", function() builtin.find_files({ hidden = false }) end,                        mode = "n", desc = "Find files (no hidden)" },
+    { "<leader>ts", function() builtin.grep_string({ search = vim.fn.input("Grep for > ") }) end, mode = "n", desc = "Grep string" },
+    { "<leader>tg", builtin.live_grep,                                                            mode = "n", desc = "Live grep" },
+    { "<leader>tb", builtin.buffers,                                                              mode = "n", desc = "Buffers" },
+  }, {  silent = true })
 
   -- Visual mode bindings using new format
   wk.add({
-    { "<leader>ts", builtin.grep_string, desc = "Grep string" },
-  }, { prefix = "<leader>", mode = "v", silent = true })
+    { "<leader>ts", builtin.grep_string, desc = "Grep string", mode = "x" },
+  }, {  silent = true })
 end
 
 function M.vim_rooter()
