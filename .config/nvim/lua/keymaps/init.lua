@@ -33,10 +33,16 @@ keymap("t", "<C-o>", "<C-\\><C-o>", { remap = false, silent = true }) --issue si
 keymap("c", "<C-5>", "getcmdtype() == ':' ? expand('%:h').'/' : '%%'", { expr = true, remap = false })
 
 
+vim.cmd([[
+command! -range=% Yp <line1>,<line2>yank | put
+cnoreabbrev <expr> yp getcmdtype() == ":" && getcmdline() == "yp" ? "Yp" : "yp"
+]])
 
 
 ------------------------------- general keymaps that can stay
 vim.cmd([[
+
+
 
 
 " changing size
