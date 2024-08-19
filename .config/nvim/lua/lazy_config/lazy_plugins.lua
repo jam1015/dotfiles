@@ -9,6 +9,23 @@ end
 
 return {
   {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
+      },
+    },
+
+    enabled = function(root_dir)
+      return vim.g.lazydev_enabled == nil and true or vim.g.lazydev_enabled
+      --return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
+    end,
+  },
+  { "Bilal2453/luvit-meta",        lazy = true }, -- optional `vim.uv` typings
+  {
     "leath-dub/snipe.nvim",
     keys = {
       { "<leader>bb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu" }
@@ -93,8 +110,8 @@ return {
       require('lspsaga').setup({})
     end,
     dependencies = {
-      'nvim-treesitter/nvim-treesitter',   -- optional
-      'nvim-tree/nvim-web-devicons',       -- optional
+      'nvim-treesitter/nvim-treesitter', -- optional
+      'nvim-tree/nvim-web-devicons',     -- optional
     }
   },
   {
@@ -165,8 +182,8 @@ return {
 
   },
 
-  { 'sainnhe/everforest',          event = "VeryLazy" },
-  { 'rose-pine/neovim',            name = "rose-pine" },
+  { 'sainnhe/everforest', event = "VeryLazy" },
+  { 'rose-pine/neovim',   name = "rose-pine" },
   ({
     "folke/tokyonight.nvim",
     priority = 1000,
@@ -187,7 +204,7 @@ return {
   }),
   ({
     "hrsh7th/nvim-cmp",
-    cond = function()   --also done vi autocmd in the cmp config
+    cond = function() --also done vi autocmd in the cmp config
       return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
     end,
     lazy = true,
@@ -202,7 +219,7 @@ return {
       { "hrsh7th/cmp-cmdline",        event = "VeryLazy" },
       { "kdheepak/cmp-latex-symbols", event = "VeryLazy" },
       {
-        "L3MON4D3/LuaSnip",   -- tag = "v<CurrentMajor>.*",
+        "L3MON4D3/LuaSnip", -- tag = "v<CurrentMajor>.*",
         build = "make install_jsregexp",
         dependencies = { "rafamadriz/friendly-snippets" },
         config = function()
@@ -808,7 +825,7 @@ return {
 
     "kwkarlwang/bufjump.nvim",
     dependencies = {
-      "folke/which-key.nvim",   -- optional [for whichkey hints]
+      "folke/which-key.nvim", -- optional [for whichkey hints]
     },
     config = function()
       require("plugin_configs.bufjump")

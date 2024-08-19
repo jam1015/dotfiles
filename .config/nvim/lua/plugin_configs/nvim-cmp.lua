@@ -116,8 +116,14 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "luasnip" },
-    { name = "latex_symbols", option = { strategy = 2 } },
+
+    {
+      name = "lazydev",
+      group_index = 0,   -- set group index to 0 to skip loading LuaLS completions
+    },
+
     { name = "nvim_lua" },
+    { name = "latex_symbols", option = { strategy = 2 } },
     { name = "buffer" },
     { name = "path" },
     { name = "cmp_r" },
