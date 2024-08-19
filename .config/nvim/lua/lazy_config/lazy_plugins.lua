@@ -10,6 +10,7 @@ end
 return {
   {
     "folke/lazydev.nvim",
+    event = "VeryLazy",
     ft = "lua", -- only load on lua files
     opts = {
       library = {
@@ -18,11 +19,12 @@ return {
         { path = "luvit-meta/library", words = { "vim%.uv" } },
       },
     },
+    enabled = false
 
-    enabled = function(root_dir)
-      return vim.g.lazydev_enabled == nil and true or vim.g.lazydev_enabled
-      --return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
-    end,
+    --    enabled = function(root_dir)
+    --      return vim.g.lazydev_enabled == nil and true or vim.g.lazydev_enabled
+    --return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
+    --   end,
   },
   { "Bilal2453/luvit-meta",        lazy = true }, -- optional `vim.uv` typings
   {
