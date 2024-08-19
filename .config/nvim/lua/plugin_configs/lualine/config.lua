@@ -35,7 +35,6 @@ local function get_chan_jobpid()
         " in case an external process kills the terminal's shell
       catch /^Vim\%((\a\+)\)\=:E900/
       endtry
-			echo pid_out
 	]], { output = true })
 	return out["output"] --returns as string
 end
