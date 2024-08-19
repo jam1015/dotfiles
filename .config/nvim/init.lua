@@ -1,3 +1,8 @@
+--  _______  _|__| _____  
+-- /    \  \/ /  |/     \ 
+--|   |  \   /|  |  Y Y  \
+--|___|  /\_/ |__|__|_|  /
+--     \/              \/ 
 require('autocommands') -- ~/.config/nvim/lua/autocommands.lua
 require('keymaps')      -- ~/.config/nvim/lua/keymaps/init.lua
 require('lazy_config')  -- ~/.config/nvim/lua/lazy_config/lazy_plugins.lua
