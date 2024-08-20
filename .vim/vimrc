@@ -56,7 +56,7 @@ runtime config/vim-slime.vim
 Pack 'kovisoft/paredit'
 "
 " minpac
-Pack 'k-takata/minpac', {'type': 'opt'}
+"Pack 'k-takata/minpac', {'type': 'opt'}
 
 
 """"""""""""""" EXAMPLE FEATRURES OF PLUGPAC
