@@ -38,7 +38,6 @@ firenvim
 .cfg
 .config/google-chrome/*
 .config/libreoffice/*
-.vim/pack/minpac/*
 .emacs.*/elpa/*
 .config/.repro
 .config/nvim/lazy-lock.json
