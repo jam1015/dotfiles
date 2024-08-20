@@ -40,13 +40,14 @@ runtime config/vim-highlightedyank.vim
 Pack 'maxbrunsfeld/vim-yankstack'
 runtime config/vim-yankstack.vim
 
+Pack 'morhetz/gruvbox'
 
 " need to install ctags and gnu global
 Pack 'skywind3000/gutentags_plus'
 Pack 'ludovicchabant/vim-gutentags'
 runtime config/gutentagsconfig.vim
 
-Pack 'jpalardy/vim-slime'
+Pack 'jam1015/vim-slime', {'branch': 'dispatch_safe'}
 runtime config/vim-slime.vim
 """" having problems with this plugin
 "Pack 'vlime/vlime', {'rtp': 'vim/'}
