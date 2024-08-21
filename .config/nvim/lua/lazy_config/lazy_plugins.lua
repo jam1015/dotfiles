@@ -18,9 +18,9 @@ return {
   { "Bilal2453/luvit-meta",        lazy = true }, -- optional `vim.uv` typings
   {
     "leath-dub/snipe.nvim",
-    config = function()
-      require("plugin_keymaps").snipe()
-    end,
+    keys = {
+      { "<leader>bb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu" }
+    },
     opts = require("plugin_configs.snipe_opts")
   },
   {
