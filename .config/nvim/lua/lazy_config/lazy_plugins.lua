@@ -12,19 +12,8 @@ return {
     "folke/lazydev.nvim",
     event = "VeryLazy",
     ft = "lua", -- only load on lua files
-    opts = {
-      library = {
-        -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
-        { path = "luvit-meta/library", words = { "vim%.uv" } },
-      },
-    },
-    enabled = false
+    opts = require("plugin_configs.lazydev_nvim")    --enabled = false
 
-    --    enabled = function(root_dir)
-    --      return vim.g.lazydev_enabled == nil and true or vim.g.lazydev_enabled
-    --return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
-    --   end,
   },
   { "Bilal2453/luvit-meta",        lazy = true }, -- optional `vim.uv` typings
   {
