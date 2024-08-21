@@ -59,7 +59,7 @@ bindkey "^R" history-incremental-pattern-search-backward
 
 # setting some useful environment variables
 
-export tododir="$HOME/Documents/diaries/"
+export tododir="$HOME/Documents/todo/"
 export diaries="$HOME/Documents/diaries/"
 export diaries_thoughts="$HOME/Documents/diaries/diaries_thoughts.md"
 export diaries_todo="$HOME/Documents/diaries/to_do_short.md"
