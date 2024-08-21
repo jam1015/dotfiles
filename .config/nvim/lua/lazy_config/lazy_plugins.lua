@@ -130,11 +130,11 @@ return {
       require("plugin_keymaps").vim_create_goto()
     end
   },
-  ({
+  {
     "folke/which-key.nvim",
     --event = "VeryLazy",
     opts = require("plugin_configs.which-key")
-  }),
+  },
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -561,7 +561,7 @@ return {
   --"mfussenegger/nvim-dap",
   { 'jghauser/mkdir.nvim' },
 
-  ({
+  {
     "neoclide/coc.nvim",
     branch = "release",
     enabled = false,
@@ -570,7 +570,7 @@ return {
       require("plugin_configs.coc")
     end,
     event = "VeryLazy",
-  }),
+  },
 
 
   {
