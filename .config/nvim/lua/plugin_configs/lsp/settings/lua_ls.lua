@@ -19,8 +19,8 @@ return {
       local path = client.workspace_folders[1].name
       --print("Checking for config files in: " .. path)
 
-       hasLuarcJson = vim.loop.fs_stat(path .. '/.luarc.json') ~= nil
-       hasLuarcJsonc = vim.loop.fs_stat(path .. '/.luarc.jsonc') ~= nil
+       hasLuarcJson = (vim.uv or vim.loop).fs_stat(path .. '/.luarc.json') ~= nil
+       hasLuarcJsonc = (vim.uv or vim.loop).fs_stat(path .. '/.luarc.jsonc') ~= nil
     else
       print("No LuaLS workspace folders available.")
     end
@@ -46,3 +46,24 @@ return {
   end,
   settings = {},
 }
+
+
+
+
+
+
+-- example luar_jsconc
+--{
+--  "runtime.version": "LuaJIT",
+--  "runtime.path": [
+--    "lua/?.lua",
+--    "lua/?/init.lua"
+--  ],
+--  "diagnostics.globals": ["vim"],
+--  "workspace.checkThirdParty": false,
+--  "workspace.library": [
+--    "$VIMRUNTIME"
+--    //"${3rd}/luv/library"
+--    //"${3rd}/busted/library"
+--  ]
+--}

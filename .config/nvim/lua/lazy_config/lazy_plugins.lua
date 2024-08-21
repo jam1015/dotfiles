@@ -10,17 +10,17 @@ end
 return {
   {
     "folke/lazydev.nvim",
-    event = "VeryLazy",
-    ft = "lua", -- only load on lua files
-    opts = require("plugin_configs.lazydev_nvim")    --enabled = false
+    --event = "VeryLazy",
+    ft = "lua",                                   -- only load on lua files
+    opts = require("plugin_configs.lazydev_nvim") --enabled = false
 
   },
   { "Bilal2453/luvit-meta",        lazy = true }, -- optional `vim.uv` typings
   {
     "leath-dub/snipe.nvim",
-    keys = {
-      { "<leader>bb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu" }
-    },
+    config = function()
+      require("plugin_keymaps").snipe()
+    end,
     opts = require("plugin_configs.snipe_opts")
   },
   {

@@ -317,12 +317,12 @@ function M.telescope()
     { "<leader>ts", function() builtin.grep_string({ search = vim.fn.input("Grep for > ") }) end, mode = "n", desc = "Grep string" },
     { "<leader>tg", builtin.live_grep,                                                            mode = "n", desc = "Live grep" },
     { "<leader>tb", builtin.buffers,                                                              mode = "n", desc = "Buffers" },
-  }, {  silent = true })
+  }, { silent = true })
 
   -- Visual mode bindings using new format
   wk.add({
     { "<leader>ts", builtin.grep_string, desc = "Grep string", mode = "x" },
-  }, {  silent = true })
+  }, { silent = true })
 end
 
 function M.vim_rooter()
@@ -343,6 +343,10 @@ function M.gx()
   wk.add({
     { 'gx', "<cmd>Browse<cr>", desc = "Browse URL" },
   }, { mode = { 'n', 'x' }, silent = false })
+end
+
+function M.snipe()
+  wk.add({ "<leader>bb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu", mode = "n" })
 end
 
 return M

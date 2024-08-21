@@ -1,6 +1,6 @@
 return {
-  runtime = vim.env.VIMRUNTIME --[[@as string]],
-  library = {}, ---@type lazydev.Library.spec[]
+  runtime = vim.env.VIMRUNTIME, -- [[@as string]],
+  library = {},                 -- @type lazydev.Library.spec[]
   integrations = {
     -- Fixes lspconfig's workspace management for LuaLS
     -- Only create a new workspace if the buffer is not part

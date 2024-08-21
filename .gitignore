@@ -59,6 +59,8 @@ dotfiles
 irssi/irssi/config.autosave
 ruby/bundle/cache
 
+*.kate-swp
+
 # Emacs
 .emacs.d/network-security.data
 .emacs.d/.org-id-locations
