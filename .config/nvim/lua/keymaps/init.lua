@@ -30,7 +30,7 @@ keymap("t", "<C-o>", "<C-\\><C-o>", { remap = false, silent = true }) --issue si
 
 
 --keymap("i", "<C-r>", "<C-r><C-p>", opts) --helpw sith pasting from insert moode but messes with flit
-keymap("c", "<C-5>", "getcmdtype() == ':' ? expand('%:h').'/' : '%%'", { expr = true, remap = false })
+keymap("c", "<C-d>", "getcmdtype() == ':' ? expand('%:h').'/' : '%%'", { expr = true, remap = false })
 
 
 vim.cmd([[
