@@ -1,7 +1,34 @@
 require("plugin_keymaps").vim_slime()
-if vim.g.slime_target == "tmux" then
   vim.cmd([[
-  function! SlimeOverrideConfig()
+  ]])
+
+if vim.g.slime_target == "neovim" then
+  vim.cmd([[
+
+" delegation
+function! s:SlimeDispatchValidate(name, ...)
+  " using try catch because exists() doesn't detect autoload functions that aren't yet loaded
+  " the idea is to return the interger 1 for true in cases where a target doesn't have
+  " the called validation function implemented. E117 is 'Unknown function'.
+  try
+    return call ("s:SlimeDispatch", [a:name] + a:000)
+  catch /^Vim\%((\a\+)\)\=:E117:/
+    return 1
+  endtry
+endfunction
+
+function! s:SlimeDispatch(name, ...)
+  " allow custom override
+  let override_fn = "SlimeOverride" . slime#common#capitalize(a:name)
+  if exists("*" . override_fn)
+    return call(override_fn, a:000)
+  endif
+  return call("slime#targets#" . slime#config#resolve("target") . "#" . a:name, a:000)
+endfunction
+
+
+function! SlimeOverrideConfig()
+  if g:slime_target == "tmux"
     if !exists("b:slime_config")
       let b:slime_config = {"socket_name": "default", "target_pane": ""}
     endif
@@ -41,6 +68,30 @@ if vim.g.slime_target == "tmux" then
     if b:slime_config["target_pane"] =~ '\s\+'
       let b:slime_config["target_pane"] = split(b:slime_config["target_pane"])[0]
     endif
-  endfunction
+  endif
+
+
+  if g:slime_target == "neovim"
+    if exists("b:slime_config")
+      let old_config = b:slime_config
+    endif
+
+    call slime#targets#neovim#config()
+
+    if exists("b:slime_config") && !s:SlimeDispatchValidate("ValidConfig", b:slime_config, 0)
+      unlet b:slime_config
+      if exists("old_config")
+        echohl WarningMsg
+        echo "--Restoring previous config.--"
+        echohl None
+        let b:slime_config = old_config
+      endif
+    endif
+
+  endif
+
+
+
+endfunction
   ]])
 end

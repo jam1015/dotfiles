@@ -1,4 +1,4 @@
-vim.g.slime_menu_config = true
+vim.g.slime_menu_config = false
 if os.getenv("TMUX") then
   vim.g.slime_target = "tmux"
   vim.g.slime_no_mappings = true
@@ -27,5 +27,5 @@ else
   --	})
 end
 
-vim.g.slime_target = "tmux"
+vim.g.slime_target = "neovim"
 

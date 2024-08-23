@@ -27,16 +27,7 @@ local function get_chan_jobid()
 end
 
 local function get_chan_jobpid()
-  local out = vim.api.nvim_exec2([[
-      let pid_out = ""
-
-      try
-        let pid_out = string(jobpid(&channel))
-        " in case an external process kills the terminal's shell
-      catch /^Vim\%((\a\+)\)\=:E900/
-      endtry
-	]], { output = true })
-  return out["output"] --returns as string
+ return vim.api.nvim_eval('&channel > 0 ? jobpid(&channel) : ""' )
 end
 
 
