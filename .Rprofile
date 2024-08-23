@@ -13,7 +13,7 @@
 
 
 options(menu.graphics = FALSE)
-invisible(require(colorout))
+#invisible(require(colorout))
 options(
     browser = "firefox-developer-edition", tabSize = 4
 )

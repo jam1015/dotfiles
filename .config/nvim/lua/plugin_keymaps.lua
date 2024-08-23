@@ -344,9 +344,9 @@ function M.gx()
     { 'gx', "<cmd>Browse<cr>", desc = "Browse URL" },
   }, { mode = { 'n', 'x' }, silent = false })
 end
--- doesn't work, opened issue
---function M.snipe()
---  wk.add( { "<leader>bb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu", mode = "n" })
---end
+
+function M.snipe()
+  wk.add( { "<leader>bb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu", mode = "n" })
+end
 
 return M

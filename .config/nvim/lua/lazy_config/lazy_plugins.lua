@@ -18,10 +18,13 @@ return {
   { "Bilal2453/luvit-meta",        lazy = true }, -- optional `vim.uv` typings
   {
     "leath-dub/snipe.nvim",
-    keys = {
+    keys   = {
       { "<leader>bb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu" }
     },
-    opts = require("plugin_configs.snipe_opts")
+    config = function()
+      require("plugin_configs.snipe")
+      require("plugin_keymaps").snipe()
+    end
   },
   {
     -- does the same thing as YankRing
@@ -106,20 +109,14 @@ return {
     }
   },
   {
-
-    "jam1015/vim-slime",
-    --"jpalardy/vim-slime",
-    enabled = true,
-    --dir = "~/Documents/vim_plugins/slimes/vim-slime",
-    --branch = "track_channels", --"main",--
-    --event = "VeryLazy",
+    "jpalardy/vim-slime",
+    dir = "~/vim-slime",
     init = function()
       require("plugin_configs.vim-slime.initi")
     end,
 
     config = function()
-      require("plugin_keymaps").vim_slime()
-      --require("plugin_configs.vim-slime.config")
+      require("plugin_configs.vim-slime.config")
     end,
   },
   {
@@ -548,7 +545,7 @@ return {
   { 'windwp/nvim-ts-autotag',   enabled = true },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
-    enabled = true,
+    enabled = false,
     event = "VeryLazy",
     dependencies = "nvim-treesitter/nvim-treesitter",
     setup = function()
@@ -598,6 +595,7 @@ return {
 
   ({
     "yorik1984/newpaper.nvim",
+    enabled = false, --causes error, waiting for issue to be resolved
     priority = 1000,
     config = function()
       require("newpaper").setup({
@@ -732,22 +730,6 @@ return {
     ---@module "quicker"
     ---@type quicker.SetupOptions
     opts = {},
-  },
-  {
-    "jam1015/vim-slime",
-    --"jpalardy/vim-slime",
-    enabled = true,
-    --dir = "~/Documents/vim_plugins/slimes/vim-slime",
-    --branch = "track_channels", --"main",--
-    --event = "VeryLazy",
-    init = function()
-      require("plugin_configs.vim-slime.initi")
-    end,
-
-    config = function()
-      require("plugin_keymaps").vim_slime()
-      --require("plugin_configs.vim-slime.config")
-    end,
   },
   {
     "mbbill/undotree",

@@ -1,4 +1,4 @@
-return {
+require("snipe").setup( {
   ui = {
     max_width = -1, -- -1 means dynamic width
     -- Where to place the ui window
@@ -25,4 +25,4 @@ return {
     -- cancel the snipe and close the window.
     cancel_snipe = "<esc>",
   },
-}
+})
