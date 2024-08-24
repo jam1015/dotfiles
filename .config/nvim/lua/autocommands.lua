@@ -29,7 +29,7 @@ api.nvim_create_autocmd("SwapExists", {
 })
 
 -- to check if we want to reload the file
-vim.api.nvim_create_autocmd({ "BufEnter",  "FocusGained" }, {
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
   -- needed because checktieme doesn't work in command line window
   command = "if mode() != 'c' &&  expand('%') !=# '[Command Line]' | checktime | endif",
   pattern = { "*" },
@@ -48,7 +48,7 @@ vim.api.nvim_create_autocmd({ "FileChangedShellPost" },
 
 -- terminal related --------------------
 
-local term_autocmds = api.nvim_create_augroup("nvim_terminal", { clear = true })
+local my_term_autocmds = api.nvim_create_augroup("my_nvim_terminal", { clear = true })
 
 
 local function no_term_num()
@@ -63,7 +63,7 @@ end
 
 api.nvim_create_autocmd("TermOpen", {
   callback = no_term_num,
-  group = term_autocmds,
+  group = my_term_autocmds,
 })
 
 
@@ -78,29 +78,32 @@ end
 
 api.nvim_create_autocmd("TermOpen", {
   callback = enterternmode,
-  group = term_autocmds,
+  group = my_term_autocmds,
 })
 
-vim.api.nvim_create_autocmd({ 'TermClose' }, {
-  group = term_autocmds,
-  desc = 'Automatically close terminal buffers when started with no arguments and exiting without an error',
-  callback = function(args)
-    if vim.v.event.status == 0 then
-      local info = vim.api.nvim_get_chan_info(vim.bo[args.buf].channel)
-      local argv = info.argv or {}
-      if #argv == 1 and argv[1] == vim.o.shell then
-        vim.cmd({ cmd = 'Bdelete', args = { args.buf }, bang = true })
+if vim.version.lt(vim.version(), vim.version.parse('0.10.0')) then
+  vim.cmd([[colorscheme blue]])
+  vim.api.nvim_create_autocmd({ 'TermClose' }, {
+    group = my_term_autocmds,
+    desc = 'Automatically close terminal buffers when started with no arguments and exiting without an error',
+    callback = function(args)
+      if vim.v.event.status == 0 then
+        local info = vim.api.nvim_get_chan_info(vim.bo[args.buf].channel)
+        local argv = info.argv or {}
+        if #argv == 1 and argv[1] == vim.o.shell then
+          vim.cmd({ cmd = 'Bdelete', args = { args.buf }, bang = true })
+        end
       end
-    end
-  end,
-})
+    end,
+  })
+end
 
 -- Create or clear an autocmd group for this purpose
 
 
 ---- Create the TermOpen autocmd
 --vim.api.nvim_create_autocmd("TermOpen", {
---	group = term_autocmds,
+--	group = my_term_autocmds,
 --  desc = "normal mode command to close terminal",
 --	-- No pattern is needed; TermOpen inherently targets terminal buffers
 --	callback = function(args)
@@ -120,7 +123,7 @@ vim.api.nvim_create_autocmd({ 'TermClose' }, {
 --
 --	--command = "if !v:event.status && len(getbufline(expand('<abuf>'), 1, '$')) == 0 | exe 'bdelete! '..expand('<abuf>') | endif",
 --	--command = "if !v:event.status | exe 'Bdelete!' | endif",
---	group = term_autocmds
+--	group = my_term_autocmds
 --})
 
 -- showcmd related ----------------
