@@ -18,7 +18,7 @@ end
 -- add complete/completeopt
 set.modeline = false
 set.completeopt = 'menu,menuone,noselect'
-set.shortmess = "IFw"
+set.shortmess = "Fw"
 set.hlsearch = true
 set.mouse = "a"
 set.undofile = true --persistent undo
