@@ -18,9 +18,7 @@ return {
   { "Bilal2453/luvit-meta",        lazy = true }, -- optional `vim.uv` typings
   {
     "leath-dub/snipe.nvim",
-    keys   = {
-      { "<leader>bb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu" }
-    },
+    enabled = false,
     config = function()
       require("plugin_configs.snipe")
       require("plugin_keymaps").snipe()
@@ -172,7 +170,7 @@ return {
 
   { 'sainnhe/everforest', event = "VeryLazy" },
   { 'rose-pine/neovim',   name = "rose-pine" },
-  ({
+  {
     "folke/tokyonight.nvim",
     priority = 1000,
     branch = "main",
@@ -181,16 +179,16 @@ return {
     end,
     --
     --event = "VeryLazy"
-  }),
-  ({
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     --event = "VeryLazy",
     enabled = true,
     config = function()
       require("plugin_configs.nvim-treesitter")
     end,
-  }),
-  ({
+  },
+  {
     "hrsh7th/nvim-cmp",
     cond = function() --also done vi autocmd in the cmp config
       return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
@@ -221,7 +219,7 @@ return {
     config = function()
       require("plugin_configs.nvim-cmp")
     end,
-  }),
+  },
   {
     "Rentib/cliff.nvim",
     keys = {
