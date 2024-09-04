@@ -28,6 +28,7 @@ Session.vim
 .local/share/nvim
 .nvim.shada
 .tmux/plugins/*
+.vim/pack/minpac
 .config/gh/*
 .nvim_chris
 .nvim_rayx
