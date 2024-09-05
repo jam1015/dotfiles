@@ -48,7 +48,7 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 exec --no-startup-id xinput set-prop "PIXA3854:00 093A:0274 Touchpad" "libinput Natural Scrolling Enabled" 1
-exec --no-startup-id xinput set-prop "PIXA3854:00 093A:0274 Touchpad" "libinput Scrolling Pixel Distance" -15 15
+exec --no-startup-id xinput set-prop "PIXA3854:00 093A:0274 Touchpad" "libinput Scrolling Pixel Distance" -1 1
 
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
