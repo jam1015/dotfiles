@@ -314,7 +314,7 @@ function M.telescope()
     { "<leader>fh", builtin.help_tags,                                                            mode = "n", desc = "Help tags" },
     { "<leader>th", function() builtin.find_files({ hidden = true }) end,                         mode = "n", desc = "Find hidden files" },
     { "<leader>tf", function() builtin.find_files({ hidden = false }) end,                        mode = "n", desc = "Find files (no hidden)" },
-    { "<leader>ts", function() builtin.grep_string({ search = vim.fn.input("Grep for > ") }) end, mode = "n", desc = "Grep string" },
+    { "<leader>ts", function() builtin.grep_string({  }) end, mode = "n", desc = "Grep string" },
     { "<leader>tg", builtin.live_grep,                                                            mode = "n", desc = "Live grep" },
     { "<leader>tb", builtin.buffers,                                                              mode = "n", desc = "Buffers" },
   }, { silent = true })
