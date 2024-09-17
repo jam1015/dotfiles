@@ -272,22 +272,22 @@ end
 
 function M.flash()
   wk.add({
-    { "<leader>f",  name = "files-flash" },
-    { "<leader>ft", "<cmd>lua require('flash').treesitter()<cr>",        desc = "Flash TreeSitter" },
-    { "<leader>fr", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSitter Search" },
+    { "<leader>x",  name = "files-flash" },
+    { "<leader>xt", "<cmd>lua require('flash').treesitter()<cr>",        desc = "Flash TreeSitter" },
+    { "<leader>xr", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSitter Search" },
   }, { mode = "n", silent = true })
 
   wk.add({
-    { "<leader>f",  name = "files-flash" },
-    { "<leader>ft", "<cmd><C-U>lua require('flash').treesitter()<cr>",   desc = "Flash TreeSitter" },
-    { "<leader>fR", "<cmd>lua require('flash').remote()<cr>",            desc = "Flash TreeSister Search" },
-    { "<leader>fr", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSister Search" },
+    { "<leader>x",  name = "files-flash" },
+    { "<leader>xt", "<cmd><C-U>lua require('flash').treesitter()<cr>",   desc = "Flash TreeSitter" },
+    { "<leader>xR", "<cmd>lua require('flash').remote()<cr>",            desc = "Flash Remote" },
+    { "<leader>xr", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSister Search" },
   }, { mode = "o", silent = true }) -- 'o' for operator-pending mode
 
   wk.add({
-    { "<leader>f",  name = "files-flash" },
-    { "<leader>ft", "<cmd>lua require('flash').treesitter()<cr>",        desc = "Flash TreeSister" },
-    { "<leader>fr", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSister Search" },
+    { "<leader>x",  name = "files-flash" },
+    { "<leader>xt", "<cmd>lua require('flash').treesitter()<cr>",        desc = "Flash TreeSister" },
+    { "<leader>xr", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSister Search" },
   }, { mode = "x", silent = true }) -- 'x' for visual mode
 end
 
