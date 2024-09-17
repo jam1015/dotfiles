@@ -593,7 +593,6 @@ return {
 
   ({
     "yorik1984/newpaper.nvim",
-    enabled = false, --causes error, waiting for issue to be resolved
     priority = 1000,
     config = function()
       require("newpaper").setup({
