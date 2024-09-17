@@ -62,7 +62,7 @@ endif
 
 
 	" motion based on visual lines
-	let g:toggle_mappings = 1
+	let g:toggle_mappings = 0
 
 	function! ToggleMappings()
 	let g:toggle_mappings = !g:toggle_mappings
