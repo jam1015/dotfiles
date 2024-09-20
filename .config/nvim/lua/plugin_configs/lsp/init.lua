@@ -9,7 +9,7 @@ if not lspconfig_status_ok then
 	return
 end
 
-local servers = { "tsserver", "vimls", "clangd", "pyright", "jsonls", "cssls", "eslint",
+local servers = { "ts_ls", "vimls", "clangd", "pyright", "jsonls", "cssls", "eslint",
 	"emmet_ls", "texlab", "html", "bashls",
 	"lua_ls",
 	"julials" }

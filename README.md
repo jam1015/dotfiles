@@ -1,6 +1,6 @@
 # Dotfiles: Master
 Dotfiles compatible across all my systems.
-Hooks controlled in a [separate repo](https://www.github.com/jam1015/dots_hooks)
+Hooks controlled in a [separate repo](https://www.github.com/jam1015/dots_hooks)  Clone that and run the setup script.
 Hopefully this also works on Nix.
 
 
@@ -52,3 +52,7 @@ Verify that paru is installed correctly:
 
 You have now successfully removed yay and installed paru as your AUR
 helper.
+
+# Install NodeJS
+
+ `sudo pacman -S nodejs`
