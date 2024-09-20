@@ -8,7 +8,10 @@ runtime config/directionalhelp.vim
 "
 "
 "git clone https://github.com/k-takata/minpac.git  ~/.vim/pack/minpac/opt/minpac
+"but that is added as a submodule
+
 "curl -fLo ~/.vim/autoload/plugpac.vim --create-dirs   https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim
+"this is directly in my git files
 
 call plugpac#Begin()
 

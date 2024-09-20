@@ -14,3 +14,41 @@ Hopefully this also works on Nix.
 
  Found [here](https://github.com/jam1015/other_config)
 
+# How to Remove yay and Install paru
+
+## Step 1: Remove yay
+
+First, remove yay using pacman:
+
+`sudo pacman -Rns yay`
+
+## Step 2: Install Git
+
+If you don\'t have Git installed, install it:
+
+`sudo pacman -S git`
+
+## Step 3: Clone paru repository
+
+Clone the paru repository from GitHub:
+
+`git clone https://aur.archlinux.org/paru.git`
+
+## Step 4: Navigate to paru directory
+
+`cd paru`
+
+## Step 5: Build and install paru
+
+Build and install paru using makepkg:
+
+`makepkg -si`
+
+## Step 6: Verify installation
+
+Verify that paru is installed correctly:
+
+`paru --version`
+
+You have now successfully removed yay and installed paru as your AUR
+helper.
