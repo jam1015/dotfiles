@@ -20,7 +20,7 @@ return {
     --   end,
     mode = "exact",
     -- behave like `incsearch`
-    incremental = false,
+    incremental = true,
     -- Excluded filetypes and custom window filters
     ---@type (string|fun(win:window))[]
     exclude = {

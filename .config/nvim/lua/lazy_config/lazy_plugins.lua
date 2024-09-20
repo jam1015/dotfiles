@@ -46,7 +46,7 @@ return {
   {
 
     "ggandor/flit.nvim",
-    enabled = true,
+    enabled = false,
 
     event = "VeryLazy",
 
@@ -57,8 +57,9 @@ return {
   },
 
   {
+    -- using leap instead
     "ggandor/leap.nvim",
-    enabled = true,
+    enabled = false,
     event = "VeryLazy",
     --commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
     config = function()

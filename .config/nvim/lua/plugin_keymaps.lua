@@ -271,6 +271,9 @@ function M.flash_keys()
 end
 
 function M.flash()
+  wk.add({{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" }}
+  )
   wk.add({
     { "<leader>x",  name = "files-flash" },
     { "<leader>xt", "<cmd>lua require('flash').treesitter()<cr>",        desc = "Flash TreeSitter" },
@@ -280,8 +283,8 @@ function M.flash()
   wk.add({
     { "<leader>x",  name = "files-flash" },
     { "<leader>xt", "<cmd><C-U>lua require('flash').treesitter()<cr>",   desc = "Flash TreeSitter" },
-    { "<leader>xR", "<cmd>lua require('flash').remote()<cr>",            desc = "Flash Remote" },
-    { "<leader>xr", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSister Search" },
+    --{ "<leader>xr", "<cmd>lua require('flash').remote()<cr>",            desc = "Flash Remote" },
+    { "<leader>xq", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSister Search" },
   }, { mode = "o", silent = true }) -- 'o' for operator-pending mode
 
   wk.add({
