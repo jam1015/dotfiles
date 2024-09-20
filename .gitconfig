@@ -8,3 +8,6 @@
 [submodule]
 	recurse = true
 	recurser = true
+[rebase]
+	updateRefs = true
+	autosquash = true
