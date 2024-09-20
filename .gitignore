@@ -56,7 +56,6 @@ dotfiles
 .zsh_history
 .bash_history
 .gitconfig.local
-.gitconfig
 irssi/irssi/config.autosave
 ruby/bundle/cache
 

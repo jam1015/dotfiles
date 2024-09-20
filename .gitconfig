@@ -1,0 +1,10 @@
+[user]
+	email = jordan.mandel@live.com
+	name = Jordan Mandel
+[diff]
+	submodule = log
+[status]
+	submodulesummary = 1
+[submodule]
+	recurse = true
+	recurser = true
