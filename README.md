@@ -1,7 +1,17 @@
 # Dotfiles: Master
 Dotfiles compatible across all my systems.
-Hooks controlled in a [separate repo](https://www.github.com/jam1015/dots_hooks)  Clone that and run the setup script.
-Hopefully this also works on Nix.
+Hooks for version control are  in a [separate repo](https://www.github.com/jam1015/dots_hooks).  Clone that and run the setup script.
+
+# set up ssh
+
+```bash
+        ssh-keygen -t ed25519 -C "jordan.mandel@live.com"
+        #ssh-keygen -t rsa -b 4096 -C "jordan.mandel@live.com"
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_ed25519
+        # if xclip is installed
+        xclip -selection clipboard < ~/.ssh/id_ed25519.pub
+```
 
 
 # Things to do on install:
@@ -16,33 +26,14 @@ Hopefully this also works on Nix.
 
 # How to Remove yay and Install paru
 
-## Step 1: Remove yay
 
-First, remove yay using pacman:
-
-`sudo pacman -Rns yay`
-
-## Step 2: Install Git
-
-If you don\'t have Git installed, install it:
-
-`sudo pacman -S git`
-
-## Step 3: Clone paru repository
-
-Clone the paru repository from GitHub:
-
-`git clone https://aur.archlinux.org/paru.git`
-
-## Step 4: Navigate to paru directory
-
-`cd paru`
-
-## Step 5: Build and install paru
-
-Build and install paru using makepkg:
-
-`makepkg -si`
+```bash
+sudo pacman -Rns yay
+sudo pacman -S git
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+```
 
 ## Step 6: Verify installation
 
