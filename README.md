@@ -2,6 +2,10 @@
 Dotfiles compatible across all my systems.
 Hooks for version control are  in a [separate repo](https://www.github.com/jam1015/dots_hooks).  Clone that and run the setup script.
 
+# submodules
+
+Include `--recurse submodules` or run `git submodule init` followed by `git submodule update --recursive`.
+
 # set up ssh
 
 ```bash
@@ -19,10 +23,6 @@ Hooks for version control are  in a [separate repo](https://www.github.com/jam10
 - Install `zsh`
 - chsh to `zsh`
 
-# Install other config
-
-
- Found [here](https://github.com/jam1015/other_config)
 
 # How to Remove yay and Install paru
 
