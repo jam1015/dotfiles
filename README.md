@@ -35,15 +35,20 @@ cd paru
 makepkg -si
 ```
 
-## Step 6: Verify installation
-
-Verify that paru is installed correctly:
-
-`paru --version`
-
-You have now successfully removed yay and installed paru as your AUR
-helper.
 
 # Install NodeJS
 
  `sudo pacman -S nodejs npm`
+
+
+# update grub
+
+`GRUB_CMDLINE_LINUX="systemd.unit=multi-user.target"`
+
+
+## BIOS Systems
+`sudo grub-mkconfig -o /boot/grub/grub.cfg`
+
+## UEFI Systems
+
+`sudo grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg`
