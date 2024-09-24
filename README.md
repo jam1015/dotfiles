@@ -55,11 +55,12 @@ makepkg -si
 
 `sudo grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg`
 
-# Install Macbook Camera Drivers if Necessary
+# My preferred global Git config is included
 
-`paru -S facetimehd-firmware facetimehd-dkms`
+Might also include:
 
-# Install `i3-back`
+```
+git config --local submodule.recurse false
+```
 
-`paru -S i3-back-bin`
-`paru -S blueman bluez pasystray`
+in this repo.
