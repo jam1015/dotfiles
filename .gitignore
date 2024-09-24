@@ -171,3 +171,5 @@ dist/
 flycheck_*.el
 /server/
 .projectile
+
+.config/font-manager/Sources.xml
