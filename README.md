@@ -58,3 +58,7 @@ makepkg -si
 # Install Macbook Camera Drivers if Necessary
 
 `paru -S facetimehd-firmware facetimehd-dkms`
+
+# Install `i3-back`
+
+ `paru -S i3-back-bin`
