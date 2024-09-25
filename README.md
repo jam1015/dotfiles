@@ -61,4 +61,5 @@ makepkg -si
 
 # Install `i3-back`
 
- `paru -S i3-back-bin`
+`paru -S i3-back-bin`
+`paru -S blueman bluez pasystray`
