@@ -1,8 +1,9 @@
 # Dotfiles: Master
+
 Dotfiles compatible across all my systems.
 Hooks for version control are  in a [separate repo](https://www.github.com/jam1015/dots_hooks).  Clone that and run the setup script.
 
-# submodules
+# Submodules
 
 Include `--recurse submodules` or run `git submodule init` followed by `git submodule update --recursive`.
 
@@ -47,8 +48,13 @@ makepkg -si
 
 
 ## BIOS Systems
+
 `sudo grub-mkconfig -o /boot/grub/grub.cfg`
 
 ## UEFI Systems
 
 `sudo grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg`
+
+# Install Macbook Camera Drivers if Necessary
+
+`paru -S facetimehd-firmware facetimehd-dkms`
