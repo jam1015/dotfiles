@@ -66,7 +66,6 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
  #sudo pacman -S pavucontrol
  #1453  paru -S nm-applet blueman-applet paysystray
 exec --no-startup-id blueman-applet
-exec --no-startup-id pasystray
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift-gtk -l 40.44:-79.99 -t 6500:2000
 
