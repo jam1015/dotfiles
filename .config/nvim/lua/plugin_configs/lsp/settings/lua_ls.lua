@@ -11,9 +11,9 @@ return {
     local hasLuarcJson = false
     local hasLuarcJsonc = false
     if client.workspace_folders and #client.workspace_folders > 0 then
-      for i, folder in ipairs(client.workspace_folders) do
+      for _, folder in ipairs(client.workspace_folders) do
         if folder and folder.name and folder.uri then
-          print("LuaLS Workspace folder " .. i .. ": " .. folder.name .. ", URI: " .. folder.uri)
+          print("LuaLS URI: " .. folder.uri)
         end
       end
       local path = client.workspace_folders[1].name
