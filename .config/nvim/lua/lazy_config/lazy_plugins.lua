@@ -25,25 +25,6 @@ return {
     end
   },
   {
-    -- does the same thing as YankRing
-    'maxbrunsfeld/vim-yankstack',
-    --event = "VeryLazy",
-    --dir = "~/Documents/vim-yankstack",
-
-    enabled = true,
-
-    --		enabled = function()
-    --			return os.getenv("DISPLAY")
-    --		end,
-
-    init = function()
-      require("plugin_configs.vim-yankstack.initi")
-    end,
-    config = function()
-      require("plugin_configs.vim-yankstack.config")
-    end
-  },
-  {
 
     "ggandor/flit.nvim",
     enabled = false,
@@ -678,25 +659,6 @@ return {
 
   { "svban/YankAssassin.vim", enabled = true },
 
-  {
-    -- does the same thing as YankRing
-    'maxbrunsfeld/vim-yankstack',
-    --event = "VeryLazy",
-    --dir = "~/Documents/vim-yankstack",
-
-    enabled = true,
-
-    --		enabled = function()
-    --			return os.getenv("DISPLAY")
-    --		end,
-
-    init = function()
-      require("plugin_configs.vim-yankstack.initi")
-    end,
-    config = function()
-      require("plugin_configs.vim-yankstack.config")
-    end
-  },
 
   {
     "gbprod/substitute.nvim",
