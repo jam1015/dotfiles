@@ -1,6 +1,6 @@
 require("bufjump").setup({
-  forward = nil,
-  backward = nil,
+  forward = false,
+  backward = false,
   on_success = nil
 })
 

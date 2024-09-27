@@ -9,6 +9,20 @@ end
 
 return {
   {
+    "folke/which-key.nvim",
+    --event = "VeryLazy",
+    opts = require("plugin_configs.which-key")
+  },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = require("plugin_configs.flash"),
+    config = function()
+      require("plugin_keymaps").flash()
+    end
+
+  },
+  {
     "folke/lazydev.nvim",
     --event = "VeryLazy",
     ft = "lua",                                   -- only load on lua files
@@ -129,20 +143,6 @@ return {
     config = function()
       require("plugin_keymaps").vim_create_goto()
     end
-  },
-  {
-    "folke/which-key.nvim",
-    --event = "VeryLazy",
-    opts = require("plugin_configs.which-key")
-  },
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    opts = require("plugin_configs.flash"),
-    config = function()
-      require("plugin_keymaps").flash()
-    end
-
   },
   {
     "gbprod/yanky.nvim",
