@@ -41,6 +41,12 @@ makepkg -si
 
  `sudo pacman -S nodejs npm`
 
+# Font cache
+
+`paru -S ttf-cm-unicoe`
+
+
+`fc-cache -r`
 
 # update grub
 
