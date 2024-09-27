@@ -25,18 +25,13 @@ return {
     end
   },
   {
-
     "ggandor/flit.nvim",
     enabled = false,
-
     event = "VeryLazy",
-
     --commit = "f60e4b3d49bb5a5e97cfffe66f2e671eb422078e",
     config = function() require("plugin_configs.flit") end,
     dependencies = { { 'tpope/vim-repeat' }, { 'ggandor/leap.nvim' } }
-
   },
-
   {
     -- using leap instead
     "ggandor/leap.nvim",
@@ -149,7 +144,17 @@ return {
     end
 
   },
-
+  {
+    "gbprod/yanky.nvim",
+    enabled = false,
+    dependencies = {
+      { "kkharji/sqlite.lua" }
+    },
+    config = function()
+      require("plugin_keymaps").yanky()
+      require("plugin_configs.yanky")
+    end
+  },
   { 'sainnhe/everforest', event = "VeryLazy" },
   { 'rose-pine/neovim',   name = "rose-pine" },
   {
@@ -568,12 +573,7 @@ return {
   }),
 
 
-  { "svban/YankAssassin.vim", enabled = true },
-
-
-
-
-  ({
+  {
     "yorik1984/newpaper.nvim",
     priority = 1000,
     config = function()
@@ -581,7 +581,7 @@ return {
         style = "light"
       })
     end
-  }),
+  },
 
 
 
@@ -736,15 +736,6 @@ return {
       require("plugin_keymaps").nvim_window()
       return true
     end,
-  },
-  {
-
-    'jam1015/buf_hint_nvim',
-    dir = "~/Documents/vim_plugins/buf_hint_nvim",
-    config = function()
-      --require("buf_hint_nvim").setup()
-    end
-
   },
   {
 

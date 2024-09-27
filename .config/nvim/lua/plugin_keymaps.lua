@@ -30,6 +30,29 @@ function M.pluginKeymaps(plugin, setup_type)
   end
 end
 
+function M.yanky()
+  wk.add({
+    { "<leader>pp", function() require("telescope").extensions.yank_history.yank_history({}) end, desc = "Open Yank History" },
+    { "y",         "<Plug>(YankyYank)",                                                          mode = { "n", "x" },                                desc = "Yank text" },
+    { "p",         "<Plug>(YankyPutAfter)",                                                      mode = { "n", "x" },                                desc = "Put yanked text after cursor" },
+    { "P",         "<Plug>(YankyPutBefore)",                                                     mode = { "n", "x" },                                desc = "Put yanked text before cursor" },
+    { "gp",        "<Plug>(YankyGPutAfter)",                                                     mode = { "n", "x" },                                desc = "Put yanked text after selection" },
+    { "gP",        "<Plug>(YankyGPutBefore)",                                                    mode = { "n", "x" },                                desc = "Put yanked text before selection" },
+    { "<c-p>",     "<Plug>(YankyPreviousEntry)",                                                 desc = "Select previous entry through yank history" },
+    { "<c-n>",     "<Plug>(YankyNextEntry)",                                                     desc = "Select next entry through yank history" },
+    --{ "]p",        "<Plug>(YankyPutIndentAfterLinewise)",                                        desc = "Put indented after cursor (linewise)" },
+    --{ "[p",        "<Plug>(YankyPutIndentBeforeLinewise)",                                       desc = "Put indented before cursor (linewise)" },
+    --{ "]P",        "<Plug>(YankyPutIndentAfterLinewise)",                                        desc = "Put indented after cursor (linewise)" },
+    --{ "[P",        "<Plug>(YankyPutIndentBeforeLinewise)",                                       desc = "Put indented before cursor (linewise)" },
+    --{ ">p",        "<Plug>(YankyPutIndentAfterShiftRight)",                                      desc = "Put and indent right" },
+    --{ "<p",        "<Plug>(YankyPutIndentAfterShiftLeft)",                                       desc = "Put and indent left" },
+    --{ ">P",        "<Plug>(YankyPutIndentBeforeShiftRight)",                                     desc = "Put before and indent right" },
+    --{ "<P",        "<Plug>(YankyPutIndentBeforeShiftLeft)",                                      desc = "Put before and indent left" },
+    --{ "=p",        "<Plug>(YankyPutAfterFilter)",                                                desc = "Put after applying a filter" },
+    --{ "=P",        "<Plug>(YankyPutBeforeFilter)",                                               desc = "Put before applying a filter" },
+  }, { mode = "n", silent = true })
+end
+
 function M.vim_yankstack()
   wk.add({
     { "<C-p>", "<Plug>yankstack_substitute_older_paste", desc = "Yankstack substitute older paste" },
@@ -271,8 +294,8 @@ function M.flash_keys()
 end
 
 function M.flash()
-  wk.add({{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" }}
+  wk.add({ { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+    { "r", mode = "o",               function() require("flash").remote() end, desc = "Remote Flash" } }
   )
   wk.add({
     { "<leader>x",  name = "files-flash" },
@@ -312,14 +335,14 @@ end
 function M.telescope()
   local builtin = require('telescope.builtin')
   wk.add({
-    { "<leader>fg", builtin.live_grep,                                                            mode = "n", desc = "Live grep" },
-    { "<leader>bb", builtin.buffers,                                                              mode = "n", desc = "List buffers" },
-    { "<leader>fh", builtin.help_tags,                                                            mode = "n", desc = "Help tags" },
-    { "<leader>th", function() builtin.find_files({ hidden = true }) end,                         mode = "n", desc = "Find hidden files" },
-    { "<leader>tf", function() builtin.find_files({ hidden = false }) end,                        mode = "n", desc = "Find files (no hidden)" },
-    { "<leader>ts", function() builtin.grep_string({  }) end, mode = "n", desc = "Grep string" },
-    { "<leader>tg", builtin.live_grep,                                                            mode = "n", desc = "Live grep" },
-    { "<leader>tb", builtin.buffers,                                                              mode = "n", desc = "Buffers" },
+    { "<leader>fg", builtin.live_grep,                                     mode = "n", desc = "Live grep" },
+    { "<leader>bb", builtin.buffers,                                       mode = "n", desc = "List buffers" },
+    { "<leader>fh", builtin.help_tags,                                     mode = "n", desc = "Help tags" },
+    { "<leader>th", function() builtin.find_files({ hidden = true }) end,  mode = "n", desc = "Find hidden files" },
+    { "<leader>tf", function() builtin.find_files({ hidden = false }) end, mode = "n", desc = "Find files (no hidden)" },
+    { "<leader>ts", function() builtin.grep_string({}) end,                mode = "n", desc = "Grep string" },
+    { "<leader>tg", builtin.live_grep,                                     mode = "n", desc = "Live grep" },
+    { "<leader>tb", builtin.buffers,                                       mode = "n", desc = "Buffers" },
   }, { silent = true })
 
   -- Visual mode bindings using new format
@@ -349,7 +372,7 @@ function M.gx()
 end
 
 function M.snipe()
-  wk.add( { "<leader>bb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu", mode = "n" })
+  wk.add({ "<leader>bb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu", mode = "n" })
 end
 
 return M
