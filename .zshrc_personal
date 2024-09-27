@@ -1,6 +1,7 @@
 # dummy comment 1
 #to install ohmyzsh
 #sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+autoload -Uz compinit && compinit -i
 export PATH="$PATH:/Users/jordanmandel/.local/bin"
 export PATH="$PATH:/Users/jordanmandel/bin"
 
@@ -12,6 +13,7 @@ alias vi='nvim'
 alias vin='nvim --cmd "let g:flatten_allow_nesting = v:true"'
 
 alias van="man -P 'nvim -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'" 
+compdef van=man
 export MANPAGER='nvim --clean -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'
 alias ptpython='ptpython --vi --dark-bg'
 alias python='python'
@@ -130,7 +132,6 @@ glog () {
 
 
 # Enable git completion for the 'glog' function
-autoload -Uz compinit && compinit -i
 compdef glog=git
 
 
