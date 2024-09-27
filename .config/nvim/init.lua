@@ -1,17 +1,8 @@
---                                         ____    
---                        ,--,           ,'  , `.  
---      ,---,           ,--.'|        ,-+-,.' _ |  
---  ,-+-. /  |     .---.|  |,      ,-+-. ;   , ||  
--- ,--.'|'   |   /.  ./|`--'_     ,--.'|'   |  ||  
---|   |  ,"' | .-' . ' |,' ,'|   |   |  ,', |  |,  
---|   | /  | |/___/ \: |'  | |   |   | /  | |--'   
---|   | |  | |.   \  ' .|  | :   |   : |  | ,      
---|   | |  |/  \   \   ''  : |__ |   : |  |/   ___ 
---|   | |--'    \   \   |  | '.'||   | |`-' .'  .`|
---|   |/         \   \ |;  :    ;|   ;/  .'  .'   :
---'---'           '---" |  ,   / '---',---, '   .' 
---                       ---`-'       ;   |  .'    
---                                    `---'
+--                                      _
+--  _        ()_         __  _   _    ,'_7() _
+-- / \/7/7/7/7/ \'\    ,',','o| / \/7/_7 /7,'o|
+--/_n_/ |,'///_nn_/____\_\ |_,'/_n_///  // |_,'
+--                /___/                    _//
 require('autocommands') -- ~/.config/nvim/lua/autocommands.lua
 require('keymaps')      -- ~/.config/nvim/lua/keymaps/init.lua
 require('lazy_config')  -- ~/.config/nvim/lua/lazy_config/lazy_plugins.lua
@@ -55,7 +46,7 @@ require('keymaps.post') -- ~/.config/nvim/lua/keymaps/post.lua
 --  --    end
 --  --  },
 --  --  {
---  --    "folke/lazydev.nvim", 
+--  --    "folke/lazydev.nvim",
 --  --    ft = "lua",
 --  --    opts = {
 --  --    --  library = {
