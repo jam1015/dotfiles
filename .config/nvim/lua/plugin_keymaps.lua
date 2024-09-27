@@ -53,12 +53,6 @@ function M.yanky()
   }, { mode = "n", silent = true })
 end
 
-function M.vim_yankstack()
-  wk.add({
-    { "<C-p>", "<Plug>yankstack_substitute_older_paste", desc = "Yankstack substitute older paste" },
-    { "<C-n>", "<Plug>yankstack_substitute_newer_paste", desc = "Yankstack substitute newer paste" },
-  }, { mode = "n", silent = true })
-end
 
 function M.emmet_vim(setup_type)
   if setup_type == "config" then
@@ -107,7 +101,51 @@ function M.leap_ast()
   }, { mode = { "n", "o", "x" }, silent = true }) -- Registering for normal, operator-pending, and visual modes
 end
 
-function M.vim_unimpaired()
+function M.unimpaired()
+ vim.cmd([[
+					function! s:ArgNext(...)
+						try
+							let l:files = ""
+							for file in a:000
+								let l:files .= file .. " "
+							endfor
+							execute "next" l:files
+							args
+						catch /^Vim\%((\a\+)\)\=:E163:/
+							first
+							args
+						catch /^Vim\%((\a\+)\)\=:E165:/
+							first
+							args
+						finally
+						endtry
+					endfunction
+					
+					function! s:ArgPrev(...)
+						try
+							previous
+							args
+						catch /^Vim\%((\a\+)\)\=:E163:/
+							last
+							args
+						catch /^Vim\%((\a\+)\)\=:E164:/
+							last
+							args
+						finally
+						endtry
+					endfunction
+					
+					command -nargs=* Anext call <SID>ArgNext(<f-args>)
+					command Aprev call <SID>ArgPrev(<f-args>)
+					
+					
+					cnoreabbrev <expr> next  getcmdtype() == ":" && getcmdline() == "next" ? "Anext" : "next"
+					cnoreabbrev <expr> n  getcmdtype() == ":" && getcmdline() == "n" ? "Anext" : "n"
+					cnoreabbrev <expr> prev  getcmdtype() == ":" && getcmdline() == "prev" ? "Aprev" : "prev"
+					cnoreabbrev <expr> previous  getcmdtype() == ":" && getcmdline() == "prevous" ? "Aprev" : "previous"
+			]])
+
+
   wk.add({
     { "]a", "<Cmd>Anext<cr>", desc = "Arg Next" },
     { "[a", "<Cmd>Aprev<cr>", desc = "Arg Prev" },

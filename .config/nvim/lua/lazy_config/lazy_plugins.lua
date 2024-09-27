@@ -146,7 +146,6 @@ return {
   },
   {
     "gbprod/yanky.nvim",
-    enabled = false,
     dependencies = {
       { "kkharji/sqlite.lua" }
     },
@@ -389,7 +388,7 @@ return {
     "tpope/vim-unimpaired",
     event = "VeryLazy",
     config = function()
-      require("plugin_keymaps").vim_unimpaired()
+      require("plugin_keymaps").unimpaired()
     end,
   },
 
@@ -657,7 +656,6 @@ return {
   { 'jghauser/mkdir.nvim' },
 
 
-  { "svban/YankAssassin.vim", enabled = true },
 
 
   {
