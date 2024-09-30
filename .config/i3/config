@@ -228,7 +228,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/endeavour_untouched/scripts/powermenu
 #bindsym $alt+Ctrl+l exec --no-startup-id ~/.config/i3/endeavour_untouched/scripts/blur-lock
-bindsym $alt+Ctrl+l exec --no-startup-id i3lock -c 000000 ~/.config/i3/endeavour_untouched/scripts/blur-lock
+bindsym $alt+Ctrl+l exec --no-startup-id ~/.config/i3/lock_script
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
