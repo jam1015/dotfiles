@@ -3,9 +3,9 @@
 PICTURE=/tmp/i3lock.png
 SCREENSHOT="scrot -z $PICTURE"
 
-BLUR="50x50"
+BLUR="0x10"
 
 $SCREENSHOT
-magick $PICTURE -blur $BLUR $PICTURE
+magick $PICTURE -gaussian-blur $BLUR $PICTURE
 i3lock -i $PICTURE
 rm $PICTURE
