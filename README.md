@@ -76,3 +76,9 @@ in this repo.
 ```
 paru -S blueman bluez pasystray redshift
 ```
+
+# Install xsel and xclip
+
+```
+paru -S xsel xclip
+```
