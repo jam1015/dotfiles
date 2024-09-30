@@ -70,3 +70,9 @@ git config --local submodule.recurse false
 ```
 
 in this repo.
+
+# Install Control Programs
+
+```
+paru -S blueman bluez pasystray redshift
+```
