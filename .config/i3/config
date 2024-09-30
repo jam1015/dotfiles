@@ -13,47 +13,47 @@ exec --no-startup-id picom --vsync
 set $mod Mod4
 set $alt Mod1
 
-# Start the daemon which listens to focus changes and sets _back mark
-exec --no-startup-id ~/.cargo/bin/i3-back
-
-# Bind a switch key, which focuses the previously focused window
-bindsym $mod+Tab workspace next
-bindsym $mod+Shift+Tab workspace prev
-
-# move focused workspace between monitors
-bindsym $mod+Ctrl+greater move workspace to output right
-bindsym $mod+Ctrl+less move workspace to output left
-bindsym $mod+Ctrl+l workspace next_on_output
-bindsym $mod+Ctrl+h workspace prev_on_output
-bindsym $mod+$alt+h focus output left
-bindsym $mod+$alt+l focus output right
-bindsym $mod+$alt+j focus output down
-bindsym $mod+$alt+k focus output up
-
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:CMU Typewriter Text 13
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Start XDG autostart .desktop files using dex. See also
-# https://wiki.archlinux.org/index.php/XDG_Autostart
-exec --no-startup-id dex --autostart --environment i3
-
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
-exec --no-startup-id xinput set-prop "PIXA3854:00 093A:0274 Touchpad" "libinput Natural Scrolling Enabled" 1
-exec --no-startup-id xinput set-prop "PIXA3854:00 093A:0274 Touchpad" "libinput Scrolling Pixel Distance" -1 1
-
-
+ # Start the daemon which listens to focus changes and sets _back mark
+ exec --no-startup-id ~/.cargo/bin/i3-back
+ 
+ # Bind a switch key, which focuses the previously focused window
+ bindsym $mod+Tab workspace next
+ bindsym $mod+Shift+Tab workspace prev
+ 
+ # move focused workspace between monitors
+ bindsym $mod+Ctrl+greater move workspace to output right
+ bindsym $mod+Ctrl+less move workspace to output left
+ bindsym $mod+Ctrl+l workspace next_on_output
+ bindsym $mod+Ctrl+h workspace prev_on_output
+ bindsym $mod+$alt+h focus output left
+ bindsym $mod+$alt+l focus output right
+ bindsym $mod+$alt+j focus output down
+ bindsym $mod+$alt+k focus output up
+ 
+ 
+ # Font for window titles. Will also be used by the bar unless a different font
+ # is used in the bar {} block below.
+ font pango:CMU Typewriter Text 13
+ 
+ # This font is widely installed, provides lots of unicode glyphs, right-to-left
+ # text rendering and scalability on retina/hidpi displays (thanks to pango).
+ #font pango:DejaVu Sans Mono 8
+ 
+ # Start XDG autostart .desktop files using dex. See also
+ # https://wiki.archlinux.org/index.php/XDG_Autostart
+ exec --no-startup-id dex --autostart --environment i3
+ 
+ # The combination of xss-lock, nm-applet and pactl is a popular choice, so
+ # they are included here as an example. Modify as you see fit.
+ 
+ # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+ # screen before suspend. Use loginctl lock-session to lock your screen.
+ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+ 
+ exec --no-startup-id xinput set-prop "PIXA3854:00 093A:0274 Touchpad" "libinput Natural Scrolling Enabled" 1
+ exec --no-startup-id xinput set-prop "PIXA3854:00 093A:0274 Touchpad" "libinput Scrolling Pixel Distance" -1 1
+ 
+ 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 #exec --no-startup-id nm-applet 
@@ -74,6 +74,7 @@ exec --no-startup-id xinput set-prop "PIXA3854:00 093A:0274 Touchpad" "libinput 
  #sudo pacman -S pavucontrol
  #1453  paru -S nm-applet blueman-applet paysystray
 exec --no-startup-id blueman-applet
+exec --no-startup-id paystray
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift-gtk -l 40.44:-79.99 -t 6500:2000
 
@@ -257,8 +258,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+ #Start i3bar to display a workspace bar (plus the system information i3status
+ #finds out, if available)
 bar {
 
     position top
@@ -267,18 +268,18 @@ bar {
 		#status_command i3blocks -c ~/.config/i3blocks/config
 }
 
-exec_always ~/.screenlayout/dual_monitor.sh
-
-
-workspace_auto_back_and_forth yes
-#######################################################################
-# automatically start i3-config-wizard to offer the user to create a
-# keysym-based config which used their favorite modifier (alt or windows)
+#exec_always ~/.screenlayout/dual_monitor.sh
 #
-# i3-config-wizard will not launch if there already is a config file
-# in ~/.config/i3/config (or $XDG_CONFIG_HOME/i3/config if set) or
-# ~/.i3/config.
 #
-# Please remove the following exec line:
-#######################################################################
-#exec i3-config-wizard
+#workspace_auto_back_and_forth yes
+########################################################################
+## automatically start i3-config-wizard to offer the user to create a
+## keysym-based config which used their favorite modifier (alt or windows)
+##
+## i3-config-wizard will not launch if there already is a config file
+## in ~/.config/i3/config (or $XDG_CONFIG_HOME/i3/config if set) or
+## ~/.i3/config.
+##
+## Please remove the following exec line:
+########################################################################
+##exec i3-config-wizard
