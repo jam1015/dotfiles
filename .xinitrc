@@ -65,7 +65,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 #fi
 
 #xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
+#xrandr --auto
 
 xset dpms 1201 1205 1210
 xset r rate 200 50
