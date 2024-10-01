@@ -1,5 +1,5 @@
+vim.g.loaded_gtags_cscope = 1
 local set = vim.opt
-
 vim.cmd([[ highlight Comment cterm=italic gui=italic]])
 vim.g.debug = false
 
