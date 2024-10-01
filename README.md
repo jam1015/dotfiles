@@ -50,8 +50,20 @@ makepkg -si
 
 # update grub
 
+in `/etc/default/grub`
+
 `GRUB_CMDLINE_LINUX="systemd.unit=multi-user.target"`
 
+# or update systemd boot
+
+in `/boot/loader/entries/xxxx`
+
+```
+title   Linux
+linux   /vmlinuz-linux
+initrd  /initramfs-linux.img
+options root=UUID=your-root-partition-uuid rw systemd.unit=multi-user.target
+```
 
 ## BIOS Systems
 
