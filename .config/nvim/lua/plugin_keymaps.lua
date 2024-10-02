@@ -33,13 +33,13 @@ end
 function M.yanky()
   wk.add({
     { "<leader>pp", function() require("telescope").extensions.yank_history.yank_history({}) end, desc = "Open Yank History" },
-    { "y",         "<Plug>(YankyYank)",                                                          mode = { "n", "x" },                                desc = "Yank text" },
-    { "p",         "<Plug>(YankyPutAfter)",                                                      mode = { "n", "x" },                                desc = "Put yanked text after cursor" },
-    { "P",         "<Plug>(YankyPutBefore)",                                                     mode = { "n", "x" },                                desc = "Put yanked text before cursor" },
-    { "gp",        "<Plug>(YankyGPutAfter)",                                                     mode = { "n", "x" },                                desc = "Put yanked text after selection" },
-    { "gP",        "<Plug>(YankyGPutBefore)",                                                    mode = { "n", "x" },                                desc = "Put yanked text before selection" },
-    { "<c-p>",     "<Plug>(YankyPreviousEntry)",                                                 desc = "Select previous entry through yank history" },
-    { "<c-n>",     "<Plug>(YankyNextEntry)",                                                     desc = "Select next entry through yank history" },
+    { "y",          "<Plug>(YankyYank)",                                                          mode = { "n", "x" },                                desc = "Yank text" },
+    { "p",          "<Plug>(YankyPutAfter)",                                                      mode = { "n", "x" },                                desc = "Put yanked text after cursor" },
+    { "P",          "<Plug>(YankyPutBefore)",                                                     mode = { "n", "x" },                                desc = "Put yanked text before cursor" },
+    { "gp",         "<Plug>(YankyGPutAfter)",                                                     mode = { "n", "x" },                                desc = "Put yanked text after selection" },
+    { "gP",         "<Plug>(YankyGPutBefore)",                                                    mode = { "n", "x" },                                desc = "Put yanked text before selection" },
+    { "<c-p>",      "<Plug>(YankyPreviousEntry)",                                                 desc = "Select previous entry through yank history" },
+    { "<c-n>",      "<Plug>(YankyNextEntry)",                                                     desc = "Select next entry through yank history" },
     --{ "]p",        "<Plug>(YankyPutIndentAfterLinewise)",                                        desc = "Put indented after cursor (linewise)" },
     --{ "[p",        "<Plug>(YankyPutIndentBeforeLinewise)",                                       desc = "Put indented before cursor (linewise)" },
     --{ "]P",        "<Plug>(YankyPutIndentAfterLinewise)",                                        desc = "Put indented after cursor (linewise)" },
@@ -52,7 +52,6 @@ function M.yanky()
     --{ "=P",        "<Plug>(YankyPutBeforeFilter)",                                               desc = "Put before applying a filter" },
   }, { mode = "n", silent = true })
 end
-
 
 function M.emmet_vim(setup_type)
   if setup_type == "config" then
@@ -102,7 +101,11 @@ function M.leap_ast()
 end
 
 function M.unimpaired()
- vim.cmd([[
+  vim.cmd([[
+ unmap [t
+ unmap [T
+ unmap ]t
+ unmap ]T
 					function! s:ArgNext(...)
 						try
 							let l:files = ""

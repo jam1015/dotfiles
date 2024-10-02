@@ -45,6 +45,12 @@ return {
     end
   },
   {
+    "jaimecgomezz/here.term",
+    config = function()
+      require("plugin_configs.hereterm")
+    end
+  },
+  {
     "ggandor/flit.nvim",
     enabled = false,
     event = "VeryLazy",
@@ -386,20 +392,34 @@ return {
       require("plugin_configs.vim-numbertoggle_init")
     end,
   }),
-
+  {
+    "blanktiger/aqf.nvim",
+    config = function()
+      require("aqf").setup()
+      local telescope = require("telescope")
+      telescope.load_extension("aqf")
+    end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    }
+  },
   { 'famiu/bufdelete.nvim',     config = function() require("plugin_keymaps").bufdelete() end },
   { "mzlogin/vim-markdown-toc", ft = { "markdown", "md", }, },
 
   {
     "tpope/vim-unimpaired",
+    enabled = true,
     event = "VeryLazy",
     config = function()
       require("plugin_keymaps").unimpaired()
     end,
   },
+  { 'echasnovski/mini.bracketed', version = false,   config = function() require("plugin_configs.minibracketed") end },
+  { 'echasnovski/mini.ai',        version = false,   config = function() require("plugin_configs.miniai") end },
 
-  { "tpope/vim-fugitive", event = "VeryLazy" },
-  { "tpope/vim-repeat",   event = "VeryLazy" },
+  { "tpope/vim-fugitive",         event = "VeryLazy" },
+  { "tpope/vim-repeat",           event = "VeryLazy" },
 
   ({
     "lervag/vimtex",
