@@ -14,6 +14,12 @@ return {
     opts = require("plugin_configs.which-key")
   },
   {
+    'gcmt/vessel.nvim',
+    config = function()
+      require("plugin_configs.vessel")
+    end
+  },
+  {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = require("plugin_configs.flash"),
@@ -542,9 +548,7 @@ return {
 
   ({
     "folke/trouble.nvim", event = "VeryLazy",
-    config = function()
-      require("plugin_configs.trouble")
-    end,
+    opts = require("plugin_configs.trouble")
   }),
 
   { "lifecrisis/vim-difforig", event = "VeryLazy" },
