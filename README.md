@@ -94,3 +94,20 @@ paru -S blueman bluez pasystray redshift
 ```
 paru -S xsel xclip
 ```
+
+# writing it out
+
+```
+sudo mkdir -p /etc/X11/xorg.conf.d
+sudo nano /etc/X11/xorg.conf.d/20-intel.conf
+```
+
+
+```
+Section "Device"
+    Identifier  "Intel Graphics"
+    Driver      "intel"
+    Option      "TearFree" "true"
+EndSection
+```
+
