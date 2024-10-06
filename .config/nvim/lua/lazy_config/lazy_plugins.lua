@@ -277,9 +277,9 @@ return {
   },
 
   {
-    'dhananjaylatkar/vim-gutentags',
+    'skywind3000/gutentags_plus' ,
     event = "VeryLazy",
-    dependencies = { "dhananjaylatkar/cscope_maps.nvim", "skywind3000/gutentags_plus" },
+    dependencies = { "dhananjaylatkar/cscope_maps.nvim", 'dhananjaylatkar/vim-gutentags'},
     --event = "VeryLazy",
 
 
