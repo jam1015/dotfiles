@@ -41,18 +41,17 @@
   ;; Enable Elpaca support for use-package's :ensure keyword.
   (elpaca-use-package-mode))
 
-(use-package evil :ensure t :demand t)
 ;;(elpaca (evil :host github :repo "emacs-evil/evil" ) )
 
 
 ;;(elpaca use-package)
 (use-package god-mode :ensure t)
 
-(use-package evil :ensure t ;;:demand t
+(use-package evil :ensure t :demand t
   :init
   (setq evil-default-state 'normal)
   :config
-  (evil-mode 1)
+   (evil-mode 1)
   )
 ;;
 ;;
