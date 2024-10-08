@@ -1,0 +1,2 @@
+#!/bin/sh
+xrandr --output eDP --mode 1280x720 --pos 1122x1500 --rotate normal --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off --output DisplayPort-4 --off --output DisplayPort-5 --off --output DisplayPort-6 --off --output DisplayPort-7 --off --output DisplayPort-8 --off --output DisplayPort-9 --off --output DisplayPort-10 --primary --mode 1920x1080 --pos 1080x420 --rotate normal --output DisplayPort-11 --off --output DisplayPort-12 --mode 1920x1080 --pos 0x0 --rotate left
