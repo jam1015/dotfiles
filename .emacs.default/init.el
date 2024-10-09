@@ -5,37 +5,39 @@
 (load-relative "packages.el")
 (load-relative "settings.el")
 (load-relative "mappings.el")
-(defgroup A-custom-group nil
-  "A custom group for my configuration."
-  :group 'convenience)
-
-(defcustom my-alist-settings-options
-  nil
-  "Feature settings with predefined options."
-  :type '(alist :key-type (symbol :tag "Feature")
-                :value-type (boolean :tag "Enabled"))
-  :options '("foo" "bar")
-  :group 'A-custom-group)
 
 
-
-(defcustom my-choice
-  "blabla"
-  "Feature settings with predefined options."
-  :type '(radio 
-           (integer :tag "Number of spaces")
-        (string :tag "Literal text")
-        )  
-  :group 'A-custom-group)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;;(defgroup A-custom-group nil
+;;  "A custom group for my configuration."
+;;  :group 'convenience)
+;;
+;;(defcustom my-alist-settings-options
+;;  nil
+;;  "Feature settings with predefined options."
+;;  :type '(alist :key-type (symbol :tag "Feature")
+;;                :value-type (boolean :tag "Enabled"))
+;;  :options '("foo" "bar")
+;;  :group 'A-custom-group)
+;;
+;;
+;;
+;;(defcustom my-choice
+;;  "blabla"
+;;  "Feature settings with predefined options."
+;;  :type '(radio 
+;;           (integer :tag "Number of spaces")
+;;        (string :tag "Literal text")
+;;        )  
+;;  :group 'A-custom-group)
+;;(custom-set-variables
+;; ;; custom-set-variables was added by Custom.
+;; ;; If you edit it by hand, you could mess it up, so be careful.
+;; ;; Your init file should contain only one such instance.
+;; ;; If there is more than one, they won't work right.
+;; )
+;;(custom-set-faces
+;; ;; custom-set-faces was added by Custom.
+;; ;; If you edit it by hand, you could mess it up, so be careful.
+;; ;; Your init file should contain only one such instance.
+;; ;; If there is more than one, they won't work right.
+;; )
