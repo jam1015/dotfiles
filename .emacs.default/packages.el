@@ -9,11 +9,13 @@
   :init
   (setq evil-default-state 'normal)
   :custom
+  (display-line-numbers-type 'relative)
    (savehist-additional-variables '(evil-ex-history))
    (savehist-mode 1)
 
   :config
-   (evil-mode 1)
+  (evil-mode 1)
+  (global-display-line-numbers-mode t)
   )
 ;;
 ;;
@@ -39,5 +41,10 @@
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
+
+(use-package xclip
+  :ensure t
+  :config
+  (xclip-mode 1))  ; Enable system clipboard support for * and + registers
 
 (use-package nord-theme :ensure (:host github :repo "nordtheme/emacs") :demand t)
