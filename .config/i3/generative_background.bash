@@ -17,8 +17,17 @@ mkdir -p "$OUTPUT_DIR"
 PYTHON_SCRIPT="$HOME/.config/i3/generative_art.py"
 
 # Use xrandr to find the maximum x and y coordinates based on the current display arrangement
-MAX_X=$(xrandr | grep ' connected' | awk '{print $3}' | grep -oP '\d+x\d+\+\d+\+\d+' | awk -F'[x+]' '{print $1 + $3}' | sort -nr | head -n1)
-MAX_Y=$(xrandr | grep ' connected' | awk '{print $3}' | grep -oP '\d+x\d+\+\d+\+\d+' | awk -F'[x+]' '{print $2 + $4}' | sort -nr | head -n1)
+# Use xrandr to calculate the maximum width (MAX_X) and height (MAX_Y) by checking all connected displays
+MAX_X=$(xrandr | grep ' connected' | grep -oP '\d+x\d+\+\d+\+\d+' | \
+    awk -F'[x+]' '{print $1 + $3}' | sort -nr | head -n1)
+MAX_Y=$(xrandr | grep ' connected' | grep -oP '\d+x\d+\+\d+\+\d+' | \
+    awk -F'[x+]' '{print $2 + $4}' | sort -nr | head -n1)
+
+# Default to a resolution if extraction fails
+MAX_X=${MAX_X:-1920}
+MAX_Y=${MAX_Y:-1080}
+
+echo "Maximum Screen Resolution: ${MAX_X}x${MAX_Y}"
 
 # Allow the user to choose between Mandelbrot or Julia sets
 # Default to 'julia' if no argument is passed
