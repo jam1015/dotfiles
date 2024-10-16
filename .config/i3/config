@@ -74,8 +74,7 @@ set $alt Mod1
  #sudo pacman -S pavucontrol
  #1453  paru -S nm-applet blueman-applet paysystray
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
+#set $refresh_i3status killall -SIGUSR1 i3status
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 
@@ -87,8 +86,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/endeavour_untouch
 bindsym Prior exec --no-startup-id ~/.config/i3/endeavour_untouched/scripts/volume_brightness.sh volume_up
 bindsym Next exec --no-startup-id ~/.config/i3/endeavour_untouched/scripts/volume_brightness.sh volume_down
 
-bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
-bindsym $mod+XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
+#bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
+#bindsym $mod+XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
 
 
 
@@ -308,7 +307,7 @@ bar {
 #	    	i3bar_command i3bar --transparency
 # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
 # reference: https://i3wm.org/docs/userguide.html#_tray_output
-		    #tray_output primary
+		    tray_output primary
 		    tray_padding 0
 
 # When strip_workspace_numbers is set to yes,
@@ -360,7 +359,7 @@ bindsym $mod+r mode "resize"
  #finds out, if available)
 
 exec --no-startup-id blueman-applet
-exec --no-startup-id paystray
+exec --no-startup-id pasystray
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift-gtk -l 40.44:-79.99 -t 6500:2000
 #exec_always ~/.screenlayout/dual_monitor.sh
