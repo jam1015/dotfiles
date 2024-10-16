@@ -94,3 +94,7 @@ paru -S blueman bluez pasystray redshift
 ```
 paru -S xsel xclip
 ```
+
+---
+
+see `arch_packages` for a list of system packages to install on arch.
