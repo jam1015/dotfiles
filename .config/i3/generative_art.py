@@ -73,8 +73,8 @@ else:
 
 # Define the custom colormap for the Julia set appearance
 colors = [
-    (0.0, (50/255, 50/255, 50/255)),  # Lighter grey
-    (0.2, (50/255, 50/255, 50/255)),  # Darker grey
+    (0.0, (200/255, 200/255, 200/255)),  # Lighter grey
+    (0.2, (105/255, 105/255, 105/255)),  # Darker grey
     (0.4, (220/255, 220/255, 220/255)),  # Pinkish grey
     (0.6, (255/255, 182/255, 193/255)),  # Lighter pink
     (0.75, (186/255, 85/255, 211/255)),  # Dark pink
