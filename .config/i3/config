@@ -33,7 +33,11 @@ set $alt Mod1
  
  # Font for window titles. Will also be used by the bar unless a different font
  # is used in the bar {} block below.
+<<<<<<< HEAD
  font pango:Courier Prime 9
+=======
+ font pango:CMU Typewriter Text 9
+>>>>>>> f31998b (configged i3)
  
  # This font is widely installed, provides lots of unicode glyphs, right-to-left
  # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -295,13 +299,17 @@ set $darkpurple #520b4d
 
 # define colors for windows:
 #class                   border      bground     text    indicator     child_border
-client.focused           $grey       $darkpurple   $white  $mediumgrey   $mediumgrey
+client.focused           $grey       $purple   $white  $mediumgrey   $mediumgrey
 client.unfocused         $darkblue   $darkpurple   $grey   $darkgrey     $darkgrey
 client.focused_inactive  $darkblue   $darkblue   $grey   $black        $black
 client.urgent            $urgentred  $urgentred  $white  $yellowbrown  $yellowbrown
 
 bar {
+<<<<<<< HEAD
 		font pango: Courier Prime 9
+=======
+		font pango: Courier Prime 10
+>>>>>>> f31998b (configged i3)
 		status_command i3blocks -c ~/.config/i3/endeavour_untouched/i3blocks.conf
 	    	position top
 #	    	i3bar_command i3bar --transparency
