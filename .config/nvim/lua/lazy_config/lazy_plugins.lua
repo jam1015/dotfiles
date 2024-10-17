@@ -204,7 +204,9 @@ return {
     end,
   },
   {
-    "hrsh7th/nvim-cmp",
+    --"hrsh7th/nvim-cmp",
+    "iguanacucumber/magazine.nvim",
+    name = "nvim-cmp",
     cond = function() --also done vi autocmd in the cmp config
       return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
     end,
@@ -276,9 +278,9 @@ return {
   },
 
   {
-    'skywind3000/gutentags_plus' ,
+    'skywind3000/gutentags_plus',
     event = "VeryLazy",
-    dependencies = { "dhananjaylatkar/cscope_maps.nvim", 'dhananjaylatkar/vim-gutentags'},
+    dependencies = { "dhananjaylatkar/cscope_maps.nvim", 'dhananjaylatkar/vim-gutentags' },
     --event = "VeryLazy",
 
 
