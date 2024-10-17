@@ -1,49 +1,64 @@
 (load-relative "elpaca_setup.el")
-;;(elpaca (evil :host github :repo "emacs-evil/evil" ) )
-
+;;(elpaca (evil :host github :repo "emacs-evil/evil" ))
 
 ;;(elpaca use-package)
-(use-package god-mode :ensure t)
+(use-package god-mode
+  :ensure t
+  :config
+  (setq god-exempt-major-modes nil)
+  (setq god-exempt-predicates nil)
+  (setq god-mode-enable-function-key-translation nil)
+  (define-key god-local-mode-map (kbd ".") #'repeat))
 
-(use-package evil :ensure t :demand t
+(use-package undo-tree
+  :ensure t
+  :demand t
+  :init
+  (global-undo-tree-mode 1))
+
+(use-package evil
+  :ensure t
+  :after undo-tree
   :init
   (setq evil-default-state 'normal)
   :custom
+  (evil-undo-system 'undo-tree)
   (display-line-numbers-type 'relative)
-   (savehist-additional-variables '(evil-ex-history))
-   (savehist-mode 1)
-
   :config
   (evil-mode 1)
   (global-display-line-numbers-mode t)
-(evil-define-command evil-quit (&optional force)
-  "Close the current window, current frame, current tab, Emacs.
+  ;; Initialize savehist-additional-variables if it's void
+  (unless (boundp 'savehist-additional-variables)
+    (setq savehist-additional-variables nil))
+  ;; Append 'evil-ex-history to savehist-additional-variables
+  (add-to-list 'savehist-additional-variables 'evil-ex-history)
+  ;; Turn on savehist-mode
+  (savehist-mode 1)
+  (evil-define-command evil-quit (&optional force)
+    "Close the current window, current frame, current tab, Emacs.
 If the current frame belongs to some client the client connection
 is closed."
-  :repeat nil
-  (interactive "<!>")
-  (condition-case nil
-      (delete-window)
-    (error
-     (if (and (bound-and-true-p server-buffer-clients)
-              (fboundp 'server-edit)
-              (fboundp 'server-buffer-done))
-         (if force
-             (server-buffer-done (current-buffer))
-           (server-edit))
-       (condition-case nil
-           (delete-frame)
-         (error
-          (condition-case nil
-              (tab-bar-close-tab)
-            (error
-             (if force (if force
-                 (kill-emacs)
-               (save-buffers-kill-emacs)))))))))))
-  )
-;;
-;;
-;;(use-package evil-god-state)
+    :repeat nil
+    (interactive "<!>")
+    (condition-case nil
+        (delete-window)
+      (error
+       (if (and (bound-and-true-p server-buffer-clients)
+                (fboundp 'server-edit)
+                (fboundp 'server-buffer-done))
+           (if force
+               (server-buffer-done (current-buffer))
+             (server-edit))
+         (condition-case nil
+             (delete-frame)
+           (error
+            (condition-case nil
+                (tab-bar-close-tab)
+              (error
+               (if force
+                   (kill-emacs)
+                 (save-buffers-kill-emacs)))))))))))
+
 (use-package evil-god-toggle
   :ensure (:repo "~/evil-god-toggle")
   :config
@@ -71,4 +86,6 @@ is closed."
   :config
   (xclip-mode 1))  ; Enable system clipboard support for * and + registers
 
-(use-package nord-theme :ensure (:host github :repo "nordtheme/emacs") :demand t)
+(use-package nord-theme
+  :ensure (:host github :repo "nordtheme/emacs")
+  :demand t)
