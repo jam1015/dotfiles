@@ -3,8 +3,8 @@
   (load-file (expand-file-name file (file-name-directory (or load-file-name buffer-file-name)))))
 
 (load-relative "packages.el")
-(load-relative "settings.el")
 (load-relative "mappings.el")
+(load-relative "settings.el")
 
 
 ;;(defgroup A-custom-group nil

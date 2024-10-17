@@ -30,24 +30,27 @@ TERM = "xterm-256color"
 size = 7.5
 
 [font.bold]
-family = "SFMono Nerd Font Mono"
+family = "Courier Prime"
 style = "Bold"
 
 [font.bold_italic]
-family = "SFMono Nerd Font Mono"
+family = "Courier Prime"
 style = "Bold Italic"
 
 [font.italic]
-family = "SFMono Nerd Font Mono"
+family = "Courier Prime"
 style = "Italic"
 
 [font.normal]
-family = "SFMono Nerd Font Mono"
+family = "Courier Prime"
 style = "Regular"
 
 [font.offset]
 x = 0
 y = 0
+
+[cursor]
+style.blinking = "Never"
 
 #[window]
 #title = "kjkljkljklj"
