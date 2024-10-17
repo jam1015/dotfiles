@@ -129,7 +129,6 @@ return {
   },
   {
     "jpalardy/vim-slime",
-    dir = "~/vim-slime",
     init = function()
       require("plugin_configs.vim-slime.initi")
     end,
