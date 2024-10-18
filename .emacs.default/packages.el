@@ -1,4 +1,5 @@
 (load-relative "elpaca_setup.el")
+;;(load-relative "straight_setup.el")
 ;;(elpaca (evil :host github :repo "emacs-evil/evil" ))
 
 ;;(elpaca use-package)
@@ -59,15 +60,17 @@ is closed."
                    (kill-emacs)
                  (save-buffers-kill-emacs)))))))))))
 
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/package-folder/"))
+
 (use-package evil-god-toggle
   :ensure (:repo "~/evil-god-toggle")
   :config
   (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle t)))
   (global-set-key (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
   (setq god_entry_strategy "default")
-  (setq persist_visual t)
+  ;;(setq persist_visual nil)
   (setq persist_visual_to_evil t)
-  (setq persist_visual_to_god t)
+  ;;(setq persist_visual_to_god t)
   (evil-define-key 'god global-map "C-;" (lambda () (interactive) (god-toggle t)))
   (evil-define-key 'god global-map "C-," (lambda () (interactive) (god-toggle nil)))
   (evil-define-key 'god global-map [escape] (lambda () (interactive) (evil-stop-execute-in-god-state nil)))
@@ -77,15 +80,18 @@ is closed."
   (setq evil-normal-state-cursor '(box "White")))
 
 (use-package markdown-mode
+  :straight t
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
 
 (use-package xclip
+  :straight t
   :ensure t
   :config
   (xclip-mode 1))  ; Enable system clipboard support for * and + registers
 
 (use-package nord-theme
+  :straight t
   :ensure (:host github :repo "nordtheme/emacs")
   :demand t)

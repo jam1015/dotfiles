@@ -1,3 +1,25 @@
+;; Remove straight.el setup
+(setq straight-use-package-by-default nil)
+
+;; Clean up any variables or settings related to straight.el
+(setq straight-base-dir nil)
+(setq straight-repository-branch nil)
+
+;; Optional: Delete the straight.el directory if you want to completely remove it
+(let ((straight-dir (expand-file-name "straight" user-emacs-directory)))
+  (when (file-exists-p straight-dir)
+    (delete-directory straight-dir t)))
+
+;; Remove any package use defined with straight.el
+(fmakunbound 'straight-use-package)
+
+;; Unload straight.el if it's loaded
+(when (featurep 'straight)
+  (unload-feature 'straight t))
+
+
+
+
 (defvar elpaca-installer-version 0.7)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
