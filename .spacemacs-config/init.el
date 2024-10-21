@@ -612,6 +612,21 @@ is closed."
       (evil-write nil nil nil file bang)
       (evil-quit bang))
 
+
+(evil-define-command evil-quit-all (&optional bang)
+  "Exit Emacs only if BANG is provided. If BANG is not provided, do nothing."
+  :repeat nil
+  (interactive "<!>")
+  (if bang
+      (let ((proc (frame-parameter (selected-frame) 'client)))
+        (if proc
+            (with-no-warnings
+              (server-delete-client proc))
+          (dolist (process (process-list))
+            (set-process-query-on-exit-flag process nil))
+          (kill-emacs)))
+    (message "Not exiting Emacs. Use :qa! to force quit.")))
+
     )
 
 
