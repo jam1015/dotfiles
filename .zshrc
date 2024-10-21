@@ -30,7 +30,6 @@ if [ -d "$ZSH" ]; then
     zstyle ':omz:update' mode auto # update automatically without asking
 fi
 
-
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).

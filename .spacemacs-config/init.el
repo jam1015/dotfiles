@@ -43,7 +43,7 @@ This function should only modify configuration layer settings."
      ;; auto-completion
      ;; better-defaults
      emacs-lisp
-		 ;;evil
+     ;;evil
      ;;latex
      ;; git
      helm
@@ -58,9 +58,9 @@ This function should only modify configuration layer settings."
      ;; syntax-checking
      ;; version-control
      treemacs
-		 evil-god-toggle
+     evil-god-toggle
 
-		 )
+     )
 
 
    ;; List of additional packages that will be installed without being wrapped
@@ -549,7 +549,7 @@ default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
   (spacemacs/load-spacemacs-env)
-)
+  )
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:
@@ -557,7 +557,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-)
+  )
 
 
 (defun dotspacemacs/user-load ()
@@ -565,7 +565,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-)
+  )
 
 
 (defun dotspacemacs/user-config ()
@@ -575,34 +575,47 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-	;; preventing from closing
-(evil-define-command evil-quit (&optional force)
-  "Close the current window, current frame, current tab, Emacs.
+  ;; preventing from closing
+  (with-eval-after-load 'evil
+    (evil-define-command evil-quit (&optional force)
+      "Close the current window, current frame, current tab. If FORCE is provided, exit Emacs.
 If the current frame belongs to some client the client connection
 is closed."
-  :repeat nil
-  (interactive "<!>")
-  (condition-case nil
-      (delete-window)
-    (error
-     (if (and (bound-and-true-p server-buffer-clients)
-              (fboundp 'server-edit)
-              (fboundp 'server-buffer-done))
-         (if force
-             (server-buffer-done (current-buffer))
-           (server-edit))
-       (condition-case nil
-           (delete-frame)
-         (error
-          (condition-case nil
-              (tab-bar-close-tab)
-            (error
-             (if force (if force
-                 (kill-emacs)
-               (save-buffers-kill-emacs)))))))))))
+      :repeat nil
+      (interactive "<!>")
+      (condition-case nil
+          (evil-window-delete)
+        (error
+         (if (and (bound-and-true-p server-buffer-clients)
+                  (fboundp 'server-edit)
+                  (fboundp 'server-buffer-done))
+             (if force
+                 (server-buffer-done (current-buffer))
+               (server-edit))
+           (condition-case nil
+               (delete-frame)
+             (error
+              (condition-case nil
+                  (tab-bar-close-tab)
+                (error
+                 (if force
+                     (kill-emacs)
+                   (message "Not exiting Emacs. Use :q! to force quit.")))))))))
 
 
-)
+      )
+
+    (evil-define-command evil-save-and-close (file &optional bang)
+      "Save the current buffer and close the window. If BANG is provided, force actions."
+      :repeat nil
+      (interactive "<f><!>")
+      (evil-write nil nil nil file bang)
+      (evil-quit bang))
+
+    )
+
+
+  )
 
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -612,17 +625,17 @@ is closed."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(company-emoji emoji-cheat-sheet-plus gh-md markdown-toc markdown-mode mmm-mode valign vmd-mode company-lua company counsel-gtags counsel swiper ivy ggtags lua-mode ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(package-selected-packages
+     '(company-emoji emoji-cheat-sheet-plus gh-md markdown-toc markdown-mode mmm-mode valign vmd-mode company-lua company counsel-gtags counsel swiper ivy ggtags lua-mode ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+  )
