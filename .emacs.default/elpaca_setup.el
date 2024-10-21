@@ -1,4 +1,5 @@
 ;; Remove straight.el setup
+(message "Removing Straight")
 (setq straight-use-package-by-default nil)
 
 ;; Clean up any variables or settings related to straight.el
@@ -19,6 +20,7 @@
 
 
 
+(message "Setting up Elpaca")
 
 (defvar elpaca-installer-version 0.7)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
@@ -63,6 +65,24 @@
   ;; Enable Elpaca support for use-package's :ensure keyword.
   (elpaca-use-package-mode))
 
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
+
+
+;; elpaca-build-functions.el
+(defun +elpaca/build-if-new (e)
+  (setf (elpaca<-build-steps e)
+        (if-let ((default-directory (elpaca<-build-dir e))
+                 (main (ignore-errors (elpaca--main-file e)))
+                 (compiled (expand-file-name (concat (file-name-base main) ".elc")))
+                 ((file-newer-than-file-p main compiled)))
+            (progn (elpaca--signal e "Rebuilding due to source changes")
+                   (cl-set-difference elpaca-build-steps
+                                      '(elpaca--clone elpaca--configure-remotes elpaca--checkout-ref)))
+          (elpaca--build-steps nil (file-exists-p (elpaca<-build-dir e))
+                               (file-exists-p (elpaca<-repo-dir e)))))
+  (elpaca--continue-build e))
 
 
 (message "Finished setting up elpaca")

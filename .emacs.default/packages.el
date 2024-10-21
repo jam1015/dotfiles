@@ -1,10 +1,7 @@
-(load-relative "elpaca_setup.el")
+(load-relative "elpaca_setup.el") ;; remember elpaca-after-init-hook  and :ensure (:build (+elpaca/build-if-new))
 ;;(load-relative "straight_setup.el")
-;;(elpaca (evil :host github :repo "emacs-evil/evil" ))
 
-;;(elpaca use-package)
 (use-package god-mode
-  :ensure t
   :config
   (setq god-exempt-major-modes nil)
   (setq god-exempt-predicates nil)
@@ -12,20 +9,77 @@
   (define-key god-local-mode-map (kbd ".") #'repeat))
 
 (use-package undo-tree
-  :ensure t
   :demand t
   :init
   (global-undo-tree-mode 1))
 
 (use-package evil
-  :ensure t
-  :after undo-tree
-  :init
+  ;;:after undo-tree
+ :init
+ (with-eval-after-load 'evil-maps
+  (define-key evil-normal-state-map (kbd "C-a") 'evil-window-map)
+  (define-key evil-normal-state-map (kbd "C-w") nil)
+(evil-define-command evil-quit (&optional force)
+  "Close the current window, current frame, current tab, Emacs.
+If the current frame belongs to some client the client connection
+is closed."
+  :repeat nil
+  (interactive "<!>")
+  (condition-case nil
+      (delete-window)
+    (error
+     (if (and (bound-and-true-p server-buffer-clients)
+              (fboundp 'server-edit)
+              (fboundp 'server-buffer-done))
+         (if force
+             (server-buffer-done (current-buffer))
+           (server-edit))
+       (condition-case nil
+           (delete-frame)
+         (error
+          (condition-case nil
+              (tab-bar-close-tab)
+            (error
+             (if force (if force
+                 (kill-emacs)
+               (save-buffers-kill-emacs))))))))))))
+
+
   (setq evil-default-state 'normal)
   :custom
   (evil-undo-system 'undo-tree)
   (display-line-numbers-type 'relative)
   :config
+
+(with-eval-after-load 'evil-maps
+  (define-key evil-normal-state-map (kbd "C-a") 'evil-window-map)
+  (define-key evil-normal-state-map (kbd "C-w") nil)
+(evil-define-command evil-quit (&optional force)
+  "Close the current window, current frame, current tab, Emacs.
+If the current frame belongs to some client the client connection
+is closed."
+  :repeat nil
+  (interactive "<!>")
+  (condition-case nil
+      (delete-window)
+    (error
+     (if (and (bound-and-true-p server-buffer-clients)
+              (fboundp 'server-edit)
+              (fboundp 'server-buffer-done))
+         (if force
+             (server-buffer-done (current-buffer))
+           (server-edit))
+       (condition-case nil
+           (delete-frame)
+         (error
+          (condition-case nil
+              (tab-bar-close-tab)
+            (error
+             (if force (if force
+                 (kill-emacs)
+               (save-buffers-kill-emacs))))))))))))
+
+
   (evil-mode 1)
   (global-display-line-numbers-mode t)
   ;; Initialize savehist-additional-variables if it's void
@@ -35,35 +89,41 @@
   (add-to-list 'savehist-additional-variables 'evil-ex-history)
   ;; Turn on savehist-mode
   (savehist-mode 1)
-  (evil-define-command evil-quit (&optional force)
-    "Close the current window, current frame, current tab, Emacs.
+)
+
+  (with-eval-after-load 'evil-maps
+  (define-key evil-normal-state-map (kbd "C-a") 'evil-window-map)
+  (define-key evil-normal-state-map (kbd "C-w") nil)
+(evil-define-command evil-quit (&optional force)
+  "Close the current window, current frame, current tab, Emacs.
 If the current frame belongs to some client the client connection
 is closed."
-    :repeat nil
-    (interactive "<!>")
-    (condition-case nil
-        (delete-window)
-      (error
-       (if (and (bound-and-true-p server-buffer-clients)
-                (fboundp 'server-edit)
-                (fboundp 'server-buffer-done))
-           (if force
-               (server-buffer-done (current-buffer))
-             (server-edit))
-         (condition-case nil
-             (delete-frame)
-           (error
-            (condition-case nil
-                (tab-bar-close-tab)
-              (error
-               (if force
-                   (kill-emacs)
-                 (save-buffers-kill-emacs)))))))))))
+  :repeat nil
+  (interactive "<!>")
+  (condition-case nil
+      (delete-window)
+    (error
+     (if (and (bound-and-true-p server-buffer-clients)
+              (fboundp 'server-edit)
+              (fboundp 'server-buffer-done))
+         (if force
+             (server-buffer-done (current-buffer))
+           (server-edit))
+       (condition-case nil
+           (delete-frame)
+         (error
+          (condition-case nil
+              (tab-bar-close-tab)
+            (error
+             (if force (if force
+                 (kill-emacs)
+               (save-buffers-kill-emacs))))))))))))
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/package-folder/"))
 
 (use-package evil-god-toggle
-  :ensure (:repo "~/evil-god-toggle")
+  :ensure (:host github :repo "jam1015/evil-god-toggle" :build (+elpaca/build-if-new)
+                 )
   :config
   (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle t)))
   (global-set-key (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
@@ -77,21 +137,15 @@ is closed."
   (setq evil-god-state-cursor '(box "Red"))
   (setq evil-insert-state-cursor '(bar "Red"))
   (setq evil-visual-state-cursor '(hollow "Red"))
-  (setq evil-normal-state-cursor '(box "White")))
+  (setq evil-normal-state-cursor '(box "White"))
+  )
 
 (use-package markdown-mode
-  :straight t
-  :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
 
 (use-package xclip
-  :straight t
-  :ensure t
   :config
   (xclip-mode 1))  ; Enable system clipboard support for * and + registers
 
-(use-package nord-theme
-  :straight t
-  :ensure (:host github :repo "nordtheme/emacs")
-  :demand t)
+(use-package nord-theme :demand t)

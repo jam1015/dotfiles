@@ -4,5 +4,9 @@
 (set-frame-font "CMU Typewriter Text-11" t t)
 (setq scroll-margin 3)
 (setq scroll-conservatively 10000)
+(save-place-mode 1)
 ;;(load-theme 'nord)
-(add-hook 'emacs-startup-hook (lambda () (load-theme 'nord t)))
+;;(add-hook 'window-setup-hook (lambda () (load-theme 'nord t)))
+;;(load-theme 'nord t)
+(add-hook 'elpaca-after-init-hook
+          (lambda () (load-theme 'nord t)))
