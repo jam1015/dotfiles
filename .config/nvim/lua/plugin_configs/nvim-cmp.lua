@@ -98,16 +98,14 @@ cmp.setup({
         end
       })(outer_entry, outer_vim_item)
 
-      local strings = vim.split(kind.kind, "%s", { trimempty = true })
-      kind.kind = strings[1]
-      local to_append = ""
-      if kind.menu then
-        to_append = kind.menu .. ":"
-      else
-        to_append = ""
-      end
+      local kind_kind_str = (type(kind.kind) == "string") and kind.kind or ""
+      local strings = vim.split(kind_kind_str, "%s", { trimempty = true })
 
-      kind.menu = to_append .. strings[2]
+      kind.kind = (strings[1] ~= nil and strings[1] ~= "") and strings[1] or ""
+
+      local to_append = (kind.menu ~= nil and kind.menu ~= "") and (kind.menu .. ":") or ""
+
+      kind.menu = (strings[2] ~= nil and strings[2] ~= "") and (to_append .. strings[2]) or to_append
 
       return kind
     end,
@@ -119,7 +117,7 @@ cmp.setup({
 
     {
       name = "lazydev",
-      group_index = 0,   -- set group index to 0 to skip loading LuaLS completions
+      group_index = 0, -- set group index to 0 to skip loading LuaLS completions
     },
 
     { name = "nvim_lua" },
