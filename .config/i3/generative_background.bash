@@ -29,6 +29,11 @@ MAX_Y=${MAX_Y:-1080}
 
 echo "Maximum Screen Resolution: ${MAX_X}x${MAX_Y}"
 
+# Default to a resolution if extraction fails
+MAX_X=${MAX_X:-1920}
+MAX_Y=${MAX_Y:-1080}
+
+echo "Maximum Screen Resolution: ${MAX_X}x${MAX_Y}"
 # Allow the user to choose between Mandelbrot or Julia sets
 # Default to 'julia' if no argument is passed
 FRACTAL_TYPE=${1:-julia}
