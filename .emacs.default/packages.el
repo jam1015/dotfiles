@@ -95,15 +95,14 @@ is closed."
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/package-folder/"))
 
 (use-package evil-god-toggle
-  :ensure (:host github :repo "jam1015/evil-god-toggle" :build (+elpaca/build-if-new)
-                 )
+  :ensure (:host github :repo "jam1015/evil-god-toggle" :build (+elpaca/build-if-new))
   :config
-  (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle t)))
-  (global-set-key (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
+  (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle  )))
+  ;;(global-set-key (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
   (setq god_entry_strategy "default")
   ;;(setq persist_visual nil)
-  (setq persist_visual_to_evil t)
-  ;;(setq persist_visual_to_god t)
+  (setq persist-visual-to-evil t)
+  (setq persist-visual-to-god t)
   (evil-define-key 'god global-map "C-;" (lambda () (interactive) (god-toggle t)))
   (evil-define-key 'god global-map "C-," (lambda () (interactive) (god-toggle nil)))
   (evil-define-key 'god global-map [escape] (lambda () (interactive) (evil-stop-execute-in-god-state nil)))
