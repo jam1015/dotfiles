@@ -43,6 +43,7 @@ is closed."
                      (kill-emacs)
                    (message "Not exiting Emacs. Use :q! to force quit.")))))))))
 
+
       )
 
 (evil-define-command evil-save-and-close (file &optional bang)
@@ -69,9 +70,6 @@ is closed."
 
     )
 
-
-
-
   (setq evil-default-state 'normal)
   :custom
   (evil-undo-system 'undo-tree)
@@ -97,20 +95,21 @@ is closed."
 (use-package evil-god-toggle
   :ensure (:host github :repo "jam1015/evil-god-toggle" :build (+elpaca/build-if-new))
   :config
-  (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle  )))
-  ;;(global-set-key (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
-  (setq god_entry_strategy "default")
-  ;;(setq persist_visual nil)
-  (setq persist-visual-to-evil t)
-  (setq persist-visual-to-god t)
-  (evil-define-key 'god global-map "C-;" (lambda () (interactive) (god-toggle t)))
-  (evil-define-key 'god global-map "C-," (lambda () (interactive) (god-toggle nil)))
+  (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle)))
+
+  ;; Set customization variables using defcustoms
+  (customize-set-variable 'evil-god-toggle-persist-visual-to-evil t)
+  (customize-set-variable 'evil-god-toggle-persist-visual-to-god t)
+
+  ;; Define Evil key bindings
+  (evil-define-key 'god global-map "C-;" (lambda () (interactive) (god-toggle)))
   (evil-define-key 'god global-map [escape] (lambda () (interactive) (evil-stop-execute-in-god-state nil)))
+
+  ;; Set cursor appearance for different states
   (setq evil-god-state-cursor '(box "Red"))
   (setq evil-insert-state-cursor '(bar "Red"))
   (setq evil-visual-state-cursor '(hollow "Red"))
-  (setq evil-normal-state-cursor '(box "White"))
-  )
+  (setq evil-normal-state-cursor '(box "White")))
 
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)
