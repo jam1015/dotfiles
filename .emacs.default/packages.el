@@ -90,10 +90,11 @@ is closed."
   )
 
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/package-folder/"))
+;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/package-folder/"))
 
 (use-package evil-god-toggle
   :ensure (:host github :repo "jam1015/evil-god-toggle" :build (+elpaca/build-if-new))
+                 )
   :config
   (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle)))
 
@@ -109,7 +110,8 @@ is closed."
   (setq evil-god-state-cursor '(box "Red"))
   (setq evil-insert-state-cursor '(bar "Red"))
   (setq evil-visual-state-cursor '(hollow "Red"))
-  (setq evil-normal-state-cursor '(box "White")))
+  (setq evil-normal-state-cursor '(box "White"))
+  )
 
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)
