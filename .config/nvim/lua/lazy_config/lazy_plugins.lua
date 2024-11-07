@@ -430,6 +430,7 @@ return {
   }),
   {
     "blanktiger/aqf.nvim",
+    event = "VeryLazy",
     config = function()
       require("aqf").setup()
       local telescope = require("telescope")
