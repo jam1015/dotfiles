@@ -32,6 +32,7 @@ vim.api.nvim_create_autocmd("FileType", {
   group = noCRO,
 })
 set.history = 2000
+set.hidden = true
 set.autoread = true
 set.scrolloff = 3   -- show a few lines around cursor
 set.display = "lastline"

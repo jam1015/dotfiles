@@ -16,6 +16,7 @@ return {
   -- TODO: write move config to its own file
   {
     "ilof2/posterpole.nvim",
+    event = "VeryLazy",
     config = function()
       require("posterpole").setup({
         transparent = false,
@@ -26,7 +27,7 @@ return {
         fg_saturation = 0,              -- font saturation, gray colors become more brighter
         bg_saturation = 0               -- background saturation
       })
-      vim.cmd("colorscheme posterpole")
+      --vim.cmd("colorscheme posterpole")
     end
   },
   {
@@ -89,6 +90,7 @@ return {
   },
   {
     'jam1015/winshift.nvim',
+    event = "VeryLazy",
     enabled = true,
     --dir = "~/Documents/vim_plugins/winshift.nvim",
     branch = "my_merged",
@@ -244,6 +246,7 @@ return {
   },
   {
     "Rentib/cliff.nvim",
+    event = "VeryLazy",
     keys = {
       { '<c-j>', mode = { 'n', 'v', 'o' }, function() require("cliff").go_down() end },
       { '<c-k>', mode = { 'n', 'v', 'o' }, function() require("cliff").go_up() end },
@@ -267,6 +270,7 @@ return {
 
   {
     "ethanholz/nvim-lastplace",
+    --event = "VeryLazy",
     config = function() require("plugin_configs.nvim-lastplace") end
   },
 
@@ -439,8 +443,8 @@ return {
       require("plugin_keymaps").unimpaired()
     end,
   },
-  { 'echasnovski/mini.bracketed', version = false,   config = function() require("plugin_configs.minibracketed") end },
-  { 'echasnovski/mini.ai',        version = false,   config = function() require("plugin_configs.miniai") end },
+  { 'echasnovski/mini.bracketed', version = false,   config = function() require("plugin_configs.minibracketed") end , event = "VeryLazy"},
+  { 'echasnovski/mini.ai',        version = false,   config = function() require("plugin_configs.miniai") end , event = "VeryLazy"},
 
   { "tpope/vim-fugitive",         event = "VeryLazy" },
   { "tpope/vim-repeat",           event = "VeryLazy" },
