@@ -10,7 +10,7 @@ end
 return {
   {
     "folke/which-key.nvim",
-    --event = "VeryLazy",
+    event = "VeryLazy",
     opts = require("plugin_configs.which-key")
   },
   -- TODO: write move config to its own file
@@ -121,6 +121,7 @@ return {
   },
   {
     "jpalardy/vim-slime",
+    event = "VeryLazy",
     init = function()
       require("plugin_configs.vim-slime.initi")
     end,
@@ -128,10 +129,6 @@ return {
     config = function()
       require("plugin_configs.vim-slime.config")
     end,
-  },
-  {
-    "jam1015/vim_consistency",
-    event = "VeryLazy"
   },
   {
     "jam1015/PushPop.vim",
@@ -206,7 +203,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    --event = "VeryLazy",
+    event = "VeryLazy",
     enabled = true,
     config = function()
       require("plugin_configs.nvim-treesitter")
@@ -215,12 +212,11 @@ return {
   {
     --"hrsh7th/nvim-cmp",
     "iguanacucumber/magazine.nvim",
+    event = "VeryLazy",
     name = "nvim-cmp",
     cond = function() --also done vi autocmd in the cmp config
       return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
     end,
-    lazy = true,
-    event = "VeryLazy",
     dependencies = {
       { "onsails/lspkind.nvim",       event = "VeryLazy" },
       { "hrsh7th/cmp-nvim-lsp",       event = "VeryLazy" },
@@ -232,13 +228,13 @@ return {
       { "kdheepak/cmp-latex-symbols", event = "VeryLazy" },
       {
         "L3MON4D3/LuaSnip", -- tag = "v<CurrentMajor>.*",
+        event = "VeryLazy",
         build = "make install_jsregexp",
         dependencies = { "rafamadriz/friendly-snippets" },
         config = function()
           require("plugin_configs.LuaSnip")
         end,
 
-        event = "VeryLazy"
       },
       { "saadparwaiz1/cmp_luasnip", event = "VeryLazy" }
     },
@@ -256,7 +252,7 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    event = { "VeryLazy" },
+    event =  "VeryLazy" ,
     dependencies = { "onsails/lspkind.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -580,7 +576,7 @@ return {
   },
 
 
-  { 'windwp/nvim-ts-autotag',   enabled = true },
+  { 'windwp/nvim-ts-autotag',   enabled = true , event = "VeryLazy",},
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
     enabled = false,
@@ -655,12 +651,6 @@ return {
     end,
   },
 
-  {
-    "norcalli/nvim-colorizer.lua",
-    enabled = false,
-    init = function() vim.opt.termguicolors = true end,
-    config = function() require('colorizer').setup() end
-  },
 
   {
     "chrishrb/gx.nvim",
@@ -730,12 +720,17 @@ return {
   },
   {
     'stevearc/quicker.nvim',
+    config = function()
+      require("plugin_configs.quicker")
+    end,
+    event = "VeryLazy",
     ---@module "quicker"
     ---@type quicker.SetupOptions
     opts = {},
   },
   {
     "mbbill/undotree",
+    event = "VeryLazy",
     init = function()
       require("plugin_configs.undotree.initi")
     end,
@@ -757,28 +752,6 @@ return {
   {
     'Shatur/neovim-session-manager',
     enabled = false
-  },
-  {
-
-    'jam1015/winshift.nvim',
-    enabled = true,
-    --dir = "~/Documents/vim_plugins/winshift.nvim",
-    branch = "my_merged_rough",
-    config = function()
-      require("plugin_configs.winshift")
-      require("plugin_keymaps").nvim_winshift()
-    end
-  },
-  {
-
-    "jam1015/nvim-window",
-    branch = "only_uppercase",
-    enabled = true,
-    config = function()
-      require("plugin_configs.nvim_window")
-      require("plugin_keymaps").nvim_window()
-      return true
-    end,
   },
   {
 
