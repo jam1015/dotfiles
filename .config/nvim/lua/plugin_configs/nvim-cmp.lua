@@ -86,7 +86,7 @@ cmp.setup({
         before = function(entry, vim_item)
           vim_item.menu = ({ --sets things before
             buffer = "[Buffer]",
-            cmp_r = "[cmp-r]",
+            --cmp_r = "[cmp-r]",
             nvim_lsp = "[LSP]",
             luasnip = "[LuaSnip]",
             nvim_lua = "[Lua]",
@@ -231,4 +231,5 @@ if has_autopairs then
     cmp_autopairs.on_confirm_done()
   )
 end
+--require("cmp_r").setup({})
 require("plugin_keymaps").nvim_cmp()
