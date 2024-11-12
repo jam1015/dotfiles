@@ -519,7 +519,7 @@ return {
   }),
   {
     "R-nvim/R.nvim",
-    event = "VeryLazy",
+    lazy = false,
     config = function() require('plugin_configs.rnvim') end,
   },
 
