@@ -31,9 +31,12 @@ return {
     end
   },
   {
-    'bettervim/yugen.nvim' },
+    'bettervim/yugen.nvim',
+    event = "VeryLazy",
+  },
   {
     'gcmt/vessel.nvim',
+    event = "VeryLazy",
     config = function()
       require("plugin_configs.vessel")
     end
@@ -54,7 +57,7 @@ return {
     opts = require("plugin_configs.lazydev_nvim") --enabled = false
 
   },
-  { "Bilal2453/luvit-meta",        lazy = true }, -- optional `vim.uv` typings
+  { "Bilal2453/luvit-meta",        lazy = true, event = "VeryLazy" }, -- optional `vim.uv` typings
   {
     "leath-dub/snipe.nvim",
     enabled = false,
@@ -68,6 +71,7 @@ return {
     event = "VeryLazy",
     config = function()
       require("plugin_configs.hereterm")
+      require("plugin_keymaps").hereterm()
     end
   },
   {
@@ -103,7 +107,7 @@ return {
 
     "jam1015/nvim-window",
     branch = "only_uppercase",
-    enabled = true,
+    event = "VeryLazy",
     config = function()
       require("plugin_configs.nvim_window")
       require("plugin_keymaps").nvim_window()
@@ -165,7 +169,7 @@ return {
   },
   {
     "jam1015/vim_create_goto",
-    --event = "VeryLazy",
+    event = "VeryLazy",
     config = function()
       require("plugin_keymaps").vim_create_goto()
     end
@@ -231,7 +235,7 @@ return {
     dependencies = {
       { "onsails/lspkind.nvim",       event = "VeryLazy" },
       { "hrsh7th/cmp-nvim-lsp",       event = "VeryLazy" },
-      { "R-nvim/cmp-r",               event = "VeryLazy" },
+      --{ "R-nvim/cmp-r",               event = "VeryLazy" },
       { "hrsh7th/cmp-nvim-lua",       event = "VeryLazy" },
       { "hrsh7th/cmp-buffer",         event = "VeryLazy" },
       { "hrsh7th/cmp-path",           event = "VeryLazy" },
@@ -264,7 +268,7 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    event =  "VeryLazy" ,
+    event = "VeryLazy",
     dependencies = { "onsails/lspkind.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -385,7 +389,7 @@ return {
   -- Using lazy.nvim
   {
     "cdmill/neomodern.nvim",
-    lazy = false,
+    event = "VeryLazy",
     priority = 1000,
     config = function()
       require("neomodern").setup({
@@ -395,6 +399,7 @@ return {
   },
   {
     "navarasu/onedark.nvim",
+    event = "VeryLazy",
 
     config = function()
       require("plugin_configs.onedark")
@@ -441,8 +446,12 @@ return {
       "nvim-telescope/telescope.nvim",
     }
   },
-  { 'famiu/bufdelete.nvim',     config = function() require("plugin_keymaps").bufdelete() end },
-  { "mzlogin/vim-markdown-toc", ft = { "markdown", "md", }, },
+  {
+    'famiu/bufdelete.nvim',
+    config = function() require("plugin_keymaps").bufdelete() end,
+    event = "VeryLazy",
+  },
+  { "mzlogin/vim-markdown-toc",   ft = { "markdown", "md", }, },
 
   {
     "tpope/vim-unimpaired",
@@ -452,16 +461,14 @@ return {
       require("plugin_keymaps").unimpaired()
     end,
   },
-  { 'echasnovski/mini.bracketed', version = false,   config = function() require("plugin_configs.minibracketed") end , event = "VeryLazy"},
-  { 'echasnovski/mini.ai',        version = false,   config = function() require("plugin_configs.miniai") end , event = "VeryLazy"},
+  { 'echasnovski/mini.bracketed', version = false,            config = function() require("plugin_configs.minibracketed") end, event = "VeryLazy" },
+  { 'echasnovski/mini.ai',        version = false,            config = function() require("plugin_configs.miniai") end,        event = "VeryLazy" },
 
   { "tpope/vim-fugitive",         event = "VeryLazy" },
   { "tpope/vim-repeat",           event = "VeryLazy" },
 
   ({
     "lervag/vimtex",
-    enabled = true,
-
     config = function()
       require("plugin_configs.vimtex")
     end,
@@ -484,7 +491,6 @@ return {
 
   { "bronson/vim-visual-star-search", event = "VeryLazy" },
   { "tpope/vim-repeat",               event = "VeryLazy" },
-
 
 
   ({
@@ -513,49 +519,9 @@ return {
   }),
   {
     "R-nvim/R.nvim",
-    config = function()
-      -- Create a table with the options to be passed to setup()
-      local opts = {
-        R_args = { "--quiet", "--no-save" },
-        hook = {
-          after_config = function()
-            -- This function will be called at the FileType event
-            -- of files supported by R.nvim. This is an
-            -- opportunity to create mappings local to buffers.
-            if vim.o.syntax ~= "rbrowser" then
-              vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {})
-              vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RSendSelection", {})
-            end
-          end
-        },
-        min_editor_width = 72,
-        rconsole_width = 78,
-        disable_cmds = {
-          "RClearConsole",
-          "RCustomStart",
-          "RSPlot",
-          "RSaveClose",
-        },
-      }
-      -- Check if the environment variable "R_AUTO_START" exists.
-      -- If using fish shell, you could put in your config.fish:
-      -- alias r "R_AUTO_START=true nvim"
-      if vim.env.R_AUTO_START == "true" then
-        opts.auto_start = 1
-        opts.objbr_auto_start = true
-      end
-      require("r").setup(opts)
-    end,
-    lazy = false
+    lazy = false,
+    config = function() require('plugin_configs.rnvim') end,
   },
-  ({
-    "jalvesaq/Nvim-R", ft = { "R", "r", "rmd", "Rmd", "RMD" },
-    enabled = false,
-    branch = "stable",
-    config = function()
-      require("plugin_configs.Nvim-R")
-    end,
-  }),
 
   {
     "jbyuki/instant.nvim",
@@ -577,7 +543,7 @@ return {
 
   {
     "andymass/vim-matchup",
-    enabled = true,
+    event = "VimEnter",
     --event = { "VeryLazy" },
   },
   {
@@ -589,7 +555,7 @@ return {
   },
 
 
-  { 'windwp/nvim-ts-autotag',   enabled = true , event = "VeryLazy",},
+  { 'windwp/nvim-ts-autotag',   enabled = true, event = "VeryLazy", },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
     enabled = false,
@@ -640,7 +606,7 @@ return {
 
   {
     "gbprod/substitute.nvim",
-    enabled = true,
+    event = "VeryLazy",
     config = function()
       require("plugin_configs.substitute_nvim")
       require("plugin_keymaps").substitute_nvim()
@@ -754,7 +720,8 @@ return {
   },
   {
 
-    "https://gitlab.com/yorickpeterse/vim-paper.git",
+    "yorickpeterse/vim-paper",
+    event = "VeryLazy",
   },
   {
     "norcalli/nvim-colorizer.lua",
@@ -769,6 +736,7 @@ return {
   {
 
     'FluxxField/bionic-reading.nvim',
+    event = "VeryLazy",
     config = function()
       require('plugin_configs.bionic-reading')
     end,

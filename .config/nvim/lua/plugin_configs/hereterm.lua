@@ -1,7 +1,7 @@
 require("here-term").setup({
     -- The command we run when exiting the terminal and no other buffers are listed. An empty
     -- buffer is shown by default. 
-    ---startup_command = "enew", -- Startify, Dashboard, etc. Make sure it has been loaded before `here.term`.
+startup_command = "enew", -- Startify, Dashboard, etc. Make sure it has been loaded before `here.term`.
 
     -- Mappings
     -- Every mapping bellow can be customized by providing your preferred combo, or disabled
