@@ -57,7 +57,7 @@ return {
     opts = require("plugin_configs.lazydev_nvim") --enabled = false
 
   },
-  { "Bilal2453/luvit-meta",        lazy = true, event = "VeryLazy" }, -- optional `vim.uv` typings
+  { "Bilal2453/luvit-meta",       lazy = true, event = "VeryLazy" },  -- optional `vim.uv` typings
   {
     "leath-dub/snipe.nvim",
     enabled = false,
@@ -66,6 +66,7 @@ return {
       require("plugin_keymaps").snipe()
     end
   },
+  { "meznaric/key-analyzer.nvim", opts = {} , event = "VeryLazy"},
   {
     "jaimecgomezz/here.term",
     event = "VeryLazy",
@@ -510,7 +511,7 @@ return {
   }),
   {
     "R-nvim/R.nvim",
-    lazy = false,
+    event = "VeryLazy",
     config = function() require('plugin_configs.rnvim') end,
   },
 
@@ -521,8 +522,6 @@ return {
       require("plugin_configs.instant")
     end
   },
-  { "equalsraf/neovim-gui-shim" },
-
 
 
   ({
@@ -744,6 +743,7 @@ return {
   {
 
     "kwkarlwang/bufjump.nvim",
+    event = "VeryLazy",
     dependencies = {
       "folke/which-key.nvim", -- optional [for whichkey hints]
     },
