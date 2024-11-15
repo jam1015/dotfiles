@@ -363,9 +363,11 @@ function M.flash_keys()
 end
 
 function M.flash()
-  wk.add({ { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-    { "r", mode = "o",               function() require("flash").remote() end, desc = "Remote Flash" } }
-  )
+  wk.add({
+    { "s", mode = { "n", "x", "o" }, "<cmd>lua  require('flash').jump()<cr>", desc = "Flash" },
+    { "r", mode = "o",               "<cmd>require('flash').remote()<cr>" , desc = "Remote Flash" } ,
+  })
+
   wk.add({
     { "<leader>x",  name = "files-flash" },
     { "<leader>xt", "<cmd>lua require('flash').treesitter()<cr>",        desc = "Flash TreeSitter" },

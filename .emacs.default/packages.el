@@ -90,7 +90,11 @@ is closed."
   )
 
 
-;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/package-folder/"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/package-folder/"))
+
+(use-package restart-emacs
+             :init (setq restart-emacs-restore-frames t)
+)
 
 (use-package evil-god-toggle
   
@@ -100,7 +104,7 @@ is closed."
 
   ;; Set customization variables using defcustoms
   (customize-set-variable 'evil-god-toggle-persist-visual-to-evil t)
-  (customize-set-variable 'evil-god-toggle-persist-visual-to-god t)
+  ;;(customize-set-variable 'evil-god-toggle-persist-visual-to-god t)
 
   ;; Define Evil key bindings
   (evil-define-key 'god global-map "C-;" (lambda () (interactive) (god-toggle)))
@@ -117,7 +121,12 @@ is closed."
 
 
 
-
+;;(use-package evil-god-state
+;;  :ensure (:after evil :host github :repo "jam1015/evil-god-state" :build (+elpaca/build-if-new))
+;;  :config
+;;(evil-define-key 'normal global-map "," 'evil-execute-in-god-state)
+;;(evil-define-key 'god global-map [escape] 'evil-god-state-bail)
+;; )
 
 
 
