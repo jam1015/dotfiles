@@ -104,7 +104,7 @@ is closed."
 
   ;; Define Evil key bindings
   (evil-define-key 'god global-map "C-;" (lambda () (interactive) (god-toggle)))
-  (evil-define-key 'god global-map [escape] (lambda () (interactive) (evil-stop-execute-in-god-state nil)))
+  (evil-define-key 'god global-map [escape] (lambda () (interactive) (evil-toggle-from-god-state nil)))
 
   ;; Set cursor appearance for different states
   (setq evil-god-state-cursor '(box "Red"))
