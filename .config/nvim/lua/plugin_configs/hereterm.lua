@@ -24,4 +24,5 @@ require("here-term").setup({
         right = "<C-w>l", -- Move to right window
     },
 })
+
 require("plugin_keymaps").hereterm()
