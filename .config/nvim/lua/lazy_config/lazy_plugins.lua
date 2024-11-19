@@ -173,6 +173,8 @@ return {
       require("plugin_keymaps").vim_create_goto()
     end
   },
+
+  { "meznaric/key-analyzer.nvim", opts = {} },
   {
     "gbprod/yanky.nvim",
     dependencies = {
@@ -183,8 +185,8 @@ return {
       require("plugin_configs.yanky")
     end
   },
-  { 'sainnhe/everforest', event = "VeryLazy" },
-  { 'rose-pine/neovim',   name = "rose-pine" },
+  { 'sainnhe/everforest',         event = "VeryLazy" },
+  { 'rose-pine/neovim',           name = "rose-pine" },
   {
     "folke/tokyonight.nvim",
     priority = 1000,

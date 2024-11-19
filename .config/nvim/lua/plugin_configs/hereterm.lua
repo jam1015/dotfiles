@@ -9,14 +9,14 @@ require("here-term").setup({
     --
     -- The minimal mappings used to toggle and kill the terminal. Available in
     -- `normal` and `terminal` mode.
-    mappings = {
-        toggle = "<localleader>tt",
-        kill = "<C-S-;>",
-    },
+    --mappings = {
+    --    toggle = "<localleader>tt",
+    --    kill = "<C-S-;>",
+    --},
     -- Additional mappings that I consider useful since you won't have to escape (<C-\><C-n>)
     -- the terminal each time. Available in `terminal` mode.
     extra_mappings = {
-        enable = true, -- Disable them entirely
+        enable = false, -- Disable them entirely
         escape = "<C-x>", -- Escape terminal mode
         left = "<C-w>h", -- Move to the left window
         down = "<C-w>j", -- Move to the window down
@@ -24,3 +24,4 @@ require("here-term").setup({
         right = "<C-w>l", -- Move to right window
     },
 })
+require("plugin_keymaps").hereterm()

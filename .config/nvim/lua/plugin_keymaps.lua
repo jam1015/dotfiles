@@ -5,6 +5,20 @@ local has_wk, wk = pcall(require, "which-key")
 if has_wk then
 end
 M = {}
+function M.hereterm()
+  wk.add(
+    {
+      { "<leader>;;", "<cmd>lua require('here-term').toggle_terminal()<CR>", desc = "here.term toggle", mode = "n" },
+      { "<leader>;;", "<cmd>lua require('here-term').toggle_terminal()<CR>", desc = "here.term toggle", mode = "t" },
+
+
+      --{"<C-;>","<cmd>lua require('here-term').kill_terminal()<CR>", desc = "here.term kill" }
+    }
+  )
+
+
+end
+
 function M.pluginKeymaps(plugin, setup_type)
   local keymap = vim.keymap.set
   local opts = { remap = false, silent = true }
