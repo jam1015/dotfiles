@@ -64,6 +64,7 @@ return {
   },
   {
     "jaimecgomezz/here.term",
+    event = "VeryLazy",
     config = function()
       require("plugin_configs.hereterm")
     end
@@ -609,15 +610,8 @@ return {
 
   {
     "yorik1984/newpaper.nvim",
-    priority = 1000,
-    config = function()
-      require("newpaper").setup({
-        style = "light"
-      })
-    end
+    event = "VeryLazy",
   },
-
-
 
   {
     "gbprod/substitute.nvim",
