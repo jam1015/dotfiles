@@ -167,16 +167,23 @@ return {
   },
 
   { "meznaric/key-analyzer.nvim", opts = {} },
-  {
-    "gbprod/yanky.nvim",
-    dependencies = {
-      { "kkharji/sqlite.lua" }
-    },
+{
+    "svban/YankAssassin.nvim",
+    event = "VeryLazy",
     config = function()
-      require("plugin_keymaps").yanky()
-      require("plugin_configs.yanky")
-    end
-  },
+      require("plugin_configs.YankAssasin")
+    end,
+},
+  --{
+  --  "gbprod/yanky.nvim",
+  --  dependencies = {
+  --    { "kkharji/sqlite.lua" }
+  --  },
+  --  config = function()
+  --    require("plugin_keymaps").yanky()
+  --    require("plugin_configs.yanky")
+  --  end
+  --},
   { 'sainnhe/everforest',         event = "VeryLazy" },
   { 'rose-pine/neovim',           name = "rose-pine" },
   {
