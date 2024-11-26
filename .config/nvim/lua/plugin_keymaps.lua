@@ -67,6 +67,14 @@ function M.yanky()
   }, { mode = "n", silent = true })
 end
 
+function M.yankstack()
+  wk.add({
+    { "<c-p>",      "<Plug>yankstack_substitute_older_paste",                                                 desc = "Select previous entry through yank history" },
+    { "<c-n>",      "<Plug>yankstack_substitute_newer_paste",                                                     desc = "Select next entry through yank history" },
+  })
+end
+
+
 function M.emmet_vim(setup_type)
   if setup_type == "config" then
     wk.add({

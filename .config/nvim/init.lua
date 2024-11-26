@@ -1,9 +1,9 @@
---            .__
---  _______  _|__| _____
--- /    \  \/ /  |/     \
---|   |  \   /|  |  Y Y  \
---|___|  /\_/ |__|__|_|  /
---     \/              \/
+----            .__
+----  _______  _|__| _____
+---- /    \  \/ /  |/     \
+----|   |  \   /|  |  Y Y  \
+----|___|  /\_/ |__|__|_|  /
+----     \/              \/
 require('autocommands') -- ~/.config/nvim/lua/autocommands.lua
 require('keymaps')      -- ~/.config/nvim/lua/keymaps/init.lua
 require('lazy_config')  -- ~/.config/nvim/lua/lazy_config/lazy_plugins.lua
@@ -11,6 +11,11 @@ require('lazy_config')  -- ~/.config/nvim/lua/lazy_config/lazy_plugins.lua
 require('settings')     -- ~/.config/nvim/lua/settings.lua
 require('keymaps.post') -- ~/.config/nvim/lua/keymaps/post.lua
 
+
+--vim.api.nvim_set_var('NVIM_LOG_FILE', '~/.cache/nvim/log')
+---vim.o.verbosefile = '~/.cache/nvim/verbose.log'
+--vim.o.verbose = 15
+--
 --local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 --if not (vim.uv or vim.loop).fs_stat(lazypath) then
 --  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -29,58 +34,13 @@ require('keymaps.post') -- ~/.config/nvim/lua/keymaps/post.lua
 --vim.g.mapleader = " "
 --vim.g.maplocalleader = "\\"
 --require("lazy").setup({
---   spec = {
---
---  ({
---    "nvim-treesitter/nvim-treesitter",
---    --event = "VeryLazy",
---    enabled = true,
---    config = function()
---      require("plugin_configs.nvim-treesitter")
---    end,
---  }),
---  --  {
---  --    "neovim/nvim-lspconfig",
---  --    config = function()
---  --      require'lspconfig'.lua_ls.setup{}
---  --      vim.keymap.set("n", "gd", vim.lsp.buf.definition )
---  --    end
---  --  },
---  --  {
---  --    "folke/lazydev.nvim",
---  --    ft = "lua",
---  --    opts = {
---  --    --  library = {
---  --    --    -- Library paths can be absolute
---  --    --    "~/projects/my-awesome-lib",
---  --    --    -- Or relative, which means they will be resolved from the plugin dir.
---  --    --    "lazy.nvim",
---  --    --    "luvit-meta/library",
---  --    --    -- It can also be a table with trigger words / mods
---  --    --    -- Only load luvit types when the `vim.uv` word is found
---  --    --    { path = "luvit-meta/library", words = { "vim%.uv" } },
---  --    --    -- always load the LazyVim library
---  --    --    "LazyVim",
---  --    --    -- Only load the lazyvim library when the `LazyVim` global is found
---  --    --    { path = "LazyVim", words = { "LazyVim" } },
---  --    --    -- Load the wezterm types when the `wezterm` module is required
---  --    --    -- Needs `justinsgithub/wezterm-types` to be installed
---  --    --    { path = "wezterm-types", mods = { "wezterm" } },
---  --    --    -- Load the xmake types when opening file named `xmake.lua`
---  --    --    -- Needs `LelouchHe/xmake-luals-addon` to be installed
---  --    --    { path = "xmake-luals-addon/library", files = { "xmake.lua" } },
---  --    --  },
---  --    --  -- always enable unless `vim.g.lazydev_enabled = false`
---  --    --  -- This is the default
---  --    --  enabled = function(root_dir)
---  --    --    return vim.g.lazydev_enabled == nil and true or vim.g.lazydev_enabled
---  --    --  end,
---  --    --  -- disable when a .luarc.json file is found
---  --    --  enabled = function(root_dir)
---  --    --    return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
---  --    --  end,
---  --    },
---
---  --  }
+--  spec = {
+--    {
+--      "jam1015/YankAssassin.nvim",
+--      event = "VeryLazy",
+--      config = function()
+--        require("plugin_configs.YankAssasin")
+--      end,
+--    }
 --  },
 --})
