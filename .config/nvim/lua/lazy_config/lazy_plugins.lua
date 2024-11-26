@@ -152,7 +152,7 @@ return {
     end
   },
   { 'jam1015/vim-directional-help' },
-  
+
   {
     'jam1015/nvim-smart-termsplit',
     config = function()
@@ -172,8 +172,9 @@ return {
     end
   },
 
-  { "meznaric/key-analyzer.nvim", enabled = false,opts = {} },
-  {'maxbrunsfeld/vim-yankstack',
+  { "meznaric/key-analyzer.nvim", enabled = false,   opts = {} },
+  {
+    'maxbrunsfeld/vim-yankstack',
     event = "VeryLazy",
     init = function()
       require("plugin_configs.yankstack.initi")
@@ -184,13 +185,13 @@ return {
     end
 
   },
-{
+  {
     "jam1015/YankAssassin.nvim",
     event = "VeryLazy",
     config = function()
       require("plugin_configs.YankAssasin")
     end,
-},
+  },
   --{
   --  "gbprod/yanky.nvim",
   --  dependencies = {
@@ -489,11 +490,11 @@ return {
     "mattn/emmet-vim",
     event = "VeryLazy",
     init = function()
-      require("plugin_configs.emmet-vim.initi")
+      require("plugin_keymaps").emmet_vim("initi")
     end,
 
     config = function()
-      require("plugin_configs.emmet-vim.config")
+      require("plugin_keymaps").emmet_vim("config")
     end,
     ft = { "js", "ts", "html", "htm", "tsx", "jsx", "md" },
   }),
