@@ -137,13 +137,13 @@ return {
     "jam1015/PushPop.vim",
 
     event = "VeryLazy",
-    enabled = true,
     dependencies = { "vim-scripts/genutils" },
     config = function()
       require("plugin_keymaps").pushpop()
     end
   },
   { 'jam1015/vim-directional-help' },
+  
   {
     'jam1015/nvim-smart-termsplit',
     config = function()
@@ -152,13 +152,10 @@ return {
     end
   },
   {
-
     "jam1015/vim_consistency",
     event = "VeryLazy"
   },
-
   {
-
     "jam1015/vim_create_goto",
     --event = "VeryLazy",
     config = function()
@@ -166,9 +163,20 @@ return {
     end
   },
 
-  { "meznaric/key-analyzer.nvim", opts = {} },
+  { "meznaric/key-analyzer.nvim", enabled = false,opts = {} },
+  {'maxbrunsfeld/vim-yankstack',
+    event = "VeryLazy",
+    init = function()
+      require("plugin_configs.yankstack.initi")
+    end,
+
+    config = function()
+      require("plugin_keymaps").yankstack()
+    end
+
+  },
 {
-    "svban/YankAssassin.nvim",
+    "jam1015/YankAssassin.nvim",
     event = "VeryLazy",
     config = function()
       require("plugin_configs.YankAssasin")
@@ -193,7 +201,6 @@ return {
     config = function()
       require("plugin_configs.tokyonight")
     end,
-    --
     --event = "VeryLazy"
   },
   {
