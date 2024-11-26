@@ -443,8 +443,15 @@ return {
       require("plugin_keymaps").unimpaired()
     end,
   },
-  { 'echasnovski/mini.bracketed', version = false,            config = function() require("plugin_configs.minibracketed") end, event = "VeryLazy" },
-  { 'echasnovski/mini.ai',        version = false,            config = function() require("plugin_configs.miniai") end,        event = "VeryLazy" },
+  { 'echasnovski/mini.bracketed', version = false,   config = function() require("plugin_configs.minibracketed") end },
+  {
+    'echasnovski/mini.ai',
+    event = "VeryLazy",
+    version = false,
+    config = function()
+      require("plugin_configs.miniai")
+    end
+  },
 
   { "tpope/vim-fugitive",         event = "VeryLazy" },
   { "tpope/vim-repeat",           event = "VeryLazy" },
