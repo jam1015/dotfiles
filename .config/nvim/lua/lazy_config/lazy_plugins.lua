@@ -8,6 +8,19 @@ local lisp_lazy = function() --also done vi autocmd in the cmp config
 end
 
 return {
+
+
+  {
+    "jpalardy/vim-slime",
+    event = "VeryLazy",
+    init = function()
+      require("plugin_configs.vim-slime.initi")
+    end,
+
+    config = function()
+      require("plugin_configs.vim-slime.config")
+    end,
+  },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -47,7 +60,7 @@ return {
     opts = require("plugin_configs.lazydev_nvim") --enabled = false
 
   },
-  { "Bilal2453/luvit-meta",       lazy = true, event = "VeryLazy" },  -- optional `vim.uv` typings
+  { "Bilal2453/luvit-meta",       lazy = true, event = "VeryLazy" }, -- optional `vim.uv` typings
   {
     "leath-dub/snipe.nvim",
     enabled = false,
@@ -56,7 +69,7 @@ return {
       require("plugin_keymaps").snipe()
     end
   },
-  { "meznaric/key-analyzer.nvim", opts = {} , event = "VeryLazy"},
+  { "meznaric/key-analyzer.nvim", opts = {},   event = "VeryLazy" },
   {
     "jaimecgomezz/here.term",
     event = "VeryLazy",
@@ -116,17 +129,7 @@ return {
       'nvim-tree/nvim-web-devicons',     -- optional
     }
   },
-  {
-    "jpalardy/vim-slime",
-    event = "VeryLazy",
-    init = function()
-      require("plugin_configs.vim-slime.initi")
-    end,
 
-    config = function()
-      require("plugin_configs.vim-slime.config")
-    end,
-  },
   {
     "jam1015/PushPop.vim",
 
@@ -157,7 +160,7 @@ return {
     end
   },
 
-  { "meznaric/key-analyzer.nvim", enabled = false,   opts = {} },
+  { "meznaric/key-analyzer.nvim",  enabled = false, opts = {} },
   {
     'maxbrunsfeld/vim-yankstack',
     event = "VeryLazy",
@@ -187,8 +190,8 @@ return {
   --    require("plugin_configs.yanky")
   --  end
   --},
-  { 'sainnhe/everforest',         event = "VeryLazy" },
-  { 'rose-pine/neovim',           name = "rose-pine" },
+  { 'sainnhe/everforest', event = "VeryLazy" },
+  { 'rose-pine/neovim',   name = "rose-pine" },
   {
     "folke/tokyonight.nvim",
     priority = 1000,
@@ -443,7 +446,7 @@ return {
       require("plugin_keymaps").unimpaired()
     end,
   },
-  { 'echasnovski/mini.bracketed', version = false,   config = function() require("plugin_configs.minibracketed") end },
+  { 'echasnovski/mini.bracketed', version = false,            config = function() require("plugin_configs.minibracketed") end },
   {
     'echasnovski/mini.ai',
     event = "VeryLazy",
@@ -453,8 +456,8 @@ return {
     end
   },
 
-  { "tpope/vim-fugitive",         event = "VeryLazy" },
-  { "tpope/vim-repeat",           event = "VeryLazy" },
+  { "tpope/vim-fugitive", event = "VeryLazy" },
+  { "tpope/vim-repeat",   event = "VeryLazy" },
 
   ({
     "lervag/vimtex",
@@ -542,7 +545,7 @@ return {
   },
 
 
-  { 'windwp/nvim-ts-autotag',   enabled = true, event = "VeryLazy", },
+  { 'windwp/nvim-ts-autotag',  enabled = true,    event = "VeryLazy", },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
     enabled = false,

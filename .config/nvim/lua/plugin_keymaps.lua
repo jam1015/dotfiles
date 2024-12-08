@@ -187,11 +187,11 @@ function M.vim_slime()
   wk.add({
     { "gz",  "<Plug>SlimeMotionSend", desc = "Slime Motion Send" },
     { "gzz", "<Plug>SlimeLineSend",   desc = "Slime Line Send" },
-  }, { mode = "n", silent = false })
+   mode = "n", silent = false, remap = true })
 
   wk.add({
-    { "gz", "<Plug>SlimeRegionSend", desc = "Slime Region Send" },
-  }, { mode = "x", silent = false })
+    { "gz", "<Plug>SlimeRegionSend", desc = "Slime Region Send", mode = "x" },
+   mode = "x", silent = false, remap = true })
 end
 
 function M.nvim_cmp()
