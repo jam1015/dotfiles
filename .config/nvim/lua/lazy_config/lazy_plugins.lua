@@ -9,7 +9,6 @@ end
 
 return {
 
-
   {
     "jpalardy/vim-slime",
     event = "VeryLazy",
