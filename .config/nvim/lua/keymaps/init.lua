@@ -10,7 +10,7 @@ vim.g.mapllocaleader = "\\"
 
 --------------------------------------------- commands to be moved to terminal/navigation plugin
 
-keymap("t", "<C-;>", "<C-\\><C-n>", opts)
+keymap("t", "<C-]>", "<C-\\><C-n>", opts)
 keymap("t", "<localleader><Esc>", "<C-\\><C-N>", opts)
 
 if os.getenv("TMUX") then
