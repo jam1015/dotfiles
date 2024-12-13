@@ -98,3 +98,25 @@ paru -S xsel xclip
 ---
 
 see `arch_packages` for a list of system packages to install on arch. `pacman -Qqet` to query  before moving to a new system.
+
+
+
+# hook for  package list
+
+`/etc/pacman.d/hooks/update-installed-packages-list.hook`
+
+
+
+```
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Update list of installed packages
+When = PostTransaction
+Exec = /bin/bash -c 'pacman -Qq > "$HOME/dotfiles/arch-packages"'
+```
