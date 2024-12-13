@@ -120,3 +120,12 @@ Description = Update list of installed packages
 When = PostTransaction
 Exec = /bin/bash -c 'pacman -Qq > "/home/jordan/dotfiles/arch-packages"'
 ```
+
+
+# fix microphone
+
+Edit `/usr/share/alsa-card-profile/mixer/paths/analog-input-internal-mic.conf` 
+
+
+`[element Internal Mic Boost]` volume should be zero.
+`[element Int Mic Boost]` volume should be zero.
