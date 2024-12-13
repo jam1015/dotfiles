@@ -108,15 +108,6 @@ return {
     end,
   },
   {
-
-    'jam1015/buf_hint_nvim',
-    dir = "~/Documents/vim_plugins/buf_hint_nvim",
-    config = function()
-      --require("buf_hint_nvim").setup()
-    end
-
-  },
-  {
     'nvimdev/lspsaga.nvim',
     enabled = false,
     config = function()
