@@ -7,6 +7,8 @@ Hooks for version control are  in a [separate repo](https://www.github.com/jam10
 
 Include `--recurse submodules` or run `git submodule init` followed by `git submodule update --recursive`.
 
+or go:
+
 `git submodule update --recursive --remote`
 # set up ssh
 
