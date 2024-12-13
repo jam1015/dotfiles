@@ -118,5 +118,5 @@ Target = *
 [Action]
 Description = Update list of installed packages
 When = PostTransaction
-Exec = /bin/bash -c 'pacman -Qq > "$HOME/dotfiles/arch-packages"'
+Exec = /bin/bash -c 'pacman -Qq > "/home/jordan/dotfiles/arch-packages"'
 ```
