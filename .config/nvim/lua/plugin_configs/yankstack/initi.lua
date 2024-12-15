@@ -1,1 +1,2 @@
-vim.g.yankstack_map_keys = 0
+vim.g.yankstack_map_keys = false
+vim.g.yankstack_yank_keys = {'c', 'C', 'd', 'D', 'S', 'x', 'X', 'y', 'Y'}
