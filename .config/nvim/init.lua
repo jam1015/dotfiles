@@ -12,10 +12,6 @@ require('settings')      -- ~/.config/nvim/lua/settings.lua
 require('keymaps.post')  -- ~/.config/nvim/lua/keymaps/post.lua
 
 
---vim.api.nvim_set_var('NVIM_LOG_FILE', '~/.cache/nvim/log')
----vim.o.verbosefile = '~/.cache/nvim/verbose.log'
---vim.o.verbose = 15
---
 --local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 --if not (vim.uv or vim.loop).fs_stat(lazypath) then
 --        local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -34,13 +30,28 @@ require('keymaps.post')  -- ~/.config/nvim/lua/keymaps/post.lua
 --vim.g.mapleader = " "
 --vim.g.maplocalleader = "\\"
 --require("lazy").setup({
---  spec = {
---    {
---      "jam1015/YankAssassin.nvim",
---      event = "VeryLazy",
---      config = function()
---        require("plugin_configs.YankAssasin")
---      end,
---    }
---  },
+--        spec = {
+--                {
+--                        "folke/flash.nvim",
+--                        event = "VeryLazy",
+--                        ---@type Flash.Config
+--                        opts = {},
+--                        -- stylua: ignore
+--                        keys = {
+--                                { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+--                                { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+--                                { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+--                                { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+--                                { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+--                        },
+--                },
+--                {
+--                        'FluxxField/bionic-reading.nvim',
+--                        event = "VeryLazy",
+--                        config = function()
+--                                require('plugin_configs.bionic-reading')
+--                        end,
+--                },
+--
+--        },
 --})
