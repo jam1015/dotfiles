@@ -132,3 +132,20 @@ Edit `/usr/share/alsa-card-profile/mixer/paths/analog-input-internal-mic.conf`
 
 `[element Internal Mic Boost]` volume should be zero.
 `[element Int Mic Boost]` volume should be zero.
+
+
+# firefox full screen tabs
+
+
+1.    Type about:config on Firefox address bar.
+2.    Search for browser.fullscreen.autohide
+3.    Set it to false
+
+
+# github
+
+1. `paru -S git-credential-manager-core`
+2. `git config --global credential.helper manager-core`
+
+The next time Git asks for your token, enter it once, and it will be securely remembered for future operations.
+
