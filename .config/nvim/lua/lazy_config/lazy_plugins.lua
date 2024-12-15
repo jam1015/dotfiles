@@ -10,15 +10,13 @@ end
 return {
 
   {
-    "jpalardy/vim-slime",
+    "folke/flash.nvim",
     event = "VeryLazy",
-    init = function()
-      require("plugin_configs.vim-slime.initi")
-    end,
-
+    opts = require("plugin_configs.flash"),
     config = function()
-      require("plugin_configs.vim-slime.config")
-    end,
+      require("plugin_keymaps").flash()
+    end
+
   },
   {
     "folke/which-key.nvim",
@@ -43,15 +41,7 @@ return {
       require("plugin_configs.vessel")
     end
   },
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    opts = require("plugin_configs.flash"),
-    config = function()
-      require("plugin_keymaps").flash()
-    end
 
-  },
   {
     "folke/lazydev.nvim",
     --event = "VeryLazy",
@@ -674,19 +664,6 @@ return {
     "powerman/vim-plugin-AnsiEsc",
   },
   {
-
-    'nvim-lualine/lualine.nvim',
-    event = "VeryLazy",
-    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
-    init = function()
-      require('plugin_configs.lualine.initi')
-    end,
-    config = function()
-      require('plugin_configs.lualine.config')
-    end,
-
-  },
-  {
     'stevearc/quicker.nvim',
     config = function()
       require("plugin_configs.quicker")
@@ -752,72 +729,83 @@ return {
 
   },
 
+  {
+    "jpalardy/vim-slime",
+    event = "VeryLazy",
+    init = function()
+      require("plugin_configs.vim-slime.initi")
+    end,
 
-  --
-  --  ------------- disabled ----------
-  --
-  --  {
-  --    'nvim-tree/nvim-tree.lua',
-  --    enabled = false,
-  --    event = "VeryLazy",
-  --    config = function()
-  --      require("plugin_configs.nvim-tree")
-  --      require("plugin_keymaps").nvim_tree()
-  --    end
-  --
-  --
-  --  },
-  --
-  --  {
-  --    'ggandor/leap-ast.nvim',
-  --    -- right now prefer treehopper because it gives more hints
-  --    config = function() require("plugin_keymaps").leap_ast() end,
-  --    enabled = false,
-  --
-  --  },
-  --  {
-  --    "mfussenegger/nvim-treehopper",
-  --    enabled = true,
-  --    event = "VeryLazy",
-  --    dependencies = "phaazon/hop.nvim",
-  --    config = function() require("plugin_configs.nvim-treehopper") end,
-  --  },
-  --  {
-  --    'altermo/nxwm',
-  --    enabled = false,
-  --    branch = 'x11',
-  --    config = function()
-  --      require('plugin_configs.nxwm')
-  --    end
-  --  },
-  --  {
-  --    -- startup screen
-  --    "goolord/alpha-nvim",
-  --    enabled = false,
-  --    cond = require("plugin_configs.alpha-nvim.cond"),
-  --    config = function()
-  --      require("plugin_configs.alpha-nvim.config")
-  --    end,
-  --
-  --  },
-  --  ({
-  --    "neoclide/coc.nvim",
-  --    branch = "release",
-  --    enabled = false,
-  --    dependencies = { "neoclide/coc-snippets" },
-  --    init = function()
-  --      require("plugin_configs.coc")
-  --    end,
-  --    event = "VeryLazy",
-  --  }),
-  --
-  --  { "tpope/vim-scriptease", enabled = false }, -- messes with s mapping of leap
-  --
-  --  {
-  --    "josa42/nvim-gx",
-  --    enabled = false,
-  --    config = function()
-  --      vim.keymap.set('n', 'gx', require('gx').gx)
-  --    end
-  --  },
+    config = function()
+      require("plugin_configs.vim-slime.config")
+    end,
+  },
+
+--  --
+--  --  ------------- disabled ----------
+--  --
+--  --  {
+--  --    'nvim-tree/nvim-tree.lua',
+--  --    enabled = false,
+--  --    event = "VeryLazy",
+--  --    config = function()
+--  --      require("plugin_configs.nvim-tree")
+--  --      require("plugin_keymaps").nvim_tree()
+--  --    end
+--  --
+--  --
+--  --  },
+--  --
+--  --  {
+--  --    'ggandor/leap-ast.nvim',
+--  --    -- right now prefer treehopper because it gives more hints
+--  --    config = function() require("plugin_keymaps").leap_ast() end,
+--  --    enabled = false,
+--  --
+--  --  },
+--  --  {
+--  --    "mfussenegger/nvim-treehopper",
+--  --    enabled = true,
+--  --    event = "VeryLazy",
+--  --    dependencies = "phaazon/hop.nvim",
+--  --    config = function() require("plugin_configs.nvim-treehopper") end,
+--  --  },
+--  --  {
+--  --    'altermo/nxwm',
+--  --    enabled = false,
+--  --    branch = 'x11',
+--  --    config = function()
+--  --      require('plugin_configs.nxwm')
+--  --    end
+--  --  },
+--  --  {
+--  --    -- startup screen
+--  --    "goolord/alpha-nvim",
+--  --    enabled = false,
+--  --    cond = require("plugin_configs.alpha-nvim.cond"),
+--  --    config = function()
+--  --      require("plugin_configs.alpha-nvim.config")
+--  --    end,
+--  --
+--  --  },
+--  --  ({
+--  --    "neoclide/coc.nvim",
+--  --    branch = "release",
+--  --    enabled = false,
+--  --    dependencies = { "neoclide/coc-snippets" },
+--  --    init = function()
+--  --      require("plugin_configs.coc")
+--  --    end,
+--  --    event = "VeryLazy",
+--  --  }),
+--  --
+--  --  { "tpope/vim-scriptease", enabled = false }, -- messes with s mapping of leap
+--  --
+--  --  {
+--  --    "josa42/nvim-gx",
+--  --    enabled = false,
+--  --    config = function()
+--  --      vim.keymap.set('n', 'gx', require('gx').gx)
+--  --    end
+--  --  },
 }
