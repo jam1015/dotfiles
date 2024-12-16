@@ -9,4 +9,4 @@
 	updateRefs = true
 	autosquash = true
 [credential]
-	helper = store
+	helper = manager-core
