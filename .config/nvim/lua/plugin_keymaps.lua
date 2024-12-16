@@ -8,10 +8,8 @@ M = {}
 function M.hereterm()
   wk.add(
     {
-      { "<leader>;;", "<cmd>lua require('here-term').toggle_terminal()<CR>", desc = "here.term toggle", mode = "n" },
-      { "<leader>;;", "<cmd>lua require('here-term').toggle_terminal()<CR>", desc = "here.term toggle", mode = "t" },
-
-
+      { "<C-;>", "<cmd>lua require('here-term').toggle_terminal()<CR>", desc = "here.term toggle", mode = "n" },
+      { "<C-;>", "<cmd>lua require('here-term').toggle_terminal()<CR>", desc = "here.term toggle", mode = "t" },
       --{"<C-;>","<cmd>lua require('here-term').kill_terminal()<CR>", desc = "here.term kill" }
     }
   )
@@ -223,8 +221,8 @@ end
 function M.nvim_smart_termsplit()
   local termsplit = require('nvim-smart-termsplit')
   wk.add({
-    { "<C-a>s", termsplit.term_hsplit, desc = "Split Term Horizontally" },
-    { "<C-a>v", termsplit.term_vsplit, desc = "Split Term Vertically" },
+    { "<C-w>s", termsplit.term_hsplit, desc = "Split Term Horizontally" },
+    { "<C-w>v", termsplit.term_vsplit, desc = "Split Term Vertically" },
   }, { mode = "n", silent = true })
 end
 

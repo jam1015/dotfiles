@@ -42,9 +42,6 @@ cnoreabbrev <expr> yp getcmdtype() == ":" && getcmdline() == "yp" ? "Yp" : "yp"
 ------------------------------- general keymaps that can stay
 vim.cmd([[
 
-
-
-
 " changing size
 if bufwinnr(1)
 	map + <C-W>+
@@ -52,11 +49,6 @@ if bufwinnr(1)
 	map <leader>. <C-W><
 	map <leader>, <C-W>>
 endif
-
-
-
-	" new windows
-
 	" in insert mode control u deletes to beginning of line, this makes it part of a new change
 	inoremap <C-U> <C-G>u<C-U>
 
@@ -78,12 +70,11 @@ endif
 
 
 
----------    setting C-; as escape like in terminal, can remove if I find a better use
-keymap("i", "<C-;>", "<C-[>", opts)
-keymap("x", "<C-;>", "<C-[>", opts)
-keymap("v", "<C-;>", "<C-[>", opts)
-keymap("o", "<C-;>", "<C-[>", opts)
-keymap("n", "<C-;>", "<C-[>", opts)
+
+
+
+
+
 
 
 keymap("i", "<C-j>", "<C-x><C-o>", { remap = false, silent = true }) -- activate omni completeion

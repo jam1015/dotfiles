@@ -9,10 +9,11 @@ startup_command = "enew", -- Startify, Dashboard, etc. Make sure it has been loa
     --
     -- The minimal mappings used to toggle and kill the terminal. Available in
     -- `normal` and `terminal` mode.
-    --mappings = {
-    --    toggle = "<localleader>tt",
-    --    kill = "<C-S-;>",
-    --},
+    mappings = {
+        enable = false,
+        toggle = "<localleader>tt",
+        kill = "<C-S-;>",
+    },
     -- Additional mappings that I consider useful since you won't have to escape (<C-\><C-n>)
     -- the terminal each time. Available in `terminal` mode.
     extra_mappings = {

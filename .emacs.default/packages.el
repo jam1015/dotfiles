@@ -98,13 +98,15 @@ is closed."
 
 (use-package evil-god-toggle
   
-  :ensure (:after evil :host github :repo "jam1015/evil-god-toggle" :build (+elpaca/build-if-new))
+  :ensure (:after evil :host github :repo "jam1015/evil-god-toggle" 
+                  :build (+elpaca/build-if-new)
+                  )
   :config
   (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle)))
 
   ;; Set customization variables using defcustoms
-  (customize-set-variable 'evil-god-toggle-persist-visual-to-evil t)
-  ;;(customize-set-variable 'evil-god-toggle-persist-visual-to-god t)
+  ;;(customize-set-variable 'evil-god-toggle-persist-visual-to-evil t)
+  (customize-set-variable 'evil-god-toggle-persist-visual-to-god t)
 
   ;; Define Evil key bindings
   (evil-define-key 'god global-map "C-;" (lambda () (interactive) (god-toggle)))
