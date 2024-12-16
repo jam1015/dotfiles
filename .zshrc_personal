@@ -9,6 +9,7 @@ export PATH="$PATH:/Users/jordanmandel/bin"
 
 export vimrc="$HOME/dotfiles/.config/nvim/init.lua"
 export zshrc="$HOME/dotfiles/.zshrc_personal"
+export GCM_CREDENTIAL_STORE="cache"
 alias vi='nvim'
 alias vid='emacs --with-profile doom'
 alias vie='emacs'
