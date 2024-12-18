@@ -10,6 +10,7 @@
 #
 
 exec --no-startup-id picom --vsync
+exec --no-startup-id fc-cache -r
 set $mod Mod4
 set $alt Mod1
 

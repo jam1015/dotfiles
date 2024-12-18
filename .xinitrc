@@ -70,5 +70,4 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 xset dpms 1201 1205 1210
 xset r rate 200 50
 #nm-applet --sm-disable &
-fc-cache -r
 exec i3
