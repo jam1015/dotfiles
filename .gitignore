@@ -173,3 +173,9 @@ flycheck_*.el
 .projectile
 
 .config/font-manager/Sources.xml
+.emacs.default/elpaca/
+.emacs.default/history
+.emacs.default/last-directory
+.emacs.default/places
+tags
+
