@@ -51,3 +51,12 @@ XTerm*allowBoldFonts: true
 XTerm*forceBoxChars: false
 UXTerm*allowBoldFonts: true
 UXTerm*forceBoxChars: false
+
+
+UXTerm*faceName: DejaVu Sans Mono
+UXTerm*faceSize: 12
+
+
+
+XTerm*faceName: DejaVu Sans Mono
+XTerm*faceSize: 12
