@@ -110,7 +110,7 @@ bindsym XF86AudioMicMute exec amixer sset Capture toggle
 
 
 
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Redirect sound to headphones
 #bindsym $mod+p exec --no-startup-id /usr/local/bin/switch-audio-port
@@ -142,9 +142,9 @@ floating_modifier $mod
 # start a terminal
 #bindsym $mod+Return exec kitty -o allow_remote_control=yes
 #bindsym $mod+Return exec "source ~/.config/i3/split_same_dir.bash kitty"
-bindsym $mod+Return exec ~/.config/i3/tiny_samedir.bash
+bindsym $mod+Return exec --no-startup-id ~/.config/i3/tiny_samedir.bash
 #bindsym $alt+Return exec /home/jordan/Documents/kitty/kitty/launcher/kitty
-bindsym $alt+Return exec /usr/bin/kitty
+bindsym $alt+Return exec --no-startup-id /usr/bin/kitty
 # kill focused window
 bindsym $mod+q kill
 
@@ -216,6 +216,7 @@ bindsym $mod+minus scratchpad show
 
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/endeavour_untouched/scripts/power-profiles
 
+# notification daemon
 exec --no-startup-id /usr/bin/dunst
 
 # Define names for default workspaces for which we configure key bindings later on.
@@ -359,11 +360,11 @@ bindsym $mod+r mode "resize"
  #Start i3bar to display a workspace bar (plus the system information i3status
  #finds out, if available)
 
-exec --no-startup-id blueman-applet
-exec --no-startup-id nm-applet
-exec --no-startup-id redshift-gtk -l 40.44:-79.99 -t 6500:2000
+exec_always --no-startup-id blueman-applet
+exec_always --no-startup-id nm-applet
+exec_always --no-startup-id redshift-gtk -l 40.44:-79.99 -t 6500:2000
 
-exec_always ~/.screenlayout/dual_monitor.sh
+exec_always --no-startup-id ~/.screenlayout/dual_monitor.sh
 
 exec --no-startup-id picom
 
