@@ -130,7 +130,7 @@ set $left h
 set $right l
 
 #exec --always nitrogen --set-zoom-fill restore
-exec --no-startup-id ~/.config/i3/generative_background.bash
+exec ~/.config/i3/generative_background.bash
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
