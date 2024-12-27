@@ -23,3 +23,25 @@ XTerm*color12: #3971ED
 XTerm*color13: #A36AC7
 XTerm*color14: #3971ED
 XTerm*color15: #FFFFFF
+
+
+UXTerm*background: #1E1E1E
+UXTerm*foreground: #C5C8C6
+UXTerm*cursorColor: #C5C8C6
+
+UXTerm*color0: #1E1E1E
+UXTerm*color1: #CC342B
+UXTerm*color2: #198844
+UXTerm*color3: #FBA922
+UXTerm*color4: #3971ED
+UXTerm*color5: #A36AC7
+UXTerm*color6: #3971ED
+UXTerm*color7: #C5C8C6
+UXTerm*color8: #969896
+UXTerm*color9: #CC342B
+UXTerm*color10: #198844
+UXTerm*color11: #FBA922
+UXTerm*color12: #3971ED
+UXTerm*color13: #A36AC7
+UXTerm*color14: #3971ED
+UXTerm*color15: #FFFFFF
