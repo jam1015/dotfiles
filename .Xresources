@@ -1,2 +1,25 @@
 Xcursor.theme: Qogir-dark
 Xcursor.size: 16
+
+! Set background and foreground colors
+XTerm*background: #1E1E1E
+XTerm*foreground: #C5C8C6
+XTerm*cursorColor: #C5C8C6
+
+! Colors
+XTerm*color0: #1E1E1E
+XTerm*color1: #CC342B
+XTerm*color2: #198844
+XTerm*color3: #FBA922
+XTerm*color4: #3971ED
+XTerm*color5: #A36AC7
+XTerm*color6: #3971ED
+XTerm*color7: #C5C8C6
+XTerm*color8: #969896
+XTerm*color9: #CC342B
+XTerm*color10: #198844
+XTerm*color11: #FBA922
+XTerm*color12: #3971ED
+XTerm*color13: #A36AC7
+XTerm*color14: #3971ED
+XTerm*color15: #FFFFFF
