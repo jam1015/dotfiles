@@ -1,19 +1,19 @@
----Types:
---
--- Passed to callbacks that handle opening files
------@alias BufInfo { fname: string, bufnr: buffer }
---
--- The first argument is a list of BufInfo tables representing the newly opened files.
--- The third argument is a single BufInfo table, only provided when a buffer is created from stdin.
---
--- IMPORTANT: For `block_for` to work, you need to return a buffer number OR a buffer number and a window number.
---            The `winnr` return value is not required, `vim.fn.bufwinid(bufnr)` is used if it is not provided.
---            The `filetype` of this buffer will determine whether block should happen or not.
---
------@alias OpenHandler fun(files: BufInfo[], argv: string[], stdin_buf: BufInfo, guest_cwd: string):window, buffer
---
-return {
-	callbacks = {
+-----Types:
+----
+---- Passed to callbacks that handle opening files
+-------@alias BufInfo { fname: string, bufnr: buffer }
+----
+---- The first argument is a list of BufInfo tables representing the newly opened files.
+---- The third argument is a single BufInfo table, only provided when a buffer is created from stdin.
+----
+---- IMPORTANT: For `block_for` to work, you need to return a buffer number OR a buffer number and a window number.
+----            The `winnr` return value is not required, `vim.fn.bufwinid(bufnr)` is used if it is not provided.
+----            The `filetype` of this buffer will determine whether block should happen or not.
+----
+-------@alias OpenHandler fun(files: BufInfo[], argv: string[], stdin_buf: BufInfo, guest_cwd: string):window, buffer
+----
+require("flatten").setup( {
+	hooks = {
 		--			---Called to determine if a nested session should wait for the host to close the file.
 		--			---@param argv table a list of all the arguments in the nested session
 		--			---@return boolean
@@ -77,9 +77,10 @@ return {
 		gitcommit = true
 	},
 	-- Command passthrough
-	allow_cmd_passthrough = true,
+	block_cmd_passthrough = false,
 	-- Allow a nested session to open if Neovim is opened without arguments
 	nest_if_no_args = true,
+  nest_if_cmds = false,
 	-- Window options
 	window = {
 		-- Options:
@@ -116,5 +117,5 @@ return {
 	one_per = {
 		kitty = true, -- Flatten all instance in the current Kitty session
 		wezterm = true, -- Flatten all instance in the current Wezterm session
-	},
-}
+	}}
+)

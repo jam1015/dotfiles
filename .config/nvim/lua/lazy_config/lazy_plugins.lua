@@ -278,7 +278,7 @@ return {
     --config = true,
     -- or pass configuration with
     --opts = require("plugin_configs.flatten"),
-    opts = require("plugin_configs.flatten"),
+    config = function() require("plugin_configs.flatten") end,
     --priority = 1001,
     --commit = "07e9496191653587336b4c8f8cab02e5c34c7c44",
   },
