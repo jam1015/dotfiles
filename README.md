@@ -149,3 +149,37 @@ Edit `/usr/share/alsa-card-profile/mixer/paths/analog-input-internal-mic.conf`
 
 The next time Git asks for your token, enter it once, and it will be securely remembered for future operations.
 
+
+# timezone
+
+
+
+Or, create a systemd service to update timezone on boot:
+
+```zsh
+sudo nano /etc/systemd/system/update-timezone.service
+```
+
+Add the following:
+
+```
+[Unit]
+Description=Update system timezone based on location
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'timedatectl set-timezone "$(curl -s https://ipapi.co/timezone)"'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then enable the service:
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable update-timezone.service
+```
