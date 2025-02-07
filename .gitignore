@@ -178,4 +178,4 @@ flycheck_*.el
 .emacs.default/last-directory
 .emacs.default/places
 tags
-
+.config/fontconfig/conf.d/09-Directories.conf

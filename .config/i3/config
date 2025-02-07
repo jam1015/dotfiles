@@ -361,7 +361,7 @@ bindsym $mod+r mode "resize"
 
 exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
-exec --no-startup-id redshift-gtk -l 40.44:-79.99 -t 6500:2000
+exec --no-startup-id redshift-gtk -l geoclue2 -t 6500:2000
 
 exec_always --no-startup-id ~/.screenlayout/dual_monitor.sh
 
