@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+PICTURE=/tmp/i3lock.png
+SCREENSHOT="scrot -z $PICTURE"
+
+BLUR="0x10"
+
+$SCREENSHOT
+magick $PICTURE -gaussian-blur $BLUR $PICTURE
+i3lock -i $PICTURE
+rm $PICTURE
