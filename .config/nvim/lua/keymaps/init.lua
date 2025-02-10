@@ -15,8 +15,6 @@ if os.getenv("TMUX") then
 	keymap("t", "<C-w>", "<C-\\><C-n><C-w>", { remap = true, silent = true })
 else
 	--using my favored tmux prefix
-	keymap("n", "<C-a>", "<C-w>", { remap = true, silent = true })
-	keymap("t", "<C-a>", "<C-\\><C-n><C-a>", { remap = true, silent = true })
 	keymap("t", "<C-w>", "<C-\\><C-n><C-w>", { remap = true, silent = true })
 end
 
