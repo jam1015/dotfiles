@@ -198,12 +198,6 @@ return {
     --event = "VeryLazy"
   },
   {
-    'EtiamNullam/white-chocolate.nvim',
-    config = function()
-      require('white-chocolate').setup()
-    end,
-  },
-  {
     "nvim-treesitter/nvim-treesitter",
     event = "VeryLazy",
     enabled = true,
