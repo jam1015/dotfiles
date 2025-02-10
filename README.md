@@ -100,7 +100,7 @@ paru -S xsel xclip
 
 ---
 
-see `arch_packages` for a list of system packages to install on arch. `pacman -Qqet` to query  before moving to a new system.
+see `arch_packages` for a list of system packages to install on arch. `pacman -Qqe` to query  before moving to a new system.
 
 
 
