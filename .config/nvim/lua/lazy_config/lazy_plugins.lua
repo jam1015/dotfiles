@@ -25,6 +25,7 @@ return {
       require('plugin_configs.bionic-reading')
     end,
   },
+
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -195,6 +196,12 @@ return {
       require("plugin_configs.tokyonight")
     end,
     --event = "VeryLazy"
+  },
+  {
+    'EtiamNullam/white-chocolate.nvim',
+    config = function()
+      require('white-chocolate').setup()
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
