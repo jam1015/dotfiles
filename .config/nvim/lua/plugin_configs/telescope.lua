@@ -103,7 +103,9 @@ telescope.setup {
             end
           end
           if index == 1 then
-            require('telescope.actions').select_default(picker.prompt_bufnr)
+            local bufno = tonumber(picker.prompt_bufnr)
+            local to_call = require('telescope.actions').select_default
+            local _ = pcall(to_call, bufno)
           end
         end
       }
@@ -152,5 +154,4 @@ telescope.setup {
 
 telescope.load_extension('file_browser')
 telescope.load_extension('fzf')
-
 
