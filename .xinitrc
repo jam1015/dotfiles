@@ -38,7 +38,7 @@ if [ -f "$usermodmap" ]; then
 	xmodmap "$usermodmap"
 fi
 
-export GTK_THEME=Nordic
+export GTK_THEME=Arc-Dark
 
 
 
