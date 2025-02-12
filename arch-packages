@@ -982,7 +982,8 @@ sbc
 scour
 scrot
 sd
-sdl2
+sdl2-compat
+sdl3
 sed
 serd
 sg3_utils

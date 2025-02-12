@@ -332,8 +332,7 @@ return {
   },
 
   {
-    "jam1015/telescope.nvim",
-    dir = "~/telescope.nvim",
+    "nvim-telescope/telescope.nvim",
     event = "VeryLazy",
     enabled = true,
     dependencies = { "nvim-lua/plenary.nvim",
