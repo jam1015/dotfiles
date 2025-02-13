@@ -941,6 +941,7 @@ qt5-base
 qt5-svg
 qt5-translations
 qt5-x11extras
+qt5ct
 qt6-5compat
 qt6-base
 qt6-declarative
@@ -955,6 +956,7 @@ qt6-translations
 qt6-wayland
 qt6-webchannel
 qt6-webengine
+qt6ct
 ragel
 raptor
 rasqal
