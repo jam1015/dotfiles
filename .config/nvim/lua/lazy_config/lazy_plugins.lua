@@ -291,7 +291,14 @@ return {
       require("plugin_configs.vim-gutentags")
     end
   },
-
+  {
+    "zaldih/themery.nvim",
+    lazy = false,
+    config = function()
+      require("themery").setup({
+      })
+    end
+  },
   {
     "dzfrias/arena.nvim",
     event = "VeryLazy",

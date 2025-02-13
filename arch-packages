@@ -73,11 +73,13 @@ clucene
 clutter
 clutter-gst
 clutter-gtk
+cmake
 cogl
 confuse
 convertlit
 coreutils
 cpio
+cppdap
 cryptsetup
 cscope
 ctags
@@ -304,6 +306,7 @@ jfsutils
 jq
 json-c
 json-glib
+jsoncpp
 kaccounts-integration
 kakoune
 karchive
@@ -524,6 +527,7 @@ libmd
 libmfx
 libmicrodns
 libmm-glib
+libmng
 libmnl
 libmodplug
 libmpc
@@ -717,6 +721,7 @@ mailcap
 make
 man-db
 man-pages
+mariadb-libs
 md4c
 mdadm
 media-player-info
@@ -866,6 +871,7 @@ poppler-glib
 poppler-qt6
 popt
 portaudio
+postgresql-libs
 potrace
 power-profiles-daemon
 ppp
@@ -927,6 +933,8 @@ python-soupsieve
 python-termcolor
 python-typing_extensions
 python-urllib3
+python-urwid
+python-wcwidth
 python-wheel
 python-yaml
 python-zstandard
@@ -970,6 +978,7 @@ redshift-gtk-git
 reflector
 reflector-simple
 reiserfsprogs
+rhash
 ripgrep
 rofi
 rpcbind
@@ -979,6 +988,7 @@ rtmpdump
 rubberband
 rust
 s-nail
+s-tui
 sassc
 sbc
 scour
@@ -1021,6 +1031,7 @@ startup-notification
 stash-bin
 stoken
 stow
+stress
 sudo
 svt-av1
 svt-hevc
@@ -1091,6 +1102,7 @@ tzdata
 uchardet
 udisks2
 unibilium
+unixodbc
 unrar
 unzip
 upower
