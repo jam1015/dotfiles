@@ -18,6 +18,15 @@ return {
     end
 
   },
+  { "jam1015/create-lua-module", config = function() require("create-lua-module") end},
+  {
+    "zaldih/themery.nvim",
+    config = function()
+      require("plugin_configs.themery")
+    end
+  },
+
+
   {
     'FluxxField/bionic-reading.nvim',
     event = "VeryLazy",
@@ -69,7 +78,7 @@ return {
     opts = require("plugin_configs.lazydev_nvim") --enabled = false
 
   },
-  { "Bilal2453/luvit-meta",        lazy = true, event = "VeryLazy" }, -- optional `vim.uv` typings
+  { "Bilal2453/luvit-meta",   lazy = true, event = "VeryLazy" },      -- optional `vim.uv` typings
   {
     "leath-dub/snipe.nvim",
     enabled = false,
@@ -168,7 +177,7 @@ return {
     end
   },
 
-  { "meznaric/key-analyzer.nvim", enabled = false,   opts = {} },
+  { "meznaric/key-analyzer.nvim",  enabled = false, opts = {} },
   {
     "jam1015/YankAssassin.nvim",
     event = "VeryLazy",
@@ -186,8 +195,8 @@ return {
   --    require("plugin_configs.yanky")
   --  end
   --},
-  { 'sainnhe/everforest',         event = "VeryLazy" },
-  { 'rose-pine/neovim',           name = "rose-pine" },
+  { 'sainnhe/everforest', event = "VeryLazy" },
+  { 'rose-pine/neovim',   name = "rose-pine" },
   {
     "folke/tokyonight.nvim",
     priority = 1000,
