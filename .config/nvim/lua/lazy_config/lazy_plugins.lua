@@ -366,7 +366,12 @@ return {
       require("plugin_keymaps").fzfx()
     end,
   },
-
+{
+  "bassamsdata/namu.nvim",
+    config = function()
+      require("plugin_configs.namu")
+    end
+},
   {
     "nvim-telescope/telescope.nvim",
     event = "VeryLazy",
