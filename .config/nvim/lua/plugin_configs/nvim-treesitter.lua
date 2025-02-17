@@ -13,7 +13,7 @@ require 'nvim-treesitter.configs'.setup {
   },
   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = { "vimdoc", "markdown_inline", "markdown", "vim", "r", "rnoweb", "lua", "c", "python", "html", "typescript", "javascript", "bash", "make",
-    "commonlisp", "json" },
+    "commonlisp", "json","yaml" },
   autopairs = true,
   autotag = { enable = true },
 
