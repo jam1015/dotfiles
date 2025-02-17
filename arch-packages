@@ -203,6 +203,7 @@ gettext
 ghc-libs
 ghostscript
 giflib
+girara
 git
 git-credential-manager-core
 git-delta-git
@@ -263,6 +264,7 @@ gtkmm3
 gtksourceview3
 gtksourceview4
 guile
+gumbo-parser
 gupnp
 gupnp-igd
 gutenprint
@@ -581,6 +583,7 @@ l-smash
 lame
 lapack
 lcms2
+leptonica
 less
 lib2geom
 lib32-acl
@@ -758,6 +761,7 @@ libmpc
 libmpcdec
 libmpeg2
 libmspub
+libmupdf
 libmwaw
 libmysofa
 libndp
@@ -1277,6 +1281,9 @@ tar
 tcl
 tdb
 television
+tesseract
+tesseract-data-afr
+tesseract-data-osd
 texinfo
 texlive-basic
 texlive-bibtexextra
@@ -1424,6 +1431,8 @@ xz
 yad
 yajl
 yyjson
+zathura
+zathura-pdf-mupdf
 zbar
 zeromq
 zimg
