@@ -2,6 +2,9 @@
 # General/System Files
 # -------------------------
 *.lock
+!renv.lock
+.RData
+.Rhistory
 *.log
 *.bak
 *.db
@@ -179,3 +182,4 @@ flycheck_*.el
 .emacs.default/places
 tags
 .config/fontconfig/conf.d/09-Directories.conf
+renv/

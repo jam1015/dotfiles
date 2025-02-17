@@ -29,3 +29,7 @@ _darcs
 arch_packages
 arch-packages
 renv
+renv/
+global-R
+global-R/
+renv.lock
