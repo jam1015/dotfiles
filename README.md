@@ -183,3 +183,15 @@ Then enable the service:
 sudo systemctl daemon-reload
 sudo systemctl enable update-timezone.service
 ```
+
+# R
+
+```r
+# Install renv if you haven't already
+install.packages("renv")
+
+# Initialize renv in the current project
+renv::init()
+```
+
+
