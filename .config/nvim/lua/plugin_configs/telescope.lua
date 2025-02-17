@@ -86,7 +86,9 @@ telescope.setup {
     --   ...
     -- }
     -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
+    colorscheme = {
+      enable_preview = true
+    },     -- builtin picker
     find_files = {
       --theme = "ivy"
       hidden = true,
@@ -154,4 +156,3 @@ telescope.setup {
 
 telescope.load_extension('file_browser')
 telescope.load_extension('fzf')
-

@@ -35,8 +35,14 @@ return {
   },
   {
     "zaldih/themery.nvim",
+    lazy = false,
     config = function()
-      require("plugin_configs.themery")
+      -- Minimal config
+      require("themery").setup({
+        themes = { "paper", "tokyonight", }, -- Your list of installed colorschemes.
+        livePreview = true,             -- Apply theme while picking. Default to true.
+      })
+      --require("plugin_configs.themery")
     end
   },
 
