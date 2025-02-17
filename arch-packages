@@ -991,13 +991,16 @@ nftables
 nilfs-utils
 nitrogen
 nm-connection-editor
+node-gyp
 nodejs-lts-jod
+nodejs-nopt
 nordic-theme
 nordvpn-bin
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
+npm
 npth
 nspr
 nss
@@ -1196,6 +1199,7 @@ qt6-wayland
 qt6-webchannel
 qt6-webengine
 qt6ct
+r
 ragel
 raptor
 rasqal
@@ -1228,6 +1232,7 @@ sd
 sdl2-compat
 sdl3
 sed
+semver
 serd
 sg3_utils
 shaderc
@@ -1309,11 +1314,13 @@ thin-provisioning-tools
 thunar
 thunar-volman
 tinysparql
+tk
 tldr
 tmux
 tpm2-tss
 tree-sitter
 tree-sitter-c
+tree-sitter-cli
 tree-sitter-lua
 tree-sitter-markdown
 tree-sitter-query

@@ -245,7 +245,7 @@ return {
     dependencies = {
       { "onsails/lspkind.nvim",       event = "VeryLazy" },
       { "hrsh7th/cmp-nvim-lsp",       event = "VeryLazy" },
-      --{ "R-nvim/cmp-r",               event = "VeryLazy" },
+      { "R-nvim/cmp-r",               event = "VeryLazy" },
       { "hrsh7th/cmp-nvim-lua",       event = "VeryLazy" },
       { "hrsh7th/cmp-buffer",         event = "VeryLazy" },
       { "hrsh7th/cmp-path",           event = "VeryLazy" },
