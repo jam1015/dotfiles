@@ -11,14 +11,6 @@
 # )
 # )
 
-# Activate our "global" renv environment stored in ~/dotfiles/global-R
-if (requireNamespace("renv", quietly = TRUE)) {
-  renv::activate("~/dotfiles/global-R")
-  # Point renv to snapshot the primary system library
-  renv::snapshot(library = .libPaths()[1], prompt = FALSE)
-  # Ensure auto.snapshot is enabled for future package changes
-  renv::settings$auto.snapshot(TRUE)
-}
 
 options(menu.graphics = FALSE)
 #invisible(require(colorout))
