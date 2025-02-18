@@ -3,7 +3,70 @@
 
 ### CRAN PACKAGES ###
 
-cran_packages <- c("dplyr", "ggplot2", "tidyr")
+cran_packages <- c("dplyr", "ggplot2", "tidyr",
+"askpass"        ,   "backports"     ,    "base64enc"        , 
+"bit"            ,   "bit64"         ,    "blob"             , 
+"broom"          ,   "bslib"         ,    "cachem"           , 
+"callr"          ,   "cellranger"    ,    "cli"              , 
+"clipr"          ,   "colorspace"    ,    "conflicted"       , 
+"cpp11"          ,   "crayon"        ,    "curl"             , 
+"data.table"     ,   "DBI"           ,    "dbplyr"           , 
+"digest"         ,   "dplyr"         ,    "dtplyr"           , 
+"evaluate"       ,   "fansi"         ,    "farver"           , 
+"fastmap"        ,   "fontawesome"   ,    "forcats"          , 
+"fs"             ,   "gargle"        ,    "generics"         , 
+"ggplot2"        ,   "glue"          ,    "googledrive"      , 
+"googlesheets4"  ,   "gtable"        ,    "haven"            , 
+"highr"          ,   "hms"           ,    "htmltools"        , 
+"httr"           ,   "ids"           ,    "isoband"          , 
+"jquerylib"      ,   "jsonlite"      ,    "knitr"            , 
+"labeling"       ,   "lifecycle"     ,    "lubridate"        , 
+"magrittr"       ,   "memoise"       ,    "mime"             , 
+"modelr"         ,   "munsell"       ,    "NCmisc"           , 
+"nvimcom"        ,   "openssl"       ,    "pillar"           , 
+"pkgconfig"      ,   "prettyunits"   ,    "processx"         , 
+"progress"       ,   "ps"            ,    "purrr"            , 
+"R.cache"        ,   "R.methodsS3"   ,    "R.oo"             , 
+"R.utils"        ,   "R6"            ,    "ragg"             , 
+"rappdirs"       ,   "RColorBrewer"  ,    "reader"           , 
+"readr"          ,   "readxl"        ,    "rematch"          , 
+"rematch2"       ,   "renv"          ,    "reprex"           , 
+"rlang"          ,   "rmarkdown"     ,    "rstudioapi"       , 
+"rvest"          ,   "sass"          ,    "scales"           , 
+"selectr"        ,   "stringi"       ,    "stringr"          , 
+"styler"         ,   "sys"           ,    "systemfonts"      , 
+"textshaping"    ,   "tibble"        ,    "tidyr"            , 
+"tidyselect"     ,   "tidyverse"     ,    "timechange"       , 
+"tinytex"        ,   "tzdb"          ,    "utf8"             , 
+"uuid"           ,   "vctrs"         ,    "viridisLite"      , 
+"vroom"          ,   "withr"         ,    "xfun"             , 
+"xml2"           ,   "yaml"          ,    "base"             , 
+"base64enc"      ,   "boot"          ,    "brio"             , 
+"class"          ,   "classInt"      ,    "cluster"          , 
+"codetools"      ,   "colorspace"    ,    "compiler"         , 
+"crayon"         ,   "datasets"      ,    "diffobj"          , 
+"digest"         ,   "e1071"         ,    "evaluate"         , 
+"fansi"          ,   "farver"        ,    "fontBitstreamVera", 
+"fontLiberation" ,   "foreign"       ,    "fs"               , 
+"glue"           ,   "graphics"      ,    "grDevices"        , 
+"grid"           ,   "hexbin"        ,    "highr"            , 
+"jsonlite"       ,   "KernSmooth"    ,    "knitr"            , 
+"labeling"       ,   "lattice"       ,    "magrittr"         , 
+"mapproj"        ,   "maps"          ,    "MASS"             , 
+"Matrix"         ,   "MatrixModels"  ,    "methods"          , 
+"mgcv"           ,   "munsell"       ,    "nlme"             , 
+"nnet"           ,   "nortest"       ,    "parallel"         , 
+"pkgconfig"      ,   "praise"        ,    "prettyunits"      , 
+"proxy"          ,   "ps"            ,    "quantreg"         , 
+"RColorBrewer"   ,   "Rcpp"          ,    "rpart"            , 
+"rprojroot"      ,   "RUnit"         ,    "sp"               , 
+"SparseM"        ,   "spatial"       ,    "splines"          , 
+"stats"          ,   "stats4"        ,    "survival"         , 
+"tcltk"          ,   "testit"        ,    "tinytest"         , 
+"tools"          ,   "units"         ,    "utf8"             , 
+"utils"          ,   "viridisLite"   ,    "withr"            , 
+"xfun"           ,   "yaml"
+)
 
 # Get list of installed packages and available CRAN packages
 installed_pkgs <- installed.packages()[, "Package"]
@@ -36,7 +99,7 @@ if (length(to_install) > 0) {
 
 ### BIOCONDUCTOR PACKAGES ###
 
-bioc_packages <- c("GenomicRanges", "Biostrings")
+bioc_packages <- c("GenomicRanges", "Biostrings","pkgKitten","BiocFileCache")
 
 # Ensure BiocManager is available, then install/update Bioconductor packages.
 if (!requireNamespace("BiocManager", quietly = TRUE)) {
