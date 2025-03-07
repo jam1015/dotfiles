@@ -13,6 +13,7 @@
   :init
   (global-undo-tree-mode 1))
 
+
 (use-package evil
   ;;:after undo-tree
   :init
@@ -42,7 +43,6 @@ is closed."
                  (if force
                      (kill-emacs)
                    (message "Not exiting Emacs. Use :q! to force quit.")))))))))
-
 
       )
 
@@ -98,7 +98,7 @@ is closed."
 
 (use-package evil-god-toggle
   
-  :ensure (:after evil :host github :repo "jam1015/evil-god-toggle" 
+  :ensure (:after evil :host github :repo "jam1015/evil-god-toggle"
                   :build (+elpaca/build-if-new)
                   )
   :config
@@ -109,8 +109,8 @@ is closed."
   (customize-set-variable 'evil-god-toggle-persist-visual-to-god t)
 
   ;; Define Evil key bindings
-  (evil-define-key 'god global-map "C-;" (lambda () (interactive) (god-toggle)))
-  (evil-define-key 'god global-map [escape] (lambda () (interactive) (evil-toggle-from-god-state nil)))
+  (evil-define-key 'god global-map "C-;" (lambda () (interactive) (evil-god-toggle)))
+  (evil-define-key 'god global-map [escape] (lambda () (interactive) (evil-god-toggle-stop-execute-in-god-state nil)))
 
   ;; Set cursor appearance for different states
   (setq evil-god-state-cursor '(box "Red"))
@@ -123,12 +123,12 @@ is closed."
 
 
 
-;;(use-package evil-god-state
-;;  :ensure (:after evil :host github :repo "jam1015/evil-god-state" :build (+elpaca/build-if-new))
-;;  :config
-;;(evil-define-key 'normal global-map "," 'evil-execute-in-god-state)
-;;(evil-define-key 'god global-map [escape] 'evil-god-state-bail)
-;; )
+(use-package evil-god-state
+  :ensure (:after evil :host github :repo "jam1015/evil-god-state" :build (+elpaca/build-if-new))
+  :config
+(evil-define-key 'normal global-map "," 'evil-execute-in-god-state)
+(evil-define-key 'god global-map [escape] 'evil-god-state-bail)
+ )
 
 
 

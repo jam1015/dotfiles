@@ -25,6 +25,37 @@
 ;;	  doom-variable-pitch-font (font-spec :family "Fira Code" :size 8))
 ;;
 
+;; In your $DOOMDIR/config.el
+
+(use-package! nerd-icons
+  :config
+  ;; Optionally, force installation of fonts
+  ;;(nerd-icons-install-fonts t)
+  )
+
+(setq doom-font (font-spec :family "CMU Typewriter Text" :size 20 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "CMU Typewriter Text" :size 20)
+      ;;doom-symbol-font (font-spec :family "Symbols Nerd Font" :size 17)
+      doom-serif-font (font-spec :family "CMU Typewriter Text" :size 20)
+      ;; Optionally, you can set a bigger font for presentations or Doom's big font mode.
+      doom-big-font (font-spec :family "CMU Typewriter Text" :size 34))
+
+
+
+
+
+
+;; If running in a GUI, reload the font settings:
+(when (display-graphic-p)
+  (doom/reload-font))
+
+;; Reload font settings if needed
+(when (display-graphic-p)
+  (doom/reload-font))
+
+;; Reload font settings if needed
+(when (display-graphic-p)
+  (doom/reload-font))
 ;;(setq doom-font (font-spec :family "Menlo" :size 6))
 ;;(setq doom-unicode-font (font-spec :family "all-the-icons"))
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them

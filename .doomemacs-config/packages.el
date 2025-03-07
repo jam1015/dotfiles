@@ -56,4 +56,5 @@
 (package! evil-god-toggle :recipe (:local-repo "~/Documents/evil_god_state_container/evil-god-toggle"))
 
 
+(package! nerd-icons)
 
