@@ -3,8 +3,8 @@ set number
 set mouse=a
 set clipboard+=unnamedplus
 set virtualedit=all
-set scrollback=100000 
-set termguicolors 
+set scrollback=100000
+set termguicolors
 set laststatus=0
 set background=dark
 set ignorecase
@@ -28,4 +28,3 @@ augroup prevent_insert
 	autocmd!
 	autocmd TermEnter * stopinsert
 augroup END
-
