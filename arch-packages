@@ -277,6 +277,7 @@ gumbo-parser
 gupnp
 gupnp-igd
 gutenprint
+gvim
 gzip
 harfbuzz
 harfbuzz-icu
@@ -1425,7 +1426,6 @@ v4l-utils
 vapoursynth
 vi
 vid.stab
-vim
 vim-runtime
 vlc
 vmaf
