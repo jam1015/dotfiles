@@ -22,7 +22,7 @@
 ;; accept. For example:
 ;;
 ;;(setq doom-font (font-spec :family "Fira Code" :size 9 :weight 'semi-light)
-;;	  doom-variable-pitch-font (font-spec :family "Fira Code" :size 8))
+;;	  doom-variable-pitch-font (font-spec :family "Fira Code" :size 10))
 ;;
 
 ;; In your $DOOMDIR/config.el
@@ -33,12 +33,12 @@
   ;;(nerd-icons-install-fonts t)
   )
 
-(setq doom-font (font-spec :family "CMU Typewriter Text" :size 20 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "CMU Typewriter Text" :size 20)
+(setq doom-font (font-spec :family "InputMonoNerdFont" :size 11 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "InputMonoNerdFont" :size 11)
       ;;doom-symbol-font (font-spec :family "Symbols Nerd Font" :size 17)
-      doom-serif-font (font-spec :family "CMU Typewriter Text" :size 20)
+      doom-serif-font (font-spec :family "InputMonoNerdFont" :size 11)
       ;; Optionally, you can set a bigger font for presentations or Doom's big font mode.
-      doom-big-font (font-spec :family "CMU Typewriter Text" :size 34))
+      doom-big-font (font-spec :family "InputMonoNerdFont" :size 34))
 
 
 

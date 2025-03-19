@@ -1,7 +1,7 @@
 (setq inhibit-startup-screen t)
 (blink-cursor-mode 0)
 (setq visible-bell 1)
-(set-frame-font "CodeNewRomanNerdFont-13" t t)
+(set-frame-font "InputMonoNerdFont-8" t t)
 (setq scroll-margin 3)
 (setq scroll-conservatively 10000)
 (save-place-mode 1)
