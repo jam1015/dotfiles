@@ -40,12 +40,18 @@ return {
       -- Minimal config
       require("themery").setup({
         themes = { "paper", "tokyonight", }, -- Your list of installed colorschemes.
-        livePreview = true,             -- Apply theme while picking. Default to true.
+        livePreview = true,                  -- Apply theme while picking. Default to true.
       })
       --require("plugin_configs.themery")
     end
   },
-
+  {
+    "oskarrrrrrr/symbols.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("plugin_configs.symbols")
+    end
+  },
 
   {
     'FluxxField/bionic-reading.nvim',
@@ -90,7 +96,13 @@ return {
       require("plugin_configs.vessel")
     end
   },
-
+  {
+    'HawkinsT/pathfinder.nvim',
+    event = "VeryLazy",
+    config = function()
+      require("plugin_configs.pathfinder")
+    end
+  },
   {
     "folke/lazydev.nvim",
     --event = "VeryLazy",
@@ -366,12 +378,12 @@ return {
       require("plugin_keymaps").fzfx()
     end,
   },
-{
-  "bassamsdata/namu.nvim",
+  {
+    "bassamsdata/namu.nvim",
     config = function()
       require("plugin_configs.namu")
     end
-},
+  },
   {
     "nvim-telescope/telescope.nvim",
     event = "VeryLazy",

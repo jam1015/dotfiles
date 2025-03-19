@@ -174,7 +174,7 @@ dist/
 flycheck_*.el
 /server/
 .projectile
-
+.config/nvim-qt/window-geometry.conf
 .config/font-manager/Sources.xml
 .emacs.default/elpaca/
 .emacs.default/history
