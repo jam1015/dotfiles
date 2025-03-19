@@ -97,13 +97,6 @@ return {
     end
   },
   {
-    'HawkinsT/pathfinder.nvim',
-    event = "VeryLazy",
-    config = function()
-      require("plugin_configs.pathfinder")
-    end
-  },
-  {
     "folke/lazydev.nvim",
     --event = "VeryLazy",
     ft = "lua",                                   -- only load on lua files
