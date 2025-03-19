@@ -58,7 +58,15 @@ endif
 if &t_Co > 2 || has("gui_running")
 "  " Revert with ":syntax off".
 "
+  "set guioptions-=T    " No toolbar
+  "set guioptions-=m    " No menu bar
+  "set guioptions-=r    " No right scrollbar
+  "set guioptions-=l    " No left scrollbar
+  "set showtabline=0    " No tab line
+  "set completeopt-=menu
+  "set completeopt-=menuone
 	syntax on
+  set guifont=InputMono\ Nerd\ Font\ 8
 
   " I like highlighting strings inside C comments.
   " Revert with ":unlet c_comment_strings".
