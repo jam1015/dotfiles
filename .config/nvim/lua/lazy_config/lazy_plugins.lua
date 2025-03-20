@@ -20,15 +20,6 @@ return {
   },
 
   {
-    "zaldih/themery.nvim",
-    lazy = false,
-    config = function()
-      require("themery").setup({
-        require("plugin_configs.themery")
-      })
-    end
-  },
-  {
     "jam1015/create-lua-module",
     config = function() require("create-lua-module") end,
     dependencies = { "jghauser/mkdir.nvim" }
