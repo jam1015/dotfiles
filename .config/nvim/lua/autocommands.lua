@@ -81,7 +81,7 @@ api.nvim_create_autocmd("TermOpen", {
   group = my_term_autocmds,
 })
 
-if vim.version.lt(vim.version(), vim.version.parse('0.10.0')) then
+if vim.version.lt(vim.version(), {0, 10, 0}) then
   vim.cmd([[colorscheme blue]])
   vim.api.nvim_create_autocmd({ 'TermClose' }, {
     group = my_term_autocmds,
@@ -142,6 +142,7 @@ vim.api.nvim_create_autocmd("ModeChanged", {
     vim.opt.showcmd = false
   end,
 })
+
 
 
 --vim.api.nvim_create_autocmd("ModeChanged", {

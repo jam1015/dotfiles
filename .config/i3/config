@@ -142,8 +142,15 @@ floating_modifier $mod
 # start a terminal
 #bindsym $mod+Return exec kitty -o allow_remote_control=yes
 #bindsym $mod+Return exec "source ~/.config/i3/split_same_dir.bash kitty"
-bindsym $mod+Return exec ~/.config/i3/tiny_samedir.bash
+bindsym $mod+Shift+Return exec ~/.config/i3/tiny_samedir_neovide.bash
+bindsym $mod+Return exec ~/.config/i3/tiny_samedir_kitty.bash
+
+
+bindsym $mod+Shift+Return exec ~/.config/i3/tiny_samedir_neovide.bash
+bindsym $mod+Return exec ~/.config/i3/tiny_samedir_kitty.bash
+
 #bindsym $alt+Return exec /home/jordan/Documents/kitty/kitty/launcher/kitty
+bindsym $alt+Shift+Return exec /usr/bin/neovide
 bindsym $alt+Return exec /usr/bin/kitty
 # kill focused window
 bindsym $mod+q kill
@@ -386,3 +393,4 @@ workspace_auto_back_and_forth yes
 ## Please remove the following exec line:
 ########################################################################
 ##exec i3-config-wizard
+

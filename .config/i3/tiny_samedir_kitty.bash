@@ -4,7 +4,7 @@
 USER=$(whoami)
 
 # Construct the filepath with the user-specific filename
-WHEREAMI=$(cat /tmp/whereami_$USER)
+WHEREAMI=$(cat ~/.local/state/zsh/whereami)
 
 # Start kitty terminal emulator with the specific directory
 /usr/bin/kitty --directory="$WHEREAMI"

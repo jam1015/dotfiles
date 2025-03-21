@@ -1,6 +1,8 @@
 # dummy comment 1
 #to install ohmyzsh
 #sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+[ -d ~/.local/state/zsh ] || mkdir -p ~/.local/state/zsh
+
 autoload -Uz compinit && compinit -i
 export PATH="$PATH:/Users/jordanmandel/.local/bin"
 export PATH="$PATH:/Users/jordanmandel/bin"
@@ -161,7 +163,7 @@ precmd_functions+=(setpwd)
 # Define a function that writes the current working directory to /tmp/[pid]
 write_cwd_to_file () {
   local USER=$(whoami)  # Capture the username
-  echo $PWD > /tmp/whereami_$USER  # write the current directory to a user-specific file
+  echo $PWD > ~/.local/state/zsh/whereami  # write the current directory to a user-specific file
 }
 
 # find in file
