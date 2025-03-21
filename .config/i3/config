@@ -146,9 +146,6 @@ bindsym $mod+Shift+Return exec ~/.config/i3/tiny_samedir_neovide.bash
 bindsym $mod+Return exec ~/.config/i3/tiny_samedir_kitty.bash
 
 
-bindsym $mod+Shift+Return exec ~/.config/i3/tiny_samedir_neovide.bash
-bindsym $mod+Return exec ~/.config/i3/tiny_samedir_kitty.bash
-
 #bindsym $alt+Return exec /home/jordan/Documents/kitty/kitty/launcher/kitty
 bindsym $alt+Shift+Return exec /usr/bin/neovide
 bindsym $alt+Return exec /usr/bin/kitty
