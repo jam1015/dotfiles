@@ -46,5 +46,4 @@
 ;;
 ;;
 ;;
-;;;;(load-theme 'nord t)
 

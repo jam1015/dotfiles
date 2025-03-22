@@ -296,12 +296,15 @@ set $darkgrey		#383c4a
 set $grey		#b0b5bd
 set $mediumgrey		#8b8b8b
 set $yellowbrown	#e1b700
-set $darkpurple #520b4d
+set $darkpurple #300030
+set $inactive_brown #8a5224
+set $active_orange# #e36905
+set $newbrown #974503
 
 # define colors for windows:
 #class                   border      bground     text    indicator     child_border
-client.focused           $grey       $purple   $white  $mediumgrey   $mediumgrey
-client.unfocused         $darkblue   $darkpurple   $grey   $darkgrey     $darkgrey
+client.focused           $darkgrey       $darkpurple   $white  $darkgrey   $darkgrey
+client.unfocused         $darkblue   $darkgrey   $white     $darkgrey
 client.focused_inactive  $darkblue   $darkblue   $grey   $black        $black
 client.urgent            $urgentred  $urgentred  $white  $yellowbrown  $yellowbrown
 

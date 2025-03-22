@@ -132,6 +132,9 @@ is closed."
 
 
 
+(use-package solarized-theme
+  :ensure t
+  )
 
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)

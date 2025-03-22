@@ -77,6 +77,7 @@ clutter-gtk
 cmake
 cmark-gfm
 cogl
+colorgrab
 confuse
 containerd
 convertlit
@@ -775,6 +776,7 @@ libmodplug
 libmpc
 libmpcdec
 libmpeg2
+libmspack
 libmspub
 libmupdf
 libmwaw
@@ -1449,6 +1451,8 @@ winetricks
 wireplumber
 woff2
 wpa_supplicant
+wxwidgets-common
+wxwidgets-gtk3
 x264
 x265
 xapp

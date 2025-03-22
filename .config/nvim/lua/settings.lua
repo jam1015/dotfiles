@@ -3,8 +3,8 @@ local set = vim.opt
 vim.cmd([[ highlight Comment cterm=italic gui=italic]])
 vim.g.debug = false
 
-set.bg = "dark"
-local colorscheme = "coffeecat"
+set.bg = "light"
+local colorscheme = "retrobox"
 if os.getenv("DISPLAY") then
   local status_ok = nil
   status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
