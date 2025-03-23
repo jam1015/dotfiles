@@ -72,14 +72,17 @@ else:
     sys.exit(1)
 
 # Define the custom colormap for the Julia set appearance
+def normalize(color):
+    return tuple(component / 255 for component in color)
+
 colors = [
-    (0.0, (50/255, 50/255, 50/255)),  # Lighter grey
-    (0.2, (50/255, 50/255, 50/255)),  # Darker grey
-    (0.4, (220/255, 220/255, 220/255)),  # Pinkish grey
-    (0.6, (255/255, 182/255, 193/255)),  # Lighter pink
-    (0.75, (186/255, 85/255, 211/255)),  # Dark pink
-    (0.85, (75/255, 0/255, 130/255)),    # Lighter purple
-    (1.0, (48/255, 0/255, 48/255))       # Deep purple for the set itself
+    (0.0, normalize((50, 50, 50))),    # Lighter grey
+    (0.2, normalize((50, 50, 50))),    # Darker grey
+    (0.4, normalize((220, 220, 220))), # Pinkish grey
+    (0.6, normalize((255, 182, 193))), # Lighter pink
+    (0.75, normalize((186, 85, 211))), # Dark pink
+    (0.85, normalize((75, 0, 130))),   # Lighter purple
+    (1.0, normalize((48, 0, 48)))      # Deep purple for the set itself
 ]
 
 cmap = LinearSegmentedColormap.from_list('custom_palette', colors, N=256)

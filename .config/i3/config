@@ -297,13 +297,15 @@ set $grey		#b0b5bd
 set $mediumgrey		#8b8b8b
 set $yellowbrown	#e1b700
 set $darkpurple #300030
+set $darkpurple2 #b16286
 set $inactive_brown #8a5224
 set $active_orange# #e36905
 set $newbrown #974503
+set $tan #fbf1c7
 
 # define colors for windows:
 #class                   border      bground     text    indicator     child_border
-client.focused           $darkgrey       $darkpurple   $white  $darkgrey   $darkgrey
+client.focused           $darkgrey   $darkpurple2   $white  $darkgrey   $darkgrey
 client.unfocused         $darkblue   $darkgrey   $white     $darkgrey
 client.focused_inactive  $darkblue   $darkblue   $grey   $black        $black
 client.urgent            $urgentred  $urgentred  $white  $yellowbrown  $yellowbrown
@@ -325,14 +327,14 @@ strip_workspace_numbers yes
 ##strip_workspace_name no
 
 		    colors {
-		    separator          $purple
-		    background         $darkgrey
-		    statusline         $white
-#                          	          	border 		        bg		txt		indicator
-		focused_workspace	$mediumgrey	   	$grey		$darkgrey	$purple
-		active_workspace	$lightblue      	$mediumgrey	$darkgrey	$purple
-		inactive_workspace	$darkgrey   		$darkgrey	$grey		$purple
-		urgent_workspace	$urgentred	    	$urgentred	$white		$purple
+		    separator          $white
+		    background         $tan
+		    statusline         $black
+#                      	border 		    bg	        txt	      indicator
+		focused_workspace	  $black	   	  $newbrown		$black	$purple
+		active_workspace  	$black      	$tan	      $black	$purple
+		inactive_workspace	$tan   		    $tan	      $black		$purple
+		urgent_workspace  	$black	    	$urgentred	$white		$purple
 	}
 }
 
