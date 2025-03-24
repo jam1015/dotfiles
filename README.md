@@ -1,7 +1,10 @@
 # Dotfiles: Master
 
 Dotfiles compatible across all my systems.
+
 Hooks for version control are  in a [separate repo](https://www.github.com/jam1015/dots_hooks).  Clone that and run the setup script.
+
+
 
 # Submodules
 
@@ -22,11 +25,40 @@ or go:
 ```
 
 
+
 # Things to do on install:
 
 - Install `zsh`
+
+```
+paru -S zsh
+```
+
 - chsh to `zsh`
 
+```
+chsh -s /bin/zsh
+```
+
+# set up hooks
+
+```
+git clone git@github.com:jam1015/dots_hooks
+```
+
+run the hooks setup script from within.
+
+```
+cd ~/dots_hooks
+./hooks_setup.bash
+```
+
+From dotfiles run the submodules setup script.
+
+```
+cd ~/dotfies
+../dots_hooks/add_submodules.bash
+```
 
 # How to Remove yay and Install paru
 
@@ -40,11 +72,11 @@ makepkg -si
 ```
 
 
-# Install NodeJS
+# Install NodeJS [superceded by package list]
 
  `sudo pacman -S nodejs npm`
 
-# Font cache
+# Font cache [superceded by package list]
 
 `paru -S ttf-cm-unicode`
 
@@ -66,6 +98,11 @@ title   Linux
 linux   /vmlinuz-linux
 initrd  /initramfs-linux.img
 options root=UUID=your-root-partition-uuid rw systemd.unit=multi-user.target
+```
+
+```
+sudo systemctl disable lightdm.service
+sudo systemctl set-default multi-user.target
 ```
 
 ## BIOS Systems
