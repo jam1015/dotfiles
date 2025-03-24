@@ -71,15 +71,21 @@ cd paru
 makepkg -si
 ```
 
+# Install from Package List
+
+```
+paru -S $(<arch-packages)
+```
 
 # Install NodeJS [superceded by package list]
 
  `sudo pacman -S nodejs npm`
 
-# Font cache [superceded by package list]
+# Font cache [partially superceded by package list]
 
 `paru -S ttf-cm-unicode`
 
+but remember to go:
 
 `fc-cache -r`
 
@@ -89,21 +95,6 @@ in `/etc/default/grub`
 
 `GRUB_CMDLINE_LINUX="systemd.unit=multi-user.target"`
 
-# or update systemd boot
-
-in `/boot/loader/entries/xxxx`
-
-```
-title   Linux
-linux   /vmlinuz-linux
-initrd  /initramfs-linux.img
-options root=UUID=your-root-partition-uuid rw systemd.unit=multi-user.target
-```
-
-```
-sudo systemctl disable lightdm.service
-sudo systemctl set-default multi-user.target
-```
 
 ## BIOS Systems
 
@@ -123,13 +114,29 @@ git config --local submodule.recurse false
 
 in this repo.
 
-# Install Control Programs
+# or update systemd boot
+
+in `/boot/loader/entries/xxxx`
+
+```
+title   Linux
+linux   /vmlinuz-linux
+initrd  /initramfs-linux.img
+options root=UUID=your-root-partition-uuid rw systemd.unit=multi-user.target
+```
+
+```
+sudo systemctl disable lightdm.service
+sudo systemctl set-default multi-user.target
+```
+
+# Install Control Programs [superseded by package list]
 
 ```
 paru -S blueman bluez pasystray redshift
 ```
 
-# Install xsel and xclip
+# Install xsel and xclip [superseded by package list]
 
 ```
 paru -S xsel xclip
@@ -137,11 +144,10 @@ paru -S xsel xclip
 
 ---
 
-see `arch_packages` for a list of system packages to install on arch. `pacman -Qqe` to query  before moving to a new system.
 
 
 
-# hook for  package list
+# hook for  package list iportant: outside of scope of dotfiles
 
 `/etc/pacman.d/hooks/update-installed-packages-list.hook`
 
@@ -194,7 +200,7 @@ The next time Git asks for your token, enter it once, and it will be securely re
 Or, create a systemd service to update timezone on boot:
 
 ```zsh
-sudo nano /etc/systemd/system/update-timezone.service
+sudoedit /etc/systemd/system/update-timezone.service
 ```
 
 Add the following:
