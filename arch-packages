@@ -36,7 +36,6 @@ automake
 avahi
 awesome-terminal-fonts
 b43-fwcutter
-balena-etcher
 base
 base-devel
 bash
@@ -53,6 +52,7 @@ bluez-libs
 bluez-utils
 boost-libs
 breeze-icons
+broadcom-wl-dkms
 brother-hll2300d
 brother-hll2350dw
 brotli
@@ -72,6 +72,7 @@ cblas
 cdparanoia
 cheese
 chromaprint
+cifs-utils
 clucene
 clutter
 clutter-gst
@@ -109,7 +110,9 @@ device-mapper
 dex
 diffutils
 ding-libs
+dkms
 dmd
+dmenu
 dmidecode
 dmraid
 dnsmasq
@@ -135,7 +138,6 @@ editorconfig-core-c
 efibootmgr
 efitools
 efivar
-electron34
 ell
 emacs
 enchant
@@ -195,6 +197,7 @@ fribidi
 fsarchiver
 fuse-common
 fuse2
+fuse3
 fzf
 galculator
 gawk
@@ -281,6 +284,12 @@ gumbo-parser
 gupnp
 gupnp-igd
 gutenprint
+gvfs
+gvfs-afc
+gvfs-gphoto2
+gvfs-mtp
+gvfs-nfs
+gvfs-smb
 gvim
 gzip
 harfbuzz
@@ -513,6 +522,7 @@ hicolor-icon-theme
 hidapi
 highway
 hopscotch-map
+hplip
 hslua-cli
 hunspell
 hwdata
@@ -532,6 +542,7 @@ imath
 imlib2
 inetutils
 inkscape
+intel-ucode
 intltool
 inxi
 iproute2
@@ -599,6 +610,7 @@ l-smash
 lame
 lapack
 lcms2
+ldb
 leancrypto
 leptonica
 less
@@ -740,6 +752,7 @@ libglvnd
 libgme
 libgnomekbd
 libgpg-error
+libgphoto2
 libgsf
 libgtop
 libgudev
@@ -748,6 +761,7 @@ libice
 libidn
 libidn2
 libiec61883
+libieee1284
 libimagequant
 libimobiledevice
 libimobiledevice-glue
@@ -784,6 +798,7 @@ libmpcdec
 libmpeg2
 libmspack
 libmspub
+libmtp
 libmupdf
 libmwaw
 libmysofa
@@ -791,6 +806,7 @@ libndp
 libnetfilter_conntrack
 libnewt
 libnfnetlink
+libnfs
 libnftnl
 libnghttp2
 libnghttp3
@@ -892,6 +908,7 @@ libvpl
 libvpx
 libvterm
 libwacom
+libwbclient
 libwebp
 libwireplumber
 libwnck3
@@ -987,7 +1004,6 @@ mjpegtools
 mlt
 mobile-broadband-provider-info
 modemmanager
-moreutils
 mpdecimal
 mpfr
 mpg123
@@ -1003,6 +1019,7 @@ neon
 neovide
 neovim
 neovim-qt
+net-snmp
 net-tools
 netctl
 netstandard-targeting-pack
@@ -1034,6 +1051,7 @@ nss-mdns
 ntfs-3g
 ntp
 numactl
+numlockx
 nwg-look
 oath-toolkit
 ocl-icd
@@ -1094,14 +1112,11 @@ perl-http-date
 perl-http-message
 perl-http-negotiate
 perl-io-html
-perl-io-tty
-perl-ipc-run
 perl-libwww
 perl-lwp-mediatypes
 perl-mailtools
 perl-net-http
 perl-path-tiny
-perl-time-duration
 perl-timedate
 perl-try-tiny
 perl-uri
@@ -1172,6 +1187,7 @@ python-dateutil
 python-dbus
 python-decorator
 python-defusedxml
+python-distro
 python-executing
 python-filelock
 python-fonttools
@@ -1213,8 +1229,11 @@ python-pygments
 python-pyparsing
 python-pyqt5
 python-pyqt5-sip
+python-pyqt6
+python-pyqt6-sip
 python-pyserial
 python-pyxdg
+python-reportlab
 python-requests
 python-setuptools
 python-shtab
@@ -1298,7 +1317,6 @@ r-sp
 r-sparsem
 r-testit
 r-tinytest
-r-units
 r-utf8
 r-viridislite
 r-withr
@@ -1330,6 +1348,7 @@ runc
 rust
 s-nail
 s-tui
+sane
 sassc
 sbc
 scour
@@ -1353,6 +1372,7 @@ signond
 skia-sharp
 slang
 smartmontools
+smbclient
 snappy
 sndio
 sof-firmware
@@ -1388,6 +1408,7 @@ systemd-libs
 systemd-resolvconf
 systemd-sysvcompat
 taglib
+talloc
 tar
 tcl
 tdb
@@ -1395,6 +1416,7 @@ television
 tesseract
 tesseract-data-afr
 tesseract-data-osd
+tevent
 texinfo
 texlive-basic
 texlive-bibtexextra
@@ -1418,6 +1440,7 @@ texlive-plaingeneric
 texlive-publishers
 thin-provisioning-tools
 thunar
+thunar-archive-plugin
 thunar-volman
 tinysparql
 tk
@@ -1449,6 +1472,7 @@ ttf-liberation
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-common
 ttf-opensans
+tumbler
 twolame
 tzdata
 uchardet
@@ -1460,6 +1484,7 @@ unrar
 unzip
 upower
 usb_modeswitch
+usbmuxd
 usbutils
 util-linux
 util-linux-libs
@@ -1495,6 +1520,7 @@ wxwidgets-gtk3
 x264
 x265
 xapp
+xarchiver
 xbindkeys
 xbitmaps
 xcb-imdkit
@@ -1546,6 +1572,7 @@ xorg-xrdb
 xorg-xset
 xorgproto
 xsel
+xss-lock
 xterm
 xvidcore
 xxhash
