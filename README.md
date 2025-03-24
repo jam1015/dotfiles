@@ -46,7 +46,7 @@ makepkg -si
 
 # Font cache
 
-`paru -S ttf-cm-unicoe`
+`paru -S ttf-cm-unicode`
 
 
 `fc-cache -r`

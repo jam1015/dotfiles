@@ -36,6 +36,7 @@ automake
 avahi
 awesome-terminal-fonts
 b43-fwcutter
+balena-etcher
 base
 base-devel
 bash
@@ -134,6 +135,7 @@ editorconfig-core-c
 efibootmgr
 efitools
 efivar
+electron34
 ell
 emacs
 enchant
@@ -985,6 +987,7 @@ mjpegtools
 mlt
 mobile-broadband-provider-info
 modemmanager
+moreutils
 mpdecimal
 mpfr
 mpg123
@@ -1091,11 +1094,14 @@ perl-http-date
 perl-http-message
 perl-http-negotiate
 perl-io-html
+perl-io-tty
+perl-ipc-run
 perl-libwww
 perl-lwp-mediatypes
 perl-mailtools
 perl-net-http
 perl-path-tiny
+perl-time-duration
 perl-timedate
 perl-try-tiny
 perl-uri
