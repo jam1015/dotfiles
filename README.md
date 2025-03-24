@@ -25,6 +25,16 @@ or go:
 ```
 
 
+# How to Remove yay and Install paru
+
+
+```bash
+sudo pacman -Rns yay
+sudo pacman -S git
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+```
 
 # Things to do on install:
 
@@ -60,16 +70,6 @@ cd ~/dotfies
 ../dots_hooks/add_submodules.bash
 ```
 
-# How to Remove yay and Install paru
-
-
-```bash
-sudo pacman -Rns yay
-sudo pacman -S git
-git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
-```
 
 # Install from Package List
 
@@ -103,6 +103,22 @@ in `/etc/default/grub`
 ## UEFI Systems
 
 `sudo grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg`
+
+# or update systemd boot
+
+in `/boot/loader/entries/xxxx`
+
+```
+title   Linux
+linux   /vmlinuz-linux
+initrd  /initramfs-linux.img
+options root=UUID=your-root-partition-uuid rw systemd.unit=multi-user.target
+```
+
+```
+sudo systemctl disable lightdm.service
+sudo systemctl set-default multi-user.target
+```
 
 # My preferred global Git config is included
 
