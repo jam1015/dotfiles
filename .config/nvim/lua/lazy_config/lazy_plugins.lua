@@ -240,9 +240,9 @@ return {
     end,
     dependencies = {
       { "onsails/lspkind.nvim",       event = "VeryLazy" },
-      { "hrsh7th/cmp-nvim-lsp",       event = "VeryLazy" },
       { "R-nvim/cmp-r",               event = "VeryLazy" },
       { "hrsh7th/cmp-nvim-lua",       event = "VeryLazy" },
+      { "hrsh7th/cmp-nvim-lsp",       event = "VeryLazy" },
       { "hrsh7th/cmp-buffer",         event = "VeryLazy" },
       { "hrsh7th/cmp-path",           event = "VeryLazy" },
       { "hrsh7th/cmp-cmdline",        event = "VeryLazy" },
@@ -264,14 +264,17 @@ return {
     end,
   },
   {
-    "Rentib/cliff.nvim",
+    'aaronik/treewalker.nvim',
     event = "VeryLazy",
-    keys = {
-      { '<c-j>', mode = { 'n', 'v', 'o' }, function() require("cliff").go_down() end },
-      { '<c-k>', mode = { 'n', 'v', 'o' }, function() require("cliff").go_up() end },
-    },
-  },
 
+    -- The following options are the defaults.
+    -- Treewalker aims for sane defaults, so these are each individually optional,
+    -- and setup() does not need to be called, so the whole opts block is optional as well.
+    opts = require("plugin_configs.treewalker"),
+    config = function()
+      require("plugin_keymaps").treewalker()
+    end
+  },
   {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
@@ -281,9 +284,9 @@ return {
       "folke/neodev.nvim"
 
     }, -- "RRethy/vim-illuminate" ,
-    config = function()
-      require("plugin_configs.lsp")
-    end
+    --    config = function()
+    --      require("plugin_configs.lsp")
+    --    end
   },
 
 
@@ -768,6 +771,12 @@ return {
     end
   },
 
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = require("plugin_configs.snacks")
+  },
 
   {
     "ethanholz/nvim-lastplace",

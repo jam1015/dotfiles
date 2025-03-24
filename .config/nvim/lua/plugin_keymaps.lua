@@ -13,8 +13,6 @@ function M.hereterm()
       --{"<C-;>","<cmd>lua require('here-term').kill_terminal()<CR>", desc = "here.term kill" }
     }
   )
-
-
 end
 
 function M.pluginKeymaps(plugin, setup_type)
@@ -67,11 +65,10 @@ end
 
 function M.yankstack()
   wk.add({
-    { "<c-p>",      "<Plug>yankstack_substitute_older_paste",                                                 desc = "Select previous entry through yank history" },
-    { "<c-n>",      "<Plug>yankstack_substitute_newer_paste",                                                     desc = "Select next entry through yank history" },
+    { "<c-p>", "<Plug>yankstack_substitute_older_paste", desc = "Select previous entry through yank history" },
+    { "<c-n>", "<Plug>yankstack_substitute_newer_paste", desc = "Select next entry through yank history" },
   })
 end
-
 
 function M.emmet_vim(setup_type)
   if setup_type == "config" then
@@ -97,12 +94,6 @@ function M.emmet_vim(setup_type)
   else
   end
 end
-
-
-
-
-
-
 
 function M.nvim_treehopper()
   wk.add({
@@ -185,11 +176,17 @@ function M.vim_slime()
   wk.add({
     { "gz",  "<Plug>SlimeMotionSend", desc = "Slime Motion Send" },
     { "gzz", "<Plug>SlimeLineSend",   desc = "Slime Line Send" },
-   mode = "n", silent = false, remap = true })
+    mode = "n",
+    silent = false,
+    remap = true
+  })
 
   wk.add({
     { "gz", "<Plug>SlimeRegionSend", desc = "Slime Region Send", mode = "x" },
-   mode = "x", silent = false, remap = true })
+    mode = "x",
+    silent = false,
+    remap = true
+  })
 end
 
 function M.nvim_cmp()
@@ -363,7 +360,7 @@ end
 function M.flash()
   wk.add({
     { "s", mode = { "n", "x", "o" }, "<cmd>lua  require('flash').jump()<cr>", desc = "Flash" },
-    { "r", mode = "o",               "<cmd>require('flash').remote()<cr>" , desc = "Remote Flash" } ,
+    { "r", mode = "o",               "<cmd>require('flash').remote()<cr>",    desc = "Remote Flash" },
   })
 
   wk.add({
@@ -442,6 +439,24 @@ end
 
 function M.snipe()
   wk.add({ "<leader>bb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu", mode = "n" })
+end
+
+function M.treewalker()
+  -- Movement keymaps for normal and visual modes
+  wk.add({
+    { "<C-k>", "<cmd>Treewalker Up<cr>",    desc = "Treewalker Up" },
+    { "<C-j>", "<cmd>Treewalker Down<cr>",  desc = "Treewalker Down" },
+    { "<C-h>", "<cmd>Treewalker Left<cr>",  desc = "Treewalker Left" },
+    { "<C-l>", "<cmd>Treewalker Right<cr>", desc = "Treewalker Right" },
+  }, { mode = { "n", "v" }, silent = true })
+
+  -- Swapping keymaps for normal mode
+  wk.add({
+    { "<leader>wk", "<cmd>Treewalker SwapUp<cr>",    desc = "Swap Up" },
+    { "<leader>wj", "<cmd>Treewalker SwapDown<cr>",  desc = "Swap Down" },
+    { "<leader>wh", "<cmd>Treewalker SwapLeft<cr>",  desc = "Swap Left" },
+    { "<leader>wl", "<cmd>Treewalker SwapRight<cr>", desc = "Swap Right" },
+  }, { mode = "n", silent = true })
 end
 
 return M

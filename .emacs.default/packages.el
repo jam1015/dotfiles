@@ -116,7 +116,7 @@ is closed."
   (setq evil-god-state-cursor '(box "Red"))
   (setq evil-insert-state-cursor '(bar "Red"))
   (setq evil-visual-state-cursor '(hollow "Red"))
-  (setq evil-normal-state-cursor '(box "White"))
+  (setq evil-normal-state-cursor '(hollow "Black"))
   )
 
 

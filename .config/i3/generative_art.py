@@ -76,8 +76,8 @@ def normalize(color):
     return tuple(component / 255 for component in color)
 
 colors = [
-    (0.0, normalize((50, 50, 50))),    # Lighter grey
-    (0.2, normalize((50, 50, 50))),    # Darker grey
+    (0.0, normalize((251,245,199))),    # Lighter grey
+    (0.2, normalize((218,177,132))),    # Darker grey
     (0.4, normalize((220, 220, 220))), # Pinkish grey
     (0.6, normalize((255, 182, 193))), # Lighter pink
     (0.75, normalize((186, 85, 211))), # Dark pink

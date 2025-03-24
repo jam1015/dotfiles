@@ -52,7 +52,7 @@ else:
         percentleft = 0
 
     # stands for charging
-    color = config.get("color_charging", "yellow")
+    color = config.get("color_charging", "purple")
     FA_LIGHTNING = "<span color='{}'><span font='FontAwesome'>\uf0e7</span></span>".format(color)
 
     # stands for plugged in
@@ -93,8 +93,8 @@ else:
         if percent < 70:
             return config.get("color_70", "#FFFF33")
         if percent < 80:
-            return config.get("color_80", "#FFFF66")
-        return config.get("color_full", "#FFFFFF")
+            return config.get("color_80", "#113073")
+        return config.get("color_full", "#000000")
 
     form =  '<span color="{}">{}%</span>'
     fulltext += form.format(color(percentleft), percentleft)

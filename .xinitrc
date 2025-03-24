@@ -3,7 +3,7 @@
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
-pactl info > /dev/null #makes sure pulse audio is working
+#pactl info > /dev/null #makes sure pulse audio is working
 sysmodmap=/etc/X11/xinit/.Xmodmap
 xdg-settings set default-web-browser firefoxdeveloperedition.desktop
 xdg-mime default firefoxdeveloperedition.desktop x-scheme-handler/http
