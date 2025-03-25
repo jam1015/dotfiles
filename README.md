@@ -184,7 +184,7 @@ Exec = /bin/bash -c 'pacman -Qq > "/home/jordan/dotfiles/arch-packages"'
 ```
 
 
-# fix microphone
+# fix microphone (on framework)
 
 Edit `/usr/share/alsa-card-profile/mixer/paths/analog-input-internal-mic.conf` 
 
@@ -192,6 +192,11 @@ Edit `/usr/share/alsa-card-profile/mixer/paths/analog-input-internal-mic.conf`
 `[element Internal Mic Boost]` volume should be zero.
 `[element Int Mic Boost]` volume should be zero.
 
+# fix webcam (on mbp)
+
+```
+paru -S facetimehd-firmware
+```
 
 # firefox full screen tabs
 
