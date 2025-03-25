@@ -7,7 +7,25 @@ local lisp_lazy = function() --also done vi autocmd in the cmp config
   end
 end
 
+--local is_gui = vim.g.neovide or vim.g.neovim_qt or vim.g.goneovim
+
+--if is_gui then
+--  print("Neovim is running in a GUI!")
+--else
+--  print("Neovim is running in a terminal.")
+--end
+
 return {
+
+
+  {
+    'jam1015/nvim_gui_termquit',
+    dependencies = { "famiu/bufdelete.nvim" },
+    cond = false,--function() return  (vim.g.neovide or vim.g.neovim_qt or vim.g.goneovim) end,
+    config = function()
+        require("nvim_gui_termquit").setup()
+    end
+  },
 
   {
     "folke/flash.nvim",
@@ -488,6 +506,12 @@ return {
 
   { "tpope/vim-fugitive", event = "VeryLazy" },
   { "tpope/vim-repeat",   event = "VeryLazy" },
+
+
+  {
+    'jam1015/nvim_gui_termquit',
+    dependencies = { "famiu/bufdelete.nvim" }
+  },
 
   ({
     "lervag/vimtex",
