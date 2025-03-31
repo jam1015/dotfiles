@@ -553,6 +553,7 @@ iptables-nft
 iputils
 ipython
 iso-codes
+iw
 iwd
 jansson
 jbig2dec
@@ -1519,6 +1520,7 @@ which
 wildmidi
 wine
 winetricks
+wireless_tools
 wireplumber
 woff2
 wpa_supplicant
