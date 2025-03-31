@@ -36,6 +36,9 @@ runtime config/indentline_config.vim
 Pack 'machakann/vim-highlightedyank'
 runtime config/vim-highlightedyank.vim
 
+
+Pack 'altercation/vim-colors-solarized'
+
 """ also hightlights yanks
 "runtime config/FYT.vim
 "Pack 'statox/FYT.vim'

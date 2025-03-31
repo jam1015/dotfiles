@@ -41,7 +41,7 @@ set listchars+=nbsp:⣿
 let g:netrw_liststyle= 3
 let g:netrw_browsex_viewer= "xdg-open"
 set cmdheight=1
-set bg=dark
+set bg=light
 
 " some things for zathura+synctex
 let g:vimtex_view_method = 'zathura'
@@ -105,7 +105,7 @@ if empty($DISPLAY)
 colorscheme elflord
 else
 	try
-		colorscheme sorbet
+		colorscheme solarized
 	catch /^Vim\%((\a\+)\)\=:E/	 " catch all Vim errors
 		colorscheme elflord
 	endtry

@@ -146,6 +146,7 @@ bindsym $mod+Shift+Return exec --no-startup-id ~/.config/i3/tiny_samedir_neovide
 bindsym $mod+Return exec  ~/.config/i3/tiny_samedir_kitty.bash
 
 
+
 #bindsym $alt+Return exec /home/jordan/Documents/kitty/kitty/launcher/kitty
 bindsym $alt+Shift+Return exec --no-startup-id /usr/bin/neovide
 bindsym $alt+Return exec /usr/bin/kitty
@@ -302,7 +303,7 @@ set $darkpurple2 #66147a
 set $inactive_brown #8a5224
 set $active_orange# #e36905
 set $newbrown #974503
-set $tan #fbf1c7
+set $tan #fdf6e3
 
 # define colors for windows:
 #class                   border      bground     text    indicator     child_border
@@ -324,8 +325,8 @@ bar {
 # When strip_workspace_numbers is set to yes,
 # any workspace that has a name of the form
 # “[n][:][NAME]” will display only the name.
-strip_workspace_numbers yes
-##strip_workspace_name no
+#strip_workspace_numbers yes
+strip_workspace_name no
 
 		    colors {
 		    separator          $white

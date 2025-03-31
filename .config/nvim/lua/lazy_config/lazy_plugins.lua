@@ -21,7 +21,7 @@ return {
   {
     'jam1015/nvim_gui_termquit',
     dependencies = { "famiu/bufdelete.nvim" },
-    cond = false,--function() return  (vim.g.neovide or vim.g.neovim_qt or vim.g.goneovim) end,
+    cond = function() return  (vim.g.neovide or vim.g.neovim_qt or vim.g.goneovim) end,
     config = function()
         require("nvim_gui_termquit").setup()
     end
@@ -508,10 +508,6 @@ return {
   { "tpope/vim-repeat",   event = "VeryLazy" },
 
 
-  {
-    'jam1015/nvim_gui_termquit',
-    dependencies = { "famiu/bufdelete.nvim" }
-  },
 
   ({
     "lervag/vimtex",

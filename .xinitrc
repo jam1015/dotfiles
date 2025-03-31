@@ -72,4 +72,5 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 xset dpms 1201 1205 1210
 xset r rate 200 50
 #nm-applet --sm-disable &
+xsetroot -solid "#fdf6e3"
 exec i3
