@@ -196,20 +196,32 @@ Edit `/usr/share/alsa-card-profile/mixer/paths/analog-input-internal-mic.conf`
 
 ```
 paru -S facetimehd-firmware
+paru -S facetimehd-dkms
 ```
+
+but if that doesn't work follow the instructions on the [upstream repo](https://github.com/patjak/facetimehd/wiki).
 
 # firefox full screen tabs
 
 
+manually:
+
+```
 1.    Type about:config on Firefox address bar.
 2.    Search for browser.fullscreen.autohide
 3.    Set it to false
+```
+
+or `firefox -P` and set the profle to `~/.ff_custom` and run `stow`
+The gitignore should be setup to ignore things besides `.ff_custom/user.js`
 
 
 # github
 
-1. `paru -S git-credential-manager-core`
-2. `git config --global credential.helper manager-core`
+```
+paru -S git-credential-manager-core
+git config --global credential.helper manager-core
+```
 
 The next time Git asks for your token, enter it once, and it will be securely remembered for future operations.
 
@@ -246,6 +258,18 @@ Then enable the service:
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable update-timezone.service
+```
+
+# Geoclue
+
+in `/etc/geoclue/geoclue.conf`
+
+add
+
+```
+[redshift]
+allowed=true
+system=true
 ```
 
 # R
