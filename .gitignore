@@ -199,6 +199,7 @@ renv/
 .ff_custom/autofill-profiles.json
 .ff_custom/bookmarkbackups
 .ff_custom/bounce-tracking-protection.sqlite
+.ff_custom/broadcast-listeners.json
 .ff_custom/cache2
 .ff_custom/cert9.db
 .ff_custom/compatibility.ini
