@@ -202,7 +202,6 @@ gc
 gcc
 gcc-fortran
 gcc-libs
-gcolor3
 gcr
 gcr-4
 gd
@@ -744,7 +743,6 @@ libgpg-error
 libgsf
 libgtop
 libgudev
-libhandy
 libheif
 libice
 libidn
@@ -825,8 +823,6 @@ libpipewire
 libplacebo
 libplist
 libpng
-libportal
-libportal-gtk3
 libppd
 libproxy
 libpsl
@@ -1549,7 +1545,6 @@ xorg-xprop
 xorg-xrandr
 xorg-xrdb
 xorg-xset
-xorg-xsetroot
 xorgproto
 xsel
 xterm
