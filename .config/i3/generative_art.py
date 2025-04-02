@@ -5,7 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 import os
+import random
 from matplotlib.colors import LinearSegmentedColormap, Normalize
+
 plt.style.use('dark_background')
 
 # Use current time as random seed
@@ -25,8 +27,12 @@ fractal_type = sys.argv[4]
 # Set maximum iterations for detailed computation
 max_iter = 1250
 
-# Original Julia set computation function
+# --- Fractal Computation Functions ---
+
 def compute_julia_set(h_range, w_range, c_value, max_iterations):
+    """
+    Compute a Julia set for a given complex parameter c_value.
+    """
     y, x = np.ogrid[-1.5:1.5:h_range*1j, -1.5:1.5:w_range*1j]
     z_array = x + y * 1j
     iterations_until_divergence = np.full(z_array.shape, max_iterations, dtype=int)
@@ -42,8 +48,10 @@ def compute_julia_set(h_range, w_range, c_value, max_iterations):
 
     return np.log(iterations_until_divergence + 1)
 
-# Function to generate the Mandelbrot set with early exit and np.square usage
 def mandelbrot(h_range, w_range, max_iterations):
+    """
+    Compute the Mandelbrot set.
+    """
     y, x = np.ogrid[-1.5:1.5:h_range*1j, -2.0:1.0:w_range*1j]
     c = x + y * 1j
     z = np.zeros_like(c)
@@ -52,18 +60,94 @@ def mandelbrot(h_range, w_range, max_iterations):
     for i in range(max_iterations):
         mask = div_time == max_iterations
         if not mask.any():
-            break  # Early exit if all points have diverged
+            break
         z[mask] = np.square(z[mask]) + c[mask]
         diverged = np.abs(z) > 2
         div_time[diverged & mask] = i
 
     return np.log(div_time + 1)
 
-# Determine which set to generate
+# --- Convex Set Sampling on the Complex Plane ---
+
+def random_point_in_triangle(a, b, c):
+    """
+    Sample a point uniformly inside a triangle defined by complex vertices a, b, c.
+    Uses barycentric coordinates.
+    """
+    r1 = np.random.random()
+    r2 = np.random.random()
+    if r1 + r2 > 1:
+        r1, r2 = 1 - r1, 1 - r2
+    return a + r1 * (b - a) + r2 * (c - a)
+
+def triangle_area(a, b, c):
+    """
+    Compute the area of a triangle defined by complex vertices a, b, c.
+    """
+    return 0.5 * abs((b - a).real * (c - a).imag - (b - a).imag * (c - a).real)
+
+def random_point_in_convex_polygon(vertices):
+    """
+    Sample a point uniformly from a convex polygon defined by a list of complex vertices.
+    
+    The polygon is triangulated from the first vertex.
+    """
+    vertices = np.array(vertices)
+    v0 = vertices[0]
+    triangles = []
+    areas = []
+    
+    # Triangulate the polygon: (v0, vertices[i], vertices[i+1])
+    for i in range(1, len(vertices) - 1):
+        a, b, c = v0, vertices[i], vertices[i+1]
+        triangles.append((a, b, c))
+        areas.append(triangle_area(a, b, c))
+        
+    areas = np.array(areas)
+    total_area = areas.sum()
+    probabilities = areas / total_area
+    
+    # Randomly choose a triangle weighted by area
+    index = np.random.choice(len(triangles), p=probabilities)
+    a, b, c = triangles[index]
+    return random_point_in_triangle(a, b, c)
+
+def tuples_to_complex(vertices_tuples):
+    """
+    Convert a list of (x, y) tuples into complex numbers.
+    """
+    return [complex(x, y) for (x, y) in vertices_tuples]
+
+def random_point_from_random_convex_set(convex_sets):
+    """
+    Given a list of convex sets (each defined as a list of (x, y) tuples),
+    randomly select one, convert its vertices to complex numbers, and
+    sample a point uniformly from its interior.
+    
+    Returns:
+      (selected_set, point) where selected_set is the list of tuples.
+    """
+    selected_set = random.choice(convex_sets)
+    selected_set_complex = tuples_to_complex(selected_set)
+    point = random_point_in_convex_polygon(selected_set_complex)
+    return selected_set, point
+
+# Define example convex sets as lists of (x, y) tuples
+convex_sets = [
+    # Example Triangle
+    #[(.2401267,-0.5127249),(0.0944565,0.613290),(0.1043697,-0.6165101)],
+    [(.34,.43),(.33,.48),(.39,.35)],
+    [(0.25,-0.0009488),(0.2616,-0.0020995),(0.2582124,-0.001733)],
+    # Example Quadrilateral
+    #[(0.115, -0.644), (0.1200,-0.63), (0.9907, -0.61), (0.0713, -0.6546)]
+]
+
+# --- Determine Which Fractal Set to Generate ---
+
 if fractal_type == 'julia':
-    # Hard-code the parameter for the Julia set
-    c_value = -0.7577111 + 0.0681141j
-    print(f"Using fixed parameter c_value: {c_value}")
+    # For the Julia set, use a random point from one of the convex sets as the parameter c_value.
+    selected_set, c_value = random_point_from_random_convex_set(convex_sets)
+    print("Using parameter c_value from convex set:", c_value)
     fractal_set = compute_julia_set(int(screen_height), int(screen_width), c_value, max_iter)
 elif fractal_type == 'mandelbrot':
     fractal_set = mandelbrot(int(screen_height), int(screen_width), max_iter)
@@ -71,14 +155,15 @@ else:
     print("Invalid fractal type. Choose either 'mandelbrot' or 'julia'.")
     sys.exit(1)
 
-# Define a function to normalize color components
+# --- Visualization and Saving the Image ---
+
 def normalize(color):
     return tuple(component / 255 for component in color)
 
 colors = [
     (0.0, normalize((253,246,227))),    # Lighter grey
     #(0.2, normalize((251,241,199))),    # Darker grey
-    (0.5, normalize((251,241,199))),    # Pinkish grey
+    (0.5, normalize(( 251,241,199 ))),    # Pinkish grey
     #(0.6, normalize((229, 182, 255))),    # Lighter pink
     (0.75, normalize((186, 85, 211))),    # Dark pink
     (0.85, normalize((116, 120, 131))),   # Lighter purple
@@ -87,7 +172,6 @@ colors = [
 cmap = LinearSegmentedColormap.from_list('custom_palette', colors, N=256)
 norm = Normalize(vmin=0, vmax=fractal_set.max())
 
-# Directly create the figure using exact pixel dimensions
 fig = plt.figure(figsize=(screen_width / 100, screen_height / 100), dpi=100)
 ax = fig.add_axes((0, 0, 1, 1))  # Use the full figure without any padding
 
@@ -96,7 +180,7 @@ ax.imshow(
     cmap=cmap,
     extent=(-1.5, 1.5, -1.5, 1.5),
     origin='lower',
-    interpolation='lanczos',  # No smoothing for precise pixel output
+    interpolation='lanczos',
     norm=norm
 )
 ax.axis('off')

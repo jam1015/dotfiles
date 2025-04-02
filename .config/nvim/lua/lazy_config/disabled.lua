@@ -97,3 +97,33 @@
   --      require("nvim_gui_termquit").setup()
   --  end
   --},
+  --{
+  --  "ggandor/flit.nvim",
+  --  enabled = false,
+  --  event = "VeryLazy",
+  --  --commit = "f60e4b3d49bb5a5e97cfffe66f2e671eb422078e",
+  --  config = function() require("plugin_configs.flit") end,
+  --  dependencies = { { 'tpope/vim-repeat' }, { 'ggandor/leap.nvim' } }
+  --},
+  --{
+  --  -- using leap instead
+  --  "ggandor/leap.nvim",
+  --  enabled = false,
+  --  event = "VeryLazy",
+  --  --commit ="8facf2eb6a378fd7691dce8c8a7b2726823e2408",
+  --  config = function()
+  --    require('plugin_keymaps').leap()
+  --  end
+  --},
+  --{
+  --  "Rentib/cliff.nvim",
+  --  event = "VeryLazy",
+  --  keys = {
+  --    { '<c-j>', mode = { 'n', 'v', 'o' }, function() require("cliff").go_down() end },
+  --    { '<c-k>', mode = { 'n', 'v', 'o' }, function() require("cliff").go_up() end },
+  --  },
+  --},
+  --{
+  --  'Shatur/neovim-session-manager',
+  --  enabled = false
+  --},
