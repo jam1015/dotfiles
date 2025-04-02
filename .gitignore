@@ -187,6 +187,8 @@ renv/
 .ipython/profile_default/startup/
 
 
+
+.ff_custom/*
 .ff_custom/activity-stream.contile.json
 .ff_custom/activity-stream.discovery_stream.json
 .ff_custom/activity-stream.personalization.json
@@ -263,3 +265,4 @@ renv/
 .ff_custom/webappsstore.sqlite
 .ff_custom/webappsstore.sqlite-wal
 .ff_custom/xulstore.json
+!.ff_custom/user.js
