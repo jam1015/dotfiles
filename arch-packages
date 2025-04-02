@@ -1545,7 +1545,6 @@ xorg-xprop
 xorg-xrandr
 xorg-xrdb
 xorg-xset
-xorg-xsetroot
 xorgproto
 xsel
 xterm
