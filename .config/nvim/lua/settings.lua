@@ -64,7 +64,7 @@ set.listchars = set.listchars + 'nbsp:⣿'
 set.number = true
 set.relativenumber = true
 set.equalalways = false
-set.spelllang = "en-custom,es"
+set.spelllang = "en-custom"
 if os.getenv("DISPLAY") then
   set.termguicolors = true
 else
