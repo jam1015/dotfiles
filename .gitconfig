@@ -8,5 +8,6 @@
 [rebase]
 	updateRefs = true
 	autosquash = true
+	reapplyCherryPicks = true
 [credential]
 	helper = manager-core
