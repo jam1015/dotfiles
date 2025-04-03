@@ -7,7 +7,6 @@ set scrollback=100000
 set termguicolors
 set laststatus=0
 set background=dark
-colorscheme blue
 set ignorecase
 set scrolloff=8
 set list
