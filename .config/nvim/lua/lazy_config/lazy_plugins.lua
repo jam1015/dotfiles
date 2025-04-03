@@ -558,7 +558,7 @@ return {
 
   {
     "andymass/vim-matchup",
-    event = "VeryLazy",
+    --event = "VeryLazy",
     --event = { "VeryLazy" },
   },
   {
