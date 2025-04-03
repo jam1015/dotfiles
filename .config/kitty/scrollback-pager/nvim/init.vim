@@ -7,6 +7,7 @@ set scrollback=100000
 set termguicolors
 set laststatus=0
 set background=dark
+colorscheme blue
 set ignorecase
 set scrolloff=8
 set list
@@ -16,7 +17,7 @@ map <silent> q :qa!<CR>
 " Short highlight on yanked text
 augroup highlight_yank
 	autocmd!
-	autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+	autocmd TextYankPost * silent! lua require('vim.hl').on_yank({timeout = 40})
 augroup END
 
 augroup start_at_bottom
