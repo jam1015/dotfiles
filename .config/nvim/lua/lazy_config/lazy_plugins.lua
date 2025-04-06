@@ -21,9 +21,9 @@ return {
   {
     'jam1015/nvim_gui_termquit',
     dependencies = { "famiu/bufdelete.nvim" },
-    cond = function() return (vim.g.neovide or vim.g.neovim_qt or vim.g.goneovim) end,
+    cond = function() return vim.fn.has("gui_running") == 1 end,
     config = function()
-      require("nvim_gui_termquit").setup()
+      require("plugin_configs.nvim_gui_termquit")
     end
   },
 
