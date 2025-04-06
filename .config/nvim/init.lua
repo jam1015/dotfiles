@@ -1,7 +1,7 @@
 -- __ _  _  _  __  _  _
 --(  ( \/ )( \(  )( \/ )!*
 --/    /\ \/ / )( / \/ \!*
---\_)__) \__/ (__)\_)(_/!
+--\_)__) \__/ (__)\_)(_/!*
 
 require('autocommands')  -- ~/.config/nvim/lua/autocommands.lua
 require('keymaps')       -- ~/.config/nvim/lua/keymaps/init.lua
