@@ -628,7 +628,6 @@ return {
 
   {
     'nvim-lualine/lualine.nvim',
-    enabled = true,
     event = "VeryLazy",
     dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
     init = function()
