@@ -10,6 +10,13 @@ require('lazy_config')   -- ~/.config/nvim/lua/lazy_config/lazy_plugins.lua
 require('settings')      -- ~/.config/nvim/lua/settings.lua
 require('keymaps.post')  -- ~/.config/nvim/lua/keymaps/post.lua
 
+--local is_gui = vim.g.neovide or vim.g.neovim_qt or vim.g.goneovim
+--
+--if is_gui then
+--  print("Neovim is running in a GUI!")
+--else
+--  print("Neovim is running in a terminal.")
+--end
 
 --local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 --if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -81,3 +88,4 @@ require('keymaps.post')  -- ~/.config/nvim/lua/keymaps/post.lua
 --    },
 --  },
 --})
+

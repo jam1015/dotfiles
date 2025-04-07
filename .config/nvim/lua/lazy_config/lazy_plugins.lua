@@ -7,13 +7,6 @@ local lisp_lazy = function() --also done vi autocmd in the cmp config
   end
 end
 
-local is_gui = vim.g.neovide or vim.g.neovim_qt or vim.g.goneovim
-
-if is_gui then
-  print("Neovim is running in a GUI!")
-else
-  print("Neovim is running in a terminal.")
-end
 
 return {
   { "ellisonleao/gruvbox.nvim", config = function() require("plugin_configs.gruvbox") end },
@@ -642,6 +635,7 @@ return {
       require('plugin_configs.lualine.initi')
     end,
     config = function()
+      --require('lualine').setup({})
       require('plugin_configs.lualine.config')
     end,
   },
