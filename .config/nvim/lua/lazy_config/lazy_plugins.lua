@@ -655,6 +655,10 @@ return {
   { 'jghauser/mkdir.nvim' },
 
 
+  {
+    'zenbones-theme/zenbones.nvim',
+    dependencies = "rktjmp/lush.nvim",
+  },
 
 
   {
