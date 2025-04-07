@@ -1285,7 +1285,6 @@ r-glue
 r-hexbin
 r-highr
 r-jsonlite
-r-knitr
 r-labeling
 r-magrittr
 r-mapproj

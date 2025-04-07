@@ -110,17 +110,12 @@ M.lsp_flags = {
 }
 
 M.setup = function() -- more setup things
-  local signs = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
-  }
+
   local sign_config_table = {
-    { [vim.diagnostic.severity.ERROR] = "" },
-    { [vim.diagnostic.severity.WARN] = "" },
-    { [vim.diagnostic.severity.HINT] = "" },
-    { [vim.diagnostic.severity.INFO] = "" },
+     [vim.diagnostic.severity.ERROR] = "" ,
+     [vim.diagnostic.severity.WARN] = "" ,
+     [vim.diagnostic.severity.HINT] = "" ,
+     [vim.diagnostic.severity.INFO] = "" ,
   }
 
 
@@ -129,8 +124,7 @@ M.setup = function() -- more setup things
     virtual_text = false,
     -- show signs
     signs = {
-      text = sign_config_table,
-      active = signs,
+       text = sign_config_table ,
     },
     update_in_insert = true,
     underline = true,
