@@ -519,6 +519,7 @@ hunspell
 hwdata
 hwdetect
 hwinfo
+hwloc
 hyphen
 i3-keylist
 i3-wm
@@ -706,6 +707,7 @@ libdca
 libde265
 libdecor
 libdeflate
+libdisplay-info
 libdovi
 libdrm
 libdv
@@ -1043,6 +1045,7 @@ nwg-look
 oath-toolkit
 ocl-icd
 onedrive
+onetbb
 oniguruma
 openal
 openconnect
@@ -1228,6 +1231,7 @@ python-soupsieve
 python-stack-data
 python-termcolor
 python-traitlets
+python-typing-inspection
 python-typing_extensions
 python-urllib3
 python-urwid
