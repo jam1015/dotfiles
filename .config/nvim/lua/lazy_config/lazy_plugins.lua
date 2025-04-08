@@ -10,10 +10,32 @@ end
 
 return {
   { "ellisonleao/gruvbox.nvim", config = function() require("plugin_configs.gruvbox") end },
+  {
+    "rcarriga/nvim-notify",
+    event = "VeryLazy",
+    config = function() require("plugin_configs.nvim-notify") end,
+  },
+  ---
+  {
+    'jam1015/flatten.nvim',
+    --event = "VeryLazy",
+
+    --config = true,
+    -- or pass configuration with
+    --opts = require("plugin_configs.flatten"),
+    config = function() require("plugin_configs.flatten") end,
+    --priority = 1001,
+    --commit = "07e9496191653587336b4c8f8cab02e5c34c7c44",
+  },
 
   {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = require("plugin_configs.which-key")
+  },
+  {
     'jam1015/nvim_gui_termquit',
-    dependencies = { "famiu/bufdelete.nvim" },
+    event = "VeryLazy",
     cond = function() return vim.fn.has("gui_running") == 1 end,
     config = function()
       require("plugin_configs.nvim_gui_termquit")
@@ -63,11 +85,6 @@ return {
     end,
   },
 
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = require("plugin_configs.which-key")
-  },
   {
     'maxbrunsfeld/vim-yankstack',
     event = "VeryLazy",
@@ -289,18 +306,7 @@ return {
     config = function() require("plugin_configs.nvim-lastplace") end
   },
 
-  {
-    'willothy/flatten.nvim',
-    --event = "VeryLazy",
-
-    --config = true,
-    -- or pass configuration with
-    --opts = require("plugin_configs.flatten"),
-    config = function() require("plugin_configs.flatten") end,
-    --priority = 1001,
-    --commit = "07e9496191653587336b4c8f8cab02e5c34c7c44",
-  },
-
+  
   {
     'skywind3000/gutentags_plus',
     event = "VeryLazy",
@@ -409,12 +415,6 @@ return {
       --plugin_configs.nvim-notify
     end,
   },
-  {
-    "rcarriga/nvim-notify",
-    event = "VeryLazy",
-    config = function() require("plugin_configs.nvim-notify") end,
-  },
-  ---
   ("nvim-lua/plenary.nvim"),
   ("nvim-lua/popup.nvim"),
 
