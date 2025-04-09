@@ -133,13 +133,13 @@ fi
 ## done making prompt
 
 # Define the 'glog' function
-glo () {
+glom () {
   git log --graph --all --decorate --oneline --pretty=format:'%C(auto)%h %d %s %cd' --date=short "$@"
 }
 
 
 # Enable git completion for the 'glog' function
-compdef glo=git
+compdef glom=git
 
 
 setopt noauto_pushd
