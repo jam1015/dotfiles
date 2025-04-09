@@ -46,7 +46,9 @@ vim.api.nvim_create_autocmd("TermClose", {
 
 
 local function enterternmode()
-  if vim.fn.mode() == 'n' then -- and not vim.b.splitting_term then
+  --  local ok, is_marked = pcall(vim.api.nvim_buf_get_var, bufnr, "is_main_terminal")
+  --and not is_marked then -- and not vim.b.splitting_term then
+  if vim.fn.mode() == 'n' then
     vim.cmd([[startinsert]])
   end
 end
@@ -66,3 +68,21 @@ api.nvim_create_autocmd("TermOpen", {
   group = my_term_autocmds,
 })
 
+vim.cmd([[echomsg "haha"]])
+
+if vim.version.lt(vim.version(), { 0, 10, 0 }) then
+  vim.cmd([[colorscheme blue]])
+  vim.api.nvim_create_autocmd({ 'TermClose' }, {
+    group = my_term_autocmds,
+    desc = 'Automatically close terminal buffers when started with no arguments and exiting without an error',
+    callback = function(args)
+      if vim.v.event.status == 0 then
+        local info = vim.api.nvim_get_chan_info(vim.bo[args.buf].channel)
+        local argv = info.argv or {}
+        if #argv == 1 and argv[1] == vim.o.shell then
+          vim.cmd({ cmd = 'Bdelete', args = { args.buf }, bang = true })
+        end
+      end
+    end,
+  })
+end

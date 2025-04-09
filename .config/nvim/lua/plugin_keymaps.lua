@@ -40,6 +40,10 @@ function M.pluginKeymaps(plugin, setup_type)
   end
 end
 
+function M.oil()
+  vim.keymap.set("n", "<leader>oo", ":Oil", { remap = false, silent = true })
+end
+
 function M.yanky()
   wk.add({
     { "<leader>pp", function() require("telescope").extensions.yank_history.yank_history({}) end, desc = "Open Yank History" },

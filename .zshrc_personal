@@ -17,9 +17,10 @@ alias vid='emacs --with-profile doom'
 alias vie='emacs'
 alias vin='nvim --cmd "let g:flatten_allow_nesting = v:true"'
 
-alias van="man -P 'nvim -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'" 
-compdef van=man
-export MANPAGER='nvim --clean -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'
+#alias van="man -P 'nvim -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'" 
+#compdef van=man
+export MANPAGER='nvim --clean -c Man! -u ~/.man_nvimrc'
+#scrollback_pager nvim --clean -u ~/.config/kitty/scrollback-pager/nvim/init.vim -c "silent write! /tmp/kitty_scrollback_buffer | term cat /tmp/kitty_scrollback_buffer -"
 alias ptpython='ptpython --vi --dark-bg'
 alias python='python'
 alias pdflatex="pdflatex -synctex=1"

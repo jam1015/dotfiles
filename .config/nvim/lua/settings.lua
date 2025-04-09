@@ -121,7 +121,8 @@ local function setup_tmux_clipboard()
   end
 end
 
-set.guicursor = "n:blinkon0"
+ set.guicursor="n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon0-TermCursor"
+--set.guicursor="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor ,sm:block-blinkwait175-blinkoff150-blinkon175"
 if vim.g.neovide then
   vim.o.guifont = "InputMono Nerd Font:h8"
   vim.g.neovide_position_animation_length = 0.0625

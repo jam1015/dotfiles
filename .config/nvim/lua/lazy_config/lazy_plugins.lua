@@ -15,9 +15,23 @@ return {
     event = "VeryLazy",
     config = function() require("plugin_configs.nvim-notify") end,
   },
-  ---
+  {
+    'stevearc/oil.nvim',
+    config = function()
+      require("plugin_configs.oil_nvim")
+      require("plugin_keymaps").oil()
+    end
+  },
+  {
+    "samjwill/nvim-unception",
+    init = function()
+      -- Optional settings go here!
+      -- e.g.) vim.g.unception_open_buffer_in_new_tab = true
+    end
+  },
   {
     'jam1015/flatten.nvim',
+    enabled = false,
     --event = "VeryLazy",
 
     --config = true,
@@ -35,11 +49,15 @@ return {
   },
   {
     'jam1015/nvim_gui_termquit',
-    event = "VeryLazy",
+    --init = function() require("term_autocmds") end,
     cond = function() return vim.fn.has("gui_running") == 1 end,
+    dir = "~/vim_plugins/nvim_gui_termquit",
     config = function()
       require("plugin_configs.nvim_gui_termquit")
-    end
+    end,
+    dependencies = {
+      "sitiom/nvim-numbertoggle",
+    },
   },
 
   {
@@ -183,7 +201,6 @@ return {
     end
   },
   { 'jam1015/vim-directional-help' },
-
   {
     'jam1015/nvim-smart-termsplit',
     config = function()
@@ -306,7 +323,7 @@ return {
     config = function() require("plugin_configs.nvim-lastplace") end
   },
 
-  
+
   {
     'skywind3000/gutentags_plus',
     event = "VeryLazy",
@@ -563,7 +580,7 @@ return {
   },
 
 
-  { 'windwp/nvim-ts-autotag',  enabled = true,    event = "VeryLazy", },
+  { 'windwp/nvim-ts-autotag', enabled = true,    event = "VeryLazy", },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
     enabled = false,
@@ -583,7 +600,7 @@ return {
     opts = require("plugin_configs.trouble")
   }),
 
-  { "lifecrisis/vim-difforig", event = "VeryLazy" },
+  { "jam1015/vim-difforig",   event = "VeryLazy" },
 
   {
     "lewis6991/gitsigns.nvim",
@@ -725,12 +742,6 @@ return {
     end
   },
 
-  {
-    'stevearc/oil.nvim',
-    config = function()
-      require("plugin_configs.oil_nvim")
-    end
-  },
   {
     "norcalli/nvim-colorizer.lua",
     enabled = false,

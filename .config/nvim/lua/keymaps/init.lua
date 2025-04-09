@@ -35,6 +35,7 @@ cnoreabbrev <expr> yp getcmdtype() == ":" && getcmdline() == "yp" ? "Yp" : "yp"
 ]])
 
 
+
 ------------------------------- general keymaps that can stay
 vim.cmd([[
 

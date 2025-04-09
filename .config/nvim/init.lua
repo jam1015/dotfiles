@@ -6,12 +6,12 @@
 require('autocommands')  -- ~/.config/nvim/lua/autocommands.lua
 require('keymaps')       -- ~/.config/nvim/lua/keymaps/init.lua
 require('lazy_config')   -- ~/.config/nvim/lua/lazy_config/lazy_plugins.lua
--- ~/.config/nvim/lua/plugin_keymaps.lua
+---- ~/.config/nvim/lua/plugin_keymaps.lua
 require('settings')      -- ~/.config/nvim/lua/settings.lua
 require('keymaps.post')  -- ~/.config/nvim/lua/keymaps/post.lua
-
-local is_gui = vim.g.neovide or vim.g.neovim_qt or vim.g.goneovim
-
+--
+--local is_gui = vim.g.neovide or vim.g.neovim_qt or vim.g.goneovim
+--
 --if is_gui then
 --  print("Neovim is running in a GUI!")
 --else
