@@ -29,24 +29,14 @@ return {
       -- e.g.) vim.g.unception_open_buffer_in_new_tab = true
     end
   },
-  {
-    'jam1015/flatten.nvim',
-    enabled = false,
-    --event = "VeryLazy",
-
-    --config = true,
-    -- or pass configuration with
-    --opts = require("plugin_configs.flatten"),
-    config = function() require("plugin_configs.flatten") end,
-    --priority = 1001,
-    --commit = "07e9496191653587336b4c8f8cab02e5c34c7c44",
-  },
 
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = require("plugin_configs.which-key")
   },
+  "tuurep/registereditor",
+
   {
     'jam1015/nvim_gui_termquit',
     --init = function() require("term_autocmds") end,
@@ -54,8 +44,10 @@ return {
     dir = "~/vim_plugins/nvim_gui_termquit",
     config = function()
       require("plugin_configs.nvim_gui_termquit")
+      require("plugin_keymaps").nvim_gui_termquit()
     end,
     dependencies = {
+      "samjwill/nvim-unception",
       "sitiom/nvim-numbertoggle",
     },
   },

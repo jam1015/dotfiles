@@ -1,9 +1,7 @@
 -- see ~/.config/nvim/lua/keymaps/init.lua for other plugins
 -- function that returns keymaps based on name of plugin supplied
 
-local has_wk, wk = pcall(require, "which-key")
-if has_wk then
-end
+local _, wk = pcall(require, "which-key")
 M = {}
 function M.hereterm()
   wk.add(
@@ -13,6 +11,12 @@ function M.hereterm()
       --{"<C-;>","<cmd>lua require('here-term').kill_terminal()<CR>", desc = "here.term kill" }
     }
   )
+end
+
+function M.nvim_gui_termquit()
+  wk.add({
+    { "<localleader>tt", "<Plug>GotoTerminal", desc = "Select previous entry through yank history", mode = "n", remap = false },
+  })
 end
 
 function M.pluginKeymaps(plugin, setup_type)
