@@ -148,7 +148,7 @@ bindsym $mod+Return exec  ~/.config/i3/tiny_samedir_kitty.bash
 
 
 #bindsym $alt+Return exec /home/jordan/Documents/kitty/kitty/launcher/kitty
-bindsym $alt+Shift+Return exec --no-startup-id /usr/bin/neovide
+bindsym $alt+Shift+Return exec --no-startup-id /usr/bin/nvim-qt
 bindsym $alt+Return exec /usr/bin/kitty
 # kill focused window
 bindsym $mod+q kill

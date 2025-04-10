@@ -88,10 +88,16 @@ telescope.setup {
     -- Now the picker_config_key will be applied every time you call this
     colorscheme = {
       enable_preview = true
-    },     -- builtin picker
+    }, -- builtin picker
     find_files = {
       --theme = "ivy"
       hidden = true,
+    },
+    live_grep = {
+      file_ignore_patterns = { 'node_modules', '.git', '.venv' },
+      additional_args = function(_)
+        return { "--hidden" }
+      end
     },
     buffers = {
       --theme = 'ivy',

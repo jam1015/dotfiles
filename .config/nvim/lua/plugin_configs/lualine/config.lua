@@ -71,9 +71,9 @@ end
 --- is the marked terminal. Returns the star if true or an empty string otherwise.
 local function lualine_marked_terminal_star()
   if vim.b.is_main_terminal then
-    return "⛤" --
+    return "⛧" --
   else
-    return "bolzano"
+    return ""
   end
 end
 
