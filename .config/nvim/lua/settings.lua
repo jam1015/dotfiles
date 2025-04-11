@@ -3,7 +3,7 @@ local set = vim.opt
 vim.cmd([[ highlight Comment cterm=italic gui=italic]])
 vim.g.debug = false
 
-set.bg = "light"
+set.bg = "dark"
 local colorscheme = "NeoSolarized"
 if os.getenv("DISPLAY") then
   local status_ok = nil

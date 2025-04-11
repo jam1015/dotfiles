@@ -285,59 +285,59 @@ for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enabl
 for_window [class="Pamac-manager"] floating enable
 for_window [window_role="About"] floating enable
 
-# Define colors variables:
-set $darkbluetrans	#08052b
-set $darkblue		#1c174a
-set $lightblue		#5294e2
-set $urgentred		#e53935
-set $white		#ffffff
-set $black		#000000
-set $purple		#a347ba
-set $darkgrey		#383c4a
-set $grey		#b0b5bd
-set $grey2		#747883
-set $mediumgrey		#8b8b8b
-set $yellowbrown	#e1b700
-set $darkpurple #300030
-set $darkpurple2 #66147a
-set $inactive_brown #8a5224
-set $active_orange# #e36905
-set $newbrown #974503
-set $tan #fdf6e3
+# Define colors variables: (inverted and renamed)
+set $lightyellowtrans  #f7fad4
+set $palebeige         #e3e8b5
+set $darkorange        #ad6b1d
+set $calmcyan          #1ac6ca
+set $pureblack         #000000
+set $purewhite         #ffffff
+set $leafgreen         #5cb845
+set $lightash          #c7c3b5
+set $darktaupe         #4f4a42
+set $taupe             #8b877c
+set $balancedgrey      #747474
+set $electricblue      #1e48ff
+set $mintgreen         #cfffcf
+set $palegreen         #99eb85
+set $skyblue           #75addb
+set $vividblue         #1c96fa
+set $brightblue        #68bafc
+set $deepnight         #02091c
 
 # define colors for windows:
-#class                   border      bground     text    indicator     child_border
-client.focused           $darkgrey   $purple   $white  $darkgrey   $darkgrey
-client.unfocused         $darkblue   $grey2   $white     $darkgrey
-client.focused_inactive  $darkblue   $darkblue   $grey   $black        $black
-client.urgent            $urgentred  $urgentred  $white  $yellowbrown  $yellowbrown
+#               border         background    text        indicator   child_border
+client.focused           $lightash   $leafgreen   $pureblack  $lightash   $lightash
+client.unfocused         $palebeige  $taupe       $pureblack  $lightash
+client.focused_inactive  $palebeige  $palebeige   $darktaupe  $purewhite  $purewhite
+client.urgent            $calmcyan   $calmcyan    $pureblack  $electricblue  $electricblue
 
 bar {
 		font pango: InputMonoNerdFont 12
 		status_command i3blocks -c ~/.config/i3/endeavour_untouched/i3blocks.conf
-	    	position top
-#	    	i3bar_command i3bar --transparency
+	    position top
+#	    i3bar_command i3bar --transparency
 # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
 # reference: https://i3wm.org/docs/userguide.html#_tray_output
-		    tray_output primary
-		    tray_padding 0
+		tray_output primary
+		tray_padding 0
 
 # When strip_workspace_numbers is set to yes,
 # any workspace that has a name of the form
 # “[n][:][NAME]” will display only the name.
 #strip_workspace_numbers yes
-strip_workspace_name no
+		strip_workspace_name no
 
-		    colors {
-		    separator          $white
-		    background         $tan
-		    statusline         $black
-#                      	border 		    bg	        txt	      indicator
-		focused_workspace	  $black	   	  $newbrown		$black	$purple
-		active_workspace  	$black      	$tan	      $black	$purple
-		inactive_workspace	$tan   		    $tan	      $black		$purple
-		urgent_workspace  	$black	    	$urgentred	$white		$purple
-	}
+		colors {
+			separator          $pureblack
+			background         $deepnight
+			statusline         $purewhite
+#                       border       bg            txt        indicator
+			focused_workspace	  $purewhite	   $brightblue	$purewhite	$leafgreen
+			active_workspace  	  $purewhite       $deepnight   $purewhite	$leafgreen
+			inactive_workspace	  $deepnight	   $deepnight	$purewhite	$leafgreen
+			urgent_workspace  	  $purewhite	   $calmcyan	$pureblack	$leafgreen
+		}
 }
 
 # resize window (you can also use the mouse for that)
@@ -397,4 +397,3 @@ workspace_auto_back_and_forth yes
 ## Please remove the following exec line:
 ########################################################################
 ##exec i3-config-wizard
-

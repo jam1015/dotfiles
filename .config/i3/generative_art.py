@@ -162,13 +162,11 @@ def normalize(color):
     return tuple(component / 255 for component in color)
 
 colors = [
-    (0.0, normalize((253,246,227))),    # Lighter grey
-    #(0.2, normalize((251,241,199))),    # Darker grey
-    (0.5, normalize(( 251,241,199 ))),    # Pinkish grey
-    #(0.6, normalize((229, 182, 255))),    # Lighter pink
-    (0.75, normalize((186, 85, 211))),    # Dark pink
-    (0.85, normalize((116, 120, 131))),   # Lighter purple
-    (1.0, normalize((49, 10, 58)))        # Deep purple for the set itself
+    (0.0, normalize((2, 9, 28))),    # Inverted from (253,246,227)
+    (0.5, normalize((4, 14, 56))),    # Inverted from (251,241,199)
+    (0.75, normalize((69, 170, 44))), # Inverted from (186,85,211)
+    (0.85, normalize((139, 135, 124))),# Inverted from (116,120,131)
+    (1.0, normalize((206, 245, 197)))  # Inverted from (49,10,58)
 ]
 cmap = LinearSegmentedColormap.from_list('custom_palette', colors, N=256)
 norm = Normalize(vmin=0, vmax=fractal_set.max())
