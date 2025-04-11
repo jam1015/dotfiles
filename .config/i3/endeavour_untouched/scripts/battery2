@@ -49,7 +49,7 @@ else:
         percentleft = 0
 
     # Set a bright violet for charging indication on dark backgrounds.
-    charging_color = "#EE82EE"
+    charging_color = "#9933cc"
     FA_LIGHTNING = "<span color='{}'><span font='FontAwesome'>\uf0e7</span></span>".format(charging_color)
 
     # Icon for plugged in state (default color used by font)
