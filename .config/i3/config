@@ -304,13 +304,15 @@ set $skyblue           #75addb
 set $vividblue         #1c96fa
 set $brightblue        #68bafc
 set $deepnight         #02091c
+set $magenta           #ff00ff
+set $purple            #9933cc
 
 # define colors for windows:
 #               border         background    text        indicator   child_border
-client.focused           $lightash   $leafgreen   $pureblack  $lightash   $lightash
-client.unfocused         $palebeige  $taupe       $pureblack  $lightash
-client.focused_inactive  $palebeige  $palebeige   $darktaupe  $purewhite  $purewhite
-client.urgent            $calmcyan   $calmcyan    $pureblack  $electricblue  $electricblue
+client.focused           $purple   $purple   $purewhite  $balancedgrey   $deepnight
+client.unfocused         $taupe  $pureblack       $purewhite  $balancedgrey    $deepnight
+client.focused_inactive  $taupe  $taupe $palebeige   $darktaupe  $balancedgrey  $purewhite
+client.urgent            $calmcyan   $calmcyan    $pureblack  $balancedgrey  $electricblue
 
 bar {
 		font pango: InputMonoNerdFont 12
@@ -333,10 +335,10 @@ bar {
 			background         $deepnight
 			statusline         $purewhite
 #                       border       bg            txt        indicator
-			focused_workspace	  $purewhite	   $brightblue	$purewhite	$leafgreen
-			active_workspace  	  $purewhite       $deepnight   $purewhite	$leafgreen
+			focused_workspace	    $purple	   $purple	$purewhite	$leafgreen
+			active_workspace  	  $deepnight       $deepnight   $purewhite	$leafgreen
 			inactive_workspace	  $deepnight	   $deepnight	$purewhite	$leafgreen
-			urgent_workspace  	  $purewhite	   $calmcyan	$pureblack	$leafgreen
+			urgent_workspace  	  $darkorange	   $calmcyan	$pureblack	$leafgreen
 		}
 }
 

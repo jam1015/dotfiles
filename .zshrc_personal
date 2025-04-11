@@ -121,13 +121,14 @@ zle -N zle-line-finish
 
 # Define ANSI color variables outside precmd to avoid redefinition
 export LIGHT_MAGENTA=$'\e[95m'
+export MAGENTA=$'\e[35m'
 export RESET_COLOR=$'\e[0m'
 
 
 if [[ "$EUID" = 0 ]]; then
   PS1='%B%F{green}%M:su:%3~%f%b${vcs_info_msg_0_}%B%F{green}${vim_mode}%f%b '
 else
-  PS1='%{$LIGHT_MAGENTA%}%B%M:%3~%{$RESET_COLOR%}${vcs_info_msg_0_}%{$LIGHT_MAGENTA%}${vim_mode}%{$RESET_COLOR%}%b '
+  PS1='%{$MAGENTA%}%B%M:%3~%{$RESET_COLOR%}${vcs_info_msg_0_}%{$MAGENTA%}${vim_mode}%{$RESET_COLOR%}%b '
 fi
 
 ## done making prompt

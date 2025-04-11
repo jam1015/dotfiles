@@ -81,6 +81,7 @@ cmake
 cmark-gfm
 cogl
 colorgrab
+colorpicker
 confuse
 containerd
 convertlit
@@ -207,6 +208,7 @@ gc
 gcc
 gcc-fortran
 gcc-libs
+gcolor3
 gcr
 gcr-4
 gd
@@ -759,6 +761,7 @@ libgphoto2
 libgsf
 libgtop
 libgudev
+libhandy
 libheif
 libice
 libidn
@@ -842,6 +845,8 @@ libpipewire
 libplacebo
 libplist
 libpng
+libportal
+libportal-gtk3
 libppd
 libproxy
 libpsl
