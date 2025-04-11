@@ -41,7 +41,7 @@ return {
     'jam1015/nvim_gui_termquit',
     --init = function() require("term_autocmds") end,
     cond = function() return vim.fn.has("gui_running") == 1 end,
-    dir = "~/vim_plugins/nvim_gui_termquit",
+    --dir = "~/vim_plugins/nvim_gui_termquit",
     config = function()
       require("plugin_configs.nvim_gui_termquit")
       require("plugin_keymaps").nvim_gui_termquit()
