@@ -185,8 +185,5 @@ tags
 renv/
 .ipython/profile_default/history.sqlite
 .ipython/profile_default/startup/
-
-
 .ff_custom/*
-!.ff_custom/
 !.ff_custom/user.js
