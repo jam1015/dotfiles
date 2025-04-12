@@ -1,20 +1,34 @@
 vim.g.loaded_gtags_cscope = 1
 local set = vim.opt
 vim.cmd([[ highlight Comment cterm=italic gui=italic]])
-vim.g.debug = false
+--vim.g.debug = false
 
 set.bg = "dark"
-local colorscheme = "habamax"
-if os.getenv("DISPLAY") then
-  local status_ok = nil
-  status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 
+-- Get the current hour (0-23)
+local current_hour = tonumber(os.date("%H"))
+
+-- Debug output (optional)
+
+--Define your condition: day (6 AM to 5:59 PM) vs. night
+local colorscheme = ""
+if current_hour >= 6 and current_hour < 18 then
+  -- daytime colorscheme
+  colorscheme = "habamax"
+else
+  colorscheme = "NeoSolarized"
+end
+
+
+if os.getenv("DISPLAY") then
+  local status_ok, out = pcall(vim.cmd, "colorscheme " .. colorscheme)
   if not status_ok then
     vim.cmd([[colorscheme elflord]])
   end
 else
   vim.cmd([[colorscheme elflord]])
 end
+
 -- add complete/completeopt
 set.modeline = false
 set.completeopt = 'menu,menuone,noselect'
@@ -121,7 +135,7 @@ local function setup_tmux_clipboard()
   end
 end
 
- set.guicursor="n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon0-TermCursor"
+set.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon0-TermCursor"
 --set.guicursor="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor ,sm:block-blinkwait175-blinkoff150-blinkon175"
 if vim.g.neovide then
   vim.o.guifont = "InputMono Nerd Font:h8"
@@ -131,5 +145,5 @@ if vim.g.neovide then
   vim.g.neovide_cursor_hack = true
   vim.g.neovide_cursor_smooth_blink = true
 end
----- Call the function to set up the clipboard
---setup_tmux_clipboard()
+-- Call the function to set up the clipboard
+setup_tmux_clipboard()

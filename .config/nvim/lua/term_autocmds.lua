@@ -68,7 +68,6 @@ api.nvim_create_autocmd("TermOpen", {
   group = my_term_autocmds,
 })
 
-vim.cmd([[echomsg "haha"]])
 
 if vim.version.lt(vim.version(), { 0, 10, 0 }) then
   vim.cmd([[colorscheme blue]])
