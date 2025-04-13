@@ -337,7 +337,7 @@ bar {
 #                       border       bg            txt        indicator
 			focused_workspace	    $purple	   $purple	$purewhite	$leafgreen
 			active_workspace  	  $deepnight       $deepnight   $purewhite	$leafgreen
-			inactive_workspace	  $deepnight	   $deepnight	$purewhite	$leafgreen
+			inactive_workspace	  $purewhite	   $deepnight	$purewhite	$leafgreen
 			urgent_workspace  	  $darkorange	   $calmcyan	$pureblack	$leafgreen
 		}
 }
