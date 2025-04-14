@@ -98,7 +98,7 @@ is closed."
 
 (use-package evil-god-toggle
   
-  :ensure (:after evil :host github :repo "jam1015/evil-god-toggle"
+  :ensure (:after evil :host github :repo "jam1015/evil-god-toggle" :branch "dev"
                   :build (+elpaca/build-if-new)
                   )
   :config
