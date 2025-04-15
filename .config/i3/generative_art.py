@@ -38,7 +38,7 @@ def compute_julia_set(h_range, w_range, c_value, max_iterations):
     iterations_until_divergence = np.full(z_array.shape, max_iterations, dtype=int)
 
     for i in range(max_iterations):
-        mask = iterations_until_divergence == max_iterations
+        mask = iterations_until_divergence == max_iter
         if not mask.any():
             break  # Early exit if all points have diverged
         z_array[mask] = np.square(z_array[mask]) + c_value
@@ -89,24 +89,24 @@ def triangle_area(a, b, c):
 def random_point_in_convex_polygon(vertices):
     """
     Sample a point uniformly from a convex polygon defined by a list of complex vertices.
-    
+
     The polygon is triangulated from the first vertex.
     """
     vertices = np.array(vertices)
     v0 = vertices[0]
     triangles = []
     areas = []
-    
+
     # Triangulate the polygon: (v0, vertices[i], vertices[i+1])
     for i in range(1, len(vertices) - 1):
         a, b, c = v0, vertices[i], vertices[i+1]
         triangles.append((a, b, c))
         areas.append(triangle_area(a, b, c))
-        
+
     areas = np.array(areas)
     total_area = areas.sum()
     probabilities = areas / total_area
-    
+
     # Randomly choose a triangle weighted by area
     index = np.random.choice(len(triangles), p=probabilities)
     a, b, c = triangles[index]
@@ -123,7 +123,7 @@ def random_point_from_random_convex_set(convex_sets):
     Given a list of convex sets (each defined as a list of (x, y) tuples),
     randomly select one, convert its vertices to complex numbers, and
     sample a point uniformly from its interior.
-    
+
     Returns:
       (selected_set, point) where selected_set is the list of tuples.
     """
@@ -132,16 +132,38 @@ def random_point_from_random_convex_set(convex_sets):
     point = random_point_in_convex_polygon(selected_set_complex)
     return selected_set, point
 
+def generate_convex_vertices(n_points, radius, center=(0, 0)):
+    """
+    Generate the vertices of a regular convex polygon.
+
+    Arguments:
+      n_points: The number of vertices (points) of the polygon.
+      radius: The distance of each vertex from the center.
+      center: A tuple (x, y) representing the center of the polygon.
+
+    Returns:
+      A list of (x, y) tuples representing the vertices of the polygon.
+    """
+    cx, cy = center
+    vertices = []
+    for i in range(n_points):
+        theta = 2 * np.pi * i / n_points  # even distribution around the circle
+        x = cx + radius * np.cos(theta)
+        y = cy + radius * np.sin(theta)
+        vertices.append((x, y))
+    return vertices
+
 # Define example convex sets as lists of (x, y) tuples
 convex_sets = [
-    # Example Triangle
-    #[(,),(,),(,),(,),]
-    [(0.06,0.63),(0.061,0.63),(0.061,0.631),(0.06,0.63),],
-    [(.311,-0.03),(.311,-0.029),(.31, -0.029),(.31,-0.03),]
-    #[(.2401267,-0.5127249),(0.0944565,0.613290),(0.1043697,-0.6165101)],
-    # Example Quadrilateral
-    #[(0.115, -0.644), (0.1200,-0.63), (0.9907, -0.61), (0.0713, -0.6546)]
+    generate_convex_vertices(20, 0.003, center = (.3742, -0.17066)),
+    generate_convex_vertices(20, 0.0003, center = (.2679249, -0.0039145)),
+    generate_convex_vertices(20, 0.0005, center = (-0.1413072, 0.6498438))
 ]
+
+# You can now easily generate a new convex set using the generate_convex_vertices function.
+# For example, to create a pentagon (5 vertices) with a radius of 0.1 centered at (0.2, 0.2):
+new_convex_set = generate_convex_vertices(5, 0.1, center=(0.2, 0.2))
+print("New Convex Set:", new_convex_set)
 
 # --- Determine Which Fractal Set to Generate ---
 
@@ -162,13 +184,11 @@ def normalize(color):
     return tuple(component / 255 for component in color)
 
 colors = [
-    (0.0, normalize((2, 9, 28))),    # Inverted from (253,246,227)
-    (0.5, normalize((4, 14, 56))),    # Inverted from (251,241,199)
-    (0.75, normalize((143,51,204))), # Inverted from (186,85,211)
-    (0.85, normalize((148,51,204))), # Inverted from (186,85,211)
-    (1.0, normalize((153,51,204))), # Inverted from (186,85,211)
-    #(0.85, normalize((139, 135, 124))),# Inverted from (116,120,131)
-    #(1.0, normalize((206, 245, 197)))  # Inverted from (49,10,58)
+    (0.0, normalize((2, 9, 28))),    
+    (0.5, normalize((4, 14, 56))),    
+    (0.75, normalize((143,51,204))), 
+    (0.85, normalize((148,51,204))), 
+    (1.0, normalize((163,51,190))), 
 ]
 cmap = LinearSegmentedColormap.from_list('custom_palette', colors, N=256)
 norm = Normalize(vmin=0, vmax=fractal_set.max())
