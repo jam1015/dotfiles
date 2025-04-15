@@ -164,8 +164,8 @@ def normalize(color):
 colors = [
     (0.0, normalize((2, 9, 28))),    # Inverted from (253,246,227)
     (0.5, normalize((4, 14, 56))),    # Inverted from (251,241,199)
-    (0.75, normalize((153,51,204))), # Inverted from (186,85,211)
-    (0.85, normalize((153,51,204))), # Inverted from (186,85,211)
+    (0.75, normalize((143,51,204))), # Inverted from (186,85,211)
+    (0.85, normalize((148,51,204))), # Inverted from (186,85,211)
     (1.0, normalize((153,51,204))), # Inverted from (186,85,211)
     #(0.85, normalize((139, 135, 124))),# Inverted from (116,120,131)
     #(1.0, normalize((206, 245, 197)))  # Inverted from (49,10,58)
