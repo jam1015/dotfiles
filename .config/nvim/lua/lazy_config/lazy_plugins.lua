@@ -67,6 +67,7 @@ return {
     config = function() require("create-lua-module") end,
     dependencies = { "jghauser/mkdir.nvim" }
   },
+
   {
     "zaldih/themery.nvim",
     lazy = false,

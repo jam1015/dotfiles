@@ -102,11 +102,9 @@ is closed."
                   :build (+elpaca/build-if-new)
                   )
   :config
-  (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle)))
+  (global-set-key (kbd "C-;") (lambda () (interactive) (evil-god-toggle)))
 
-  ;; Set customization variables using defcustoms
-  ;;(customize-set-variable 'evil-god-toggle-persist-visual-to-evil t)
-  (customize-set-variable 'evil-god-toggle-persist-visual-to-god t)
+  (setopt evil-god-toggle-persist-visual-to-god t)
 
   ;; Define Evil key bindings
   (evil-define-key 'god global-map "C-;" (lambda () (interactive) (evil-god-toggle)))
