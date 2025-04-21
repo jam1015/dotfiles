@@ -61,6 +61,7 @@ return {
     end
 
   },
+  'vuciv/golf',
 
   {
     "jam1015/create-lua-module",
