@@ -56,8 +56,6 @@ cnoreabbrev <expr> ter getcmdtype() == ":" && getcmdline() == "ter" ? "Ter" : "t
 if !empty($TMUX)
 	tnoremap <silent> <C-w> <C-\\><C-n><C-w>
 else
-	nmap <silent> <C-a> <C-w>
-	tmap <C-a> <C-\\><C-o>
 endif
 
 let g:toggle_mappings = 1

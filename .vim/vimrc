@@ -15,10 +15,11 @@ runtime config/directionalhelp.vim
 
 call plugpac#Begin()
 
-Pack 'vim/colorschemes'
-
+Pack 'flazz/colorschemes'
+Pack 'afair/vibrantink2'
 Pack 'moll/vim-bbye'
 runtime config/vim-bbye.vim
+Pack 'vuciv/golf'
 
 Pack 'NLKNguyen/papercolor-theme'
 Pack 'sickill/vim-monokai'

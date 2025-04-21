@@ -8,5 +8,3 @@
 [rebase]
 	updateRefs = true
 	autosquash = true
-[credential]
-	helper = manager-core

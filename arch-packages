@@ -120,8 +120,11 @@ dosfstools
 dotnet-host
 dotnet-runtime
 dotnet-runtime-6.0
+dotnet-runtime-8.0
 dotnet-sdk
+dotnet-sdk-8.0
 dotnet-targeting-pack
+dotnet-targeting-pack-8.0
 double-conversion
 downgrade
 dpkg
@@ -219,7 +222,7 @@ ghostscript
 giflib
 girara
 git
-git-credential-manager-core
+git-credential-manager
 git-delta-git
 glances
 glib-networking
@@ -738,6 +741,7 @@ libfreehand
 libfreexl
 libgccjit
 libgcrypt
+libgdiplus
 libgeotiff
 libgirepository
 libgit2
@@ -997,6 +1001,7 @@ mjpegtools
 mlt
 mobile-broadband-provider-info
 modemmanager
+mono
 moreutils
 mpdecimal
 mpfr
@@ -1044,6 +1049,7 @@ nss
 nss-mdns
 ntfs-3g
 ntp
+nuget
 numactl
 nwg-look
 oath-toolkit
@@ -1059,6 +1065,7 @@ openh264
 openjpeg2
 openssh
 openssl
+opentimelineio
 openvpn
 opus
 orc
@@ -1158,6 +1165,7 @@ ptpython
 purpose
 pv
 python
+python-aaf2
 python-annotated-types
 python-appdirs
 python-argcomplete
