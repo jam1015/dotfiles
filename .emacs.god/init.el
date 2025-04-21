@@ -1,55 +1,73 @@
-;;;; Set up package.el to work with MELPA
+(message "Setting up Elpaca")
+(defvar elpaca-installer-version 0.11)
+(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+(defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+(defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+(defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+                              :ref nil :depth 1 :inherit ignore
+                              :files (:defaults "elpaca-test.el" (:exclude "extensions"))
+                              :build (:not elpaca--activate-package)))
+(let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+       (build (expand-file-name "elpaca/" elpaca-builds-directory))
+       (order (cdr elpaca-order))
+       (default-directory repo))
+  (add-to-list 'load-path (if (file-exists-p build) build repo))
+  (unless (file-exists-p repo)
+    (make-directory repo t)
+    (when (<= emacs-major-version 28) (require 'subr-x))
+    (condition-case-unless-debug err
+                                 (if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+                                           ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+                                                                           ,@(when-let* ((depth (plist-get order :depth)))
+                                                                                        (list (format "--depth=%d" depth) "--no-single-branch"))
+                                                                           ,(plist-get order :repo) ,repo))))
+                                           ((zerop (call-process "git" nil buffer t "checkout"
+                                                                 (or (plist-get order :ref) "--"))))
+                                           (emacs (concat invocation-directory invocation-name))
+                                           ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+                                                                 "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+                                           ((require 'elpaca))
+                                           ((elpaca-generate-autoloads "elpaca" repo)))
+                                          (progn (message "%s" (buffer-string)) (kill-buffer buffer))
+                                          (error "%s" (with-current-buffer buffer (buffer-string))))
+                                 ((error) (warn "%s" err) (delete-directory repo 'recursive))))
+  (unless (require 'elpaca-autoloads nil t)
+    (require 'elpaca)
+    (elpaca-generate-autoloads "elpaca" repo)
+    (let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
+(add-hook 'after-init-hook #'elpaca-process-queues)
+(elpaca `(,@elpaca-order))
+
+
+
+
+(elpaca elpaca-use-package
+        ;; Enable Elpaca support for use-package's :ensure keyword.
+        (elpaca-use-package-mode))
+
+(require 'use-package-ensure)
+(setq use-package-always-ensure t);;;; Set up package.el to work with MELPA
 (blink-cursor-mode 0)
 (setq visible-bell 1)
-(require 'package)
-(add-to-list 'package-archives
-'("melpa" . "https://melpa.org/packages/"))
-(when (< emacs-major-version 24)
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-(package-initialize)
-(package-refresh-contents)
-;;
-(unless (package-installed-p 'god-mode)
-  (package-install 'god-mode))
-;;
-;; Enable god-mode
-(require 'god-mode)
-(global-set-key (kbd "<escape>") #'god-mode-all)
-(global-set-key (kbd "C-,") #'god-mode-all)
-(define-key god-local-mode-map (kbd ".") #'repeat)
-(setq god-exempt-major-modes nil)
-(setq god-exempt-predicates nil)
-;;(custom-set-variables
-;; ;; custom-set-variables was added by Custom.
-;; ;; If you edit it by hand, you could mess it up, so be careful.
-;; ;; Your init file should contain only one such instance.
-;; ;; If there is more than one, they won't work right.
-;; '(package-selected-packages '(god-mode)))
-;;(custom-set-faces
-;; ;; custom-set-faces was added by Custom.
-;; ;; If you edit it by hand, you could mess it up, so be careful.
-;; ;; Your init file should contain only one such instance.
-;; ;; If there is more than one, they won't work right.
-;; )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages '(god-mode)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(defun my-enable-god-mode ()
-  (god-mode)
-  (message "God mode enabled."))
 
-(add-hook 'emacs-startup-hook 'my-enable-god-mode)
-(defun my-enable-god-mode ()
-  (god-mode-all)
-  (message "God mode enabled."))
+;;(setq inhibit-startup-screen t)
 
-(add-hook 'after-init-hook 'my-enable-god-mode)
+(use-package god-mode
+  :ensure t
+  ;;:demand t                                  ;; load right away, not lazily
+  :init
+  (setq god-exempt-major-modes nil
+        god-exempt-predicates  nil
+        god-mode-enable-function-key-translation nil)
+  :bind (("<escape>" . god-mode-all)
+         ("C-;"     . god-mode-all))
+  :hook (elpaca-after-init . god-mode-all)
+  )
+
+
+
+
+
+
+
+
