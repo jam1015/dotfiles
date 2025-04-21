@@ -105,7 +105,7 @@ if empty($DISPLAY)
 colorscheme elflord
 else
 	try
-		colorscheme solarized
+		colorscheme challenger_deep
 	catch /^Vim\%((\a\+)\)\=:E/	 " catch all Vim errors
 		colorscheme elflord
 	endtry

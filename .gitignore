@@ -180,6 +180,10 @@ flycheck_*.el
 .emacs.default/history
 .emacs.default/last-directory
 .emacs.default/places
+.emacs.god/elpaca/
+.emacs.god/history
+.emacs.god/last-directory
+.emacs.god/places
 tags
 .config/fontconfig/conf.d/09-Directories.conf
 renv/

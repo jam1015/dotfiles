@@ -245,6 +245,7 @@ gobject-introspection-runtime
 goneovim-bin
 google-chrome
 google-crc32c
+gopass
 gperftools
 gpgme
 gpm

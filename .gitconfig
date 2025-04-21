@@ -8,3 +8,5 @@
 [rebase]
 	updateRefs = true
 	autosquash = true
+[credential]
+	helper = gopass

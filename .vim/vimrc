@@ -15,12 +15,11 @@ runtime config/directionalhelp.vim
 
 call plugpac#Begin()
 
-Pack 'flazz/colorschemes'
+Pack 'mbbill/undotree'
 Pack 'afair/vibrantink2'
 Pack 'moll/vim-bbye'
 runtime config/vim-bbye.vim
 Pack 'vuciv/golf'
-
 Pack 'NLKNguyen/papercolor-theme'
 Pack 'sickill/vim-monokai'
 
@@ -43,7 +42,7 @@ Pack 'altercation/vim-colors-solarized'
 """ also hightlights yanks
 "runtime config/FYT.vim
 "Pack 'statox/FYT.vim'
-
+Pack 'challenger-deep-theme/vim'
 Pack 'maxbrunsfeld/vim-yankstack'
 runtime config/vim-yankstack.vim
 
