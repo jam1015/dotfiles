@@ -96,41 +96,41 @@ is closed."
              :init (setq restart-emacs-restore-frames t)
 )
 
-;;(use-package evil-god-toggle
-;;  :ensure (:after evil :host github :repo "jam1015/evil-god-toggle"
-;;:build (+elpaca/build-if-new)
-;;                  )
-;;  :config
-;;  (global-set-key (kbd "C-;") (lambda () (interactive) (evil-god-toggle)))
-;;
-;;  (setopt evil-god-toggle-persist-visual 'always)
-;;  (setopt evil-god-toggle-global t)
-;;
-;;  ;; Define Evil key bindings
-;;  (evil-define-key '(god god-off) global-map "C-;" (lambda () (interactive) (evil-god-toggle)))
-;;  (evil-define-key 'god global-map [escape] (lambda () (interactive) (evil-god-toggle-stop-choose-state 'normal )))
-;;  (evil-define-key 'god-off global-map "C-;" (lambda () (interactive) (evil-god-toggle)))
-;;  (evil-define-key 'god-off global-map [escape] (lambda () (interactive) (evil-god-toggle-stop-choose-state 'insert)))
-;;  (evil-define-key '(normal) global-map "," #'evil-god-toggle-once)
-;;
-;;  (evil-define-key 'god-off global-map (kbd "<S-escape>") #'evil-god-toggle-bail)
-;;
-;;  ;;idea: Set cursor appearance for different states
-;;  (setq evil-god-state-cursor '(box "Red"))
-;;  (setq evil-god-off-state-cursor '(bar "Green"))
-;;  (setq evil-insert-state-cursor '(bar "Red"))
-;;  (setq evil-visual-state-cursor '(hollow "Red"))
-;;  (setq evil-normal-state-cursor '(hollow "Black"))
-;;  )
+(use-package evil-god-toggle
+  :ensure (:after evil :host github :repo "jam1015/evil-god-toggle"
+:build (+elpaca/build-if-new)
+                  )
+  :config
+  (global-set-key (kbd "C-;") (lambda () (interactive) (evil-god-toggle)))
+
+  (setopt evil-god-toggle-persist-visual 'always)
+  (setopt evil-god-toggle-global t)
+
+  ;; Define Evil key bindings
+  (evil-define-key '(god god-off) global-map "C-;" (lambda () (interactive) (evil-god-toggle)))
+  (evil-define-key 'god global-map [escape] (lambda () (interactive) (evil-god-toggle-stop-choose-state 'normal )))
+  (evil-define-key 'god-off global-map "C-;" (lambda () (interactive) (evil-god-toggle)))
+  (evil-define-key 'god-off global-map [escape] (lambda () (interactive) (evil-god-toggle-stop-choose-state 'insert)))
+  (evil-define-key '(normal) global-map "," #'evil-god-toggle-once)
+
+  (evil-define-key 'god-off global-map (kbd "<S-escape>") #'evil-god-toggle-bail)
+
+  ;;idea: Set cursor appearance for different states
+  (setq evil-god-state-cursor '(box "Red"))
+  (setq evil-god-off-state-cursor '(bar "Green"))
+  (setq evil-insert-state-cursor '(bar "Red"))
+  (setq evil-visual-state-cursor '(hollow "Red"))
+  (setq evil-normal-state-cursor '(hollow "Black"))
+  )
 
 
-( use-package evil-god-state
-
-              :config 
-(evil-define-key 'normal global-map "," 'evil-execute-in-god-state)
-(evil-define-key 'god global-map [escape] 'evil-god-state-bail)
-
-              )
+;;( use-package evil-god-state
+;;
+;;              :config 
+;;(evil-define-key 'normal global-map "," 'evil-execute-in-god-state)
+;;(evil-define-key 'god global-map [escape] 'evil-god-state-bail)
+;;
+;;              )
 
 
 (use-package anisochromatic-theme
@@ -149,4 +149,4 @@ is closed."
   :config
   (xclip-mode 1))  ; Enable system clipboard support for * and + registers
 
-(use-package nord-theme :demand t)
+;;(use-package nord-theme :demand t)

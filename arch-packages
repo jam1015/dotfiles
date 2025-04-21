@@ -222,6 +222,7 @@ ghostscript
 giflib
 girara
 git
+git-credential-gopass
 git-credential-manager
 git-delta-git
 glances
