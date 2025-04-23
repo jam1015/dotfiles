@@ -1,16 +1,16 @@
 [submodule ".config/emacs"]
 	path = .config/emacs
-	url = https//www.github.com/plexus/chemacs2
+	url = https://github.com/plexus/chemacs2
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
-	url = https//www.github.com/ohmyzsh/ohmyzsh.git
+	url = https://github.com/ohmyzsh/ohmyzsh.git
 [submodule ".spacemacs"]
 	path = .spacemacs
-	url = https//www.github.com/syl20bnr/spacemacs
+	url = https://github.com/syl20bnr/spacemacs
 	branch = develop
 [submodule ".doomemacs"]
 	path = .doomemacs
-	url = https//www.github.com/doomemacs/doomemacs
+	url = https://github.com/doomemacs/doomemacs
 [submodule ".vim/pack/minpac/opt/minpac"]
 	path = .vim/pack/minpac/opt/minpac
-	url = https//www.github.com/k-takata/minpac
+	url = https://github.com/k-takata/minpac

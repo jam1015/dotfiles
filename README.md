@@ -48,7 +48,6 @@ Git credential helper:
 
 # How to Remove yay and Install paru
 
-
 ```bash
 sudo pacman -Rns yay
 sudo pacman -S git
