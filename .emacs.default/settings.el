@@ -11,3 +11,8 @@
 (add-hook 'elpaca-after-init-hook
 (lambda () (load-theme 'solarized-light t))
 )
+
+
+(setq debug-on-error t)
+
+

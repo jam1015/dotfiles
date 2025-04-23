@@ -22,40 +22,9 @@
 ;; accept. For example:
 ;;
 ;;(setq doom-font (font-spec :family "Fira Code" :size 9 :weight 'semi-light)
-;;	  doom-variable-pitch-font (font-spec :family "Fira Code" :size 10))
+;;	  doom-variable-pitch-font (font-spec :family "Fira Code" :size 8))
 ;;
 
-;; In your $DOOMDIR/config.el
-
-(use-package! nerd-icons
-  :config
-  ;; Optionally, force installation of fonts
-  ;;(nerd-icons-install-fonts t)
-  )
-
-(setq doom-font (font-spec :family "InputMonoNerdFont" :size 11 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "InputMonoNerdFont" :size 11)
-      ;;doom-symbol-font (font-spec :family "Symbols Nerd Font" :size 17)
-      doom-serif-font (font-spec :family "InputMonoNerdFont" :size 11)
-      ;; Optionally, you can set a bigger font for presentations or Doom's big font mode.
-      doom-big-font (font-spec :family "InputMonoNerdFont" :size 34))
-
-
-
-
-
-
-;; If running in a GUI, reload the font settings:
-(when (display-graphic-p)
-  (doom/reload-font))
-
-;; Reload font settings if needed
-(when (display-graphic-p)
-  (doom/reload-font))
-
-;; Reload font settings if needed
-(when (display-graphic-p)
-  (doom/reload-font))
 ;;(setq doom-font (font-spec :family "Menlo" :size 6))
 ;;(setq doom-unicode-font (font-spec :family "all-the-icons"))
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
