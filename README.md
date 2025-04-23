@@ -28,7 +28,7 @@ or go:
         xclip -selection clipboard < ~/.ssh/id_ed25519.pub
 ```
 
-::: section
+
 ## Configure gopass as Git Credential Manager
 
 On Arch Linux, install, initialize, and register gopass as the global
@@ -36,14 +36,12 @@ Git credential helper:
 
 
 ```
-    sudo pacman -Syu gopass
-    gopass init "Your Name "
-    git config --global credential.helper "/usr/bin/gopass git-credential"
+    paru -S gopass git-credential-gopass
+    gopass init
+    git config --global credential.helper gopass
     git config --global --get credential.helper
 ```
 
-      
-:::
 
 
 
