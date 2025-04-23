@@ -185,9 +185,6 @@ precmd_functions+=(write_cwd_to_file)
 
 alias luamake=/Users/jordanmandel/Documents/lua-language-server/3rd/luamake/luamake
 
-
-
-
 if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init --cmd cd zsh)"
 else
