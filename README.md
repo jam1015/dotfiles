@@ -13,7 +13,11 @@ Include `--recurse submodules` or run `git submodule init` followed by `git subm
 or go:
 
 `git submodule update --recursive --remote`
-# set up ssh
+
+
+# Set up Github Access
+
+## set up ssh
 
 ```bash
         ssh-keygen -t ed25519 -C "jordan.mandel@live.com"
@@ -23,6 +27,24 @@ or go:
         # if xclip is installed
         xclip -selection clipboard < ~/.ssh/id_ed25519.pub
 ```
+
+::: section
+## Configure gopass as Git Credential Manager
+
+On Arch Linux, install, initialize, and register gopass as the global
+Git credential helper:
+
+
+```
+    sudo pacman -Syu gopass
+    gopass init "Your Name "
+    git config --global credential.helper "/usr/bin/gopass git-credential"
+    git config --global --get credential.helper
+```
+
+      
+:::
+
 
 
 # How to Remove yay and Install paru
