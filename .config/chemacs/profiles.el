@@ -6,6 +6,7 @@
                  )
   )
  (
+  ;; note that the environment variable $DOOMDIR is used when running the doom binary
   "doom" . (
             (user-emacs-directory . "~/.doomemacs")
             (env . (("DOOMDIR" . "~/.doomemacs-config")))
