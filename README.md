@@ -249,7 +249,6 @@ The next time Git asks for your token, enter it once, and it will be securely re
 # timezone
 
 
-
 Or, create a systemd service to update timezone on boot:
 
 ```zsh
