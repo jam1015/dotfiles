@@ -124,6 +124,8 @@ export LIGHT_MAGENTA=$'\e[95m'
 export MAGENTA=$'\e[35m'
 export RESET_COLOR=$'\e[0m'
 
+export DOOMDIR='~/.doomemacs-config'
+
 
 if [[ "$EUID" = 0 ]]; then
   PS1='%B%F{green}%M:su:%3~%f%b${vcs_info_msg_0_}%B%F{green}${vim_mode}%f%b '

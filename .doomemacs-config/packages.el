@@ -51,56 +51,53 @@
 ;; ~/.doom.d/packages.el
 (package! undo-tree)
 (package! god-mode)
+(use-package god-mode
+  :config
+  (setq god-exempt-major-modes nil)
+  (setq god-exempt-predicates nil)
+  (setq god-mode-enable-function-key-translation nil)
+  (define-key god-local-mode-map (kbd ".") #'repeat))
 
+(package! evil-god-toggle
+  :recipe (:host github
+                 :repo "jam1015/evil-god-toggle"
+                 )
+)
 
-;;(package! evil-god-toggle :recipe 
-;;  :recipe (:host github
-;;                 :repo "jam1015/evil-god-toggle"
-;;                 :after (god-mode))
-;;)
-;;
 ;;(use-package! evil-god-toggle
 ;;  :config
-;;  ;; 1) Enable the global minor mode (so its keymap + lighter are active)
 ;;  (evil-god-toggle-mode 1)
 ;;
-;;  ;; 2) Core toggle binding in the minor-mode’s keymap
-;;  (define-key evil-god-toggle-mode-map (kbd "C-;")
+;;  (define-key evil-god-toggle-mode-map (kbd "C-,")
 ;;    #'evil-god-toggle--god)
 ;;
-;;  ;; 3) Bind escape from god mode to take you to evil normal mode
 ;;  (evil-define-key 'god
 ;;    evil-god-toggle-mode-map
 ;;    [escape] (lambda () (interactive)
 ;;               (evil-god-toggle--stop-choose-state 'normal)))
 ;;
-;;  ;; 4) Bind escape from god-off mode to take you to evil insert mode
 ;;  (evil-define-key 'god-off
 ;;    evil-god-toggle-mode-map
 ;;    [escape] (lambda () (interactive)
 ;;               (evil-god-toggle--stop-choose-state 'insert)))
 ;;
-;;  ;; 5) Bind  shift+escape to bail from god-off-mode 
 ;;  (evil-define-key 'god-off
 ;;    evil-god-toggle-mode-map
 ;;    (kbd "<S-escape>") #'evil-god-toggle-bail)
 ;;
-;;  ;; 6) bind comma in  evil normal mode to initiate a once-off god mode command
 ;;  (evil-define-key 'normal
 ;;    evil-god-toggle-mode-map
 ;;    "," #'evil-god-toggle--once)
 ;;
-;;  ;; 7) Your visual‑persistence and global flag settings
 ;;  (setq evil-god-toggle-persist-visual 'always
 ;;        evil-god-toggle-global        nil)
 ;;
-;;  ;; 8) Optional: customize your cursors per state
 ;;  (setq evil-god-state-cursor       '(box    "Red")
 ;;        evil-god-off-state-cursor   '(bar    "Green")
 ;;        evil-insert-state-cursor    '(bar    "Red")
 ;;        evil-visual-state-cursor    '(hollow "Red")
 ;;        evil-normal-state-cursor    '(hollow "Black"))
 ;;  )
-;;
-;;(package! nerd-icons)
-;;
+
+(package! nerd-icons)
+
