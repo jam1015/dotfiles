@@ -10,3 +10,5 @@
 	autosquash = true
 [credential]
 	helper = gopass
+[alias]
+	glog = log --graph --all --decorate --oneline --pretty=format:'%C(auto)%h %d %s %cd' --date=short
