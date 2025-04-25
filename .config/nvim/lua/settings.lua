@@ -14,9 +14,9 @@ local current_hour = tonumber(os.date("%H"))
 local colorscheme = ""
 if current_hour >= 6 and current_hour < 18 then
   -- daytime colorscheme
-  colorscheme = "habamax"
+  colorscheme = "bluloco"
 else
-  colorscheme = "NeoSolarized"
+  colorscheme = "bluloco"
 end
 
 

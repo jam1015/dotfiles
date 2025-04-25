@@ -62,6 +62,16 @@ return {
 
   },
   'vuciv/golf',
+{
+  'uloco/bluloco.nvim',
+  lazy = false,
+  priority = 1000,
+  dependencies = { 'rktjmp/lush.nvim' },
+  config = function()
+      require("plugin_configs.bluloco")
+    
+  end,
+},
 
   {
     "jam1015/create-lua-module",

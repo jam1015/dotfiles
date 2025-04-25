@@ -135,17 +135,38 @@ is closed."
 
 ;; In your ~/.doom.d/config.el or ~/.config/doom/config.el
 
-(after! (evil-god-toggle evil god-mode)
-  (global-set-key (kbd "C-;") (lambda () (interactive) (god-toggle t)))
-  (global-set-key (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
-  (setq god_entry_strategy "default")
-  (setq persist_visual t)
-  (setq persist_visual_to_evil t)
-  (setq persist_visual_to_god t)
-  (evil-define-key 'god global-map (kbd "C-;") (lambda () (interactive) (god-toggle t)))
-  (evil-define-key 'god global-map (kbd "C-,") (lambda () (interactive) (god-toggle nil)))
-  (evil-define-key 'god global-map [escape] (lambda () (interactive) (evil-stop-execute-in-god-state nil)))
-  (setq evil-god-state-cursor '(box "Red"))
-  (setq evil-insert-state-cursor '(bar "Red"))
-  (setq evil-visual-state-cursor '(hollow "Red"))
-  (setq evil-normal-state-cursor '(box "White")))
+
+(use-package! evil-god-toggle
+  :config
+  (evil-god-toggle-mode 1)
+
+  (define-key evil-god-toggle-mode-map (kbd "C-,")
+    #'evil-god-toggle--god)
+
+  (evil-define-key 'god
+    evil-god-toggle-mode-map
+    [escape] (lambda () (interactive)
+               (evil-god-toggle--stop-choose-state 'normal)))
+
+  (evil-define-key 'god-off
+    evil-god-toggle-mode-map
+    [escape] (lambda () (interactive)
+               (evil-god-toggle--stop-choose-state 'insert)))
+
+  (evil-define-key 'god-off
+    evil-god-toggle-mode-map
+    (kbd "<S-escape>") #'evil-god-toggle-bail)
+
+  (evil-define-key 'normal
+    evil-god-toggle-mode-map
+    "," #'evil-god-toggle--once)
+
+  (setq evil-god-toggle-persist-visual 'always
+        evil-god-toggle-global        nil)
+
+  (setq evil-god-state-cursor       '(box    "Red")
+        evil-god-off-state-cursor   '(bar    "Green")
+        evil-insert-state-cursor    '(bar    "Red")
+        evil-visual-state-cursor    '(hollow "Red")
+        evil-normal-state-cursor    '(hollow "Black"))
+  )
