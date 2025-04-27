@@ -57,3 +57,4 @@
             (setq default-directory dir)))))))
 
 (add-hook 'emacs-startup-hook #'load-default-directory-if-not-launched-from-terminal)
+(provide 'hooks)

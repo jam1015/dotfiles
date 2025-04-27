@@ -9,10 +9,11 @@
 ;;(add-hook 'window-setup-hook (lambda () (load-theme 'nord t)))
 ;;(load-theme 'nord t)
 (add-hook 'elpaca-after-init-hook
-(lambda () (load-theme 'solarized-light t))
+(lambda () (load-theme 'anisochromatic t))
 )
 
 
 (setq debug-on-error t)
 
+(provide 'settings)
 

@@ -88,3 +88,4 @@
 
 
 (message "Finished setting up elpaca")
+(provide 'elpaca-setup)

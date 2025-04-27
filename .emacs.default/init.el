@@ -1,11 +1,10 @@
-(defun load-relative (file)
-  "Load FILE relative to the current source file."
-  (load-file (expand-file-name file (file-name-directory (or load-file-name buffer-file-name)))))
+;; in init.el, before any `require` calls:
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-(load-relative "hooks.el")
-(load-relative "packages.el")
-(load-relative "mappings.el")
-(load-relative "settings.el")
+(require 'hooks)
+(require 'packages)
+(require 'mappings)
+(require 'settings)
 
 ;;;;(defgroup A-custom-group nil
 ;;;;  "A custom group for my configuration."
