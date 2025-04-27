@@ -294,3 +294,12 @@ system=true
 # R
 
 I keep a list of packages I have installed in `/dotfiles/my_r_packs.r`
+
+
+# Lisp
+
+```
+paru -S sbcl quicklisp
+sbcl --load /usr/share/quicklisp/quicklisp.lisp --eval '(quicklisp-quickstart:install)' --quit
+sbcl --load ~/quicklisp/setup.lisp --eval '(ql:add-to-init-file)' --quit
+```
