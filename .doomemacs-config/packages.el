@@ -51,7 +51,7 @@
 ;; ~/.doom.d/packages.el
 (package! undo-tree)
 (package! god-mode)
-(use-package god-mode
+(use-package! god-mode
   :config
   (setq god-exempt-major-modes nil)
   (setq god-exempt-predicates nil)
