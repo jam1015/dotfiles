@@ -563,6 +563,58 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   )
 
 (defun dotspacemacs/user-config ()
+
+
+
+(use-package evil-god-toggle
+  :config
+  ;; Enable the global minor mode (so its keymap + lighter are active)
+  (evil-god-toggle-mode 1)
+
+  ;; Core toggle binding in the minor-mode’s keymap
+  (define-key evil-god-toggle-mode-map (kbd "C-;")
+    #'evil-god-toggle--god)
+
+  ;; Bind escape from god mode to take you to evil normal mode
+  (evil-define-key 'god
+    evil-god-toggle-mode-map
+    [escape] (lambda () (interactive)
+               (evil-god-toggle--stop-choose-state 'normal)))
+
+  ;; Bind escape from god-off mode to take you to evil insert mode
+  (evil-define-key 'god-off
+    evil-god-toggle-mode-map
+    [escape] (lambda () (interactive)
+               (evil-god-toggle--stop-choose-state 'insert)))
+
+  ;; Bind  shift+escape to bail from god-off-mode 
+  (evil-define-key 'god-off
+    evil-god-toggle-mode-map
+    (kbd "<S-escape>") #'evil-god-toggle-bail)
+
+  ;; Bind comma in  evil normal mode to initiate a once-off god mode command
+  (evil-define-key 'normal
+    evil-god-toggle-mode-map
+    "," #'evil-god-toggle--once)
+
+  ;; Your visual‑persistence and global flag settings
+  (setq evil-god-toggle-persist-visual 'always
+        evil-god-toggle-global        nil)
+
+  ;; Customize your cursors per state
+  (setq evil-god-state-cursor       '(box    "Red")
+        evil-god-off-state-cursor   '(bar    "Green")
+        evil-insert-state-cursor    '(bar    "Red")
+        evil-visual-state-cursor    '(hollow "Red")
+        evil-normal-state-cursor    '(hollow "Black"))
+  )
+
+
+
+
+
+
+
   "Configuration for user code:
 This function is called at the very end of Spacemacs startup, after layer
 configuration.
