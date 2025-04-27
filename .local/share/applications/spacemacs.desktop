@@ -2,7 +2,7 @@
 Name=Spacemacs
 Comment=Launch Emacs with the Spacemacs profile
 Exec=emacs --with-profile spacemacs
-Icon=spacemacs
+Icon=spacemacs-logo
 Type=Application
 Categories=Utility;TextEditor;
 Terminal=false
