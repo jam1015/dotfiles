@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Emacs (Doom Profile)
+Name=Doom Emacs
 Comment=Launch Emacs with the Doom profile
 Exec=emacs --with-profile doom
-Icon=emacs
+Icon=doom
 Type=Application
 Categories=Utility;TextEditor;
 Terminal=false

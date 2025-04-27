@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Spacemacs
+Comment=Launch Emacs with the Spacemacs profile
+Exec=emacs --with-profile spacemacs
+Icon=spacemacs
+Type=Application
+Categories=Utility;TextEditor;
+Terminal=false
