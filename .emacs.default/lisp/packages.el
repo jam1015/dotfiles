@@ -117,14 +117,19 @@ is closed."
   :init (setq restart-emacs-restore-frames t)
   )
 
+(use-package cursor-contraster
+  :ensure (:host github
+                 :repo "jam1015/cursor-contraster"
+                 :after (evil god-mode)))
+
 (use-package evil-god-toggle
   :ensure (:host github
                  :repo "jam1015/evil-god-toggle"
-                 :after (evil god-mode))
+                 :after (evil god-mode cursor-contraster))
   :init
-  (require 'cursor-contraster)
 
   :config
+  (require 'cursor-contraster)
   ;; 1) Enable the global minor mode (so its keymap + lighter are active)
   (evil-god-toggle-mode 1)
 
