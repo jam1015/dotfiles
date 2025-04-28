@@ -51,12 +51,7 @@
 ;; ~/.doom.d/packages.el
 (package! undo-tree)
 (package! god-mode)
-(use-package! god-mode
-  :config
-  (setq god-exempt-major-modes nil)
-  (setq god-exempt-predicates nil)
-  (setq god-mode-enable-function-key-translation nil)
-  (define-key god-local-mode-map (kbd ".") #'repeat))
+
 
 (package! evil-god-toggle
   :recipe (:host github
@@ -64,40 +59,7 @@
                  )
 )
 
-(use-package! evil-god-toggle
-  :config
-  (evil-god-toggle-mode 1)
 
-  (define-key evil-god-toggle-mode-map (kbd "C-,")
-    #'evil-god-toggle--god)
-
-  (evil-define-key 'god
-    evil-god-toggle-mode-map
-    [escape] (lambda () (interactive)
-               (evil-god-toggle--stop-choose-state 'normal)))
-
-  (evil-define-key 'god-off
-    evil-god-toggle-mode-map
-    [escape] (lambda () (interactive)
-               (evil-god-toggle--stop-choose-state 'insert)))
-
-  (evil-define-key 'god-off
-    evil-god-toggle-mode-map
-    (kbd "<S-escape>") #'evil-god-toggle-bail)
-
-  (evil-define-key 'normal
-    evil-god-toggle-mode-map
-    "," #'evil-god-toggle--once)
-
-  (setq evil-god-toggle-persist-visual 'always
-        evil-god-toggle-global        nil)
-
-  (setq evil-god-state-cursor       '(box    "Red")
-        evil-god-off-state-cursor   '(bar    "Green")
-        evil-insert-state-cursor    '(bar    "Red")
-        evil-visual-state-cursor    '(hollow "Red")
-        evil-normal-state-cursor    '(hollow "Black"))
-  )
 
 (package! nerd-icons)
 
