@@ -12,6 +12,8 @@
 (lambda () (load-theme 'anisochromatic t))
 )
 
+(require 'which-key)
+(which-key-mode)
 
 (setq debug-on-error t)
 

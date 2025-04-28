@@ -8,6 +8,8 @@
   (setq god-mode-enable-function-key-translation nil)
   (define-key god-local-mode-map (kbd ".") #'repeat))
 
+(use-package geiser-mit :ensure t)
+
 (use-package undo-tree
   :demand t
   :init
@@ -39,57 +41,7 @@
   :init
   (setq evil-want-keybinding nil)
 
-  (with-eval-after-load 'evil
-    (evil-define-command evil-quit (&optional force)
-      "Close the current window, current frame, current tab. If FORCE is provided, exit Emacs.
-If the current frame belongs to some client the client connection
-is closed."
-      :repeat nil
-      (interactive "<!>")
-      (condition-case nil
-          (evil-window-delete)
-        (error
-         (if (and (bound-and-true-p server-buffer-clients)
-                  (fboundp 'server-edit)
-                  (fboundp 'server-buffer-done))
-             (if force
-                 (server-buffer-done (current-buffer))
-               (server-edit))
-           (condition-case nil
-               (delete-frame)
-             (error
-              (condition-case nil
-                  (tab-bar-close-tab)
-                (error
-                 (if force
-                     (kill-emacs)
-                   (message "Not exiting Emacs. Use :q! to force quit.")))))))))
-
-      )
-
-    (evil-define-command evil-save-and-close (file &optional bang)
-      "Save the current buffer and close the window. If BANG is provided, force actions."
-      :repeat nil
-      (interactive "<f><!>")
-      (evil-write nil nil nil file bang)
-      (evil-quit bang))
-
-
-    (evil-define-command evil-quit-all (&optional bang)
-      "Exit Emacs only if BANG is provided. If BANG is not provided, do nothing."
-      :repeat nil
-      (interactive "<!>")
-      (if bang
-	  (let ((proc (frame-parameter (selected-frame) 'client)))
-            (if proc
-		(with-no-warnings
-		  (server-delete-client proc))
-              (dolist (process (process-list))
-		(set-process-query-on-exit-flag process nil))
-              (kill-emacs)))
-	(message "Not exiting Emacs. Use :qa! to force quit.")))
-
-    )
+  
 
   (setq evil-default-state 'normal)
   :custom
@@ -134,29 +86,37 @@ is closed."
   (evil-god-toggle-mode 1)
 
   ;; 2) Core toggle binding in the minor-mode’s keymap
-  (define-key evil-god-toggle-mode-map (kbd "C-;")
-	      #'evil-god-toggle--god)
+;;  (define-key evil-god-toggle-mode-map (kbd "C-;")
+;;	      #'evil-god-toggle--god)
 
   ;; 3) State‑specific bindings in that same map:
   (evil-define-key 'god
-    evil-god-toggle-mode-map
-    [escape] (lambda () (interactive)
-               (evil-god-toggle--stop-choose-state 'normal)))
-  (evil-define-key 'god-off
-    evil-god-toggle-mode-map
-    [escape] (lambda () (interactive)
-               (evil-god-toggle--stop-choose-state 'normal)))
+  evil-god-toggle-mode-map
+  (kbd "C-;") (lambda () (interactive)
+                (evil-change-to-previous-state)))
 
-  (evil-define-key 'god-off evil-god-toggle-mode-map
-    (kbd "<S-escape>") (lambda () (interactive) (evil-god-toggle--bail)))
+(evil-define-key '(normal insert)
+  evil-god-toggle-mode-map
+  (kbd "C-;") (lambda () (interactive)
+                (evil-god-toggle--execute-in-god-state)))
 
-  (evil-define-key 'normal
+;  (evil-define-key 'god-off
+;    evil-god-toggle-mode-map
+;    [escape] (lambda () (interactive)
+;               (evil-god-toggle--stop-choose-state 'normal)))
+
+  (evil-define-key '(god god-off) evil-god-toggle-mode-map
+    [escape] (lambda () (interactive) (evil-god-toggle--bail)))
+
+
+
+  (evil-define-key '(normal insert)
     evil-god-toggle-mode-map
-    "," #'evil-god-toggle--once)
+    (kbd "C-,") #'evil-god-toggle--once)
 
   ;; 4) Your visual‑persistence and global flag settings
   (setq evil-god-toggle-persist-visual 'always
-        evil-god-toggle-global        nil)
+        evil-god-toggle-global        t)
 
   (cursor-contraster-mode 1)
   (cursor-contraster-setup-with-specs
