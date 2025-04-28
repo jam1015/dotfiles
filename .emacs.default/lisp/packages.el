@@ -145,7 +145,7 @@ is closed."
   (evil-define-key 'god-off
     evil-god-toggle-mode-map
     [escape] (lambda () (interactive)
-               (evil-god-toggle--stop-choose-state 'insert)))
+               (evil-god-toggle--stop-choose-state 'normal)))
 
   (evil-define-key 'god-off evil-god-toggle-mode-map
     (kbd "<S-escape>") (lambda () (interactive) (evil-god-toggle--bail)))
