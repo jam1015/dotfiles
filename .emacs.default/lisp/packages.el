@@ -115,7 +115,7 @@
     (kbd "C-,") #'evil-god-toggle--once)
 
   ;; 4) Your visual‑persistence and global flag settings
-  (setq evil-god-toggle-persist-visual 'always
+  (setq evil-god-toggle-persist-visual nil
         evil-god-toggle-global        t)
 
   (cursor-contraster-mode 1)
