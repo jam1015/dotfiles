@@ -59,7 +59,10 @@
                  )
 )
 
-
+(package! cursor-contraster
+  :recipe (:host github
+                 :repo "jam1015/cursor-contraster")
+  )
 
 (package! nerd-icons)
 

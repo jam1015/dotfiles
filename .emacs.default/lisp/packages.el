@@ -129,7 +129,7 @@ is closed."
   :init
 
   :config
-  (require 'cursor-contraster)
+  ;;(require 'cursor-contraster)
   ;; 1) Enable the global minor mode (so its keymap + lighter are active)
   (evil-god-toggle-mode 1)
 
@@ -158,7 +158,6 @@ is closed."
   (setq evil-god-toggle-persist-visual 'always
         evil-god-toggle-global        nil)
 
-  ;; 5) Optional: customize your cursors per state
   (cursor-contraster-mode 1)
   (cursor-contraster-setup-with-specs
    '((:var evil-god-state-cursor     :shape box    :index 1)

@@ -169,9 +169,13 @@ is closed."
   (setq evil-god-toggle-persist-visual 'always
         evil-god-toggle-global        nil)
 
-  (setq evil-god-state-cursor       '(box    "Red")
-        evil-god-off-state-cursor   '(bar    "Green")
-        evil-insert-state-cursor    '(bar    "Red")
-        evil-visual-state-cursor    '(hollow "Red")
-        evil-normal-state-cursor    '(hollow "Black"))
+ 
+  (cursor-contraster-mode 1)
+  (cursor-contraster-setup-with-specs
+   '((:var evil-god-state-cursor     :shape box    :index 1)
+     (:var evil-god-off-state-cursor :shape bar    :index 2)
+     (:var evil-insert-state-cursor  :shape bar    :index 3)
+     (:var evil-visual-state-cursor  :shape hollow :index 4)
+     (:var evil-normal-state-cursor  :shape hollow :index 8)))
+
   )
