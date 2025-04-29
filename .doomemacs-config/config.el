@@ -140,42 +140,67 @@ is closed."
 
 ;; In your ~/.doom.d/config.el or ~/.config/doom/config.el
 
-
-(use-package! evil-god-toggle
+(use-package cursor-contraster
+  :after (evil god-mode)
   :config
+(cursor-contraster-mode 1)
+(cursor-contraster-setup-with-specs
+ '((:var evil-god-state-cursor     :shape box    :index 0)
+   (:var evil-god-off-state-cursor :shape bar    :index 1)
+   (:var evil-insert-state-cursor  :shape bar    :index 2)
+   (:var evil-visual-state-cursor  :shape hollow :index 3)
+   (:var evil-normal-state-cursor  :shape hollow :index 4)))
+
+  
+  )
+
+(use-package evil-god-toggle
+  :after (evil god-mode cursor-contraster)
+  :init
+
+  :config
+  
+  ;; 1) Enable the global minor mode (so its keymap + lighter are active)
   (evil-god-toggle-mode 1)
 
-  (define-key evil-god-toggle-mode-map (kbd "C-,")
-    #'evil-god-toggle--god)
+  ;; 2) Core toggle binding in the minor-mode’s keymap
+  ;;  (define-key evil-god-toggle-mode-map (kbd "C-;")
+  ;;	      #'evil-god-toggle--god)
 
+  ;; 3) State‑specific bindings in that same map:
   (evil-define-key 'god
     evil-god-toggle-mode-map
-    [escape] (lambda () (interactive)
-               (evil-god-toggle--stop-choose-state 'normal)))
+    (kbd "C-;") (lambda () (interactive)
+                  (evil-change-to-previous-state)))
 
-  (evil-define-key 'god-off
+  (evil-define-key '(normal insert)
     evil-god-toggle-mode-map
-    [escape] (lambda () (interactive)
-               (evil-god-toggle--stop-choose-state 'insert)))
+    (kbd "C-;") (lambda () (interactive)
+                  (evil-god-toggle--execute-in-god-state)))
 
-  (evil-define-key 'god-off
+					;  (evil-define-key 'god-off
+					;    evil-god-toggle-mode-map
+					;    [escape] (lambda () (interactive)
+					;               (evil-god-toggle--stop-choose-state 'normal)))
+
+  (evil-define-key '(god god-off) evil-god-toggle-mode-map
+    [escape] (lambda () (interactive) (evil-god-toggle--bail)))
+
+
+
+  (evil-define-key '(normal insert)
     evil-god-toggle-mode-map
-    (kbd "<S-escape>") #'evil-god-toggle-bail)
+    (kbd "C-,") #'evil-god-toggle--once)
 
-  (evil-define-key 'normal
-    evil-god-toggle-mode-map
-    "," #'evil-god-toggle--once)
+  ;; 4) Your visual‑persistence and global flag settings
+  (setq evil-god-toggle-persist-visual nil
+        evil-god-toggle-global        t)
 
-  (setq evil-god-toggle-persist-visual 'always
-        evil-god-toggle-global        nil)
 
- 
-  (cursor-contraster-mode 1)
-  (cursor-contraster-setup-with-specs
-   '((:var evil-god-state-cursor     :shape box    :index 1)
-     (:var evil-god-off-state-cursor :shape bar    :index 2)
-     (:var evil-insert-state-cursor  :shape bar    :index 3)
-     (:var evil-visual-state-cursor  :shape hollow :index 4)
-     (:var evil-normal-state-cursor  :shape hollow :index 8)))
+
+
+
+
+
 
   )

@@ -32,10 +32,16 @@
   (display-line-numbers-type 'relative)
   :config
 
-  (define-key evil-ex-completion-map (kbd "<tab>") #'evil-ex-complete-next)
-  ;; …and S-Tab will cycle backward
-  (define-key evil-ex-completion-map (kbd "<backtab>") #'evil-ex-complete-previous)
+  ;; Tab now invokes Emacs’s normal completion (completion-at-point)
+  (define-key evil-ex-completion-map (kbd "<tab>") #'completion-at-point)     ;; Emacs completion-at-point :contentReference[oaicite:0]{index=0}
+  (define-key evil-ex-completion-map (kbd "TAB")    #'completion-at-point)
 
+  ;; Shift-Tab can also re-trigger completion if you like
+  (define-key evil-ex-completion-map (kbd "<backtab>") #'completion-at-point)
+
+  ;; Up/Down cycle Ex command-history entries
+  (define-key evil-ex-completion-map [up]   #'previous-complete-history-element)   ;; minibuffer history :contentReference[oaicite:1]{index=1}
+  (define-key evil-ex-completion-map [down] #'next-complete-history-element)
   (defun my/evil-write-and-bdelete ()
     "Save the current buffer, then kill it (like Vim’s :wbd)."
     (interactive)
@@ -55,6 +61,13 @@
   (add-to-list 'savehist-additional-variables 'evil-ex-history)
   ;; Turn on savehist-mode
   (savehist-mode 1)
+
+
+  (evil-ex-define-cmd "ConsultLine" #'consult-line)
+  (evil-ex-define-cmd "ConsultRg" #'consult-ripgrep)
+  (evil-ex-define-cmd "ConsultFind" #'consult-find)
+  (evil-ex-define-cmd "Mx" #'execute-extended-command)
+
   )
 
 
@@ -90,17 +103,15 @@
                  )
   :after (evil god-mode)
   :config
+(cursor-contraster-mode 1)
+(cursor-contraster-setup-with-specs
+ '((:var evil-god-state-cursor     :shape box    :index 0)
+   (:var evil-god-off-state-cursor :shape bar    :index 1)
+   (:var evil-insert-state-cursor  :shape bar    :index 2)
+   (:var evil-visual-state-cursor  :shape hollow :index 3)
+   (:var evil-normal-state-cursor  :shape hollow :index 4)))
 
-  (cursor-contraster-mode 1)
-  (cursor-contraster-setup-with-specs
-   '((:var evil-god-state-cursor     :shape box    :index 1)
-     (:var evil-god-off-state-cursor :shape bar    :index 2)
-     (:var evil-insert-state-cursor  :shape bar    :index 3)
-     (:var evil-visual-state-cursor  :shape hollow :index 4)
-     (:var evil-normal-state-cursor  :shape hollow :index 8)))
-
-
-     (setq cursor-in-non-selected-windows nil)
+  
   )
 
 (use-package evil-god-toggle
@@ -148,6 +159,13 @@
   (setq evil-god-toggle-persist-visual nil
         evil-god-toggle-global        t)
 
+
+
+
+
+
+
+
   )
 
 (use-package evil-goggles
@@ -179,47 +197,21 @@
   :config
   (xclip-mode 1))  ; Enable system clipboard support for * and + registers
 
+
+
 (use-package corfu
-  
-  ;;─────────────────────────────────────────────────────────────────────────
-  ;; Core behavior tweaks
-  ;;─────────────────────────────────────────────────────────────────────────
-  :custom
-  (corfu-cycle t)              ;; Wrap around candidates when reaching top/bottom
-  (corfu-quit-at-boundary nil) ;; Keep popup open when moving past first/last
-  (corfu-quit-no-match t)      ;; Close popup if input no longer matches anything
-  (corfu-preselect 'prompt)    ;; Preselect the prompt (safer than auto-selecting first)
-  (corfu-on-exact-match nil)   ;; Don’t auto-insert when your input exactly equals a candidate
-
-  ;;─────────────────────────────────────────────────────────────────────────
-  ;; Auto-popup settings
-  ;;─────────────────────────────────────────────────────────────────────────
-  ;; Enable automatic popup after typing at least one character and a small delay
-  :custom
-  (corfu-auto t)
-  (corfu-auto-delay 0.2)  ;; Wait 0.2s after typing before showing completions
-  (corfu-auto-prefix 1)   ;; Only pop up once you've typed ≥1 character
-
-  ;;─────────────────────────────────────────────────────────────────────────
-  ;; Minibuffer & Eshell integration
-  ;;─────────────────────────────────────────────────────────────────────────
+  :ensure t
   :init
-  ;; Only enable Corfu in minibuffers when not using Vertico/MCT/password prompts
-  (setq global-corfu-minibuffer
-        (lambda ()
-          (not (or (bound-and-true-p mct--active)
-                   (bound-and-true-p vertico--input)
-                   (eq (current-local-map) read-passwd-map)))))
+  (global-corfu-mode)               ;; enable Corfu everywhere for completion-at-point
+  :custom
+  (corfu-cycle t)                   ;; wrap around candidates at top/bottom
+  (corfu-auto t)                    ;; enable auto-popup
+  (corfu-auto-delay 0.05)           ;; delay before popup
+  (corfu-auto-prefix 0)             ;; number of chars before auto-popup (0 = immediate)
+  :config
+  (corfu-popupinfo-mode 1))         ;; show documentation/tooltips in a popup
 
-  ;; In Eshell under Evil, use TAB to manually trigger completion-at-point
-  (with-eval-after-load 'eshell
-    (evil-define-key 'insert eshell-mode-map
-      (kbd "TAB") #'completion-at-point))
 
-  ;;─────────────────────────────────────────────────────────────────────────
-  ;; Enable Corfu globally
-  ;;─────────────────────────────────────────────────────────────────────────
-  (global-corfu-mode))
 
 ;;─────────────────────────────────────────────────────────────────────────────
 ;; Notes:
@@ -231,7 +223,29 @@
 ;;   explicitly in those modes’ hooks, rather than unconditionally here.
 
 
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode)
+  :custom
+  (vertico-count 15)      ;; show 15 candidates
+  (vertico-resize t))     ;; grow/shrink minibuffer
 
+(use-package consult
+  :ensure t
+  :after vertico
+  :custom
+  (consult-preview-key "any"))
+
+(use-package embark
+  :ensure t
+  :bind
+  (("C-." . embark-act) ;; "Do something" prompt on selected minibuffer candidate
+   ("C-;" . embark-dwim))) ;; "Do what I mean" action
+
+(use-package embark-consult
+  :ensure t
+  :after (embark consult)) ;; for deeper consult-embark integration
 
 (use-package dabbrev
   :ensure nil
@@ -253,8 +267,6 @@
 (use-package orderless
 
   :custom
-  ;; (orderless-style-dispatchers '(orderless-affix-dispatch))
-  ;; (orderless-component-separator #'orderless-escapable-split-on-space)
   (completion-styles '(orderless basic))
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
