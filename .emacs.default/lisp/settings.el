@@ -13,7 +13,7 @@
       (load-theme 'solarized-light t)
      (setq cursor-in-non-selected-windows nil)
 
-
+;;(setq completion-in-region-function #'consult-completion-in-region)
 	    )
 )
 

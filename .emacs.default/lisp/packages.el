@@ -22,9 +22,13 @@
   
   ;;:after undo-tree
   :init
+
   (setq evil-want-keybinding nil)
 
-  
+
+
+
+
 
   (setq evil-default-state 'normal)
   :custom
@@ -49,7 +53,9 @@
     (kill-this-buffer))
 
     (evil-ex-define-cmd "wbd" #'my/evil-write-and-bdelete)
-
+  ;;(define-key evil-ex-completion-map (kbd "TAB")       #'evil-ex-complete)
+  ;;(define-key evil-ex-completion-map (kbd "<tab>")     #'evil-ex-complete)
+  ;;(define-key evil-ex-completion-map (kbd "<backtab>") #'evil-ex-complete)
 
 
   (evil-mode 1)
@@ -197,19 +203,99 @@
   :config
   (xclip-mode 1))  ; Enable system clipboard support for * and + registers
 
+(use-package vertico
+  :init
+  (vertico-mode)
+  (setq completion-styles '(basic substring partial-completion flex))
+  :custom
+  (vertico-count 15)
+  (vertico-resize t)
+  (vertico-cycle t)  ;; wrap at top/bottom
+  :config
+(keymap-set vertico-map "?" #'minibuffer-completion-help)
+(keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
+(keymap-set vertico-map "M-TAB" #'minibuffer-complete)
 
+
+  :bind
+  (:map vertico-map
+        ("TAB"       . vertico-next)
+        ("<tab>"     . vertico-next)
+        ("S-TAB"     . vertico-previous)
+        ("<backtab>" . vertico-previous)
+        ("C-SPC"     . vertico-insert)
+        ))
 
 (use-package corfu
   :ensure t
   :init
-  (global-corfu-mode)               ;; enable Corfu everywhere for completion-at-point
+  (add-hook 'completion-at-point-functions #'cape-file)
+  ;; 1) Make sure file‐path completion treats “/” as a boundary:
+  (setq completion-category-overrides '((file (styles partial-completion))))
+  ;; 2) (Optional) if you use Orderless elsewhere, you might want:
+  (setq completion-styles '(orderless basic partial-completion)
+        completion-category-overrides '((file (styles partial-completion))))
+  (global-corfu-mode)                  ; enable everywhere
   :custom
-  (corfu-cycle t)                   ;; wrap around candidates at top/bottom
-  (corfu-auto t)                    ;; enable auto-popup
-  (corfu-auto-delay 0.05)           ;; delay before popup
-  (corfu-auto-prefix 0)             ;; number of chars before auto-popup (0 = immediate)
+  (corfu-cycle t)                      ; wrap at ends
+  (corfu-auto t)                       ; popup as you type
+  (corfu-auto-delay 0.05)
+  (corfu-auto-prefix 1)                ; start immediately
+  (corfu-preselect 'prompt)
+  (corfu-quit-at-boundary 'separator)         ; don’t quit on e.g. `/`
+  (corfu-quit-no-match 'separator)            ; stay open even when no candidates
+  :bind
+  (:map corfu-map
+        ("TAB"       . corfu-next)
+        ("<tab>"     . corfu-next)
+        ("S-TAB"     . corfu-previous)
+        ("<backtab>" . corfu-previous)
+)
   :config
-  (corfu-popupinfo-mode 1))         ;; show documentation/tooltips in a popup
+  ;; file-and-path completion that understands `…/` and leaves the popup up:
+
+
+
+
+
+
+
+  )
+
+(use-package cape
+  :ensure t
+  ;;:after corfu
+  :init
+  ;;  Register the Capfs you want.  Order matters: try file first, then dabbrev, etc.
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-file)      ; directories and files
+;;  (add-to-list 'completion-at-point-functions #'cape-dabbrev)   ; words from buffers
+;;  (add-to-list 'completion-at-point-functions #'cape-history)   ; input histories (minibuffer, etc)
+;;  (add-to-list 'completion-at-point-functions #'cape-keyword)   ; mode keywords (e.g. programming language)
+;;  (add-to-list 'completion-at-point-functions #'cape-symbol)    ; symbols in buffer
+;;  (add-to-list 'completion-at-point-functions #'cape-yasnippet) ; Yasnippet snippets
+  ;;  (Optional) Merge them into a single Capf so you get a unified popup.
+  ;;(add-to-list 'completion-at-point-functions
+  ;;             (cape-capf-super
+  ;;               #'cape-file
+  ;;               #'cape-dabbrev
+  ;;               #'cape-history
+  ;;               #'cape-keyword
+  ;;               #'cape-symbol
+  ;;               #'cape-yasnippet)
+  ;;             )
+  ;;:bind
+  ;;;; on-demand invocation
+  ;;("C-c p p" . completion-at-point)
+  ;;("C-c p f" . cape-file)
+  ;;("C-c p d" . cape-dabbrev)
+  ;;("C-c p h" . cape-history)
+  ;;("C-c p k" . cape-keyword)
+  ;;("C-c p s" . cape-symbol)
+  ;;("C-c p y" . cape-yasnippet)
+  )
+
+
 
 
 
@@ -223,13 +309,7 @@
 ;;   explicitly in those modes’ hooks, rather than unconditionally here.
 
 
-(use-package vertico
-  :ensure t
-  :init
-  (vertico-mode)
-  :custom
-  (vertico-count 15)      ;; show 15 candidates
-  (vertico-resize t))     ;; grow/shrink minibuffer
+
 
 (use-package consult
   :ensure t
@@ -248,7 +328,7 @@
   :after (embark consult)) ;; for deeper consult-embark integration
 
 (use-package dabbrev
-  :ensure nil
+             :ensure nil
 
     ;; Swap M-/ and C-M-/
     :bind (("M-/" . dabbrev-completion)
