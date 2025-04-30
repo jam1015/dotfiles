@@ -272,7 +272,7 @@
 (keymap-set vertico-map "?" #'minibuffer-completion-help)
 (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
 (keymap-set vertico-map "M-TAB" #'minibuffer-complete)
-                                                                                  
+
   :bind
   (:map vertico-map
         ("TAB"       . vertico-next)
@@ -281,13 +281,13 @@
         ("<backtab>" . vertico-previous)
         ("C-SPC"     . vertico-insert)
         ))
-                                                                                  
+
 (use-package corfu
   :ensure t
   :init
   ;; Enable Corfu globally
   (global-corfu-mode)
-                                                                                  
+
   :custom
   (corfu-cycle t)                      ;; wrap at ends
   (corfu-auto t)                       ;; popup as you type
@@ -296,7 +296,7 @@
   (corfu-preselect 'prompt)
   (corfu-quit-at-boundary 'separator)  ;; stay open on "/" boundary
   (corfu-quit-no-match 'separator)     ;; stay open even when no match
-                                                                                  
+
   :bind
   (:map corfu-map
         ("TAB"       . corfu-next)
@@ -305,7 +305,7 @@
         ("<backtab>" . corfu-previous)
          ("C-SPC" . corfu-insert   )
 	)
-                                                                                  
+
   :config
 
 (defgroup my/corfu-strip nil
