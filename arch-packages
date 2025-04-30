@@ -10,7 +10,6 @@ adwaita-cursors
 adwaita-fonts
 adwaita-icon-theme
 adwaita-icon-theme-legacy
-alacritty
 alsa-card-profiles
 alsa-firmware
 alsa-lib
@@ -37,7 +36,6 @@ automake
 avahi
 awesome-terminal-fonts
 b43-fwcutter
-balena-etcher
 base
 base-devel
 bash
@@ -54,6 +52,7 @@ bluez-libs
 bluez-utils
 boost-libs
 breeze-icons
+broadcom-wl-dkms
 brother-hll2300d
 brother-hll2350dw
 brotli
@@ -73,6 +72,7 @@ cblas
 cdparanoia
 cheese
 chromaprint
+cifs-utils
 clucene
 clutter
 clutter-gst
@@ -81,6 +81,7 @@ cmake
 cmark-gfm
 cogl
 colorgrab
+colorpicker
 confuse
 containerd
 convertlit
@@ -110,7 +111,9 @@ device-mapper
 dex
 diffutils
 ding-libs
+dkms
 dmd
+dmenu
 dmidecode
 dmraid
 dnsmasq
@@ -120,11 +123,8 @@ dosfstools
 dotnet-host
 dotnet-runtime
 dotnet-runtime-6.0
-dotnet-runtime-8.0
 dotnet-sdk
-dotnet-sdk-8.0
 dotnet-targeting-pack
-dotnet-targeting-pack-8.0
 double-conversion
 downgrade
 dpkg
@@ -139,7 +139,6 @@ editorconfig-core-c
 efibootmgr
 efitools
 efivar
-electron34
 ell
 emacs
 enchant
@@ -167,6 +166,8 @@ expat
 f2fs-tools
 faac
 faad2
+facetimehd-dkms
+facetimehd-firmware
 fakeroot
 fastfetch
 fd
@@ -199,6 +200,7 @@ fribidi
 fsarchiver
 fuse-common
 fuse2
+fuse3
 fzf
 galculator
 gawk
@@ -222,8 +224,7 @@ ghostscript
 giflib
 girara
 git
-git-credential-gopass
-git-credential-manager
+git-credential-manager-core
 git-delta-git
 glances
 glib-networking
@@ -243,10 +244,8 @@ gnulib-l10n
 gnupg
 gnutls
 gobject-introspection-runtime
-goneovim-bin
 google-chrome
 google-crc32c
-gopass
 gperftools
 gpgme
 gpm
@@ -289,6 +288,12 @@ gumbo-parser
 gupnp
 gupnp-igd
 gutenprint
+gvfs
+gvfs-afc
+gvfs-gphoto2
+gvfs-mtp
+gvfs-nfs
+gvfs-smb
 gvim
 gzip
 harfbuzz
@@ -521,12 +526,12 @@ hicolor-icon-theme
 hidapi
 highway
 hopscotch-map
+hplip
 hslua-cli
 hunspell
 hwdata
 hwdetect
 hwinfo
-hwloc
 hyphen
 i3-keylist
 i3-wm
@@ -541,6 +546,7 @@ imath
 imlib2
 inetutils
 inkscape
+intel-ucode
 intltool
 inxi
 iproute2
@@ -548,6 +554,7 @@ iptables-nft
 iputils
 ipython
 iso-codes
+iw
 iwd
 jansson
 jbig2dec
@@ -608,6 +615,7 @@ l-smash
 lame
 lapack
 lcms2
+ldb
 leancrypto
 leptonica
 less
@@ -714,7 +722,6 @@ libdca
 libde265
 libdecor
 libdeflate
-libdisplay-info
 libdovi
 libdrm
 libdv
@@ -743,7 +750,6 @@ libfreehand
 libfreexl
 libgccjit
 libgcrypt
-libgdiplus
 libgeotiff
 libgirepository
 libgit2
@@ -751,6 +757,7 @@ libglvnd
 libgme
 libgnomekbd
 libgpg-error
+libgphoto2
 libgsf
 libgtop
 libgudev
@@ -760,6 +767,7 @@ libice
 libidn
 libidn2
 libiec61883
+libieee1284
 libimagequant
 libimobiledevice
 libimobiledevice-glue
@@ -796,6 +804,7 @@ libmpcdec
 libmpeg2
 libmspack
 libmspub
+libmtp
 libmupdf
 libmwaw
 libmysofa
@@ -803,6 +812,7 @@ libndp
 libnetfilter_conntrack
 libnewt
 libnfnetlink
+libnfs
 libnftnl
 libnghttp2
 libnghttp3
@@ -868,7 +878,6 @@ libsoup
 libsoup3
 libsoxr
 libspatialite
-libspeechd
 libsrtp
 libssh
 libssh2
@@ -882,7 +891,6 @@ libteam
 libthai
 libtheora
 libtiff
-libtiff5
 libtirpc
 libtommath
 libtool
@@ -908,6 +916,7 @@ libvpl
 libvpx
 libvterm
 libwacom
+libwbclient
 libwebp
 libwireplumber
 libwnck3
@@ -1004,8 +1013,6 @@ mjpegtools
 mlt
 mobile-broadband-provider-info
 modemmanager
-mono
-moreutils
 mpdecimal
 mpfr
 mpg123
@@ -1021,6 +1028,7 @@ neon
 neovide
 neovim
 neovim-qt
+net-snmp
 net-tools
 netctl
 netstandard-targeting-pack
@@ -1040,7 +1048,6 @@ nodejs-lts-jod
 nodejs-nopt
 nordic-theme
 nordvpn-bin
-nordzy-icon-theme
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
@@ -1052,13 +1059,12 @@ nss
 nss-mdns
 ntfs-3g
 ntp
-nuget
 numactl
+numlockx
 nwg-look
 oath-toolkit
 ocl-icd
 onedrive
-onetbb
 oniguruma
 openal
 openconnect
@@ -1068,7 +1074,6 @@ openh264
 openjpeg2
 openssh
 openssl
-opentimelineio
 openvpn
 opus
 orc
@@ -1116,14 +1121,11 @@ perl-http-date
 perl-http-message
 perl-http-negotiate
 perl-io-html
-perl-io-tty
-perl-ipc-run
 perl-libwww
 perl-lwp-mediatypes
 perl-mailtools
 perl-net-http
 perl-path-tiny
-perl-time-duration
 perl-timedate
 perl-try-tiny
 perl-uri
@@ -1168,7 +1170,6 @@ ptpython
 purpose
 pv
 python
-python-aaf2
 python-annotated-types
 python-appdirs
 python-argcomplete
@@ -1195,6 +1196,7 @@ python-dateutil
 python-dbus
 python-decorator
 python-defusedxml
+python-distro
 python-executing
 python-filelock
 python-fonttools
@@ -1236,8 +1238,11 @@ python-pygments
 python-pyparsing
 python-pyqt5
 python-pyqt5-sip
+python-pyqt6
+python-pyqt6-sip
 python-pyserial
 python-pyxdg
+python-reportlab
 python-requests
 python-setuptools
 python-shtab
@@ -1246,7 +1251,6 @@ python-soupsieve
 python-stack-data
 python-termcolor
 python-traitlets
-python-typing-inspection
 python-typing_extensions
 python-urllib3
 python-urwid
@@ -1262,19 +1266,8 @@ qpdf
 qqc2-desktop-style
 qrencode
 qt5-base
-qt5-declarative
-qt5-location
-qt5-multimedia
-qt5-quickcontrols2
-qt5-sensors
-qt5-speech
 qt5-svg
-qt5-tools
 qt5-translations
-qt5-wayland
-qt5-webchannel
-qt5-webengine
-qt5-websockets
 qt5-x11extras
 qt5ct
 qt6-5compat
@@ -1292,6 +1285,7 @@ qt6-wayland
 qt6-webchannel
 qt6-webengine
 qt6ct
+quicklisp
 r
 r-base64enc
 r-brio
@@ -1311,6 +1305,7 @@ r-glue
 r-hexbin
 r-highr
 r-jsonlite
+r-knitr
 r-labeling
 r-magrittr
 r-mapproj
@@ -1332,7 +1327,6 @@ r-sp
 r-sparsem
 r-testit
 r-tinytest
-r-units
 r-utf8
 r-viridislite
 r-withr
@@ -1364,8 +1358,10 @@ runc
 rust
 s-nail
 s-tui
+sane
 sassc
 sbc
+sbcl
 scour
 scrot
 sd
@@ -1387,6 +1383,7 @@ signond
 skia-sharp
 slang
 smartmontools
+smbclient
 snappy
 sndio
 sof-firmware
@@ -1422,6 +1419,7 @@ systemd-libs
 systemd-resolvconf
 systemd-sysvcompat
 taglib
+talloc
 tar
 tcl
 tdb
@@ -1429,6 +1427,7 @@ television
 tesseract
 tesseract-data-afr
 tesseract-data-osd
+tevent
 texinfo
 texlive-basic
 texlive-bibtexextra
@@ -1452,6 +1451,7 @@ texlive-plaingeneric
 texlive-publishers
 thin-provisioning-tools
 thunar
+thunar-archive-plugin
 thunar-volman
 tinysparql
 tk
@@ -1483,6 +1483,7 @@ ttf-liberation
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-common
 ttf-opensans
+tumbler
 twolame
 tzdata
 uchardet
@@ -1494,6 +1495,7 @@ unrar
 unzip
 upower
 usb_modeswitch
+usbmuxd
 usbutils
 util-linux
 util-linux-libs
@@ -1521,7 +1523,7 @@ which
 wildmidi
 wine
 winetricks
-wireguard-tools
+wireless_tools
 wireplumber
 woff2
 wpa_supplicant
@@ -1530,6 +1532,7 @@ wxwidgets-gtk3
 x264
 x265
 xapp
+xarchiver
 xbindkeys
 xbitmaps
 xcb-imdkit
@@ -1582,6 +1585,7 @@ xorg-xset
 xorg-xsetroot
 xorgproto
 xsel
+xss-lock
 xterm
 xvidcore
 xxhash

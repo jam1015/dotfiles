@@ -1,7 +1,7 @@
 (setq-default inhibit-startup-screen t)
 (blink-cursor-mode 0)
 (setq-default visible-bell 1)
-(set-frame-font "InputMonoNerdFont-8" t t)
+(set-frame-font "InputMonoNerdFont-13" t t)
 (setq-default scroll-margin 3)
 (setq-default scroll-conservatively 10000)
 (save-place-mode 1)
@@ -10,7 +10,7 @@
 ;;(load-theme 'nord t)
 (add-hook 'elpaca-after-init-hook
 	  (lambda () 
-      (load-theme 'solarized-light t)
+      (load-theme 'anisochromatic t)
      (setq cursor-in-non-selected-windows nil)
 
 ;;(setq completion-in-region-function #'consult-completion-in-region)

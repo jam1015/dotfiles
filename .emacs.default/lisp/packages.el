@@ -12,8 +12,6 @@
 (use-package geiser-mit :defer t)
 
 (use-package undo-tree
-  
-  :demand t
   :init
   (global-undo-tree-mode 1))
 
@@ -203,56 +201,6 @@
   :config
   (xclip-mode 1))  ; Enable system clipboard support for * and + registers
 
-(use-package vertico
-  :init
-  (vertico-mode)
-  (setq completion-styles '(basic substring partial-completion flex))
-  :custom
-  (vertico-count 15)
-  (vertico-resize t)
-  (vertico-cycle t)  ;; wrap at top/bottom
-  :config
-(keymap-set vertico-map "?" #'minibuffer-completion-help)
-(keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
-(keymap-set vertico-map "M-TAB" #'minibuffer-complete)
-
-
-  :bind
-  (:map vertico-map
-        ("TAB"       . vertico-next)
-        ("<tab>"     . vertico-next)
-        ("S-TAB"     . vertico-previous)
-        ("<backtab>" . vertico-previous)
-        ("C-SPC"     . vertico-insert)
-        ))
-
-(use-package corfu
-  :ensure t
-  :init
-  (add-hook 'completion-at-point-functions #'cape-file)
-  ;; 1) Make sure file‐path completion treats “/” as a boundary:
-  (setq completion-category-overrides '((file (styles partial-completion))))
-  ;; 2) (Optional) if you use Orderless elsewhere, you might want:
-  (setq completion-styles '(orderless basic partial-completion)
-        completion-category-overrides '((file (styles partial-completion))))
-  (global-corfu-mode)                  ; enable everywhere
-  :custom
-  (corfu-cycle t)                      ; wrap at ends
-  (corfu-auto t)                       ; popup as you type
-  (corfu-auto-delay 0.05)
-  (corfu-auto-prefix 1)                ; start immediately
-  (corfu-preselect 'prompt)
-  (corfu-quit-at-boundary 'separator)         ; don’t quit on e.g. `/`
-  (corfu-quit-no-match 'separator)            ; stay open even when no candidates
-  :bind
-  (:map corfu-map
-        ("TAB"       . corfu-next)
-        ("<tab>"     . corfu-next)
-        ("S-TAB"     . corfu-previous)
-        ("<backtab>" . corfu-previous)
-)
-  :config
-  ;; file-and-path completion that understands `…/` and leaves the popup up:
 
 
 
@@ -260,53 +208,8 @@
 
 
 
-  )
-
-(use-package cape
-  :ensure t
-  ;;:after corfu
-  :init
-  ;;  Register the Capfs you want.  Order matters: try file first, then dabbrev, etc.
-  (add-hook 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-file)      ; directories and files
-;;  (add-to-list 'completion-at-point-functions #'cape-dabbrev)   ; words from buffers
-;;  (add-to-list 'completion-at-point-functions #'cape-history)   ; input histories (minibuffer, etc)
-;;  (add-to-list 'completion-at-point-functions #'cape-keyword)   ; mode keywords (e.g. programming language)
-;;  (add-to-list 'completion-at-point-functions #'cape-symbol)    ; symbols in buffer
-;;  (add-to-list 'completion-at-point-functions #'cape-yasnippet) ; Yasnippet snippets
-  ;;  (Optional) Merge them into a single Capf so you get a unified popup.
-  ;;(add-to-list 'completion-at-point-functions
-  ;;             (cape-capf-super
-  ;;               #'cape-file
-  ;;               #'cape-dabbrev
-  ;;               #'cape-history
-  ;;               #'cape-keyword
-  ;;               #'cape-symbol
-  ;;               #'cape-yasnippet)
-  ;;             )
-  ;;:bind
-  ;;;; on-demand invocation
-  ;;("C-c p p" . completion-at-point)
-  ;;("C-c p f" . cape-file)
-  ;;("C-c p d" . cape-dabbrev)
-  ;;("C-c p h" . cape-history)
-  ;;("C-c p k" . cape-keyword)
-  ;;("C-c p s" . cape-symbol)
-  ;;("C-c p y" . cape-yasnippet)
-  )
 
 
-
-
-
-;;─────────────────────────────────────────────────────────────────────────────
-;; Notes:
-;; - We removed the redundant first `setq` block; only one set of auto-popup
-;;   settings remains.
-;; - We dropped the `corfu-mode-hook` that forced `completion-styles` to `(basic)`
-;;   so you can continue using orderless/flex matching elsewhere.
-;; - If you *do* want per-mode completion-style overrides, consider doing it
-;;   explicitly in those modes’ hooks, rather than unconditionally here.
 
 
 
@@ -344,11 +247,202 @@
 
 
 ;; Optionally use the `orderless' completion style.
-(use-package orderless
 
+
+
+
+
+
+
+
+
+
+
+
+
+(use-package vertico
+  :init
+  (vertico-mode)
+  (setq completion-styles '(basic substring partial-completion flex))
   :custom
-  (completion-styles '(orderless basic))
+  (vertico-count 15)
+  (vertico-resize t)
+  (vertico-cycle t)  ;; wrap at top/bottom
+  :config
+(keymap-set vertico-map "?" #'minibuffer-completion-help)
+(keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
+(keymap-set vertico-map "M-TAB" #'minibuffer-complete)
+                                                                                  
+  :bind
+  (:map vertico-map
+        ("TAB"       . vertico-next)
+        ("<tab>"     . vertico-next)
+        ("S-TAB"     . vertico-previous)
+        ("<backtab>" . vertico-previous)
+        ("C-SPC"     . vertico-insert)
+        ))
+                                                                                  
+(use-package corfu
+  :ensure t
+  :init
+  ;; Enable Corfu globally
+  (global-corfu-mode)
+                                                                                  
+  :custom
+  (corfu-cycle t)                      ;; wrap at ends
+  (corfu-auto t)                       ;; popup as you type
+  (corfu-auto-delay 0.05)
+  (corfu-auto-prefix 1)                ;; start completing after 1 char
+  (corfu-preselect 'prompt)
+  (corfu-quit-at-boundary 'separator)  ;; stay open on "/" boundary
+  (corfu-quit-no-match 'separator)     ;; stay open even when no match
+                                                                                  
+  :bind
+  (:map corfu-map
+        ("TAB"       . corfu-next)
+        ("<tab>"     . corfu-next)
+        ("S-TAB"     . corfu-previous)
+        ("<backtab>" . corfu-previous)
+         ("C-SPC" . corfu-insert   )
+	)
+                                                                                  
+  :config
+
+(defgroup my/corfu-strip nil
+  "Strip trailing slash from real-directory completions in Corfu."
+  :group 'corfu)
+
+(defun my/corfu--strip-slash (s)
+  "If S ends in “/” and is a real directory, drop the slash."
+  (if (and (string-suffix-p "/" s)
+           (file-directory-p s))
+      (directory-file-name s)
+    s))
+
+(defun my/corfu--replace-advice (orig beg end str)
+  "Advice around `corfu--replace' to drop trailing \"/\" on directories."
+  (funcall orig beg end (my/corfu--strip-slash str)))
+
+(defun my/corfu--preview-advice (&rest _)
+  "Advice after `corfu--preview-current' to drop trailing \"/\" in the overlay."
+  (when (overlayp corfu--preview-ov)
+    (let* ((ov    corfu--preview-ov)
+           (disp  (overlay-get ov 'display))
+           (clean (and (stringp disp) (my/corfu--strip-slash disp))))
+      (when clean
+        (overlay-put ov 'display clean)))))
+
+;;;###autoload
+(define-minor-mode my/corfu-dir-strip-mode
+  "Toggle stripping trailing slash for directory candidates in Corfu."
+  :global t
+  :group 'my/corfu-strip
+  (if my/corfu-dir-strip-mode
+      (progn
+        (advice-add 'corfu--replace        :around #'my/corfu--replace-advice)
+        (advice-add 'corfu--preview-current :after  #'my/corfu--preview-advice))
+    (advice-remove 'corfu--replace        #'my/corfu--replace-advice)
+    (advice-remove 'corfu--preview-current #'my/corfu--preview-advice)))
+
+
+(my/corfu-dir-strip-mode 1)
+ 
+  )
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic partial-completion))
   (completion-category-defaults nil)
-  (completion-category-overrides '((file (styles partial-completion)))))
+  (completion-category-overrides '((file ( styles partial-completion)))))
+
+
+
+
+
+
+(use-package cape
+  :ensure t
+  :init
+  ;; Register the CAPE backends you want. Order matters: file first, then others.
+  (add-hook 'completion-at-point-functions #'cape-file)
+  ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)   ; buffer words
+  ;; (add-to-list 'completion-at-point-functions #'cape-history)   ; input history
+  ;; ... add other capes as needed
+  )
+                                                                                  ;;─────────────────────────────────────────────────────────────────────────────
+;;(add-hook 'text-mode-hook #'my/add-cape-file)                                     ;; Notes:
+;;(add-hook 'prog-mode-hook #'my/add-cape-file)                                     ;; - We removed the redundant first `setq` block; only one set of auto-popup
+;;)                                                                                 ;;   settings remains.
+;; - We dropped the `corfu-mode-hook` that forced `completion-styles` to `(basic)`
+;;   so you can continue using orderless/flex matching elsewhere.
+;; - If you *do* want per-mode completion-style overrides, consider doing it
+;;   explicitly in those modes’ hooks, rather than unconditionally here.
+
+
+;;(use-package corfu
+;;  :ensure t
+;;  :init
+;;  (global-corfu-mode)                  ; enable everywhere
+;;  :custom
+;;  (corfu-cycle t)                      ; wrap at ends
+;;  (corfu-auto t)                       ; popup as you type
+;;  (corfu-auto-delay 0.05)
+;;  (corfu-auto-prefix 0)                ; start immediately
+;;  (corfu-quit-at-boundary 'separator)         ; don’t quit on e.g. `/`
+;;  (corfu-quit-no-match 'separator)            ; stay open even when no candidates
+;;  :bind
+;;  (:map corfu-map
+;;        ("TAB"       . corfu-next)
+;;        ("<tab>"     . corfu-next)
+;;        ("S-TAB"     . corfu-previous)
+;;        ("<backtab>" . corfu-previous))
+;;  :config
+;;  ;; file-and-path completion that understands `…/` and leaves the popup up:
+;;  (use-package cape
+;;    :ensure t
+;;    :init
+;;    (add-to-list 'completion-at-point-functions #'cape-file)))
+;;
+;;
+;;(use-package vertico
+;;  :ensure t
+;;  :init
+;;  (vertico-mode)
+;;  :custom
+;;  (vertico-count 15)
+;;  (vertico-resize t)
+;;  (vertico-cycle t)  ;; wrap at top/bottom
+;;  :bind
+;;  (:map vertico-map
+;;        ("TAB"       . vertico-next)
+;;        ("<tab>"     . vertico-next)
+;;        ("S-TAB"     . vertico-previous)
+;;        ("<backtab>" . vertico-previous)))
+;;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 (provide 'packages)
