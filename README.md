@@ -13,11 +13,12 @@ Include `--recurse submodules` or run `git submodule init` followed by `git subm
 or go:
 
 ```bash
+git subbmodule init
 git submodule update --recursive --remote
 ```
 
 
-`git submodule sync --recursive` is another useful command.
+`git submodule sync --recursive` is another useful command; syncs submodule info in `.git` to what is in `.gitmodules` 
 
 # Set up Github Access
 
