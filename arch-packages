@@ -20,7 +20,6 @@ alsa-utils
 amd-ucode
 aom
 arandr
-arc-gtk-theme
 archlinux-keyring
 archlinux-xdg-menu
 argon2
@@ -80,8 +79,6 @@ clutter-gtk
 cmake
 cmark-gfm
 cogl
-colorgrab
-colorpicker
 confuse
 containerd
 convertlit
@@ -224,8 +221,7 @@ ghostscript
 giflib
 girara
 git
-git-credential-manager-core
-git-delta-git
+git-credential-gopass
 glances
 glib-networking
 glib2
@@ -245,7 +241,7 @@ gnupg
 gnutls
 gobject-introspection-runtime
 google-chrome
-google-crc32c
+gopass
 gperftools
 gpgme
 gpm
@@ -350,7 +346,6 @@ haskell-crypton-x509
 haskell-crypton-x509-store
 haskell-crypton-x509-system
 haskell-crypton-x509-validation
-haskell-data-array-byte
 haskell-data-default
 haskell-data-default-class
 haskell-data-default-instances-containers
@@ -522,16 +517,17 @@ haskell-zip-archive
 haskell-zlib
 haveged
 hdparm
+helix
 hicolor-icon-theme
 hidapi
 highway
-hopscotch-map
 hplip
 hslua-cli
 hunspell
 hwdata
 hwdetect
 hwinfo
+hwloc
 hyphen
 i3-keylist
 i3-wm
@@ -722,6 +718,7 @@ libdca
 libde265
 libdecor
 libdeflate
+libdisplay-info
 libdovi
 libdrm
 libdv
@@ -1007,8 +1004,8 @@ media-player-info
 meld
 mesa
 mesa-utils
+meson
 minizip
-mit-scheme
 mjpegtools
 mlt
 mobile-broadband-provider-info
@@ -1041,6 +1038,7 @@ nfs-utils
 nfsidmap
 nftables
 nilfs-utils
+ninja
 nitrogen
 nm-connection-editor
 node-gyp
@@ -1065,6 +1063,7 @@ nwg-look
 oath-toolkit
 ocl-icd
 onedrive
+onetbb
 oniguruma
 openal
 openconnect
@@ -1074,6 +1073,7 @@ openh264
 openjpeg2
 openssh
 openssl
+opentimelineio
 openvpn
 opus
 orc
@@ -1170,6 +1170,7 @@ ptpython
 purpose
 pv
 python
+python-aaf2
 python-annotated-types
 python-appdirs
 python-argcomplete
@@ -1250,7 +1251,9 @@ python-six
 python-soupsieve
 python-stack-data
 python-termcolor
+python-tqdm
 python-traitlets
+python-typing-inspection
 python-typing_extensions
 python-urllib3
 python-urwid
@@ -1292,8 +1295,6 @@ r-brio
 r-classint
 r-colorspace
 r-crayon
-r-diffobj
-r-digest
 r-e1071
 r-evaluate
 r-fansi

@@ -32,6 +32,16 @@ git submodule update --recursive --remote
         xclip -selection clipboard < ~/.ssh/id_ed25519.pub
 ```
 
+# How to Remove yay and Install paru
+
+```bash
+sudo pacman -Rns yay
+sudo pacman -S git
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+```
+
 ## Configure gopass as Git Credential Manager
 
 On Arch Linux, install, initialize, and register gopass as the global
@@ -46,15 +56,6 @@ Git credential helper:
 ```
 
 
-# How to Remove yay and Install paru
-
-```bash
-sudo pacman -Rns yay
-sudo pacman -S git
-git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
-```
 
 # Things to do on install:
 
@@ -83,6 +84,8 @@ cd ~/dots_hooks
 ./hooks_setup.bash
 ```
 
+## only if hooks aren't properly set up already
+
 From dotfiles run the submodules setup script.
 
 ```
@@ -109,7 +112,7 @@ but remember to go:
 
 `fc-cache -r`
 
-# update grub
+# update grub [if we are using it]
 
 in `/etc/default/grub`
 
@@ -124,7 +127,7 @@ in `/etc/default/grub`
 
 `sudo grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg`
 
-# or update systemd boot
+# or update systemd boot [if necessary]
 
 in `/boot/loader/entries/xxxx`
 
@@ -150,21 +153,6 @@ git config --local submodule.recurse false
 
 in this repo.
 
-# or update systemd boot
-
-in `/boot/loader/entries/xxxx`
-
-```
-title   Linux
-linux   /vmlinuz-linux
-initrd  /initramfs-linux.img
-options root=UUID=your-root-partition-uuid rw systemd.unit=multi-user.target
-```
-
-```
-sudo systemctl disable lightdm.service
-sudo systemctl set-default multi-user.target
-```
 
 # Install Control Programs [superseded by package list]
 
