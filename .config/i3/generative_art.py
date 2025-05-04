@@ -186,7 +186,8 @@ def normalize(color):
 colors = [
     (0.0, normalize((2, 9, 28))),    
     (0.5, normalize((4, 14, 56))),    
-    (0.75, normalize((143,51,204))), 
+    (0.75, normalize((5,16,60))), 
+    #(0.75, normalize((143,51,204))), 
     (0.85, normalize((148,51,204))), 
     (1.0, normalize((163,51,190))), 
 ]
