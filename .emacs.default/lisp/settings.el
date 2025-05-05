@@ -1,7 +1,6 @@
 (setq-default inhibit-startup-screen t)
 (blink-cursor-mode 0)
 (setq-default visible-bell 1)
-(set-frame-font "InputMonoNerdFont-13" t t)
 (setq-default scroll-margin 3)
 (setq-default scroll-conservatively 10000)
 (save-place-mode 1)

@@ -289,6 +289,7 @@
   (global-corfu-mode)
 
   :custom
+  (corfu-count 25)
   (corfu-cycle t)                      ;; wrap at ends
   (corfu-auto t)                       ;; popup as you type
   (corfu-auto-delay 0.05)
@@ -314,20 +315,21 @@
 
 (defun my/corfu--strip-slash (s)
   "If S ends in “/” and is a real directory, drop the slash."
-  (if (and (string-suffix-p "/" s)
+  (if (and (stringp s)
+           (string-suffix-p "/" s)
            (file-directory-p s))
       (directory-file-name s)
     s))
 
 (defun my/corfu--replace-advice (orig beg end str)
-  "Advice around `corfu--replace' to drop trailing \"/\" on directories."
+  "Advice around `corfu--replace' to drop trailing “/” on directories."
   (funcall orig beg end (my/corfu--strip-slash str)))
 
 (defun my/corfu--preview-advice (&rest _)
-  "Advice after `corfu--preview-current' to drop trailing \"/\" in the overlay."
+  "Advice after `corfu--preview-current' to drop trailing “/” in the inline preview."
   (when (overlayp corfu--preview-ov)
-    (let* ((ov    corfu--preview-ov)
-           (disp  (overlay-get ov 'display))
+    (let* ((ov   corfu--preview-ov)
+           (disp (overlay-get ov 'display))
            (clean (and (stringp disp) (my/corfu--strip-slash disp))))
       (when clean
         (overlay-put ov 'display clean)))))
@@ -339,12 +341,16 @@
   :group 'my/corfu-strip
   (if my/corfu-dir-strip-mode
       (progn
-        (advice-add 'corfu--replace        :around #'my/corfu--replace-advice)
+        ;; enable
+        (advice-add 'corfu--replace         :around #'my/corfu--replace-advice)
         (advice-add 'corfu--preview-current :after  #'my/corfu--preview-advice))
-    (advice-remove 'corfu--replace        #'my/corfu--replace-advice)
-    (advice-remove 'corfu--preview-current #'my/corfu--preview-advice)))
+    (progn
+      ;; disable
+      (advice-remove 'corfu--replace         #'my/corfu--replace-advice)
+      (advice-remove 'corfu--preview-current #'my/corfu--preview-advice))))
 
 
+;; Turn it on by default:
 (my/corfu-dir-strip-mode 1)
  
   )
