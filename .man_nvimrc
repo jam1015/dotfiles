@@ -19,10 +19,10 @@ augroup highlight_yank
 	autocmd TextYankPost * silent! lua require('vim.hl').on_yank({timeout = 40})
 augroup END
 
-augroup start_at_bottom
-	autocmd!
-	autocmd VimEnter * $
-augroup END
+"augroup start_at_bottom
+"	autocmd!
+"	autocmd VimEnter * $
+"augroup END
 
 augroup prevent_insert
 	autocmd!

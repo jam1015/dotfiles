@@ -1,3 +1,4 @@
+(set-frame-font "InputMonoNerdFont-13" t t)
 (setq-default inhibit-startup-screen t)
 (blink-cursor-mode 0)
 (setq-default visible-bell 1)
