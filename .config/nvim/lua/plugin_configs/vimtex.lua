@@ -5,19 +5,17 @@
   let g:vimtex_complete_enabled=1
 
     let g:vimtex_compiler_latexmk = {
-        \ 'aux_dir' : '',
-        \ 'out_dir' : '',
+        \ 'aux_dir' : 'aux',
+        \ 'build_dir' : 'build',
+        \ 'out_dir' : 'out',
         \ 'callback' : 1,
         \ 'continuous' : 1,
         \ 'executable' : 'latexmk',
         \ 'hooks' : [],
-        \ 'options' : [
-        \   '-verbose',
-        \   '-file-line-error',
-        \   '-synctex=1',
-        \   '-interaction=nonstopmode',
-        \ ],
         \}
-<
 
+let g:vimtex_compiler_bib = 'biber'
  	]])
+
+
+
