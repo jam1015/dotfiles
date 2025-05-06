@@ -1,4 +1,3 @@
-(set-frame-font "InputMonoNerdFont-13" t t)
 (setq-default inhibit-startup-screen t)
 (blink-cursor-mode 0)
 (setq-default visible-bell 1)
@@ -13,6 +12,7 @@
       (load-theme 'anisochromatic t)
      (setq cursor-in-non-selected-windows nil)
 
+;;(set-frame-font "InputMonoNerdFont-13" t t)
 ;;(setq completion-in-region-function #'consult-completion-in-region)
 	    )
 )

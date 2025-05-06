@@ -39,6 +39,7 @@ base
 base-devel
 bash
 bash-completion
+bashtop
 bat
 biber
 bind
