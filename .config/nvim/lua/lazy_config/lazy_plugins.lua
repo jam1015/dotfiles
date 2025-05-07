@@ -310,7 +310,21 @@ return {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
     dependencies = { "onsails/lspkind.nvim",
-      "williamboman/mason.nvim",
+
+      {
+        "williamboman/mason.nvim",
+        dependencies = { "Zeioth/mason-extra-cmds" },
+        cmd = {
+          "Mason",
+          "MasonInstall",
+          "MasonUninstall",
+          "MasonUninstallAll",
+          "MasonLog",
+          "MasonUpdate",
+          "MasonUpdateAll"
+        }
+      },
+
       "williamboman/mason-lspconfig.nvim",
       "folke/neodev.nvim"
 
@@ -693,16 +707,16 @@ return {
   {
     "powerman/vim-plugin-AnsiEsc",
   },
---  {
---    'stevearc/quicker.nvim',
---    config = function()
---      require("plugin_configs.quicker")
---    end,
---    event = "VeryLazy",
---    ---@module "quicker"
---    ---@type quicker.SetupOptions
---    opts = {},
---  },
+  --  {
+  --    'stevearc/quicker.nvim',
+  --    config = function()
+  --      require("plugin_configs.quicker")
+  --    end,
+  --    event = "VeryLazy",
+  --    ---@module "quicker"
+  --    ---@type quicker.SetupOptions
+  --    opts = {},
+  --  },
   {
     "mbbill/undotree",
     event = "VeryLazy",

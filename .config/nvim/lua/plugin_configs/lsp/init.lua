@@ -4,30 +4,27 @@
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 
 if not lspconfig_status_ok then
-	vim.cmd([[colorscheme blue]])
-	vim.notify("failed to load lspconfig", vim.log.levels.DEBUG)
-	return
+  vim.cmd([[colorscheme blue]])
+  vim.notify("failed to load lspconfig", vim.log.levels.DEBUG)
+  return
 end
 
 local servers = { "ts_ls", "vimls", "clangd", "pyright", "jsonls", "cssls", "eslint",
-	"emmet_ls", "texlab", "html", "bashls",
-	"lua_ls",
-	"julials" }
+  "emmet_ls", "texlab", "html", "bashls",
+  "lua_ls",
+  "julials" }
 --"r_language_server",
 --"texlab",
 
-
 local settings_obj = require("plugin_configs.lsp.mason_settings")
-
-
 
 local settings = settings_obj.settings()
 
 require("mason").setup(settings)
 
 require("mason-lspconfig").setup({
-	ensure_installed       = servers,
-	automatic_installation = true --if we set it up with lspconfig then we install it
+  ensure_installed       = servers,
+  automatic_installation = true --if we set it up with lspconfig then we install it
 })
 
 
@@ -38,27 +35,27 @@ handlers_obj.global_keymaps()
 --
 local opts = {}
 for _, server in ipairs(servers) do
-	opts = {
-		on_attach = handlers_obj.on_attach,
-		capabilities = handlers_obj.capabilities,
-		flags = handlers_obj.lsp_flags
-	}
+  opts = {
+    on_attach = handlers_obj.on_attach,
+    capabilities = handlers_obj.capabilities,
+    flags = handlers_obj.lsp_flags
+  }
 
-	--
-	--	--vim.notify("trying to set up " .. server )
-	local require_ok, conf_opts = pcall(require, "plugin_configs.lsp.settings." .. server)
-	if require_ok then
-		opts = vim.tbl_deep_extend("force", conf_opts, opts)
-	else
-	end
-	--
-	--	--vim.notify("setting up " .. server )
-	lspconfig[server].setup(opts)
+  --	--vim.notify("trying to set up " .. server )
+  local require_ok, conf_opts = pcall(require, "plugin_configs.lsp.settings." .. server)
+  if require_ok then
+    opts = vim.tbl_deep_extend("force", conf_opts, opts)
+  else
+  end
+  --
+  --	--vim.notify("setting up " .. server )
+  vim.lsp.enable(server)
+  vim.lsp.config(server,opts)
+--  lspconfig[server].setup(opts)
 end
 
 handlers_obj.setup()
 vim.api.nvim_exec_autocmds("FileType", {})
-
 
 vim.api.nvim_create_autocmd("LspDetach", {
   callback = function(args)
