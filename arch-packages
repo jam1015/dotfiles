@@ -31,6 +31,7 @@ attica
 attr
 audit
 autoconf
+autoconf-archive
 automake
 avahi
 awesome-terminal-fonts
@@ -1024,6 +1025,7 @@ mtools
 mujs
 nano
 nano-syntax-highlighting
+nasm
 ncurses
 neon
 neovide
@@ -1390,6 +1392,7 @@ qt6-positioning
 qt6-shadertools
 qt6-speech
 qt6-svg
+qt6-tools
 qt6-translations
 qt6-wayland
 qt6-webchannel

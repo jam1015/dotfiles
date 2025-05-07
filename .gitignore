@@ -90,6 +90,30 @@ ruby/bundle/cache
 .emacs.d/straight/repos
 
 
+.emacs.default/network-security.data
+.emacs.default/.org-id-locations
+.emacs.default/ac-comphist.dat
+.emacs.default/auto-save-list/
+.emacs.default/smex-items
+.emacs.default/%backup%~
+.emacs.default/bookmarks
+.emacs.default/eln-cache
+.emacs.default/secret.el
+.emacs.default/transient
+.emacs.default/projects
+.emacs.default/session*
+.emacs.default/history
+.emacs.default/recentf
+.emacs.default/eshell
+.emacs.default/games
+.emacs.default/tramp
+.emacs.default/elpa
+.emacs.default/url
+.emacs.default/straight/build
+.emacs.default/straight/build-cache.el
+.emacs.default/straight/modified
+.emacs.default/straight/repos
+
 .config/emacs/network-security.data
 .config/emacs/.org-id-locations
 .config/emacs/ac-comphist.dat
