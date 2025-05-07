@@ -159,7 +159,8 @@ bindsym $mod+q kill
 bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun \
 		-config ~/.config/rofi/rofidmenu.rasi
 bindsym $mod+Shift+d exec --no-startup-id rofi -show window \
-		-config ~/.config/rofi/rofidmenu.rasi rofidmenu.rasi
+		-config ~/.config/rofi/rofidmenu.rasi
+
 # A more modern dmenu replacement is rofi:
 # bindsym $mod+d exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -378,7 +379,6 @@ exec --no-startup-id redshift-gtk -l geoclue2 -t 6500:2000
 
 exec_always --no-startup-id ~/.screenlayout/dual_monitor.sh
 
-exec --no-startup-id picom
 
 workspace_auto_back_and_forth yes
 
