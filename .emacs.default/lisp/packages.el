@@ -152,17 +152,27 @@
   :init
 
   :config
-  
+ 
   ;; 1) Enable the global minor mode (so its keymap + lighter are active)
   (evil-god-toggle-mode 1)
 
-  ;; 2) Core toggle binding in the minor-mode’s keymap
-  ;;  (define-key evil-god-toggle-mode-map (kbd "C-;")
-  ;;	      #'evil-god-toggle--god)
+  ; 2) Core toggle binding in the minor-mode’s keymap
+;    (define-key evil-god-toggle-mode-map (kbd "C-;")
+;  	      #'evil-god-toggle--god-toggle)
+
+
+
+    (evil-define-key '(god) evil-god-toggle-mode-map  (kbd "C-;")
+  	      (lambda () (interactive)
+               (evil-god-toggle--stop-choose-state 'insert)))
+
+
+
+
 
   ;; 3) State‑specific bindings in that same map:
 
-  (evil-define-key '(normal insert)
+  (evil-define-key '(god-off normal insert)
     evil-god-toggle-mode-map
     (kbd "C-;") (lambda () (interactive)
                   (evil-god-toggle-execute-in-god-state)))
