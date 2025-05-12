@@ -13,3 +13,4 @@
 [alias]
 	glog = log --graph --all --decorate --oneline --pretty=format:'%C(auto)%h %d %s %cd' --date=short
 	pushh = push --all --force-with-lease --force-if-includes
+	wip = !git add -u && git commit -m 'wip' && git push

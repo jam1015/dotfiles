@@ -41,7 +41,7 @@ return {
 
   {
     "folke/which-key.nvim",
-    event = "VeryLazy",
+    lazy = false,
     opts = require("plugin_configs.which-key")
   },
   "tuurep/registereditor",
@@ -147,12 +147,23 @@ return {
   { "Bilal2453/luvit-meta",     lazy = true,                                              event = "VeryLazy" }, -- optional `vim.uv` typings
   {
     "leath-dub/snipe.nvim",
-    enabled = false,
+    event = "VeryLazy",
     config = function()
       require("plugin_configs.snipe")
       require("plugin_keymaps").snipe()
     end
   },
+
+
+
+{
+	"kungfusheep/snipe-lsp.nvim",
+	event = "VeryLazy",
+	dependencies = "leath-dub/snipe.nvim",
+	keymap = require("plugin_keymaps").snipe_lsp()
+},
+
+
   {
     "jaimecgomezz/here.term",
     event = "VeryLazy",

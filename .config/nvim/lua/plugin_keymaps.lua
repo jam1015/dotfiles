@@ -1,7 +1,7 @@
 -- see ~/.config/nvim/lua/keymaps/init.lua for other plugins
 -- function that returns keymaps based on name of plugin supplied
 
-local _, wk = pcall(require, "which-key")
+local wk = require("which-key")
 M = {}
 function M.hereterm()
   wk.add(
@@ -42,6 +42,14 @@ function M.pluginKeymaps(plugin, setup_type)
   else
     error("plugin " .. plugin .. " not found\n")
   end
+end
+
+function M.snipe_lsp()
+  return {
+    {
+      open_symbols_menu = '<leader>ss',
+    }
+  }
 end
 
 function M.oil()
@@ -410,7 +418,7 @@ function M.telescope()
   local builtin = require('telescope.builtin')
   wk.add({
     { "<leader>fg", builtin.live_grep,                                     mode = "n", desc = "Live grep" },
-    { "<leader>bb", builtin.buffers,                                       mode = "n", desc = "List buffers" },
+    --{ "<leader>bb", builtin.buffers,                                       mode = "n", desc = "List buffers" },
     { "<leader>fh", builtin.help_tags,                                     mode = "n", desc = "Help tags" },
     { "<leader>th", function() builtin.find_files({ hidden = true }) end,  mode = "n", desc = "Find hidden files" },
     { "<leader>tf", function() builtin.find_files({ hidden = false }) end, mode = "n", desc = "Find files (no hidden)" },
