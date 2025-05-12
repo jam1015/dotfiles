@@ -127,3 +127,12 @@
   --  'Shatur/neovim-session-manager',
   --  enabled = false
   --},
+--  {
+--    "jam1015/snipe-lsp.nvim",
+--    event = "VeryLazy",
+--    dependencies = { "leath-dub/snipe.nvim" },
+--    config = function()
+--      require("snipe-lsp").setup({})
+--      require("plugin_keymaps").snipe_lsp()
+--    end
+--  },

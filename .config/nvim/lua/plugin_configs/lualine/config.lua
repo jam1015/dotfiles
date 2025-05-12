@@ -1,8 +1,8 @@
 -- Attempt to load the custom lualine theme.
-local ok, my_custom_theme = pcall(require, 'plugin_configs.lualine.my_auto_theme')
+--local ok, my_custom_theme = pcall(require, 'plugin_configs.lualine.my_auto_theme')
 
 local used_theme = nil
-if ok then
+if nil then
   used_theme = my_custom_theme('normal')
   --vim.cmd([[colorscheme delek]])
 else

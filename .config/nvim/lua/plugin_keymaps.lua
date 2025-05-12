@@ -47,7 +47,9 @@ end
 function M.snipe_lsp()
   return {
     {
-      open_symbols_menu = '<leader>ss',
+      vim.keymap.set('n', "<leader>ss", "<cmd>SnipeLspSymbols<CR>", { desc = 'Navigate LSP Symbols' }),
+      vim.keymap.set('n', "<leader>sh", "<cmd>SnipeLspSymbolsSplit<CR>", { desc = 'Navigate LSP Symbols and open in a split pane' }),
+      vim.keymap.set('n', "<leader>sv", "<cmd>SnipeLspSymbolsVSplit<CR>", { desc = 'Navigate LSP Symbols and open in a vertical split pane' })
     }
   }
 end

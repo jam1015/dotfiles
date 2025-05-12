@@ -10,9 +10,14 @@ end
 
 return {
   {
-    'uloco/bluloco.nvim',
+    "folke/which-key.nvim",
     lazy = false,
-    priority = 1000,
+    opts = require("plugin_configs.which-key")
+  },
+  {
+    'uloco/bluloco.nvim',
+    --lazy = false,
+    --priority = 1000,
     dependencies = { 'rktjmp/lush.nvim' },
     config = function()
       require("plugin_configs.bluloco")
@@ -39,11 +44,6 @@ return {
     end
   },
 
-  {
-    "folke/which-key.nvim",
-    lazy = false,
-    opts = require("plugin_configs.which-key")
-  },
   "tuurep/registereditor",
 
   {
@@ -156,12 +156,6 @@ return {
 
 
 
-{
-	"kungfusheep/snipe-lsp.nvim",
-	event = "VeryLazy",
-	dependencies = "leath-dub/snipe.nvim",
-	keymap = require("plugin_keymaps").snipe_lsp()
-},
 
 
   {
@@ -674,7 +668,7 @@ return {
 
   {
     'nvim-lualine/lualine.nvim',
-    event = "VeryLazy",
+    --event = "VeryLazy",
     dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
     init = function()
       require('plugin_configs.lualine.initi')
