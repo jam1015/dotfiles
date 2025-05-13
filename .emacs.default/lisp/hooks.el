@@ -54,7 +54,13 @@
                      (insert-file-contents last-dir-file)
                      (buffer-string))))
           (when (file-directory-p dir)
-            (setq default-directory dir)))))))
+            (setq default-directory dir))))
+      ))
+
+(kill-buffer "*scratch*")
+            (dired default-directory)
+
+  )
 
 (add-hook 'emacs-startup-hook #'load-default-directory-if-not-launched-from-terminal)
 (provide 'hooks)

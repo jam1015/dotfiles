@@ -10,12 +10,19 @@ end
 
 return {
   {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = require("plugin_configs.flash"),
+    keys = require("plugin_keymaps").flash()
+  },
+  {
     "folke/which-key.nvim",
     lazy = false,
     opts = require("plugin_configs.which-key")
   },
   {
-    'uloco/bluloco.nvim',
+    'jam1015/bluloco.nvim',
+    --dir = "~/bluloco.nvim",
     --lazy = false,
     --priority = 1000,
     dependencies = { 'rktjmp/lush.nvim' },
@@ -28,6 +35,15 @@ return {
     "rcarriga/nvim-notify",
     event = "VeryLazy",
     config = function() require("plugin_configs.nvim-notify") end,
+  },
+  {
+   "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("plugin_configs.harpoon")
+    end,
+
   },
   {
     'stevearc/oil.nvim',
@@ -45,6 +61,16 @@ return {
   },
 
   "tuurep/registereditor",
+  {
+
+
+  "chentoast/marks.nvim",
+  event = "VeryLazy",
+  config = function()
+    require("plugin_configs.marks")
+    end
+  },
+
 
   {
     'jam1015/nvim_gui_termquit',
@@ -61,15 +87,6 @@ return {
     },
   },
 
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    opts = require("plugin_configs.flash"),
-    config = function()
-      require("plugin_keymaps").flash()
-    end
-
-  },
   'vuciv/golf',
 
 
@@ -408,7 +425,14 @@ return {
       require("plugin_keymaps").telescope()
     end
   },
-
+  {
+    'dnlhc/glance.nvim',
+    config = function()
+      require('plugin_keymaps').glance()
+    end,
+    event = 'VeryLazy',
+    cmd = 'Glance'
+  },
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",

@@ -20,7 +20,7 @@ return {
     --   end,
     mode = "exact",
     -- behave like `incsearch`
-    incremental = true,
+    incremental = false,
     -- Excluded filetypes and custom window filters
     ---@type (string|fun(win:window))[]
     exclude = {
@@ -116,7 +116,7 @@ return {
       match = "FlashMatch",
       current = "FlashCurrent",
       backdrop = "FlashBackdrop",
-      label = "FlashLabel",
+      label = "Visual",
     },
   },
   -- action to perform when picking a label.
@@ -138,7 +138,7 @@ return {
     search = {
       -- when `true`, flash will be activated during regular search by default.
       -- You can always toggle when searching with `require("flash").toggle()`
-      enabled = true,
+      enabled = false,
       highlight = { backdrop = false },
       jump = { history = true, register = true, nohlsearch = true },
       search = {
@@ -159,9 +159,9 @@ return {
         -- disable jump labels when not enabled, when using a count,
         -- or when recording/executing registers
         opts.jump_labels = opts.jump_labels
-            and vim.v.count == 0
-            and vim.fn.reg_executing() == ""
-            and vim.fn.reg_recording() == ""
+          and vim.v.count == 0
+          and vim.fn.reg_executing() == ""
+          and vim.fn.reg_recording() == ""
 
         -- Show jump labels only in operator-pending mode
         -- opts.jump_labels = vim.v.count == 0 and vim.fn.mode(true):find("o")
@@ -179,8 +179,7 @@ return {
       -- by removing them from the list.
       -- If you rather use another key, you can map them
       -- to something else, e.g., { [";"] = "L", [","] = H }
-      --keys = { "f", "F", "t", "T", ";", "," },
-      keys = {},
+      keys = { "f", "F", "t", "T", ";", "," },
       ---@alias Flash.CharActions table<string, "next" | "prev" | "right" | "left">
       -- The direction for `prev` and `next` is determined by the motion.
       -- `left` and `right` are always left and right.
@@ -198,13 +197,18 @@ return {
       end,
       search = { wrap = false },
       highlight = { backdrop = true },
-      jump = { register = false },
+      jump = {
+        register = false,
+        -- when using jump labels, set to 'true' to automatically jump
+        -- or execute a motion when there is only one match
+        autojump = false,
+      },
     },
     -- options used for treesitter selections
     -- `require("flash").treesitter()`
     treesitter = {
       labels = "abcdefghijklmnopqrstuvwxyz",
-      jump = { pos = "range" },
+      jump = { pos = "range", autojump = true },
       search = { incremental = false },
       label = { before = true, after = true, style = "inline" },
       highlight = {
@@ -225,6 +229,7 @@ return {
   },
   -- options for the floating window that shows the prompt,
   -- for regular jumps
+  -- `require("flash").prompt()` is always available to get the prompt text
   prompt = {
     enabled = true,
     prefix = { { "⚡", "FlashPromptIcon" } },
@@ -232,8 +237,8 @@ return {
       relative = "editor",
       width = 1, -- when <=1 it's a percentage of the editor width
       height = 1,
-      row = -1,  -- when negative it's an offset from the bottom
-      col = 0,   -- when negative it's an offset from the right
+      row = -1, -- when negative it's an offset from the bottom
+      col = 0, -- when negative it's an offset from the right
       zindex = 1000,
     },
   },

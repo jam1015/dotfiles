@@ -17,10 +17,32 @@
 	    )
 )
 
+;; which key ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'which-key)
+
+;; make it pop up very quickly
+(setq which-key-idle-delay            0.2   ; time to wait before popup
+      which-key-idle-secondary-delay  0.05) ; shorter delay after first show
+
+;; use a bottom side-window, limited height
+(setq which-key-popup-type            'side-window
+      which-key-side-window-location  'bottom
+      which-key-side-window-max-height 0.25) ; at most 25% of frame
+
+;; sorting: show prefixes first, then keys, and ignore case
+(setq which-key-sort-order
+      'which-key-prefix-then-key-order
+      which-key-sort-uppercase-first nil)
+
+;; prettier arrows and spacing
+(setq which-key-separator              " → "
+      which-key-prefix-prefix          "+ ")
 (which-key-mode)
 
-(setq debug-on-error t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;(setq debug-on-error t)
 
 
      (setq cursor-in-non-selected-windows nil)

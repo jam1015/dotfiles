@@ -1,9 +1,26 @@
 -- see ~/.config/nvim/lua/keymaps/init.lua for other plugins
 -- function that returns keymaps based on name of plugin supplied
 
-local wk = require("which-key")
 M = {}
+
+function M.harpoon(harpoon)
+
+vim.keymap.set("n", "<leader>ah", function() harpoon:list():add() end, {desc = "harpoon add"})
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+
+end
+
 function M.hereterm()
+  local wk = require("which-key")
   wk.add(
     {
       { "<C-;>", "<cmd>lua require('here-term').toggle_terminal()<CR>", desc = "here.term toggle", mode = "n" },
@@ -13,13 +30,23 @@ function M.hereterm()
   )
 end
 
+function M.glance()
+  local wk = require("which-key")
+  vim.keymap.set('n', 'gD', '<CMD>Glance definitions<CR>')
+  vim.keymap.set('n', 'gR', '<CMD>Glance references<CR>')
+  vim.keymap.set('n', 'gY', '<CMD>Glance type_definitions<CR>')
+  vim.keymap.set('n', 'gM', '<CMD>Glance implementations<CR>')
+end
+
 function M.nvim_gui_termquit()
+  local wk = require("which-key")
   wk.add({
     { "<localleader>tt", "<Plug>GotoTerminal", desc = "Select previous entry through yank history", mode = "n", remap = false },
   })
 end
 
 function M.pluginKeymaps(plugin, setup_type)
+  local wk = require("which-key")
   local keymap = vim.keymap.set
   local opts = { remap = false, silent = true }
 
@@ -45,20 +72,25 @@ function M.pluginKeymaps(plugin, setup_type)
 end
 
 function M.snipe_lsp()
+  local wk = require("which-key")
   return {
     {
       vim.keymap.set('n', "<leader>ss", "<cmd>SnipeLspSymbols<CR>", { desc = 'Navigate LSP Symbols' }),
-      vim.keymap.set('n', "<leader>sh", "<cmd>SnipeLspSymbolsSplit<CR>", { desc = 'Navigate LSP Symbols and open in a split pane' }),
-      vim.keymap.set('n', "<leader>sv", "<cmd>SnipeLspSymbolsVSplit<CR>", { desc = 'Navigate LSP Symbols and open in a vertical split pane' })
+      vim.keymap.set('n', "<leader>sh", "<cmd>SnipeLspSymbolsSplit<CR>",
+        { desc = 'Navigate LSP Symbols and open in a split pane' }),
+      vim.keymap.set('n', "<leader>sv", "<cmd>SnipeLspSymbolsVSplit<CR>",
+        { desc = 'Navigate LSP Symbols and open in a vertical split pane' })
     }
   }
 end
 
 function M.oil()
+  local wk = require("which-key")
   vim.keymap.set("n", "<leader>oo", ":Oil", { remap = false, silent = true })
 end
 
 function M.yanky()
+  local wk = require("which-key")
   wk.add({
     { "<leader>pp", function() require("telescope").extensions.yank_history.yank_history({}) end, desc = "Open Yank History" },
     { "y",          "<Plug>(YankyYank)",                                                          mode = { "n", "x" },                                desc = "Yank text" },
@@ -82,6 +114,7 @@ function M.yanky()
 end
 
 function M.yankstack()
+  local wk = require("which-key")
   wk.add({
     { "<c-p>", "<Plug>yankstack_substitute_older_paste", desc = "Select previous entry through yank history" },
     { "<c-n>", "<Plug>yankstack_substitute_newer_paste", desc = "Select next entry through yank history" },
@@ -89,6 +122,7 @@ function M.yankstack()
 end
 
 function M.emmet_vim(setup_type)
+  local wk = require("which-key")
   if setup_type == "config" then
     wk.add({
       { "<leader>m,", "<plug>(emmet-expand-abbr)",         desc = "Emmet expand abbreviation" },
@@ -114,6 +148,7 @@ function M.emmet_vim(setup_type)
 end
 
 function M.nvim_treehopper()
+  local wk = require("which-key")
   wk.add({
     { "<leader>h",  name = "Hopping" },
     { "<leader>ht", "<cmd>lua require('tsht').move({ side = 'start' })<cr>", desc = "Treehopper Move" },
@@ -129,6 +164,7 @@ function M.nvim_treehopper()
 end
 
 function M.leap_ast()
+  local wk = require("which-key")
   wk.add({
     { "<leader>h",  name = "Hopping" },
     { "<leader>ht", function() require 'leap-ast'.leap() end, desc = "Leap AST Move" },
@@ -136,6 +172,7 @@ function M.leap_ast()
 end
 
 function M.unimpaired()
+  local wk = require("which-key")
   vim.cmd([[
  unmap [t
  unmap [T
@@ -191,6 +228,7 @@ function M.unimpaired()
 end
 
 function M.vim_slime()
+  local wk = require("which-key")
   wk.add({
     { "gz",  "<Plug>SlimeMotionSend", desc = "Slime Motion Send" },
     { "gzz", "<Plug>SlimeLineSend",   desc = "Slime Line Send" },
@@ -208,6 +246,7 @@ function M.vim_slime()
 end
 
 function M.nvim_cmp()
+  local wk = require("which-key")
   local function cmp_disable()
     require('cmp').setup.buffer { enabled = false }
   end
@@ -220,12 +259,14 @@ function M.nvim_cmp()
 end
 
 function M.undotree()
+  local wk = require("which-key")
   wk.add({
     { '<leader>uu', vim.cmd.UndotreeToggle, desc = "Toggle Undotree" },
   }, { mode = "n", silent = true })
 end
 
 function M.substitute_nvim()
+  local wk = require("which-key")
   wk.add({
     { "<leader>xc", require('substitute.exchange').operator, desc = "Exchange operator" },
     { "<leader>xx", require('substitute.exchange').line,     desc = "Exchange line" },
@@ -234,6 +275,7 @@ function M.substitute_nvim()
 end
 
 function M.nvim_smart_termsplit()
+  local wk = require("which-key")
   local termsplit = require('nvim-smart-termsplit')
   wk.add({
     { "<C-w>s", termsplit.term_hsplit, desc = "Split Term Horizontally" },
@@ -242,24 +284,28 @@ function M.nvim_smart_termsplit()
 end
 
 function M.nvim_tree()
+  local wk = require("which-key")
   wk.add({
     { "<leader>nt", "<Cmd>NvimTreeToggle<CR>", desc = "Toggle Nvim Tree" },
   }, { mode = "n", silent = true })
 end
 
 function M.nvim_window()
+  local wk = require("which-key")
   wk.add({
     { "<C-w>g", require('nvim-window').pick, desc = "Select window by label" },
   }, { mode = "n", silent = true })
 end
 
 function M.nvim_winshift()
+  local wk = require("which-key")
   wk.add({
     { "<C-w>x", "<cmd>WinShift swap<CR>", desc = "WinShift Swap" },
   }, { mode = "n", silent = true })
 end
 
 function M.bufdelete()
+  local wk = require("which-key")
   vim.cmd([[
 cnoreabbrev <expr> bd getcmdtype() == ":" && getcmdline() == "bd" ? "Bdelete" : "bd"
 cnoreabbrev <expr> bw getcmdtype() == ":" && getcmdline() == "bw" ? "Bwipeout" : "bw"
@@ -269,12 +315,14 @@ cnoreabbrev <expr> wbw getcmdtype() == ":" && getcmdline() == "wbw" ? "w \| Bwip
 end
 
 function M.vim_create_goto()
+  local wk = require("which-key")
   wk.add({
     { '<leader>fc', '<Plug>(CreateGoTo)', desc = "Create Goto" },
   }, { mode = "n", silent = false })
 end
 
 function M.cscope_maps()
+  local wk = require("which-key")
   local keymap = vim.keymap.set
   local get_cscope_prompt_cmd = function(operation, selection)
     local sel = "cword"      -- word under cursor
@@ -315,6 +363,7 @@ function M.cscope_maps()
 end
 
 function M.fzfx()
+  local wk = require("which-key")
   wk.add({
     { "<leader>f",   group = "files-flash" },
     { "<leader>fs",  "<cmd>FzfxFiles<cr>",              desc = "Find files" },
@@ -366,6 +415,7 @@ function M.fzfx()
 end
 
 function M.flash_keys()
+  local wk = require("which-key")
   return {
     --{ "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
     --{ "<leader>ft", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
@@ -376,32 +426,18 @@ function M.flash_keys()
 end
 
 function M.flash()
-  wk.add({
-    { "s", mode = { "n", "x", "o" }, "<cmd>lua  require('flash').jump()<cr>", desc = "Flash" },
-    { "r", mode = "o",               "<cmd>require('flash').remote()<cr>",    desc = "Remote Flash" },
-  })
+  return {
 
-  wk.add({
-    { "<leader>x",  name = "files-flash" },
-    { "<leader>xt", "<cmd>lua require('flash').treesitter()<cr>",        desc = "Flash TreeSitter" },
-    { "<leader>xr", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSitter Search" },
-  }, { mode = "n", silent = true })
-
-  wk.add({
-    { "<leader>x",  name = "files-flash" },
-    { "<leader>xt", "<cmd><C-U>lua require('flash').treesitter()<cr>",   desc = "Flash TreeSitter" },
-    --{ "<leader>xr", "<cmd>lua require('flash').remote()<cr>",            desc = "Flash Remote" },
-    { "<leader>xq", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSister Search" },
-  }, { mode = "o", silent = true }) -- 'o' for operator-pending mode
-
-  wk.add({
-    { "<leader>x",  name = "files-flash" },
-    { "<leader>xt", "<cmd>lua require('flash').treesitter()<cr>",        desc = "Flash TreeSister" },
-    { "<leader>xr", "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Flash TreeSister Search" },
-  }, { mode = "x", silent = true }) -- 'x' for visual mode
+    { "s",          mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+    { "r",          mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+--    -- Treesitter & Treesitter-Search in all relevant modes
+    { "<leader>xt", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+    { "<leader>xr", mode = { "n", "x", "o" }, function() require("flash").treesitter_search() end, desc = "Flash Treesitter Search" },
+  }
 end
 
 function M.leap()
+  local wk = require("which-key")
   wk.add({
     { 's',  '<Plug>(leap-forward)',     desc = "Leap Forward" },
     { 'S',  '<Plug>(leap-backward)',    desc = "Leap Backward" },
@@ -410,6 +446,7 @@ function M.leap()
 end
 
 function M.bufjump()
+  local wk = require("which-key")
   wk.add({
     { "<leader>[b", "<cmd>lua require('bufjump').backward()<cr>", desc = "Jump Back Buffer" },
     { "<leader>]b", "<cmd>lua require('bufjump').forward()<cr>",  desc = "Jump Forward Buffer" },
@@ -417,6 +454,7 @@ function M.bufjump()
 end
 
 function M.telescope()
+  local wk = require("which-key")
   local builtin = require('telescope.builtin')
   wk.add({
     { "<leader>fg", builtin.live_grep,                                     mode = "n", desc = "Live grep" },
@@ -436,12 +474,14 @@ function M.telescope()
 end
 
 function M.vim_rooter()
+  local wk = require("which-key")
   wk.add({
     { "<leader>rf", ":cd <c-r>=FindRootDirectory()<CR>", desc = "Find Root Directory" },
   }, { mode = "n", silent = false })
 end
 
 function M.pushpop()
+  local wk = require("which-key")
   vim.cmd([[
 cnoreabbrev <expr> pud getcmdtype() == ":" && getcmdline() == "pud" ? "Pushd" : "pud"
 cnoreabbrev <expr> pod getcmdtype() == ":" && getcmdline() == "pod" ? "Popd" : "pod"
@@ -450,16 +490,19 @@ cnoreabbrev <expr> dirs getcmdtype() == ":" && getcmdline() == "dirs" ? "Dirs" :
 end
 
 function M.gx()
+  local wk = require("which-key")
   wk.add({
     { 'gx', "<cmd>Browse<cr>", desc = "Browse URL" },
   }, { mode = { 'n', 'x' }, silent = false })
 end
 
 function M.snipe()
+  local wk = require("which-key")
   wk.add({ "<leader>bb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu", mode = "n" })
 end
 
 function M.treewalker()
+  local wk = require("which-key")
   -- Movement keymaps for normal and visual modes
   wk.add({
     { "<C-k>", "<cmd>Treewalker Up<cr>",    desc = "Treewalker Up" },

@@ -19,6 +19,8 @@ alsa-ucm-conf
 alsa-utils
 amd-ucode
 aom
+appstream
+appstream-glib
 arandr
 archlinux-keyring
 archlinux-xdg-menu
@@ -251,6 +253,7 @@ google-chrome
 gopass
 gperftools
 gpgme
+gpick
 gpm
 graphene
 graphicsmagick
@@ -692,6 +695,7 @@ lib32-zstd
 libabw
 libaccounts-glib
 libaccounts-qt
+libadwaita
 libaec
 libaio
 libappindicator-gtk3
@@ -970,6 +974,7 @@ libxkbfile
 libxklavier
 libxml2
 libxml2-legacy
+libxmlb
 libxmu
 libxpm
 libxpresent

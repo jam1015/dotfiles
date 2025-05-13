@@ -67,12 +67,14 @@
   (savehist-mode 1)
 
 
+
   (evil-ex-define-cmd "ConsultLine" #'consult-line)
   (evil-ex-define-cmd "ConsultRg" #'consult-ripgrep)
   (evil-ex-define-cmd "ConsultFind" #'consult-find)
   (evil-ex-define-cmd "Mx" #'execute-extended-command)
 
   )
+
 
 
 (use-package evil-collection
@@ -202,34 +204,6 @@
   (xclip-mode 1))  ; Enable system clipboard support for * and + registers
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-(use-package consult
-  :ensure t
-  :after vertico
-  :custom
-  (consult-preview-key "any"))
-
-(use-package embark
-  :ensure t
-  :bind
-  (("C-." . embark-act) ;; "Do something" prompt on selected minibuffer candidate
-   ("C-;" . embark-dwim))) ;; "Do what I mean" action
-
-(use-package embark-consult
-  :ensure t
-  :after (embark consult)) ;; for deeper consult-embark integration
-
 (use-package dabbrev
              :ensure nil
 
@@ -246,19 +220,6 @@
   )
 
 
-;; Optionally use the `orderless' completion style.
-
-
-
-
-
-
-
-
-
-
-
-
 
 (use-package vertico
   :init
@@ -268,19 +229,19 @@
   (vertico-count 15)
   (vertico-resize t)
   (vertico-cycle t)  ;; wrap at top/bottom
-  :config
-(keymap-set vertico-map "?" #'minibuffer-completion-help)
-(keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
-(keymap-set vertico-map "M-TAB" #'minibuffer-complete)
-
   :bind
   (:map vertico-map
+        ;; navigation
         ("TAB"       . vertico-next)
         ("<tab>"     . vertico-next)
         ("S-TAB"     . vertico-previous)
         ("<backtab>" . vertico-previous)
+        ;; insertion & completion
         ("C-SPC"     . vertico-insert)
-        ))
+        ("?"         . minibuffer-completion-help)
+        ("M-RET"     . minibuffer-force-complete-and-exit)
+        ("M-TAB"     . minibuffer-complete)))
+
 
 (use-package corfu
   :ensure t
@@ -363,8 +324,52 @@
   (completion-category-overrides '((file ( styles partial-completion)))))
 
 
+(use-package marginalia
+  :after vertico
+  :init
+  (marginalia-mode))  
+
+(use-package consult
+  :after vertico
+  :bind (;; Replace default bindings:
+         ("C-s"     . consult-line)             ; search in buffer :contentReference[oaicite:12]{index=12}
+         ("C-x b"   . consult-buffer)           ; enhanced buffer switch :contentReference[oaicite:13]{index=13}
+         ("C-x C-r" . consult-recent-file)      ; recent files :contentReference[oaicite:14]{index=14}
+         ("M-y"     . consult-yank-pop)         ; better yank history :contentReference[oaicite:15]{index=15}
+         )
+  :hook (completion-list-mode . consult-preview-at-point-mode) ; live previews
+  :custom
+   (consult-preview-key "any")
+  )
+
+(use-package embark
+  :bind (("C-." . embark-act)                   ; act on target :contentReference[oaicite:16]{index=16}
+         ("C-;" . embark-dwim)
+         :map minibuffer-local-map
+         ("C-c C-c" . embark-collect)           ; collect candidates :contentReference[oaicite:17]{index=17}
+         ("C-c C-e" . embark-export))           ; export to dedicated buffer :contentReference[oaicite:18]{index=18}
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command))
 
 
+(use-package embark-consult
+  :after (embark consult)                       ; glue for Embark+Consult :contentReference[oaicite:19]{index=19}
+  :demand t
+  :config
+
+(setf (alist-get 'consult-location embark-exporters-alist)
+      #'embark-consult-export-location-grep)
+(add-hook 'embark-collect-mode-hook #'consult-preview-at-point)
+  )
+
+(use-package wgrep
+  :after grep
+  :bind (:map grep-mode-map                    ; keybindings in `grep-mode'
+              ("e"       . wgrep-change-to-wgrep-mode)  ; start editing :contentReference[oaicite:20]{index=20}
+              ("C-x C-q" . wgrep-change-to-wgrep-mode)
+              ("C-c C-c" . wgrep-finish-edit))          ; apply edits :contentReference[oaicite:21]{index=21}
+  :custom
+  (wgrep-auto-save-buffer t))    
 
 
 (use-package cape
@@ -376,79 +381,23 @@
   ;; (add-to-list 'completion-at-point-functions #'cape-history)   ; input history
   ;; ... add other capes as needed
   )
-                                                                                  ;;─────────────────────────────────────────────────────────────────────────────
-;;(add-hook 'text-mode-hook #'my/add-cape-file)                                     ;; Notes:
-;;(add-hook 'prog-mode-hook #'my/add-cape-file)                                     ;; - We removed the redundant first `setq` block; only one set of auto-popup
-;;)                                                                                 ;;   settings remains.
-;; - We dropped the `corfu-mode-hook` that forced `completion-styles` to `(basic)`
-;;   so you can continue using orderless/flex matching elsewhere.
-;; - If you *do* want per-mode completion-style overrides, consider doing it
-;;   explicitly in those modes’ hooks, rather than unconditionally here.
-
-
-;;(use-package corfu
-;;  :ensure t
-;;  :init
-;;  (global-corfu-mode)                  ; enable everywhere
-;;  :custom
-;;  (corfu-cycle t)                      ; wrap at ends
-;;  (corfu-auto t)                       ; popup as you type
-;;  (corfu-auto-delay 0.05)
-;;  (corfu-auto-prefix 0)                ; start immediately
-;;  (corfu-quit-at-boundary 'separator)         ; don’t quit on e.g. `/`
-;;  (corfu-quit-no-match 'separator)            ; stay open even when no candidates
-;;  :bind
-;;  (:map corfu-map
-;;        ("TAB"       . corfu-next)
-;;        ("<tab>"     . corfu-next)
-;;        ("S-TAB"     . corfu-previous)
-;;        ("<backtab>" . corfu-previous))
-;;  :config
-;;  ;; file-and-path completion that understands `…/` and leaves the popup up:
-;;  (use-package cape
-;;    :ensure t
-;;    :init
-;;    (add-to-list 'completion-at-point-functions #'cape-file)))
-;;
-;;
-;;(use-package vertico
-;;  :ensure t
-;;  :init
-;;  (vertico-mode)
-;;  :custom
-;;  (vertico-count 15)
-;;  (vertico-resize t)
-;;  (vertico-cycle t)  ;; wrap at top/bottom
-;;  :bind
-;;  (:map vertico-map
-;;        ("TAB"       . vertico-next)
-;;        ("<tab>"     . vertico-next)
-;;        ("S-TAB"     . vertico-previous)
-;;        ("<backtab>" . vertico-previous)))
-;;
 
 
 
+;; lisp/packages.el
 
+(use-package dirvish
+  :after dired               ;; load after dired
+  :init
+  :config
+(setq initial-buffer-choice
+      (lambda () (dirvish user-emacs-directory)))
+  ;; make all Dired commands use Dirvish
+  (dirvish-override-dired-mode)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  ;; optional: enable some extra Dirvish modules
+    (setq dirvish-use-caching        t)
+  )
 
 
 (provide 'packages)
