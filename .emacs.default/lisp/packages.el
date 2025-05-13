@@ -436,17 +436,28 @@
 
 ;; lisp/packages.el
 
+
+
+
+
 (use-package dirvish
-  :after dired               ;; load after dired
+  :after dired
   :init
+  
+
   :config
-(setq initial-buffer-choice
-      (lambda () (dirvish user-emacs-directory)))
-  ;; make all Dired commands use Dirvish
+  ;; override vanilla Dired
   (dirvish-override-dired-mode)
 
-  ;; optional: enable some extra Dirvish modules
-    (setq dirvish-use-caching        t)
+
+
+
+
+  ;; extras for layout-switch/toggle commands
+  (require 'dirvish-extras)   ;; L = switch layouts, T = toggle preview
+
+  (use-package all-the-icons :defer t)
+
   )
 
 (use-package which-key
