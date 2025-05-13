@@ -261,6 +261,8 @@
 
   :bind
   (:map corfu-map
+        ;;("<return>" . corfu-send)
+        ;;("RET" . corfu-send)
         ("TAB"       . corfu-next)
         ("<tab>"     . corfu-next)
         ("S-TAB"     . corfu-previous)
@@ -269,6 +271,37 @@
 	)
 
   :config
+
+;; In your config, after Corfu is set up:
+(defun my/eshell-corfu-return ()
+  "In Eshell, if Corfu popup is visible insert completion, then send input."  
+  (interactive)
+  (if (and (bound-and-true-p corfu-mode)
+           (fboundp 'corfu--popup-visible-p)
+           (corfu--popup-visible-p))
+      (progn
+        (corfu-insert)      ;; accept the Corfu candidate
+        (eshell-send-input))
+    (eshell-send-input))) ;; normal RET
+
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (local-set-key (kbd "RET")      #'my/eshell-corfu-return)
+            (local-set-key (kbd "<return>") #'my/eshell-corfu-return)))
+
+;; ─── Helper to inspect what RET is bound to ──────────────────────────────────
+
+(defun my/debug-ret-key ()
+  (interactive)
+  (message "DEBUG: RET maps to %S"
+           (key-binding (kbd "RET"))))
+
+;; Bind C-c RET in corfu-popup and in all minibuffers
+(define-key corfu-map  (kbd "C-c RET") #'my/debug-ret-key)
+(add-hook 'minibuffer-setup-hook
+          (lambda () (local-set-key (kbd "C-c RET") #'my/debug-ret-key)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defgroup my/corfu-strip nil
   "Strip trailing slash from real-directory completions in Corfu."
