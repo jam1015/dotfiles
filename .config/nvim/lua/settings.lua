@@ -19,19 +19,18 @@ else
   colorscheme = "bluloco"
 end
 
-vim.cmd([[colorscheme bluloco]])
 
---if os.getenv("DISPLAY") then
---  local status_ok, out = pcall(vim.cmd, "colorscheme " .. colorscheme)
---  if not status_ok then
---    vim.cmd([[colorscheme elflord]])
---  end
---else
---  vim.cmd([[colorscheme elflord]])
---end
+if os.getenv("DISPLAY") then
+  local status_ok, out = pcall(vim.cmd, "colorscheme " .. colorscheme)
+  if not status_ok then
+    vim.cmd([[colorscheme elflord]])
+  end
+else
+  vim.cmd([[colorscheme elflord]]) end
 
 -- add complete/completeopt
 set.modeline = false
+--set.timeoutlen = 1
 set.completeopt = 'menu,menuone,noselect'
 set.shortmess = "Fw"
 set.hlsearch = true

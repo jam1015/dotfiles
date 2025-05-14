@@ -5,55 +5,51 @@
 local type = "mine" -- "lazy", "debug"
 
 if type == "mine" then
-require('autocommands')--~/.config/nvim/lua/autocommands.lua
-require('keymaps')       -- ~/.config/nvim/lua/keymaps/init.lua
-require('lazy_config')   -- ~/.config/nvim/lua/lazy_config/lazy_plugins.lua
--------- ~/.config/nvim/lua/plugin_keymaps.lua
-require('settings')      -- ~/.config/nvim/lua/settings.lua
-require('keymaps.post')  -- ~/.config/nvim/lua/keymaps/post.lua
+  require('autocommands') --~/.config/nvim/lua/autocommands.lua
+  require('keymaps')    -- ~/.config/nvim/lua/keymaps/init.lua
+  require('config.lazy') -- ~/.config/nvim/lua/plugins/init.lua
+  require('settings')   -- ~/.config/nvim/lua/settings.lua
+  -------- ~/.config/nvim/lua/plugin_keymaps.lua
+  require('keymaps.post') -- ~/.config/nvim/lua/keymaps/post.lua
 
-elseif type == "lazy" then
+
 elseif type == "debug" then
 
---local is_gui = vim.g.neovide or vim.g.neovim_qt or vim.g.goneovim
---
---if is_gui then
---  print("Neovim is running in a GUI!")
---else
---  print("Neovim is running in a terminal.")
---end
---
---vim.g.mapleader = " "
---vim.g.maplocalleader = "\\"
---local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
---if not (vim.uv or vim.loop).fs_stat(lazypath) then
---  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
---  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
---  if vim.v.shell_error ~= 0 then
---    vim.api.nvim_echo({
---      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
---      { out,                            "WarningMsg" },
---      { "\nPress any key to exit..." },
---    }, true, {})
---    vim.fn.getchar()
---    os.exit(1)
---  end
---end
---vim.opt.rtp:prepend(lazypath)
---require("lazy").setup({
---  spec = {
---    {
---      'uloco/bluloco.nvim',
---      lazy = false,
---      priority = 1000,
---      dependencies = { 'rktjmp/lush.nvim' },
---      config = function()
---        require("plugin_configs.bluloco")
---      end,
---    },
---  },
---})
---
+
+
+
+  --vim.opt.timeoutlen = 500000
+
+
+  vim.g.mapleader = " "
+  vim.g.maplocalleader = "\\"
+  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+  if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+      vim.api.nvim_echo({
+        { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+        { out,                            "WarningMsg" },
+        { "\nPress any key to exit..." },
+      }, true, {})
+      vim.fn.getchar()
+      os.exit(1)
+    end
+  end
+  vim.opt.rtp:prepend(lazypath)
+  require("lazy").setup({
+    spec = {
+      {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        },
+      }
+    },
+  })
 else
 end
-

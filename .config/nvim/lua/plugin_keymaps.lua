@@ -174,10 +174,6 @@ end
 function M.unimpaired()
   local wk = require("which-key")
   vim.cmd([[
- unmap [t
- unmap [T
- unmap ]t
- unmap ]T
 					function! s:ArgNext(...)
 						try
 							let l:files = ""
