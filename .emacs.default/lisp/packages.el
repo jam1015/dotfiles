@@ -470,6 +470,7 @@
 ;; use-package with Elpaca:
 (use-package dashboard
   :config
+(setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name))  )
   (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
   (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
   (dashboard-setup-startup-hook))
