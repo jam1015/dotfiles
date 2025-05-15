@@ -19,7 +19,6 @@ else
   colorscheme = "bluloco"
 end
 
-
 if os.getenv("DISPLAY") then
   local status_ok, out = pcall(vim.cmd, "colorscheme " .. colorscheme)
   if not status_ok then
@@ -30,7 +29,7 @@ else
 
 -- add complete/completeopt
 set.modeline = false
---set.timeoutlen = 1
+set.timeoutlen = 5000
 set.completeopt = 'menu,menuone,noselect'
 set.shortmess = "Fw"
 set.hlsearch = true
@@ -88,7 +87,6 @@ set.foldmethod = "expr"
 set.foldexpr = "nvim_treesitter#foldexpr()"
 set.foldlevelstart = 99
 
-
 vim.g.vim_json_syntax_conceal = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_browsex_viewer = "xdg-open"
@@ -100,8 +98,6 @@ set.inccommand = 'split'
 set.shada = "'1000,%"
 
 -- see yanky config for clipboard settingss
-
-
 
 --setting clipboard settings
 if os.getenv("DISPLAY") then
@@ -134,7 +130,6 @@ local function setup_tmux_clipboard()
     return true
   end
 end
-
 
 if vim.g.neovide then
   vim.o.guifont = "InputMono Nerd Font:h8"

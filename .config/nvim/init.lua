@@ -5,20 +5,14 @@
 local type = "mine" -- "lazy", "debug"
 
 if type == "mine" then
-  require('autocommands') --~/.config/nvim/lua/autocommands.lua
-  require('keymaps')    -- ~/.config/nvim/lua/keymaps/init.lua
-  require('config.lazy') -- ~/.config/nvim/lua/plugins/init.lua
-  require('settings')   -- ~/.config/nvim/lua/settings.lua
+  require('autocommands')       --~/.config/nvim/lua/autocommands.lua
+  require('keymaps')            -- ~/.config/nvim/lua/keymaps/init.lua
+  require('config.lazy')        -- ~/.config/nvim/lua/plugins/init.lua
+  require('settings')           -- ~/.config/nvim/lua/settings.lua
   -------- ~/.config/nvim/lua/plugin_keymaps.lua
-  require('keymaps.post') -- ~/.config/nvim/lua/keymaps/post.lua
-
-
+  require('keymaps.post')       -- ~/.config/nvim/lua/keymaps/post.lua
 elseif type == "debug" then
-
-
-
-
-  --vim.opt.timeoutlen = 500000
+  vim.opt.timeoutlen = 1000
 
 
   vim.g.mapleader = " "
@@ -43,12 +37,20 @@ elseif type == "debug" then
       {
         "folke/which-key.nvim",
         event = "VeryLazy",
-        opts = {
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
-        },
-      }
+        opts = { delay = 0 },
+        --config = function() require("plugin_configs.which-key") end
+      },
+      {
+        "kylechui/nvim-surround",
+        --dir = "~/nvim-surround",
+        --version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
+        --event = "VeryLazy",
+        config = function()
+          require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+          })
+        end
+      },
     },
   })
 else
