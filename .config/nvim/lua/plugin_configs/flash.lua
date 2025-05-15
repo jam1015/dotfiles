@@ -112,12 +112,12 @@ return {
     matches = true,
     -- extmark priority
     priority = 5000,
---    groups = {
---      match = "FlashMatch",
---      current = "FlashCurrent",
---      backdrop = "FlashBackdrop",
---      label = "Visual",
---    },
+    groups = {
+      match = "FlashMatch",
+      current = "FlashCurrent",
+      backdrop = "FlashBackdrop",
+      label = "Visual",
+    },
   },
   -- action to perform when picking a label.
   -- defaults to the jumping logic depending on the mode.

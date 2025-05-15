@@ -18,16 +18,14 @@
 
 (use-package evil
   
+  :after which-key
   ;;:after undo-tree
   :init
 
-  (setq evil-want-keybinding nil)
+  (setq evil-want-keybinding nil
+	evil-want-integration t
 
-
-
-
-
-
+	)
   (setq evil-default-state 'normal)
   :custom
   (evil-undo-system 'undo-tree)
@@ -78,7 +76,7 @@
 
 
 (use-package evil-collection
-  :after evil
+  :after evil which-key
   
   :config
   (setq evil-overriding-maps nil)
@@ -121,10 +119,11 @@
   )
 
 (use-package evil-god-toggle
+
   :ensure (:host github
 		 :repo "jam1015/evil-god-toggle"
 		 )
-  :after (evil god-mode cursor-contraster)
+  :after (evil god-mode cursor-contraster which-key)
   :init
 
   :config
@@ -173,6 +172,11 @@
 
 
   )
+
+
+
+
+
 
 (use-package evil-goggles
   
@@ -432,5 +436,35 @@
     (setq dirvish-use-caching        t)
   )
 
+(use-package which-key
+  :ensure nil
+  :init
+  (setq
+   ;;which-key-allow-evil-operator;s t
+   ;;which-key-show-operator-state-maps t
+   which-key-idle-delay 0.2
+   which-key-idle-secondary-delay 0.05
+   which-key-popup-type 'side-window
+   which-key-side-window-location 'bottom
+   which-key-side-window-max-height 0.25
+   which-key-sort-order 'which-key-prefix-then-key-order
+   which-key-sort-uppercase-first nil
+   which-key-separator " → "
+   which-key-prefix-prefix "+ ")
+  :config
+  (which-key-mode 1)
+  (which-key-enable-god-mode-support)
+
+
+  )
+
+
+(use-package evil-textobj-entire
+  :ensure t
+            :after evil
+	    :config
+ (define-key evil-outer-text-objects-map evil-textobj-entire-key 'evil-entire-entire-buffer)
+ (define-key evil-inner-text-objects-map evil-textobj-entire-key 'evil-entire-entire-buffer)
+	    )
 
 (provide 'packages)
