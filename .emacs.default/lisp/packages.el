@@ -467,4 +467,20 @@
  (define-key evil-inner-text-objects-map evil-textobj-entire-key 'evil-entire-entire-buffer)
 	    )
 
+;; use-package with Elpaca:
+(use-package dashboard
+  :config
+  (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
+  (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
+  (dashboard-setup-startup-hook))
+
+
+
+
+
+
+
+
+
+
 (provide 'packages)
