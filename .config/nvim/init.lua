@@ -5,10 +5,10 @@
 local type = "mine" -- "lazy", "debug"
 
 if type == "mine" then
-  require('autocommands')       --~/.config/nvim/lua/autocommands.lua
-  require('keymaps')            -- ~/.config/nvim/lua/keymaps/init.lua
-  require('config.lazy')        -- ~/.config/nvim/lua/plugins/init.lua
-  require('settings')           -- ~/.config/nvim/lua/settings.lua
+  --require('autocommands')       --~/.config/nvim/lua/autocommands.lua
+  --require('keymaps')            -- ~/.config/nvim/lua/keymaps/init.lua
+  require('lazyspec')        -- ~/.config/nvim/lua/plugins/init.lua
+  --require('settings')           -- ~/.config/nvim/lua/settings.lua
   -------- ~/.config/nvim/lua/plugin_keymaps.lua
   require('keymaps.post')       -- ~/.config/nvim/lua/keymaps/post.lua
 elseif type == "debug" then

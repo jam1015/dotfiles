@@ -1,6 +1,7 @@
 (require 'elpaca-setup) ;; remember elpaca-after-init-hook  and :ensure (:build (+elpaca/build-if-new))
 ;;(load-relative "straight_setup.el")
 
+;;; code
 (use-package god-mode
   
   :config
@@ -14,6 +15,13 @@
 (use-package undo-tree
   :init
   (global-undo-tree-mode 1))
+;; in your init.el or config.el
+(use-package anzu
+  :config
+  (global-anzu-mode +1)) ;; turn on match counting globally
+
+(use-package evil-anzu
+  :after (evil anzu)) ;; hook anzu into evil’s ex/search
 
 
 (use-package evil
@@ -21,6 +29,7 @@
   :after which-key
   ;;:after undo-tree
   :init
+
 
   (setq evil-want-keybinding nil
 	evil-want-integration t
@@ -98,8 +107,24 @@
 
 
 
+(use-package flycheck
+  :init
+  (global-flycheck-mode)
+  :config ;;(add-hook 'after-init-hook #'global-flycheck-mode)
+ ;; optional
+  ;;(setq flycheck-disabled-checkers '(emacs-lisp emacs-lisp-ela))
+ (flycheck-add-mode 'emacs-lisp-checkdoc 'emacs-lisp-mode)
+ :hook ((prog-mode       . flycheck-mode)
+          (emacs-lisp-mode . flycheck-mode))
+  )
 
+(use-package package-lint)
 
+(use-package flycheck-package
+  :after flycheck
+  :config
+  (flycheck-package-setup)
+  )
 
 (use-package cursor-contraster
   :ensure (:host github
@@ -136,41 +161,29 @@
   ;;	      #'evil-god-toggle--god)
 
   ;; 3) State‑specific bindings in that same map:
-  (evil-define-key 'god
-    evil-god-toggle-mode-map
-    (kbd "C-;") (lambda () (interactive)
-                  (evil-change-to-previous-state)))
 
   (evil-define-key '(normal insert)
     evil-god-toggle-mode-map
     (kbd "C-;") (lambda () (interactive)
-                  (evil-god-toggle--execute-in-god-state)))
+                  (evil-god-toggle-execute-in-god-state)))
 
-					;  (evil-define-key 'god-off
-					;    evil-god-toggle-mode-map
-					;    [escape] (lambda () (interactive)
-					;               (evil-god-toggle--stop-choose-state 'normal)))
 
   (evil-define-key '(god god-off) evil-god-toggle-mode-map
-    [escape] (lambda () (interactive) (evil-god-toggle--bail)))
+    [escape] (lambda () (interactive) (evil-god-toggle-stop-execute-in-god-state 'normal)))
 
+  (evil-define-key '( god-off) evil-god-toggle-mode-map
+    (kbd "C-;") (lambda () (interactive) (evil-god-toggle-execute-in-god-state)))
 
+  (evil-define-key '(god) evil-god-toggle-mode-map
+    (kbd "C-;") (lambda () (interactive) (evil-god-toggle-stop-execute-in-god-state 'insert)))
 
   (evil-define-key '(normal insert)
     evil-god-toggle-mode-map
-    (kbd "C-,") #'evil-god-toggle--once)
+    (kbd "C-,") #'evil-god-toggle-once)
 
   ;; 4) Your visual‑persistence and global flag settings
-  (setq evil-god-toggle-persist-visual nil
+  (setq evil-god-toggle-persist-visual 'always
         evil-god-toggle-global        t)
-
-
-
-
-
-
-
-
   )
 
 
@@ -469,19 +482,32 @@
 
 ;; use-package with Elpaca:
 (use-package dashboard
+  :if (< (length command-line-args) 2)
+  :init
+  (require 'cl-lib)
   :config
-(setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name))  )
+
   (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
   (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
   (dashboard-setup-startup-hook))
 
 
 
+(use-package elisp-lint
+  :ensure t
+  :commands (elisp-lint-files-batch))
+
+:config
 
 
+(defun my/elisp-lint-current-file ()
+  "Run elisp-lint on the current buffer's file."
+  (interactive)
+  (when buffer-file-name
+    (elisp-lint-files-batch buffer-file-name)))
 
 
-
+(define-key emacs-lisp-mode-map (kbd "C-c l") #'my/elisp-lint-current-file)
 
 
 (provide 'packages)

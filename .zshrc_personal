@@ -14,7 +14,7 @@ export zshrc="$HOME/dotfiles/.zshrc_personal"
 export GCM_CREDENTIAL_STORE="cache"
 alias vi='nvim'
 alias vid='emacs --with-profile doom'
-alias vie='emacs'
+alias vie='emacs -nw'
 alias vin='nvim --cmd "let g:flatten_allow_nesting = v:true"'
 
 #alias van="man -P 'nvim -c Man! -c set\ nonumber -c set\ norelativenumber --cmd let\ g:flatten_allow_nesting=v:true'" 

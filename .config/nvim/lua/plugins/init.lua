@@ -274,6 +274,18 @@ return {
       require("plugin_configs.nvim-treesitter")
     end,
   },
+
+  {
+    "PaterJason/cmp-conjure",
+    lazy = true,
+    config = function()
+      local cmp = require("cmp")
+      local config = cmp.get_config()
+      table.insert(config.sources, { name = "conjure" })
+      return cmp.setup(config)
+    end,
+  },
+
   {
     --"hrsh7th/nvim-cmp",
     "iguanacucumber/magazine.nvim",
@@ -283,6 +295,7 @@ return {
       return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
     end,
     dependencies = {
+      { "PaterJason/cmp-conjure",     event = "VeryLazy" },
       { "onsails/lspkind.nvim",       event = "VeryLazy" },
       { "R-nvim/cmp-r",               event = "VeryLazy" },
       { "hrsh7th/cmp-nvim-lua",       event = "VeryLazy" },
@@ -291,6 +304,7 @@ return {
       { "hrsh7th/cmp-path",           event = "VeryLazy" },
       { "hrsh7th/cmp-cmdline",        event = "VeryLazy" },
       { "kdheepak/cmp-latex-symbols", event = "VeryLazy" },
+
       {
         "L3MON4D3/LuaSnip", -- tag = "v<CurrentMajor>.*",
         event = "VeryLazy",
@@ -667,7 +681,7 @@ return {
   },
 
 
-  "powerman/vim-plugin-AnsiEsc",
+  -- ;"powerman/vim-plugin-AnsiEsc",
 
 
   {
@@ -801,7 +815,20 @@ return {
 
   },
 
+  {
+    "Olical/conjure",
+    ft = { "clojure", "fennel", "scm" }, -- etc
+    event = "VeryLazy",
+    init = function()
+      -- Set configuration options here
+      -- Uncomment this to get verbose logging to help diagnose internal Conjure issues
+      -- This is VERY helpful when reporting an issue with the project
+      -- vim.g["conjure#debug"] = true
+    end,
 
+    -- Optional cmp-conjure integration
+    dependencies = { "PaterJason/cmp-conjure" },
+  },
 
   {
     "echasnovski/mini.surround",

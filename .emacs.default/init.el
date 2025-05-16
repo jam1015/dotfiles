@@ -1,4 +1,4 @@
-;; in init.el, before any `require` calls:
+;; ;;in init.el, before any `require` calls:
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 (require 'hooks)
