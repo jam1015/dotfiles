@@ -1,2 +1,1 @@
-return {"rebelot/kanagawa.nvim",
-"nyoom-engineering/nyoom.nvim" }
+return {"rebelot/kanagawa.nvim", }
