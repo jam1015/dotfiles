@@ -25,7 +25,6 @@ alias ptpython='ptpython --vi --dark-bg'
 alias python='python'
 alias pdflatex="pdflatex -synctex=1"
 alias cb=clipboard
-alias wip="git add -u && git commit -m wp && git push"
 alias ll='ls -lG'
 alias ls='ls -G'
 alias pd='pandoc'

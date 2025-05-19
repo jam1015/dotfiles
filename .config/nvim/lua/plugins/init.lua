@@ -830,15 +830,7 @@ return {
     dependencies = { "PaterJason/cmp-conjure" },
   },
 
-  {
-    "echasnovski/mini.surround",
-    enabled = false,
-    version = false,
-    event = "VeryLazy", -- load on first idle
-    config = function()
-      require("plugin_configs.mini_surround")
-    end,
-  },
+  
 
 
   -- to add: bqf
