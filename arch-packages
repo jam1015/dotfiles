@@ -107,6 +107,7 @@ db5.3
 dbus
 dbus-broker
 dbus-broker-units
+dbus-glib
 dbus-units
 dconf
 debugedit
@@ -532,6 +533,7 @@ helix
 hicolor-icon-theme
 hidapi
 highway
+hosts
 hplip
 hslua-cli
 hunspell
@@ -1275,6 +1277,7 @@ portaudio
 postgresql-libs
 potrace
 power-profiles-daemon
+powershell-bin
 ppp
 prettier
 procps-ng
@@ -1327,6 +1330,7 @@ python-fonttools
 python-frozenlist
 python-gnupg
 python-gobject
+python-gpgme
 python-hatchling
 python-idna
 python-importlib-metadata
@@ -1392,6 +1396,7 @@ python-pyqt5-sip
 python-pyqt6
 python-pyqt6-sip
 python-pyserial
+python-pysocks
 python-pyxdg
 python-reportlab
 python-requests
@@ -1620,6 +1625,9 @@ tinysparql
 tk
 tldr
 tmux
+tor
+tor-browser-bin
+torbrowser-launcher
 tpm2-tss
 tree
 tree-sitter

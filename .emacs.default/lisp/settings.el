@@ -65,7 +65,6 @@
   ;; commands are hidden, since they are not used via M-x. This setting is
   ;; useful beyond Corfu.
   (read-extended-command-predicate #'command-completion-default-include-p))
-;;(setq debug-on-error t)
 
 
      (setq cursor-in-non-selected-windows nil)

@@ -109,7 +109,7 @@
 
 (use-package flycheck
   :init
-  (global-flycheck-mode)
+  ;;(global-flycheck-mode)
   :config ;;(add-hook 'after-init-hook #'global-flycheck-mode)
  ;; optional
   ;;(setq flycheck-disabled-checkers '(emacs-lisp emacs-lisp-ela))
@@ -175,7 +175,7 @@
     (kbd "C-;") (lambda () (interactive) (evil-god-toggle-execute-in-god-state)))
 
   (evil-define-key '(god) evil-god-toggle-mode-map
-    (kbd "C-;") (lambda () (interactive) (evil-god-toggle-stop-execute-in-god-state 'insert)))
+    (kbd "C-;") (lambda () (interactive) (evil-god-toggle-execute-in-god-off-state)))
 
   (evil-define-key '(normal insert)
     evil-god-toggle-mode-map
@@ -508,6 +508,22 @@
 
 
 (define-key emacs-lisp-mode-map (kbd "C-c l") #'my/elisp-lint-current-file)
+
+
+
+(use-package gnus
+  :defer t
+  :ensure nil
+  :init
+  (setq user-full-name "Jordan Mandel"
+        user-mail-address "jordan.mandel@live.com"
+        gnus-select-method
+        '(nntp "news.eternal-september.org"
+               (nntp-authinfo-file "~/.authinfo.gpg")
+               (nntp-open-connection-function nntp-open-tls-stream)
+               (nntp-port-number 563))
+        gnus-read-active-file 'some
+        gnus-use-cache t))
 
 
 (provide 'packages)
