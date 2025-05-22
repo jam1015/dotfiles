@@ -169,7 +169,7 @@
 
 
   (evil-define-key '(god god-off) evil-god-toggle-mode-map
-    [escape] (lambda () (interactive) (evil-god-toggle-stop-execute-in-god-state 'normal)))
+    [escape] (lambda () (interactive) (evil-god-toggle-stop-choose-state 'normal)))
 
   (evil-define-key '( god-off) evil-god-toggle-mode-map
     (kbd "C-;") (lambda () (interactive) (evil-god-toggle-execute-in-god-state)))
@@ -519,7 +519,7 @@
         user-mail-address "jordan.mandel@live.com"
         gnus-select-method
         '(nntp "news.eternal-september.org"
-               (nntp-authinfo-file "~/.authinfo.gpg")
+               (nntp-authinfo-file "~/.authinfo")
                (nntp-open-connection-function nntp-open-tls-stream)
                (nntp-port-number 563))
         gnus-read-active-file 'some

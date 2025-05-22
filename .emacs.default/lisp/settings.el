@@ -1,5 +1,6 @@
 (setq-default inhibit-startup-screen t)
 (blink-cursor-mode 0)
+(setq byte-compile-warnings t)  ;; default is '(not obsolete)
 (setq-default visible-bell 1)
 (setq-default scroll-margin 3)
 (setq-default scroll-conservatively 10000)

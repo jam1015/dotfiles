@@ -56,6 +56,7 @@ bluez
 bluez-libs
 bluez-utils
 boost-libs
+botan2
 breeze-icons
 broadcom-wl-dkms
 brother-hll2300d
@@ -85,6 +86,7 @@ clutter-gtk
 cmake
 cmark-gfm
 cockpit
+code
 cogl
 confuse
 containerd
@@ -125,6 +127,7 @@ dmraid
 dnsmasq
 dnssec-anchors
 docker
+docker-buildx
 dosfstools
 dotnet-host
 dotnet-runtime
@@ -146,6 +149,7 @@ editorconfig-core-c
 efibootmgr
 efitools
 efivar
+electron34
 ell
 emacs
 enchant
@@ -187,7 +191,6 @@ fftw
 file
 filesystem
 findutils
-firefox
 firefox-developer-edition
 firewalld
 flac
@@ -243,6 +246,7 @@ glibmm-2.68
 global
 glslang
 glu
+gmime3
 gmp
 gnome-desktop
 gnome-desktop-common
@@ -1037,6 +1041,7 @@ md4c
 mdadm
 media-player-info
 meld
+mercurial
 mesa
 mesa-utils
 meson
@@ -1124,6 +1129,7 @@ pacutils
 pahole
 pam
 pambase
+pan
 pandoc-cli
 pango
 pangomm
@@ -1621,6 +1627,7 @@ thin-provisioning-tools
 thunar
 thunar-archive-plugin
 thunar-volman
+thunderbird
 tinysparql
 tk
 tldr
@@ -1774,6 +1781,7 @@ zimg
 zip
 zix
 zlib
+zlib-ng
 zoxide
 zsh
 zstd

@@ -214,3 +214,36 @@ renv/
 .ipython/profile_default/startup/
 .ff_custom/*
 !.ff_custom/user.js
+
+# ── Secret key material ─────────────────────────────────────────────
+/.gnupg/private-keys-v1.d/
+/.gnupg/secring.gpg
+
+# ── Trust & database files ──────────────────────────────────────────
+/.gnupg/trustdb.gpg
+/.gnupg/random_seed
+/.gnupg/openpgp-revocs.d/
+/.gnupg/crls.d/
+
+# ── Public-key caches & keyrings ────────────────────────────────────
+/.gnupg/public-keys.d/
+/.gnupg/pubring.kbx
+/.gnupg/pubring.gpg
+
+# ── Legacy & lock files ─────────────────────────────────────────────
+/.gnupg/*.lock
+/.gnupg/*.gpg.lock
+/​.gnupg/*.kbx.lock
+
+# ── Agent sockets & IPC files ───────────────────────────────────────
+/.gnupg/S.gpg-agent
+/.gnupg/S.gpg-agent.extra
+/.gnupg/S.gpg-agent.ssh
+/.gnupg/.S.gpg-agent.browser
+
+# ── Miscellaneous caches & backups ─────────────────────────────────
+/.gnupg/*.cache
+/.gnupg/*.tmp
+/.gnupg/*.bak
+/.gnupg/*.old
+/.gnupg/*.backup
