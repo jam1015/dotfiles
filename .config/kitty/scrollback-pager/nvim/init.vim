@@ -1,31 +1,70 @@
-set relativenumber
-set number
-set mouse=a
-set clipboard+=unnamedplus
-set virtualedit=all
-set scrollback=100000
-set termguicolors
-set laststatus=0
-set background=dark
-colorscheme desert
-set ignorecase
-set scrolloff=8
-set list
+" Minimal pager-focused Neovim init for Kitty scrollback
+" ================================================
 
-map <silent> q :qa!<CR>
+" ===== Buffer settings =====
+set relativenumber           " show line numbers
+set noswapfile               " no swapfile for performance
+set nobackup                 " no backup file
+set buftype=nofile           " buffer is not tied to a file
+set bufhidden=wipe           " wipe buffer on close
+set number                   " show absolute line number
 
-" Short highlight on yanked text
+" ===== UI enhancements =====n
+set termguicolors            " enable true color support
+set laststatus=0             " hide status line
+set background=dark          " dark background
+colorscheme desert           " simple colorscheme
+set list                     " show whitespace
+
+" ===== Navigation & search =====
+set scrolloff=8              " keep context when scrolling
+set ignorecase               " case-insensitive search
+
+" ===== Interaction =====n
+set mouse=a                  " enable mouse support
+set clipboard+=unnamedplus   " use system clipboard
+set virtualedit=all          " allow cursor past end of line
+
+" ===== Performance tweak =====n
+set lazyredraw               " speed up redraws during macros
+
+" ===== Quick quit =====n
+nnoremap <silent> q :qa!<CR>   " quit all
+
+" ===== Highlight on yank =====n
 augroup highlight_yank
-	autocmd!
-	autocmd TextYankPost * silent! lua require('vim.hl').on_yank({timeout = 40})
+  autocmd!
+  autocmd TextYankPost * silent! lua require('vim.hl').on_yank({timeout = 40})
 augroup END
 
-augroup start_at_bottom
-	autocmd!
-	autocmd VimEnter * $
-augroup END
 
+" ===== Prevent insert mode in terminal buffers =====
 augroup prevent_insert
-	autocmd!
-	autocmd TermEnter * stopinsert
+  autocmd!
+  autocmd TermEnter * stopinsert
 augroup END
+
+
+" ===== Start at bottom on open =====
+"function! Scrollback_StartAtBottom()
+"  " Jump to the last line and end of that line
+"  normal! G$
+"  " Search backwards for the first non-blank character and move to its end
+"
+"let has_text = (getline('.') =~# '\S') >= 0
+"if has_text
+"endif
+"
+"  call search('\S', 'bWec')
+"  " Clear any search highlighting
+"  nohlsearch
+"  colorscheme blue
+"endfunction
+"
+"augroup start_at_bottom
+"  autocmd!
+"  " Run on startup and when buffer window opens, scheduling to ensure content loaded
+"  autocmd WinEnter,VimEnter,BufReadPost,BufWinEnter * call Scrollback_StartAtBottom()
+""  autocmd VimEnter * ++nested call timer_start(0, { -> Scrollback_StartAtBottom() })
+""  autocmd BufWinEnter * ++nested if &buftype ==# 'nofile' | call timer_start(0, { -> Scrollback_StartAtBottom() }) | endif
+"augroup END
