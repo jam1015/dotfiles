@@ -1,5 +1,6 @@
 " Minimal pager-focused Neovim init for Kitty scrollback
 " ================================================
+set packpath+=~/.config/kitty/scrollback-pager/nvim
 
 " ===== Buffer settings =====
 set relativenumber           " show line numbers
