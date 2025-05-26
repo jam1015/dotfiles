@@ -1743,6 +1743,7 @@ xfsprogs
 xkeyboard-config
 xl2tpd
 xmlsec
+xorg-appres
 xorg-bdftopcf
 xorg-font-util
 xorg-font-utils
@@ -1765,6 +1766,7 @@ xorg-xrdb
 xorg-xset
 xorg-xsetroot
 xorgproto
+xscreensaver
 xsel
 xss-lock
 xterm

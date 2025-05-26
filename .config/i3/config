@@ -49,7 +49,7 @@ set $alt Mod1
  
  # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
  # screen before suspend. Use loginctl lock-session to lock your screen.
- exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+ exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.config/i3/lock_script
  
  exec --no-startup-id xinput set-prop "PIXA3854:00 093A:0274 Touchpad" "libinput Natural Scrolling Enabled" 1
  exec --no-startup-id xinput set-prop "PIXA3854:00 093A:0274 Touchpad" "libinput Scrolling Pixel Distance" -1 1
@@ -111,7 +111,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # Redirect sound to headphones
 #bindsym $mod+p exec --no-startup-id /usr/local/bin/switch-audio-port
 
-bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/endeavour_untouched/scripts/empty_workspace
+bindsym $mod+n exec --no-startup-id ~/.config/i3/endeavour_untouched/scripts/empty_workspace
 
 # User-added function keys:
 #bindsym XF86AudioLowerVolume  exec --no-startup-id pamixer -d 3   && pkill -RTMIN+1 i3blocks
