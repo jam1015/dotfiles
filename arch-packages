@@ -23,6 +23,7 @@ aom
 appstream
 appstream-glib
 arandr
+arc-gtk-theme-eos
 archlinux-keyring
 archlinux-xdg-menu
 argon2
@@ -62,6 +63,7 @@ broadcom-wl-dkms
 brother-hll2300d
 brother-hll2350dw
 brotli
+bspwm
 btrfs-progs
 bubblewrap
 bzip2
@@ -166,6 +168,7 @@ eos-packagelist
 eos-qogir-icons
 eos-quickstart
 eos-rankmirrors
+eos-sddm-theme
 eos-settings-i3wm
 eos-translations
 ethtool
@@ -189,6 +192,7 @@ ffmpeg4.4
 ffmpegthumbnailer
 fftw
 file
+file-roller
 filesystem
 findutils
 firefox-developer-edition
@@ -285,6 +289,7 @@ gst-plugins-good
 gst-plugins-ugly
 gstreamer
 gtest
+gtk-engine-murrine
 gtk-layer-shell
 gtk-update-icon-cache
 gtk2
@@ -540,6 +545,7 @@ highway
 hosts
 hplip
 hslua-cli
+htop
 hunspell
 hwdata
 hwdetect
@@ -742,6 +748,7 @@ libcheese
 libcloudproviders
 libcmis
 libcolord
+libconfig
 libcups
 libcupsfilters
 libdaemon
@@ -833,6 +840,7 @@ libmnl
 libmodplug
 libmpc
 libmpcdec
+libmpdclient
 libmpeg2
 libmspack
 libmspub
@@ -840,6 +848,7 @@ libmtp
 libmupdf
 libmwaw
 libmysofa
+libnautilus-extension
 libndp
 libnetfilter_conntrack
 libnewt
@@ -1258,6 +1267,7 @@ perl-xml-sax
 perl-xml-sax-base
 perl-xml-writer
 pfetch
+picom
 pinentry
 pipewire
 pipewire-alsa
@@ -1274,6 +1284,7 @@ polkit
 polkit-gnome
 polkit-qt5
 polkit-qt6
+polybar
 poppler
 poppler-data
 poppler-glib
@@ -1440,6 +1451,7 @@ qqc2-desktop-style
 qrencode
 qt5-base
 qt5-declarative
+qt5-quickcontrols2
 qt5-svg
 qt5-translations
 qt5-wayland
@@ -1536,6 +1548,7 @@ sbcl
 scour
 scrot
 sd
+sddm
 sdl2-compat
 sdl3
 sed
@@ -1579,6 +1592,7 @@ stress
 sudo
 svt-av1
 svt-hevc
+sxhkd
 sxiv
 syndication
 syntax-highlighting
@@ -1626,6 +1640,7 @@ texlive-xetex
 thin-provisioning-tools
 thunar
 thunar-archive-plugin
+thunar-media-tags-plugin
 thunar-volman
 thunderbird
 tinysparql
@@ -1656,6 +1671,7 @@ ttf-fira-code
 ttf-fira-sans
 ttf-go-nerd
 ttf-input-nerd
+ttf-iosevka-nerd
 ttf-iosevkatermslab-nerd
 ttf-liberation
 ttf-meslo
