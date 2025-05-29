@@ -78,4 +78,4 @@ xsetroot -solid "#02091C"
 
 session=${1:-i3}
 
-exec i3
+exec $WM
