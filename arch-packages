@@ -81,6 +81,10 @@ cdparanoia
 cheese
 chromaprint
 cifs-utils
+cl-alexandria-git
+cl-clx
+cl-ppcre
+cl-unicode
 clucene
 clutter
 clutter-gst
@@ -1592,6 +1596,7 @@ stash-bin
 stoken
 stow
 stress
+stumpwm
 sudo
 svt-av1
 svt-hevc

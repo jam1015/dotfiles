@@ -193,6 +193,7 @@ fi
 setopt completealiases
 
 export GPG_TTY=$(tty)
+export wm="i3"
 
 echo ".zshrc sourced"
 export PATH=~/.npm-global/bin:$PATH
