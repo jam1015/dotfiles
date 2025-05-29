@@ -73,4 +73,17 @@ xset dpms 1201 1205 1210
 xset r rate 200 50
 #nm-applet --sm-disable &
 xsetroot -solid "#02091C"
-exec i3
+
+
+
+session=${1:-i3}
+
+case $session in
+    i3) exec i3 ;;
+    #openbox) exec openbox-session ;;
+    #xfce) exec startxfce4 ;;
+    #kde) exec startplasma-x11 ;;
+    stump) exec stumpwm ;;
+    *) exec $session ;;
+esac
+

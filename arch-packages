@@ -260,6 +260,7 @@ gnulib-l10n
 gnupg
 gnutls
 gobject-introspection-runtime
+google-chrome
 gopass
 gperftools
 gpgme
@@ -822,6 +823,7 @@ liblangtag
 liblc3
 libldac
 libldap
+libliftoff
 liblqr
 liblrdf
 libltc
@@ -1551,6 +1553,7 @@ sd
 sddm
 sdl2-compat
 sdl3
+seatd
 sed
 semver
 serd
@@ -1722,6 +1725,7 @@ wine
 winetricks
 wireless_tools
 wireplumber
+wlroots
 woff2
 wpa_supplicant
 wxwidgets-common
@@ -1736,6 +1740,7 @@ xcb-imdkit
 xcb-proto
 xcb-util
 xcb-util-cursor
+xcb-util-errors
 xcb-util-image
 xcb-util-keysyms
 xcb-util-renderutil

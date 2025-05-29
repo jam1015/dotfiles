@@ -12,7 +12,7 @@ require("oil").setup({
   },
   -- Buffer-local options to use for oil buffers
   buf_options = {
-    buflisted = false,
+    buflisted = true,
     bufhidden = "hide",
   },
   -- Window-local options to use for oil buffers
@@ -172,4 +172,29 @@ require("oil").setup({
   ssh = {
     border = "rounded",
   },
+})
+
+
+-- now that Oil is loaded, create the autocmd
+local oil_group = vim.api.nvim_create_augroup("oil", { clear = true })
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = oil_group,
+  callback = function()
+    if vim.fn.argc() > 1 then
+      for _, arg in ipairs(vim.fn.argv()) do
+        if vim.fn.isdirectory(arg) == 1 then
+          -- delete the buffer by number, not by path
+          vim.schedule(
+            function()
+              local bufnr = vim.fn.bufnr(arg, false)
+              if bufnr > 0 then
+                vim.api.nvim_buf_delete(bufnr, { force = true })
+              end
+              vim.cmd("Oil " .. vim.fn.fnameescape(arg))
+            end
+          )
+        end
+      end
+    end
+  end,
 })
