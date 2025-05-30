@@ -73,7 +73,7 @@ xset dpms 1201 1205 1210
 xset r rate 200 50
 #nm-applet --sm-disable &
 xsetroot -solid "#02091C"
-
+xsetroot -cursor_name left_ptr
 
 
 session=${1:-i3}

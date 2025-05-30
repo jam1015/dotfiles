@@ -82,6 +82,7 @@ bind k scrollline -5
 " 
 " " Allow Ctrl-a to select all in the commandline
 " unbind --mode=ex <C-a>
+unbind --mode=normal p
 " 
 " " Allow Ctrl-c to copy in the commandline
 " unbind --mode=ex <C-c>
