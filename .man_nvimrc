@@ -10,7 +10,7 @@ set background=light
 set ignorecase
 set scrolloff=8
 set list
-colorscheme peachpuff
+colorscheme iceclimber
 map <silent> q :qa!<CR>
 
 " Short highlight on yanked text
