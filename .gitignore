@@ -247,3 +247,6 @@ renv/
 /.gnupg/*.bak
 /.gnupg/*.old
 /.gnupg/*.backup
+
+
+.config/gtk-3.0/bookmarks 
