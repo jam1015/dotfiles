@@ -47,7 +47,7 @@ vim.api.nvim_create_autocmd("FileType", {
 set.history = 2000
 set.hidden = true
 set.autoread = true
-set.scrolloff = 3   -- show a few lines around cursor
+--set.scrolloff = 3   -- show a few lines around cursor
 set.display = "lastline"
 set.shiftwidth = 2  --how much indentation from >
 set.softtabstop = 2 --lets us delete by tabs when expandtab is on
