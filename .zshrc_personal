@@ -194,6 +194,6 @@ setopt completealiases
 
 export GPG_TTY=$(tty)
 export wm="i3"
-
+export XDG_SESSION_TYPE=wayland
 echo ".zshrc sourced"
 export PATH=~/.npm-global/bin:$PATH
