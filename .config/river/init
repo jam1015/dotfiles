@@ -1,138 +1,249 @@
 #!/bin/sh
-#
+
 # ~/.config/river/init
 # This script is run once river’s Wayland server is up, before entering the main loop.
-# Use this to:
-#   • Configure outputs (replacing xrandr calls)
-#   • Set your keybindings via riverctl
-#   • Launch programs (status bar, compositor, background, etc.)
-#   • Export any env vars (GTK_THEME, QT_QPA_PLATFORMTHEME, etc.)
-#
 
-# 1) Export environment variables
+# ─── A) Keyboard layout and environment variables ─────────────────────────────────
+riverctl keyboard-layout \
+  -variant mac \
+  -options "ctrl:nocaps" \
+  us
+
 export GTK_THEME=Arc-Dark
 export QT_STYLE_OVERRIDE=adwaita
 export QT_QPA_PLATFORMTHEME=qt5ct
 
-# 2) Set up outputs (Wayland-native, see next section)
-#    → We’ll show how to replicate your dual_monitor.sh logic using `wlr-randr`
-
-# In ~/.config/river/init (inside the script)
-#
-# 1) Detect if your external DisplayPort outputs are connected.
-#    For simplicity, instead of grepping, you can just try to set them; if not present, wlr-randr will ignore them.
-
-# If you want conditional logic, you can do:
-if ! wlr-randr --output DisplayPort-10 --list-available >/dev/null 2>&1; then
-  # No external DP at all: leave eDP at its default or explicitly set it
-  wlr-randr --output eDP --mode 1366x768 --transform normal
-else
-  # External displays detected → apply the two-monitor layout.
-
-  # 1. Force eDP at 1024×768 (replace “–pos” with “--transform normal”; Wayland doesn’t use X/Y pos the same way;
-  #    instead you instruct wlr-randr how to place them in a single framebuffer)
-  # 2. Turn off DP-0, DP-1, … etc (wlr-randr will interpret --off)
-  # 3. Place DP-10 at 1920×1080, rotated left, positioned to the left of eDP (since left = “--transform 90”)
-  # 4. Place DP-12 at 1920×1080 as primary, positioned to the right (transform normal).
-
+# ─── B) Output configuration (wlr-randr instead of xrandr) ───────────────────────
+if wlr-randr | grep -q '^DP-'; then
+  # At least one DP-connected monitor exists
   wlr-randr \
-    --output eDP --mode 1024x768 --pos 1159x1265 --rotate 0 \
-    --output DisplayPort-0 --off \
-    --output DisplayPort-1 --off \
-    --output DisplayPort-2 --off \
-    --output DisplayPort-3 --off \
-    --output DisplayPort-4 --off \
-    --output DisplayPort-5 --off \
-    --output DisplayPort-6 --off \
-    --output DisplayPort-7 --off \
-    --output DisplayPort-8 --off \
-    --output DisplayPort-9 --off \
-    --output DisplayPort-10 --mode 1920x1080 --pos 0x0 --rotate 90 \
-    --output DisplayPort-11 --off \
-    --output DisplayPort-12 --mode 1920x1080 --pos 1080x185 --rotate 0 --primary
+    --output DP-11 --mode 1920x1080 --pos 0,0 --transform 90 \
+    --output DP-13 --mode 1920x1080 --pos 1080,0 --transform normal \
+    --output eDP-1 --mode 2256x1504 --pos 1080,1080 --transform normal --scale 2.0
+else
+  # No DP output detected
+  echo "only laptop panel"
 fi
 
-
-
-# In ~/.config/river/init, after outputs:
-# Install swayidle & swaylock from the repos; then:
+# ─── C) Screen-lock / idle handling ───────────────────────────────────────────────
 swayidle \
   timeout 1200 'swaylock -f' \
   resume 'swaymsg "seat0 disable_idle"' \
-  before-sleep 'swaylock -f'
+  before-sleep 'swaylock -f' &
 
+# ─── D) Cursor theme and XKB remapping ────────────────────────────────────────────
+riverctl xcursor-theme left_ptr 24
+# (Caps → Control happens via XKB settings under Wayland/Xwayland)
 
+# ─── E) Autostart daemons and utilities ──────────────────────────────────────────
+dunst &
 
+pkill -9 polkit-gnome-authentication-agent-1 2>/dev/null
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-# Use `wlr-kbselect` or put in ~/.config/river/init:
-seatctl -S 200 50   # for 25 repeats/sec with 30 ms delay  (‘seatctl’ is part of wlroots tools)
-
-
-
-riverctl set-cursor-theme left_ptr 24
-
-setxkbmap -layout us -variant mac -option "ctrl:nocaps"
-
-riverctl map normal None Prior spawn ~/.config/i3/endeavour_untouched/scripts/volume_brightness.sh volume_up
-riverctl map normal None Next  spawn ~/.config/i3/endeavour_untouched/scripts/volume_brightness.sh volume_down
-
-# 3) Launch background/scroll keys, status bar, etc.
-#    → Instead of picom under X11, you might NOT need it (Wayland has no “compositor” in the same sense).
-#    → If you rely on a tray or notification daemon, launch it here.
-
-# 4) Configure keybindings / modes with riverctl (mapping keys)
-#    → We’ll translate your i3 binds to riverctl commands.
-
-# In ~/.config/river/init, after exports and output config:
-
-# Enter “normal” mode (default); we map keys in that mode.
-
-# Bind Super+1 .. Super+9 to focus tags 1..9
-riverctl map normal Mod4 1 set-focused-tags 1     # binary 000000001
-riverctl map normal Mod4 2 set-focused-tags 2     # binary 000000010
-riverctl map normal Mod4 3 set-focused-tags 4     # binary 000000100
-riverctl map normal Mod4 4 set-focused-tags 8     # binary 000001000
-riverctl map normal Mod4 5 set-focused-tags 16    # binary 000010000
-riverctl map normal Mod4 6 set-focused-tags 32    # binary 000100000
-riverctl map normal Mod4 7 set-focused-tags 64    # binary 001000000
-riverctl map normal Mod4 8 set-focused-tags 128   # binary 010000000
-riverctl map normal Mod4 9 set-focused-tags 256   # binary 100000000
-
-# Move the focused view into a different tag:
-riverctl map normal Mod4+Shift 1 toggle-view-tags 1
-riverctl map normal Mod4+Shift 2 toggle-view-tags 2
-riverctl map normal Mod4+Shift 3 toggle-view-tags 4
-riverctl map normal Mod4+Shift 4 toggle-view-tags 8
-riverctl map normal Mod4+Shift 5 toggle-view-tags 16
-riverctl map normal Mod4+Shift 6 toggle-view-tags 32
-riverctl map normal Mod4+Shift 7 toggle-view-tags 64
-riverctl map normal Mod4+Shift 8 toggle-view-tags 128
-riverctl map normal Mod4+Shift 9 toggle-view-tags 256
-
-# “Next” / “Previous” workspace (cycle tags):
-riverctl map normal Mod4+Tab focus-previous-tags
-riverctl map normal Mod4+Shift+Tab focus-previous-tags
-
-# Send focused view to the next/previous output (maintaining tags):
-riverctl map normal Mod4+Ctrl+l send-to-output previous --current-tags
-riverctl map normal Mod4+Ctrl+h send-to-output next --current-tags
-
-# Focus outputs directionally:
-riverctl map normal Mod4+Mod1+h focus-output left
-riverctl map normal Mod4+Mod1+l focus-output right
-riverctl map normal Mod4+Mod1+j focus-output down
-riverctl map normal Mod4+Mod1+k focus-output up
-
-
-seatctl set-keyboard-repeat 200 30
-
-riverctl map normal Mod4+Shift e exit
-
-# sudo systemctl enable --now seatd
-
-# 5) Launch any auto-started applications (e.g. nm-applet replacement, rofi, gtk menus)
-#    → Under Wayland, you might use waybar + nm-applet
-#    → If you still want a tray icon for network, use a Wayland-compatible tray (like gb-tray or nm-applet under Xwayland).
+wlsunset &
 waybar &
-# 6) (Optional) Start a layout generator like rivertile:
 rivertile &
+
+# ─── F) Border and background colors ─────────────────────────────────────────────
+riverctl border-color-focused   0x9933cc   # purple
+riverctl border-color-unfocused 0x8b877c   # taupe
+riverctl border-color-urgent    0x1ac6ca   # calmcyan
+riverctl background-color       0x02091C   # deepnight background
+
+# ─── G) Floating rules for specific apps ─────────────────────────────────────────
+riverctl rule-add -app-id 'Yad'          float
+riverctl rule-add -app-id 'Galculator'   float
+riverctl rule-add -app-id 'Blueberry.py' float
+riverctl rule-add -app-id 'Xsane'        float
+riverctl rule-add -app-id 'Pavucontrol'  float
+riverctl rule-add -app-id 'qt5ct'        float
+riverctl rule-add -app-id 'Bluetooth-sendto' float
+riverctl rule-add -app-id 'Pamac-manager'   float
+riverctl rule-add -window-role 'About'      float
+
+# ─── H) Declare custom modes ─────────────────────────────────────────────────────
+riverctl declare-mode resize
+
+# ─── I) Keybindings: Workspaces (tags) and navigation ────────────────────────────
+# Focus tags 1..9
+riverctl map normal Super   1 set-focused-tags 1     # 0b000000001
+riverctl map normal Super   2 set-focused-tags 2     # 0b000000010
+riverctl map normal Super   3 set-focused-tags 4     # 0b000000100
+riverctl map normal Super   4 set-focused-tags 8     # 0b000001000
+riverctl map normal Super   5 set-focused-tags 16    # 0b000010000
+riverctl map normal Super   6 set-focused-tags 32    # 0b000100000
+riverctl map normal Super   7 set-focused-tags 64    # 0b001000000
+riverctl map normal Super   8 set-focused-tags 128   # 0b010000000
+riverctl map normal Super   9 set-focused-tags 256   # 0b100000000
+
+# Move focused view into a different tag
+riverctl map normal Super+Shift 1 toggle-view-tags 1
+riverctl map normal Super+Shift 2 toggle-view-tags 2
+riverctl map normal Super+Shift 3 toggle-view-tags 4
+riverctl map normal Super+Shift 4 toggle-view-tags 8
+riverctl map normal Super+Shift 5 toggle-view-tags 16
+riverctl map normal Super+Shift 6 toggle-view-tags 32
+riverctl map normal Super+Shift 7 toggle-view-tags 64
+riverctl map normal Super+Shift 8 toggle-view-tags 128
+riverctl map normal Super+Shift 9 toggle-view-tags 256
+
+# Cycle tags (“Next” / “Previous” workspace)
+riverctl map normal Super Tab           focus-previous-tags
+riverctl map normal Super+Shift Tab    focus-previous-tags
+riverctl map normal Super+Shift O      focus-previous-tags
+
+# Close, spawn terminal, and fullscreen
+riverctl map normal Super Q             close
+riverctl map normal Super Return        spawn kitty
+riverctl map normal Super+Shift F       toggle-fullscreen
+
+# Focus outputs directionally
+riverctl map normal Super+Alt H         focus-output left
+riverctl map normal Super+Alt L         focus-output right
+riverctl map normal Super+Alt J         focus-output down
+riverctl map normal Super+Alt K         focus-output up
+
+# Focus views within current workspace
+riverctl map normal Super J             focus-view next
+riverctl map normal Super K             focus-view previous
+
+# Swap views
+riverctl map normal Super+Shift J       swap next
+riverctl map normal Super+Shift K       swap previous
+
+# Zoom focused view
+riverctl map normal Super+Shift Return  zoom
+
+# Rivertile layout adjustments
+riverctl map normal Super H             send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map normal Super L             send-layout-cmd rivertile "main-ratio +0.05"
+riverctl map normal Alt+Shift H         send-layout-cmd rivertile "main-count +1"
+riverctl map normal Alt+Shift L         send-layout-cmd rivertile "main-count -1"
+riverctl default-layout rivertile
+
+# Enter/exit resize mode (like i3’s resize mode)
+riverctl map normal Super r             enter-mode resize
+riverctl map resize None Left           resize horizontal -10
+riverctl map resize None Right          resize horizontal +10
+riverctl map resize None Up             resize vertical   -10
+riverctl map resize None Down           resize vertical   +10
+riverctl map resize None Return         enter-mode normal
+riverctl map resize None Escape         enter-mode normal
+
+# Previous window focus (i3-back equivalent)
+riverctl map normal Super+Shift Backspace focus-view previous
+
+# Reload, restart, exit river
+riverctl map normal Super+Shift C       reload
+riverctl map normal Super+Shift R       restart
+riverctl map normal Super+Shift E       exit
+
+# Spawn application launcher and window switcher
+riverctl map normal Super D             spawn 'wofi --show drun'
+riverctl map normal Super+Shift D       spawn 'wofi --show window'
+
+# Ctrl+Alt+Delete → exit to TTY
+riverctl map normal Control+Alt Delete  exit
+
+# ─── J) Keyboard repeat settings ─────────────────────────────────────────────────
+riverctl set-repeat 50 300
+
+# ─── K) Volume, brightness, and media keys (for both normal and locked modes) ────
+for mode in normal locked; do
+  # Volume up/down
+  riverctl map "$mode" None Prior               spawn '~/.config/river/scripts/volume_up.sh'
+  riverctl map "$mode" None Next                spawn '~/.config/river/scripts/volume_down.sh'
+  riverctl map "$mode" None XF86AudioRaiseVolume spawn '~/.config/river/scripts/volume_up.sh'
+  riverctl map "$mode" None XF86AudioLowerVolume spawn '~/.config/river/scripts/volume_down.sh'
+  riverctl map "$mode" None XF86AudioMute         spawn '~/.config/river/scripts/toggle_mute.sh'
+
+  # Brightness up/down
+  riverctl map "$mode" None XF86MonBrightnessUp   spawn '~/.config/river/scripts/brightness_up.sh'
+  riverctl map "$mode" None XF86MonBrightnessDown spawn '~/.config/river/scripts/brightness_down.sh'
+
+  # Media controls
+  riverctl map "$mode" None XF86AudioPlay         spawn '~/.config/river/scripts/media_play_pause.sh'
+  riverctl map "$mode" None XF86AudioNext         spawn '~/.config/river/scripts/media_next.sh'
+  riverctl map "$mode" None XF86AudioPrev         spawn '~/.config/river/scripts/media_prev.sh'
+done
+
+# ─── End of active configuration ─────────────────────────────────────────────────
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Stand-alone commentary and addendum (for reference only; not executed)
+# ──────────────────────────────────────────────────────────────────────────────
+
+# • Use this script to configure outputs, keybindings, and autostarts under Wayland/river.
+# • Remove any “sudo systemctl enable …” lines; enable them manually:
+#     sudo systemctl enable --now geoclue.service
+#     sudo systemctl enable --now seatd
+#
+# A) Rebuild font cache and run XDG autostart (replacement for i3’s fc-cache and dex):
+#    fc-cache -r &
+#    dex --autostart --environment river &
+#
+# B) X11-based helpers (picom, xinput, xss-lock):
+#    - picom: no direct equivalent under Wayland; drop entirely.
+#    - xinput tweaks: use libinput or input-remapper; most defaults are fine.
+#    - xss-lock + i3lock: replaced by swayidle + swaylock (already in section C).
+#
+# C) Network tray, Bluetooth tray, and redshift:
+#    Under i3:
+#      exec --no-startup-id nm-applet
+#      exec --no-startup-id blueman-applet
+#      exec --no-startup-id redshift-gtk -l geoclue2 -t 6500:2000
+#    Under river:
+#      nm-applet &        # Xwayland tray icons in Waybar’s tray
+#      blueman-applet &   # Xwayland tray icons
+#      wlsunset -l 40.44:-79.99 -t 6500:2000 &   # replaces redshift-gtk
+#
+# D) “i3-back” daemon (workspace back/forward):
+#    i3 config used a focus-change listener. Under river, “focus-previous-tags” covers history.
+#    If a custom back binding is needed, use Super+Shift+O (already bound above).
+#
+# E) Generative background script:
+#    i3 ran:
+#      exec --no-startup-id ~/.config/i3/generative_background.bash
+#    Under Wayland:
+#      - Convert script to generate a PNG and run swaybg:
+#          swaybg -i ~/.config/river/solid_color.png -m stretch &
+#      - Or spawn the existing script under Xwayland:
+#          ~/.config/i3/generative_background.bash &
+#
+# F) Polkit agent:
+#    i3: exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#    Under river: same, but kill any existing instance first (in section E).
+#
+# G) Audio and brightness keys (pamixer / volume_brightness.sh):
+#    i3 bound XF86AudioRaiseVolume and XF86MonBrightnessUp to custom scripts.
+#    Under river: ported to riverctl “spawn” in section K.
+#
+# H) Workspace naming and “auto back and forth”:
+#    i3 had “workspace_auto_back_and_forth yes” and numeric workspace aliases.
+#    Under river: “focus-previous-tags” handles back-and-forth. Numeric shortcuts are explicit tags above.
+#
+# I) Floating rules for specific apps:
+#    i3 used “for_window [class=…] floating enable”. Under river: `riverctl rule-add`.
+#
+# J) Color definitions:
+#    i3 set a palette for client.focused, etc. Under river: colors are global (set once in section F).
+#
+# K) “resize” mode (i3’s mode “resize”):
+#    Declared and mapped in section H.
+#
+# L) “i3-back” equivalent for “previous window”:
+#    Mapped Super+Shift+Backspace in section H.
+#
+# M) “reload” and “restart”:
+#    Mapped Super+Shift+C and Super+Shift+R in section H.
+#
+# N) If you also want a “logout” via keybinding rather than wlogout:
+#    Super+Shift+E is mapped to exit in section H (and wlogout is spawned for graphical logout).
+#
+# O) Final reminders:
+# 1) Ensure all custom scripts are executable (`chmod +x ...`) and work under Wayland.
+# 2) Run “riverctl reload” or restart river after saving this file to apply changes.
+# 3) Double-check that geoclue.service and seatd are enabled manually as needed.
+# 4) Remove any leftover i3-specific lines once fully migrated.
+# ──────────────────────────────────────────────────────────────────────────────
