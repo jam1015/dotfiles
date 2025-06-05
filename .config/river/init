@@ -67,16 +67,16 @@ riverctl declare-mode resize
 
 # ─── I) Keybindings: Workspaces (tags) and navigation ────────────────────────────
 # Focus tags 1..9
-riverctl map normal Super   1 set-focused-tags 1     # 0b000000001
-riverctl map normal Super   2 set-focused-tags 2     # 0b000000010
-riverctl map normal Super   3 set-focused-tags 4     # 0b000000100
-riverctl map normal Super   4 set-focused-tags 8     # 0b000001000
-riverctl map normal Super   5 set-focused-tags 16    # 0b000010000
-riverctl map normal Super   6 set-focused-tags 32    # 0b000100000
-riverctl map normal Super   7 set-focused-tags 64    # 0b001000000
-riverctl map normal Super   8 set-focused-tags 128   # 0b010000000
-riverctl map normal Super   9 set-focused-tags 256   # 0b100000000
-riverctl map normal Super   0 set-focused-tags 512   # 0b100000000
+riverctl map normal Super   1 spawn '~/.config/river/scripts/set_global_tags.sh 1'
+riverctl map normal Super   2 spawn '~/.config/river/scripts/set_global_tags.sh 2'
+riverctl map normal Super   3 spawn '~/.config/river/scripts/set_global_tags.sh 4'
+riverctl map normal Super   4 spawn '~/.config/river/scripts/set_global_tags.sh 8'
+riverctl map normal Super   5 spawn '~/.config/river/scripts/set_global_tags.sh 16'
+riverctl map normal Super   6 spawn '~/.config/river/scripts/set_global_tags.sh 32'
+riverctl map normal Super   7 spawn '~/.config/river/scripts/set_global_tags.sh 64'
+riverctl map normal Super   8 spawn '~/.config/river/scripts/set_global_tags.sh 128'
+riverctl map normal Super   9 spawn '~/.config/river/scripts/set_global_tags.sh 256'
+riverctl map normal Super   0 spawn '~/.config/river/scripts/set_global_tags.sh 512'
 
 # Move focused view into a different tag
 riverctl map normal Super+Shift 1 set-view-tags 1
@@ -162,7 +162,7 @@ riverctl map normal Super+Shift D       spawn 'wofi --show window'
 riverctl map normal Control+Alt Delete  exit
 
 # ─── J) Keyboard repeat settings ─────────────────────────────────────────────────
-riverctl set-repeat 50 300
+riverctl set-repeat 50 200
 
 # ─── K) Volume, brightness, and media keys (for both normal and locked modes) ────
 for mode in normal locked; do
