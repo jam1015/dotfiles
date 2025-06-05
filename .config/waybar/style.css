@@ -53,23 +53,32 @@ button:hover {
     background-color: #a37800;
 }
 
-#workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
+
+/* Base style for all River tag buttons */
+#tags button {
+  box-shadow: inset 0 -3px transparent;    /* underline effect off by default */
+  border: none;
+  border-radius: 0;
+  padding: 0 10px;                          /* horizontal padding */
+  color: #6272a4;                           /* inactive‐tag text color (dracula comment) */
+  background: transparent;
 }
 
-#workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+/* When a tag has at least one window (occupied) */
+#tags button.occupied {
+  color: #50fa7b;   /* green for occupied tags */
 }
 
-#workspaces button.focused {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
+/* Highlight the currently focused tag */
+#tags button.focused {
+ /* color: #f8f8f2;                            bright foreground */
+  box-shadow: inset 0 -3px #ff79c6;         /* pink underline */
 }
 
-#workspaces button.urgent {
-    background-color: #eb4d4b;
+/* Mark a tag with urgency (e.g., urgent window) */
+#tags button.urgent {
+  background-color: #ff5555;                /* red background for urgency */
+  color: #f8f8f2;                           /* bright foreground on red */
 }
 
 #mode {

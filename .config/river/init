@@ -76,17 +76,19 @@ riverctl map normal Super   6 set-focused-tags 32    # 0b000100000
 riverctl map normal Super   7 set-focused-tags 64    # 0b001000000
 riverctl map normal Super   8 set-focused-tags 128   # 0b010000000
 riverctl map normal Super   9 set-focused-tags 256   # 0b100000000
+riverctl map normal Super   0 set-focused-tags 512   # 0b100000000
 
 # Move focused view into a different tag
-riverctl map normal Super+Shift 1 toggle-view-tags 1
-riverctl map normal Super+Shift 2 toggle-view-tags 2
-riverctl map normal Super+Shift 3 toggle-view-tags 4
-riverctl map normal Super+Shift 4 toggle-view-tags 8
-riverctl map normal Super+Shift 5 toggle-view-tags 16
-riverctl map normal Super+Shift 6 toggle-view-tags 32
-riverctl map normal Super+Shift 7 toggle-view-tags 64
-riverctl map normal Super+Shift 8 toggle-view-tags 128
-riverctl map normal Super+Shift 9 toggle-view-tags 256
+riverctl map normal Super+Shift 1 set-view-tags 1
+riverctl map normal Super+Shift 2 set-view-tags 2
+riverctl map normal Super+Shift 3 set-view-tags 4
+riverctl map normal Super+Shift 4 set-view-tags 8
+riverctl map normal Super+Shift 5 set-view-tags 16
+riverctl map normal Super+Shift 6 set-view-tags 32
+riverctl map normal Super+Shift 7 set-view-tags 64
+riverctl map normal Super+Shift 8 set-view-tags 128
+riverctl map normal Super+Shift 9 set-view-tags 256
+riverctl map normal Super+Shift 0 set-view-tags 512
 
 # Cycle tags (“Next” / “Previous” workspace)
 riverctl map normal Super Tab           focus-previous-tags
@@ -101,6 +103,12 @@ riverctl map normal Super+Shift F       toggle-fullscreen
 # Focus outputs directionally
 riverctl map normal Super+Alt H         focus-output left
 riverctl map normal Super+Alt L         focus-output right
+riverctl map normal Super+Alt J         focus-output down
+riverctl map normal Super+Alt K         focus-output up
+
+riverctl map normal Super+Shift N         send-to-output next
+riverctl map normal Super+Shift P         focus-output previous
+
 riverctl map normal Super+Alt J         focus-output down
 riverctl map normal Super+Alt K         focus-output up
 
@@ -120,6 +128,13 @@ riverctl map normal Super H             send-layout-cmd rivertile "main-ratio -0
 riverctl map normal Super L             send-layout-cmd rivertile "main-ratio +0.05"
 riverctl map normal Alt+Shift H         send-layout-cmd rivertile "main-count +1"
 riverctl map normal Alt+Shift L         send-layout-cmd rivertile "main-count -1"
+
+
+riverctl map normal Super U send-layout-cmd rivertile "main-location left"
+riverctl map normal Super I send-layout-cmd rivertile "main-location bottom"
+riverctl map normal Super O send-layout-cmd rivertile "main-location top"
+riverctl map normal Super P send-layout-cmd rivertile "main-location right"
+
 riverctl default-layout rivertile
 
 # Enter/exit resize mode (like i3’s resize mode)
