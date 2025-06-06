@@ -42,6 +42,7 @@ pkill -9 polkit-gnome-authentication-agent-1 2>/dev/null
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 wlsunset &
+pkill waybar
 waybar &
 rivertile &
 
@@ -78,6 +79,7 @@ riverctl map normal Super   8 spawn '~/.config/river/scripts/set_global_tags.sh 
 riverctl map normal Super   9 spawn '~/.config/river/scripts/set_global_tags.sh 256'
 riverctl map normal Super   0 spawn '~/.config/river/scripts/set_global_tags.sh 512'
 
+riverctl map normal Super+Shift R    spawn ~/.config/river/init
 # Move focused view into a different tag
 riverctl map normal Super+Shift 1 set-view-tags 1
 riverctl map normal Super+Shift 2 set-view-tags 2
@@ -91,9 +93,8 @@ riverctl map normal Super+Shift 9 set-view-tags 256
 riverctl map normal Super+Shift 0 set-view-tags 512
 
 # Cycle tags (“Next” / “Previous” workspace)
-riverctl map normal Super Tab           focus-previous-tags
-riverctl map normal Super+Shift Tab    focus-previous-tags
-riverctl map normal Super+Shift O      focus-previous-tags
+#riverctl map normal Super Tab           focus-previous-tags
+#riverctl map normal Super+Shift Tab    focus-previous-tags
 
 # Close, spawn terminal, and fullscreen
 riverctl map normal Super Q             close
@@ -105,20 +106,21 @@ riverctl map normal Super+Alt H         focus-output left
 riverctl map normal Super+Alt L         focus-output right
 riverctl map normal Super+Alt J         focus-output down
 riverctl map normal Super+Alt K         focus-output up
+riverctl map normal Super+Alt N         focus-output next
+riverctl map normal Super+Alt P         focus-output previous
 
-riverctl map normal Super+Shift N         send-to-output next
-riverctl map normal Super+Shift P         focus-output previous
+# send to outputs
+riverctl map normal Super+Shift N         send-to-output -current-tags next
+riverctl map normal Super+Shift P         focus-output -current-tags previous
 
-riverctl map normal Super+Alt J         focus-output down
-riverctl map normal Super+Alt K         focus-output up
 
 # Focus views within current workspace
-riverctl map normal Super J             focus-view next
-riverctl map normal Super K             focus-view previous
+riverctl map normal Super N             focus-view next
+riverctl map normal Super P             focus-view previous
 
 # Swap views
-riverctl map normal Super+Shift J       swap next
-riverctl map normal Super+Shift K       swap previous
+riverctl map normal Alt+Shift N       swap next
+riverctl map normal Alt+Shift P       swap previous
 
 # Zoom focused view
 riverctl map normal Super+Shift Return  zoom
@@ -157,12 +159,14 @@ riverctl map normal Super+Shift E       exit
 # Spawn application launcher and window switcher
 riverctl map normal Super D             spawn 'wofi --show drun'
 riverctl map normal Super+Shift D       spawn 'wofi --show window'
+riverctl focus-follows-cursor normal
 
 # Ctrl+Alt+Delete → exit to TTY
 riverctl map normal Control+Alt Delete  exit
 
 # ─── J) Keyboard repeat settings ─────────────────────────────────────────────────
 riverctl set-repeat 50 200
+riverctl set-cursor-warp on-focus-change
 
 # ─── K) Volume, brightness, and media keys (for both normal and locked modes) ────
 for mode in normal locked; do
