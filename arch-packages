@@ -1876,6 +1876,8 @@ xcb-util-wm
 xcb-util-xrm
 xclip
 xcur2png
+xcursor-breeze5
+xcursor-themes
 xdg-dbus-proxy
 xdg-desktop-portal
 xdg-desktop-portal-kde

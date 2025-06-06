@@ -33,7 +33,7 @@ swayidle \
   before-sleep 'swaylock -f --color 000000' &
 
 # ─── D) Cursor Theme & XKB Remapping ───────────────────────────────────────────────
-riverctl xcursor-theme left_ptr 24
+riverctl xcursor-theme Breeze5
 riverctl focus-follows-cursor normal  # retain original focus-follows behavior
 
 # ─── E) Autostart Daemons & Utilities ─────────────────────────────────────────────
@@ -43,9 +43,9 @@ pkill -9 polkit-gnome-authentication-agent-1 2>/dev/null
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 wlsunset &
-pkill waybar
 waybar &
-rivertile &
+rivertile -view-padding 0 -outer-padding 0 &
+( sleep 0.2; ~/.config/river/scripts/rivertile_orient.sh ) &
 
 # ─── F) Border & Background Colors ────────────────────────────────────────────────
 riverctl border-color-focused   0x9933cc   # purple
@@ -54,6 +54,7 @@ riverctl border-color-urgent    0x1ac6ca   # calmcyan
 riverctl background-color       0x02091C   # deepnight
 riverctl set-cursor-warp on-focus-change
 riverctl set-repeat 50 200
+riverctl output-attach-mode below
 
 # ─── G) Floating Rules for Specific Apps ─────────────────────────────────────────
 riverctl rule-add -app-id 'Yad'            float
