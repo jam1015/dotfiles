@@ -28,6 +28,7 @@ alias cb=clipboard
 alias ll='ls -lG'
 alias ls='ls -G'
 alias pd='pandoc'
+alias catscripts="~/.scripts/cat-scripts.bash"
 export TERMINAL="kitty"
 
 if [[ "$(uname -s)" == "Darwin" ]]; then
