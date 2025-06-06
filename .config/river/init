@@ -1,9 +1,10 @@
 #!/bin/sh
 
 # ~/.config/river/init
-# This script is run once river’s Wayland server is up, before entering the main loop.
+# Fully reorganized with a single “prefix” mode and Vim-inspired keybindings.
+# Includes every mapping from your original config, but grouped logically.
 
-# ─── A) Keyboard layout and environment variables ─────────────────────────────────
+# ─── A) Keyboard Layout & Environment Variables ─────────────────────────────────
 riverctl keyboard-layout \
   -variant mac \
   -options "ctrl:nocaps" \
@@ -13,29 +14,29 @@ export GTK_THEME=Arc-Dark
 export QT_STYLE_OVERRIDE=adwaita
 export QT_QPA_PLATFORMTHEME=qt5ct
 
-# ─── B) Output configuration (wlr-randr instead of xrandr) ───────────────────────
+# ─── B) Output Configuration (wlr-randr) ──────────────────────────────────────────
 if wlr-randr | grep -q '^DP-'; then
-  # At least one DP-connected monitor exists
+  # At least one DisplayPort-connected monitor exists
   wlr-randr \
     --output DP-11 --mode 1920x1080 --pos 0,0 --transform 90 \
     --output DP-13 --mode 1920x1080 --pos 1080,0 --transform normal \
     --output eDP-1 --mode 2256x1504 --pos 1080,1080 --transform normal --scale 2.0
 else
-  # No DP output detected
+  # No DP output detected; fall back to laptop panel only
   echo "only laptop panel"
 fi
 
-# ─── C) Screen-lock / idle handling ───────────────────────────────────────────────
+# ─── C) Idle / Screen-Lock ─────────────────────────────────────────────────────────
 swayidle \
-  timeout 1200 'swaylock -f' \
+  timeout 1200 'swaylock -f --color 000000' \
   resume 'swaymsg "seat0 disable_idle"' \
-  before-sleep 'swaylock -f' &
+  before-sleep 'swaylock -f --color 000000' &
 
-# ─── D) Cursor theme and XKB remapping ────────────────────────────────────────────
+# ─── D) Cursor Theme & XKB Remapping ───────────────────────────────────────────────
 riverctl xcursor-theme left_ptr 24
-# (Caps → Control happens via XKB settings under Wayland/Xwayland)
+riverctl focus-follows-cursor normal  # retain original focus-follows behavior
 
-# ─── E) Autostart daemons and utilities ──────────────────────────────────────────
+# ─── E) Autostart Daemons & Utilities ─────────────────────────────────────────────
 dunst &
 
 pkill -9 polkit-gnome-authentication-agent-1 2>/dev/null
@@ -46,223 +47,141 @@ pkill waybar
 waybar &
 rivertile &
 
-# ─── F) Border and background colors ─────────────────────────────────────────────
+# ─── F) Border & Background Colors ────────────────────────────────────────────────
 riverctl border-color-focused   0x9933cc   # purple
 riverctl border-color-unfocused 0x8b877c   # taupe
 riverctl border-color-urgent    0x1ac6ca   # calmcyan
-riverctl background-color       0x02091C   # deepnight background
+riverctl background-color       0x02091C   # deepnight
+riverctl set-cursor-warp on-focus-change
+riverctl set-repeat 50 200
 
-# ─── G) Floating rules for specific apps ─────────────────────────────────────────
-riverctl rule-add -app-id 'Yad'          float
-riverctl rule-add -app-id 'Galculator'   float
-riverctl rule-add -app-id 'Blueberry.py' float
-riverctl rule-add -app-id 'Xsane'        float
-riverctl rule-add -app-id 'Pavucontrol'  float
-riverctl rule-add -app-id 'qt5ct'        float
+# ─── G) Floating Rules for Specific Apps ─────────────────────────────────────────
+riverctl rule-add -app-id 'Yad'            float
+riverctl rule-add -app-id 'Galculator'     float
+riverctl rule-add -app-id 'Blueberry.py'   float
+riverctl rule-add -app-id 'Xsane'          float
+riverctl rule-add -app-id 'Pavucontrol'    float
+riverctl rule-add -app-id 'qt5ct'          float
 riverctl rule-add -app-id 'Bluetooth-sendto' float
-riverctl rule-add -app-id 'Pamac-manager'   float
-riverctl rule-add -window-role 'About'      float
+riverctl rule-add -app-id 'Pamac-manager'     float
+riverctl rule-add -window-role 'About'        float
 
-# ─── H) Declare custom modes ─────────────────────────────────────────────────────
-riverctl declare-mode resize
+# ─── H) Declare “prefix” Mode ─────────────────────────────────────────────────────
+riverctl declare-mode prefix
 
-# ─── I) Keybindings: Workspaces (tags) and navigation ────────────────────────────
-# Focus tags 1..9
-riverctl map normal Super   1 spawn '~/.config/river/scripts/set_global_tags.sh 1'
-riverctl map normal Super   2 spawn '~/.config/river/scripts/set_global_tags.sh 2'
-riverctl map normal Super   3 spawn '~/.config/river/scripts/set_global_tags.sh 4'
-riverctl map normal Super   4 spawn '~/.config/river/scripts/set_global_tags.sh 8'
-riverctl map normal Super   5 spawn '~/.config/river/scripts/set_global_tags.sh 16'
-riverctl map normal Super   6 spawn '~/.config/river/scripts/set_global_tags.sh 32'
-riverctl map normal Super   7 spawn '~/.config/river/scripts/set_global_tags.sh 64'
-riverctl map normal Super   8 spawn '~/.config/river/scripts/set_global_tags.sh 128'
-riverctl map normal Super   9 spawn '~/.config/river/scripts/set_global_tags.sh 256'
-riverctl map normal Super   0 spawn '~/.config/river/scripts/set_global_tags.sh 512'
+# ─── I) Normal-Mode Mappings ──────────────────────────────────────────────────────
 
-riverctl map normal Super+Shift R    spawn ~/.config/river/init
-# Move focused view into a different tag
-riverctl map normal Super+Shift 1 set-view-tags 1
-riverctl map normal Super+Shift 2 set-view-tags 2
-riverctl map normal Super+Shift 3 set-view-tags 4
-riverctl map normal Super+Shift 4 set-view-tags 8
-riverctl map normal Super+Shift 5 set-view-tags 16
-riverctl map normal Super+Shift 6 set-view-tags 32
-riverctl map normal Super+Shift 7 set-view-tags 64
-riverctl map normal Super+Shift 8 set-view-tags 128
-riverctl map normal Super+Shift 9 set-view-tags 256
-riverctl map normal Super+Shift 0 set-view-tags 512
+# —— Volume Controls (no prefix) —— 
+riverctl map normal None XF86AudioRaiseVolume spawn '~/.config/river/scripts/volume_up.sh'
+riverctl map normal None XF86AudioLowerVolume spawn '~/.config/river/scripts/volume_down.sh'
+riverctl map normal None XF86AudioMute       spawn '~/.config/river/scripts/toggle_mute.sh'
 
-# Cycle tags (“Next” / “Previous” workspace)
-#riverctl map normal Super Tab           focus-previous-tags
-#riverctl map normal Super+Shift Tab    focus-previous-tags
+# —— Enter Prefix Mode (Super as single prefix) —— 
+riverctl map normal None Super_L enter-mode prefix
+riverctl map normal None Super_R enter-mode prefix
 
-# Close, spawn terminal, and fullscreen
-riverctl map normal Super Q             close
-riverctl map normal Super Return        spawn kitty
-riverctl map normal Super F       toggle-fullscreen
+# —— Exit to TTY —— 
+riverctl map normal Control+Alt Delete exit
 
-# Focus outputs directionally
-riverctl map normal Super+Alt H         focus-output left
-riverctl map normal Super+Alt L         focus-output right
-riverctl map normal Super+Alt J         focus-output down
-riverctl map normal Super+Alt K         focus-output up
-riverctl map normal Super+Alt N         focus-output next
-riverctl map normal Super+Alt P         focus-output previous
+# —— Exit River & Reload Config —— 
+riverctl map normal Super+Shift E exit
+riverctl map normal Super+Shift R spawn ~/.config/river/init
 
-# send to outputs
-riverctl map normal Super+Shift N         send-to-output -current-tags next
-riverctl map normal Super+Shift P         focus-output -current-tags previous
+# ─── J) Prefix-Mode Mappings ──────────────────────────────────────────────────────
+# In prefix mode, press the key (no modifiers) to run the command, then return to normal.
 
+# —— Exit Prefix Without Action (double-tap Super) —— 
+riverctl map prefix None Super_L enter-mode normal
+riverctl map prefix None Super_R enter-mode normal
 
-# Focus views within current workspace
-riverctl map normal Super N             focus-view next
-riverctl map normal Super P             focus-view previous
+# —— Window Close & Spawn Terminal —— 
+riverctl map prefix None q spawn '            riverctl enter-mode normal && riverctl close '
+riverctl map prefix None Return spawn '                    riverctl enter-mode normal &&  kitty '
 
-# Swap views
-riverctl map normal Alt+Shift N       swap next
-riverctl map normal Alt+Shift P       swap previous
+# —— Window Focus & Navigation (Vim-inspired) —— 
+riverctl map prefix None n spawn '     riverctl enter-mode normal && riverctl focus-view next '
+riverctl map prefix None p spawn ' riverctl enter-mode normal && riverctl focus-view previous '
 
-# Zoom focused view
-riverctl map normal Super+Shift Return  zoom
+# —— Swap Views —— 
+riverctl map prefix None s spawn '           riverctl enter-mode normal && riverctl swap next '
+riverctl map prefix None S spawn '       riverctl enter-mode normal && riverctl swap previous '
 
-# Rivertile layout adjustments
-riverctl map normal Super H             send-layout-cmd rivertile "main-ratio -0.05"
-riverctl map normal Super L             send-layout-cmd rivertile "main-ratio +0.05"
-riverctl map normal Alt+Shift H         send-layout-cmd rivertile "main-count +1"
-riverctl map normal Alt+Shift L         send-layout-cmd rivertile "main-count -1"
+# —— Previous Window Focus (i3-back style) —— 
+riverctl map prefix None Backspace spawn ' riverctl enter-mode normal && riverctl focus-view previous '
 
+# —— Output (Monitor) Focus —— 
+riverctl map prefix None . spawn '     riverctl enter-mode normal && riverctl focus-output next '
+riverctl map prefix None , spawn 'riverctl focus-output previous && riverctl enter-mode normal'
+riverctl map prefix None Left  spawn '  riverctl enter-mode normal && riverctl focus-output left '
+riverctl map prefix None Right spawn ' riverctl enter-mode normal && riverctl focus-output right '
+riverctl map prefix None Up    spawn 'riverctl focus-output up &&    riverctl enter-mode normal'
+riverctl map prefix None Down  spawn '  riverctl enter-mode normal && riverctl focus-output down '
 
-riverctl map normal Super Y send-layout-cmd rivertile "main-location left"
-riverctl map normal Super U send-layout-cmd rivertile "main-location bottom"
-riverctl map normal Super I send-layout-cmd rivertile "main-location top"
-riverctl map normal Super O send-layout-cmd rivertile "main-location right"
+# —— Send Window to Other Output —— 
+riverctl map prefix None ] spawn ' riverctl enter-mode normal && riverctl send-to-output next &&     riverctl focus-output next '
+riverctl map prefix None [ spawn ' riverctl enter-mode normal  && riverctl send-to-output previous && riverctl focus-output previous '
 
+# —— Window Movement (Floating) —— 
+riverctl map prefix None h spawn '   riverctl enter-mode normal && riverctl move left 50 '
+riverctl map prefix None j spawn '   riverctl enter-mode normal && riverctl move down 50 '
+riverctl map prefix None k spawn '     riverctl enter-mode normal && riverctl move up 50 '
+riverctl map prefix None l spawn '  riverctl enter-mode normal && riverctl move right 50 '
+
+# —— Window Resize (Floating) —— 
+riverctl map prefix None H spawn ' riverctl enter-mode normal && riverctl resize horizontal -50 '
+riverctl map prefix None L spawn ' riverctl enter-mode normal && riverctl resize horizontal +50 '
+riverctl map prefix None K spawn '   riverctl enter-mode normal && riverctl resize vertical   -50 '
+riverctl map prefix None J spawn '   riverctl enter-mode normal && riverctl resize vertical   +50 '
+
+# —— Floating / Fullscreen Toggles —— 
+riverctl map prefix None t spawn '      riverctl enter-mode normal && riverctl toggle-float '
+riverctl map prefix None f spawn ' riverctl enter-mode normal && riverctl toggle-fullscreen '
+
+# —— Spawn App Launcher & Window Switcher —— 
+riverctl map prefix None d spawn '          riverctl enter-mode normal && wofi --show drun '
+riverctl map prefix None D spawn '        riverctl enter-mode normal && wofi --show window '
+
+# —— Rivertile Layout Adjustments —— 
+riverctl map prefix None r spawn '                               riverctl enter-mode normal && riverctl default-layout rivertile '
+riverctl map prefix None y spawn '         riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-location left" '
+riverctl map prefix None i spawn '          riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-location top" '
+riverctl map prefix None o spawn '        riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-location right" '
+riverctl map prefix None u spawn '       riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-location bottom" '
+riverctl map prefix None = spawn '           riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-ratio +0.05" '
+riverctl map prefix None - spawn '           riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-ratio -0.05" '
+riverctl map prefix None + spawn '              riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-count +1" '
+riverctl map prefix None _ spawn '              riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-count -1" '
+
+# —— Tag (Workspace) Management —— 
+riverctl map prefix None 1 spawn '   riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 1 '
+riverctl map prefix None 2 spawn '   riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 2 '
+riverctl map prefix None 3 spawn '   riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 4 '
+riverctl map prefix None 4 spawn '   riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 8 '
+riverctl map prefix None 5 spawn '  riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 16 '
+riverctl map prefix None 6 spawn '  riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 32 '
+riverctl map prefix None 7 spawn '  riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 64 '
+riverctl map prefix None 8 spawn ' riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 128 '
+riverctl map prefix None 9 spawn ' riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 256 '
+riverctl map prefix None 0 spawn ' riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 512 '
+
+# —— Move Focused View Into Tag (“view-tags”) —— 
+riverctl map prefix Shift 1 spawn '   riverctl enter-mode normal && riverctl set-view-tags 1 '
+riverctl map prefix Shift 2 spawn '   riverctl enter-mode normal && riverctl set-view-tags 2 '
+riverctl map prefix Shift 3 spawn '   riverctl enter-mode normal && riverctl set-view-tags 4 '
+riverctl map prefix Shift 4 spawn '   riverctl enter-mode normal && riverctl set-view-tags 8 '
+riverctl map prefix Shift 5 spawn '  riverctl enter-mode normal && riverctl set-view-tags 16 '
+riverctl map prefix Shift 6 spawn '  riverctl enter-mode normal && riverctl set-view-tags 32 '
+riverctl map prefix Shift 7 spawn '  riverctl enter-mode normal && riverctl set-view-tags 64 '
+riverctl map prefix Shift 8 spawn ' riverctl enter-mode normal && riverctl set-view-tags 128 '
+riverctl map prefix Shift 9 spawn ' riverctl enter-mode normal && riverctl set-view-tags 256 '
+riverctl map prefix Shift 0 spawn ' riverctl enter-mode normal && riverctl set-view-tags 512 '
+
+# —— Cycle Tag History (“i3-back” equivalent) —— 
+riverctl map prefix None Tab spawn ' riverctl enter-mode normal && riverctl focus-previous-tags '
+
+# ─── K) Default Layout & Final Settings ───────────────────────────────────────────
 riverctl default-layout rivertile
 
-# Enter/exit resize mode (like i3’s resize mode)
-riverctl map normal Super r             enter-mode resize
-riverctl map resize None Left           resize horizontal -10
-riverctl map resize None Right          resize horizontal +10
-riverctl map resize None Up             resize vertical   -10
-riverctl map resize None Down           resize vertical   +10
-riverctl map resize None Return         enter-mode normal
-riverctl map resize None Escape         enter-mode normal
-
-# Previous window focus (i3-back equivalent)
-riverctl map normal Super+Shift Backspace focus-view previous
-
-# Reload, restart, exit river
-riverctl map normal Super+Shift C       reload
-riverctl map normal Super+Shift R       restart
-riverctl map normal Super+Shift E       exit
-
-# Spawn application launcher and window switcher
-riverctl map normal Super D             spawn 'wofi --show drun'
-riverctl map normal Super+Shift D       spawn 'wofi --show window'
-riverctl focus-follows-cursor normal
-
-# Ctrl+Alt+Delete → exit to TTY
-riverctl map normal Control+Alt Delete  exit
-
-# ─── J) Keyboard repeat settings ─────────────────────────────────────────────────
-riverctl set-repeat 50 200
-riverctl set-cursor-warp on-focus-change
-
-# ─── K) Volume, brightness, and media keys (for both normal and locked modes) ────
-for mode in normal locked; do
-  # Volume up/down
-  riverctl map -repeat "$mode" None Prior               spawn '~/.config/river/scripts/volume_up.sh'
-  riverctl map -repeat "$mode" None Next                spawn '~/.config/river/scripts/volume_down.sh'
-  riverctl map -repeat "$mode" None XF86AudioRaiseVolume spawn '~/.config/river/scripts/volume_up.sh'
-  riverctl map -repeat "$mode" None XF86AudioLowerVolume spawn '~/.config/river/scripts/volume_down.sh'
-  riverctl map "$mode" None XF86AudioMute         spawn '~/.config/river/scripts/toggle_mute.sh'
-
-  # Brightness up/down
-  riverctl map -repeat "$mode" None XF86MonBrightnessUp   spawn '~/.config/river/scripts/brightness_up.sh'
-  riverctl map -repeat "$mode" None XF86MonBrightnessDown spawn '~/.config/river/scripts/brightness_down.sh'
-
-  # Media controls
-  riverctl map "$mode" None XF86AudioPlay         spawn '~/.config/river/scripts/media_play_pause.sh'
-  riverctl map "$mode" None XF86AudioNext         spawn '~/.config/river/scripts/media_next.sh'
-  riverctl map "$mode" None XF86AudioPrev         spawn '~/.config/river/scripts/media_prev.sh'
-done
-
-# ─── End of active configuration ─────────────────────────────────────────────────
-
-# ──────────────────────────────────────────────────────────────────────────────
-# Stand-alone commentary and addendum (for reference only; not executed)
-# ──────────────────────────────────────────────────────────────────────────────
-
-# • Use this script to configure outputs, keybindings, and autostarts under Wayland/river.
-# • Remove any “sudo systemctl enable …” lines; enable them manually:
-#     sudo systemctl enable --now geoclue.service
-#     sudo systemctl enable --now seatd
-#
-# A) Rebuild font cache and run XDG autostart (replacement for i3’s fc-cache and dex):
-#    fc-cache -r &
-#    dex --autostart --environment river &
-#
-# B) X11-based helpers (picom, xinput, xss-lock):
-#    - picom: no direct equivalent under Wayland; drop entirely.
-#    - xinput tweaks: use libinput or input-remapper; most defaults are fine.
-#    - xss-lock + i3lock: replaced by swayidle + swaylock (already in section C).
-#
-# C) Network tray, Bluetooth tray, and redshift:
-#    Under i3:
-#      exec --no-startup-id nm-applet
-#      exec --no-startup-id blueman-applet
-#      exec --no-startup-id redshift-gtk -l geoclue2 -t 6500:2000
-#    Under river:
-#      nm-applet &        # Xwayland tray icons in Waybar’s tray
-#      blueman-applet &   # Xwayland tray icons
-#      wlsunset -l 40.44:-79.99 -t 6500:2000 &   # replaces redshift-gtk
-#
-# D) “i3-back” daemon (workspace back/forward):
-#    i3 config used a focus-change listener. Under river, “focus-previous-tags” covers history.
-#    If a custom back binding is needed, use Super+Shift+O (already bound above).
-#
-# E) Generative background script:
-#    i3 ran:
-#      exec --no-startup-id ~/.config/i3/generative_background.bash
-#    Under Wayland:
-#      - Convert script to generate a PNG and run swaybg:
-#          swaybg -i ~/.config/river/solid_color.png -m stretch &
-#      - Or spawn the existing script under Xwayland:
-#          ~/.config/i3/generative_background.bash &
-#
-# F) Polkit agent:
-#    i3: exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-#    Under river: same, but kill any existing instance first (in section E).
-#
-# G) Audio and brightness keys (pamixer / volume_brightness.sh):
-#    i3 bound XF86AudioRaiseVolume and XF86MonBrightnessUp to custom scripts.
-#    Under river: ported to riverctl “spawn” in section K.
-#
-# H) Workspace naming and “auto back and forth”:
-#    i3 had “workspace_auto_back_and_forth yes” and numeric workspace aliases.
-#    Under river: “focus-previous-tags” handles back-and-forth. Numeric shortcuts are explicit tags above.
-#
-# I) Floating rules for specific apps:
-#    i3 used “for_window [class=…] floating enable”. Under river: `riverctl rule-add`.
-#
-# J) Color definitions:
-#    i3 set a palette for client.focused, etc. Under river: colors are global (set once in section F).
-#
-# K) “resize” mode (i3’s mode “resize”):
-#    Declared and mapped in section H.
-#
-# L) “i3-back” equivalent for “previous window”:
-#    Mapped Super+Shift+Backspace in section H.
-#
-# M) “reload” and “restart”:
-#    Mapped Super+Shift+C and Super+Shift+R in section H.
-#
-# N) If you also want a “logout” via keybinding rather than wlogout:
-#    Super+Shift+E is mapped to exit in section H (and wlogout is spawned for graphical logout).
-#
-# O) Final reminders:
-# 1) Ensure all custom scripts are executable (`chmod +x ...`) and work under Wayland.
-# 2) Run “riverctl reload” or restart river after saving this file to apply changes.
-# 3) Double-check that geoclue.service and seatd are enabled manually as needed.
-# 4) Remove any leftover i3-specific lines once fully migrated.
-# ──────────────────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────────
+# END OF CONFIG
+# ─────────────────────────────────────────────────────────────────────────────────
