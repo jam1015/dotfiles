@@ -45,7 +45,7 @@ pkill -9 polkit-gnome-authentication-agent-1 2>/dev/null
 wlsunset &
 waybar &
 rivertile -view-padding 0 -outer-padding 0 &
-( sleep 0.2; ~/.config/river/scripts/rivertile_orient.sh ) &
+( sleep 0.5; ~/.config/river/scripts/rivertile_orient.bash ) &
 
 # ─── F) Border & Background Colors ────────────────────────────────────────────────
 riverctl border-color-focused   0x9933cc   # purple
@@ -108,8 +108,8 @@ riverctl map prefix None bracketright spawn 'riverctl enter-mode normal && river
 riverctl map prefix None bracketleft  spawn 'riverctl enter-mode normal && riverctl swap previous '
 
 # —— Output (Monitor) Focus —— 
-riverctl map prefix None f spawn 'riverctl enter-mode normal && riverctl focus-output next '
-riverctl map prefix None b spawn ' riverctl enter-mode normal &&  riverctl focus-output previous '
+riverctl map prefix None apostrophe spawn 'riverctl enter-mode normal && riverctl focus-output next '
+riverctl map prefix None semicolon spawn 'riverctl enter-mode normal &&  riverctl focus-output previous '
 
 # —— Send Window to Other Output —— 
 riverctl map prefix None comma  spawn 'riverctl enter-mode normal && riverctl send-to-output next && riverctl focus-output next '
@@ -131,7 +131,7 @@ riverctl map prefix None period spawn 'riverctl enter-mode normal && riverctl se
 # c for cloud, clouds float
 riverctl map prefix None c spawn 'riverctl enter-mode normal && riverctl toggle-float '
 # w for window
-riverctl map prefix None w spawn 'riverctl enter-mode normal && riverctl toggle-fullscreen '
+riverctl map prefix None f spawn 'riverctl enter-mode normal && riverctl toggle-fullscreen '
 
 # —— Spawn App Launcher & Window Switcher —— 
 # lowercase d → drun
@@ -151,7 +151,7 @@ riverctl map prefix None u spawn 'riverctl enter-mode normal && riverctl send-la
 
 
 riverctl map prefix None g spawn 'riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-ratio +0.05" '
-riverctl map prefix None b spawn 'riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-ratio -0.05" '
+riverctl map prefix Shift g spawn 'riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-ratio -0.05" '
 
 riverctl map prefix None + spawn 'riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-count +1" '
 riverctl map prefix None - spawn 'riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-count -1" '
