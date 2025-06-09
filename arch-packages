@@ -77,6 +77,7 @@ ca-certificates
 ca-certificates-mozilla
 ca-certificates-utils
 cabextract
+cagebreak
 cairo
 cairomm
 cairomm-1.16
@@ -86,12 +87,12 @@ cdparanoia
 cheese
 chromaprint
 cifs-utils
-cl-alexandria
+cl-alexandria-git
 cl-clx
 cl-ppcre
 cl-unicode
-clang
 clang18
+clipman
 clucene
 clutter
 clutter-gst
@@ -101,9 +102,6 @@ cmark-gfm
 cockpit
 code
 cogl
-colorgrab
-colorpicker
-compiler-rt
 compiler-rt18
 confuse
 containerd
@@ -160,6 +158,7 @@ duktape
 dunst
 dvisvgm
 e2fsprogs
+ebgaramond-otf
 ebook-tools
 editorconfig-core-c
 efibootmgr
@@ -260,8 +259,6 @@ giflib
 girara
 git
 git-credential-gopass
-git-credential-manager-core
-git-delta-git
 glances
 glib-networking
 glib2
@@ -285,13 +282,11 @@ go
 gobject-introspection
 gobject-introspection-runtime
 google-chrome
-google-crc32c
 gopass
 gperftools
 gpgme
 gpick
 gpm
-granite7
 graphene
 graphicsmagick
 graphite
@@ -395,7 +390,6 @@ haskell-crypton-x509
 haskell-crypton-x509-store
 haskell-crypton-x509-system
 haskell-crypton-x509-validation
-haskell-data-array-byte
 haskell-data-default
 haskell-data-default-class
 haskell-data-default-instances-containers
@@ -572,7 +566,7 @@ helix
 hicolor-icon-theme
 hidapi
 highway
-hopscotch-map
+hosts
 hplip
 hslua-cli
 htop
@@ -602,6 +596,7 @@ iproute2
 iptables-nft
 iputils
 ipython
+isd
 iso-codes
 iw
 iwd
@@ -848,7 +843,6 @@ libfreehand
 libfreexl
 libgccjit
 libgcrypt
-libgee
 libgeotiff
 libgirepository
 libgit2
@@ -1004,6 +998,7 @@ libtirpc
 libtommath
 libtool
 libtorrent-rasterbar
+libucl
 libunibreak
 libunistring
 libunwind
@@ -1085,7 +1080,6 @@ linux-api-headers
 linux-firmware
 linux-firmware-whence
 linux-headers
-lld
 lld18
 llhttp
 llvm-libs
@@ -1170,6 +1164,7 @@ node-gyp
 nodejs-lts-jod
 nodejs-nopt
 nordic-theme
+nordvpn-bin
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
@@ -1203,6 +1198,7 @@ openvpn
 opus
 orc
 otf-codenewroman-nerd
+otf-edwin
 p11-kit
 pacman
 pacman-contrib
@@ -1375,6 +1371,7 @@ portaudio
 postgresql-libs
 potrace
 power-profiles-daemon
+powershell-bin
 ppp
 prettier
 prison
@@ -1475,6 +1472,7 @@ python-parso
 python-pathspec
 python-pbs-installer
 python-pexpect
+python-pfzy
 python-pillow
 python-pip
 python-pkginfo
@@ -1499,6 +1497,7 @@ python-pycups
 python-pydantic
 python-pydantic-core
 python-pydantic-settings
+python-pyglet
 python-pygments
 python-pynacl
 python-pyopenssl
@@ -1529,13 +1528,13 @@ python-soupsieve
 python-stack-data
 python-termcolor
 python-textual
-python-tinycss2
 python-tomli
 python-tomli-w
 python-tomlkit
 python-tqdm
 python-traitlets
 python-trove-classifiers
+python-types-pyyaml
 python-typing-inspection
 python-typing_extensions
 python-urllib3
@@ -1544,6 +1543,7 @@ python-virtualenv
 python-wcwidth
 python-webencodings
 python-wheel
+python-xdg-base-dirs
 python-yaml
 python-yarl
 python-zipp
@@ -1588,12 +1588,8 @@ quicklisp
 r
 r-base64enc
 r-brio
-r-classint
 r-colorspace
 r-crayon
-r-diffobj
-r-digest
-r-e1071
 r-evaluate
 r-fansi
 r-farver
@@ -1615,7 +1611,6 @@ r-nortest
 r-pkgconfig
 r-praise
 r-prettyunits
-r-proxy
 r-ps
 r-quantreg
 r-rcolorbrewer
@@ -1648,6 +1643,7 @@ reiserfsprogs
 rhash
 ripgrep
 ripgrep-all
+river-git
 rofi
 rpcbind
 rsync
@@ -1772,6 +1768,7 @@ tk
 tldr
 tmux
 tor
+tor-browser-bin
 torbrowser-launcher
 tpm2-tss
 tree
@@ -1798,6 +1795,7 @@ ttf-input-nerd
 ttf-iosevka-nerd
 ttf-iosevkatermslab-nerd
 ttf-liberation
+ttf-meslo
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-common
 ttf-opensans
@@ -1813,6 +1811,7 @@ unixodbc
 unrar
 unzip
 upower
+urw-garamond
 usb_modeswitch
 usbmuxd
 usbutils
@@ -1831,8 +1830,8 @@ vte-common
 vte3
 vulkan-headers
 vulkan-icd-loader
-w3m
 wavpack
+way-displays
 waybar
 wayland
 wayland-protocols
@@ -1848,8 +1847,11 @@ winetricks
 wireless_tools
 wireplumber
 wl-clipboard
+wlogout
+wlr-layout-ui
 wlr-randr
 wlroots
+wlroots0.15
 wlsunset
 woff2
 wofi
@@ -1874,6 +1876,7 @@ xcb-util-wm
 xcb-util-xrm
 xclip
 xcur2png
+xcursor-breeze5
 xcursor-themes
 xdg-dbus-proxy
 xdg-desktop-portal
