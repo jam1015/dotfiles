@@ -69,6 +69,7 @@ riverctl rule-add -window-role 'About'        float
 
 # ─── H) Declare “prefix” Mode ─────────────────────────────────────────────────────
 riverctl declare-mode prefix
+riverctl declare-mode prefix2
 
 # ─── I) Normal-Mode Mappings ──────────────────────────────────────────────────────
 
@@ -80,6 +81,15 @@ riverctl map normal None XF86AudioMute       spawn '~/.config/river/scripts/togg
 # —— Enter Prefix Mode (Super as single prefix) —— 
 riverctl map normal None Super_L enter-mode prefix
 riverctl map normal None Super_R enter-mode prefix
+# —— Exit Prefix Without Action (double-tap Super) —— 
+riverctl map prefix None Super_L enter-mode normal
+riverctl map prefix None Super_R enter-mode normal
+
+riverctl map prefix None Control_L enter-mode prefix2
+riverctl map prefix None Control_R enter-mode prefix2
+
+riverctl map prefix2 None Control_L enter-mode normal
+riverctl map prefix2 None Control_R enter-mode normal
 
 # —— Exit to TTY —— 
 riverctl map normal Control+Alt Delete exit
@@ -91,29 +101,29 @@ riverctl map normal Super+Shift R spawn ~/.config/river/init
 # ─── J) Prefix-Mode Mappings ──────────────────────────────────────────────────────
 # In prefix mode, press the key (no modifiers) to run the command, then return to normal.
 
-# —— Exit Prefix Without Action (double-tap Super) —— 
-riverctl map prefix None Super_L enter-mode normal
-riverctl map prefix None Super_R enter-mode normal
 
 # —— Window Close & Spawn Terminal —— 
 riverctl map prefix None q spawn 'riverctl enter-mode normal && riverctl close '
 riverctl map prefix None Return spawn 'riverctl enter-mode normal &&  kitty '
 
 # —— Window Focus & Navigation (Vim-inspired) —— 
-riverctl map prefix None n spawn 'riverctl enter-mode normal && riverctl focus-view next '
-riverctl map prefix None p spawn 'riverctl enter-mode normal && riverctl focus-view previous '
+riverctl map prefix None j spawn 'riverctl enter-mode normal && riverctl focus-view next '
+riverctl map prefix None k spawn 'riverctl enter-mode normal && riverctl focus-view previous '
 
-# —— Swap Views —— 
+
+# —— Output (Monitor) Focus ——
+riverctl map prefix None n spawn 'riverctl enter-mode normal && riverctl focus-output next '
+riverctl map prefix None p spawn 'riverctl enter-mode normal &&  riverctl focus-output previous '
+
+
+# —— Swap Views ——
 riverctl map prefix None bracketright spawn 'riverctl enter-mode normal && riverctl swap next '
 riverctl map prefix None bracketleft  spawn 'riverctl enter-mode normal && riverctl swap previous '
 
-# —— Output (Monitor) Focus —— 
-riverctl map prefix None apostrophe spawn 'riverctl enter-mode normal && riverctl focus-output next '
-riverctl map prefix None semicolon spawn 'riverctl enter-mode normal &&  riverctl focus-output previous '
 
 # —— Send Window to Other Output —— 
-riverctl map prefix None comma  spawn 'riverctl enter-mode normal && riverctl send-to-output next && riverctl focus-output next '
-riverctl map prefix None period spawn 'riverctl enter-mode normal && riverctl send-to-output previous && riverctl focus-output previous '
+riverctl map prefix None Period  spawn 'riverctl enter-mode normal && riverctl send-to-output next && riverctl focus-output next '
+riverctl map prefix None Comma spawn 'riverctl enter-mode normal && riverctl send-to-output previous && riverctl focus-output previous '
 
 # —— Window Movement (Floating) —— 
 #riverctl map prefix None y spawn 'riverctl enter-mode normal && riverctl move left 50 '
@@ -168,6 +178,21 @@ riverctl map prefix None 8 spawn 'riverctl enter-mode normal && ~/.config/river/
 riverctl map prefix None 9 spawn 'riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 256 '
 riverctl map prefix None 0 spawn 'riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 512 '
 
+
+
+# —— Tag (Workspace) Management —— 
+riverctl map prefix2 None 1 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 1 '
+riverctl map prefix2 None 2 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 2 '
+riverctl map prefix2 None 3 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 4 '
+riverctl map prefix2 None 4 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 8 '
+riverctl map prefix2 None 5 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 16 '
+riverctl map prefix2 None 6 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 32 '
+riverctl map prefix2 None 7 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 64 '
+riverctl map prefix2 None 8 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 128 '
+riverctl map prefix2 None 9 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 256 '
+riverctl map prefix2 None 0 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 512 '
+
+
 # —— Move Focused View Into Tag (“view-tags”) —— 
 riverctl map prefix Shift 1 spawn 'riverctl enter-mode normal && riverctl set-view-tags 1 '
 riverctl map prefix Shift 2 spawn 'riverctl enter-mode normal && riverctl set-view-tags 2 '
@@ -181,7 +206,7 @@ riverctl map prefix Shift 9 spawn 'riverctl enter-mode normal && riverctl set-vi
 riverctl map prefix Shift 0 spawn 'riverctl enter-mode normal && riverctl set-view-tags 512 '
 
 # —— Cycle Tag History (“i3-back” equivalent) —— 
-riverctl map prefix None Tab spawn 'riverctl enter-mode normal && riverctl focus-previous-tags '
+#riverctl map prefix Control Tab spawn 'riverctl enter-mode normal && riverctl focus-previous-tags '
 
 # ─── K) Default Layout & Final Settings ───────────────────────────────────────────
 riverctl default-layout rivertile
