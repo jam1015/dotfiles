@@ -10,7 +10,46 @@
   (setq god-mode-enable-function-key-translation nil)
   (define-key god-local-mode-map (kbd ".") #'repeat))
 
-(use-package geiser-mit :defer t)
+(use-package geiser-mit
+ :after corfu
+  :config
+  (dolist (hook '(geiser-repl-mode-hook
+                  geiser-mode-hook    ; for Scheme source buffers
+                  scheme-mode-hook))  ; if you ever open plain scheme-mode
+    (add-hook hook
+              (lambda ()
+                (setq-local corfu-auto        nil
+                            corfu-auto-delay  0.25
+                            corfu-auto-prefix 1))))
+
+
+
+;; Bind in both REPL and source buffers
+
+
+;; 1) Your space handler
+(defun my/geiser-space-insert ()
+  "If Corfu is showing, quit it; then insert a space unconditionally."
+  (interactive)
+  (when (and (bound-and-true-p corfu-mode)
+             (fboundp #'corfu--popup-visible-p)
+             (corfu--popup-visible-p))
+    (corfu-quit))
+  (self-insert-command 1))
+
+;; 2) Bind SPC in Evil’s insert state for Geiser & Scheme
+(dolist (map '(geiser-mode-map
+               geiser-repl-mode-map
+               scheme-mode-map))
+  (when (boundp map)
+    (evil-define-key 'insert
+      ;; must unwrap the symbol to the actual keymap variable
+      (symbol-value map)
+      (kbd "SPC") #'my/geiser-space-insert)))
+
+
+
+  )
 
 (use-package undo-tree
   :init
@@ -32,9 +71,8 @@
 
 
   (setq evil-want-keybinding nil
-	evil-want-integration t
+	evil-want-integration t)
 
-	)
   (setq evil-default-state 'normal)
   :custom
   (evil-undo-system 'undo-tree)
@@ -83,6 +121,15 @@
   )
 
 
+;;(use-package company
+;;  :hook (scheme-mode . company-mode)
+;;  :custom
+;;  (company-idle-delay nil)         ;; don’t auto-popup Company
+;;  (company-minimum-prefix-length 2))
+;;
+;;(use-package company-geiser
+;;  :after (company geiser))
+
 
 (use-package evil-collection
   :after evil which-key
@@ -108,6 +155,7 @@
 
 
 (use-package flycheck
+  :defer t
   :init
   ;;(global-flycheck-mode)
   :config ;;(add-hook 'after-init-hook #'global-flycheck-mode)
@@ -280,8 +328,8 @@
   (corfu-count 25)
   (corfu-cycle t)                      ;; wrap at ends
   (corfu-auto t)                       ;; popup as you type
-  (corfu-auto-delay 0.05)
-  (corfu-auto-prefix 1)                ;; start completing after 1 char
+  (corfu-auto-delay 0.2)
+  (corfu-auto-prefix 2)                ;; start completing after 1 char
   (corfu-preselect 'prompt)
   (corfu-quit-at-boundary 'separator)  ;; stay open on "/" boundary
   (corfu-quit-no-match 'separator)     ;; stay open even when no match
@@ -298,6 +346,9 @@
 	)
 
   :config
+;; ─── Debug Corfu popup ─────────────────────────────────────────────────
+(advice-add 'corfu--show :before (lambda (&rest _) (message "⟫ Corfu popup SHOW")))
+(advice-add 'corfu--hide :before (lambda (&rest _) (message "⟪ Corfu popup HIDE")))
 
 ;; In your config, after Corfu is set up:
 (defun my/eshell-corfu-return ()
@@ -373,8 +424,9 @@
 
 ;; Turn it on by default:
 (my/corfu-dir-strip-mode 1)
- 
-  )
+
+
+)
 
 (use-package orderless
   :ensure t
@@ -431,16 +483,16 @@
   :custom
   (wgrep-auto-save-buffer t))    
 
-
 (use-package cape
-  :ensure t
+  :after (corfu geiser)  
   :init
   ;; Register the CAPE backends you want. Order matters: file first, then others.
   (add-hook 'completion-at-point-functions #'cape-file)
-  ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)   ; buffer words
-  ;; (add-to-list 'completion-at-point-functions #'cape-history)   ; input history
-  ;; ... add other capes as needed
-  )
+  :config
+  ;; Protect Geiser’s CAPF from interruption
+  (advice-add #'geiser-completion-at-point
+              :around #'cape-wrap-noninterruptible))
+
 
 
 
