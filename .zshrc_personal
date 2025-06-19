@@ -86,7 +86,7 @@ autoload -Uz vcs_info
 
 zstyle ':vcs_info:*' enable git svn hg
 # This line obtains information from the vcs.
-zstyle ':vcs_info:git*' formats "⎇%b"
+zstyle ':vcs_info:git*' formats "⎇ %b"
 
 
 get_vcs () {

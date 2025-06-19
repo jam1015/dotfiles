@@ -1135,6 +1135,7 @@ msgpack-c
 mtdev
 mtools
 mujs
+mupdf
 nano
 nano-syntax-highlighting
 nasm
@@ -1781,6 +1782,7 @@ tree-sitter-query
 tree-sitter-vim
 tree-sitter-vimdoc
 tslib
+ttf-adobe-source-fonts
 ttf-bitstream-vera
 ttf-cm-unicode
 ttf-courier-prime
@@ -1796,6 +1798,7 @@ ttf-iosevka-nerd
 ttf-iosevkatermslab-nerd
 ttf-liberation
 ttf-meslo
+ttf-ms-fonts
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-common
 ttf-opensans
@@ -1931,9 +1934,10 @@ xz
 yad
 yajl
 yaml-cpp
+yay
 yyjson
 zathura
-zathura-pdf-mupdf
+zathura-pdf-poppler
 zbar
 zeromq
 zig

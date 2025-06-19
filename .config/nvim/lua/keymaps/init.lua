@@ -73,8 +73,7 @@ endif
 
 
 
-
-keymap("i", "<C-j>", "<C-x><C-o>", { remap = false, silent = true }) -- activate omni completeion
+keymap("i", "<C-i>", "<C-x><C-o>", { remap = false, silent = true }) -- activate omni completeion
 --keymap("n", "<C-w>s", "<cmd>colorscheme blue<cr>", opts)
 
 keymap("n", "<leader>km",
