@@ -6,7 +6,7 @@
 
 # ─── A) Keyboard Layout & Environment Variables ─────────────────────────────────
 riverctl keyboard-layout \
-  -variant mac \
+  #-variant mac \
   -options "ctrl:nocaps" \
   us
 
