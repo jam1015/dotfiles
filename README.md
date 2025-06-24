@@ -98,7 +98,7 @@ cd ~/dotfies
 # Install from Package List
 
 ```
-paru -S $(<arch-packages)
+paru -S --needed $(<arch-packages)
 ```
 
 # Install NodeJS [superceded by package list]
