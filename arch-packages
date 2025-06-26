@@ -35,7 +35,6 @@ atkmm
 attica
 attr
 audit
-aurorae
 autoconf
 autoconf-archive
 automake
@@ -78,6 +77,7 @@ ca-certificates
 ca-certificates-mozilla
 ca-certificates-utils
 cabextract
+cagebreak
 cairo
 cairomm
 cairomm-1.16
@@ -91,9 +91,7 @@ cl-alexandria-git
 cl-clx
 cl-ppcre
 cl-unicode
-clang
 clang18
-clang19
 clipman
 clucene
 clutter
@@ -104,11 +102,7 @@ cmark-gfm
 cockpit
 code
 cogl
-colorgrab
-colorpicker
-compiler-rt
 compiler-rt18
-compiler-rt19
 confuse
 containerd
 convertlit
@@ -171,7 +165,6 @@ efibootmgr
 efitools
 efivar
 electron34
-electron35
 ell
 emacs
 enchant
@@ -266,8 +259,6 @@ giflib
 girara
 git
 git-credential-gopass
-git-credential-manager-core
-git-delta-git
 glances
 glib-networking
 glib2
@@ -291,14 +282,11 @@ go
 gobject-introspection
 gobject-introspection-runtime
 google-chrome
-google-crc32c
 gopass
 gperftools
 gpgme
-gpgmepp
 gpick
 gpm
-granite7
 graphene
 graphicsmagick
 graphite
@@ -402,7 +390,6 @@ haskell-crypton-x509
 haskell-crypton-x509-store
 haskell-crypton-x509-system
 haskell-crypton-x509-validation
-haskell-data-array-byte
 haskell-data-default
 haskell-data-default-class
 haskell-data-default-instances-containers
@@ -579,7 +566,6 @@ helix
 hicolor-icon-theme
 hidapi
 highway
-hopscotch-map
 hosts
 hplip
 hslua-cli
@@ -857,7 +843,6 @@ libfreehand
 libfreexl
 libgccjit
 libgcrypt
-libgee
 libgeotiff
 libgirepository
 libgit2
@@ -1093,24 +1078,12 @@ lilv
 linux
 linux-api-headers
 linux-firmware
-linux-firmware-amdgpu
-linux-firmware-atheros
-linux-firmware-broadcom
-linux-firmware-intel
-linux-firmware-mediatek
-linux-firmware-nvidia
-linux-firmware-other
-linux-firmware-radeon
-linux-firmware-realtek
 linux-firmware-whence
 linux-headers
-lld
 lld18
-lld19
 llhttp
 llvm-libs
 llvm18-libs
-llvm19-libs
 lm_sensors
 lmdb
 logrotate
@@ -1157,7 +1130,7 @@ mpdecimal
 mpfr
 mpg123
 mpv
-msedit
+ms-edit
 msgpack-c
 mtdev
 mtools
@@ -1266,7 +1239,6 @@ perl-class-inspector
 perl-class-load
 perl-class-singleton
 perl-clone
-perl-clone-choose
 perl-data-compare
 perl-data-dump
 perl-data-optlist
@@ -1557,7 +1529,6 @@ python-soupsieve
 python-stack-data
 python-termcolor
 python-textual
-python-tinycss2
 python-tomli
 python-tomli-w
 python-tomlkit
@@ -1598,7 +1569,6 @@ qt5ct
 qt6-5compat
 qt6-base
 qt6-declarative
-qt6-location
 qt6-multimedia
 qt6-multimedia-ffmpeg
 qt6-networkauth
@@ -1619,12 +1589,8 @@ quicklisp
 r
 r-base64enc
 r-brio
-r-classint
 r-colorspace
 r-crayon
-r-diffobj
-r-digest
-r-e1071
 r-evaluate
 r-fansi
 r-farver
@@ -1646,7 +1612,6 @@ r-nortest
 r-pkgconfig
 r-praise
 r-prettyunits
-r-proxy
 r-ps
 r-quantreg
 r-rcolorbrewer
@@ -1679,7 +1644,7 @@ reiserfsprogs
 rhash
 ripgrep
 ripgrep-all
-river
+river-git
 rofi
 rpcbind
 rsync
@@ -1804,6 +1769,7 @@ tk
 tldr
 tmux
 tor
+tor-browser-bin
 torbrowser-launcher
 tpm2-tss
 tree
@@ -1816,6 +1782,7 @@ tree-sitter-query
 tree-sitter-vim
 tree-sitter-vimdoc
 tslib
+ttf-adobe-source-fonts
 ttf-bitstream-vera
 ttf-cm-unicode
 ttf-courier-prime
@@ -1830,6 +1797,8 @@ ttf-input-nerd
 ttf-iosevka-nerd
 ttf-iosevkatermslab-nerd
 ttf-liberation
+ttf-meslo
+ttf-ms-fonts
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-common
 ttf-opensans
@@ -1845,6 +1814,7 @@ unixodbc
 unrar
 unzip
 upower
+urw-garamond
 usb_modeswitch
 usbmuxd
 usbutils
@@ -1863,8 +1833,8 @@ vte-common
 vte3
 vulkan-headers
 vulkan-icd-loader
-w3m
 wavpack
+way-displays
 waybar
 wayland
 wayland-protocols
@@ -1880,9 +1850,11 @@ winetricks
 wireless_tools
 wireplumber
 wl-clipboard
+wlogout
+wlr-layout-ui
 wlr-randr
-wlroots0.18
-wlroots0.19
+wlroots
+wlroots0.15
 wlsunset
 woff2
 wofi
@@ -1907,6 +1879,7 @@ xcb-util-wm
 xcb-util-xrm
 xclip
 xcur2png
+xcursor-breeze5
 xcursor-themes
 xdg-dbus-proxy
 xdg-desktop-portal
