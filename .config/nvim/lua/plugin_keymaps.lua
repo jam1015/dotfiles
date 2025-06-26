@@ -4,19 +4,17 @@
 M = {}
 
 function M.harpoon(harpoon)
+  vim.keymap.set("n", "<leader>ah", function() harpoon:list():add() end, { desc = "harpoon add" })
+  vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
-vim.keymap.set("n", "<leader>ah", function() harpoon:list():add() end, {desc = "harpoon add"})
-vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+  vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+  vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
+  vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+  vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
 
-vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
-vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
-vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
-
--- Toggle previous & next buffers stored within Harpoon list
-vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
-vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
-
+  -- Toggle previous & next buffers stored within Harpoon list
+  vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+  vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
 end
 
 function M.hereterm()
@@ -27,6 +25,14 @@ function M.hereterm()
       { "<C-;>", "<cmd>lua require('here-term').toggle_terminal()<CR>", desc = "here.term toggle", mode = "t" },
       --{"<C-;>","<cmd>lua require('here-term').kill_terminal()<CR>", desc = "here.term kill" }
     }
+  )
+end
+
+function M.vimtex()
+  local wk = require("which-key")
+  wk.add({
+    { "<localleader>l", group = "vimtex", mode = "n" },
+  }
   )
 end
 
@@ -45,27 +51,46 @@ function M.nvim_gui_termquit()
   })
 end
 
+function M.hop()
+  local wk = require("which-key")
+  wk.add({
+    { "<leader>ww", "<cmd>HopWord<CR>", desc = "Hop Word",  mode = "o", silent = true },
+    { "<leader>ww", "<cmd>HopWord<CR>", desc = "Hop Word",  mode = "n", silent = true } })
+end
+
+
+
+function M.mason()
+    return {
+			-- Keymap to expand a package
+			toggle_package_expand = "<CR>",
+			-- Keymap to install the package under the current cursor position
+			install_package = "i",
+			-- Keymap to reinstall/update the package under the current cursor position
+			update_package = "u",
+			-- Keymap to check for new version for the package under the current cursor position
+			check_package_version = "c",
+			-- Keymap to update all installed packages
+			update_all_packages = "U",
+			-- Keymap to check which installed packages are outdated
+			check_outdated_packages = "C",
+			-- Keymap to uninstall a package
+			uninstall_package = "X",
+			-- Keymap to cancel a package installation
+			cancel_installation = "<C-c>",
+			-- Keymap to apply language filter
+			apply_language_filter = "<C-f>",
+    }
+end
+
+
 function M.pluginKeymaps(plugin, setup_type)
   local wk = require("which-key")
   local keymap = vim.keymap.set
   local opts = { remap = false, silent = true }
 
-  if plugin == "hop" then
-    wk.add({
-      { "<leader>ww", ":HopWord<CR>", desc = "Hop Word" },
-    }, { mode = "n", silent = true })
-  elseif plugin == "mason" then
-    return {
-      { toggle_package_expand = "<CR>",  desc = "Toggle package expand" },
-      { install_package = "i",           desc = "Install package" },
-      { update_package = "u",            desc = "Update package" },
-      { check_package_version = "c",     desc = "Check package version" },
-      { update_all_packages = "U",       desc = "Update all packages" },
-      { check_outdated_packages = "C",   desc = "Check outdated packages" },
-      { uninstall_package = "X",         desc = "Uninstall package" },
-      { cancel_installation = "<C-c>",   desc = "Cancel installation" },
-      { apply_language_filter = "<C-f>", desc = "Apply language filter" },
-    }
+
+  if plugin == "mason" then
   else
     error("plugin " .. plugin .. " not found\n")
   end
@@ -426,7 +451,7 @@ function M.flash()
 
     { "s",          mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
     { "r",          mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
---    -- Treesitter & Treesitter-Search in all relevant modes
+    --    -- Treesitter & Treesitter-Search in all relevant modes
     { "<leader>xt", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
     { "<leader>xr", mode = { "n", "x", "o" }, function() require("flash").treesitter_search() end, desc = "Flash Treesitter Search" },
   }
