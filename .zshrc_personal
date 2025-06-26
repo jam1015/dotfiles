@@ -4,8 +4,7 @@
 [ -d ~/.local/state/zsh ] || mkdir -p ~/.local/state/zsh
 
 autoload -Uz compinit && compinit -i
-export PATH="$PATH:/Users/jordanmandel/.local/bin"
-export PATH="$PATH:/Users/jordanmandel/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 # ``````````Vim configuration things`````
 
