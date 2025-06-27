@@ -1424,6 +1424,7 @@ python-distro
 python-dotenv
 python-dulwich
 python-editables
+python-evdev
 python-executing
 python-fastjsonschema
 python-filelock
@@ -1510,6 +1511,7 @@ python-pyqt6
 python-pyqt6-sip
 python-pyserial
 python-pysocks
+python-pywayland
 python-pyxdg
 python-rapidfuzz
 python-referencing

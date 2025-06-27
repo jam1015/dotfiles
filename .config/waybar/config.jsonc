@@ -13,9 +13,6 @@
 //  "clickable": true,
 //  "on-click": "blueberry"
 //},
-
-
-
 // -*- mode: jsonc -*-
 {
   "layer": "top", // Waybar at top layer
@@ -32,7 +29,8 @@
     "custom/media"
   ],
   "modules-center": [
-    "river/window"
+    "river/window",
+    "custom/output_name"
   ],
   "modules-right": [
     "mpd",
@@ -52,23 +50,6 @@
     "tray",
     "custom/power"
   ],
-  // Modules configuration
-  // "sway/workspaces": {
-  //     "disable-scroll": true,
-  //     "all-outputs": true,
-  //     "warp-on-scroll": false,
-  //     "format": "{name}: {icon}",
-  //     "format-icons": {
-  //         "1": "",
-  //         "2": "",
-  //         "3": "",
-  //         "4": "",
-  //         "5": "",
-  //         "urgent": "",
-  //         "focused": "",
-  //         "default": ""
-  //     }
-  // },
   "keyboard-state": {
     "numlock": true,
     "capslock": true,
@@ -84,7 +65,10 @@
   "sway/scratchpad": {
     "format": "{icon} {count}",
     "show-empty": false,
-    "format-icons": ["", ""],
+    "format-icons": [
+      "",
+      ""
+    ],
     "tooltip": true,
     "tooltip-format": "{app}: {title}"
   },
@@ -143,12 +127,26 @@
     "critical-threshold": 80,
     // "format-critical": "{temperatureC}°C {icon}",
     "format": "{temperatureC}°C {icon}",
-    "format-icons": ["", "", ""]
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
   },
   "backlight": {
     // "device": "acpi_video1",
     "format": "{percent}% {icon}",
-    "format-icons": ["", "", "", "", "", "", "", "", ""]
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
   },
   "battery": {
     "states": {
@@ -163,7 +161,13 @@
     "format-alt": "{time} {icon}",
     // "format-good": "", // An empty format will hide the module
     // "format-full": "",
-    "format-icons": ["", "", "", "", ""]
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
   },
   "battery#bat2": {
     "bat": "BAT2"
@@ -203,7 +207,11 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": ["", "", ""]
+      "default": [
+        "",
+        "",
+        ""
+      ]
     },
     "on-click": "pavucontrol"
   },
@@ -220,7 +228,7 @@
     // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
   },
   "custom/power": {
-    "format" : "⏻ ",
+    "format": "⏻ ",
     "tooltip": false,
     "menu": "on-click",
     "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
@@ -231,6 +239,11 @@
       "hibernate": "systemctl hibernate"
     }
   },
+ "custom/output_name": {
+    "exec": "echo \"$WAYBAR_OUTPUT_NAME\"",
+    "interval": 1,
+    "format": "{text}"
+  },
   "river/tags": {
     // The format string for each tag number. {} is replaced with the tag digit.
     "format": "{tag}",
@@ -239,10 +252,29 @@
     // How to format a tag when it is focused/active.
     // Here we wrap it in a colored <span> and make it bold.
     //"format-focused": "<span color=\"#ffdd57\"><b>{tag}</b></span>"
-
     // Optionally, hide tags that have no windows on them:
     // "show-occupied-only": true
   }
-
-
 }
+
+
+
+
+  // Modules configuration
+  // "sway/workspaces": {
+  //     "disable-scroll": true,
+  //     "all-outputs": true,
+  //     "warp-on-scroll": false,
+  //     "format": "{name}: {icon}",
+  //     "format-icons": {
+  //         "1": "",
+  //         "2": "",
+  //         "3": "",
+  //         "4": "",
+  //         "5": "",
+  //         "urgent": "",
+  //         "focused": "",
+  //         "default": ""
+  //     }
+  // },
+

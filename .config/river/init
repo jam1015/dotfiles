@@ -34,6 +34,7 @@ swayidle \
 # ─── D) Cursor Theme & XKB Remapping ───────────────────────────────────────────────
 riverctl xcursor-theme Breeze5
 riverctl focus-follows-cursor normal  # retain original focus-follows behavior
+riverctl set-cursor-warp on-focus-change
 
 # ─── E) Autostart Daemons & Utilities ─────────────────────────────────────────────
 dunst &
@@ -51,9 +52,8 @@ riverctl border-color-focused   0x9933cc   # purple
 riverctl border-color-unfocused 0x8b877c   # taupe
 riverctl border-color-urgent    0x1ac6ca   # calmcyan
 riverctl background-color       0x02091C   # deepnight
-riverctl set-cursor-warp on-focus-change
-riverctl set-repeat 50 200
-riverctl output-attach-mode below
+
+riverctl set-repeat 45 195
 
 # ─── G) Floating Rules for Specific Apps ─────────────────────────────────────────
 riverctl rule-add -app-id 'Yad'            float
@@ -102,19 +102,23 @@ riverctl map normal Super+Shift R spawn ~/.config/river/init
 
 
 # —— Window Close & Spawn Terminal —— 
-riverctl map          prefix None q close                 # press
+riverctl map          prefix None q close #spawn '~/.config/river/scripts/prev_output.sh'                 # press
 riverctl map -release prefix None q enter-mode normal    # release
 
 riverctl map prefix None Return spawn 'riverctl enter-mode normal &&  tiny_samedir_kitty && ~/.config/river/scripts/rivertile_orient.bash '
 
 # —— Window Focus & Navigation (Vim-inspired) —— 
-riverctl map prefix None j spawn 'riverctl enter-mode normal && riverctl focus-view next '
-riverctl map prefix None k spawn 'riverctl enter-mode normal && riverctl focus-view previous '
+riverctl map prefix          None j  focus-view next 
+riverctl map -release prefix None j  enter-mode normal 
+riverctl map prefix          None k  focus-view previous 
+riverctl map -release prefix None k  enter-mode normal 
 
 
 # —— Output (Monitor) Focus ——
-riverctl map prefix None n spawn 'riverctl enter-mode normal && riverctl focus-output next '
-riverctl map prefix None p spawn 'riverctl enter-mode normal &&  riverctl focus-output previous '
+riverctl map prefix          None n   focus-output next
+riverctl map -release prefix None n   enter-mode normal
+riverctl map prefix          None p   focus-output previous
+riverctl map -release prefix None p   enter-mode normal
 
 
 # —— Swap Views ——
@@ -239,6 +243,7 @@ riverctl map prefix2 None e spawn 'emacsclient -c'
 
 
 
+riverctl output-attach-mode below
 
 
 
