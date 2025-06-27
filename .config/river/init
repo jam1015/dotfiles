@@ -102,8 +102,10 @@ riverctl map normal Super+Shift R spawn ~/.config/river/init
 
 
 # —— Window Close & Spawn Terminal —— 
-riverctl map prefix None q spawn 'riverctl enter-mode normal && riverctl close '
-riverctl map prefix None Return spawn 'riverctl enter-mode normal &&  tiny_kitty_samedir && ~/.config/river/scripts/rivertile_orient.bash '
+riverctl map          prefix None q close                 # press
+riverctl map -release prefix None q enter-mode normal    # release
+
+riverctl map prefix None Return spawn 'riverctl enter-mode normal &&  tiny_samedir_kitty && ~/.config/river/scripts/rivertile_orient.bash '
 
 # —— Window Focus & Navigation (Vim-inspired) —— 
 riverctl map prefix None j spawn 'riverctl enter-mode normal && riverctl focus-view next '
@@ -179,7 +181,7 @@ riverctl map prefix None 0 spawn 'riverctl enter-mode normal && ~/.config/river/
 
 
 
-# —— Tag (Workspace) Management —— 
+# —— Tag (Workspace) Management —— just this window
 riverctl map prefix2 None 1 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 1 '
 riverctl map prefix2 None 2 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 2 '
 riverctl map prefix2 None 3 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 4 '
