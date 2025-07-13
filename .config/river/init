@@ -45,7 +45,7 @@ pkill -9 polkit-gnome-authentication-agent-1 2>/dev/null
 wlsunset &
 waybar &
 rivertile -view-padding 0 -outer-padding 0 &
-( sleep 0.5; ~/.config/river/scripts/rivertile_orient.bash ) &
+( sleep 0.05; ~/.config/river/scripts/rivertile_orient.bash ) &
 
 # ─── F) Border & Background Colors ────────────────────────────────────────────────
 riverctl border-color-focused   0x9933cc   # purple
@@ -105,7 +105,7 @@ riverctl map normal Super+Shift R spawn ~/.config/river/init
 riverctl map          prefix None q close #spawn '~/.config/river/scripts/prev_output.sh'                 # press
 riverctl map -release prefix None q enter-mode normal    # release
 
-riverctl map prefix None Return spawn 'riverctl enter-mode normal &&  tiny_samedir_kitty && ~/.config/river/scripts/rivertile_orient.bash '
+riverctl map prefix          None Return spawn 'riverctl enter-mode normal && tiny_samedir_kitty'
 
 # —— Window Focus & Navigation (Vim-inspired) —— 
 riverctl map prefix          None j  focus-view next 
