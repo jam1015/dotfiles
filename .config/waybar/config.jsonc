@@ -248,7 +248,7 @@
     // The format string for each tag number. {} is replaced with the tag digit.
     "format": "{tag}",
     "num-tags": 10,
-    "hide-vacant": true
+    "hide-vacant": false
     // How to format a tag when it is focused/active.
     // Here we wrap it in a colored <span> and make it bold.
     //"format-focused": "<span color=\"#ffdd57\"><b>{tag}</b></span>"
