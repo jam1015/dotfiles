@@ -1,4 +1,4 @@
-set editorcmd /usr/bin/neovide
+set editorcmd /usr/bin/kitty -e nvim
 bind j scrollline 5
 bind k scrollline -5
 
