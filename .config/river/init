@@ -81,14 +81,21 @@ riverctl map normal None XF86AudioMute       spawn '~/.config/river/scripts/togg
 riverctl map normal None Super_L enter-mode prefix
 riverctl map normal None Super_R enter-mode prefix
 # —— Exit Prefix Without Action (double-tap Super) —— 
-riverctl map prefix None Super_L enter-mode normal
-riverctl map prefix None Super_R enter-mode normal
+riverctl map prefix None Super_L enter-mode prefix2
+riverctl map prefix None Super_R enter-mode prefix2
 
-riverctl map prefix None Control_L enter-mode prefix2
-riverctl map prefix None Control_R enter-mode prefix2
+riverctl map prefix2 None Super_L enter-mode normal
+riverctl map prefix2 None Super_R enter-mode normal
 
-riverctl map prefix2 None Control_L enter-mode normal
-riverctl map prefix2 None Control_R enter-mode normal
+# In prefix mode: Escape → normal
+riverctl map prefix  None      Escape        enter-mode normal
+# In prefix mode: Ctrl+[ → normal
+riverctl map prefix  Control   bracketleft   enter-mode normal
+# In prefix2 mode: Escape → normal
+riverctl map prefix2 None      Escape        enter-mode normal
+# In prefix2 mode: Ctrl+[ → normal
+riverctl map prefix2 Control   bracketleft   enter-mode normal
+
 
 # —— Exit to TTY —— 
 riverctl map normal Control+Alt Delete exit
