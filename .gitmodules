@@ -14,3 +14,6 @@
 [submodule ".vim/pack/minpac/opt/minpac"]
 	path = .vim/pack/minpac/opt/minpac
 	url = https://github.com/k-takata/minpac
+[submodule ".config/tmux/tpm"]
+	path = .config/tmux/tpm
+	url = https://github.com/tmux-plugins/tpm
