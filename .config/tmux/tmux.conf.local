@@ -80,7 +80,6 @@ set -g @plugin 'xamut/tmux-weather'
 set -g @plugin 'maxrodrigo/tmux-nordvpn'
 set -g @plugin 'Morantron/tmux-fingers'
 
-run '~/.tmux/plugins/tpm/tpm'
 
 
 # for neovim
@@ -100,3 +99,4 @@ if-shell "test -f ~/.tmux/tmux-nordvpn/nordvpn.tmux" "run ~/.tmux/tmux-nordvpn/n
 ## other tmux
 
 #display-message -d 10000 "haha"
+run '~/.config/tmux/plugins/tpm/tpm'
