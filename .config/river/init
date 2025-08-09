@@ -129,13 +129,13 @@ riverctl map -release prefix None p   enter-mode normal
 
 
 # —— Swap Views ——
-riverctl map prefix None bracketright spawn 'riverctl enter-mode normal && riverctl swap next '
-riverctl map prefix None bracketleft  spawn 'riverctl enter-mode normal && riverctl swap previous '
+riverctl map prefix None Period spawn 'riverctl enter-mode normal && riverctl swap next '
+riverctl map prefix None Comma  spawn 'riverctl enter-mode normal && riverctl swap previous '
 
 
 # —— Send Window to Other Output —— 
-riverctl map prefix None Period  spawn 'riverctl enter-mode normal && riverctl send-to-output next && riverctl focus-output next '
-riverctl map prefix None Comma spawn 'riverctl enter-mode normal && riverctl send-to-output previous && riverctl focus-output previous '
+riverctl map prefix None bracketright  spawn 'riverctl enter-mode normal && riverctl send-to-output next && riverctl focus-output next '
+riverctl map prefix None bracketleft spawn 'riverctl enter-mode normal && riverctl send-to-output previous && riverctl focus-output previous '
 
 # —— Window Movement (Floating) —— 
 #riverctl map prefix None y spawn 'riverctl enter-mode normal && riverctl move left 50 '
