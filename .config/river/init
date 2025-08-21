@@ -245,7 +245,7 @@ for mode in normal locked; do
   riverctl map "$mode" None XF86AudioPrev         spawn '~/.config/river/scripts/media_prev.sh'
 done
 
-riverctl map prefix2 None e spawn 'emacsclient -c'
+riverctl map prefix2 None e spawn 'riverctl enter-mode normal && emacsclient -c'
 
 
 
