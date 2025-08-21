@@ -5,8 +5,7 @@
 # Includes every mapping from your original config, but grouped logically.
 
 # ─── A) Keyboard Layout & Environment Variables ─────────────────────────────────
-riverctl keyboard-layout -options "ctrl:nocaps" us
-#-variant mac \
+riverctl keyboard-layout -options "ctrl:nocaps" us #-variant mac \
 
 
 export GTK_THEME=Arc-Dark
