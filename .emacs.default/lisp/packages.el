@@ -27,7 +27,7 @@
 ;; Bind in both REPL and source buffers
 
 
-;; 1) Your space handler
+;; 1 Your space handler
 (defun my/geiser-space-insert ()
   "If Corfu is showing, quit it; then insert a space unconditionally."
   (interactive)
@@ -37,7 +37,7 @@
     (corfu-quit))
   (self-insert-command 1))
 
-;; 2) Bind SPC in Evil’s insert state for Geiser & Scheme
+;; 2 Bind SPC in Evil’s insert state for Geiser & Scheme
 (dolist (map '(geiser-mode-map
                geiser-repl-mode-map
                scheme-mode-map))
@@ -336,8 +336,8 @@
 
   :bind
   (:map corfu-map
-        ;;("<return>" . corfu-send)
-        ;;("RET" . corfu-send)
+        ("<return>" . corfu-send)
+        ("RET" . corfu-send)
         ("TAB"       . corfu-next)
         ("<tab>"     . corfu-next)
         ("S-TAB"     . corfu-previous)
