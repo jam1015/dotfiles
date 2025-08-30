@@ -7,6 +7,7 @@ if not status_ok and vim.g.debug then
 end
 
 M.global_keymaps = function()
+
   local opts = { noremap = true, silent = false }
 
   -- Global keymaps using which-key
@@ -69,6 +70,7 @@ local function local_keymaps(bufnr)
       },
     }, { mode = "n", buffer = bufnr, silent = false })
   else
+
     -- Fallback if which-key is not available
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)

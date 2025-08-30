@@ -3,8 +3,9 @@
 
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 
+
 if not lspconfig_status_ok then
-  vim.cmd([[colorscheme blue]])
+  vim.cmd([[colorscheme delek]])
   vim.notify("failed to load lspconfig", vim.log.levels.DEBUG)
   return
 end

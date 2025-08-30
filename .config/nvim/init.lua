@@ -34,22 +34,27 @@ elseif type == "debug" then
   vim.opt.rtp:prepend(lazypath)
   require("lazy").setup({
     spec = {
+
       {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        opts = { delay = 0 },
-        --config = function() require("plugin_configs.which-key") end
-      },
-      {
-        "kylechui/nvim-surround",
-        --dir = "~/nvim-surround",
-        --version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
-        --event = "VeryLazy",
-        config = function()
-          require("nvim-surround").setup({
-            -- Configuration here, or leave empty to use defaults
-          })
-        end
+        "jam1015/vim-slime",
+--        event = "VeryLazy",
+        init = function()
+          require("plugin_configs.vim-slime.initi")
+
+          vim.g.slime_target = "neovim"
+          vim.g.slime_no_mappings = true
+          vim.g.slime_input_pid = true
+          vim.g.slime_suggest_default = true
+          vim.g.slime_bracketed_paste = true
+          vim.g.slime_menu_config = true
+        end,
+
+        keys = {
+          { "<leader>is", "<Plug>SlimeRegionSend", mode = "x", desc = "Send Selection" },
+          { "<leader>it", "<Plug>SlimeMotionSend", mode = "n", desc = "Send Text Object" },
+          { "<leader>il", "<Plug>SlimeLineSend",   mode = "n", desc = "Send Line" },
+          { "<leader>ic", "<Plug>SlimeConfig",     mode = "n", desc = "Slime Config" },
+        },
       },
     },
   })

@@ -2,7 +2,6 @@ require("plugin_keymaps").vim_slime()
   vim.cmd([[
   ]])
 
-if vim.g.slime_target == "neovim" then
   vim.cmd([[
 
 " delegation
@@ -94,4 +93,3 @@ function! SlimeOverrideConfig()
 
 endfunction
   ]])
-end

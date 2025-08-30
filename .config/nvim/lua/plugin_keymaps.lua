@@ -486,6 +486,7 @@ function M.telescope()
     { "<leader>ts", function() builtin.grep_string({}) end,                mode = "n", desc = "Grep string" },
     { "<leader>tg", builtin.live_grep,                                     mode = "n", desc = "Live grep" },
     { "<leader>tb", builtin.buffers,                                       mode = "n", desc = "Buffers" },
+    { "<leader>tq", builtin.quickfix,                                       mode = "n", desc = "Buffers" },
   }, { silent = true })
 
   -- Visual mode bindings using new format

@@ -177,7 +177,7 @@ riverctl map prefix Shift g spawn 'riverctl enter-mode normal && riverctl send-l
 riverctl map prefix None + spawn 'riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-count +1" '
 riverctl map prefix None - spawn 'riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-count -1" '
 
-# —— Tag (Workspace) Management —— 
+# —— Tag (Workspace) Management change all tags —— 
 riverctl map prefix None 1 spawn 'riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 1 '
 riverctl map prefix None 2 spawn 'riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 2 '
 riverctl map prefix None 3 spawn 'riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 4 '
@@ -191,7 +191,7 @@ riverctl map prefix None 0 spawn 'riverctl enter-mode normal && ~/.config/river/
 
 
 
-# —— Tag (Workspace) Management —— just this window
+# —— Tag (Workspace) Management —— just this output
 riverctl map prefix2 None 1 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 1 '
 riverctl map prefix2 None 2 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 2 '
 riverctl map prefix2 None 3 spawn 'riverctl enter-mode normal && riverctl set-focused-tags 4 '
