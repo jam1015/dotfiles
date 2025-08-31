@@ -5,6 +5,7 @@
 (require 'packages)
 (require 'mappings)
 (require 'settings)
+(require 'eshell-config)
 
 ;;;;(defgroup A-custom-group nil
 ;;;;  "A custom group for my configuration."
