@@ -63,8 +63,8 @@ Restores the previous directory *only* when the buffer is brand‑new (i.e.
 point-min = point-max), so reopening an existing Eshell buffer doesn’t yank
 you elsewhere." 
   ;; Only restore for fresh Eshell buffers.
-  (when (= (point-min) (point-max))
-    (eshell-config-restore-pwd))
+  ;;(when (= (point-min) (point-max))
+  ;;  (eshell-config-restore-pwd))
   ;; Record dir only when it changes.
   (add-hook 'eshell-directory-change-hook #'eshell-config-write-pwd nil t)
   ;; Add aliases.

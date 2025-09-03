@@ -146,7 +146,10 @@
 
 (use-package undo-tree
   :init
-  (global-undo-tree-mode 1))
+  (global-undo-tree-mode 1)
+  :config
+  (global-undo-tree-mode)
+  )
 ;; in your init.el or config.el
 (use-package anzu
   :config
@@ -263,7 +266,7 @@
                   (evil-god-toggle-execute-in-god-state)))
 
 
-  (evil-define-key '(god god-off) evil-god-toggle-mode-map
+  (evil-define-key '(god god-off god-once) evil-god-toggle-mode-map
     [escape] (lambda () (interactive) (evil-god-toggle-stop-choose-state 'normal)))
 
   (evil-define-key '( god-off) evil-god-toggle-mode-map
@@ -272,9 +275,8 @@
   (evil-define-key '(god) evil-god-toggle-mode-map
     (kbd "C-;") (lambda () (interactive) (evil-god-toggle-execute-in-god-off-state)))
 
-  (evil-define-key '(normal insert)
-    evil-god-toggle-mode-map
-    (kbd "C-,") #'evil-god-toggle-once)
+  (evil-define-key '(normal insert) evil-god-toggle-mode-map
+    (kbd "C-,") (lambda () (interactive) (evil-god-toggle-execute-in-god-once-state)))
 
   ;; 4) Your visual‑persistence and global flag settings
   (setq evil-god-toggle-persist-visual 'always
