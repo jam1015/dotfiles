@@ -309,6 +309,7 @@ return
 
     {
       "PaterJason/cmp-conjure",
+      enabled = false,
       lazy = true,
       config = function()
         local cmp = require("cmp")
@@ -824,6 +825,7 @@ return
 
     {
       "Olical/conjure",
+      enabled = false,
       ft = { "clojure", "fennel", "scm" }, -- etc
       event = "VeryLazy",
       init = function()
