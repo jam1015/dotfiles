@@ -13,7 +13,7 @@
       (load-theme 'anisochromatic t)
      (setq cursor-in-non-selected-windows nil)
 
-;;(set-frame-font "InputMonoNerdFont-13" t t)
+(set-frame-font "InputMonoNerdFont-10" t t)
 ;;(setq completion-in-region-function #'consult-completion-in-region)
 
 ;; which key ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
