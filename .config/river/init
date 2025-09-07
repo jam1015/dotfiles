@@ -158,7 +158,7 @@ riverctl map prefix None f spawn 'riverctl enter-mode normal && riverctl toggle-
 # lowercase d → drun
 riverctl map prefix None d spawn ~/.config/river/scripts/launch_wofi_drun.sh
 # lowercase d → run
-riverctl map prefix2 None d spawn ~/.config/river/scripts/launch_wofi_run.sh
+riverctl map prefix2 None d spawn ~/.config/river/scripts/launch_zsh_runner.sh
 
 # Shift +d → window
 riverctl map prefix Shift d spawn ~/.config/river/scripts/launch_wofi_window.sh

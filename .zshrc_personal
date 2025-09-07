@@ -190,6 +190,19 @@ else
   echo "zoxide is not installed, falling back to standard cd"
 fi
 
+if [[ $ZSH_LAUNCHER = 1 ]]; then
+  # Override command execution to always detach
+  alias -g '##LAUNCHER##'='</dev/null >/dev/null 2>&1 &!'
+  
+  accept-line() {
+    [[ -n "$BUFFER" ]] && BUFFER="nohup $BUFFER ##LAUNCHER##"
+    zle .accept-line
+    sleep 0.1  # Give time for process to start
+    exit
+  }
+  zle -N accept-line
+fi
+
 setopt completealiases
 
 export GPG_TTY=$(tty)
