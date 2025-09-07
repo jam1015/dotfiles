@@ -1,4 +1,5 @@
 #!/bin/bash
+riverctl enter-mode normal
 # Kill any existing launcher instances
 pkill -f "ZSH_LAUNCHER=1" 2>/dev/null
 

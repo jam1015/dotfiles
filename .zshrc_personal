@@ -191,16 +191,24 @@ else
 fi
 
 if [[ $ZSH_LAUNCHER = 1 ]]; then
-  # Override command execution to always detach
-  alias -g '##LAUNCHER##'='</dev/null >/dev/null 2>&1 &!'
+  PROMPT='%F{cyan}run>%f '
   
-  accept-line() {
-    [[ -n "$BUFFER" ]] && BUFFER="nohup $BUFFER ##LAUNCHER##"
-    zle .accept-line
-    sleep 0.1  # Give time for process to start
-    exit
+  # Define the custom accept-line
+  _launcher_accept_line() {
+    if [[ -n "$BUFFER" ]]; then
+      # Launch detached
+      (eval "$BUFFER" </dev/null >/dev/null 2>&1 &) &
+      disown
+      # Exit the shell
+      exit 0
+    fi
   }
-  zle -N accept-line
+  
+  # Force the binding after everything else loads
+  zle -N accept-line _launcher_accept_line
+  
+  # Also bind Enter key explicitly
+  bindkey '^M' accept-line
 fi
 
 setopt completealiases
