@@ -156,10 +156,10 @@ export PATH=$PATH:"$HOME/.local/bin"
 #    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
 #    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME'
-export MANPAGER="nvim -c 'set ft=man' -"
+export MANPAGER='nvim --clean -c Man! -u ~/.man_nvimrc'
 
 
-
+# Add this ONE line to your original .bashrc
 
 PROMPT_COMMAND='PWD=$(pwd)'
 
