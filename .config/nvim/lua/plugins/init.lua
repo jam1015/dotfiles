@@ -253,8 +253,8 @@ return
     {
       'jam1015/nvim-smart-termsplit',
       config = function()
-        require('nvim-smart-termsplit').setup()
-        require('plugin_configs.nvim_smart_termsplit')
+        require('plugin_configs.nvim-smart-termsplit')
+        require('plugin_keymaps').nvim_smart_termsplit()
       end
     },
     {

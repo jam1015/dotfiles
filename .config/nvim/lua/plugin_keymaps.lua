@@ -299,9 +299,15 @@ function M.nvim_smart_termsplit()
   local wk = require("which-key")
   local termsplit = require('nvim-smart-termsplit')
   wk.add({
-    { "<C-w>s", termsplit.term_hsplit, desc = "Split Term Horizontally" },
-    { "<C-w>v", termsplit.term_vsplit, desc = "Split Term Vertically" },
+    { "<C-w>s", termsplit.term_hsplit, desc = "New Term Horizontally" },
+    { "<C-w>v", termsplit.term_vsplit, desc = "New Term Vertically" },
+    { "<C-w>t", termsplit.term_tabnew, desc = "New Term In new tab" },
   }, { mode = "n", silent = true })
+
+  wk.add({
+    { "<C-w><S-s>", "<C-w>s", desc = "Split Term Horizontally" },
+    { "<C-w><S-v>", "<C-w>v", desc = "Split Term Vertically" },
+  }, { mode = "n", silent = true, remap = false })
 end
 
 function M.nvim_tree()
