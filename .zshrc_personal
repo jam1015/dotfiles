@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # Personal Zsh Configuration
 # This file is sourced after oh-my-zsh
-
+bindkey -v
 # ============================================================================
 # EARLY INITIALIZATION
 # ============================================================================
@@ -99,15 +99,14 @@ HISTFILE=~/.zhistory
 # ============================================================================
 
 # Use vi mode but with some emacs bindings
-bindkey -v
 KEYTIMEOUT=1  # Reduce mode switch delay
 
 # Useful emacs-style bindings even in vi mode
 bindkey '^R' history-incremental-pattern-search-backward
-bindkey '^A' beginning-of-line
-bindkey '^E' end-of-line
-bindkey '^K' kill-line
-bindkey '^W' backward-kill-word
+#bindkey '^A' beginning-of-line
+#bindkey '^E' end-of-line
+#bindkey '^K' kill-line
+#bindkey '^W' backward-kill-word
 
 # Remove some bindings
 bindkey -r '^[x' 2>/dev/null
@@ -252,7 +251,7 @@ precmd_setpwd() {
 }
 
 # Register precmd hooks
-precmd_functions=(
+precmd_functions+=(
     precmd_vcs_info
     precmd_save_cwd
     precmd_setpwd
