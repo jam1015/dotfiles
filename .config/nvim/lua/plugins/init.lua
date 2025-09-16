@@ -322,7 +322,7 @@ return
     {
       --"hrsh7th/nvim-cmp",
       "iguanacucumber/magazine.nvim",
-      event = "VeryLazy",
+      event = "InsertEnter",
       name = "nvim-cmp",
       cond = function() --also done vi autocmd in the cmp config
         return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")

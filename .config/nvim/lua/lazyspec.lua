@@ -33,4 +33,6 @@ change_detection = {
   },
   -- automatically check for plugin updates
   checker = { enabled = false },
+  lazy = true, -- should plugins be lazy-loaded?
+
 })
