@@ -64,6 +64,7 @@ ruby/bundle/cache
 *.kate-swp
 
 # Emacs
+.emacs.default/eshell-whereami
 .emacs.d/network-security.data
 .emacs.d/.org-id-locations
 .emacs.d/ac-comphist.dat
