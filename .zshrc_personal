@@ -127,7 +127,7 @@ fi
 # Emacs aliases
 if command -v emacs >/dev/null 2>&1; then
     alias vid='emacs --with-profile doom'
-    alias vie='emacs -nw'
+    alias vie='emacsclient -nw'
     alias ec='emacsclient -nc'
 fi
 
@@ -220,12 +220,12 @@ zle -N zle-line-finish
 
 # Prompt setup using zsh color codes
 # Load colors module
-#autoload -U colors && colors
+autoload -U colors && colors
 
 if [[ "$EUID" = 0 ]]; then
   PS1='%B%F{green}%M:su:%3~%f%b${vcs_info_msg_0_}%B%F{green}${vim_mode}%f%b '
 else
-  PS1='%{$MAGENTA%}%B%M:%3~%{$RESET_COLOR%}${vcs_info_msg_0_}%{$MAGENTA%}${vim_mode}%{$RESET_COLOR%}%b '
+  PS1='%F{magenta}%B%M:%3~%f%b${vcs_info_msg_0_}%F{magenta}${vim_mode}%f '
 fi
 
 # ============================================================================

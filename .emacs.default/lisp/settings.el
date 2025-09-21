@@ -26,10 +26,6 @@
   
   ;; Remember cursor positions across sessions
   (save-place-mode 1)
-  (add-hook 'elpaca-after-init-hook
-            (lambda ()
-              (load-theme 'anisochromatic t)
-              (set-frame-font "InputMonoNerdFont-10" t t)))
   )
 
 ;; Theme and Visual Setup
@@ -37,6 +33,10 @@
   :ensure nil
   :after elpaca
   :config
+  (add-hook 'elpaca-after-init-hook
+            (lambda ()
+              (load-theme 'anisochromatic t)
+              (set-frame-font "InputMonoNerdFont-10" t t)))
   )
 
 ;; Which-key Configuration (currently disabled)

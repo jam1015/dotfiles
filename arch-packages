@@ -72,6 +72,7 @@ botan2
 breeze
 breeze-gtk
 breeze-icons
+brightnessctl
 broadcom-wl-dkms
 brother-hll2300d
 brother-hll2350dw
@@ -98,6 +99,7 @@ cl-alexandria-git
 cl-clx
 cl-ppcre
 cl-unicode
+clang
 clang18
 clang19
 clinfo
@@ -111,6 +113,7 @@ cmark-gfm
 cockpit
 code
 cogl
+compiler-rt
 compiler-rt18
 compiler-rt19
 confuse
@@ -180,6 +183,7 @@ efitools
 efivar
 electron34
 electron35
+electron37
 elfutils
 ell
 emacs
@@ -393,6 +397,7 @@ haskell-byteorder
 haskell-call-stack
 haskell-case-insensitive
 haskell-cassava
+haskell-cborg
 haskell-cereal
 haskell-citeproc
 haskell-cmdargs
@@ -432,10 +437,12 @@ haskell-fast-logger
 haskell-file-embed
 haskell-foldable1-classes-compat
 haskell-generically
+haskell-generics-sop
 haskell-ghc-bignum-orphans
 haskell-glob
 haskell-gridtables
 haskell-haddock-library
+haskell-half
 haskell-hashable
 haskell-hourglass
 haskell-hslua
@@ -464,6 +471,7 @@ haskell-http2
 haskell-hunit
 haskell-indexed-traversable
 haskell-indexed-traversable-instances
+haskell-integer-conversion
 haskell-integer-logarithms
 haskell-iproute
 haskell-ipynb
@@ -481,6 +489,7 @@ haskell-monad-control
 haskell-mono-traversable
 haskell-network
 haskell-network-byte-order
+haskell-network-control
 haskell-network-uri
 haskell-old-locale
 haskell-old-time
@@ -497,6 +506,8 @@ haskell-pandoc-types
 haskell-pem
 haskell-pretty-show
 haskell-prettyprinter
+haskell-prettyprinter-ansi-terminal
+haskell-prettyprinter-compat-ansi-wl-pprint
 haskell-primitive
 haskell-psqueues
 haskell-quickcheck
@@ -510,6 +521,7 @@ haskell-safe-exceptions
 haskell-scientific
 haskell-semialign
 haskell-semigroupoids
+haskell-serialise
 haskell-servant
 haskell-servant-server
 haskell-sha
@@ -537,6 +549,7 @@ haskell-temporary
 haskell-texmath
 haskell-text-conversions
 haskell-text-icu
+haskell-text-iso8601
 haskell-text-short
 haskell-th-abstraction
 haskell-th-compat
@@ -874,6 +887,7 @@ libfontenc
 libfreeaptx
 libfreehand
 libfreexl
+libfyaml
 libgccjit
 libgcrypt
 libgeotiff
@@ -954,6 +968,7 @@ libnl
 libnm
 libnma
 libnma-common
+libnma-gtk4
 libnotify
 libnsl
 libnumbertext
@@ -1123,6 +1138,7 @@ linux-firmware-radeon
 linux-firmware-realtek
 linux-firmware-whence
 linux-headers
+lld
 lld18
 lld19
 llhttp
@@ -1200,6 +1216,8 @@ networkmanager
 networkmanager-openconnect
 networkmanager-openvpn
 networkmanager-qt
+networkmanager-vpn-plugin-openconnect
+networkmanager-vpn-plugin-openvpn
 nfs-utils
 nfsidmap
 nftables
@@ -1911,6 +1929,36 @@ vi
 vid.stab
 vim-runtime
 vlc
+vlc-cli
+vlc-gui-qt
+vlc-plugin-a52dec
+vlc-plugin-alsa
+vlc-plugin-archive
+vlc-plugin-dav1d
+vlc-plugin-dbus
+vlc-plugin-dbus-screensaver
+vlc-plugin-faad2
+vlc-plugin-flac
+vlc-plugin-gnutls
+vlc-plugin-inflate
+vlc-plugin-journal
+vlc-plugin-jpeg
+vlc-plugin-lua
+vlc-plugin-mpg123
+vlc-plugin-ogg
+vlc-plugin-opus
+vlc-plugin-png
+vlc-plugin-pulse
+vlc-plugin-shout
+vlc-plugin-speex
+vlc-plugin-tag
+vlc-plugin-theora
+vlc-plugin-twolame
+vlc-plugin-vorbis
+vlc-plugin-vpx
+vlc-plugin-xml
+vlc-plugins-base
+vlc-plugins-video-output
 vmaf
 volume_key
 vpnc
