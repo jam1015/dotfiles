@@ -26,19 +26,28 @@
   
   ;; Remember cursor positions across sessions
   (save-place-mode 1)
-  )
 
-;; Theme and Visual Setup
-(use-package emacs
-  :ensure nil
-  :after elpaca
-  :config
   (add-hook 'elpaca-after-init-hook
             (lambda ()
               (load-theme 'anisochromatic t)
               (set-frame-font "InputMonoNerdFont-10" t t)))
+
+
   )
 
+; ;;Theme and Visual Setup
+;(use-package emacs
+;  :ensure nil
+;  :demand t
+;  ;;:after elpaca
+;  :config
+;  )
+;
+
+;;  (add-hook 'elpaca-after-init-hook
+;;            (lambda ()
+;;              (load-theme 'anisochromatic t)
+;;              (set-frame-font "InputMonoNerdFont-10" t t)))
 ;; Which-key Configuration (currently disabled)
 ;; Uncomment to enable helpful keybinding hints
 ;; (use-package which-key
