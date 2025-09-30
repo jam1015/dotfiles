@@ -1,5 +1,8 @@
 ;; ;;in init.el, before any `require` calls:
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+;; Add lisp directory and all its subdirectories to load-path
+(let ((default-directory (expand-file-name "lisp" user-emacs-directory)))
+  (add-to-list 'load-path default-directory)
+  (normal-top-level-add-subdirs-to-load-path))
 
 (require 'hooks)
 (require 'packages)
