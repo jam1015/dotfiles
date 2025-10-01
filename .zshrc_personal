@@ -271,13 +271,16 @@ fi
 # ============================================================================
 
 if [[ $ZSH_LAUNCHER = 1 ]]; then
-    PROMPT="%F{cyan}${PROMPT}%f"
-    preexec() {
-        (eval "$1" &) &>/dev/null
-        exit
-    }
+  # Set cyan prompt for launcher mode
+  if [[ "$EUID" = 0 ]]; then
+    PS1='%B%F{cyan}%M:su:%3~%f%b${vcs_info_msg_0_}%B%F{cyan}${vim_mode}%f%b '
+  else
+    PS1='%F{cyan}%B%M:%3~%f%b${vcs_info_msg_0_}%F{cyan}${vim_mode}%f '
+  fi
+  preexec() { (eval "$1" &) &>/dev/null
+    exit
+  }
 fi
-
 
 
 dt() {
