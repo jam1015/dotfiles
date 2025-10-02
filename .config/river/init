@@ -247,6 +247,7 @@ for mode in normal locked; do
 done
 
 riverctl map prefix2 None e spawn 'riverctl enter-mode normal && emacsclient -c'
+riverctl map prefix2 None n spawn 'riverctl enter-mode normal && neovide'
 
 
 
