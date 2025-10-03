@@ -12,3 +12,4 @@
   )
 
 (provide 'consult-config)
+;;;end consult-config.el

@@ -6,3 +6,4 @@
   )
 (provide 'undo-tree-config)
 
+;;;end undo-tree-config.el

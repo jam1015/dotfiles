@@ -6,3 +6,4 @@
   (setq god-mode-enable-function-key-translation nil)
   (define-key god-local-mode-map (kbd ".") #'repeat))
 (provide 'god-mode-config)
+;;;end god-mode-config.el

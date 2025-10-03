@@ -1,5 +1,6 @@
 (use-package dashboard
   :if (< (length command-line-args) 2)
+  :disabled t
   :init
   (require 'cl-lib)
   :config
@@ -9,3 +10,4 @@
   (dashboard-setup-startup-hook))
 
 (provide 'dashboard-config)
+;;;end dashboard-config.el

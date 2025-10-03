@@ -14,3 +14,4 @@
 )
 
 (provide 'cursor-contraster-config)
+;;;end cursor-contraster-config.el

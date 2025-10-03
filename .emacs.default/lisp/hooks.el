@@ -1,9 +1,15 @@
 (require 'cl-lib)  ;; For using 'cl-intersection'
 
-(defun eshell/ff (&rest files)
-  "In Eshell, open each FILE in the current Emacs frame."
-  (dolist (f files)
-    (find-file (expand-file-name f))))
+
 ;; Usage in Eshell:  ff foo.txt bar.org
 
+(add-hook 'emacs-startup-hook (lambda ()
+                                 (when (not (cdr command-line-args))
+                                   (eshell 'new))))
+
+(add-hook 'server-after-make-frame-hook (lambda ()
+                                 (when (not (cdr command-line-args))
+                                   (eshell 'new))))
+
 (provide 'hooks)
+;;;end hooks.el

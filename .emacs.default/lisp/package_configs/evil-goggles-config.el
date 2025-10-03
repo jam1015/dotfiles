@@ -9,3 +9,4 @@
   ;; other faces such as `diff-added` will be used for other actions
   (evil-goggles-use-diff-faces))
 (provide 'evil-goggles-config)
+;;;end evil-goggles-config.el

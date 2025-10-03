@@ -16,3 +16,4 @@
 )
 
 (provide 'elisp-lint-config)
+;;;end elisp-lint-config.el

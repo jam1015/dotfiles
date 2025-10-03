@@ -10,3 +10,4 @@
           (emacs-lisp-mode . flycheck-mode))
   )
 (provide 'flycheck-config)
+;;;end flycheck-config.el

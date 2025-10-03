@@ -42,3 +42,4 @@
         evil-god-toggle-global t))
 
 (provide 'evil-god-toggle-config)
+;;;end evil-god-toggle-config.el

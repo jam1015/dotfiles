@@ -105,3 +105,4 @@
 )
 
 (provide 'corfu-config)
+;;;end corfu-config.el

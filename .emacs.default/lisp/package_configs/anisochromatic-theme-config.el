@@ -3,3 +3,4 @@
   :ensure (:host github :repo "isomatter-labs/anisochromatic-emacs" )
   )
 (provide 'anisochromatic-theme-config)
+;;;end anisochromatic-theme-config.el

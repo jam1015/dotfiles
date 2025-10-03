@@ -3,3 +3,4 @@
 
 (provide 'sly-quicklisp-config)
 
+;;;end sly-quicklisp-config.el

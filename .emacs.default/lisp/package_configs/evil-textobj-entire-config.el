@@ -7,3 +7,4 @@
 	    )
 
 (provide 'evil-textobj-entire-config)
+;;;end evil-textobj-entire-config.el

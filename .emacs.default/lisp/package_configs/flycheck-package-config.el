@@ -4,3 +4,4 @@
   (flycheck-package-setup)
   )
 (provide 'flycheck-package-config)
+;;;end flycheck-package-config.el

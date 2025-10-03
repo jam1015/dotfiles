@@ -9,3 +9,4 @@
               :around #'cape-wrap-noninterruptible))
 
 (provide 'cape-config)
+;;;end cape-config.el

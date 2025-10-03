@@ -5,3 +5,4 @@
   (completion-category-defaults nil)
   (completion-category-overrides '((file ( styles partial-completion)))))
 (provide 'orderless-config)
+;;;end orderless-config.el

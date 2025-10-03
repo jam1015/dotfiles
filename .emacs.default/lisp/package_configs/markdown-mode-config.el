@@ -4,3 +4,4 @@
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
 (provide 'markdown-mode-config)
+;;;end markdown-mode-config.el

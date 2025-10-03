@@ -60,3 +60,4 @@
 
 
 (provide 'evil-config)
+;;;end evil-config.el

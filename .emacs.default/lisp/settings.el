@@ -2,6 +2,9 @@
 (use-package emacs
   :ensure nil
   :demand t
+  :init
+
+   (set-frame-font "InputMonoNerdFont-10" t t)
   :custom
   ;; Startup and UI
   (inhibit-startup-screen t)
@@ -30,11 +33,12 @@
   (add-hook 'elpaca-after-init-hook
             (lambda ()
               (load-theme 'anisochromatic t)
-              (set-frame-font "InputMonoNerdFont-10" t t)))
+              ))
 
+(set-frame-font "InputMonoNerdFont-10" t t)
 
   )
-
+(set-frame-font "InputMonoNerdFont-10" t t)
 ; ;;Theme and Visual Setup
 ;(use-package emacs
 ;  :ensure nil
@@ -73,3 +77,4 @@
 ;;   (which-key-mode 1))
 
 (provide 'settings)
+;;;end settings.el

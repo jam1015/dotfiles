@@ -8,3 +8,4 @@
 (add-hook 'embark-collect-mode-hook #'consult-preview-at-point)
   )
 (provide 'embark-consult-config)
+;;;end embark-consult-config.el

@@ -4,3 +4,4 @@
   (marginalia-mode))
 
 (provide 'marginalia-config)
+;;;end marginalia-config.el

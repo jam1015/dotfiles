@@ -18,3 +18,4 @@
 
   )
 (provide 'dirvish-config)
+;;;end dirvish-config.el

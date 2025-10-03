@@ -13,3 +13,4 @@
         gnus-use-cache t))
 
 (provide 'gnus-config)
+;;;end gnus-config.el

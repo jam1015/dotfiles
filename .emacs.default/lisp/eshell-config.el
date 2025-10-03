@@ -50,15 +50,21 @@
 
 (defun eshell-config-define-aliases ()
   "Define common convenience aliases in the current Eshell buffer."
-  (dolist (pair '(("ff" . "find-file $1")
+  (dolist (pair '(
+		              ("ff" . "find-file $1")
                   ("vi" . "find-file $1")
                   ("ll" . "ls -la $*")
                   ("la" . "ls -a $*")))
     (eshell/alias (car pair) (cdr pair))))
 
+;;(defun eshell/ff (&rest files)
+;;  "In Eshell, open each FILE in the current Emacs frame."
+;;  (dolist (f files)
+;;    (find-file (expand-file-name f))))
+;;(defalias 'eshell/vi 'eshell/ff)
+
 (defun eshell-config-initialize ()
   "Set up Eshell conveniences in the current buffer.
-
 Restores the previous directory *only* when the buffer is brand‑new (i.e.
 point-min = point-max), so reopening an existing Eshell buffer doesn’t yank
 you elsewhere." 
@@ -75,3 +81,4 @@ you elsewhere."
 (provide 'eshell-config)
 ;;; eshell-config.el ends here
 
+;;;end eshell-config.el

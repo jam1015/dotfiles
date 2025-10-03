@@ -49,3 +49,4 @@
 (straight-use-package 'use-package)
 (provide 'straight-setup)
 
+;;;end straight-setup.el

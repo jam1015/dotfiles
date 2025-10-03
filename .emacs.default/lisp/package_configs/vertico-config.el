@@ -20,3 +20,4 @@
         ("M-TAB"     . minibuffer-complete)))
 
 (provide 'vertico-config)
+;;;end vertico-config.el

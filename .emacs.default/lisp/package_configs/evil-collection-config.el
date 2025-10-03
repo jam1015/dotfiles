@@ -6,3 +6,4 @@
   (evil-collection-init)
   )
 (provide 'evil-collection-config)
+;;;end evil-collection-config.el

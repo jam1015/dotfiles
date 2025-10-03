@@ -8,3 +8,4 @@
   (wgrep-auto-save-buffer t))
 
 (provide 'wgrep-config)
+;;;end wgrep-config.el
