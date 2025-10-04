@@ -16,8 +16,6 @@
 
   :bind
   (:map corfu-map
-        ("<return>" . corfu-send)
-        ("RET" . corfu-send)
         ("TAB"       . corfu-next)
         ("<tab>"     . corfu-next)
         ("S-TAB"     . corfu-previous)
@@ -26,6 +24,29 @@
 	)
 
   :config
+  (corfu-history-mode)
+  (corfu-popupinfo-mode)
+
+ ;; Custom RET handling for Evil ex-commands
+  (defun my/evil-ex-corfu-send-and-execute ()
+    "In Evil ex minibuffer, accept Corfu completion and execute."
+    (interactive)
+    (if (and (minibufferp)
+             (string-match-p "^:" (or (minibuffer-prompt) "")))
+        (progn
+          ;; Accept the completion
+          (when (>= corfu--index 0)
+            (corfu-insert))
+          ;; Then execute the command
+          (exit-minibuffer))
+      ;; If not in Evil ex minibuffer, fall back to normal corfu-send
+      (corfu-send)))
+
+  ;; Apply the custom RET binding AFTER everything else
+  (define-key corfu-map (kbd "RET") #'my/evil-ex-corfu-send-and-execute)
+  (define-key corfu-map (kbd "<return>") #'my/evil-ex-corfu-send-and-execute)
+
+
 ;; ─── Debug Corfu popup ─────────────────────────────────────────────────
 (advice-add 'corfu--show :before (lambda (&rest _) (message "⟫ Corfu popup SHOW")))
 (advice-add 'corfu--hide :before (lambda (&rest _) (message "⟪ Corfu popup HIDE")))
@@ -59,7 +80,6 @@
 (add-hook 'minibuffer-setup-hook
           (lambda () (local-set-key (kbd "C-c RET") #'my/debug-ret-key)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defgroup my/corfu-strip nil
   "Strip trailing slash from real-directory completions in Corfu."

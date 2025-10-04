@@ -28,7 +28,6 @@
 (require 'dabbrev-config)
 (require 'vertico-config)
 (require 'corfu-config)
-(require 'corfu-history-config)
 (require 'corfu-terminal-config)
 
 ;;; lisp
