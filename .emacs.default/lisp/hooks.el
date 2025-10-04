@@ -5,11 +5,17 @@
 
 (add-hook 'emacs-startup-hook (lambda ()
                                  (when (not (cdr command-line-args))
-                                   (eshell 'new))))
+                                   (eshell))))
 
 (add-hook 'server-after-make-frame-hook (lambda ()
                                  (when (not (cdr command-line-args))
-                                   (eshell 'new))))
+                                   (eshell))))
+
+
+
+
+
+
 
 (provide 'hooks)
 ;;;end hooks.el

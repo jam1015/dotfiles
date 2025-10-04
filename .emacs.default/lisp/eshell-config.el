@@ -31,22 +31,31 @@
 
 (defun eshell-config-write-pwd ()
   "Persist `default-directory` to `eshell-config-whereami-file`. Buffer‑local."
+  (message "Writing pwd: %s" default-directory)  ;; DEBUG
   (eshell-config--ensure-whereami-dir)
   (with-temp-file eshell-config-whereami-file
     (insert (expand-file-name default-directory))))
 
 (defun eshell-config-restore-pwd ()
-  "Jump to the directory recorded in `eshell-config-whereami-file`, if valid." 
-  (when (file-readable-p eshell-config-whereami-file)
-    (let ((saved (string-trim (with-temp-buffer
-                                (insert-file-contents eshell-config-whereami-file)
-                                (buffer-string)))))
-      (when (and (file-directory-p saved)
-                 (not (string-equal (expand-file-name saved)
-                                     (expand-file-name default-directory))))
-        (condition-case nil
-            (eshell/cd saved)
-          (error (message "eshell-config: Saved directory %s no longer accessible" saved)))))))
+  "Jump to the directory recorded in the most recent eshell-whereami file." 
+  (let ((whereami-file (or (and (file-readable-p eshell-config-whereami-file)
+                                eshell-config-whereami-file)
+                           (eshell-config--find-most-recent-whereami))))
+    (when (and whereami-file (file-readable-p whereami-file))
+      (let ((saved (string-trim (with-temp-buffer
+                                  (insert-file-contents whereami-file)
+                                  (buffer-string)))))
+        (when (and (not (string-empty-p saved))
+                   (file-directory-p saved)
+                   (not (string-equal (expand-file-name saved)
+                                       (expand-file-name default-directory))))
+          (condition-case err
+              (progn
+                (cd saved)
+                (eshell/cd saved)
+                (message "Restored eshell to: %s" saved))
+            (error (message "eshell-config: Could not restore to %s: %s" 
+                           saved (error-message-string err)))))))))
 
 (defun eshell-config-define-aliases ()
   "Define common convenience aliases in the current Eshell buffer."
@@ -63,16 +72,26 @@
 ;;    (find-file (expand-file-name f))))
 ;;(defalias 'eshell/vi 'eshell/ff)
 
+(defvar eshell-config--initialized-buffers nil
+  "List of eshell buffers that have been initialized.")
+
+(defun eshell-config--cleanup-buffer-list ()
+  "Remove current buffer from initialized list when killed."
+  (setq eshell-config--initialized-buffers
+        (delq (current-buffer) eshell-config--initialized-buffers)))
+
 (defun eshell-config-initialize ()
-  "Set up Eshell conveniences in the current buffer.
-Restores the previous directory *only* when the buffer is brand‑new (i.e.
-point-min = point-max), so reopening an existing Eshell buffer doesn’t yank
-you elsewhere." 
-  ;; Only restore for fresh Eshell buffers.
-  ;;(when (= (point-min) (point-max))
-  ;;  (eshell-config-restore-pwd))
-  ;; Record dir only when it changes.
-  (add-hook 'eshell-directory-change-hook #'eshell-config-write-pwd nil t)
+  "Set up Eshell conveniences in the current buffer."
+  (message "eshell-config-initialize called, buffer: %s" (current-buffer))
+  (message "Already initialized buffers: %s" eshell-config--initialized-buffers)
+  ;; Only restore if this buffer hasn't been initialized yet
+  (unless (memq (current-buffer) eshell-config--initialized-buffers)
+    (message "This is a new buffer, attempting restore...")
+    (push (current-buffer) eshell-config--initialized-buffers)
+    (eshell-config-restore-pwd)
+    (add-hook 'kill-buffer-hook #'eshell-config--cleanup-buffer-list nil t))
+  ;; Record dir after every command
+  (add-hook 'eshell-post-command-hook #'eshell-config-write-pwd nil t)
   ;; Add aliases.
   (eshell-config-define-aliases))
 
