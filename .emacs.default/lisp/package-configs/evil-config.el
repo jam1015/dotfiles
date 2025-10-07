@@ -84,29 +84,8 @@ Works with Elisp, Common Lisp (Sly), and Scheme (Geiser)."
      
      ((eq major-mode 'lisp-mode)
       (error "No Lisp REPL connected. Start Sly first"))
-     
      (t
       (error "Not in a Lisp mode")))))
-
-(dolist (config '((elisp-mode  emacs-lisp-mode-map)
-                  (lisp-mode   lisp-mode-map)
-                  (scheme      scheme-mode-map)
-                  (geiser-mode geiser-mode-map)))
-  (with-eval-after-load (car config)
-    (evil-define-key 'visual (symbol-value (cadr config)) "gz" #'my/eval-lisp-region)))
-
-
-
-
-
-  )
-
-
-
-
-
-
-
-
+)
 (provide 'evil-config)
 ;;;end evil-config.el

@@ -1,5 +1,5 @@
 (use-package geiser-mit
- :after corfu
+ :after ( corfu evil)
   :config
   (dolist (hook '(geiser-repl-mode-hook
                   geiser-mode-hook    ; for Scheme source buffers
@@ -29,6 +29,9 @@
       ;; must unwrap the symbol to the actual keymap variable
       (symbol-value map)
       (kbd "SPC") #'my/geiser-space-insert)))
+(with-eval-after-load 'evil
+    (evil-define-key 'visual scheme-mode-map "gz" #'my/eval-lisp-region)
+    (evil-define-key 'visual geiser-mode-map "gz" #'my/eval-lisp-region))
   )
 (provide 'geiser-mit-config)
 ;;;end geiser-mit-config.el
