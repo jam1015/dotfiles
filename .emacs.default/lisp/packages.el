@@ -2,16 +2,16 @@
 ;;(load-relative "straight_setup.el")
 
 ;;; evil
-(require 'evil-leader-config)
 (require 'evil-config)
+(require 'evil-god-toggle-config)
 (require 'evil-anzu-config)
 (require 'anzu-config)
-(require 'evil-god-toggle-config)
 (require 'evil-goggles-config)
 (require 'evil-collection-config)
 (require 'cursor-contraster-config)
 (require 'god-mode-config)
 (require 'evil-textobj-entire-config)
+(require 'evil-leader-config)
 
 ;;; elisp
 (require 'flycheck-config)

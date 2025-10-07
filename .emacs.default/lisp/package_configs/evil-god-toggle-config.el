@@ -10,7 +10,14 @@
   (evil-god-toggle-mode 1)
 
   ;; 2) Enter persistent god mode from Normal/Insert/God-off states with C-;
-  (evil-define-key '(normal insert god-off)
+  (evil-define-key '(normal insert )
+    evil-god-toggle-mode-map
+    (kbd "C-;") (lambda ()
+                  (interactive)
+                  (evil-god-toggle-execute-in-god-state t)))
+
+
+  (evil-define-key '(god-off)
     evil-god-toggle-mode-map
     (kbd "C-;") (lambda ()
                   (interactive)
@@ -35,11 +42,10 @@
     evil-god-toggle-mode-map
     (kbd "C-,") (lambda ()
                   (interactive)
-                  (evil-god-toggle-once)))
+                  (evil-god-toggle-once t)))
 
   ;; 6) Visual persistence and global flag settings
-  (setq evil-god-toggle-persist-visual 'always
-        evil-god-toggle-global t))
+  (setq evil-god-toggle-persist-visual 'always))
 
 (provide 'evil-god-toggle-config)
 ;;;end evil-god-toggle-config.el

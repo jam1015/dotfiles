@@ -8,7 +8,7 @@
   (corfu-count 25)
   (corfu-cycle t)                      ;; wrap at ends
   (corfu-auto t)                       ;; popup as you type
-  (corfu-auto-delay 0.2)
+  (corfu-auto-delay 0.1)
   (corfu-auto-prefix 2)                ;; start completing after 1 char
   (corfu-preselect 'prompt)
   (corfu-quit-at-boundary 'separator)  ;; stay open on "/" boundary
