@@ -17,7 +17,7 @@
                   (evil-god-toggle-execute-in-god-state t)))
 
 
-  (evil-define-key '(god-off)
+  (evil-define-key '(god-off visual)
     evil-god-toggle-mode-map
     (kbd "C-;") (lambda ()
                   (interactive)

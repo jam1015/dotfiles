@@ -50,42 +50,7 @@
   (evil-ex-define-cmd "ConsultFind" #'consult-find)
   (evil-ex-define-cmd "Mx" #'execute-extended-command)
 
-(defun my/eval-lisp-region ()
-  "Evaluate the selected region based on the current Lisp mode.
-Works with Elisp, Common Lisp (Sly), and Scheme (Geiser)."
-  (interactive)
-  (unless (region-active-p)
-    (error "No region selected"))
-  (let ((start (region-beginning))
-        (end (region-end)))
-    ;; Pulse the region for visual feedback
-    (pulse-momentary-highlight-region start end)
-    
-    (cond
-     ;; [rest of the function as above]
-     ((or (eq major-mode 'emacs-lisp-mode)
-          (eq major-mode 'lisp-interaction-mode))
-      (eval-region start end)
-      (message "Evaluated Elisp region"))
-     
-     ((and (eq major-mode 'lisp-mode)
-           (fboundp 'sly-connected-p)
-           (sly-connected-p))
-      (sly-eval-region start end)
-      (message "Evaluated Common Lisp region (Sly)"))
-     
-     ((or (eq major-mode 'scheme-mode)
-          (eq major-mode 'geiser-mode))
-      (if (fboundp 'geiser-eval-region)
-          (progn
-            (geiser-eval-region start end)
-            (message "Evaluated Scheme region (Geiser)"))
-        (error "Geiser not available")))
-     
-     ((eq major-mode 'lisp-mode)
-      (error "No Lisp REPL connected. Start Sly first"))
-     (t
-      (error "Not in a Lisp mode")))))
+
 )
 (provide 'evil-config)
 ;;;end evil-config.el
