@@ -56,6 +56,7 @@ export DOOMDIR='~/.doomemacs-config'
 # Quick access paths
 export vimrc="$HOME/dotfiles/.config/nvim/init.lua"
 export zshrc="$HOME/dotfiles/.zshrc_personal"
+export emacsc="$HOME/.emacs.default/init.el"
 
 # Git configuration
 export GCM_CREDENTIAL_STORE="cache"
