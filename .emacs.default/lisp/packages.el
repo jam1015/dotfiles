@@ -43,8 +43,10 @@
 (require 'wgrep-config)
 
 ;;; themes
+(require 'treesit-auto-config)
 (require 'anisochromatic-theme-config)
 (require 'solarized-theme-config)
+(require 'doom-themes-config)
 
 
 ;;; utilities

@@ -32,13 +32,11 @@
 
   (add-hook 'elpaca-after-init-hook
             (lambda ()
-              (load-theme 'anisochromatic t)
+              (load-theme 'doom-tokyo-night t)
               ))
 
-(set-frame-font "InputMonoNerdFont-10" t t)
 
   )
-(set-frame-font "InputMonoNerdFont-10" t t)
 ; ;;Theme and Visual Setup
 ;(use-package emacs
 ;  :ensure nil

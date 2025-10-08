@@ -14,7 +14,8 @@
     evil-god-toggle-mode-map
     (kbd "C-;") (lambda ()
                   (interactive)
-                  (evil-god-toggle-execute-in-god-state t)))
+                  (evil-god-toggle-execute-in-god-state t
+                                                        )))
 
 
   (evil-define-key '(god-off visual)
@@ -44,6 +45,12 @@
                   (interactive)
                   (evil-god-toggle-once t)))
 
+
+  (evil-define-key 'visual
+    evil-god-toggle-mode-map
+    (kbd "C-,") (lambda ()
+                  (interactive)
+                  (evil-god-toggle-once )))
   ;; 6) Visual persistence and global flag settings
   (setq evil-god-toggle-persist-visual 'always))
 
