@@ -2082,6 +2082,8 @@ zlib
 zlib-ng
 zoxide
 zsh
+zsh-autosuggestions
+zsh-completions
 zstd
 zvbi
 zxing-cpp

@@ -296,8 +296,30 @@ dt() {
     # Optional: notify user
     echo "Detached: $1 (PID: $!)"
 }
-
 compdef _precommand dt
+
+# ============================================================================
+# ZSH COMPLETION CONFIGURATION
+# ============================================================================
+
+# Optional: Override config flags before sourcing
+# export ZSH_COMPLETION_VERBOSE_MISSING=false
+# export ZSH_ENABLE_AUTOSUGGESTIONS=true
+# export ZSH_ENABLE_SYNTAX_HIGHLIGHTING=true
+
+# Source completion configuration
+if [[ -f "$HOME/.config/zsh/completion.zsh" ]]; then
+    source "$HOME/.config/zsh/completion.zsh"
+else
+    echo "Warning: ~/.config/zsh/completion.zsh not found"
+fi
+
+source ~/.config/zsh/completion.zsh
+
+
+
+
+
 
 # ============================================================================
 # FINAL MESSAGE
