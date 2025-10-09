@@ -2084,6 +2084,7 @@ zoxide
 zsh
 zsh-autosuggestions
 zsh-completions
+zsh-syntax-highlighting
 zstd
 zvbi
 zxing-cpp

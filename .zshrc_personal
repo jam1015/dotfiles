@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# Source completion configuration
 # Personal Zsh Configuration
 # This file is sourced after oh-my-zsh
 bindkey -v
@@ -11,9 +12,11 @@ bindkey -v
 [[ -d ~/.local/bin ]] || mkdir -p ~/.local/bin
 [[ -d ~/.npm-global/bin ]] || mkdir -p ~/.npm-global/bin
 
+set -o vi
 # Load completions
 autoload -Uz compinit && compinit -i
 
+set -o vi
 # ============================================================================
 # ENVIRONMENT VARIABLES
 # ============================================================================
@@ -307,14 +310,7 @@ compdef _precommand dt
 # export ZSH_ENABLE_AUTOSUGGESTIONS=true
 # export ZSH_ENABLE_SYNTAX_HIGHLIGHTING=true
 
-# Source completion configuration
-if [[ -f "$HOME/.config/zsh/completion.zsh" ]]; then
-    source "$HOME/.config/zsh/completion.zsh"
-else
-    echo "Warning: ~/.config/zsh/completion.zsh not found"
-fi
 
-source ~/.config/zsh/completion.zsh
 
 
 
