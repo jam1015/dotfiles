@@ -44,7 +44,7 @@ local function local_keymaps(bufnr)
     wk.add({
       { "gD",         vim.lsp.buf.declaration,             desc = "Go to Declaration" },
       { "gd",         vim.lsp.buf.definition,              desc = "Go to Definition" },
-      { "<leader>kk", vim.lsp.buf.hover,                   desc = "Hover" },
+      { "<leader>kh", vim.lsp.buf.hover,                   desc = "Hover" },
       { "gi",         vim.lsp.buf.implementation,          desc = "Go to Implementation" },
       { "<leader>kk", vim.lsp.buf.signature_help,          desc = "Signature Help" },
       { "<leader>w",  name = "Workspace" }, -- Adding a group name for workspace-related mappings
@@ -74,7 +74,7 @@ local function local_keymaps(bufnr)
     -- Fallback if which-key is not available
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-    vim.keymap.set("n", "<leader>kk", vim.lsp.buf.hover, bufopts)
+    vim.keymap.set("n", "<leader>kh", vim.lsp.buf.hover, bufopts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
     vim.keymap.set("n", "<leader>kk", vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
