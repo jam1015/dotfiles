@@ -24,9 +24,9 @@ set -o vi
 # Path configuration (do this once at the top)
 typeset -U path  # Ensure unique entries in PATH
 path=(
-    $HOME/.local/bin
-    $HOME/.npm-global/bin
-    $path
+  $HOME/.local/bin
+  $HOME/.npm-global/bin
+  $path
 )
 export PATH
 
@@ -38,16 +38,16 @@ export GPG_TTY=$(tty)
 
 # Platform-specific settings
 case "$OSTYPE" in
-    darwin*)
-        export VISUAL='/usr/local/bin/nvim --cmd "let g:flatten_allow_nesting = v:true"'
-        # Add Homebrew paths if they exist
-        [[ -d /opt/homebrew/bin ]] && path=(/opt/homebrew/bin $path)
-        ;;
-    linux*)
-        export VISUAL="$HOME/.visual_editor.bash"
-        export XDG_SESSION_TYPE=wayland
-        export wm="i3"
-        ;;
+  darwin*)
+    export VISUAL='/usr/local/bin/nvim --cmd "let g:flatten_allow_nesting = v:true"'
+    # Add Homebrew paths if they exist
+    [[ -d /opt/homebrew/bin ]] && path=(/opt/homebrew/bin $path)
+    ;;
+  linux*)
+    export VISUAL="$HOME/.visual_editor.bash"
+    export XDG_SESSION_TYPE=wayland
+    export wm="i3"
+    ;;
 esac
 
 # Vim/Neovim configuration
@@ -78,8 +78,8 @@ export diaries_events="${diaries}diaries_events.md"
 
 # FZF configuration
 if command -v fzf >/dev/null 2>&1; then
-    export FZF_DEFAULT_COMMAND='fd --hidden --type f --color=never'
-    export FZF_ALT_C_COMMAND='fd --hidden --type d . --color=never'
+  export FZF_DEFAULT_COMMAND='fd --hidden --type f --color=never'
+  export FZF_ALT_C_COMMAND='fd --hidden --type d . --color=never'
 fi
 
 # ============================================================================
@@ -122,31 +122,30 @@ bindkey -a -r ':' 2>/dev/null
 
 # Editor aliases (simplified and consistent)
 if command -v nvim >/dev/null 2>&1; then
-    alias vi='nvim'
-    alias vim='nvim'
-    alias vin='nvim --cmd "let g:flatten_allow_nesting = v:true"'
-    export MANPAGER='nvim --clean -c Man! -u ~/.man_nvimrc'
+  alias vi='nvim'
+  alias vin='nvim --cmd "let g:flatten_allow_nesting = v:true"'
+  export MANPAGER='nvim --clean -c Man! -u ~/.man_nvimrc'
 fi
 
 # Emacs aliases
 if command -v emacs >/dev/null 2>&1; then
-    alias vid='emacs --with-profile doom'
-    alias vie='emacsclient -nw'
-    alias ec='emacsclient -nc'
+  alias vid='emacs --with-profile doom'
+  alias vie='emacsclient -nw'
+  alias ec='emacsclient -nc'
 fi
 
 # Platform-specific aliases
 case "$OSTYPE" in
-    darwin*)
-        alias ls='ls -G'
-        alias ll='ls -lG'
-        # Override vim with MacVim if available
-        command -v mvim >/dev/null 2>&1 && alias vim="mvim -v"
-        ;;
-    linux*)
-        alias ls='ls --color=auto'
-        alias ll='ls -l --color=auto'
-        ;;
+  darwin*)
+    alias ls='ls -G'
+    alias ll='ls -lG'
+    # Override vim with MacVim if available
+    command -v mvim >/dev/null 2>&1 && alias vim="mvim -v"
+    ;;
+  linux*)
+    alias ls='ls --color=auto'
+    alias ll='ls -l --color=auto'
+    ;;
 esac
 
 # General aliases
@@ -158,7 +157,7 @@ alias catscripts="~/.scripts/cat-scripts.bash"
 
 # Lua language server (check if exists first)
 [[ -x ~/Documents/lua-language-server/3rd/luamake/luamake ]] && \
-    alias luamake='~/Documents/lua-language-server/3rd/luamake/luamake'
+  alias luamake='~/Documents/lua-language-server/3rd/luamake/luamake'
 
 # ============================================================================
 # FUNCTIONS
@@ -166,36 +165,36 @@ alias catscripts="~/.scripts/cat-scripts.bash"
 
 # Directory creation and navigation
 mkcd() {
-    mkdir -p "$1" && cd "$1"
+  mkdir -p "$1" && cd "$1"
 }
 
 # Cheat.sh integration
 cheat() {
-    curl -s "cheat.sh/$1"
+  curl -s "cheat.sh/$1"
 }
 
 # Find in files using ripgrep and fzf
 fif() {
-    if [[ $# -eq 0 ]]; then
-        echo "Usage: fif <search_string>"
-        return 1
-    fi
+  if [[ $# -eq 0 ]]; then
+    echo "Usage: fif <search_string>"
+    return 1
+  fi
 
-    local search_string="$1"
-    
-    if ! command -v rg >/dev/null 2>&1; then
-        echo "Error: ripgrep (rg) is not installed"
-        return 1
-    fi
-    
-    if ! command -v fzf >/dev/null 2>&1; then
-        echo "Error: fzf is not installed"
-        return 1
-    fi
+  local search_string="$1"
 
-    rg --files-with-matches --no-messages "$search_string" | \
-        fzf --preview "rg --ignore-case --pretty --context 10 '$search_string' {}"
-}
+  if ! command -v rg >/dev/null 2>&1; then
+    echo "Error: ripgrep (rg) is not installed"
+    return 1
+  fi
+
+  if ! command -v fzf >/dev/null 2>&1; then
+    echo "Error: fzf is not installed"
+    return 1
+  fi
+
+  rg --files-with-matches --no-messages "$search_string" | \
+    fzf --preview "rg --ignore-case --pretty --context 10 '$search_string' {}"
+  }
 
 # ============================================================================
 # PROMPT CONFIGURATION
@@ -212,13 +211,13 @@ vim_cmd_mode="%%"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {
-    vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-    zle reset-prompt
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  zle reset-prompt
 }
 zle -N zle-keymap-select
 
 function zle-line-finish {
-    vim_mode=$vim_ins_mode
+  vim_mode=$vim_ins_mode
 }
 zle -N zle-line-finish
 
@@ -238,27 +237,27 @@ fi
 
 # Function to update VCS info
 precmd_vcs_info() {
-    vcs_info
+  vcs_info
 }
 
 # Track current directory for other shells/tmux
 precmd_save_cwd() {
-    echo "$PWD" > ~/.local/state/zsh/whereami
+  echo "$PWD" > ~/.local/state/zsh/whereami
 }
 
 # Set OLDPWD for compatibility
 precmd_setpwd() {
-    OLDPWD=$PWD
-    export OLDPWD
-    PWD=$(pwd)
-    export PWD
+  OLDPWD=$PWD
+  export OLDPWD
+  PWD=$(pwd)
+  export PWD
 }
 
 # Register precmd hooks
 precmd_functions+=(
-    precmd_vcs_info
-    precmd_save_cwd
-    precmd_setpwd
+  precmd_vcs_info
+  precmd_save_cwd
+  precmd_setpwd
 )
 
 # ============================================================================
@@ -267,7 +266,7 @@ precmd_functions+=(
 
 # Zoxide (better cd)
 if command -v zoxide >/dev/null 2>&1; then
-    eval "$(zoxide init --cmd cd zsh)"
+  eval "$(zoxide init --cmd cd zsh)"
 fi
 
 # ============================================================================
@@ -281,23 +280,43 @@ if [[ $ZSH_LAUNCHER = 1 ]]; then
   else
     PS1='%F{cyan}%B%M:%3~%f%b${vcs_info_msg_0_}%F{cyan}${vim_mode}%f '
   fi
-  preexec() { (eval "$1" &) &>/dev/null
+
+  preexec() {
+    # Get the first word of the command to check what's being run
+    local cmd="${1%% *}"
+
+    # List of commands that should NOT cause exit (directory navigation, etc.)
+    local -a no_exit_cmds=(
+      'cd' 'z' 'zoxide' 'pushd' 'popd' 'dirs'
+      'pwd' 'ls' 'll' 'la' 'tree' 'exa' 'eza'
+      'source' '.' 'alias' 'unalias' 'export'
+      'echo' 'printf' 'cat' 'less' 'more'
+      'fg' 'bg' 'jobs' 'exit' 'clear'
+    )
+
+    # Check if this is a navigation/shell command
+    if (( ${no_exit_cmds[(I)$cmd]} )); then
+      # Don't exit for these commands, just run them normally
+      return
+    fi
+
+    # For all other commands, run in background and exit
+    (eval "$1" &) &>/dev/null
     exit
   }
 fi
 
-
 dt() {
-    if [[ $# -eq 0 ]]; then
-        echo "Usage: detach <command> [arguments...]"
-        return 1
-    fi
+  if [[ $# -eq 0 ]]; then
+    echo "Usage: detach <command> [arguments...]"
+    return 1
+  fi
 
-    # Run command in background, redirect output, and disown
-    nohup "$@" >/dev/null 2>&1 &!
+  # Run command in background, redirect output, and disown
+  nohup "$@" >/dev/null 2>&1 &!
 
-    # Optional: notify user
-    echo "Detached: $1 (PID: $!)"
+  # Optional: notify user
+  echo "Detached: $1 (PID: $!)"
 }
 compdef _precommand dt
 

@@ -45,6 +45,7 @@ wlsunset &
 waybar &
 rivertile -view-padding 0 -outer-padding 0 &
 ( sleep 0.05; ~/.config/river/scripts/rivertile_orient.bash ) &
+~/.config/river/scripts/enable_natural_scroll.sh
 
 # ─── F) Border & Background Colors ────────────────────────────────────────────────
 riverctl border-color-focused   0x9933cc   # purple
