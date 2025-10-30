@@ -291,7 +291,7 @@ if [[ $ZSH_LAUNCHER = 1 ]]; then
       'pwd' 'ls' 'll' 'la' 'tree' 'exa' 'eza'
       'source' '.' 'alias' 'unalias' 'export'
       'echo' 'printf' 'cat' 'less' 'more'
-      'fg' 'bg' 'jobs' 'exit' 'clear'
+      'fg' 'bg' 'jobs' 'exit' 'clear' 'rm'
     )
 
     # Check if this is a navigation/shell command
