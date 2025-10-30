@@ -113,6 +113,7 @@ ruby/bundle/cache
 .emacs.default/straight/build-cache.el
 .emacs.default/straight/modified
 .emacs.default/straight/repos
+.emacs.default/treesitter
 
 .config/emacs/network-security.data
 .config/emacs/.org-id-locations

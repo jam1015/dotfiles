@@ -12,7 +12,7 @@
   ;; 2) Enter persistent god mode from Normal/Insert/God-off states with C-;
   (evil-define-key '(normal insert )
     evil-god-toggle-mode-map
-    (kbd "C-;") (lambda ()
+    (kbd "C-,") (lambda ()
                   (interactive)
                   (evil-god-toggle-execute-in-god-state t
                                                         )))
@@ -20,14 +20,14 @@
 
   (evil-define-key '(god-off visual)
     evil-god-toggle-mode-map
-    (kbd "C-;") (lambda ()
+    (kbd "C-,") (lambda ()
                   (interactive)
                   (evil-god-toggle-execute-in-god-state)))
 
   ;; 3) Exit god mode to god-off state with C-; 
   (evil-define-key 'god
     evil-god-toggle-mode-map
-    (kbd "C-;") (lambda ()
+    (kbd "C-,") (lambda ()
                   (interactive)
                   (evil-god-toggle-execute-in-god-off-state)))
 
@@ -41,18 +41,22 @@
   ;; 5) One-shot God mode: C-, in Normal for exactly one command
   (evil-define-key 'normal
     evil-god-toggle-mode-map
-    (kbd "C-,") (lambda ()
+    (kbd "C-;") (lambda ()
                   (interactive)
                   (evil-god-toggle-once t)))
 
 
   (evil-define-key 'visual
     evil-god-toggle-mode-map
-    (kbd "C-,") (lambda ()
+    (kbd "C-;") (lambda ()
                   (interactive)
                   (evil-god-toggle-once )))
   ;; 6) Visual persistence and global flag settings
-  (setq evil-god-toggle-persist-visual 'always))
+;; Emacs 29.1+ (recommended)
+  (setopt evil-god-toggle-persist-visual 'always
+        evil-god-toggle-persist-visual-once 'to-god)
+
+  )
 
 (provide 'evil-god-toggle-config)
 ;;;end evil-god-toggle-config.el

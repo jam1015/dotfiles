@@ -12,6 +12,7 @@
 (require 'god-mode-config)
 (require 'evil-textobj-entire-config)
 (require 'evil-leader-config)
+(require 'evil-search-highlight-persist-config)
 
 ;;; elisp
 (require 'flycheck-config)
@@ -53,6 +54,7 @@
 (require 'dirvish-config)
 (require 'gnus-config)
 (require 'dashboard-config)
+;;(require 'kkp-config)
 
 
 ;;; other filetypes

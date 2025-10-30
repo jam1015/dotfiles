@@ -89,13 +89,78 @@
     (message "This is a new buffer, attempting restore...")
     (push (current-buffer) eshell-config--initialized-buffers)
     (eshell-config-restore-pwd)
-    (add-hook 'kill-buffer-hook #'eshell-config--cleanup-buffer-list nil t))
+    (add-hook 'kill-buffer-hook #'eshell-config--cleanup-buffer-list nil t)
+    ;; Add this part for Evil insert mode
+    (goto-char (point-max))
+    (when (fboundp 'evil-insert)
+      (evil-insert 1)))
   ;; Record dir after every command
   (add-hook 'eshell-post-command-hook #'eshell-config-write-pwd nil t)
-  ;; Add aliases.
+  ;; Add aliases
   (eshell-config-define-aliases))
 
-(add-hook 'eshell-first-time-mode-hook #'eshell-config-initialize)
+
+(add-hook 'eshell-mode-hook #'eshell-config-initialize)
+
+
+
+(defun my/eshell-enter-insert-after-prompt ()
+  "Always go to end of Eshell and enter insert mode after prompt."
+  (when (eq major-mode 'eshell-mode)
+    (goto-char (point-max))
+    (when (fboundp 'evil-insert)
+      (evil-insert 1))))
+
+(add-hook 'eshell-after-prompt-hook #'my/eshell-enter-insert-after-prompt)
+
+
+
+(defun my/setup-eshell-evil-window-keys ()
+  "Setup C-w as window command prefix in eshell."
+  ;; Create a prefix keymap for C-w
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w") nil)
+  
+  ;; Window navigation
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w h") #'evil-window-left)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w j") #'evil-window-down)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w k") #'evil-window-up)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w l") #'evil-window-right)
+  
+  ;; Window manipulation
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w v") #'evil-window-vsplit)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w s") #'evil-window-split)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w c") #'evil-window-delete)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w o") #'delete-other-windows)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w q") #'evil-quit)
+  
+  ;; Window movement
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w H") #'evil-window-move-far-left)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w J") #'evil-window-move-very-bottom)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w K") #'evil-window-move-very-top)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w L") #'evil-window-move-far-right)
+  
+  ;; Window resizing
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w =") #'balance-windows)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w +") #'evil-window-increase-height)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w -") #'evil-window-decrease-height)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w >") #'evil-window-increase-width)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w <") #'evil-window-decrease-width)
+  
+  ;; Rotation and exchange
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w r") #'evil-window-rotate-downwards)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w R") #'evil-window-rotate-upwards)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w x") #'evil-window-exchange)
+  
+  ;; If you still want access to the original C-w (kill-region), map it to C-w C-w
+  (evil-define-key 'insert eshell-mode-map (kbd "C-w C-w") #'kill-region))
+
+;; Apply the setup to eshell buffers
+(add-hook 'eshell-mode-hook #'my/setup-eshell-evil-window-keys)
+
+
+
+
+
 
 (provide 'eshell-config)
 ;;; eshell-config.el ends here
