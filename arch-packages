@@ -1,5 +1,6 @@
 a52dec
 aalib
+aardvark-dns
 abseil-cpp
 accounts-qml-module
 accountsservice
@@ -31,6 +32,7 @@ archlinux-keyring
 archlinux-xdg-menu
 argon2
 aribb24
+asciidoc
 aspell
 at-spi2-core
 atkmm
@@ -67,6 +69,7 @@ bluez-tools
 bluez-utils
 bmake
 bolt
+boost
 boost-libs
 botan2
 breeze
@@ -80,6 +83,7 @@ brotli
 bspwm
 btrfs-progs
 bubblewrap
+bwidget
 bzip2
 c-ares
 ca-certificates
@@ -90,6 +94,7 @@ cairo
 cairomm
 cairomm-1.16
 cantarell-fonts
+catatonit
 cblas
 cdparanoia
 cheese
@@ -102,6 +107,7 @@ cl-unicode
 clang
 clang18
 clang19
+clang20
 clinfo
 clipman
 clucene
@@ -113,11 +119,16 @@ cmark-gfm
 cockpit
 code
 cogl
+coin
 compiler-rt
 compiler-rt18
 compiler-rt19
+compiler-rt20
+composefs
 confuse
+conmon
 containerd
+containers-common
 convertlit
 coreutils
 cpio
@@ -150,6 +161,7 @@ diffutils
 ding-libs
 discount
 discover
+distrobox
 dkms
 dmd
 dmenu
@@ -157,6 +169,8 @@ dmidecode
 dmraid
 dnsmasq
 dnssec-anchors
+docbook-xml
+docbook-xsl
 docker
 docker-buildx
 dosfstools
@@ -210,6 +224,7 @@ exiv2
 exo
 expac
 expat
+extra-cmake-modules
 f2fs-tools
 faac
 faad2
@@ -234,6 +249,8 @@ firefox-developer-edition
 firewalld
 flac
 flameshot
+flatpak
+flatpak-kcm
 flex
 fluidsynth
 fmt
@@ -247,6 +264,7 @@ foomatic-db-nonfree-ppds
 foomatic-db-ppds
 foot
 frameworkintegration
+freecad
 freeglut
 freerdp
 freetype2
@@ -283,6 +301,7 @@ girara
 git
 git-credential-gopass
 glances
+glew
 glib-networking
 glib2
 glibc
@@ -291,6 +310,7 @@ glibmm-2.68
 global
 glslang
 glu
+glycin
 gmime3
 gmp
 gnome-bluetooth
@@ -413,6 +433,7 @@ haskell-contravariant
 haskell-cookie
 haskell-crypton
 haskell-crypton-connection
+haskell-crypton-socks
 haskell-crypton-x509
 haskell-crypton-x509-store
 haskell-crypton-x509-system
@@ -488,6 +509,7 @@ haskell-mmorph
 haskell-monad-control
 haskell-mono-traversable
 haskell-network
+haskell-network-bsd
 haskell-network-byte-order
 haskell-network-control
 haskell-network-uri
@@ -596,6 +618,7 @@ haskell-yaml
 haskell-zip-archive
 haskell-zlib
 haveged
+hdf5
 hdparm
 helix
 hicolor-icon-theme
@@ -696,6 +719,7 @@ ki18n5
 kiconthemes
 kiconthemes5
 kidletime
+kimageformats
 kinfocenter
 kio
 kio-extras
@@ -712,6 +736,7 @@ kjobwidgets
 kmenuedit
 kmod
 knewstuff
+knighttime
 knotifications
 knotifyconfig
 kpackage
@@ -810,7 +835,7 @@ libaccounts-qt
 libadwaita
 libaec
 libaio
-libappindicator-gtk3
+libappindicator
 libarchive
 libass
 libassuan
@@ -881,6 +906,7 @@ libevdev
 libevent
 libexif
 libexttextcat
+libfabric
 libfdk-aac
 libffi
 libfontenc
@@ -898,6 +924,7 @@ libgme
 libgnomekbd
 libgpg-error
 libgphoto2
+libgpiod
 libgsf
 libgtop
 libgudev
@@ -932,6 +959,7 @@ liblrdf
 libltc
 libluv
 libmad
+libmalcontent
 libmanette
 libmatroska
 libmaxminddb
@@ -1029,6 +1057,7 @@ libsoup
 libsoup3
 libsoxr
 libspatialite
+libspnav
 libsrtp
 libssh
 libssh2
@@ -1038,6 +1067,7 @@ libsynctex
 libsysprof-capture
 libtar
 libtasn1
+libtatsu
 libteam
 libthai
 libtheora
@@ -1138,13 +1168,17 @@ linux-firmware-radeon
 linux-firmware-realtek
 linux-firmware-whence
 linux-headers
+linuxcnc
 lld
 lld18
 lld19
+lld20
 llhttp
+llvm
 llvm-libs
 llvm18-libs
 llvm19-libs
+llvm20-libs
 lm_sensors
 lmdb
 logrotate
@@ -1173,6 +1207,7 @@ man-pages
 mariadb-libs
 md4c
 mdadm
+med
 media-player-info
 meld
 mercurial
@@ -1180,6 +1215,7 @@ mesa
 mesa-utils
 meson
 milou
+mimalloc
 minizip
 mit-scheme
 mjpegtools
@@ -1187,6 +1223,7 @@ mlt
 mobile-broadband-provider-info
 modemmanager
 modemmanager-qt
+mold
 mpdecimal
 mpfr
 mpg123
@@ -1208,6 +1245,7 @@ neovim
 neovim-qt
 net-snmp
 net-tools
+netavark
 netctl
 netstandard-targeting-pack
 nettle
@@ -1251,19 +1289,24 @@ onedrive
 onetbb
 oniguruma
 openal
+opencascade
 openconnect
 opencore-amr
 opencv
 openexr
 openh264
 openjpeg2
+openmpi
+openpmix
 openssh
 openssl
 opentimelineio
+openucx
 openvpn
 openxr
 opus
 orc
+ostree
 otf-codenewroman-nerd
 otf-edwin
 oxygen
@@ -1284,6 +1327,7 @@ pangomm-2.48
 parallel
 parted
 paru
+passt
 pasystray
 patch
 pavucontrol
@@ -1438,6 +1482,7 @@ plasma-workspace-wallpapers
 plasma5support
 playerctl
 plocate
+podman
 polkit
 polkit-gnome
 polkit-kde-agent
@@ -1464,11 +1509,14 @@ procps-ng
 proj
 protobuf
 proton-vpn-gtk-app
+prrte
 psmisc
 ptpython
+pugixml
 pulseaudio-qt
 purpose
 pv
+pyside6
 python
 python-aaf2
 python-aiohappyeyeballs
@@ -1495,6 +1543,7 @@ python-charset-normalizer
 python-cleo
 python-click
 python-colorama
+python-configobj
 python-contourpy
 python-coverage
 python-crashtest
@@ -1563,9 +1612,11 @@ python-pexpect
 python-pfzy
 python-pillow
 python-pip
+python-pivy
 python-pkginfo
 python-platformdirs
 python-pluggy
+python-ply
 python-poetry
 python-poetry-core
 python-poetry-plugin-export
@@ -1598,6 +1649,7 @@ python-pyqt6
 python-pyqt6-sip
 python-pyserial
 python-pysocks
+python-pytokens
 python-pywayland
 python-pyxdg
 python-rapidfuzz
@@ -1636,6 +1688,7 @@ python-webencodings
 python-wheel
 python-xdg-base-dirs
 python-yaml
+python-yapps2
 python-yarl
 python-zipp
 python-zstandard
@@ -1652,8 +1705,10 @@ qt5-base
 qt5-declarative
 qt5-quickcontrols2
 qt5-svg
+qt5-tools
 qt5-translations
 qt5-wayland
+qt5-websockets
 qt5-x11extras
 qt5ct
 qt6-5compat
@@ -1756,6 +1811,7 @@ sassc
 sbc
 sbcl
 scdoc
+scons
 scour
 scrot
 sd
@@ -1773,6 +1829,7 @@ shaderc
 shadow
 shared-mime-info
 shfmt
+shiboken6
 signal-desktop
 signon-kwallet-extension
 signon-plugin-oauth2
@@ -1788,6 +1845,7 @@ socat
 sof-firmware
 solid
 sonnet
+soqt
 sord
 sound-theme-freedesktop
 soundtouch
@@ -1832,6 +1890,7 @@ taglib
 talloc
 tar
 tcl
+tclx
 tdb
 television
 tesseract
@@ -1964,6 +2023,7 @@ volume_key
 vpnc
 vte-common
 vte3
+vtk
 vulkan-headers
 vulkan-icd-loader
 vulkan-tools
@@ -2017,6 +2077,7 @@ xcursor-breeze5
 xcursor-themes
 xdg-dbus-proxy
 xdg-desktop-portal
+xdg-desktop-portal-gtk
 xdg-desktop-portal-kde
 xdg-user-dirs
 xdg-user-dirs-gtk
@@ -2068,6 +2129,7 @@ xxhash
 xz
 yad
 yajl
+yaml-cpp
 yay
 yyjson
 zathura

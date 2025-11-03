@@ -7,6 +7,7 @@
   "ee" 'eshell
   "bb" 'switch-to-buffer
   "bk" 'kill-buffer)
+  "ll"  'evil-search-highlight-persist-remove-all
 	     )
 
 (provide 'evil-leader-config)

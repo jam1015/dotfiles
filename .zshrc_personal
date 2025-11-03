@@ -221,14 +221,23 @@ function zle-line-finish {
 }
 zle -N zle-line-finish
 
+# Detect distrobox and get distro name
+distrobox_indicator=""
+if [[ -n "$CONTAINER_ID" ]] || [[ -f /run/.containerenv ]]; then
+  # Get distro name from os-release
+  if [[ -f /etc/os-release ]]; then
+    distro_name=$(grep -E '^ID=' /etc/os-release | cut -d'=' -f2 | tr -d '"')
+    distrobox_indicator="%F{cyan}[$distro_name]%f "
+  fi
+fi
+
 # Prompt setup using zsh color codes
-# Load colors module
 autoload -U colors && colors
 
 if [[ "$EUID" = 0 ]]; then
-  PS1='%B%F{green}%M:su:%3~%f%b${vcs_info_msg_0_}%B%F{green}${vim_mode}%f%b '
+  PS1="${distrobox_indicator}"'%B%F{green}%M:su:%3~%f%b${vcs_info_msg_0_}%B%F{green}${vim_mode}%f%b '
 else
-  PS1='%F{magenta}%B%M:%3~%f%b${vcs_info_msg_0_}%F{magenta}${vim_mode}%f '
+  PS1="${distrobox_indicator}"'%F{magenta}%B%M:%3~%f%b${vcs_info_msg_0_}%F{magenta}${vim_mode}%f '
 fi
 
 # ============================================================================

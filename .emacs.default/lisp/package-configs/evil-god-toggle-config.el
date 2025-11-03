@@ -1,7 +1,9 @@
 (use-package evil-god-toggle
   :ensure (:host github
            :repo "jam1015/evil-god-toggle"
-           :build (+elpaca/build-if-new))
+           :build (+elpaca/build-if-new)
+           :branch "dev"
+           )
   :after (evil god-mode cursor-contraster which-key)
   :init
   
@@ -57,6 +59,9 @@
         evil-god-toggle-persist-visual-once 'to-god)
 
   )
+
+(setopt evil-god-toggle-target-state-alist
+        '((visual . normal)))
 
 (provide 'evil-god-toggle-config)
 ;;;end evil-god-toggle-config.el
