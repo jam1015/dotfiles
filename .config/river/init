@@ -22,6 +22,8 @@ if wlr-randr | grep -q '^DP-'; then
 else
   # No DP output detected; fall back to laptop panel only
   echo "only laptop panel"
+  wlr-randr --output eDP-1 --mode 1920x1200 --pos 0,0 --transform normal 
+  
 fi
 
 # ─── C) Idle / Screen-Lock ─────────────────────────────────────────────────────────
