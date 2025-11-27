@@ -958,6 +958,7 @@ liblqr
 liblrdf
 libltc
 libluv
+liblzf
 libmad
 libmalcontent
 libmanette
@@ -1076,6 +1077,7 @@ libtirpc
 libtommath
 libtool
 libtorrent-rasterbar
+libtpms
 libucl
 libunibreak
 libunistring
@@ -1722,6 +1724,7 @@ qt6-networkauth
 qt6-positioning
 qt6-quick3d
 qt6-quicktimeline
+qt6-scxml
 qt6-sensors
 qt6-shadertools
 qt6-speech
@@ -1817,6 +1820,7 @@ scrot
 sd
 sddm
 sddm-kcm
+sdl12-compat
 sdl2-compat
 sdl2_ttf
 sdl3
@@ -1987,6 +1991,9 @@ verdict
 vi
 vid.stab
 vim-runtime
+virtualbox
+virtualbox-guest-iso
+virtualbox-host-dkms
 vlc
 vlc-cli
 vlc-gui-qt
@@ -2119,6 +2126,7 @@ xorg-xset
 xorg-xsetroot
 xorg-xwayland
 xorgproto
+xournalpp
 xscreensaver
 xsel
 xsettingsd

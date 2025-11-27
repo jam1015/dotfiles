@@ -72,6 +72,7 @@ require("oil").setup({
     ["gx"] = "actions.open_external",
     ["g."] = "actions.toggle_hidden",
     ["g\\"] = "actions.toggle_trash",
+    ["<leader>ye"] = "actions.yank_entry"
   },
   -- Configuration for the floating keymaps help window
   keymaps_help = {
