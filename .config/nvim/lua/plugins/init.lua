@@ -2,7 +2,7 @@ return
   {
     {
       "folke/which-key.nvim",
-      event = "VeryLazy",
+      --event = "VeryLazy",
       opts = {},
       config = function() require("plugin_configs.which-key") end
     },
@@ -307,17 +307,17 @@ return
       end,
     },
 
-    {
-      "PaterJason/cmp-conjure",
-      enabled = false,
-      lazy = true,
-      config = function()
-        local cmp = require("cmp")
-        local config = cmp.get_config()
-        table.insert(config.sources, { name = "conjure" })
-        return cmp.setup(config)
-      end,
-    },
+    --{
+    --  "PaterJason/cmp-conjure",
+    --  enabled = false,
+    --  lazy = true,
+    --  config = function()
+    --    local cmp = require("cmp")
+    --    local config = cmp.get_config()
+    --    table.insert(config.sources, { name = "conjure" })
+    --    return cmp.setup(config)
+    --  end,
+    --},
 
     {
       --"hrsh7th/nvim-cmp",
@@ -328,7 +328,7 @@ return
         return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
       end,
       dependencies = {
-        { "PaterJason/cmp-conjure",     event = "VeryLazy" },
+        --{ "PaterJason/cmp-conjure",     event = "VeryLazy" },
         { "onsails/lspkind.nvim",       event = "VeryLazy" },
         { "R-nvim/cmp-r",               event = "VeryLazy" },
         { "hrsh7th/cmp-nvim-lua",       event = "VeryLazy" },
@@ -823,21 +823,21 @@ return
 
     },
 
-    {
-      "Olical/conjure",
-      enabled = false,
-      ft = { "clojure", "fennel", "scm" }, -- etc
-      event = "VeryLazy",
-      init = function()
-        -- Set configuration options here
-        -- Uncomment this to get verbose logging to help diagnose internal Conjure issues
-        -- This is VERY helpful when reporting an issue with the project
-        -- vim.g["conjure#debug"] = true
-      end,
+    --{
+    --  "Olical/conjure",
+    --  enabled = false,
+    --  ft = { "clojure", "fennel", "scm" }, -- etc
+    --  event = "VeryLazy",
+    --  init = function()
+    --    -- Set configuration options here
+    --    -- Uncomment this to get verbose logging to help diagnose internal Conjure issues
+    --    -- This is VERY helpful when reporting an issue with the project
+    --    -- vim.g["conjure#debug"] = true
+    --  end,
 
-      -- Optional cmp-conjure integration
-      dependencies = { "PaterJason/cmp-conjure" },
-    },
+    --  -- Optional cmp-conjure integration
+    --  dependencies = { "PaterJason/cmp-conjure" },
+    --},
 
 
 
