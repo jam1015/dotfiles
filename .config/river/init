@@ -18,7 +18,8 @@ fcitx5 -d
 export GTK_THEME=Arc-Dark
 export QT_STYLE_OVERRIDE=adwaita
 export QT_QPA_PLATFORMTHEME=qt5ct
-
+export GCM_PROFILE_FILE="/usr/share/color/icc/framework-2.8k.icc"
+export ICC_PROFILE="/usr/share/color/icc/framework-2.8k.icc"
 # ─── B) Output Configuration (wlr-randr) ──────────────────────────────────────────
 if wlr-randr | grep -q '^DP-'; then
   # At least one DisplayPort-connected monitor exists
