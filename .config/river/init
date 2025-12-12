@@ -24,7 +24,7 @@ export ICC_PROFILE="/usr/share/color/icc/framework-2.8k.icc"
 if wlr-randr | grep -q '^DP-'; then
   # At least one DisplayPort-connected monitor exists
   wlr-randr \
-    --output DP-11 --mode 1920x1080 --pos 0,0 --transform 90 \
+    --output DP-11 --mode 2880x1920 --pos 0,0 --transform 90 \
     --output DP-13 --mode 1920x1080 --pos 1080,0 --transform normal \
     --output eDP-1 --mode 2880x1920 --pos 1080,1080 --transform normal --scale 1.75
 else
