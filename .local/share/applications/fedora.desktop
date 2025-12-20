@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=Fedora
+GenericName=Terminal entering Fedora
+Comment=Terminal entering Fedora
+Categories=Distrobox;System;Utility
+Exec=/usr/bin/distrobox enter  fedora
+Icon=/home/jordan/.local/share/icons/distrobox/fedora.png
+Keywords=distrobox;
+NoDisplay=false
+Terminal=true
+TryExec=/usr/bin/distrobox
+Type=Application
+Actions=Remove;
+
+[Desktop Action Remove]
+Name=Remove Fedora from system
+Exec=/usr/bin/distrobox rm  fedora
