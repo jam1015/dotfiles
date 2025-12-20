@@ -4,7 +4,7 @@
   :demand t
   :init
 
-   (set-frame-font "InputMonoNerdFont-10" t t)
+  ;; (set-frame-font "InputMonoNerdFont-10" t t)
   :custom
   ;; Startup and UI
   (inhibit-startup-screen t)
