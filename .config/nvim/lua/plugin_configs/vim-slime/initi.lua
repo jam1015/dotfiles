@@ -1,4 +1,4 @@
-vim.g.slime_menu_config = false
+vim.g.slime_menu_config = true
 if os.getenv("TMUX") then
   vim.g.slime_target = "tmux"
   vim.g.slime_no_mappings = true
@@ -11,6 +11,7 @@ else
   vim.g.slime_input_pid = true
   vim.g.slime_suggest_default = true
   vim.g.slime_bracketed_paste = true
+ -- vim.g.slime_python_ipython = 1
 
 
 
