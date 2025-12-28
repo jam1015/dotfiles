@@ -9,7 +9,7 @@ if type == "mine" then
   require('keymaps')      -- ~/.config/nvim/lua/keymaps/init.lua
   require('lazyspec')     -- ~/.config/nvim/lua/plugins/init.lua
   require('settings')     -- ~/.config/nvim/lua/settings.lua
-  -------- ~/.config/nvim/lua/plugin_keymaps.lua
+--  -------- ~/.config/nvim/lua/plugin_keymaps.lua
   require('keymaps.post') -- ~/.config/nvim/lua/keymaps/post.lua
 elseif type == "debug" then
   vim.opt.timeoutlen = 1000
