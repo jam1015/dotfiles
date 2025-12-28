@@ -8,7 +8,7 @@ return
     },
     {
       "neovim/nvim-lspconfig",
-      event = { "BufReadPre", "BufNewFile" },
+      event = "VeryLazy",
       dependencies = { "onsails/lspkind.nvim",
         {
           "williamboman/mason.nvim",
