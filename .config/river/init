@@ -18,10 +18,11 @@ if wlr-randr | grep -q '^DP-'; then
   wlr-randr \
     --output DP-11 --mode 1920x1080 --pos 0,0 --transform 90 \
     --output DP-13 --mode 1920x1080 --pos 1080,0 --transform normal \
-    --output eDP-1 --mode 2256x1504 --pos 1080,1080 --transform normal --scale 2.0
+    --output eDP-1 --mode 2880x1920 --pos 1080,1080 --transform normal --scale 2.0
 else
   # No DP output detected; fall back to laptop panel only
   echo "only laptop panel"
+  wlr-randr  --output eDP-1 --mode 2880x1920 --pos 1080,1080 --transform normal --scale 2.0
 fi
 
 # ─── C) Idle / Screen-Lock ─────────────────────────────────────────────────────────
