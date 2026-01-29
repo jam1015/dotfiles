@@ -285,6 +285,11 @@ fakeroot
 falkon
 fastfetch
 fcft
+fcitx5
+fcitx5-chinese-addons
+fcitx5-configtool
+fcitx5-gtk
+fcitx5-qt
 fd
 feh
 ffcall
@@ -1203,6 +1208,7 @@ libidn2
 libiec61883
 libieee1284
 libimagequant
+libime
 libimobiledevice
 libimobiledevice-glue
 libinih
@@ -1505,6 +1511,7 @@ marble-common
 mariadb
 mariadb-clients
 mariadb-libs
+marisa
 markdownpart
 massif-visualizer
 mbox-importer
@@ -1602,6 +1609,7 @@ oniguruma
 openal
 openbabel
 opencascade
+opencc
 openconnect
 opencore-amr
 opencv

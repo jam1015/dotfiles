@@ -7,6 +7,12 @@
 # ─── A) Keyboard Layout & Environment Variables ─────────────────────────────────
 riverctl keyboard-layout -options "ctrl:nocaps" us #-variant mac \
 
+export QT_IM_MODULES="wayland;fcitx"
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+export SDL_IM_MODULE=fcitx
+export GLFW_IM_MODULE=ibus  # fcitx5 works with ibus protocol
+fcitx5 -d
 
 export GTK_THEME=Arc-Dark
 export QT_STYLE_OVERRIDE=adwaita
