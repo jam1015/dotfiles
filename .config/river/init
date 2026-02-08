@@ -12,6 +12,7 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 export SDL_IM_MODULE=fcitx
 export GLFW_IM_MODULE=ibus  # fcitx5 works with ibus protocol
+killall fcitx5 2>/dev/null
 fcitx5 -d
 
 export GTK_THEME=Arc-Dark
@@ -184,8 +185,8 @@ riverctl map prefix None u spawn 'riverctl enter-mode normal && riverctl send-la
 riverctl map prefix None g spawn 'riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-ratio +0.05" '
 riverctl map prefix Shift g spawn 'riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-ratio -0.05" '
 
-riverctl map prefix None + spawn 'riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-count +1" '
-riverctl map prefix None - spawn 'riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-count -1" '
+riverctl map prefix Shift equal spawn 'riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-count +1" '
+riverctl map prefix None minus spawn 'riverctl enter-mode normal && riverctl send-layout-cmd rivertile "main-count -1" '
 
 # —— Tag (Workspace) Management change all tags —— 
 riverctl map prefix None 1 spawn 'riverctl enter-mode normal && ~/.config/river/scripts/set_global_tags.sh 1 '
@@ -257,7 +258,10 @@ done
 riverctl map prefix2 None e spawn 'riverctl enter-mode normal && emacsclient -c'
 riverctl map prefix2 None n spawn 'riverctl enter-mode normal && neovide'
 
+# Add this near your other normal-mode mappings (section I):
 
+# —— Input Method Toggle (no prefix) —— 
+riverctl map prefix Control Space spawn '~/.config/river/scripts/cycle_input_method.sh'
 
 
 riverctl output-attach-mode below
