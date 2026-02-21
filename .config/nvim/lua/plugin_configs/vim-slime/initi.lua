@@ -28,5 +28,4 @@ else
   --	})
 end
 
-vim.g.slime_target = "neovim"
 

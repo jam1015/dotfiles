@@ -8,7 +8,7 @@ return
     },
     {
       "neovim/nvim-lspconfig",
-      event = "VeryLazy",
+      --event = "VeryLazy",
       dependencies = { "onsails/lspkind.nvim",
         {
           "williamboman/mason.nvim",

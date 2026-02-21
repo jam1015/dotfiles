@@ -111,7 +111,7 @@ end
 
 function M.oil()
   local wk = require("which-key")
-  vim.keymap.set("n", "<leader>oo", ":Oil", { remap = false, silent = true })
+  vim.keymap.set("n", "<leader>oo", "<cmd>Oil<CR>", { remap = false, silent = true })
 end
 
 function M.yanky()

@@ -7,7 +7,6 @@ if not status_ok and vim.g.debug then
 end
 
 M.global_keymaps = function()
-
   local opts = { noremap = true, silent = false }
 
   -- Global keymaps using which-key
@@ -15,16 +14,16 @@ M.global_keymaps = function()
   if has_wk then
     wk.add({
       { "<leader>d",  name = "Diagnostics" }, -- Adding a group name for diagnostics
-      { "<leader>de", vim.diagnostic.open_float, desc = "Open Diagnostic Float" },
-      { "[d",         vim.diagnostic.goto_prev,  desc = "Go to Previous Diagnostic" },
-      { "]d",         vim.diagnostic.goto_next,  desc = "Go to Next Diagnostic" },
-      { "<leader>dq", vim.diagnostic.setloclist, desc = "Set Loclist for Diagnostics" },
+      { "<leader>de", vim.diagnostic.open_float,                                              desc = "Open Diagnostic Float" },
+      { "[d",         function() vim.diagnostic.jump({ count = -1, float = true }) end,       desc = "Go to Previous Diagnostic" },
+      { "]d",         function() vim.diagnostic.jump({ count = 1, float = true }) end,        desc = "Go to Next Diagnostic" },
+      { "<leader>dq", vim.diagnostic.setloclist,                                              desc = "Set Loclist for Diagnostics" },
     }, { mode = "n", silent = false })
   else
     -- Fallback if which-key is not available
     vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, opts)
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+    vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
+    vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
     vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, opts)
   end
 end
@@ -32,7 +31,7 @@ end
 local function local_keymaps(bufnr)
   -- Enable completion triggered by <c-x><c-o>
   if vim.fn.exists("v:lua.vim.lsp.omnifunc") == 1 then
-    vim.nvim_set_option_value(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
   else
   end
 
@@ -70,7 +69,6 @@ local function local_keymaps(bufnr)
       },
     }, { mode = "n", buffer = bufnr, silent = false })
   else
-
     -- Fallback if which-key is not available
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
@@ -112,12 +110,11 @@ M.lsp_flags = {
 }
 
 M.setup = function() -- more setup things
-
   local sign_config_table = {
-     [vim.diagnostic.severity.ERROR] = "" ,
-     [vim.diagnostic.severity.WARN] = "" ,
-     [vim.diagnostic.severity.HINT] = "" ,
-     [vim.diagnostic.severity.INFO] = "" ,
+    [vim.diagnostic.severity.ERROR] = "",
+    [vim.diagnostic.severity.WARN] = "",
+    [vim.diagnostic.severity.HINT] = "",
+    [vim.diagnostic.severity.INFO] = "",
   }
 
 
@@ -126,7 +123,7 @@ M.setup = function() -- more setup things
     virtual_text = false,
     -- show signs
     signs = {
-       text = sign_config_table ,
+      text = sign_config_table,
     },
     update_in_insert = true,
     underline = true,
