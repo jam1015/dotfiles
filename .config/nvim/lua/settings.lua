@@ -29,7 +29,7 @@ else
 
 -- add complete/completeopt
 set.modeline = false
-set.timeoutlen = 5000
+set.timeoutlen = 50
 set.completeopt = 'menu,menuone,noselect'
 set.shortmess = "Fw"
 set.hlsearch = true
@@ -95,7 +95,7 @@ vim.g.netrw_liststyle = 3
 vim.g.c_comment_strings = 1 --can be any value
 set.pumheight = 25
 set.inccommand = 'split'
-set.shada = "'1000,%"
+set.shada = "'1000"
 
 -- see yanky config for clipboard settingss
 
