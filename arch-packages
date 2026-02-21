@@ -197,6 +197,7 @@ dconf
 ddcutil
 debugedit
 default-cursors
+deno
 desktop-file-utils
 device-mapper
 dex
@@ -227,6 +228,7 @@ dotnet-sdk
 dotnet-targeting-pack
 double-conversion
 downgrade
+doxygen
 dpkg
 dracut
 dragon
@@ -245,6 +247,7 @@ efivar
 electron34
 electron35
 electron37
+electron39
 elfutils
 elisa
 ell
@@ -270,6 +273,7 @@ eos-translations
 eos-update
 ethtool
 eventviews
+ex-vi-compat
 exfatprogs
 exiv2
 exo
@@ -368,6 +372,8 @@ glances
 glew
 glib-networking
 glib2
+glib2-devel
+glib2-docs
 glibc
 glibmm
 glibmm-2.68
@@ -399,7 +405,6 @@ gpick
 gpm
 gpsd
 granatier
-grantlee
 grantlee-editor
 grantleetheme
 graphene
@@ -428,6 +433,7 @@ gst-plugins-good
 gst-plugins-ugly
 gstreamer
 gtest
+gtk-doc
 gtk-engine-murrine
 gtk-layer-shell
 gtk-update-icon-cache
@@ -810,6 +816,7 @@ kcron
 kdav
 kdbusaddons
 kdbusaddons5
+kddockwidgets
 kde-accessibility-meta
 kde-applications-meta
 kde-cli-tools
@@ -1247,6 +1254,7 @@ libltc
 libluv
 liblzf
 libmad
+libmakepkg-dropins
 libmalcontent
 libmanette
 libmatroska
@@ -1465,7 +1473,6 @@ linux-firmware-radeon
 linux-firmware-realtek
 linux-firmware-whence
 linux-headers
-linuxcnc
 lld
 lld18
 lld19
@@ -1886,6 +1893,7 @@ python-cycler
 python-dateutil
 python-dbus
 python-dbus-fast
+python-dbusmock
 python-decorator
 python-defusedxml
 python-distlib
@@ -1899,6 +1907,7 @@ python-fastjsonschema
 python-fido2
 python-filelock
 python-findpython
+python-firewall
 python-flit-core
 python-fonttools
 python-frozenlist
@@ -1940,6 +1949,7 @@ python-msgpack
 python-multidict
 python-mypy_extensions
 python-numpy
+python-opengl
 python-orjson
 python-packaging
 python-parso
@@ -1963,7 +1973,6 @@ python-proton-core
 python-proton-keyring-linux
 python-proton-vpn-api-core
 python-proton-vpn-local-agent
-python-proton-vpn-network-manager
 python-psutil
 python-ptyprocess
 python-pure-eval
@@ -2358,7 +2367,6 @@ util-linux-libs
 v4l-utils
 vapoursynth
 verdict
-vi
 vid.stab
 vim-runtime
 virtualbox
@@ -2440,6 +2448,7 @@ x264
 x265
 xapian-core
 xapp
+xapp-symbolic-icons
 xarchiver
 xbindkeys
 xbitmaps
@@ -2516,6 +2525,7 @@ yakuake
 yaml-cpp
 yay
 yt-dlp
+yt-dlp-ejs
 yyjson
 zanshin
 zathura

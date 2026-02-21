@@ -726,14 +726,6 @@ return
     },
 
 
-    {
-      "gbprod/substitute.nvim",
-      enabled = true,
-      config = function()
-        require("plugin_configs.substitute_nvim")
-        require("plugin_keymaps").substitute_nvim()
-      end
-    },
 
     {
       "powerman/vim-plugin-AnsiEsc",
