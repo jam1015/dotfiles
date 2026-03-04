@@ -306,7 +306,6 @@ return
         require("plugin_configs.nvim-treesitter")
       end,
     },
-
     --{
     --  "PaterJason/cmp-conjure",
     --  enabled = false,
@@ -318,7 +317,6 @@ return
     --    return cmp.setup(config)
     --  end,
     --},
-
     {
       --"hrsh7th/nvim-cmp",
       "iguanacucumber/magazine.nvim",
@@ -337,7 +335,6 @@ return
         { "hrsh7th/cmp-path",           event = "VeryLazy" },
         { "hrsh7th/cmp-cmdline",        event = "VeryLazy" },
         { "kdheepak/cmp-latex-symbols", event = "VeryLazy" },
-
         {
           "L3MON4D3/LuaSnip", -- tag = "v<CurrentMajor>.*",
           event = "VeryLazy",
@@ -346,7 +343,6 @@ return
           config = function()
             require("plugin_configs.LuaSnip")
           end,
-
         },
         { "saadparwaiz1/cmp_luasnip", event = "VeryLazy" }
       },
@@ -357,7 +353,6 @@ return
     {
       'aaronik/treewalker.nvim',
       event = "VeryLazy",
-
       -- The following options are the defaults.
       -- Treewalker aims for sane defaults, so these are each individually optional,
       -- and setup() does not need to be called, so the whole opts block is optional as well.
@@ -366,22 +361,16 @@ return
         require("plugin_keymaps").treewalker()
       end
     },
-
-
     {
       "ethanholz/nvim-lastplace",
       --event = "VeryLazy",
       config = function() require("plugin_configs.nvim-lastplace") end
     },
-
-
     {
       'skywind3000/gutentags_plus',
       event = "VeryLazy",
       dependencies = { "dhananjaylatkar/cscope_maps.nvim", 'dhananjaylatkar/vim-gutentags' },
       --event = "VeryLazy",
-
-
       config = function()
         require("plugin_configs.vim-gutentags")
       end
@@ -547,9 +536,6 @@ return
         require("plugin_configs.miniai")
       end
     },
-
-
-
 
     ({
       "lervag/vimtex",
