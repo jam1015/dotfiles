@@ -48,8 +48,8 @@
 
 
 ;; ─── Debug Corfu popup ─────────────────────────────────────────────────
-(advice-add 'corfu--show :before (lambda (&rest _) (message "⟫ Corfu popup SHOW")))
-(advice-add 'corfu--hide :before (lambda (&rest _) (message "⟪ Corfu popup HIDE")))
+;;(advice-add 'corfu--show :before (lambda (&rest _) (message "⟫ Corfu popup SHOW")))
+;;(advice-add 'corfu--hide :before (lambda (&rest _) (message "⟪ Corfu popup HIDE")))
 
 ;; In your config, after Corfu is set up:
 (defun my/eshell-corfu-return ()
@@ -70,15 +70,15 @@
 
 ;; ─── Helper to inspect what RET is bound to ──────────────────────────────────
 
-(defun my/debug-ret-key ()
-  (interactive)
-  (message "DEBUG: RET maps to %S"
-           (key-binding (kbd "RET"))))
-
-;; Bind C-c RET in corfu-popup and in all minibuffers
-(define-key corfu-map  (kbd "C-c RET") #'my/debug-ret-key)
-(add-hook 'minibuffer-setup-hook
-          (lambda () (local-set-key (kbd "C-c RET") #'my/debug-ret-key)))
+;;(defun my/debug-ret-key ()
+;;  (interactive)
+;;  (message "DEBUG: RET maps to %S"
+;;           (key-binding (kbd "RET"))))
+;;
+;;;; Bind C-c RET in corfu-popup and in all minibuffers
+;;(define-key corfu-map  (kbd "C-c RET") #'my/debug-ret-key)
+;;(add-hook 'minibuffer-setup-hook
+;;          (lambda () (local-set-key (kbd "C-c RET") #'my/debug-ret-key)))
 
 
 (defgroup my/corfu-strip nil

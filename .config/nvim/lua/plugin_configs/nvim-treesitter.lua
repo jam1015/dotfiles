@@ -12,7 +12,8 @@ require 'nvim-treesitter.configs'.setup {
     },
   },
   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = { "vimdoc", "markdown_inline", "markdown", "vim", "r", "rnoweb", "lua", "c", "python", "html", "typescript", "javascript", "bash", "make", "latex",
+  ensure_installed = { "vimdoc", "markdown_inline", 
+    "markdown", "vim", "r", "rnoweb", "lua", "c", "python", "html", "typescript", "javascript", "bash", "make", "latex",
     "commonlisp", "json","yaml" },
   autopairs = true,
   autotag = { enable = true },
@@ -27,6 +28,7 @@ require 'nvim-treesitter.configs'.setup {
   highlight = {
     -- `false` will disable the whole extension
     enable = true,
+    disable = {"markdown"},
 
     -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is

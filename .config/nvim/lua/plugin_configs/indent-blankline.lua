@@ -25,5 +25,5 @@ require("ibl").setup ({
 		remove_blankline_trail = true,
 	},
 	scope = { enabled = false },
-	exclude = {filetypes = {"text"}}
+	exclude = {filetypes = {"text", "markdown"}}
 })

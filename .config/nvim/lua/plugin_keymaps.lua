@@ -484,7 +484,6 @@ function M.telescope()
   local wk = require("which-key")
   local builtin = require('telescope.builtin')
   wk.add({
-    { "<leader>fg", builtin.live_grep,                                     mode = "n", desc = "Live grep" },
     --{ "<leader>bb", builtin.buffers,                                       mode = "n", desc = "List buffers" },
     { "<leader>fh", builtin.help_tags,                                     mode = "n", desc = "Help tags" },
     { "<leader>th", function() builtin.find_files({ hidden = true }) end,  mode = "n", desc = "Find hidden files" },

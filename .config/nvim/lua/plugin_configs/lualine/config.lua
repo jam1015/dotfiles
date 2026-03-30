@@ -92,9 +92,9 @@ require('lualine').setup {
     always_divide_middle = true,
     globalstatus = false,
     refresh = {
-      statusline = 10,
-      tabline = 10,
-      winbar = 10,
+      statusline = 100,
+      tabline = 100,
+      winbar = 100,
     }
   },
 

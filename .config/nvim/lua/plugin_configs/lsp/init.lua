@@ -13,8 +13,8 @@ end
 local servers = { "ts_ls", "vimls", "clangd", "pyright", "jsonls", "cssls", "eslint",
   "emmet_ls", "texlab", "html", "bashls",
   "lua_ls",
+"r_language_server",
   "julials" }
---"r_language_server",
 --"texlab",
 
 local settings_obj = require("plugin_configs.lsp.mason_settings")

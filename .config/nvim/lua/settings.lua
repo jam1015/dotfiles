@@ -83,9 +83,22 @@ if os.getenv("DISPLAY") then
   set.termguicolors = true
 else
 end
-set.foldmethod = "expr"
-set.foldexpr = "nvim_treesitter#foldexpr()"
-set.foldlevelstart = 99
+--vim.api.nvim_create_autocmd("BufReadPost", {
+--  pattern = "*",
+--  callback = function()
+--    -- start with manual (instant open)
+--    vim.wo.foldmethod = "manual"
+--
+--    vim.defer_fn(function()
+--      -- only set if the buffer is still current and window valid
+--      if vim.api.nvim_buf_is_valid(vim.api.nvim_get_current_buf()) then
+--        vim.wo.foldmethod = "expr"
+--        vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+--      end
+--    end, 5000) -- delay in ms
+--  end,
+--})
+--set.foldlevelstart = 99
 
 vim.g.vim_json_syntax_conceal = 0
 vim.g.netrw_liststyle = 3
@@ -107,27 +120,33 @@ if os.getenv("DISPLAY") then
 else
 end
 
-local function setup_tmux_clipboard()
-  local tmux = os.getenv("TMUX")
-  if tmux then
-    -- Configure Neovim to use tmux's clipboard
-    vim.cmd([[
-		let g:clipboard = {
-			\   'name': 'myClipboard',
-			\   'copy': {
-				\      '+': ['tmux', 'load-buffer', '-w', '-'],
-				\      '*': ['tmux', 'load-buffer', '-w', '-'],
-				\    },
-				\   'paste': {
-					\      '+': ['tmux', 'save-buffer', '-'],
-					\      '*': ['tmux', 'save-buffer', '-'],
-					\   },
-					\   'cache_enabled': 0,
-					\ }
-
-					]])
-  else
-    return true
+local function setup_clipboard()
+  if os.getenv("TMUX") then
+    vim.g.clipboard = {
+      name = 'tmux-clipboard',
+      copy = {
+        ['+'] = { 'tmux', 'load-buffer', '-w', '-' },
+        ['*'] = { 'tmux', 'load-buffer', '-w', '-' },
+      },
+      paste = {
+        ['+'] = { 'tmux', 'save-buffer', '-' },
+        ['*'] = { 'tmux', 'save-buffer', '-' },
+      },
+      cache_enabled = false,
+    }
+  elseif os.getenv("WAYLAND_DISPLAY") then
+    vim.g.clipboard = {
+      name = 'wl-clipboard',
+      copy = {
+        ['+'] = { 'wl-copy', '--type', 'text/plain' },
+        ['*'] = { 'wl-copy', '--primary', '--type', 'text/plain' },
+      },
+      paste = {
+        ['+'] = { 'wl-paste', '--no-newline' },
+        ['*'] = { 'wl-paste', '--no-newline', '--primary' },
+      },
+      cache_enabled = false,
+    }
   end
 end
 
@@ -140,4 +159,4 @@ if vim.g.neovide then
   vim.g.neovide_cursor_smooth_blink = true
 end
 -- Call the function to set up the clipboard
-setup_tmux_clipboard()
+setup_clipboard()

@@ -300,7 +300,7 @@ return
     },
     {
       "nvim-treesitter/nvim-treesitter",
-      event = "VeryLazy",
+      --event = "VeryLazy",
       enabled = true,
       config = function()
         require("plugin_configs.nvim-treesitter")
@@ -327,24 +327,24 @@ return
       end,
       dependencies = {
         --{ "PaterJason/cmp-conjure",     event = "VeryLazy" },
-        { "onsails/lspkind.nvim",       event = "VeryLazy" },
-        { "R-nvim/cmp-r",               event = "VeryLazy" },
-        { "hrsh7th/cmp-nvim-lua",       event = "VeryLazy" },
-        { "hrsh7th/cmp-nvim-lsp",       event = "VeryLazy" },
-        { "hrsh7th/cmp-buffer",         event = "VeryLazy" },
-        { "hrsh7th/cmp-path",           event = "VeryLazy" },
-        { "hrsh7th/cmp-cmdline",        event = "VeryLazy" },
-        { "kdheepak/cmp-latex-symbols", event = "VeryLazy" },
+        { "onsails/lspkind.nvim",        },
+        { "R-nvim/cmp-r",                },
+        { "hrsh7th/cmp-nvim-lua",        },
+        { "hrsh7th/cmp-nvim-lsp",        },
+        { "hrsh7th/cmp-buffer",          },
+        { "hrsh7th/cmp-path",            },
+        { "hrsh7th/cmp-cmdline",         },
+        { "kdheepak/cmp-latex-symbols", ft = "tex" },
         {
           "L3MON4D3/LuaSnip", -- tag = "v<CurrentMajor>.*",
-          event = "VeryLazy",
+          event = "InsertEnter",
           build = "make install_jsregexp",
           dependencies = { "rafamadriz/friendly-snippets" },
           config = function()
             require("plugin_configs.LuaSnip")
           end,
         },
-        { "saadparwaiz1/cmp_luasnip", event = "VeryLazy" }
+        { "saadparwaiz1/cmp_luasnip", event = "InsertEnter" }
       },
       config = function()
         require("plugin_configs.nvim-cmp")
@@ -414,7 +414,7 @@ return
     },
     {
       "nvim-telescope/telescope.nvim",
-      event = "VeryLazy",
+      cmd = "Telescope",
       enabled = true,
       dependencies = { "nvim-lua/plenary.nvim",
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
@@ -499,19 +499,22 @@ return
         require("plugin_configs.vim-numbertoggle_init")
       end,
     }),
-    {
-      "blanktiger/aqf.nvim",
-      event = "VeryLazy",
-      config = function()
+{
+    "blanktiger/aqf.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
         require("aqf").setup()
-        local telescope = require("telescope")
-        telescope.load_extension("aqf")
-      end,
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope.nvim",
-      }
-    },
+        -- load the extension lazily when telescope opens
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "TelescopeLoaded",
+            once = true,
+            callback = function()
+                require("telescope").load_extension("aqf")
+            end,
+        })
+    end,
+},
     {
       'famiu/bufdelete.nvim',
       config = function() require("plugin_keymaps").bufdelete() end,
@@ -580,7 +583,6 @@ return
     }),
     {
       "R-nvim/R.nvim",
-      event = "VeryLazy",
       config = function() require('plugin_configs.rnvim') end,
     },
 
