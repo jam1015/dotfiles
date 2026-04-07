@@ -34,6 +34,7 @@ alsa-utils
 amd-ucode
 analitza
 angelfish
+ant
 aom
 appstream
 appstream-glib
@@ -708,6 +709,7 @@ hplip
 hslua-cli
 htop
 hunspell
+hunspell-en_us
 hwdata
 hwdetect
 hwinfo
@@ -745,8 +747,11 @@ iw
 iwd
 jansson
 jasper
+java-environment-common
+java-runtime-common
 jbig2dec
 jbigkit
+jdk17-openjdk
 jemalloc
 jfsutils
 jkqtplotter
@@ -1281,6 +1286,7 @@ libmwaw
 libmysofa
 libnautilus-extension
 libndp
+libnet
 libnetfilter_conntrack
 libnewt
 libnfnetlink
@@ -1521,6 +1527,7 @@ mariadb-libs
 marisa
 markdownpart
 massif-visualizer
+mathjax2
 mbox-importer
 md4c
 mdadm
@@ -1605,6 +1612,7 @@ ntfs-3g
 ntp
 numactl
 numlockx
+nvm
 nwg-look
 oath-toolkit
 ocean-sound-theme
@@ -2162,6 +2170,7 @@ river
 rocs
 rofi
 rpcbind
+rstudio-desktop
 rsync
 rtkit
 rtmpdump
@@ -2524,6 +2533,7 @@ yad
 yajl
 yakuake
 yaml-cpp
+yarn
 yay
 yt-dlp
 yt-dlp-ejs
