@@ -54,7 +54,7 @@
 (require 'dirvish-config)
 (require 'gnus-config)
 (require 'dashboard-config)
-;;(require 'kkp-config)
+(require 'kkp-config)
 
 
 ;;; other filetypes
