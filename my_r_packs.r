@@ -1,4 +1,4 @@
-# global_packages.R
+# my_r_packs.r
 # This script installs/updates CRAN, Bioconductor, and GitHub packages only when needed.
 
 ### CRAN PACKAGES ###
