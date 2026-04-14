@@ -1,68 +1,23 @@
 # my_r_packs.r
-# Installs/updates CRAN, Bioconductor, and GitHub packages only when needed.
+# Installs/updates CRAN, Bioconductor, and GitHub packages from CSV manifests.
 
 options(repos = c(CRAN = "https://cloud.r-project.org"))
 
+pkg_dir <- "~/dotfiles/r_packages"
+
+read_manifest <- function(file) {
+  path <- file.path(pkg_dir, file)
+  if (file.exists(path)) {
+    pkgs <- readLines(path, warn = FALSE)
+    pkgs[nzchar(trimws(pkgs))]
+  } else {
+    message("Manifest not found: ", path)
+    character()
+  }
+}
+
 ### CRAN PACKAGES ###
-cran_packages <- unique(c(
-  # tidyverse core
-  "tidyverse", "dplyr", "ggplot2", "tidyr", "purrr", "readr", "tibble",
-  "stringr", "forcats", "lubridate",
-
-  # tidyverse adjacent
-  "broom", "dbplyr", "dtplyr", "googledrive", "googlesheets4",
-  "haven", "modelr", "readxl", "reprex", "rvest", "conflicted",
-
-  # completion / dev
-  "data.table", "DBI", "renv", "styler", "knitr", "rmarkdown",
-  "quarto", "tinytex", "ragg",
-
-  # infrastructure
-  "cli", "rlang", "glue", "vctrs", "pillar", "lifecycle", "R6",
-  "withr", "memoise", "cachem", "fastmap",
-
-  # io / web
-  "curl", "httr", "jsonlite", "xml2", "yaml", "openssl", "askpass",
-  "mime", "gargle", "ids", "uuid",
-
-  # string / text
-  "stringi", "clipr", "crayon",
-
-  # graphics support
-  "scales", "farver", "colorspace", "viridisLite", "RColorBrewer",
-  "isoband", "munsell", "labeling", "gtable", "systemfonts",
-  "textshaping", "fontawesome",
-
-  # html / web rendering
-  "htmltools", "bslib", "jquerylib", "sass", "selectr",
-
-  # data formats
-  "bit", "bit64", "blob", "cellranger", "hms", "timechange", "tzdb",
-  "vroom", "readr",
-
-  # process / system
-  "callr", "processx", "ps", "sys", "fs", "rappdirs", "prettyunits",
-  "progress",
-
-  # misc
-  "digest", "base64enc", "cpp11", "evaluate", "highr", "xfun",
-  "backports", "rematch", "rematch2", "generics", "pkgconfig",
-  "fansi", "utf8",
-
-  # R utilities
-  "R.cache", "R.methodsS3", "R.oo", "R.utils", "NCmisc", "nvimcom",
-  "reader",
-
-  # spatial / stats
-  "e1071", "proxy", "classInt", "sp", "units", "maps", "mapproj",
-  "hexbin", "quantreg", "SparseM", "MatrixModels", "nortest",
-
-  # testing / packaging
-  "brio", "diffobj", "praise", "rprojroot", "RUnit", "Rcpp",
-
-  # fonts
-  "fontBitstreamVera", "fontLiberation"
-))
+cran_packages <- read_manifest("cran.csv")
 
 # Filter out base packages that can't be updated
 base_pkgs <- rownames(installed.packages(priority = "base"))
@@ -86,23 +41,28 @@ if (length(to_install) > 0) {
 }
 
 ### BIOCONDUCTOR PACKAGES ###
-bioc_packages <- c("GenomicRanges", "Biostrings", "pkgKitten", "BiocFileCache")
+bioc_packages <- read_manifest("bioc.csv")
 
-if (!requireNamespace("BiocManager", quietly = TRUE)) {
-  install.packages("BiocManager")
+if (length(bioc_packages) > 0) {
+  if (!requireNamespace("BiocManager", quietly = TRUE)) {
+    install.packages("BiocManager")
+  }
+  BiocManager::install(bioc_packages, ask = FALSE, update = FALSE)
+} else {
+  message("No Bioconductor packages in manifest.")
 }
-
-# update = FALSE prevents BiocManager from trying to update system library packages
-BiocManager::install(bioc_packages, ask = FALSE, update = FALSE)
 
 ### GITHUB PACKAGES ###
-if (!requireNamespace("pak", quietly = TRUE)) {
-  install.packages("pak")
-}
+github_packages <- read_manifest("github.csv")
 
-github_packages <- c("hadley/emo", "jalvesaq/colorout", "git::https://gitlab.com/djvanderlaan/terminalgraphics.git")
-
-for (gh_pkg in github_packages) {
-  message("Installing/updating GitHub package: ", gh_pkg)
-  pak::pak(gh_pkg)
+if (length(github_packages) > 0) {
+  if (!requireNamespace("pak", quietly = TRUE)) {
+    install.packages("pak")
+  }
+  for (gh_pkg in github_packages) {
+    message("Installing/updating GitHub package: ", gh_pkg)
+    pak::pak(gh_pkg)
+  }
+} else {
+  message("No GitHub packages in manifest.")
 }

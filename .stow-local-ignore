@@ -34,3 +34,5 @@ global-R
 global-R/
 renv.lock
 my_r_packs.r
+r_packages
+r_packages/*
