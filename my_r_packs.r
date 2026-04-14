@@ -100,7 +100,7 @@ if (!requireNamespace("pak", quietly = TRUE)) {
   install.packages("pak")
 }
 
-github_packages <- c("hadley/emo")
+github_packages <- c("hadley/emo", "jalvesaq/colorout", "git::https://gitlab.com/djvanderlaan/terminalgraphics.git")
 
 for (gh_pkg in github_packages) {
   message("Installing/updating GitHub package: ", gh_pkg)
