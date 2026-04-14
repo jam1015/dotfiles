@@ -92,7 +92,21 @@ end
 
 M.on_attach = function(client, bufnr)
   local_keymaps(bufnr)
-  -- Additional on_attach setup can go here
+
+  if client.server_capabilities.documentHighlightProvider then
+    local group = vim.api.nvim_create_augroup("LspDocHighlight", { clear = false })
+    vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
+    vim.api.nvim_create_autocmd("CursorHold", {
+      group = group,
+      buffer = bufnr,
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      group = group,
+      buffer = bufnr,
+      callback = vim.lsp.buf.clear_references,
+    })
+  end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

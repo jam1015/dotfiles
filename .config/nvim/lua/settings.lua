@@ -55,6 +55,7 @@ set.tabstop = 2
 set.showcmd = false
 --set.path = set.path + "**"
 set.expandtab = true
+set.updatetime = 300
 set.smarttab = false
 set.cindent = false
 set.smartindent = false
