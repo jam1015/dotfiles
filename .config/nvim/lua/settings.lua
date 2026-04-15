@@ -25,7 +25,8 @@ if os.getenv("DISPLAY") then
     vim.cmd([[colorscheme elflord]])
   end
 else
-  vim.cmd([[colorscheme elflord]]) end
+  vim.cmd([[colorscheme elflord]])
+end
 
 -- add complete/completeopt
 set.modeline = false
