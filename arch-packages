@@ -1046,6 +1046,7 @@ kwidgetsaddons5
 kwin
 kwindowsystem
 kwindowsystem5
+kwm
 kwordquiz
 kwrited
 kxmlgui
@@ -1517,6 +1518,7 @@ lsb-release
 lskat
 lsof
 lsscsi
+lswt
 lua
 lua-language-server
 lua-lpeg
@@ -2215,7 +2217,7 @@ reiserfsprogs
 rhash
 ripgrep
 ripgrep-all
-river-classic
+river
 rocs
 rofi
 rpcbind
@@ -2495,6 +2497,7 @@ wl-clipboard
 wlogout
 wlr-layout-ui
 wlr-randr
+wlrctl
 wlroots0.15
 wlroots0.19
 wlsunset
