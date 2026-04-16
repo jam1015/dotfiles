@@ -106,6 +106,7 @@ botan
 botan2
 bovo
 breeze
+breeze-cursors
 breeze-gtk
 breeze-icons
 brightnessctl
@@ -146,6 +147,7 @@ clang
 clang18
 clang19
 clang20
+clang21
 clinfo
 clipman
 clucene
@@ -165,6 +167,7 @@ compiler-rt
 compiler-rt18
 compiler-rt19
 compiler-rt20
+compiler-rt21
 composefs
 confuse
 conmon
@@ -724,6 +727,7 @@ i3status
 iana-etc
 icu
 id3lib
+iio-sensor-proxy
 ijs
 imagemagick
 imath
@@ -743,6 +747,7 @@ isd
 iso-codes
 isoimagewriter
 itinerary
+itstool
 iw
 iwd
 jansson
@@ -866,7 +871,7 @@ kdialog
 kdiamond
 kdnssd
 kdoctools
-kdsoap-qt6
+kdsoap
 kdsoap-ws-discovery-client
 keditbookmarks
 kernel-install-for-dracut
@@ -1114,10 +1119,12 @@ libaio
 libakonadi
 libappindicator
 libarchive
+libasan
 libass
 libassuan
 libasyncns
 libatasmart
+libatomic
 libatomic_ops
 libavc1394
 libavif
@@ -1195,14 +1202,17 @@ libfreeaptx
 libfreehand
 libfreexl
 libfyaml
+libgcc
 libgccjit
 libgcrypt
 libgeotiff
+libgfortran
 libgirepository
 libgit2
 libglvnd
 libgme
 libgnomekbd
+libgomp
 libgpg-error
 libgphoto2
 libgpiod
@@ -1255,6 +1265,7 @@ libldap
 libliftoff
 liblqr
 liblrdf
+liblsan
 libltc
 libluv
 liblzf
@@ -1305,6 +1316,7 @@ libnotify
 libnsl
 libnumbertext
 libnvme
+libobjc
 libodfgen
 libogg
 libolm
@@ -1338,6 +1350,7 @@ libqaccessibilityclient-qt6
 libqalculate
 libqmi
 libqrtr-glib
+libquadmath
 libquotient
 libqxp
 libraqm
@@ -1368,9 +1381,11 @@ libspatialite
 libspectre
 libspnav
 libsrtp
+libssc
 libssh
 libssh2
 libstaroffice
+libstdc++
 libstemmer
 libsynctex
 libsysprof-capture
@@ -1386,6 +1401,8 @@ libtommath
 libtool
 libtorrent-rasterbar
 libtpms
+libtsan
+libubsan
 libucl
 libunibreak
 libunistring
@@ -1489,6 +1506,8 @@ llvm-libs
 llvm18-libs
 llvm19-libs
 llvm20-libs
+llvm21
+llvm21-libs
 lm_sensors
 lmdb
 logrotate
@@ -1501,7 +1520,10 @@ lsscsi
 lua
 lua-language-server
 lua-lpeg
+lua-luarocks
 lua51-lpeg
+lua54
+lua54-lpeg
 luajit
 luarocks
 luit
@@ -1517,6 +1539,7 @@ mailcap
 mailcommon
 mailimporter
 make
+mallard-ducktype
 man-db
 man-pages
 marble
@@ -1632,6 +1655,7 @@ opencv
 openexr
 openh264
 openjpeg2
+openjph
 openmpi
 openpmix
 openssh
@@ -1646,6 +1670,8 @@ ostree
 otf-codenewroman-nerd
 otf-edwin
 oxygen
+oxygen-cursors
+oxygen-icons
 oxygen-sounds
 p11-kit
 pacman
@@ -1813,6 +1839,8 @@ plasma-desktop
 plasma-disks
 plasma-firewall
 plasma-integration
+plasma-keyboard
+plasma-login-manager
 plasma-meta
 plasma-nm
 plasma-pa
@@ -1853,6 +1881,7 @@ prison
 procps-ng
 proj
 protobuf
+protobuf-c
 proton-vpn-daemon
 proton-vpn-gtk-app
 prrte
@@ -1862,6 +1891,7 @@ pugixml
 pulseaudio-qt
 purpose
 pv
+pybind11
 pyside6
 python
 python-aaf2
@@ -1875,6 +1905,7 @@ python-asttokens
 python-attrs
 python-autocommand
 python-automat
+python-babel
 python-bcc
 python-bcrypt
 python-beautifulsoup4
@@ -1907,6 +1938,7 @@ python-decorator
 python-defusedxml
 python-distlib
 python-distro
+python-docutils
 python-dotenv
 python-dulwich
 python-editables
@@ -1927,6 +1959,7 @@ python-hatchling
 python-html5lib
 python-hyperlink
 python-idna
+python-imagesize
 python-importlib-metadata
 python-incremental
 python-installer
@@ -1944,6 +1977,7 @@ python-jsonschema-specifications
 python-keyring
 python-kiwisolver
 python-lark-parser
+python-linkify-it-py
 python-lockfile
 python-lxml
 python-mako
@@ -1969,6 +2003,7 @@ python-pfzy
 python-pillow
 python-pip
 python-pivy
+python-pkg_resources
 python-pkginfo
 python-platformdirs
 python-pluggy
@@ -2004,7 +2039,9 @@ python-pyqt6
 python-pyqt6-sip
 python-pyserial
 python-pysocks
+python-python-discovery
 python-pytokens
+python-pytz
 python-pywayland
 python-pyxdg
 python-qtpy
@@ -2014,6 +2051,7 @@ python-reportlab
 python-requests
 python-requests-toolbelt
 python-rich
+python-roman-numerals-py
 python-rpds-py
 python-secretstorage
 python-sentry_sdk
@@ -2022,7 +2060,16 @@ python-setuptools
 python-shellingham
 python-shtab
 python-six
+python-snowballstemmer
 python-soupsieve
+python-sphinx
+python-sphinx-alabaster-theme
+python-sphinxcontrib-applehelp
+python-sphinxcontrib-devhelp
+python-sphinxcontrib-htmlhelp
+python-sphinxcontrib-jsmath
+python-sphinxcontrib-qthelp
+python-sphinxcontrib-serializinghtml
 python-stack-data
 python-termcolor
 python-textual
@@ -2037,6 +2084,7 @@ python-twisted
 python-types-pyyaml
 python-typing-inspection
 python-typing_extensions
+python-uc-micro-py
 python-urllib3
 python-urwid
 python-virtualenv
@@ -2167,11 +2215,10 @@ reiserfsprogs
 rhash
 ripgrep
 ripgrep-all
-river
+river-classic
 rocs
 rofi
 rpcbind
-rstudio-desktop
 rsync
 rtkit
 rtmpdump
@@ -2376,6 +2423,7 @@ usbutils
 util-linux
 util-linux-libs
 v4l-utils
+vala
 vapoursynth
 verdict
 vid.stab
@@ -2504,6 +2552,7 @@ xorg-fonts-encodings
 xorg-mkfontscale
 xorg-server
 xorg-server-common
+xorg-server-xvfb
 xorg-setxkbmap
 xorg-xauth
 xorg-xbacklight
@@ -2536,6 +2585,9 @@ yakuake
 yaml-cpp
 yarn
 yay
+yelp-tools
+yelp-xsl
+yoga
 yt-dlp
 yt-dlp-ejs
 yyjson
@@ -2546,6 +2598,7 @@ zbar
 zeromq
 zig
 zimg
+zint
 zip
 zix
 zlib

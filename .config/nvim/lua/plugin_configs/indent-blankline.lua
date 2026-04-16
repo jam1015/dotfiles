@@ -17,13 +17,14 @@
 --})
 
 
-require("ibl").setup ({
-	--indent = { highlight = highlight, char = "" },
-	indent = {char = "│"},
-	whitespace = {
-		--highlight = highlight,
-		remove_blankline_trail = true,
-	},
-	scope = { enabled = false },
-	exclude = {filetypes = {"text", "markdown"}}
+require("ibl").setup({
+  indent = {
+    char = "│",
+    tab_char = "│",
+  },
+  whitespace = {
+    remove_blankline_trail = true,
+  },
+  scope = { enabled = false },
+  exclude = { filetypes = { "text", "markdown" } },
 })
