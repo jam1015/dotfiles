@@ -141,7 +141,11 @@ riverctl map -release prefix None p   enter-mode normal
 riverctl map prefix None Period spawn 'riverctl enter-mode normal && riverctl swap next '
 riverctl map prefix None Comma  spawn 'riverctl enter-mode normal && riverctl swap previous '
 
-
+# —— Rotate tiled views, preserving focus position ——
+riverctl map prefix2 None  period spawn 'riverctl enter-mode normal && ~/.config/river/scripts/rotate_views.sh next slot'
+riverctl map prefix2 None  comma  spawn 'riverctl enter-mode normal && ~/.config/river/scripts/rotate_views.sh prev slot'
+riverctl map prefix2 Shift period spawn 'riverctl enter-mode normal && ~/.config/river/scripts/rotate_views.sh next window'
+riverctl map prefix2 Shift comma  spawn 'riverctl enter-mode normal && ~/.config/river/scripts/rotate_views.sh prev window'
 # —— Send Window to Other Output —— 
 riverctl map prefix None bracketright  spawn 'riverctl enter-mode normal && riverctl send-to-output next && riverctl focus-output next '
 riverctl map prefix None bracketleft spawn 'riverctl enter-mode normal && riverctl send-to-output previous && riverctl focus-output previous '
