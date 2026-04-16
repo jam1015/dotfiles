@@ -1,0 +1,46 @@
+#!/bin/sh
+# ~/.config/river/init
+# River 0.4 — compositor-only config. Window management is handled by kwm.
+
+# ─── Environment Variables ───────────────────────────────────────────────────────
+export QT_IM_MODULES="wayland;fcitx"
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+export SDL_IM_MODULE=fcitx
+export GLFW_IM_MODULE=ibus
+
+export GTK_THEME=Arc-Dark
+export QT_STYLE_OVERRIDE=adwaita
+export QT_QPA_PLATFORMTHEME=qt5ct
+export GCM_PROFILE_FILE="/usr/share/color/icc/framework-2.8k.icc"
+export ICC_PROFILE="/usr/share/color/icc/framework-2.8k.icc"
+
+export XKB_DEFAULT_OPTIONS=ctrl:nocaps
+
+# ─── Output Configuration ────────────────────────────────────────────────────────
+if wlr-randr | grep -q '^DP-'; then
+  wlr-randr \
+    --output DP-11 --mode 1920x1080 --pos 0,0 --transform 90 \
+    --output DP-13 --mode 1920x1080 --pos 1080,0 --transform normal \
+    --output eDP-1 --mode 2880x1920 --pos 1080,1080 --transform normal --scale 1.75
+else
+  wlr-randr --output eDP-1 --mode 2880x1920 --pos 1080,1080 --transform normal --scale 1.75
+fi
+
+# ─── Autostart ────────────────────────────────────────────────────────────────────
+killall fcitx5 2>/dev/null
+fcitx5 -d
+
+dunst &
+
+pkill -9 polkit-gnome-authentication-agent-1 2>/dev/null
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+wlsunset &
+
+swayidle \
+  timeout 1200 'swaylock -f --color 000000' \
+  before-sleep 'swaylock -f --color 000000' &
+
+# ─── Start Window Manager ────────────────────────────────────────────────────────
+kwm
