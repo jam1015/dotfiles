@@ -1,0 +1,866 @@
+.{
+    // ─── Startup ────────────────────────────────────────────────────────────────
+    // NOTE: daemons like dunst, fcitx5, swayidle, wlsunset, polkit are started
+    // from river's init, not here. Only kwm-specific startup goes here.
+    .startup_cmds = .{
+        // If you drop waybar in favor of kwm's built-in bar, remove this:
+        .{ "waybar" },
+    },
+
+    // ─── Cursor ─────────────────────────────────────────────────────────────────
+    .xcursor_theme = .{ .theme = .{ .name = "Breeze5", .size = 24 } },
+    .sloppy_focus = true,           // was: riverctl focus-follows-cursor normal
+    .cursor_warp = .on_focus_changed, // was: riverctl set-cursor-warp on-focus-change
+
+    // ─── Background ─────────────────────────────────────────────────────────────
+    // deepnight — NOTE: needs -Dbackground=true when building kwm
+    .background = .{ .color = 0x02091Cff },
+
+    // ─── Borders ────────────────────────────────────────────────────────────────
+    .border = .{
+        .width = 3,
+        .color = .{
+            .focus = 0x9933ccff,    // purple
+            .unfocus = 0x8b877cff,  // taupe
+            // kwm doesn't have a separate urgent border color;
+            // urgent is shown via the bar tag highlight
+        },
+    },
+
+    // ─── Tags ───────────────────────────────────────────────────────────────────
+    // 10 tags (matching your old 1-9 + 0 setup)
+    .tags = .{ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" },
+
+    // ─── Layout ─────────────────────────────────────────────────────────────────
+    .default_layout = .tile,
+    .layout = .{
+        .tile = .{
+            .nmaster = 1,
+            .mfact = 0.55,
+            .inner_gap = 0,     // was: rivertile -view-padding 0
+            .outer_gap = 0,     // was: rivertile -outer-padding 0
+            .master_location = .left,
+            // TODO: your rivertile_orient.bash auto-detected monitor rotation
+            // and set master_location = top for portrait monitors.
+            // kwm supports per-tag layout settings but not per-output auto-detection.
+            // You may need to manually set portrait outputs to top, or request
+            // this feature from kwm upstream.
+        },
+    },
+
+    // ─── Attach Mode ────────────────────────────────────────────────────────────
+    // was: riverctl output-attach-mode below
+    .default_attach_mode = .{
+        .tile = .bottom,
+        .grid = .bottom,
+        .monocle = .bottom,
+        .deck = .bottom,
+        .scroller = .below_focused,
+        .float = .bottom,
+    },
+
+    // ─── Window Decoration ──────────────────────────────────────────────────────
+    .default_window_decoration = .ssd,
+
+    // ─── Bar ────────────────────────────────────────────────────────────────────
+    .bar = .{
+        .show_default = true,
+        .position = .top,
+        .font = "monospace:size=10",
+        .color = .{
+            .normal = .{
+                .fg = 0xc8d3f5ff,
+                .bg = 0x02091Cd0,  // deepnight with slight transparency
+            },
+            .select = .{
+                .fg = 0x02091Cff,
+                .bg = 0x9933ccd0,  // purple
+            },
+        },
+        .status = .stdin,
+    },
+
+    // ─── Rules (float specific apps) ────────────────────────────────────────────
+    .rules = .{
+        .{ .app_id = "Yad",              .float = true },
+        .{ .app_id = "Galculator",       .float = true },
+        .{ .app_id = "Blueberry.py",     .float = true },
+        .{ .app_id = "Xsane",            .float = true },
+        .{ .app_id = "Pavucontrol",      .float = true },
+        .{ .app_id = "qt5ct",            .float = true },
+        .{ .app_id = "Bluetooth-sendto", .float = true },
+        .{ .app_id = "Pamac-manager",    .float = true },
+        .{ .app_id = "Launcher",         .float = true },
+    },
+
+    // ─── Input (handled by kwim) ────────────────────────────────────────────────
+    // Replaces enable_natural_scroll.sh
+    .input = .{
+        .{ .match = "touchpad", .natural_scroll = true },
+    },
+
+    // ─── Keybindings ────────────────────────────────────────────────────────────
+    .bindings = .{
+        .repeat_info = .{
+            .rate = 45,     // was: riverctl set-repeat 45 195
+            .delay = 195,
+        },
+
+        .mode_tag = .{
+            .{ "default", "" },
+            .{ "passthrough", "P" },
+            .{ "prefix", "»" },
+            .{ "prefix2", "»»" },
+        },
+
+        .key = .{
+
+            // ═══════════════════════════════════════════════════════════════
+            // DEFAULT MODE
+            // ═══════════════════════════════════════════════════════════════
+
+            // ── Enter prefix mode (Super tap) ───────────────────────────
+            // NOTE: Using bare Super_L as a keysym may or may not work in
+            // kwm. If it doesn't, fall back to a different key or use
+            // Mod4 as a held modifier on all prefix bindings instead.
+            .{
+                .keysym = "Super_L",
+                .modifiers = .{},
+                .event = .{ .click = .{ .pressed = .{ .switch_mode = .{ .mode = "prefix" } } } },
+            },
+
+            // ── Exit to TTY ─────────────────────────────────────────────
+            .{
+                .keysym = "Delete",
+                .modifiers = .{ .ctrl = true, .mod1 = true },
+                .event = .{ .click = .{ .pressed = .quit } },
+            },
+
+            // ── Volume (normal + locked, repeating) ─────────────────────
+            .{
+                .keysym = "XF86AudioRaiseVolume",
+                .modifiers = .{},
+                .event = .{ .repeat = .{ .spawn = .{ .argv = .{ "sh", "-c", "~/.config/river/scripts/volume_up.sh" } } } },
+            },
+            .{
+                .mode = "lock",
+                .keysym = "XF86AudioRaiseVolume",
+                .modifiers = .{},
+                .event = .{ .repeat = .{ .spawn = .{ .argv = .{ "sh", "-c", "~/.config/river/scripts/volume_up.sh" } } } },
+            },
+            .{
+                .keysym = "XF86AudioLowerVolume",
+                .modifiers = .{},
+                .event = .{ .repeat = .{ .spawn = .{ .argv = .{ "sh", "-c", "~/.config/river/scripts/volume_down.sh" } } } },
+            },
+            .{
+                .mode = "lock",
+                .keysym = "XF86AudioLowerVolume",
+                .modifiers = .{},
+                .event = .{ .repeat = .{ .spawn = .{ .argv = .{ "sh", "-c", "~/.config/river/scripts/volume_down.sh" } } } },
+            },
+            .{
+                .keysym = "XF86AudioMute",
+                .modifiers = .{},
+                .event = .{ .click = .{ .pressed = .{ .spawn = .{ .argv = .{ "sh", "-c", "~/.config/river/scripts/toggle_mute.sh" } } } } },
+            },
+            .{
+                .mode = "lock",
+                .keysym = "XF86AudioMute",
+                .modifiers = .{},
+                .event = .{ .click = .{ .pressed = .{ .spawn = .{ .argv = .{ "sh", "-c", "~/.config/river/scripts/toggle_mute.sh" } } } } },
+            },
+
+            // ── Page Up/Down for volume (repeating) ─────────────────────
+            .{
+                .keysym = "Prior",
+                .modifiers = .{},
+                .event = .{ .repeat = .{ .spawn = .{ .argv = .{ "sh", "-c", "~/.config/river/scripts/volume_up.sh" } } } },
+            },
+            .{
+                .keysym = "Next",
+                .modifiers = .{},
+                .event = .{ .repeat = .{ .spawn = .{ .argv = .{ "sh", "-c", "~/.config/river/scripts/volume_down.sh" } } } },
+            },
+
+            // ── Brightness (repeating) ──────────────────────────────────
+            .{
+                .keysym = "XF86MonBrightnessUp",
+                .modifiers = .{},
+                .event = .{ .repeat = .{ .spawn = .{ .argv = .{ "sh", "-c", "~/.config/river/scripts/brightness_up.sh" } } } },
+            },
+            .{
+                .keysym = "XF86MonBrightnessDown",
+                .modifiers = .{},
+                .event = .{ .repeat = .{ .spawn = .{ .argv = .{ "sh", "-c", "~/.config/river/scripts/brightness_down.sh" } } } },
+            },
+
+            // ── Media keys ──────────────────────────────────────────────
+            .{
+                .keysym = "XF86AudioPlay",
+                .modifiers = .{},
+                .event = .{ .click = .{ .pressed = .{ .spawn = .{ .argv = .{ "playerctl", "play-pause" } } } } },
+            },
+            .{
+                .keysym = "XF86AudioNext",
+                .modifiers = .{},
+                .event = .{ .click = .{ .pressed = .{ .spawn = .{ .argv = .{ "playerctl", "next" } } } } },
+            },
+            .{
+                .keysym = "XF86AudioPrev",
+                .modifiers = .{},
+                .event = .{ .click = .{ .pressed = .{ .spawn = .{ .argv = .{ "playerctl", "previous" } } } } },
+            },
+
+            // ═══════════════════════════════════════════════════════════════
+            // PREFIX MODE
+            // ═══════════════════════════════════════════════════════════════
+
+            // ── Mode transitions ────────────────────────────────────────
+            // Super_L in prefix → prefix2
+            .{
+                .mode = "prefix",
+                .keysym = "Super_L",
+                .modifiers = .{},
+                .event = .{ .click = .{ .pressed = .{ .switch_mode = .{ .mode = "prefix2" } } } },
+            },
+            // Escape → default
+            .{
+                .mode = "prefix",
+                .keysym = "Escape",
+                .modifiers = .{},
+                .event = .{ .click = .{ .pressed = .{ .switch_mode = .{ .mode = "default" } } } },
+            },
+            // Ctrl+[ → default
+            .{
+                .mode = "prefix",
+                .keysym = "bracketleft",
+                .modifiers = .{ .ctrl = true },
+                .event = .{ .click = .{ .pressed = .{ .switch_mode = .{ .mode = "default" } } } },
+            },
+
+            // ── Close window ────────────────────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "q",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .close,
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Spawn terminal ──────────────────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "Return",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .spawn = .{ .argv = .{ "tiny_samedir_kitty" } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Focus navigation (vim-style) ────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "j",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .focus_next,
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "k",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .focus_previous,
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Output (monitor) focus ──────────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "n",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .focus_next_output,
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "p",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .focus_previous_output,
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Swap views ──────────────────────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "period",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .swap_next,
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "comma",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .swap_previous,
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Send window to other output ─────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "bracketright",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .send_to_next_output,
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "bracketleft",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .send_to_previous_output,
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Toggle float / fullscreen ───────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "c",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .toggle_float,
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "f",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .toggle_fullscreen,
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Spawn launchers ─────────────────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "d",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .spawn = .{ .argv = .{ "wofi", "--show", "drun" } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "d",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .spawn = .{ .argv = .{ "wofi", "--show", "window" } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Layout: master location ─────────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "y",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_master_location = .left },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "u",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_master_location = .bottom },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "i",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_master_location = .top },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "o",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_master_location = .right },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Layout: master ratio ────────────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "g",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .inc_mfact = 0.05 },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "g",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .inc_mfact = -0.05 },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Layout: master count ────────────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "equal",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .inc_nmaster = 1 },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "minus",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .inc_nmaster = -1 },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Tags: set output tag (ALL outputs — global workspaces) ──
+            // TODO: kwm may not have a built-in "set tag on all outputs"
+            // action. If set_output_tag only affects the focused output,
+            // we need to either:
+            //   1. Find if kwm has a global tag action
+            //   2. Request the feature upstream
+            //   3. Use a workaround script (but kwm has no IPC from shell)
+            // For now, using set_output_tag which works on focused output.
+            // Test and compare behavior to your old set_global_tags.sh.
+            .{
+                .mode = "prefix",
+                .keysym = "1",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 0 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "2",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 1 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "3",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 2 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "4",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 3 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "5",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 4 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "6",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 5 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "7",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 6 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "8",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 7 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "9",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 8 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "0",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 9 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Tags: move window to tag ────────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "1",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .set_window_tag = .{ .tag = .{ .tag = 0 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "2",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .set_window_tag = .{ .tag = .{ .tag = 1 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "3",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .set_window_tag = .{ .tag = .{ .tag = 2 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "4",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .set_window_tag = .{ .tag = .{ .tag = 3 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "5",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .set_window_tag = .{ .tag = .{ .tag = 4 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "6",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .set_window_tag = .{ .tag = .{ .tag = 5 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "7",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .set_window_tag = .{ .tag = .{ .tag = 6 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "8",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .set_window_tag = .{ .tag = .{ .tag = 7 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "9",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .set_window_tag = .{ .tag = .{ .tag = 8 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix",
+                .keysym = "0",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .set_window_tag = .{ .tag = .{ .tag = 9 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Input method toggle ─────────────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "space",
+                .modifiers = .{ .ctrl = true },
+                .event = .{ .click = .{
+                    .pressed = .{ .spawn = .{ .argv = .{ "sh", "-c", "~/.config/river/scripts/cycle_input_method.sh" } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Reload config ───────────────────────────────────────────
+            .{
+                .mode = "prefix",
+                .keysym = "r",
+                .modifiers = .{ .shift = true },
+                .event = .{ .click = .{
+                    .pressed = .reload_config,
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ═══════════════════════════════════════════════════════════════
+            // PREFIX2 MODE
+            // ═══════════════════════════════════════════════════════════════
+
+            // ── Mode transitions ────────────────────────────────────────
+            // Super_L in prefix2 → default
+            .{
+                .mode = "prefix2",
+                .keysym = "Super_L",
+                .modifiers = .{},
+                .event = .{ .click = .{ .pressed = .{ .switch_mode = .{ .mode = "default" } } } },
+            },
+            // Escape → default
+            .{
+                .mode = "prefix2",
+                .keysym = "Escape",
+                .modifiers = .{},
+                .event = .{ .click = .{ .pressed = .{ .switch_mode = .{ .mode = "default" } } } },
+            },
+            // Ctrl+[ → default
+            .{
+                .mode = "prefix2",
+                .keysym = "bracketleft",
+                .modifiers = .{ .ctrl = true },
+                .event = .{ .click = .{ .pressed = .{ .switch_mode = .{ .mode = "default" } } } },
+            },
+
+            // ── Tags: set output tag (single output only) ──────────────
+            .{
+                .mode = "prefix2",
+                .keysym = "1",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 0 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix2",
+                .keysym = "2",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 1 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix2",
+                .keysym = "3",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 2 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix2",
+                .keysym = "4",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 3 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix2",
+                .keysym = "5",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 4 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix2",
+                .keysym = "6",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 5 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix2",
+                .keysym = "7",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 6 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix2",
+                .keysym = "8",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 7 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix2",
+                .keysym = "9",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 8 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+            .{
+                .mode = "prefix2",
+                .keysym = "0",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .set_output_tag = .{ .tag = .{ .tag = 9 } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Spawn: emacsclient ──────────────────────────────────────
+            .{
+                .mode = "prefix2",
+                .keysym = "e",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .spawn = .{ .argv = .{ "emacsclient", "-c" } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Spawn: neovide ──────────────────────────────────────────
+            .{
+                .mode = "prefix2",
+                .keysym = "n",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .spawn = .{ .argv = .{ "neovide" } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Spawn: zsh runner ───────────────────────────────────────
+            .{
+                .mode = "prefix2",
+                .keysym = "d",
+                .modifiers = .{},
+                .event = .{ .click = .{
+                    .pressed = .{ .spawn = .{ .argv = .{ "sh", "-c", "~/.config/river/scripts/launch_zsh_runner.sh" } } },
+                    .released = .{ .switch_mode = .{ .mode = "default" } },
+                } },
+            },
+
+            // ── Rotate views ────────────────────────────────────────────
+            // TODO: kwm has direct stack access, so rotation could be a
+            // native action (trivial in Zig). For now, keeping the spawn
+            // approach. The rotate_views.sh script needs updating for
+            // river 0.4 (no more riverctl for WM operations). This is
+            // a candidate for a kwm feature request or Zig patch.
+            // Placeholder bindings — will revisit when we go through scripts.
+
+            // ═══════════════════════════════════════════════════════════════
+            // PASSTHROUGH MODE (for nested compositors / VMs)
+            // ═══════════════════════════════════════════════════════════════
+            .{
+                .keysym = "Escape",
+                .modifiers = .{ .mod4 = true, .shift = true },
+                .event = .{ .click = .{ .pressed = .{ .switch_mode = .{ .mode = "passthrough" } } } },
+            },
+            .{
+                .mode = "passthrough",
+                .keysym = "Escape",
+                .modifiers = .{ .mod4 = true, .shift = true },
+                .event = .{ .click = .{ .pressed = .{ .switch_mode = .{ .mode = "default" } } } },
+            },
+        },
+
+        // ── Mouse bindings ──────────────────────────────────────────────
+        .pointer = .{
+            .{
+                .button = "BTN_LEFT",
+                .modifiers = .{ .mod4 = true },
+                .action = .move,
+            },
+            .{
+                .button = "BTN_RIGHT",
+                .modifiers = .{ .mod4 = true },
+                .action = .resize,
+            },
+        },
+    },
+}
