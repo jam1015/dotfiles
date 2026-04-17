@@ -416,6 +416,7 @@ graphicsmagick
 graphite
 graphviz
 grep
+grim
 groff
 grub
 gsettings-desktop-schemas
@@ -1046,7 +1047,6 @@ kwidgetsaddons5
 kwin
 kwindowsystem
 kwindowsystem5
-kwm
 kwordquiz
 kwrited
 kxmlgui
@@ -2217,7 +2217,7 @@ reiserfsprogs
 rhash
 ripgrep
 ripgrep-all
-river
+river-classic
 rocs
 rofi
 rpcbind
@@ -2267,6 +2267,7 @@ skanpage
 skia-sharp
 skladnik
 slang
+slurp
 smartmontools
 smbclient
 snappy
@@ -2532,6 +2533,7 @@ xdg-dbus-proxy
 xdg-desktop-portal
 xdg-desktop-portal-gtk
 xdg-desktop-portal-kde
+xdg-desktop-portal-wlr
 xdg-user-dirs
 xdg-user-dirs-gtk
 xdg-utils
