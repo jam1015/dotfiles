@@ -47,23 +47,6 @@
 
 
 
-(evil-define-command my/evil-delete-buffer (&optional bang)
-  "Delete current buffer without prompting. 
-With bang (!), force delete even if modified."
-  :repeat nil
-  (interactive "<!>")
-  (let ((buf (current-buffer)))
-    (when bang
-      (set-buffer-modified-p nil))
-    (kill-buffer buf)))
-
-(evil-ex-define-cmd "bd[elete]" 'my/evil-delete-buffer)
-  (evil-ex-define-cmd "ConsultLine" #'consult-line)
-  (evil-ex-define-cmd "ConsultRg" #'consult-ripgrep)
-  (evil-ex-define-cmd "ConsultFind" #'consult-find)
-  (evil-ex-define-cmd "Mx" #'execute-extended-command)
-
-
 )
 (provide 'evil-config)
 ;;;end evil-config.el

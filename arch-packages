@@ -39,6 +39,7 @@ aom
 appstream
 appstream-glib
 appstream-qt
+aquamarine
 arandr
 arc-gtk-theme-eos
 archlinux-appstream-data
@@ -148,6 +149,7 @@ clang18
 clang19
 clang20
 clang21
+claude-code-bin
 clinfo
 clipman
 clucene
@@ -312,7 +314,6 @@ filelight
 filesystem
 findutils
 firefox
-firefox-developer-edition
 firewalld
 flac
 flameshot
@@ -390,6 +391,7 @@ gmp
 gnome-bluetooth
 gnome-desktop
 gnome-desktop-common
+gnome-disk-utility
 gnome-keyring
 gnome-video-effects
 gnugo
@@ -719,6 +721,15 @@ hwdetect
 hwinfo
 hwloc
 hyphen
+hyprcursor
+hyprgraphics
+hyprland
+hyprland-guiutils
+hyprlang
+hyprtoolkit
+hyprutils
+hyprwayland-scanner
+hyprwire
 i2c-tools
 i3-keylist
 i3-wm
@@ -732,10 +743,12 @@ iio-sensor-proxy
 ijs
 imagemagick
 imath
+img2pdf
 imlib2
 inchi
 incidenceeditor
 inetutils
+iniparser
 inkscape
 intel-ucode
 intltool
@@ -2002,6 +2015,7 @@ python-pathspec
 python-pbs-installer
 python-pexpect
 python-pfzy
+python-pikepdf
 python-pillow
 python-pip
 python-pivy
@@ -2370,6 +2384,7 @@ tk
 tldr
 tmux
 tokodon
+tomlplusplus
 tor
 tor-browser-bin
 torbrowser-launcher

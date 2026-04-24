@@ -18,6 +18,5 @@
         ("?"         . minibuffer-completion-help)
         ("M-RET"     . minibuffer-force-complete-and-exit)
         ("M-TAB"     . minibuffer-complete)))
-
 (provide 'vertico-config)
 ;;;end vertico-config.el

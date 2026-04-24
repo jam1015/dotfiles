@@ -1,7 +1,6 @@
 (use-package evil-god-toggle
   :ensure (:host github
            :repo "jam1015/evil-god-toggle"
-           :build (+elpaca/build-if-new)
            :branch "dev"
            )
   :after (evil god-mode cursor-contraster which-key)
@@ -16,7 +15,8 @@
     evil-god-toggle-mode-map
     (kbd "C-,") (lambda ()
                   (interactive)
-                  (evil-god-toggle-execute-in-god-state t
+                  ; nil means don't move forward
+                  (evil-god-toggle-execute-in-god-state nil
                                                         )))
 
 
@@ -45,7 +45,8 @@
     evil-god-toggle-mode-map
     (kbd "C-;") (lambda ()
                   (interactive)
-                  (evil-god-toggle-once t)))
+                  ; nil means don't move forwrd
+                  (evil-god-toggle-once nil)))
 
 
   (evil-define-key 'visual
