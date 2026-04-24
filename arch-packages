@@ -374,6 +374,7 @@ girara
 git
 git-credential-gopass
 glances
+glaze
 glew
 glib-networking
 glib2
@@ -725,6 +726,7 @@ hyprcursor
 hyprgraphics
 hyprland
 hyprland-guiutils
+hyprland-protocols
 hyprlang
 hyprtoolkit
 hyprutils
@@ -2254,6 +2256,7 @@ scons
 scour
 scrot
 sd
+sdbus-cpp
 sddm
 sddm-kcm
 sdl12-compat
@@ -2440,6 +2443,7 @@ usbmuxd
 usbutils
 util-linux
 util-linux-libs
+uwsm
 v4l-utils
 vala
 vapoursynth
@@ -2547,6 +2551,7 @@ xcursor-themes
 xdg-dbus-proxy
 xdg-desktop-portal
 xdg-desktop-portal-gtk
+xdg-desktop-portal-hyprland
 xdg-desktop-portal-kde
 xdg-desktop-portal-wlr
 xdg-user-dirs

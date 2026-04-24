@@ -250,6 +250,7 @@ renv/
 /.gnupg/*.old
 /.gnupg/*.backup
 
+*claude-code-url-handler.desktop
 
 .config/gtk-3.0/bookmarks 
 .config/tmux/plugins/*
