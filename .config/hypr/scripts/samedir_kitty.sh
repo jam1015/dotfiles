@@ -1,13 +1,9 @@
 #!/bin/bash
 # samedir_kitty.sh
-# Launch kitty in the same directory as the focused window's CWD.
-# Hyprland exposes the active window's PID via hyprctl.
+# Use whereami written by zsh's precmd hook — always reflects
+# the last active shell's directory regardless of what's focused.
 
-PID=$(hyprctl activewindow -j | jq -r '.pid')
-
-if [ -n "$PID" ] && [ "$PID" != "null" ] && [ "$PID" -gt 0 ]; then
-    CWD=$(readlink -f /proc/"$PID"/cwd 2>/dev/null)
-fi
+CWD=$(cat ~/.local/state/zsh/whereami 2>/dev/null)
 
 if [ -z "$CWD" ] || [ ! -d "$CWD" ]; then
     CWD="$HOME"

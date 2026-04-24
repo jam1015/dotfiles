@@ -1,37 +1,61 @@
-#!/bin/sh
+#!/bin/bash
 #
 # monitor_setup.sh
-# Mirrors the wlr-randr conditional logic from the river init.
-# Run via exec-once — uses hyprctl keyword to override monitor positions
-# depending on whether DP outputs are connected.
-#
-# Hyprland static monitor= lines handle the case when DP is present.
-# This script fixes eDP-1 position for laptop-only mode.
+# Waits for the first window open event, then sets per-monitor orientation.
+# This ensures the layout manager has a window to work with before dispatching.
 
-sleep 0.5  # give compositor time to enumerate outputs
+LOG="/tmp/monitor_setup.log"
+echo "=== monitor_setup.sh ===" > "$LOG"
 
-if hyprctl monitors | grep -q 'DP-'; then
-    # Multi-monitor: positions already set correctly by hyprland.conf
-    # DP-11: 0x0, rotated 90  (1080px wide after rotation)
-    # DP-13: 1080x0, normal
-    # eDP-1: 1080x1080, scaled 1.75
-    echo "Multi-monitor setup detected, using static config."
-
-    # Set master layout orientation per monitor:
-    # DP-11 is rotated 90° → effective portrait → top layout
-    hyprctl -i 0 keyword monitor "DP-11,1920x1080@60,0x0,1,transform,1"
-    hyprctl dispatch focusmonitor DP-11
-    hyprctl dispatch layoutmsg orientationtop
-
-    # DP-13 and eDP-1 are landscape → left layout
-    hyprctl dispatch focusmonitor DP-13
-    hyprctl dispatch layoutmsg orientationleft
-
-    hyprctl dispatch focusmonitor eDP-1
-    hyprctl dispatch layoutmsg orientationleft
-else
-    # Laptop-only: move eDP-1 to 0x0
-    echo "Laptop-only mode."
+# Laptop-only: reposition eDP-1
+if ! hyprctl monitors | grep -q 'DP-'; then
+    echo "Laptop-only mode" >> "$LOG"
     hyprctl keyword monitor "eDP-1,2880x1920@60,0x0,1.75"
-    hyprctl dispatch layoutmsg orientationleft
 fi
+
+set_orientations() {
+    hyprctl monitors -j | jq -c '.[]' | while read -r mon; do
+        name=$(echo "$mon" | jq -r '.name')
+        width=$(echo "$mon" | jq -r '.width')
+        height=$(echo "$mon" | jq -r '.height')
+        transform=$(echo "$mon" | jq -r '.transform')
+
+        if [ "$transform" -eq 1 ] || [ "$transform" -eq 3 ]; then
+            eff_w=$height
+            eff_h=$width
+        else
+            eff_w=$width
+            eff_h=$height
+        fi
+
+        if [ "$eff_h" -gt "$eff_w" ]; then
+            orientation="orientationtop"
+        else
+            orientation="orientationleft"
+        fi
+
+        echo "$name: ${eff_w}x${eff_h} → $orientation" >> "$LOG"
+        hyprctl dispatch focusmonitor "$name"
+        hyprctl dispatch layoutmsg "$orientation"
+    done
+    echo "Orientations set." >> "$LOG"
+}
+
+# Find the socket for the current instance
+# Wait for socket to appear
+SOCKET=""
+while [ -z "$SOCKET" ]; do
+    SOCKET=$(find "$XDG_RUNTIME_DIR/hypr" -name ".socket2.sock" | sort -t_ -k2 -n | tail -1)
+    sleep 0.2
+done
+echo "Using socket: $SOCKET" >> "$LOG"
+echo "Waiting for first window..." >> "$LOG"
+
+# Use process substitution so set_orientations is visible inside the loop
+while read -r line; do
+    if echo "$line" | grep -q "^openwindow"; then
+        echo "Got openwindow event: $line" >> "$LOG"
+        set_orientations
+        break
+    fi
+done < <(socat -u "UNIX-CONNECT:$SOCKET" -) &
