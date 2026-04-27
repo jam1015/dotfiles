@@ -151,7 +151,6 @@ clang20
 clang21
 claude-code-bin
 clinfo
-clipman
 clucene
 clutter
 clutter-gst
@@ -2505,6 +2504,7 @@ webkit2gtk-4.1
 webkitgtk-6.0
 webrtc-audio-processing-1
 welcome
+wev
 wget
 which
 wildmidi

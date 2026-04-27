@@ -26,7 +26,13 @@
   :config
   (corfu-history-mode)
   (corfu-popupinfo-mode)
-
+;; Silence Corfu's continue-predicate when evil-ex sees a partial/unknown command
+(with-eval-after-load 'evil
+  (advice-add 'evil-ex-completion-at-point :around
+    (lambda (orig &rest args)
+      (condition-case nil
+          (apply orig args)
+        (user-error nil)))))
  ;; Custom RET handling for Evil ex-commands
   (defun my/evil-ex-corfu-send-and-execute ()
     "In Evil ex minibuffer, accept Corfu completion and execute."

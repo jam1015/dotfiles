@@ -59,7 +59,7 @@
     (let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
-
+;; Register it so the recipe parser recognizes it as a valid step
 
 
 
@@ -73,18 +73,18 @@
 
 
  ;;elpaca-build-functions.el
-(defun +elpaca/build-if-new (e)
-  (setf (elpaca<-build-steps e)
-        (if-let ((default-directory (elpaca<-build-dir e))
-                 (main (ignore-errors (elpaca--main-file e)))
-                 (compiled (expand-file-name (concat (file-name-base main) ".elc")))
-                 ((file-newer-than-file-p main compiled)))
-            (progn (elpaca--signal e "Rebuilding due to source changes")
-                   (cl-set-difference elpaca-build-steps
-                                      '(elpaca--clone elpaca--configure-remotes elpaca--checkout-ref)))
-          (elpaca--build-steps nil (file-exists-p (elpaca<-build-dir e))
-                               (file-exists-p (elpaca<-repo-dir e)))))
-  (elpaca--continue-build e))
+  (defun +elpaca/build-if-new (e)
+    (setf (elpaca<-build-steps e)
+          (if-let ((default-directory (elpaca<-build-dir e))
+                   (main (ignore-errors (elpaca--main-file e)))
+                   (compiled (expand-file-name (concat (file-name-base main) ".elc")))
+                   ((file-newer-than-file-p main compiled)))
+              (progn (elpaca--signal e "Rebuilding due to source changes")
+                     (cl-set-difference elpaca-build-steps
+                                        '(elpaca--clone elpaca--configure-remotes elpaca--checkout-ref)))
+            (elpaca--build-steps nil (file-exists-p (elpaca<-build-dir e))
+                                 (file-exists-p (elpaca<-repo-dir e)))))
+    (elpaca--continue-build e))
 
 
 (message "Finished setting up elpaca")

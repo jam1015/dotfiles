@@ -1,5 +1,6 @@
 (use-package evil
   :after which-key
+  :ensure (:wait t)
   ;;:after undo-tree
   :init
 (setq lazy-highlight-cleanup nil)

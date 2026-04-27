@@ -1,5 +1,10 @@
 return
   {
+{
+  "Isrothy/neominimap.nvim",
+      keys = require("plugin_keymaps").neominimap(),
+      init = require("plugin_configs.neominimap.neominimap_initi")
+    },
     {
       "folke/which-key.nvim",
       --event = "VeryLazy",
