@@ -151,6 +151,7 @@ clang20
 clang21
 claude-code-bin
 clinfo
+clisp
 clucene
 clutter
 clutter-gst
@@ -162,6 +163,7 @@ cockpit
 code
 cogl
 coin
+colm
 colord
 colord-kde
 compiler-rt
@@ -347,6 +349,7 @@ futuresql
 fzf
 galculator
 gamescope
+gavl
 gawk
 gc
 gcc
@@ -727,6 +730,8 @@ hyprland
 hyprland-guiutils
 hyprland-protocols
 hyprlang
+hyprpaper
+hyprpicker
 hyprtoolkit
 hyprutils
 hyprwayland-scanner
@@ -755,7 +760,7 @@ intel-ucode
 intltool
 inxi
 iproute2
-iptables-nft
+iptables
 iputils
 ipython
 isd
@@ -1131,7 +1136,6 @@ libaccounts-qt
 libadwaita
 libaec
 libaio
-libakonadi
 libappindicator
 libarchive
 libasan
@@ -2002,11 +2006,13 @@ python-markdown-it-py
 python-markupsafe
 python-matplotlib
 python-matplotlib-inline
+python-mdit_py_plugins
 python-mdurl
 python-more-itertools
 python-msgpack
 python-multidict
 python-mypy_extensions
+python-myst-parser
 python-numpy
 python-opengl
 python-orjson
@@ -2520,6 +2526,7 @@ wlr-randr
 wlrctl
 wlroots0.15
 wlroots0.19
+wlroots0.20
 wlsunset
 woff2
 wofi
