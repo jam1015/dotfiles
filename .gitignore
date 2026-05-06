@@ -254,3 +254,5 @@ renv/
 
 .config/gtk-3.0/bookmarks 
 .config/tmux/plugins/*
+.config/nvim/claude.md
+.config/nvim/nvim_keys.txt
