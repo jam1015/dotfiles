@@ -1,6 +1,6 @@
 (use-package god-mode
   :ensure (:host github
-           :repo "jam1015/god-mode"
+           :repo "emacsorphanage/god-mode"
            :build (:sub elpaca--clone +elpaca/build-if-new)
            )
   :config

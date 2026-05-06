@@ -2,8 +2,9 @@ return
   {
 {
   "Isrothy/neominimap.nvim",
-      keys = require("plugin_keymaps").neominimap(),
-      init = require("plugin_configs.neominimap.neominimap_initi")
+      event = "VeryLazy",
+      init = require("plugin_configs.neominimap.neominimap_initi"),
+      config = function() require("plugin_keymaps").neominimap() end,
     },
     {
       "folke/which-key.nvim",
@@ -333,7 +334,6 @@ return
       dependencies = {
         --{ "PaterJason/cmp-conjure",     event = "VeryLazy" },
         { "onsails/lspkind.nvim",        },
-        { "R-nvim/cmp-r",                },
         { "hrsh7th/cmp-nvim-lua",        },
         { "hrsh7th/cmp-nvim-lsp",        },
         { "hrsh7th/cmp-buffer",          },
@@ -419,7 +419,8 @@ return
     },
     {
       "nvim-telescope/telescope.nvim",
-      cmd = "Telescope",
+      event = "VeryLazy",
+     -- cmd = "Telescope",
       enabled = true,
       dependencies = { "nvim-lua/plenary.nvim",
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },

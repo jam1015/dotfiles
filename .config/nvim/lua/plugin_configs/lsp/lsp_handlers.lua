@@ -13,7 +13,7 @@ M.global_keymaps = function()
   local has_wk, wk = pcall(require, "which-key")
   if has_wk then
     wk.add({
-      { "<leader>d", name = "Diagnostics" }, -- Adding a group name for diagnostics
+      { "<leader>d", name = "LSP Diagnostics" }, -- Adding a group name for diagnostics
       {
         "<leader>de",
         vim.diagnostic.open_float,

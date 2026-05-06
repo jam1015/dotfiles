@@ -1,7 +1,7 @@
 (use-package evil-god-toggle
   :ensure (:host github
            :repo "jam1015/evil-god-toggle"
-           :branch "dev"
+           :branch "main"
            :build (:sub elpaca--clone +elpaca/build-if-new)
            )
   :after (evil god-mode cursor-contraster which-key)
