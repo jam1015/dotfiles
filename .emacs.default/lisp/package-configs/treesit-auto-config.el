@@ -1,13 +1,14 @@
 (use-package treesit-auto
   :demand t
   :custom
-  (treesit-auto-install t)
   :config
+  (setq treesit-auto-install t)
   (setq treesit-font-lock-level 4)
   (global-treesit-auto-mode)
 
   ;; --------------------------------------------------------------------------
-  ;; Generic fix for Emacs 30.2 + tree-sitter 0.26 (ABI15) predicate mismatch.
+  ;; Generic fix for Emacs 30.x + tree-sitter 0.26 (ABI15) predicate mismatch.
+  ;; Fixed upstream in Emacs 31 (commit b0143530 / bug#79687); no-op there.
   ;;
   ;; Emacs 30.2 compiles (:match REGEX @CAP) as (#match REGEX @CAP) and
   ;; (:pred FN @CAP) as (#pred FN @CAP) — both without the '?' suffix.
@@ -97,13 +98,14 @@ each is replaced with a generated Elisp wrapper function capture."
                                 result)))))
             result))))))
 
-  (define-advice treesit-query-compile
-      (:around (orig lang query &optional eager) my-ts-fix-match-predicates)
-    (funcall orig lang
-             (if (listp query)
-                 (my-ts--transform-query-sexp query)
-               query)
-             eager)))
+  (when (= emacs-major-version 30)
+    (define-advice treesit-query-compile
+        (:around (orig lang query &optional eager) my-ts-fix-match-predicates)
+      (funcall orig lang
+               (if (listp query)
+                   (my-ts--transform-query-sexp query)
+                 query)
+               eager))))
 
 (provide 'treesit-auto-config)
 
