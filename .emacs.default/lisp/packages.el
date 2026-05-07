@@ -1,5 +1,6 @@
 (require 'elpaca-setup) ;; remember elpaca-after-init-hook  and :ensure (:build (+elpaca/build-if-new))
 ;;(load-relative "straight_setup.el")
+(require 'compat-config)
 
 ;;; evil
 (require 'evil-config)

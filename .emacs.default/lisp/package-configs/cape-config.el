@@ -1,5 +1,6 @@
 (use-package cape
   :after (corfu geiser)  
+  ;:ensure (:tag "2.6")
   :init
   ;; Register the CAPE backends you want. Order matters: file first, then others.
   (add-hook 'completion-at-point-functions #'cape-file)

@@ -1,4 +1,5 @@
 (use-package consult
+  ;;:ensure (:tag "3.4")
   :after vertico
   :bind (;; Replace default bindings:
          ("C-s"     . consult-line)             ; search in buffer :contentReference[oaicite:12]{index=12}

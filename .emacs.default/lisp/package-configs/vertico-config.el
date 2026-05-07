@@ -1,4 +1,5 @@
 (use-package vertico
+             ;;:ensure (:tag "2.8")
   :init
   (vertico-mode)
   (setq completion-styles '(basic substring partial-completion flex))

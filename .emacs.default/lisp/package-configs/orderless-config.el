@@ -1,5 +1,5 @@
 (use-package orderless
-  :ensure t
+  ;;:ensure (:tag "1.6")
   :custom
   (completion-styles '(orderless basic partial-completion))
   (completion-category-defaults nil)

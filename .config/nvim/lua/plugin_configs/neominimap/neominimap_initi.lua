@@ -7,7 +7,7 @@ return function() local AnnotationMode = {
 
 vim.g.neominimap = {
     -- Enable the plugin by default
-    auto_enable = true, ---@type boolean
+    auto_enable = false, ---@type boolean
 
     -- Log level
     log_level = vim.log.levels.OFF, ---@type Neominimap.Log.Levels

@@ -1,5 +1,15 @@
 return
   {
+
+{
+  "romus204/tree-sitter-manager.nvim",
+  dependencies = {}, -- tree-sitter CLI must be installed system-wide
+  config = function()
+    require("plugin_configs.tree-sitter-manager")
+  end
+},
+
+
 {
   "Isrothy/neominimap.nvim",
       event = "VeryLazy",
@@ -241,7 +251,7 @@ return
         require('lspsaga').setup({})
       end,
       dependencies = {
-        'nvim-treesitter/nvim-treesitter', -- optional
+        --'nvim-treesitter/nvim-treesitter', -- optional
         'nvim-tree/nvim-web-devicons',     -- optional
       }
     },
@@ -303,14 +313,6 @@ return
         require("plugin_configs.tokyonight")
       end,
       --event = "VeryLazy"
-    },
-    {
-      "nvim-treesitter/nvim-treesitter",
-      --event = "VeryLazy",
-      enabled = true,
-      config = function()
-        require("plugin_configs.nvim-treesitter")
-      end,
     },
     --{
     --  "PaterJason/cmp-conjure",
@@ -618,7 +620,7 @@ return
       "numToStr/Comment.nvim",
       enabled = true,
       event = "VeryLazy",
-      dependencies = "nvim-treesitter/nvim-treesitter",
+      --dependencies = "nvim-treesitter/nvim-treesitter",
       config = function() require("plugin_configs.Comment") end,
     },
 
@@ -628,7 +630,7 @@ return
       "JoosepAlviste/nvim-ts-context-commentstring",
       enabled = false,
       event = "VeryLazy",
-      dependencies = "nvim-treesitter/nvim-treesitter",
+      --dependencies = "nvim-treesitter/nvim-treesitter",
       setup = function()
         require('plugin_configs.nvim-ts-context-commentstring')
       end
