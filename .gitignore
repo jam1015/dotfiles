@@ -60,7 +60,9 @@ dotfiles
 .gitconfig.local
 irssi/irssi/config.autosave
 ruby/bundle/cache
-
+.emacs.god/tree-sitter/
+.emacs.vanilla/CLAUDE.md
+.emacs.vanilla/tree-sitter/
 *.kate-swp
 
 # Emacs
