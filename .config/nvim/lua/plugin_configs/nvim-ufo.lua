@@ -13,6 +13,9 @@ vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 -- performance and stability are better than `foldmethod=nvim_treesitter#foldexpr()`
 require('ufo').setup({
 	provider_selector = function(bufnr, filetype, buftype)
+		if filetype == 'markdown' then
+			return { 'indent' }
+		end
 		return { 'treesitter', 'indent' }
 	end
 })

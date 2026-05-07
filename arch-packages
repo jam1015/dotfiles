@@ -258,7 +258,7 @@ electron39
 elfutils
 elisa
 ell
-emacs
+emacs-wayland
 enchant
 endeavouros-branding
 endeavouros-keyring
@@ -2501,6 +2501,7 @@ vulkan-icd-loader
 vulkan-mesa-implicit-layers
 vulkan-radeon
 vulkan-tools
+watershot
 wavpack
 waybar
 wayland

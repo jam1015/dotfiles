@@ -97,6 +97,18 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 
 require('term_autocmds')
 
+-- Stop treesitter on markdown buffers — parser has a nil 'range' bug
+local markdown_ts_fix = api.nvim_create_augroup("markdown_ts_fix", { clear = true })
+api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown" },
+  group = markdown_ts_fix,
+  callback = function(args)
+    vim.schedule(function()
+      vim.treesitter.stop(args.buf)
+    end)
+  end,
+})
+
 
 --vim.api.nvim_create_autocmd("ModeChanged", {
 --    pattern = "*",
