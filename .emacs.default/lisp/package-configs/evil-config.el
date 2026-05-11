@@ -3,8 +3,8 @@
   :ensure (:wait t)
   ;;:after undo-tree
   :init
-(setq lazy-highlight-cleanup nil)
-(setq lazy-highlight-max-at-a-time nil)
+  (setq lazy-highlight-cleanup nil)
+  (setq lazy-highlight-max-at-a-time nil)
   (setq evil-want-keybinding nil
 	evil-want-integration t)
 
@@ -30,7 +30,7 @@
     (save-buffer)
     (kill-this-buffer))
 
-    (evil-ex-define-cmd "wbd" #'my/evil-write-and-bdelete)
+  (evil-ex-define-cmd "wbd" #'my/evil-write-and-bdelete)
   ;;(define-key evil-ex-completion-map (kbd "TAB")       #'evil-ex-complete)
   ;;(define-key evil-ex-completion-map (kbd "<tab>")     #'evil-ex-complete)
   ;;(define-key evil-ex-completion-map (kbd "<backtab>") #'evil-ex-complete)
@@ -46,8 +46,9 @@
   ;; Turn on savehist-mode
   (savehist-mode 1)
 
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'eshell-mode 'normal)
 
-
-)
+  )
 (provide 'evil-config)
 ;;;end evil-config.el

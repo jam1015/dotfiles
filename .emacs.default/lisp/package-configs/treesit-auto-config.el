@@ -1,7 +1,12 @@
 (use-package treesit-auto
   :demand t
-  :custom
   :config
+  (add-to-list 'treesit-language-source-alist
+    '(php "https://github.com/tree-sitter/tree-sitter-php" "master" "php/src"))
+  (add-to-list 'treesit-language-source-alist
+    '(elixir "https://github.com/elixir-lang/tree-sitter-elixir"))
+  (add-to-list 'treesit-language-source-alist
+    '(heex "https://github.com/phoenixframework/tree-sitter-heex"))
   (setq treesit-auto-install t)
   (setq treesit-font-lock-level 4)
   (global-treesit-auto-mode)
@@ -26,7 +31,7 @@
   ;; Result: all :match- and :pred-affected features fully restored for all
   ;; languages without any language-specific code.
   ;; --------------------------------------------------------------------------
-
+(when (= emacs-major-version 30)
   (defvar my-ts--gen-counter 0
     "Counter for unique treesit fontification wrapper function names.")
 
@@ -98,7 +103,7 @@ each is replaced with a generated Elisp wrapper function capture."
                                 result)))))
             result))))))
 
-  (when (= emacs-major-version 30)
+  
     (define-advice treesit-query-compile
         (:around (orig lang query &optional eager) my-ts-fix-match-predicates)
       (funcall orig lang

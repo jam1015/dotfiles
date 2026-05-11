@@ -92,8 +92,9 @@
     (add-hook 'kill-buffer-hook #'eshell-config--cleanup-buffer-list nil t)
     ;; Add this part for Evil insert mode
     (goto-char (point-max))
-    (when (fboundp 'evil-insert)
-      (evil-insert 1)))
+    ;(when (fboundp 'evil-insert)
+    ;(evil-insert 1))
+    )
   ;; Record dir after every command
   (add-hook 'eshell-post-command-hook #'eshell-config-write-pwd nil t)
   ;; Add aliases
@@ -109,9 +110,9 @@
   (when (eq major-mode 'eshell-mode)
     (goto-char (point-max))
     (when (fboundp 'evil-insert)
-      (evil-insert 1))))
+    (evil-insert 1))
+    ))
 
-(add-hook 'eshell-after-prompt-hook #'my/eshell-enter-insert-after-prompt)
 
 
 
