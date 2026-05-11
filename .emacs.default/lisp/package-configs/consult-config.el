@@ -7,7 +7,6 @@
          ("C-x C-r" . consult-recent-file)      ; recent files :contentReference[oaicite:14]{index=14}
          ("M-y"     . consult-yank-pop)         ; better yank history :contentReference[oaicite:15]{index=15}
          )
-  :hook (completion-list-mode . consult-preview-at-point-mode) ; live previews
   :custom
    (consult-preview-key "any")
   )

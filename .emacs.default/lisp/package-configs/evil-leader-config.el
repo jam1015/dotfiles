@@ -6,7 +6,7 @@
 (evil-leader/set-key
   "ee" 'eshell
   "bb" 'switch-to-buffer
-  "bk" 'kill-buffer)
+  "bk" 'my/kill-this-buffer)
   "nh"  'evil-search-highlight-persist-remove-all
 	     )
 

@@ -24,13 +24,23 @@
   ;; Up/Down cycle Ex command-history entries
   (define-key evil-ex-completion-map [up]   #'previous-complete-history-element)   ;; minibuffer history :contentReference[oaicite:1]{index=1}
   (define-key evil-ex-completion-map [down] #'next-complete-history-element)
+  (defun my/kill-this-buffer ()
+    "Kill the current buffer without closing its window."
+    (interactive)
+    (let ((buf (current-buffer)))
+      (switch-to-prev-buffer nil ‘kill)
+      (unless (eq buf (current-buffer))
+        (kill-buffer buf))))
+
+  (evil-ex-define-cmd "bd[elete]" #’my/kill-this-buffer)
+
   (defun my/evil-write-and-bdelete ()
     "Save the current buffer, then kill it (like Vim’s :wbd)."
     (interactive)
     (save-buffer)
-    (kill-this-buffer))
+    (my/kill-this-buffer))
 
-  (evil-ex-define-cmd "wbd" #'my/evil-write-and-bdelete)
+  (evil-ex-define-cmd "wbd" #’my/evil-write-and-bdelete)
   ;;(define-key evil-ex-completion-map (kbd "TAB")       #'evil-ex-complete)
   ;;(define-key evil-ex-completion-map (kbd "<tab>")     #'evil-ex-complete)
   ;;(define-key evil-ex-completion-map (kbd "<backtab>") #'evil-ex-complete)
