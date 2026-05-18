@@ -7,9 +7,9 @@ set nrformats-=octal
 set autoindent
 set scrolloff=3                 " show a few lines around cursor
 set display=truncate
-set shiftwidth=4 "how much indentation from >
-set softtabstop=4 "lets us delete by tabs when expandtab is on
-set tabstop=4
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 let g:python_recommended_style=0
 let g:vim_json_conceal=0
 set hidden
@@ -23,7 +23,7 @@ set wildmenu
 set wildmode=longest:full,full
 set clipboard=unnamedplus
 set laststatus=2
-set shortmess=IFw
+set shortmess=Fw
 
 "set cursorline
 "set cursorcolumn
@@ -33,11 +33,11 @@ set ignorecase
 set smartcase
 set listchars+=tab:\ \ ░
 set mouse=ar
-set listchars+=lead:·
+set listchars+=leadmultispace:\│\ 
 set listchars+=trail:␣
 set listchars+=extends:»
 set listchars+=precedes:«
-set listchars+=nbsp:⣿
+"set listchars+=nbsp:⣿
 let g:netrw_liststyle= 3
 let g:netrw_browsex_viewer= "xdg-open"
 set cmdheight=1
@@ -65,9 +65,9 @@ if &t_Co > 2 || has("gui_running")
   "set showtabline=0    " No tab line
   "set completeopt-=menu
   "set completeopt-=menuone
-	syntax on
+  syntax on
   set guifont=InputMono\ Nerd\ Font\ 8
-
+  "
   " I like highlighting strings inside C comments.
   " Revert with ":unlet c_comment_strings".
   let c_comment_strings=1

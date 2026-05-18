@@ -163,6 +163,18 @@
 
 
 
+
+(defun my/dired-open-eshell-here ()
+  "Open eshell in the current dired buffer's directory, bypassing whereami restore."
+  (interactive)
+  (let ((dir default-directory))
+    (eshell)
+    (eshell/cd dir)
+    (eshell-reset)))
+
+(with-eval-after-load 'dired
+  (define-key dired-mode-map (kbd "M-e") #'my/dired-open-eshell-here))
+
 (provide 'eshell-config)
 ;;; eshell-config.el ends here
 

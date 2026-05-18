@@ -31,6 +31,7 @@
 (require 'vertico-config)
 (require 'corfu-config)
 (require 'corfu-terminal-config)
+(require 'paredit-config)
 
 ;;; lisp
 (require 'sly-config)
