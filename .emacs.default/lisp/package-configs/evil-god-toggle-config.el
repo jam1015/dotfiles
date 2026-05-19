@@ -34,6 +34,20 @@
                   (interactive)
                   (evil-god-toggle-execute-in-god-off-state)))
 
+  ;; 3b; C-' is the reverse complement of C-,: enters god-off from evil states.
+  ;; Intentionally not bound in god or god-off — C-, already handles those transitions.
+  (evil-define-key '(normal insert)
+    evil-god-toggle-mode-map
+    (kbd "C-'") (lambda ()
+                  (interactive)
+                  (evil-god-toggle-execute-in-god-off-state nil)))
+
+  (evil-define-key 'visual
+    evil-god-toggle-mode-map
+    (kbd "C-'") (lambda ()
+                  (interactive)
+                  (evil-god-toggle-execute-in-god-off-state)))
+
   ;; 4; Escape from any god state returns to Normal
   (evil-define-key '(god god-off god-once)
     evil-god-toggle-mode-map
