@@ -12,41 +12,35 @@
   (evil-god-toggle-mode 1)
 
   ;; 2; Enter persistent god mode from Normal/Insert/God-off states with C-;
-  (evil-define-key '(normal insert )
+  (evil-define-key '(normal insert visual god-off)
     evil-god-toggle-mode-map
     (kbd "C-,") (lambda ()
                   (interactive)
-                  ; nil means don't move forward
-                  (evil-god-toggle-execute-in-god-state nil
-                                                        )))
+                  ; nil means don't move forward (same as default)
+                  (evil-god-toggle-execute-in-god-state nil)))
 
-
-  (evil-define-key '(god-off visual)
-    evil-god-toggle-mode-map
-    (kbd "C-,") (lambda ()
-                  (interactive)
-                  (evil-god-toggle-execute-in-god-state)))
 
   ;; 3; Exit god mode to god-off state with C-; 
   (evil-define-key 'god
     evil-god-toggle-mode-map
     (kbd "C-,") (lambda ()
                   (interactive)
-                  (evil-god-toggle-execute-in-god-off-state)))
+                  (evil-god-toggle-execute-in-god-off-state nil)))
 
   ;; 3b; C-' is the reverse complement of C-,: enters god-off from evil states.
   ;; Intentionally not bound in god or god-off — C-, already handles those transitions.
-  (evil-define-key '(normal insert)
+  (evil-define-key '(normal insert visual god)
     evil-god-toggle-mode-map
     (kbd "C-'") (lambda ()
                   (interactive)
                   (evil-god-toggle-execute-in-god-off-state nil)))
 
-  (evil-define-key 'visual
+  (evil-define-key 'god-off
     evil-god-toggle-mode-map
     (kbd "C-'") (lambda ()
                   (interactive)
-                  (evil-god-toggle-execute-in-god-off-state)))
+                  (evil-god-toggle-execute-in-god-state nil)))
+
 
   ;; 4; Escape from any god state returns to Normal
   (evil-define-key '(god god-off god-once)

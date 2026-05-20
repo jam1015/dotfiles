@@ -7,8 +7,11 @@
     '(elixir "https://github.com/elixir-lang/tree-sitter-elixir"))
   (add-to-list 'treesit-language-source-alist
     '(heex "https://github.com/phoenixframework/tree-sitter-heex"))
+  (add-to-list 'treesit-language-source-alist
+    '(lua "https://github.com/tree-sitter-grammars/tree-sitter-lua"))
   (setq treesit-auto-install t)
   (setq treesit-font-lock-level 4)
+  (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode)
 
   ;; --------------------------------------------------------------------------
