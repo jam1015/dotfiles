@@ -32,8 +32,12 @@
 
   (add-hook 'elpaca-after-init-hook
             (lambda ()
-              (load-theme 'doom-tokyo-night t)
-              ))
+              (cond
+               ((display-graphic-p)
+                (load-theme 'doom-tokyo-night t))
+               ((or (getenv "DISPLAY") (getenv "WAYLAND_DISPLAY"))
+                (load-theme 'doom-old-hope t))
+               (t nil))))
 
 
   )
