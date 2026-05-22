@@ -30,33 +30,19 @@
   ;; Remember cursor positions across sessions
   (save-place-mode 1)
 
-  (defun my/apply-frame-theme (frame)
-    (cond
-     ((display-graphic-p frame)
-      (load-theme 'doom-tokyo-night t))
-     ((or (getenv "DISPLAY" frame) (getenv "WAYLAND_DISPLAY" frame))
-      (load-theme 'doom-old-hope t))
-     (t nil)))
-
-  (add-hook 'elpaca-after-init-hook
-            (lambda () (my/apply-frame-theme (selected-frame))))
-
-  (add-hook 'after-make-frame-functions #'my/apply-frame-theme)
-
 ;; more common: redirect to a real but ignored file
 (setq custom-file (expand-file-name "custom-dump.el" user-emacs-directory))
 
-so this writes it somewhere that doesn't get lost but the settings aren't run?
-
   )
-; ;;Theme and Visual Setup
-;(use-package emacs
-;  :ensure nil
-;  :demand t
-;  ;;:after elpaca
-;  :config
-;  )
-;
+(defun my/apply-theme (frame)
+  (with-selected-frame frame
+    (when (display-graphic-p frame)
+      (load-theme 'doom-old-hope t))))
+(add-hook 'after-make-frame-functions #'my/apply-theme)
+(add-hook 'elpaca-after-init-hook
+          (lambda ()
+            (when (display-graphic-p)
+              (load-theme 'doom-old-hope t))))
 
 ;;  (add-hook 'elpaca-after-init-hook
 ;;            (lambda ()

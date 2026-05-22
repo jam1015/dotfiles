@@ -7,7 +7,7 @@
     (set-frame-font "Lilex Nerd Font Mono-10" t (list frame))))
 
 (add-hook 'after-make-frame-functions #'my/setup-frame-font)
-(when (display-graphic-p)
-  (set-frame-font "Lilex Nerd Font Mono-10" t t))
+;(when (display-graphic-p)
+;  (set-frame-font "Lilex Nerd Font Mono-10" t t))
 (scroll-bar-mode -1)
 ;;;end early-init.el

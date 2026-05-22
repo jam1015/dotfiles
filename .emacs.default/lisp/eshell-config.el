@@ -31,7 +31,6 @@
 
 (defun eshell-config-write-pwd ()
   "Persist `default-directory` to `eshell-config-whereami-file`. Buffer‑local."
-  (message "Writing pwd: %s" default-directory)  ;; DEBUG
   (eshell-config--ensure-whereami-dir)
   (with-temp-file eshell-config-whereami-file
     (insert (expand-file-name default-directory))))
@@ -52,7 +51,6 @@
           (condition-case err
               (progn
                 (cd saved)
-                (eshell/cd saved)
                 (message "Restored eshell to: %s" saved))
             (error (message "eshell-config: Could not restore to %s: %s" 
                            saved (error-message-string err)))))))))
@@ -82,11 +80,8 @@
 
 (defun eshell-config-initialize ()
   "Set up Eshell conveniences in the current buffer."
-  (message "eshell-config-initialize called, buffer: %s" (current-buffer))
-  (message "Already initialized buffers: %s" eshell-config--initialized-buffers)
   ;; Only restore if this buffer hasn't been initialized yet
   (unless (memq (current-buffer) eshell-config--initialized-buffers)
-    (message "This is a new buffer, attempting restore...")
     (push (current-buffer) eshell-config--initialized-buffers)
     (eshell-config-restore-pwd)
     (add-hook 'kill-buffer-hook #'eshell-config--cleanup-buffer-list nil t)
@@ -118,6 +113,8 @@
 
 (defun my/setup-eshell-evil-window-keys ()
   "Setup C-w as window command prefix in eshell."
+  (evil-define-key 'insert eshell-mode-map (kbd "RET") #'eshell-send-input)
+
   ;; Create a prefix keymap for C-w
   (evil-define-key 'insert eshell-mode-map (kbd "C-w") nil)
   
