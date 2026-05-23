@@ -1,11 +1,9 @@
 (use-package embark
-  :bind (("C-." . embark-act)                   ; act on target :contentReference[oaicite:16]{index=16}
-         ("C-;" . embark-dwim)
-         :map minibuffer-local-map
-         ("C-c C-c" . embark-collect)           ; collect candidates :contentReference[oaicite:17]{index=17}
-         ("C-c C-e" . embark-export))           ; export to dedicated buffer :contentReference[oaicite:18]{index=18}
+  :demand t
   :init
-  (setq prefix-help-command #'embark-prefix-help-command))
+  (setq prefix-help-command #'embark-prefix-help-command)
+  :config
+  (my/apply-package-mappings 'embark))
 
 
 (provide 'embark-config)

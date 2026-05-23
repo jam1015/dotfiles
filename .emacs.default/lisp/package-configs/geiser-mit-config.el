@@ -20,18 +20,6 @@
     (corfu-quit))
   (self-insert-command 1))
 
-;; 2 Bind SPC in Evil’s insert state for Geiser & Scheme
-(dolist (map '(geiser-mode-map
-               geiser-repl-mode-map
-               scheme-mode-map))
-  (when (boundp map)
-    (evil-define-key 'insert
-      ;; must unwrap the symbol to the actual keymap variable
-      (symbol-value map)
-      (kbd "SPC") #'my/geiser-space-insert)))
-(with-eval-after-load 'evil
-    (evil-define-key 'visual scheme-mode-map "gz" #'my/eval-lisp-region)
-    (evil-define-key 'visual geiser-mode-map "gz" #'my/eval-lisp-region))
-  )
+  (my/apply-package-mappings 'geiser-mit))
 (provide 'geiser-mit-config)
 ;;;end geiser-mit-config.el

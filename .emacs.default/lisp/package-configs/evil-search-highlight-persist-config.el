@@ -4,14 +4,7 @@
   :after (evil evil-leader)
   :config
   (global-evil-search-highlight-persist t)
-
-(evil-leader/set-key
-  "ll"  'evil-search-highlight-persist-remove-all
-	     )
-
-
-
-
+  (my/apply-package-mappings 'evil-search-highlight-persist)
 
   )
 

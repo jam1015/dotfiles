@@ -1,14 +1,8 @@
 (use-package evil-leader
-	     :after evil
-	     :config
-(global-evil-leader-mode)
-(evil-leader/set-leader "<SPC>")
-(evil-leader/set-key
-  "ee" 'eshell
-  "bb" 'switch-to-buffer
-  "bk" 'my/kill-this-buffer)
-  "nh"  'evil-search-highlight-persist-remove-all
-	     )
+  :after evil
+  :config
+  (global-evil-leader-mode)
+  (my/apply-package-mappings 'evil-leader))
 
 (provide 'evil-leader-config)
 

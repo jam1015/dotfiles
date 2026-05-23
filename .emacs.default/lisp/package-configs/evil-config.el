@@ -14,16 +14,6 @@
   (display-line-numbers-type 'relative)
   :config
 
-  ;; Tab now invokes Emacs’s normal completion (completion-at-point)
-  (define-key evil-ex-completion-map (kbd "<tab>") #'completion-at-point)     ;; Emacs completion-at-point :contentReference[oaicite:0]{index=0}
-  (define-key evil-ex-completion-map (kbd "TAB")    #'completion-at-point)
-
-  ;; Shift-Tab can also re-trigger completion if you like
-  (define-key evil-ex-completion-map (kbd "<backtab>") #'completion-at-point)
-
-  ;; Up/Down cycle Ex command-history entries
-  (define-key evil-ex-completion-map [up]   #'previous-complete-history-element)   ;; minibuffer history :contentReference[oaicite:1]{index=1}
-  (define-key evil-ex-completion-map [down] #'next-complete-history-element)
   (defun my/kill-this-buffer ()
     "Kill the current buffer without closing its window."
     (interactive)
@@ -32,19 +22,18 @@
       (unless (eq buf (current-buffer))
         (kill-buffer buf))))
 
-  (evil-ex-define-cmd "bd[elete]" #'my/kill-this-buffer)
-
   (defun my/evil-write-and-bdelete ()
     "Save the current buffer, then kill it (like Vim’s :wbd)."
     (interactive)
     (save-buffer)
     (my/kill-this-buffer))
 
-  (evil-ex-define-cmd "wbd" #'my/evil-write-and-bdelete)
-  ;;(define-key evil-ex-completion-map (kbd "TAB")       #'evil-ex-complete)
-  ;;(define-key evil-ex-completion-map (kbd "<tab>")     #'evil-ex-complete)
-  ;;(define-key evil-ex-completion-map (kbd "<backtab>") #'evil-ex-complete)
+  (evil-define-operator my/evil-send-to-repl (beg end)
+    "Send motion/region to REPL. `gzz' sends current line, `gzap' a paragraph, etc."
+    :move-point nil
+    (my/send-region-to-repl beg end))
 
+  (my/apply-package-mappings 'evil)
 
   (evil-mode 1)
   (global-display-line-numbers-mode t)

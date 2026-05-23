@@ -269,14 +269,7 @@ precmd_functions+=(
   precmd_setpwd
 )
 
-# ============================================================================
-# OPTIONAL INTEGRATIONS
-# ============================================================================
 
-# Zoxide (better cd)
-if command -v zoxide >/dev/null 2>&1; then
-  eval "$(zoxide init --cmd cd zsh)"
-fi
 
 # ============================================================================
 # LAUNCHER MODE (if needed)
@@ -339,7 +332,14 @@ compdef _precommand dt
 # export ZSH_ENABLE_SYNTAX_HIGHLIGHTING=true
 
 
+# ============================================================================
+# OPTIONAL INTEGRATIONS
+# ============================================================================
 
+# Zoxide (better cd)
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init  zsh --cmd cd )"
+fi
 
 
 

@@ -4,48 +4,74 @@
   (add-to-list 'load-path default-directory)
   (normal-top-level-add-subdirs-to-load-path))
 
-(require 'hooks)
-(require 'packages)
-(require 'mappings)
-(require 'settings)
+;; remember elpaca-after-init-hook  and :ensure (:build (+elpaca/build-if-new))
+(require 'elpaca-setup)
+(require 'package-mappings)
 (require 'eshell-config)
+(require 'emacs-config)
+(require 'dired-config)
 
-;;;;(defgroup A-custom-group nil
-;;;;  "A custom group for my configuration."
-;;;;  :group 'convenience)
-;;;;
-;;;;(defcustom my-alist-settings-options
-;;;;  nil
-;;;;  "Feature settings with predefined options."
-;;;;  :type '(alist :key-type (symbol :tag "Feature")
-;;;;                :value-type (boolean :tag "Enabled"))
-;;;;  :options '("foo" "bar")
-;;;;  :group 'A-custom-group)
-;;;;
-;;;;
-;;;;
-;;;;(defcustom my-choice
-;;;;  "blabla"
-;;;;  "Feature settings with predefined options."
-;;;;  :type '(radio 
-;;;;           (integer :tag "Number of spaces")
-;;;;        (string :tag "Literal text")
-;;;;        )  
-;;;;  :group 'A-custom-group)
-;;;;(custom-set-variables
-;; ;; custom-set-variables was added by Custom.
-;; ;; If you edit it by hand, you could mess it up, so be careful.
-;; ;; Your init file should contain only one such instance.
-;; ;; If there is more than one, they won't work right.
-;; '(custom-enabled-themes '(nord))
-;; '(custom-safe-themes
-;;   '("4c7228157ba3a48c288ad8ef83c490b94cb29ef01236205e360c2c4db200bb18" default)))
-;;(custom-set-faces
-;; ;; custom-set-faces was added by Custom.
-;; ;; If you edit it by hand, you could mess it up, so be careful.
-;; ;; Your inwdit file should contain only one such instance.u;; ;; If there is more than one, they won't work right.
-;; )
-;;
-;;
-;;
+;;(load-relative "straight_setup.el")
+(require 'compat-config)
+
+;;; evil
+(require 'evil-config)
+(require 'evil-god-toggle-config)
+(require 'evil-anzu-config)
+(require 'anzu-config)
+(require 'evil-goggles-config)
+(require 'evil-collection-config)
+(require 'cursor-contraster-config)
+(require 'god-mode-config)
+(require 'evil-textobj-entire-config)
+(require 'evil-leader-config)
+(require 'evil-search-highlight-persist-config)
+
+;;; elisp
+(require 'flycheck-config)
+(require 'package-lint-config)
+(require 'elisp-lint-config)
+
+;;; completion
+(require 'orderless-config)
+(require 'marginalia-config)
+(require 'consult-config)
+(require 'embark-config)
+(require 'embark-consult-config)
+(require 'cape-config)
+(require 'dabbrev-config)
+(require 'vertico-config)
+(require 'corfu-config)
+(require 'corfu-terminal-config)
+(require 'paredit-config)
+
+;;; lisp
+(require 'sly-config)
+;;(require 'sly-quicklisp-config)
+;;(require 'sly-asdf-config)
+(require 'geiser-mit-config)
+;
+;;;; convenience
+(require 'which-key-config)
+(require 'undo-tree-config)
+(require 'xclip-config)
+(require 'wgrep-config)
+
+;;; themes
+(require 'treesit-auto-config)
+(require 'anisochromatic-theme-config)
+(require 'solarized-theme-config)
+(require 'doom-themes-config)
+
+
+;;; utilities
+(require 'dirvish-config)
+(require 'gnus-config)
+(require 'dashboard-config)
+(require 'kkp-config)
+
+
+;;; other filetypes
+(require 'markdown-mode-config)
+
 ;;;end init.el

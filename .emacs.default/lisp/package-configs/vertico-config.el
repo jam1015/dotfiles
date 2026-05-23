@@ -1,23 +1,13 @@
 (use-package vertico
-             ;;:ensure (:tag "2.8")
+  ;;:ensure (:tag "2.8")
   :init
   (vertico-mode)
   (setq completion-styles '(basic substring partial-completion flex))
   :custom
   (vertico-count 15)
   (vertico-resize t)
-  (vertico-cycle t)  ;; wrap at top/bottom
-  :bind
-  (:map vertico-map
-        ;; navigation
-        ("TAB"       . vertico-next)
-        ("<tab>"     . vertico-next)
-        ("S-TAB"     . vertico-previous)
-        ("<backtab>" . vertico-previous)
-        ;; insertion & completion
-        ("C-SPC"     . vertico-insert)
-        ("?"         . minibuffer-completion-help)
-        ("M-RET"     . minibuffer-force-complete-and-exit)
-        ("M-TAB"     . minibuffer-complete)))
+  (vertico-cycle t)
+  :config
+  (my/apply-package-mappings 'vertico))
 (provide 'vertico-config)
 ;;;end vertico-config.el

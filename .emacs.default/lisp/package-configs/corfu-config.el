@@ -14,15 +14,6 @@
   (corfu-quit-at-boundary 'separator)  ;; stay open on "/" boundary
   (corfu-quit-no-match 'separator)     ;; stay open even when no match
 
-  :bind
-  (:map corfu-map
-        ("TAB"       . corfu-next)
-        ("<tab>"     . corfu-next)
-        ("S-TAB"     . corfu-previous)
-        ("<backtab>" . corfu-previous)
-         ("C-SPC" . corfu-insert   )
-	)
-
   :config
   (corfu-history-mode)
   (corfu-popupinfo-mode)
@@ -33,24 +24,16 @@
       (condition-case nil
           (apply orig args)
         (user-error nil)))))
- ;; Custom RET handling for Evil ex-commands
-  (defun my/evil-ex-corfu-send-and-execute ()
+ (defun my/evil-ex-corfu-send-and-execute ()
     "In Evil ex minibuffer, accept Corfu completion and execute."
     (interactive)
     (if (and (minibufferp)
              (string-match-p "^:" (or (minibuffer-prompt) "")))
         (progn
-          ;; Accept the completion
           (when (>= corfu--index 0)
             (corfu-insert))
-          ;; Then execute the command
           (exit-minibuffer))
-      ;; If not in Evil ex minibuffer, fall back to normal corfu-send
       (corfu-send)))
-
-  ;; Apply the custom RET binding AFTER everything else
-  (define-key corfu-map (kbd "RET") #'my/evil-ex-corfu-send-and-execute)
-  (define-key corfu-map (kbd "<return>") #'my/evil-ex-corfu-send-and-execute)
 
 
 ;; ─── Debug Corfu popup ─────────────────────────────────────────────────
@@ -59,20 +42,15 @@
 
 ;; In your config, after Corfu is set up:
 (defun my/eshell-corfu-return ()
-  "In Eshell, if Corfu popup is visible insert completion, then send input."  
+  "In Eshell, if Corfu popup is visible insert completion, then send input."
   (interactive)
   (if (and (bound-and-true-p corfu-mode)
            (fboundp 'corfu--popup-visible-p)
            (corfu--popup-visible-p))
       (progn
-        (corfu-insert)      ;; accept the Corfu candidate
+        (corfu-insert)
         (eshell-send-input))
-    (eshell-send-input))) ;; normal RET
-
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (local-set-key (kbd "RET")      #'my/eshell-corfu-return)
-            (local-set-key (kbd "<return>") #'my/eshell-corfu-return)))
+    (eshell-send-input)))
 
 ;; ─── Helper to inspect what RET is bound to ──────────────────────────────────
 
@@ -128,6 +106,7 @@
       (advice-remove 'corfu--preview-current #'my/corfu--preview-advice))))
 ;; Turn it on by default:
 (my/corfu-dir-strip-mode 1)
+(my/apply-package-mappings 'corfu)
 )
 
 (provide 'corfu-config)

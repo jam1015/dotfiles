@@ -67,6 +67,7 @@
   "nvim-unception": { "branch": "main", "commit": "59f9f64a7ff4c7f853d3d1a941132648059fc799" },
   "nvim-web-devicons": { "branch": "master", "commit": "4fc505ac7bd7692824a142e96e5f529c133862f8" },
   "nvim-window": { "branch": "only_uppercase", "commit": "2d0d979b5b8ac1b133043d5f9749cc5f4f35a284" },
+  "nvim_gui_termquit": { "branch": "master", "commit": "d783b4edd4b2345bcfdb2effce0be78ff21c5e9b" },
   "oil.nvim": { "branch": "master", "commit": "0fcc83805ad11cf714a949c98c605ed717e0b83e" },
   "onedark.nvim": { "branch": "master", "commit": "df4792accde9db0043121f32628bcf8e645d9aea" },
   "papercolor-theme-slim": { "branch": "main", "commit": "1b923dae2cea6ccb6578475abf947bb3cd9fb202" },

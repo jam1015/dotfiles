@@ -1,15 +1,10 @@
 (use-package consult
   ;;:ensure (:tag "3.4")
   :after vertico
-  :bind (;; Replace default bindings:
-         ("C-s"     . consult-line)             ; search in buffer :contentReference[oaicite:12]{index=12}
-         ("C-x b"   . consult-buffer)           ; enhanced buffer switch :contentReference[oaicite:13]{index=13}
-         ("C-x C-r" . consult-recent-file)      ; recent files :contentReference[oaicite:14]{index=14}
-         ("M-y"     . consult-yank-pop)         ; better yank history :contentReference[oaicite:15]{index=15}
-         )
   :custom
-   (consult-preview-key "any")
-  )
+  (consult-preview-key 'any)
+  :config
+  (my/apply-package-mappings 'consult))
 
 (provide 'consult-config)
 ;;;end consult-config.el

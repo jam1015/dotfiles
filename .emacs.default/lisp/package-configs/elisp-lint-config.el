@@ -10,9 +10,7 @@
   (interactive)
   (when buffer-file-name
     (elisp-lint-files-batch buffer-file-name)))
-
-
-(define-key emacs-lisp-mode-map (kbd "C-c l") #'my/elisp-lint-current-file)
+(my/apply-package-mappings 'elisp-lint)
 )
 
 (provide 'elisp-lint-config)
