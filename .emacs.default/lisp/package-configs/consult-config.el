@@ -4,7 +4,7 @@
   :custom
   (consult-preview-key 'any)
   :config
-  (my/apply-package-mappings 'consult))
+  (my/mappings-consult))
 
 (provide 'consult-config)
 ;;;end consult-config.el

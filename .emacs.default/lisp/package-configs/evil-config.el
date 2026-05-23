@@ -33,7 +33,7 @@
     :move-point nil
     (my/send-region-to-repl beg end))
 
-  (my/apply-package-mappings 'evil)
+  (my/mappings-evil)
 
   (evil-mode 1)
   (global-display-line-numbers-mode t)

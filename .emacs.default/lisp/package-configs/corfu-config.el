@@ -106,7 +106,7 @@
       (advice-remove 'corfu--preview-current #'my/corfu--preview-advice))))
 ;; Turn it on by default:
 (my/corfu-dir-strip-mode 1)
-(my/apply-package-mappings 'corfu)
+(my/mappings-corfu)
 )
 
 (provide 'corfu-config)

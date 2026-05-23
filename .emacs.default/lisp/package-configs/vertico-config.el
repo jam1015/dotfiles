@@ -8,6 +8,6 @@
   (vertico-resize t)
   (vertico-cycle t)
   :config
-  (my/apply-package-mappings 'vertico))
+  (my/mappings-vertico))
 (provide 'vertico-config)
 ;;;end vertico-config.el

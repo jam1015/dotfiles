@@ -12,7 +12,7 @@
   ;; Handle initial frame if Emacs started in a terminal
   (unless (display-graphic-p)
     (global-kkp-mode +1))
-  (my/apply-package-mappings 'kkp))
+  (my/mappings-kkp))
 
 (provide 'kkp-config)
 ;;;end kkp-config.el

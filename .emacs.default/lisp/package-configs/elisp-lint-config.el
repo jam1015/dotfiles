@@ -10,7 +10,7 @@
   (interactive)
   (when buffer-file-name
     (elisp-lint-files-batch buffer-file-name)))
-(my/apply-package-mappings 'elisp-lint)
+(my/mappings-elisp-lint)
 )
 
 (provide 'elisp-lint-config)

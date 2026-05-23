@@ -13,7 +13,7 @@
           evil-god-toggle-persist-visual-once 'to-god)
   (setopt evil-god-toggle-target-state-alist
           '((visual . normal)))
-  (my/apply-package-mappings 'evil-god-toggle))
+  (my/mappings-evil-god-toggle))
 
 (provide 'evil-god-toggle-config)
 ;;;end evil-god-toggle-config.el

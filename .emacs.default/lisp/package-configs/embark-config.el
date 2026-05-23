@@ -3,7 +3,7 @@
   :init
   (setq prefix-help-command #'embark-prefix-help-command)
   :config
-  (my/apply-package-mappings 'embark))
+  (my/mappings-embark))
 
 
 (provide 'embark-config)

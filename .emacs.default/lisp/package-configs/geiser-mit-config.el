@@ -20,6 +20,6 @@
     (corfu-quit))
   (self-insert-command 1))
 
-  (my/apply-package-mappings 'geiser-mit))
+  (my/mappings-geiser-mit))
 (provide 'geiser-mit-config)
 ;;;end geiser-mit-config.el

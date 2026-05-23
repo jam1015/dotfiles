@@ -2,7 +2,7 @@
   :after evil
   :config
   (global-evil-leader-mode)
-  (my/apply-package-mappings 'evil-leader))
+  (my/mappings-evil-leader))
 
 (provide 'evil-leader-config)
 
