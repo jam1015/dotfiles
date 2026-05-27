@@ -258,3 +258,8 @@ renv/
 .config/tmux/plugins/*
 .config/nvim/claude.md
 .config/nvim/nvim_keys.txt
+
+CLAUDE.md          
+context.md         
+instructions.md    
+cscope.out.files

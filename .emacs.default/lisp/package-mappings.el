@@ -2,42 +2,28 @@
 ;;
 ;; Each package's :config block calls (my/mappings-PACKAGE).
 
-(defun my/dired-open-eshell-here ()
-  "Open eshell in the current dired directory, bypassing whereami restore."
-  (interactive)
-  (let ((dir default-directory))
-    (eshell)
-    (eshell/cd dir)
-    (eshell-reset)))
 
-(defun my/send-region-to-repl (beg end)
-  "Send region BEG to END to the appropriate REPL based on major mode."
-  (cond
-   ((derived-mode-p 'scheme-mode 'geiser-repl-mode)
-    (geiser-eval-region beg end))
-   ((derived-mode-p 'emacs-lisp-mode)
-    (eval-region beg end))
-   ((and (derived-mode-p 'lisp-mode) (bound-and-true-p sly-mode))
-    (sly-eval-region beg end))
-   ((and (derived-mode-p 'lisp-mode) (bound-and-true-p slime-mode))
-    (slime-eval-region beg end))
-   ((derived-mode-p 'python-mode)
-    (python-shell-send-region beg end))
-   (t (user-error "No REPL configured for %s" major-mode))))
+;;; ============================================================
+;;; EVIL
+;;; ============================================================
+
+
+
+
 
 (defun my/mappings-evil ()
-  (evil-define-operator my/evil-send-to-repl (beg end)
-    "Send motion/region to REPL. `gzz' sends current line, `gzap' a paragraph, etc."
-    :move-point nil
-    (my/send-region-to-repl beg end))
   (define-key evil-ex-completion-map (kbd "<tab>")     #'completion-at-point)
   (define-key evil-ex-completion-map (kbd "TAB")       #'completion-at-point)
   (define-key evil-ex-completion-map (kbd "<backtab>") #'completion-at-point)
   (define-key evil-ex-completion-map [up]              #'previous-complete-history-element)
   (define-key evil-ex-completion-map [down]            #'next-complete-history-element)
   (evil-ex-define-cmd "bd[elete]" #'my/kill-this-buffer)
-  (evil-ex-define-cmd "wbd"       #'my/evil-write-and-bdelete)
-  (define-key evil-normal-state-map "gz" #'my/evil-send-to-repl))
+  (evil-ex-define-cmd "wbd"       #'my/evil-write-and-bdelete))
+
+
+;;; ============================================================
+;;; EVIL-GOD-TOGGLE
+;;; ============================================================
 
 (defun my/mappings-evil-god-toggle ()
   ;; C-,: enter god from evil states; exit god to god-off
@@ -63,6 +49,11 @@
     evil-god-toggle-mode-map
     (kbd "C-;") (lambda () (interactive) (evil-god-toggle-once nil))))
 
+
+;;; ============================================================
+;;; EVIL-LEADER
+;;; ============================================================
+
 (defun my/mappings-evil-leader ()
   (evil-leader/set-leader "<SPC>")
   (evil-leader/set-key
@@ -78,26 +69,39 @@
   ;;   (define-key evil-leader--default-map (kbd "SPC") spc-map))
   )
 
+
+;;; ============================================================
+;;; EVIL-SEARCH-HIGHLIGHT-PERSIST
+;;; ============================================================
+
 (defun my/mappings-evil-search-highlight-persist ()
 					;(evil-leader/set-key "ll" #'evil-search-highlight-persist-remove-all)
   )
 
-(defun my/mappings-consult ()
-  (global-set-key (kbd "C-s")     #'consult-line)
-  (global-set-key (kbd "C-x b")   #'consult-buffer)
-  (global-set-key (kbd "C-x C-r") #'consult-recent-file)
-  (global-set-key (kbd "M-y")     #'consult-yank-pop))
+
+;;; ============================================================
+;;; EVIL-TEXTOBJ-ENTIRE
+;;; ============================================================
+
+(defun my/mappings-evil-textobj-entire ()
+  (define-key evil-outer-text-objects-map evil-textobj-entire-key 'evil-entire-entire-buffer)
+  (define-key evil-inner-text-objects-map evil-textobj-entire-key 'evil-entire-entire-buffer))
+
+
+;;; ============================================================
+;;; CORFU
+;;; ============================================================
 
 (defun my/evil-ex-corfu-send-and-execute ()
-       "In Evil ex minibuffer, accept Corfu completion and execute."
-       (interactive)
-       (if (and (minibufferp)
-		(string-match-p "^:" (or (minibuffer-prompt) "")))
-           (progn
-             (when (>= corfu--index 0)
-               (corfu-insert))
-             (exit-minibuffer))
-	 (corfu-send)))
+  "In Evil ex minibuffer, accept Corfu completion and execute."
+  (interactive)
+  (if (and (minibufferp)
+	   (string-match-p "^:" (or (minibuffer-prompt) "")))
+      (progn
+        (when (>= corfu--index 0)
+          (corfu-insert))
+        (exit-minibuffer))
+    (corfu-send)))
 
 (defun my/mappings-corfu ()
   (define-key corfu-map (kbd "TAB")       #'corfu-next)
@@ -112,20 +116,10 @@
               (local-set-key (kbd "RET")      #'my/eshell-corfu-return)
               (local-set-key (kbd "<return>") #'my/eshell-corfu-return))))
 
-(defun my/mappings-embark ()
-  (global-set-key (kbd "C-.") #'embark-act)
-  (global-set-key (kbd "C-;") #'embark-dwim)
-  (define-key minibuffer-local-map (kbd "C-c C-c") #'embark-collect)
-  (define-key minibuffer-local-map (kbd "C-c C-e") #'embark-export))
 
-(defun my/mappings-elisp-lint ()
-  (define-key emacs-lisp-mode-map (kbd "C-c l") #'my/elisp-lint-current-file))
-
-(defun my/mappings-geiser-mit ()
-  (dolist (map '(geiser-mode-map geiser-repl-mode-map scheme-mode-map))
-    (when (boundp map)
-      (evil-define-key 'insert (symbol-value map)
-        (kbd "SPC") #'my/geiser-space-insert))))
+;;; ============================================================
+;;; VERTICO
+;;; ============================================================
 
 (defun my/mappings-vertico ()
   (define-key vertico-map (kbd "TAB")       #'vertico-next)
@@ -137,26 +131,92 @@
   (define-key vertico-map (kbd "M-RET")     #'minibuffer-force-complete-and-exit)
   (define-key vertico-map (kbd "M-TAB")     #'minibuffer-complete))
 
+
+;;; ============================================================
+;;; CONSULT
+;;; ============================================================
+
+(defun my/mappings-consult ()
+  (global-set-key (kbd "C-s")     #'consult-line)
+  (global-set-key (kbd "C-x b")   #'consult-buffer)
+  (global-set-key (kbd "C-x C-r") #'consult-recent-file)
+  (global-set-key (kbd "M-y")     #'consult-yank-pop))
+
+
+;;; ============================================================
+;;; EMBARK
+;;; ============================================================
+
+(defun my/mappings-embark ()
+  (global-set-key (kbd "C-.") #'embark-act)
+  (global-set-key (kbd "C-;") #'embark-dwim)
+  (define-key minibuffer-local-map (kbd "C-c C-c") #'embark-collect)
+  (define-key minibuffer-local-map (kbd "C-c C-e") #'embark-export))
+
+
+;;; ============================================================
+;;; ELISP-LINT
+;;; ============================================================
+
+(defun my/mappings-elisp-lint ()
+  (define-key emacs-lisp-mode-map (kbd "C-c l") #'my/elisp-lint-current-file))
+
+
+;;; ============================================================
+;;; GEISER-MIT
+;;; ============================================================
+
+(defun my/mappings-geiser-mit ()
+  (dolist (map '(geiser-mode-map geiser-repl-mode-map scheme-mode-map))
+    (when (boundp map)
+      (evil-define-key 'insert (symbol-value map)
+        (kbd "SPC") #'my/geiser-space-insert))))
+
+
+;;; ============================================================
+;;; WGREP
+;;; ============================================================
+
 (defun my/mappings-wgrep ()
   (define-key grep-mode-map (kbd "e")       #'wgrep-change-to-wgrep-mode)
   (define-key grep-mode-map (kbd "C-x C-q") #'wgrep-change-to-wgrep-mode)
   (define-key grep-mode-map (kbd "C-c C-c") #'wgrep-finish-edit))
 
+
+;;; ============================================================
+;;; KKP
+;;; ============================================================
+
 (defun my/mappings-kkp ()
   (unless (display-graphic-p)
     (define-key key-translation-map (kbd "C-[")
-	    (lambda (_prompt) (if (display-graphic-p) nil [escape])))
+		(lambda (_prompt) (if (display-graphic-p) nil [escape])))
     (define-key input-decode-map (kbd "C-m") [return])))
+
+
+;;; ============================================================
+;;; GOD-MODE
+;;; ============================================================
 
 (defun my/mappings-god-mode ()
   (define-key god-local-mode-map (kbd ".") #'repeat))
 
-(defun my/mappings-evil-textobj-entire ()
-  (define-key evil-outer-text-objects-map evil-textobj-entire-key 'evil-entire-entire-buffer)
-  (define-key evil-inner-text-objects-map evil-textobj-entire-key 'evil-entire-entire-buffer))
+
+;;; ============================================================
+;;; DIRED
+;;; ============================================================
+
+(defun my/dired-open-eshell-here ()
+  "Open eshell in the current dired directory, bypassing whereami restore."
+  (interactive)
+  (let ((dir default-directory))
+    (eshell)
+    (eshell/cd dir)
+    (eshell-reset)))
 
 (defun my/mappings-dired ()
   (define-key dired-mode-map (kbd "M-e") #'my/dired-open-eshell-here))
+
 
 (provide 'package-mappings)
 ;;; end package-mappings.el

@@ -26,6 +26,7 @@
 (require 'evil-textobj-entire-config)
 (require 'evil-leader-config)
 (require 'evil-search-highlight-persist-config)
+(require 'evil-overrides-config)
 
 ;;; elisp
 (require 'flycheck-config)
@@ -47,6 +48,7 @@
 
 ;;; lisp
 (require 'sly-config)
+(require 'slime-config)
 ;;(require 'sly-quicklisp-config)
 ;;(require 'sly-asdf-config)
 (require 'geiser-mit-config)

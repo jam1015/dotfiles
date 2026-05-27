@@ -7,8 +7,8 @@
   (setq lazy-highlight-max-at-a-time nil)
   (setq evil-want-keybinding nil
 	evil-want-integration t)
-
   (setq evil-default-state 'normal)
+
   :custom
   (evil-undo-system 'undo-tree)
   (display-line-numbers-type 'relative)
@@ -28,10 +28,7 @@
     (save-buffer)
     (my/kill-this-buffer))
 
-  (evil-define-operator my/evil-send-to-repl (beg end)
-    "Send motion/region to REPL. `gzz' sends current line, `gzap' a paragraph, etc."
-    :move-point nil
-    (my/send-region-to-repl beg end))
+  
 
   (my/mappings-evil)
 
