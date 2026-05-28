@@ -69,6 +69,7 @@
 ;;; utilities
 (require 'dirvish-config)
 (require 'gnus-config)
+(require 'erc-config)
 (require 'dashboard-config)
 (require 'kkp-config)
 

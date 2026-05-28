@@ -1,7 +1,6 @@
 (use-package corfu
   :ensure t
   :init
-  ;; Enable Corfu globally
   (global-corfu-mode)
 
   :custom
@@ -9,7 +8,7 @@
   (corfu-cycle t)                      ;; wrap at ends
   (corfu-auto t)                       ;; popup as you type
   (corfu-auto-delay 0.1)
-  (corfu-auto-prefix 2)                ;; start completing after 1 char
+  (corfu-auto-prefix 1)                ;; start completing after 1 char
   (corfu-preselect 'prompt)
   (corfu-quit-at-boundary 'separator)  ;; stay open on "/" boundary
   (corfu-quit-no-match 'separator)     ;; stay open even when no match
