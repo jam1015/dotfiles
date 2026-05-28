@@ -711,6 +711,7 @@ haveged
 hdf5
 hdparm
 helix
+hexchat
 hicolor-icon-theme
 hidapi
 highway
@@ -2250,6 +2251,8 @@ rsync
 rtkit
 rtmpdump
 rubberband
+ruby
+rubygems
 run-parts
 runc
 rust
