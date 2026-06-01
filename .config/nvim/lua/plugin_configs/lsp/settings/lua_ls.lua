@@ -37,7 +37,7 @@ return {
         -- Your settings here
       })
 
-      client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+      client:notify("workspace/didChangeConfiguration", { settings = client.config.settings })
       --print("Configurations updated.")
     end
 

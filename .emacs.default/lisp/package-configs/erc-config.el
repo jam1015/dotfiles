@@ -25,7 +25,12 @@
   (erc-sasl-server "irc.libera.chat"))
 
 (provide 'erc-config)
+;; /joing #channel
 ;; /quit -- get out of IRC completely
 ;; /part and /leave       leave the channel
 ;; /whois /whoami /who
+;; /msg /query for direct communication
+;; /dcc chat [name]   asks for a dcc session, they are faster
+;; /dcc send kumquat /path/to/file
+;;/msg =kumquat hellow
 ;; end erc-config.el
