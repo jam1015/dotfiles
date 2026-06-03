@@ -24,7 +24,7 @@ return
   },
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "BufReadPre", "BufNewFile","VeryLazy" },
     dependencies = { "onsails/lspkind.nvim",
       {
         "williamboman/mason.nvim",

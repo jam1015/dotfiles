@@ -39,17 +39,22 @@
 ;;(advice-add 'corfu--show :before (lambda (&rest _) (message "⟫ Corfu popup SHOW")))
 ;;(advice-add 'corfu--hide :before (lambda (&rest _) (message "⟪ Corfu popup HIDE")))
 
-;; In your config, after Corfu is set up:
 (defun my/eshell-corfu-return ()
-  "In Eshell, if Corfu popup is visible insert completion, then send input."
+  "In Eshell, if Corfu popup is visible insert completion, then send input.
+When a visual command is running under `eat-eshell-mode', forward RET to
+the terminal via `eat-self-input' instead of submitting eshell input."
   (interactive)
-  (if (and (bound-and-true-p corfu-mode)
-           (fboundp 'corfu--popup-visible-p)
-           (corfu--popup-visible-p))
-      (progn
-        (corfu-insert)
-        (eshell-send-input))
-    (eshell-send-input)))
+  (cond
+   ((or (bound-and-true-p eat--eshell-semi-char-mode)
+        (bound-and-true-p eat--eshell-char-mode))
+    (call-interactively #'eat-self-input))
+   ((and (bound-and-true-p corfu-mode)
+         (fboundp 'corfu--popup-visible-p)
+         (corfu--popup-visible-p))
+    (corfu-insert)
+    (eshell-send-input))
+   (t
+    (eshell-send-input))))
 
 ;; ─── Helper to inspect what RET is bound to ──────────────────────────────────
 

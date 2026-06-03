@@ -58,7 +58,7 @@
   (evil-leader/set-leader "<SPC>")
   (evil-leader/set-key
     "ee"    #'eshell
-    "bb"    #'switch-to-buffer
+    "bb"    #'consult-buffer
     "bk"    #'my/kill-this-buffer
     "nh"    #'evil-search-highlight-persist-remove-all
     ":"     #'execute-extended-command
@@ -163,14 +163,71 @@
 
 
 ;;; ============================================================
+;;; REPL shared helpers
+;;; ============================================================
+
+(defun my/repl-space-insert ()
+  "Dismiss Corfu popup if visible, then insert a space."
+  (interactive)
+  (when (and (bound-and-true-p corfu-mode)
+             (fboundp #'corfu--popup-visible-p)
+             (corfu--popup-visible-p))
+    (corfu-quit))
+  (self-insert-command 1))
+
+
+;;; ============================================================
+;;; SLY
+;;; ============================================================
+
+(defun my/mappings-sly ()
+  (with-eval-after-load 'sly-mrepl
+    (evil-define-key 'insert sly-mrepl-mode-map
+      (kbd "SPC")        #'my/repl-space-insert
+      (kbd "RET")        #'sly-mrepl-return
+      (kbd "<return>")   #'sly-mrepl-return
+      (kbd "C-<return>") #'newline-and-indent
+      (kbd "C-RET")      #'newline-and-indent))
+  (with-eval-after-load 'sly
+    (evil-define-key 'insert sly-mode-map
+      (kbd "SPC") #'my/repl-space-insert)))
+
+
+;;; ============================================================
+;;; SLIME
+;;; ============================================================
+
+(defun my/mappings-slime ()
+  (with-eval-after-load 'slime-repl
+    (evil-define-key 'insert slime-repl-mode-map
+      (kbd "SPC")        #'my/repl-space-insert
+      (kbd "RET")        #'slime-repl-return
+      (kbd "<return>")   #'slime-repl-return
+      (kbd "C-<return>") #'slime-repl-newline-and-indent
+      (kbd "C-RET")      #'slime-repl-newline-and-indent))
+  (with-eval-after-load 'slime
+    (evil-define-key 'insert slime-mode-map
+      (kbd "SPC") #'my/repl-space-insert)))
+
+
+;;; ============================================================
 ;;; GEISER-MIT
 ;;; ============================================================
 
 (defun my/mappings-geiser-mit ()
-  (dolist (map '(geiser-mode-map geiser-repl-mode-map scheme-mode-map))
-    (when (boundp map)
-      (evil-define-key 'insert (symbol-value map)
-        (kbd "SPC") #'my/geiser-space-insert))))
+  (with-eval-after-load 'geiser-repl
+    (evil-define-key 'insert geiser-repl-mode-map
+      (kbd "SPC")        #'my/repl-space-insert
+      (kbd "RET")        #'geiser-repl-maybe-send
+      (kbd "<return>")   #'geiser-repl-maybe-send
+      (kbd "C-<return>") #'geiser-repl--newline-and-indent
+      (kbd "C-RET")      #'geiser-repl--newline-and-indent))
+  (with-eval-after-load 'geiser-mode
+    (evil-define-key 'insert geiser-mode-map
+      (kbd "SPC") #'my/repl-space-insert))
+  (with-eval-after-load 'scheme
+    (evil-define-key 'insert scheme-mode-map
+      (kbd "SPC") #'my/repl-space-insert)))
 
 
 ;;; ============================================================

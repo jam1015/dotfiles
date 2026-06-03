@@ -9,6 +9,7 @@
          (emacs-startup           . my/startup-reinit-evil-messages)
          (server-after-make-frame . my/startup-open-eshell)
          (elpaca-after-init       . my/elpaca-after))
+  :bind ([remap list-buffers] . ibuffer)
 
   :custom
   ;; Startup and UI

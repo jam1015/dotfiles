@@ -25,12 +25,27 @@
   (erc-sasl-server "irc.libera.chat"))
 
 (provide 'erc-config)
-;; /joing #channel
-;; /quit -- get out of IRC completely
-;; /part and /leave       leave the channel
-;; /whois /whoami /who
-;; /msg /query for direct communication
-;; /dcc chat [name]   asks for a dcc session, they are faster
-;; /dcc send kumquat /path/to/file
-;;/msg =kumquat hellow
+;; /join #channel
+;; /nick
+;; /bye /exit  /quit  [message] ## get out of IRC completely (quit is the real one)
+;; /part and /leave  #####     leave the channel
+;; /whoami
+;; /me ####### at the beginning puts my name
+;; /whois [user]
+;; /who #channel ###### who is onther
+;; /names #channel #### is lighter
+;; /msg  user  message ####### one off
+;; /msg  #channel  message ####### one off
+;; /query user ###### for direct communication
+;; /quert      ###### to end
+;; /dcc chat [name] ######  asks for a dcc session, they are faster
+;; /dcc send [name] /path/to/file   #### send a file
+;; /msg =[name] hellow     ######### one off in dcc
+;; /help [command]
+;; /list ######## list all channels
+;; /away [message] ### im away
+;; /away   ######    im back (always, message is needed for away)
+;; /ping user         ########   these ping, 
+;; /ping #channel
+;; /CTCP [user/#channe] PING goes directly but often doesn't work
 ;; end erc-config.el

@@ -64,9 +64,11 @@
 (require 'anisochromatic-theme-config)
 (require 'solarized-theme-config)
 (require 'doom-themes-config)
+(require 'all-the-icons-config)
 
 
 ;;; utilities
+(require 'eat-config)
 (require 'dirvish-config)
 (require 'gnus-config)
 (require 'erc-config)

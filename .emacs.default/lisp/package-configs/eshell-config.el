@@ -72,8 +72,19 @@
       (when (fboundp 'evil-insert)
         (evil-insert 1))))
 
+  (defun my/eshell-send-input-or-eat ()
+    "Submit eshell input, or forward RET to eat when a TUI is running.
+When `eat-eshell-mode' has put the buffer under a visual subprocess,
+RET must reach the child process as a terminal keystroke instead of
+being interpreted as `eshell-send-input'."
+    (interactive)
+    (if (or (bound-and-true-p eat--eshell-semi-char-mode)
+            (bound-and-true-p eat--eshell-char-mode))
+        (call-interactively #'eat-self-input)
+      (eshell-send-input)))
+
   (defun my/setup-eshell-evil-window-keys ()
-    (evil-define-key 'insert eshell-mode-map (kbd "RET") #'eshell-send-input)
+    (evil-define-key 'insert eshell-mode-map (kbd "RET") #'my/eshell-send-input-or-eat)
     (evil-define-key 'insert eshell-mode-map (kbd "C-w") nil)
     (evil-define-key 'insert eshell-mode-map (kbd "C-w h") #'evil-window-left)
     (evil-define-key 'insert eshell-mode-map (kbd "C-w j") #'evil-window-down)
