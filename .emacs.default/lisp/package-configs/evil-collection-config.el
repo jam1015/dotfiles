@@ -1,7 +1,7 @@
 (use-package evil-collection
   :ensure (:host github
            :repo "jam1015/evil-collection"
-           :branch "master"
+           :branch "sync_dev"
            :build (:sub elpaca--clone +elpaca/build-if-new)
            )
   :after evil which-key

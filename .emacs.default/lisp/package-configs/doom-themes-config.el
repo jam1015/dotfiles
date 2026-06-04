@@ -1,4 +1,3 @@
 (use-package doom-themes
-  ;;:config (load-theme 'doom-tokyo-night t)
-  )
+  :ensure t)
 (provide 'doom-themes-config)

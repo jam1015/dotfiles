@@ -8,7 +8,7 @@
   :hook ((emacs-startup           . my/startup-open-eshell)
          (emacs-startup           . my/startup-reinit-evil-messages)
          (server-after-make-frame . my/startup-open-eshell)
-         (elpaca-after-init       . my/elpaca-after))
+         (elpaca-after-init       . my/elpaca-after-init))
   :bind ([remap list-buffers] . ibuffer)
 
   :custom

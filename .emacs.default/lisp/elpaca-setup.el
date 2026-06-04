@@ -25,10 +25,20 @@
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-sources-directory (expand-file-name "sources/" elpaca-directory))
-(defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+;; Using the jam1015 fork to pick up PR #547 (defers elpaca-after-init-hook
+;; until init.el has finished loading). When that PR merges upstream, swap
+;; back to the mainline order below.
+(defvar elpaca-order '(elpaca :repo "https://github.com/jam1015/elpaca.git"
+                              :branch "sync_dev"
                               :ref nil :depth 1 :inherit ignore
                               :files (:defaults "elpaca-test.el" (:exclude "extensions"))
                               :build (:not elpaca-activate)))
+;; Mainline order — re-enable this block (and disable the fork order above)
+;; when reverting to progfolio/elpaca master:
+;; (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+;;                               :ref nil :depth 1 :inherit ignore
+;;                               :files (:defaults "elpaca-test.el" (:exclude "extensions"))
+;;                               :build (:not elpaca-activate)))
 (let* ((repo  (expand-file-name "elpaca/" elpaca-sources-directory))
        (build (expand-file-name "elpaca/" elpaca-builds-directory))
        (order (cdr elpaca-order))
@@ -63,9 +73,18 @@
 
 
 
-(elpaca elpaca-use-package
+;; elpaca-use-package ships inside the elpaca repo (extensions/). Override its
+;; default :repo so it matches our forked elpaca and shares its source dir.
+(elpaca (elpaca-use-package
+         :repo "https://github.com/jam1015/elpaca.git"
+         :branch "sync_dev"
+         :files ("extensions/elpaca-use-package.el")
+         :main "extensions/elpaca-use-package.el")
   ;; Enable Elpaca support for use-package's :ensure keyword.
   (elpaca-use-package-mode))
+;; Mainline elpaca-use-package — use this form when reverting to progfolio/elpaca:
+;; (elpaca elpaca-use-package
+;;   (elpaca-use-package-mode))
 
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)

@@ -6,9 +6,9 @@
 
 ;; remember elpaca-after-init-hook  and :ensure (:build (+elpaca/build-if-new))
 (require 'elpaca-setup)
+(require 'emacs-config)
 (require 'package-mappings)
 (require 'eshell-config)
-(require 'emacs-config)
 (require 'dired-config)
 
 ;;(load-relative "straight_setup.el")

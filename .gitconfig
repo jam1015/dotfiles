@@ -16,3 +16,5 @@
 	wip = !git add -u && git commit -m 'wip' && git push
 [core]
 	editor = nvim --clean
+[push]
+	followTags = true
