@@ -45,6 +45,8 @@
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'eshell-mode 'normal)
 
+  (evil-ex-define-cmd "eshell-new" (lambda () (interactive) (eshell t)))
+
   )
 (provide 'evil-config)
 ;;;end evil-config.el
