@@ -266,3 +266,5 @@ cscope.out.files
 .local/bin/late
 .authinfo
 .authinfo.gpg
+
+.emacs.default/ielm-history.eld
