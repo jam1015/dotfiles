@@ -347,6 +347,7 @@ fuse-common
 fuse2
 fuse3
 futuresql
+fuzzel
 fzf
 galculator
 gamescope
@@ -2242,6 +2243,7 @@ redshift-gtk-git
 reflector
 reflector-simple
 reiserfsprogs
+resvg
 rhash
 ripgrep
 ripgrep-all
@@ -2431,6 +2433,7 @@ ttf-hack
 ttf-input-nerd
 ttf-iosevka-nerd
 ttf-iosevkatermslab-nerd
+ttf-jetbrains-mono-nerd
 ttf-liberation
 ttf-lilex-nerd
 ttf-martian-mono

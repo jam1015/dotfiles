@@ -14,5 +14,5 @@ vsync = true
 wsl = false
 
 [font]
-normal = [] # Will use the bundled Fira Code Nerd Font by default
-size = 14.0
+normal = ["JetBrainsMono Nerd Font Mono"]
+size = 9.0

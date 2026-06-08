@@ -33,7 +33,7 @@
   (byte-compile-warnings t)
 
   :config
-  (set-face-attribute 'default nil :family "Lilex Nerd Font Mono" :height 100)
+  (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font Mono" :height 90)
   ;; Disable cursor blinking
   (blink-cursor-mode 0)
 

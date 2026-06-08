@@ -153,7 +153,6 @@ local function setup_clipboard()
 end
 
 if vim.g.neovide then
-  vim.o.guifont = "InputMono Nerd Font:h8"
   vim.g.neovide_position_animation_length = 0.0625
   vim.g.neovide_scroll_animation_length = 0.15
   vim.g.neovide_cursor_animation_length = 0.05
