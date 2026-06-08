@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <menu id="menu">
+    <section>
+      <item>
+        <attribute name="label">Lock</attribute>
+        <attribute name="action">custom.lock</attribute>
+      </item>
+      <item>
+        <attribute name="label">Suspend</attribute>
+        <attribute name="action">custom.suspend</attribute>
+      </item>
+      <item>
+        <attribute name="label">Hibernate</attribute>
+        <attribute name="action">custom.hibernate</attribute>
+      </item>
+      <item>
+        <attribute name="label">Log out</attribute>
+        <attribute name="action">custom.logout</attribute>
+      </item>
+      <item>
+        <attribute name="label">Reboot</attribute>
+        <attribute name="action">custom.reboot</attribute>
+      </item>
+      <item>
+        <attribute name="label">Shutdown</attribute>
+        <attribute name="action">custom.shutdown</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>
