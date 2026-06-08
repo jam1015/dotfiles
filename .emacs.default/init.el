@@ -68,6 +68,7 @@
 
 
 ;;; utilities
+(require 'perspective-config)
 (require 'eat-config)
 (require 'dirvish-config)
 (require 'gnus-config)
@@ -78,5 +79,7 @@
 
 ;;; other filetypes
 (require 'markdown-mode-config)
+(require 'ess-config)
+(require 'r-ts-mode-config)
 
 ;;;end init.el

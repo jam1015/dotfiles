@@ -23,6 +23,7 @@
  ("default" . ((user-emacs-directory . "~/.emacs.default")))
  ("vanilla" . ((user-emacs-directory . "~/.emacs.vanilla")))
  ("evil" . ((user-emacs-directory . "~/.emacs.evil")))
+ ("evcol" . ((user-emacs-directory . "~/.emacs.evcol")))
  ("god" . ((user-emacs-directory . "~/.emacs.god")))
 )
 

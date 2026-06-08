@@ -5,6 +5,8 @@
            :build (:sub elpaca--clone +elpaca/build-if-new)
            )
   :after evil which-key
+  :custom
+  (evil-collection-repl-submit-state 'insert)
   :config
   (setq evil-overriding-maps nil)
   (evil-collection-init))

@@ -183,11 +183,7 @@
 (defun my/mappings-sly ()
   (with-eval-after-load 'sly-mrepl
     (evil-define-key 'insert sly-mrepl-mode-map
-      (kbd "SPC")        #'my/repl-space-insert
-      (kbd "RET")        #'sly-mrepl-return
-      (kbd "<return>")   #'sly-mrepl-return
-      (kbd "C-<return>") #'newline-and-indent
-      (kbd "C-RET")      #'newline-and-indent))
+      (kbd "SPC") #'my/repl-space-insert))
   (with-eval-after-load 'sly
     (evil-define-key 'insert sly-mode-map
       (kbd "SPC") #'my/repl-space-insert)))
@@ -200,11 +196,7 @@
 (defun my/mappings-slime ()
   (with-eval-after-load 'slime-repl
     (evil-define-key 'insert slime-repl-mode-map
-      (kbd "SPC")        #'my/repl-space-insert
-      (kbd "RET")        #'slime-repl-return
-      (kbd "<return>")   #'slime-repl-return
-      (kbd "C-<return>") #'slime-repl-newline-and-indent
-      (kbd "C-RET")      #'slime-repl-newline-and-indent))
+      (kbd "SPC") #'my/repl-space-insert))
   (with-eval-after-load 'slime
     (evil-define-key 'insert slime-mode-map
       (kbd "SPC") #'my/repl-space-insert)))
@@ -217,11 +209,7 @@
 (defun my/mappings-geiser-mit ()
   (with-eval-after-load 'geiser-repl
     (evil-define-key 'insert geiser-repl-mode-map
-      (kbd "SPC")        #'my/repl-space-insert
-      (kbd "RET")        #'geiser-repl-maybe-send
-      (kbd "<return>")   #'geiser-repl-maybe-send
-      (kbd "C-<return>") #'geiser-repl--newline-and-indent
-      (kbd "C-RET")      #'geiser-repl--newline-and-indent))
+      (kbd "SPC") #'my/repl-space-insert))
   (with-eval-after-load 'geiser-mode
     (evil-define-key 'insert geiser-mode-map
       (kbd "SPC") #'my/repl-space-insert))
@@ -273,6 +261,23 @@
 
 (defun my/mappings-dired ()
   (define-key dired-mode-map (kbd "M-e") #'my/dired-open-eshell-here))
+
+
+;;; ============================================================
+;;; PERSPECTIVE
+;;; ============================================================
+
+(defun my/mappings-perspective ()
+  (with-eval-after-load 'evil-leader
+    (evil-leader/set-key
+      "ps" #'persp-switch
+      "pk" #'persp-kill
+      "pn" #'persp-next
+      "pp" #'persp-prev
+      "pr" #'persp-rename
+      "pA" #'persp-add-buffer
+      "pb" #'persp-switch-to-buffer
+      "pm" #'persp-merge)))
 
 
 (provide 'package-mappings)

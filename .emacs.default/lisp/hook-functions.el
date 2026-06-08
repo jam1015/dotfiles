@@ -22,5 +22,46 @@ Add additional one-shot startup work here as needed."
     (when (or (daemonp) (display-graphic-p) (display-color-p))
       (load-theme my/default-theme t))))
 
+(defun my/repl-unify-return-bindings ()
+  "In any comint-derived REPL, bind RET to submit in both insert+normal
+and C-<return> to newline. Detects the REPL's submit function by reading
+the evil-collection binding that the `evil-collection-repl-submit-state'
+flag installs, falling back to `comint-send-input'."
+  (when (derived-mode-p 'comint-mode)
+    (let* ((map (current-local-map))
+           (insert-ret (lookup-key (evil-get-auxiliary-keymap map 'insert t)
+                                   (kbd "RET")))
+           (normal-ret (lookup-key (evil-get-auxiliary-keymap map 'normal t)
+                                   (kbd "RET")))
+           (submit-fn (cond
+                       ((and (functionp insert-ret)
+                             (not (eq insert-ret 'newline))
+                             (not (eq insert-ret 'evil-ret)))
+                        insert-ret)
+                       ((and (functionp normal-ret)
+                             (not (eq normal-ret 'newline))
+                             (not (eq normal-ret 'evil-ret)))
+                        normal-ret)
+                       (t #'comint-send-input))))
+      (evil-define-key '(insert normal) map
+        (kbd "RET")        submit-fn
+        (kbd "<return>")   submit-fn
+        (kbd "C-<return>") #'newline
+        (kbd "C-RET")      #'newline))))
+
+(defun my/kill-scratch-when-other-buffers (&rest _)
+  "Kill *scratch* once any real (user-visible, non-scratch) buffer exists.
+Self-removes from `window-buffer-change-functions' after firing."
+  (when (and (get-buffer "*scratch*")
+             (seq-some
+              (lambda (b)
+                (let ((n (buffer-name b)))
+                  (and (not (string-prefix-p " " n))
+                       (not (string= n "*scratch*")))))
+              (buffer-list)))
+    (kill-buffer "*scratch*")
+    (remove-hook 'window-buffer-change-functions
+                 #'my/kill-scratch-when-other-buffers)))
+
 (provide 'hook-functions)
 ;;; end hook-functions.el
