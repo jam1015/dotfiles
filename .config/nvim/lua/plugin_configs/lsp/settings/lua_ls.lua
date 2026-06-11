@@ -44,7 +44,15 @@ return {
     --print("Client initialized.")
     return true
   end,
-  settings = {},
+  -- *CLAUDE CHANGE* declare `vim` as a known global so lua_ls stops flagging it
+  -- in plugin spec / autocommands / settings files outside the runtime workspace.
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  },
 }
 
 

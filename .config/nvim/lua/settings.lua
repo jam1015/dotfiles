@@ -1,4 +1,9 @@
 vim.g.loaded_gtags_cscope = 1
+-- *CLAUDE CHANGE* disable unused language providers (silences :checkhealth, avoids spawn checks)
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python3_provider = 0
 local set = vim.opt
 vim.cmd([[ highlight Comment cterm=italic gui=italic]])
 --vim.g.debug = false
@@ -49,6 +54,9 @@ set.history = 2000
 set.hidden = true
 set.autoread = true
 set.scrolloff = 5   -- show a few lines around cursor
+-- *CLAUDE CHANGE* explicit guicursor so foot honors DECSCUSR shape changes per mode
+-- (block in normal/visual, beam in insert, underline in replace).
+set.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkon0"
 set.display = "lastline"
 set.shiftwidth = 2  --how much indentation from >
 set.softtabstop = 2 --lets us delete by tabs when expandtab is on

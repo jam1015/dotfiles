@@ -4,6 +4,7 @@ return
   {
     "romus204/tree-sitter-manager.nvim",
     dependencies = {}, -- tree-sitter CLI must be installed system-wide
+    event = "VeryLazy", -- *CLAUDE CHANGE* defer until UI ready (was loading at startup, ~10ms)
     config = function()
       require("plugin_configs.tree-sitter-manager")
     end
@@ -24,7 +25,13 @@ return
   },
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile","VeryLazy" },
+    -- *CLAUDE CHANGE* drop VeryLazy so lsp only loads on file open (was triggering on UI ready too)
+    --event = { "BufReadPre", "BufNewFile","VeryLazy" },
+    --event = { "BufReadPre", "BufNewFile" },
+    -- *CLAUDE CHANGE* trigger only on filetypes for configured LSP servers.
+    -- Filetypes derived from the shared server table so it stays in sync with
+    -- mason-lspconfig's `ensure_installed`. Edit plugin_configs/lsp/servers.lua to change.
+    ft = require("plugin_configs.lsp.servers").filetypes(),
     dependencies = { "onsails/lspkind.nvim",
       {
         "williamboman/mason.nvim",
@@ -54,6 +61,7 @@ return
   },
   {
     'stevearc/oil.nvim',
+    -- *CLAUDE CHANGE* (reverted: oil hijacks netrw; deferring breaks `nvim <dir>`)
     config = function()
       -- your existing oil setup
       require("plugin_configs.oil_nvim")
@@ -71,12 +79,14 @@ return
     --dir = "~/bluloco.nvim",
     --lazy = false,
     --priority = 1000,
+    lazy = true, -- *CLAUDE CHANGE* defer colorscheme (was ~3ms at startup)
     dependencies = { 'rktjmp/lush.nvim' },
     config = function()
       require("plugin_configs.bluloco")
     end,
   },
-  { "ellisonleao/gruvbox.nvim", config = function() require("plugin_configs.gruvbox") end },
+  -- *CLAUDE CHANGE* colorscheme: lazy=true so themery loads it on demand (was ~2ms at startup)
+  { "ellisonleao/gruvbox.nvim", lazy = true, config = function() require("plugin_configs.gruvbox") end },
   {
     "rcarriga/nvim-notify",
     event = "VeryLazy",
@@ -86,6 +96,7 @@ return
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
+    event = "VeryLazy", -- *CLAUDE CHANGE* defer (was loading at startup, ~9.5ms)
     config = function()
       require("plugin_configs.harpoon")
     end,
@@ -550,6 +561,7 @@ return
 
   ({
     "lervag/vimtex",
+    ft = { "tex", "latex", "plaintex", "bib" }, -- *CLAUDE CHANGE* only for tex files (was ~6ms at startup)
     config = function()
       require("plugin_configs.vimtex")
       require("plugin_keymaps").vimtex()
@@ -591,6 +603,10 @@ return
   }),
   {
     "R-nvim/R.nvim",
+    -- *CLAUDE CHANGE* lazy-load on R-adjacent filetypes (was ~5ms at startup).
+    -- Includes R, R Markdown, Quarto, Sweave (Rnoweb), and TeX (often used for
+    -- knitr/Sweave + .Rprofile-style files). Rprofile files default to ft=r anyway.
+    ft = { "r", "rmd", "quarto", "rnoweb", "tex", "rhelp", "rdoc" },
     config = function() require('plugin_configs.rnvim') end,
   },
 
@@ -615,6 +631,7 @@ return
   {
     "andymass/vim-matchup",
     --event = "VeryLazy", event = { "VeryLazy" },
+    event = "BufReadPost", -- *CLAUDE CHANGE* defer until a file is loaded (was ~4.8ms at startup)
   },
   {
     "numToStr/Comment.nvim",
@@ -691,6 +708,7 @@ return
   {
     'nvim-lualine/lualine.nvim',
     --event = "VeryLazy",
+    event = "VeryLazy", -- *CLAUDE CHANGE* defer (was ~22ms at startup, biggest hit)
     dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
     init = function()
       require('plugin_configs.lualine.initi')

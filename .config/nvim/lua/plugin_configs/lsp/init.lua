@@ -9,24 +9,27 @@ if not lspconfig_status_ok then
 	return
 end
 
-local servers = {
-	"ts_ls",
-	"vimls",
-	"clangd",
-	"pyright",
-	"jsonls",
-	"cssls",
-	"eslint",
-	"emmet_ls",
-	"texlab",
-	"html",
-	"bashls",
-	"lua_ls",
-	"r_language_server",
-	"julials",
-	"yamlls",
-}
+-- *CLAUDE CHANGE* moved server list to plugin_configs.lsp.servers so the plugin spec
+-- can derive its `ft` lazy-load list from the same source.
+--local servers = {
+--	"ts_ls",
+--	"vimls",
+--	"clangd",
+--	"pyright",
+--	"jsonls",
+--	"cssls",
+--	"eslint",
+--	"emmet_ls",
+--	"texlab",
+--	"html",
+--	"bashls",
+--	"lua_ls",
+--	"r_language_server",
+--	"julials",
+--	"yamlls",
+--}
 --"texlab",
+local servers = require("plugin_configs.lsp.servers").names()
 
 local settings_obj = require("plugin_configs.lsp.mason_settings")
 

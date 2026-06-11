@@ -1,6 +1,6 @@
 #!/bin/bash
 # show_keybinds.sh
-# Display all Hyprland keybindings grouped by submap in a floating kitty window.
+# Display all Hyprland keybindings grouped by submap in a floating foot window.
 
 decode_mod() {
     local mask=$1

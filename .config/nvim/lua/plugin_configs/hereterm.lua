@@ -26,4 +26,6 @@ startup_command = "enew", -- Startify, Dashboard, etc. Make sure it has been loa
     },
 })
 
-require("plugin_keymaps").hereterm()
+-- *CLAUDE CHANGE* keymap call already happens in the plugin spec
+-- (plugins/init.lua → here.term config). Removed to fix duplicate <C-;> binding.
+--require("plugin_keymaps").hereterm()

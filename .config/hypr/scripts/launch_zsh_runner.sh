@@ -5,4 +5,6 @@
 WHEREAMI=$(cat ~/.local/state/zsh/whereami)
 pkill -f "ZSH_LAUNCHER=1" 2>/dev/null
 
-/usr/bin/kitty --directory="$WHEREAMI" --class=Launcher -e env ZSH_LAUNCHER=1 zsh -o vi -i
+# *CLAUDE CHANGE* reverted foot → kitty (foot's --working-directory/--app-id → kitty's --directory/--class).
+#/usr/bin/foot --working-directory="$WHEREAMI" --app-id=Launcher env ZSH_LAUNCHER=1 zsh -o vi -i
+/usr/bin/kitty --directory="$WHEREAMI" --class=Launcher env ZSH_LAUNCHER=1 zsh -o vi -i

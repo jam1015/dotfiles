@@ -1,3 +1,4 @@
+7zip
 a52dec
 aalib
 aardvark-dns
@@ -88,6 +89,7 @@ binutils
 bison
 black-hole-solver
 blas
+blas64-openblas
 blinken
 blosc
 blueberry
@@ -118,6 +120,7 @@ brotli
 bspwm
 btrfs-progs
 bubblewrap
+build2
 bwidget
 bzip2
 c-ares
@@ -139,6 +142,7 @@ cdparanoia
 cfitsio
 cheese
 chromaprint
+chrpath
 cifs-utils
 cjson
 cl-alexandria-git
@@ -256,6 +260,7 @@ electron34
 electron35
 electron37
 electron39
+electron42
 elfutils
 elisa
 ell
@@ -377,6 +382,7 @@ giflib
 girara
 git
 git-credential-gopass
+git-delta
 github-cli
 glances
 glaze
@@ -511,6 +517,7 @@ haskell-case-insensitive
 haskell-cassava
 haskell-cborg
 haskell-cereal
+haskell-character-ps
 haskell-citeproc
 haskell-cmdargs
 haskell-colour
@@ -790,6 +797,7 @@ json-c
 json-glib
 jsoncpp
 juk
+julia
 k3b
 kaccounts-integration
 kaccounts-providers
@@ -1155,6 +1163,7 @@ libavif
 libavtp
 libb2
 libblake3
+libblastrampoline
 libblockdev
 libblockdev-crypto
 libblockdev-fs
@@ -1174,6 +1183,7 @@ libcaca
 libcanberra
 libcap
 libcap-ng
+libcbor
 libcdio
 libcdio-paranoia
 libcdr
@@ -1184,6 +1194,7 @@ libcolord
 libconfig
 libcups
 libcupsfilters
+libcutl
 libdaemon
 libdatrie
 libdbusmenu-glib
@@ -1221,6 +1232,7 @@ libfabric
 libfakekey
 libfdk-aac
 libffi
+libfido2
 libfontenc
 libfreeaptx
 libfreehand
@@ -1338,6 +1350,7 @@ libnma-common
 libnma-gtk4
 libnotify
 libnsl
+libntfs-3g
 libnumbertext
 libnvme
 libobjc
@@ -1490,6 +1503,8 @@ libxpresent
 libxrandr
 libxrender
 libxres
+libxsd
+libxsd-frontend
 libxshmfence
 libxslt
 libxss
@@ -1524,8 +1539,10 @@ lld
 lld18
 lld19
 lld20
+lld21
 llhttp
 llvm
+llvm-julia-libs
 llvm-libs
 llvm18-libs
 llvm19-libs
@@ -1546,6 +1563,7 @@ lua
 lua-language-server
 lua-lpeg
 lua-luarocks
+lua51
 lua51-lpeg
 lua54
 lua54-lpeg
@@ -1674,6 +1692,7 @@ onetbb
 oniguruma
 openal
 openbabel
+openblas64
 openbsd-netcat
 opencascade
 opencc
@@ -1684,6 +1703,7 @@ openexr
 openh264
 openjpeg2
 openjph
+openlibm
 openmpi
 openpmix
 openssh
@@ -2337,6 +2357,7 @@ stress
 stumpwm
 stumpwm-contrib
 sudo
+suitesparse
 svgpart
 svt-av1
 svt-hevc
@@ -2488,6 +2509,7 @@ vlc-plugin-inflate
 vlc-plugin-journal
 vlc-plugin-jpeg
 vlc-plugin-lua
+vlc-plugin-matroska
 vlc-plugin-mpg123
 vlc-plugin-ogg
 vlc-plugin-opus
@@ -2619,6 +2641,7 @@ xorg-xwayland
 xorgproto
 xournalpp
 xscreensaver
+xsd
 xsel
 xsettingsd
 xss-lock

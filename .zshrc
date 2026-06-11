@@ -118,3 +118,27 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
+
+# === CLAUDE CHANGE: vi mode + cursor shape per mode ===
+bindkey -v
+export KEYTIMEOUT=1  # 100ms ESC delay (default 400ms feels laggy in vi mode)
+
+# Change cursor shape based on vi mode (DECSCUSR; foot honors these).
+# 1 = blink block, 2 = block, 3 = blink underline, 4 = underline,
+# 5 = blink beam,  6 = beam
+function zle-keymap-select {
+    case $KEYMAP in
+        vicmd)      printf '\e[2 q' ;;   # normal mode → block
+        viins|main) printf '\e[6 q' ;;   # insert mode → beam
+    esac
+}
+zle -N zle-keymap-select
+
+# Beam on new prompt (insert mode is the default).
+function zle-line-init { printf '\e[6 q'; }
+zle -N zle-line-init
+
+# Reset to beam after a command finishes (so :clear etc. don't leave a block).
+function _claude_reset_cursor { printf '\e[6 q'; }
+precmd_functions+=(_claude_reset_cursor)
+# === end CLAUDE CHANGE ===

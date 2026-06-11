@@ -473,7 +473,10 @@ function M.nvim_smart_termsplit()
 		{ "<leader>t", group = "tabs & terminals & telescope" },
 		{ "<leader>ts", termsplit.term_hsplit, desc = "Terminal hsplit" },
 		{ "<leader>tv", termsplit.term_vsplit, desc = "Terminal vsplit" },
-		{ "<leader>tt", termsplit.term_tabnew, desc = "Terminal new tab" },
+		-- *CLAUDE CHANGE* was `<leader>tt` (collided with here.term toggle). Header comment
+		-- on this file says `<leader>tT` was the intended binding for smart_termsplit.
+		--{ "<leader>tt", termsplit.term_tabnew, desc = "Terminal new tab" },
+		{ "<leader>tT", termsplit.term_tabnew, desc = "Terminal new tab" },
 	}, { mode = "n", silent = true })
 	wk.add({
 		{ "<C-w><S-s>", "<C-w>s", desc = "Split horizontal" },
@@ -712,7 +715,8 @@ end
 function M.snipe()
 	local wk = require("which-key")
 	wk.add({
-		{ "<leader>b", group = "buffers" },
+		-- *CLAUDE CHANGE* group already declared in M.bufjump(); dedupe.
+		--{ "<leader>b", group = "buffers" },
 		{
 			"<leader>bb",
 			function()
@@ -735,7 +739,8 @@ function M.treewalker()
 	}, { mode = { "n", "v" }, silent = true })
 
 	wk.add({
-		{ "<leader>w", group = "treewalker" },
+		-- *CLAUDE CHANGE* group already declared in the previous wk.add above; dedupe.
+		--{ "<leader>w", group = "treewalker" },
 		{ "<leader>wk", "<cmd>Treewalker SwapUp<cr>", desc = "Swap up" },
 		{ "<leader>wj", "<cmd>Treewalker SwapDown<cr>", desc = "Swap down" },
 		{ "<leader>wh", "<cmd>Treewalker SwapLeft<cr>", desc = "Swap left" },

@@ -1,8 +1,14 @@
 local api = vim.api
 
+-- *CLAUDE CHANGE* diagnostic removed — culprit identified: `q:` (command-line window)
+-- sets filetype=vim, which was firing the lspconfig ft trigger. Fixed by dropping
+-- vimls from plugin_configs/lsp/servers.lua.
+
 -- Highlight on yank
 local function hilite()
-  vim.highlight.on_yank({ higroup = "Visual", timeout = 100 })
+  -- *CLAUDE CHANGE* vim.highlight deprecated → vim.hl (slated for Nvim 2.0 removal)
+  --vim.highlight.on_yank({ higroup = "Visual", timeout = 100 })
+  vim.hl.on_yank({ higroup = "Visual", timeout = 100 })
 end
 
 local aesthetics = api.nvim_create_augroup("aesthetic_settings", { clear = true })
