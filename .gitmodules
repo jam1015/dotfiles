@@ -20,3 +20,6 @@
 [submodule ".local/share/fonts/cmu-typewriter-dotted"]
 	path = .local/share/fonts/cmu-typewriter-dotted
 	url = https://github.com/jam1015/cmu-typewriter-dotted
+[submodule ".local/share/fonts/cmu-typewriter-slashed"]
+	path = .local/share/fonts/cmu-typewriter-slashed
+	url = https://github.com/jam1015/cmu-typewriter-slashed
