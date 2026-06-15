@@ -17,3 +17,6 @@
 [submodule ".config/tmux/tpm"]
 	path = .config/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule ".local/share/fonts/cmu-typewriter-dotted"]
+	path = .local/share/fonts/cmu-typewriter-dotted
+	url = https://github.com/jam1015/cmu-typewriter-dotted

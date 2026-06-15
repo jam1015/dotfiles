@@ -331,6 +331,7 @@ fluidsynth
 fmt
 font-manager
 fontconfig
+fontforge
 foomatic-db
 foomatic-db-engine
 foomatic-db-gutenprint-ppds
@@ -372,6 +373,7 @@ gdb-common
 gdbm
 gdk-pixbuf2
 geckodriver
+gemini-cli
 geoclue
 geos
 gettext
@@ -404,6 +406,7 @@ gnome-bluetooth
 gnome-desktop
 gnome-desktop-common
 gnome-disk-utility
+gnome-font-viewer
 gnome-keyring
 gnome-video-effects
 gnugo
@@ -1416,6 +1419,7 @@ libsoup3
 libsoxr
 libspatialite
 libspectre
+libspiro
 libspnav
 libsrtp
 libssc
@@ -1442,6 +1446,7 @@ libtsan
 libubsan
 libucl
 libunibreak
+libuninameslist
 libunistring
 libunwind
 libupnp
