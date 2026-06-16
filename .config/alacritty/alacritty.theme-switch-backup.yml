@@ -1,15 +1,15 @@
 font:
   normal:
-    family: Courier Prime
+    family: CMU Typewriter Slashed
     style: Regular
   bold:
-    family: Courier Prime
+    family: CMU Typewriter Slashed
     style: Bold
   italic:
-    family: Courier Prime
+    family: CMU Typewriter Slashed
     style: Oblique
   bold_italic:
-    family: Courier Prime
+    family: CMU Typewriter Slashed
     style: Bold Italic
   size: 9
 colors:

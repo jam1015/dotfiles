@@ -56,7 +56,7 @@ set.autoread = true
 set.scrolloff = 5   -- show a few lines around cursor
 -- *CLAUDE CHANGE* explicit guicursor so foot honors DECSCUSR shape changes per mode
 -- (block in normal/visual, beam in insert, underline in replace).
-set.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkon0"
+--set.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:blinkon0"
 set.display = "lastline"
 set.shiftwidth = 2  --how much indentation from >
 set.softtabstop = 2 --lets us delete by tabs when expandtab is on

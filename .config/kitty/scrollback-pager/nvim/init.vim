@@ -1,21 +1,21 @@
-" Minimal pager-focused Neovim init for Kitty scrollback
-" ================================================
+"" Minimal pager-focused Neovim init for Kitty scrollback
+"" ================================================
 set packpath+=~/.config/kitty/scrollback-pager/nvim
-
+"
 " ===== Buffer settings =====
-set relativenumber           " show line numbers
+"set relativenumber           " show line numbers
 set noswapfile               " no swapfile for performance
 set nobackup                 " no backup file
 set buftype=nofile           " buffer is not tied to a file
 set bufhidden=wipe           " wipe buffer on close
-set number                   " show absolute line number
+"set number                   " show absolute line number
 
 " ===== UI enhancements =====n
 set termguicolors            " enable true color support
 set laststatus=0             " hide status line
 set background=dark          " dark background
 colorscheme desert           " simple colorscheme
-set list                     " show whitespace
+set nolist                   " was: set list — caused blank-line inflation in scrollback
 
 " ===== Navigation & search =====
 set scrolloff=8              " keep context when scrolling
@@ -39,7 +39,7 @@ augroup highlight_yank
 augroup END
 
 
-" ===== Prevent insert mode in terminal buffers =====
+ "===== Prevent insert mode in terminal buffers =====
 augroup prevent_insert
   autocmd!
   autocmd TermEnter * stopinsert

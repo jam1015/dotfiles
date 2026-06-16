@@ -15,12 +15,28 @@
 
 (defvar my/default-theme 'doom-tokyo-night)
 
+(defvar my/default-font-family "CMU Typewriter Slashed")
+(defvar my/default-font-height 90)
+
+(defun my/apply-default-font (&rest _)
+  "Re-assert the default face font. Useful after `load-theme', which
+typically resets the default face."
+  (when (find-font (font-spec :family my/default-font-family))
+    (set-face-attribute 'default nil
+                        :family my/default-font-family
+                        :height my/default-font-height)))
+
 (defun my/elpaca-after-init ()
   "Run after Elpaca has finished processing init queues.
 Add additional one-shot startup work here as needed."
   (unless (memq my/default-theme custom-enabled-themes)
     (when (or (daemonp) (display-graphic-p) (display-color-p))
-      (load-theme my/default-theme t))))
+      (load-theme my/default-theme t)))
+  (my/apply-default-font))
+
+;; Re-apply on any future theme switch too.
+(when (boundp 'enable-theme-functions)
+  (add-hook 'enable-theme-functions #'my/apply-default-font))
 
 (defun my/repl-unify-return-bindings ()
   "In any comint-derived REPL, bind RET to submit in both insert+normal

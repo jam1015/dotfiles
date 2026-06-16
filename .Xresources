@@ -53,10 +53,10 @@ UXTerm*allowBoldFonts: true
 UXTerm*forceBoxChars: false
 
 
-UXTerm*faceName: DejaVu Sans Mono
+UXTerm*faceName: CMU Typewriter Slashed
 UXTerm*faceSize: 12
 
 
 
-XTerm*faceName: DejaVu Sans Mono
+XTerm*faceName: CMU Typewriter Slashed
 XTerm*faceSize: 12

@@ -1,6 +1,9 @@
 .dots_hooks
 .dots_hooks/*
 .gitmodules
+.scripts
+.stow-local-ignore
+etc
 
 # Comments and blank lines are allowed.
 
@@ -25,6 +28,7 @@ _darcs
 ^/README.*
 ^/LICENSE.*
 ^/COPYING
+^/etc
 
 arch_packages
 arch-packages

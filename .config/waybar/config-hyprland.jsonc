@@ -48,7 +48,7 @@
   "hyprland/submap": {
     // Shows nothing in normal mode (empty string).
     // Shows "prefix" or "prefix2" when a submap is active.
-    "format": "  {}",
+    "format": "{}",
     "default-submap": "",
     "always-on": false,          // hides module entirely when empty
     "tooltip": false

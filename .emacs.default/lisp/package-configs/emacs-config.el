@@ -33,7 +33,8 @@
   (byte-compile-warnings t)
 
   :config
-  (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font Mono" :height 90)
+  (set-face-attribute 'default nil :family "CMU Typewriter Slashed" :height 100)
+  ;(add-to-list 'default-frame-alist '(font . "CMU Typewriter Slashed-9"))
   ;; Disable cursor blinking
   (blink-cursor-mode 0)
 

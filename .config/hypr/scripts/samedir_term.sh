@@ -11,4 +11,4 @@ fi
 
 # *CLAUDE CHANGE* reverted from foot back to kitty.
 #exec /usr/bin/foot --working-directory="$CWD"
-exec /usr/bin/kitty --directory="$CWD"
+exec /usr/bin/kitty --single-instance --directory="$CWD"

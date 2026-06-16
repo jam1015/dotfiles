@@ -13,7 +13,7 @@ M.global_keymaps = function()
   local has_wk, wk = pcall(require, "which-key")
   if has_wk then
     wk.add({
-      { "<leader>d", name = "LSP Diagnostics" }, -- Adding a group name for diagnostics
+      { "<leader>d", group = "LSP Diagnostics" }, -- Adding a group name for diagnostics
       {
         "<leader>de",
         vim.diagnostic.open_float,
@@ -57,116 +57,77 @@ local function local_keymaps(bufnr)
     vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
   end
 
-  local has_wk, wk = pcall(require, "which-key")
-  if not has_wk then
-    vim.notify("which-key not found, LSP keymaps not set", vim.log.levels.WARN)
-    return
+  local function map(lhs, rhs, desc)
+    vim.keymap.set("n", lhs, rhs, { buffer = bufnr, silent = false, desc = desc })
   end
 
-  wk.add({
-    -- g-prefixed navigation
-    {
-      "gD",
-      vim.lsp.buf.declaration,
-      desc = "Go to Declaration",
-    },
-    {
-      "gd",
-      vim.lsp.buf.definition,
-      desc = "Go to Definition",
-    },
-    {
-      "gi",
-      vim.lsp.buf.implementation,
-      desc = "Go to Implementation",
-    },
-    { "gr",         vim.lsp.buf.references, desc = "References" },
+  -- g-prefixed navigation
+  map("gD", vim.lsp.buf.declaration, "Go to Declaration")
+  map("gd", vim.lsp.buf.definition, "Go to Definition")
+  map("gi", vim.lsp.buf.implementation, "Go to Implementation")
+  map("gr", vim.lsp.buf.references, "References")
 
-    -- <leader>l = LSP
-    { "<leader>l",  group = "LSP" },
-    { "<leader>lh", vim.lsp.buf.hover,      desc = "Hover" },
-    {
-      "<leader>ls",
-      vim.lsp.buf.signature_help,
-      desc = "Signature Help",
-    },
-    {
-      "<leader>ld",
-      vim.lsp.buf.type_definition,
-      desc = "Type Definition",
-    },
-    {
-      "<leader>lr",
-      vim.lsp.buf.rename,
-      desc = "Rename Symbol",
-    },
-    {
-      "<leader>la",
-      vim.lsp.buf.code_action,
-      desc = "Code Action",
-    },
-    {
-      "<leader>lf",
-      function()
-        vim.lsp.buf.format({ async = true })
-      end,
-      desc = "Format",
-    },
+  -- <leader>l = LSP
+  map("<leader>lh", vim.lsp.buf.hover, "Hover")
+  map("<leader>ls", vim.lsp.buf.signature_help, "Signature Help")
+  map("<leader>ld", vim.lsp.buf.type_definition, "Type Definition")
+  map("<leader>lr", vim.lsp.buf.rename, "Rename Symbol")
+  map("<leader>la", vim.lsp.buf.code_action, "Code Action")
+  map("<leader>lf", function() vim.lsp.buf.format({ async = true }) end, "Format")
 
-    -- <leader>lw = workspace
-    { "<leader>lw",  group = "Workspace" },
-    { "<leader>lwa", vim.lsp.buf.add_workspace_folder, desc = "Add Folder" },
-    {
-      "<leader>lwr",
-      vim.lsp.buf.remove_workspace_folder,
-      desc = "Remove Folder",
-    },
-    {
-      "<leader>lwl",
-      function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      end,
-      desc = "List Folders",
-    },
+  -- <leader>lw = workspace
+  map("<leader>lwa", vim.lsp.buf.add_workspace_folder, "Add Folder")
+  map("<leader>lwr", vim.lsp.buf.remove_workspace_folder, "Remove Folder")
+  map("<leader>lwl", function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, "List Folders")
 
-    -- <leader>lt = toggles
-    { "<leader>lt", group = "Toggles" },
-    {
-      "<leader>lti",
-      function()
-        local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
-        vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
-        vim.notify("Inlay hints " .. (enabled and "disabled" or "enabled"))
-      end,
-      desc = "Toggle Inlay Hints",
-    },
-    {
-      "<leader>ltl",
-      function()
-        if vim.b[bufnr].codelens_enabled == nil then
-          vim.b[bufnr].codelens_enabled = true
-        end
+  -- <leader>lt = toggles
+  map("<leader>lti", function()
+    local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+    vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
+    vim.notify("Inlay hints " .. (enabled and "disabled" or "enabled"))
+  end, "Toggle Inlay Hints")
+  map("<leader>ltl", function()
+    if vim.b[bufnr].codelens_enabled == nil then
+      vim.b[bufnr].codelens_enabled = true
+    end
+    vim.b[bufnr].codelens_enabled = not vim.b[bufnr].codelens_enabled
+    if vim.b[bufnr].codelens_enabled then
+      vim.lsp.codelens.refresh({ bufnr = bufnr })
+      vim.notify("Code lens enabled")
+    else
+      vim.lsp.codelens.clear(nil, bufnr)
+      vim.notify("Code lens disabled")
+    end
+  end, "Toggle Code Lens")
+  map("<leader>ltd", function()
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+  end, "Toggle Diagnostics")
 
-        vim.b[bufnr].codelens_enabled = not vim.b[bufnr].codelens_enabled
-        if vim.b[bufnr].codelens_enabled then
-          vim.lsp.codelens.refresh({ bufnr = bufnr })
-          vim.notify("Code lens enabled")
-        else
-          vim.lsp.codelens.clear(nil, bufnr)
-          vim.notify("Code lens disabled")
-        end
-      end,
-      desc = "Toggle Code Lens",
-    },
-    {
-      "<leader>ltd",
-      function()
-        vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
-      end,
-      desc = "Toggle Diagnostics",
-    },
-  }, { mode = "n", buffer = bufnr, silent = false })
+  -- Register group labels with which-key (buffer-local). Maps themselves
+  -- are set via vim.keymap.set above; which-key v3 picks up their `desc`.
+  local has_wk, wk = pcall(require, "which-key")
+  if has_wk then
+    wk.add({
+      { "<leader>l",  group = "LSP",       buffer = bufnr },
+      { "<leader>lw", group = "Workspace", buffer = bufnr },
+      { "<leader>lt", group = "Toggles",   buffer = bufnr },
+    }, { mode = "n" })
+  end
 end
+
+-- *CLAUDE CHANGE* Belt-and-suspenders: bind LSP keymaps via LspAttach autocmd
+-- in addition to the on_attach config field. This is the canonical 0.11+
+-- pattern and fires reliably for every client attach (including :LspRestart),
+-- regardless of how the server was configured.
+vim.api.nvim_create_augroup("UserLspKeymaps", { clear = true })
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = "UserLspKeymaps",
+  callback = function(args)
+    local_keymaps(args.buf)
+  end,
+})
 
 M.on_attach = function(client, bufnr)
   local_keymaps(bufnr)

@@ -131,6 +131,8 @@ function zle-keymap-select {
         vicmd)      printf '\e[2 q' ;;   # normal mode → block
         viins|main) printf '\e[6 q' ;;   # insert mode → beam
     esac
+    vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+    zle reset-prompt
 }
 zle -N zle-keymap-select
 

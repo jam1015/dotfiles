@@ -132,6 +132,20 @@ The font relies on two pieces tracked in this repo:
 
 After cloning on a new system: `fc-cache -rf` and restart kitty.
 
+# Console (tty) font
+
+Different from GUI fonts above: the bare tty (Ctrl+Alt+F3) uses PSF fonts
+under `/usr/share/kbd/consolefonts/`. Tracked copy of `/etc/vconsole.conf`
+lives at `etc/vconsole.conf` in this repo and is installed by
+`dots_hooks/install_console_font.bash` (invoked from `hooks_setup.bash`).
+Edit the tracked file, re-run the hook (needs sudo), and it both copies the
+file to `/etc/vconsole.conf` and applies `setfont` to active ttys.
+
+Default is `FONT=ter-v22n`, which needs the `terminus-font` package; built-in
+fallbacks include `lat2-16` and `lat9w-16`. List available fonts with
+`ls /usr/share/kbd/consolefonts/` (omit the extension). Preview them in a GUI
+with `python3 ~/dotfiles/.scripts/fontbrowse.py`.
+
 # update grub [if we are using it]
 
 in `/etc/default/grub`
