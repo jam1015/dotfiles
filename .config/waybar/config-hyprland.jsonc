@@ -55,7 +55,7 @@
   },
 
   "hyprland/window": {
-    "format": "▣ {}",
+    "format": "▣{}",
     "max-length": 60,
     "separate-outputs": true     // each bar shows its own monitor's window
   },
@@ -90,7 +90,7 @@
     "tooltip-format-disconnected": "MPD (disconnected)"
   },
 
-  "tray": { "spacing": 10, "icon-size": 14 },
+  "tray": { "spacing": 10, "icon-size": 20 },
 
   "clock": {
     "format": " {:%Y-%m-%d %a %H:%M:%S}",
@@ -143,9 +143,9 @@
     "tooltip": true,
     "format-icons": {
       "default":      "⚡",
-      "performance":  "",
-      "balanced":     "",
-      "power-saver":  ""
+      "performance":  " ",
+      "balanced":     " ",
+      "power-saver":  " "
     }
   },
 
@@ -163,8 +163,8 @@
     "format-bluetooth":      " {volume}% {format_source}",
     "format-bluetooth-muted":"  {format_source}",
     "format-muted":          "  {format_source}",
-    "format-source":         " 󰍬 {volume}%",
-    "format-source-muted":   " 󰍭",
+    "format-source":         "󰍬 {volume}%",
+    "format-source-muted":   "󰍭 ",
     "on-click": "pavucontrol"
   },
 

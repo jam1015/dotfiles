@@ -33,7 +33,7 @@
 @define-color red           #ef4444;
 
 * {
-    font-family: "CMU Typewriter Slashed", "Symbols Nerd Font", "FontAwesome", monospace;
+    font-family: "InputMono Nerd Font", "Symbols Nerd Font", "FontAwesome", monospace;
     font-size: 13px;
     font-weight: 600;
     min-height: 0;
@@ -197,7 +197,7 @@ window#waybar.hidden { opacity: 0.1; }
 
 #custom-power {
     color: @red;
-    font-family: "CMU Typewriter Slashed", "Symbols Nerd Font", "FontAwesome", monospace;
+    font-family: "InputMono Nerd Font", "Symbols Nerd Font", "FontAwesome", monospace;
     font-size: 15px;
     padding: 0 12px;
 }

@@ -6,7 +6,7 @@ Bare tty: setfont+showconsolefont loop.
 
 Keys (both modes): n/Right next, p/Left prev, s select, q quit.
 On select, writes FONT=<name> into ~/dotfiles/etc/vconsole.conf and
-reminds you to run the install hook.
+runs install_console_font.bash to install + apply system-wide.
 """
 import gzip
 import os
@@ -18,6 +18,7 @@ from pathlib import Path
 
 FONT_DIR = Path("/usr/share/kbd/consolefonts")
 VCONSOLE_SRC = Path.home() / "dotfiles/etc/vconsole.conf"
+INSTALL_SCRIPT = Path.home() / "dotfiles/.scripts/install_console_font.bash"
 
 PSF1_MAGIC = b"\x36\x04"
 PSF2_MAGIC = b"\x72\xb5\x4a\x86"
@@ -55,6 +56,30 @@ def parse_font(path: Path):
     raise ValueError("unrecognized format")
 
 
+def print_all_chars(per_row=32):
+    """Print all 256 glyph slots of the current console font.
+
+    Uses the Linux console's direct-to-font PUA mapping: code points
+    U+F000..U+F0FF are routed straight to glyph slots 0..255, bypassing
+    the unicode->font lookup table. They are valid UTF-8 sequences so
+    they survive tmux / terminal emulators (unlike raw 0x80..0xFF bytes,
+    which get rejected as invalid UTF-8 continuation bytes and rendered
+    as '?').
+
+    ASCII (slots 0x20..0x7E) is printed as itself so control codes don't
+    sneak through; the rest goes via PUA."""
+    out = sys.stdout
+    for row_start in range(0, 256, per_row):
+        chars = []
+        for b in range(row_start, row_start + per_row):
+            if 0x20 <= b < 0x7F:
+                chars.append(chr(b))
+            else:
+                chars.append(chr(0xF000 + b))
+        out.write("".join(chars) + "\n")
+    out.flush()
+
+
 def bits(glyph, width, height):
     rb = (width + 7) // 8
     for y in range(height):
@@ -77,7 +102,8 @@ def write_selection(name: str):
     VCONSOLE_SRC.write_text(txt)
     print(f"\nselected: {name}")
     print(f"updated {VCONSOLE_SRC}")
-    print("apply with: ~/dots_hooks/install_console_font.bash")
+    print(f"running {INSTALL_SCRIPT}...")
+    subprocess.run([str(INSTALL_SCRIPT)], check=False)
 
 
 # ---------- tty mode ----------
@@ -97,37 +123,112 @@ def getch():
 
 
 def tty_loop(paths):
+    import tempfile
     paths = [p for p in paths if ".psf" in p.name]
     if not paths:
         sys.exit("no PSF fonts found")
-    i = 0
-    while True:
-        path = paths[i]
-        name = font_name(path)
-        r = subprocess.run(["sudo", "setfont", name],
+
+    orig_fd, orig_path = tempfile.mkstemp(prefix="fontbrowse-orig-",
+                                          suffix=".psf")
+    os.close(orig_fd)
+    saved_orig = subprocess.run(
+        ["sudo", "setfont", "-O", orig_path],
+        stderr=subprocess.DEVNULL).returncode == 0
+
+    def restore_orig():
+        if saved_orig and os.path.getsize(orig_path) > 0:
+            subprocess.run(["sudo", "setfont", orig_path],
                            stderr=subprocess.DEVNULL)
-        if r.returncode != 0:
-            paths.pop(i)
-            if not paths:
-                sys.exit("no working fonts left")
-            i %= len(paths)
-            continue
-        os.system("clear")
-        print(f"[{i+1}/{len(paths)}] {name}    "
-              f"(n=next p=prev s=select q=quit)")
-        subprocess.run(["showconsolefont"])
-        k = getch()
-        if k in ("q", "\x03"):
+        else:
             subprocess.run(["sudo", "setfont"])
-            return
-        if k == "s":
-            subprocess.run(["sudo", "setfont"])
-            write_selection(name)
-            return
-        if k in ("n", "\x1b[C", " ", "\r"):
-            i = (i + 1) % len(paths)
-        elif k in ("p", "\x1b[D"):
-            i = (i - 1) % len(paths)
+
+    os.system("clear")
+    print("fontbrowse: console font preview")
+    print("=" * 60)
+    print()
+    print("Cycles through PSF fonts in /usr/share/kbd/consolefonts/ by")
+    print("calling `setfont` on your active tty. The font you see *is*")
+    print("the font being previewed -- including these instructions.")
+    print()
+    if saved_orig:
+        print(f"Saved your current tty font to {orig_path}")
+        print("so 'q' can restore exactly what you had.")
+    else:
+        print("WARNING: could not save current tty font; 'q' will fall")
+        print("back to the kernel default font instead.")
+    print()
+    print("KEYS:")
+    print("  n / Right / Space    next font")
+    print("  p / Left             previous font")
+    print()
+    print("  s    SELECT + INSTALL current font (persistent):")
+    print("         1. writes FONT= into ~/dotfiles/etc/vconsole.conf")
+    print("         2. copies that to /etc/vconsole.conf (sudo)")
+    print("         3. runs setfont on /dev/tty[1-6] (sudo)")
+    print("       Persists across reboot.")
+    print()
+    print("  k    KEEP for this session (NOT persistent):")
+    print("         quits with the currently-previewed font still active")
+    print("         on this tty. Does NOT write any config, does NOT")
+    print("         install anything. Lost on reboot or `setfont` reset.")
+    print()
+    print("  q    QUIT and REVERT:")
+    print("         restores the font that was active when this script")
+    print("         started. Nothing written, nothing installed.")
+    print()
+    print("  Ctrl-C   same as q (revert).")
+    print()
+    print("WARNING:")
+    print("  Many PSF fonts are tiny (8x8). When such a font loads, these")
+    print("  instructions become unreadable. Press q (or Ctrl-C) blind to")
+    print("  revert to your original font.")
+    print()
+    print("Press any key to begin...")
+    getch()
+
+    i = 0
+    try:
+        while True:
+            path = paths[i]
+            name = font_name(path)
+            r = subprocess.run(["sudo", "setfont", name],
+                               stderr=subprocess.DEVNULL)
+            if r.returncode != 0:
+                paths.pop(i)
+                if not paths:
+                    sys.exit("no working fonts left")
+                i %= len(paths)
+                continue
+            os.system("clear")
+            print(f"[{i+1}/{len(paths)}] {name}")
+            print("n/Space/Right=next  p/Left=prev  "
+                  "s=select+install  k=keep-for-session  "
+                  "q/Ctrl-C=revert-to-original")
+            print_all_chars()
+            k = getch()
+            if k in ("q", "\x03"):
+                restore_orig()
+                return
+            if k == "k":
+                print(f"\nkeeping {name} for this session "
+                      f"(not installed; lost on reboot).")
+                return
+            if k == "s":
+                restore_orig()
+                write_selection(name)
+                return
+            if k in ("n", "\x1b[C", " ", "\r"):
+                i = (i + 1) % len(paths)
+            elif k in ("p", "\x1b[D"):
+                i = (i - 1) % len(paths)
+    except (KeyboardInterrupt, Exception):
+        restore_orig()
+        raise
+    finally:
+        try:
+            os.unlink(orig_path)
+        except OSError:
+            pass
 
 
 # ---------- gui mode ----------
@@ -135,7 +236,7 @@ def tty_loop(paths):
 def gui_loop(paths):
     import tkinter as tk
 
-    CELL = 2
+    CELL = 4
     COLS = 32
     PAD = 4
 
@@ -208,7 +309,7 @@ def gui_loop(paths):
             name = font_name(path)
             self.label.config(
                 text=f"[{self.idx+1}/{len(self.paths)}] {name}   "
-                     f"(n/p step, s select, / filter, q quit)")
+                     f"(n/p step, s select+install, / filter, q quit)")
             rows = (len(glyphs) + COLS - 1) // COLS
             self.info.config(text=f"  {w}x{h}px  {len(glyphs)} glyphs")
             cw, ch, gap = w * CELL, h * CELL, CELL

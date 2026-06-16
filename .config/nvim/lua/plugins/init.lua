@@ -739,8 +739,6 @@ return
     dependencies = "rktjmp/lush.nvim",
   },
 
-
-
   {
     "powerman/vim-plugin-AnsiEsc",
   },

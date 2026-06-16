@@ -118,7 +118,7 @@ but remember to go:
 Different from GUI fonts above: the bare tty (Ctrl+Alt+F3) uses PSF fonts
 under `/usr/share/kbd/consolefonts/`. Tracked copy of `/etc/vconsole.conf`
 lives at `etc/vconsole.conf` in this repo and is installed by
-`dots_hooks/install_console_font.bash` (invoked from `hooks_setup.bash`).
+`.scripts/install_console_font.bash` (invoked from `hooks_setup.bash`).
 Edit the tracked file, re-run the hook (needs sudo), and it both copies the
 file to `/etc/vconsole.conf` and applies `setfont` to active ttys.
 

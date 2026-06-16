@@ -14,5 +14,5 @@ vsync = true
 wsl = false
 
 [font]
-normal = ["CMU Typewriter Slashed"]
-size = 9.0
+normal = ["InputMono Nerd Font"]
+size = 10.0

@@ -15,8 +15,8 @@
 
 (defvar my/default-theme 'doom-tokyo-night)
 
-(defvar my/default-font-family "CMU Typewriter Slashed")
-(defvar my/default-font-height 90)
+(defvar my/default-font-family "InputMono Nerd Font")
+(defvar my/default-font-height 100)
 
 (defun my/apply-default-font (&rest _)
   "Re-assert the default face font. Useful after `load-theme', which
