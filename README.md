@@ -113,25 +113,6 @@ but remember to go:
 
 `fc-cache -r`
 
-## CMU Typewriter Dotted
-
-A submodule at `.local/share/fonts/cmu-typewriter-dotted` (repo:
-[jam1015/cmu-typewriter-dotted](https://github.com/jam1015/cmu-typewriter-dotted))
-ships a fork of CMU Typewriter Text with a small centered dot inside the zero
-glyph, so `0` is distinguishable from `O`. After `git submodule update --init`
-the four TTFs land in a fontconfig-scanned directory automatically.
-
-The font relies on two pieces tracked in this repo:
-
-- `.config/fontconfig/fonts.conf` — adds a `spacing=100` (monospace) override
-  for the family. Required because upstream CMU Typewriter Text's Bold and
-  Bold Italic variants ship without a monospace spacing flag, which causes
-  terminal emulators to silently fall back to another font for bold text.
-- `.config/kitty/kitty.conf` — uses the `family="..." style=...` form to
-  resolve all four variants.
-
-After cloning on a new system: `fc-cache -rf` and restart kitty.
-
 # Console (tty) font
 
 Different from GUI fonts above: the bare tty (Ctrl+Alt+F3) uses PSF fonts
