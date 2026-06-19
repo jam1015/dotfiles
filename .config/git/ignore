@@ -1,0 +1,40 @@
+**/.claude/settings.local.json
+
+# ---- Emacs ----
+*~
+\#*\#
+.\#*
+*.~undo-tree~
+auto-save-list/
+tramp
+.org-id-locations
+*_archive
+*.elc
+
+# ---- Vim / Neovim ----
+*.swp
+*.swo
+*.swn
+Session.vim
+.netrwhist
+
+# ---- ctags / cscope ----
+tags
+TAGS
+cscope.out
+cscope.out.in
+cscope.out.po
+cscope.files
+cscope.in.out
+cscope.po.out
+
+# ---- OS cruft ----
+.DS_Store
+Thumbs.db
+
+# ---- Editor / IDE ----
+.idea/
+.vscode/
+*.iml
+*.claude
+
