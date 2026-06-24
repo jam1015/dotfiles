@@ -1,5 +1,5 @@
 #!/bin/sh
-# Rotate stack backward: [A,B,C,D] → [D,A,B,C]
+# Rotate stack reverse: [A,B,C,D] → [B,C,D,A]
 
 WIN=$(hyprctl activewindow -j)
 ORIG=$(echo "$WIN" | jq -r '.address')
@@ -8,23 +8,15 @@ COUNT=$(hyprctl clients -j | jq "[.[] | select(.workspace.id == $WS_ID)] | lengt
 
 [ -z "$COUNT" ] || [ "$COUNT" -le 1 ] && exit 0
 
-if [ "$COUNT" -eq 2 ]; then
-    hyprctl dispatch layoutmsg swapwithmaster
-    hyprctl dispatch focuswindow "address:$ORIG"
-    exit 0
-fi
-
-# Lift last slave (D) into master → [D, B, C, A]  (A lands at D's old position)
+# Focus A (master), then swapnext COUNT-1 times: A bubbles to end
+# [A,B,C,D] → [B,A,C,D] → [B,C,A,D] → [B,C,D,A]
 hyprctl dispatch layoutmsg focusmaster
-hyprctl dispatch layoutmsg cycleprev       # focus D (last slave)
-hyprctl dispatch layoutmsg swapwithmaster  # [D, B, C, A]
 
-# A is now at the end; bubble it forward to first-slave position
-hyprctl dispatch layoutmsg cycleprev       # focus A (last slave, wrap from master)
 i=1
-while [ "$i" -le "$((COUNT - 2))" ]; do
-    hyprctl dispatch layoutmsg swapprev
+while [ "$i" -le "$((COUNT - 1))" ]; do
+    hyprctl dispatch layoutmsg swapnext
     i=$((i + 1))
 done
 
 hyprctl dispatch focuswindow "address:$ORIG"
+

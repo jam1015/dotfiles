@@ -48,7 +48,7 @@
 
 ;;; lisp
 (require 'sly-config)
-(require 'slime-config)
+;;(require 'slime-config)
 (require 'lisp-extra-font-lock-config)
 (require 'lisp-semantic-hl-config)
 ;;(require 'rainbow-delimiters-config)
