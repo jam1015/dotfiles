@@ -144,3 +144,7 @@ zle -N zle-line-init
 function _claude_reset_cursor { printf '\e[6 q'; }
 precmd_functions+=(_claude_reset_cursor)
 # === end CLAUDE CHANGE ===
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/jordan/.local/bin:$PATH"

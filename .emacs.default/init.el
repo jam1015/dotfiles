@@ -26,6 +26,7 @@
 (require 'evil-textobj-entire-config)
 (require 'evil-leader-config)
 (require 'evil-search-highlight-persist-config)
+(require 'evil-surround-config)
 (require 'evil-overrides)
 
 ;;; elisp

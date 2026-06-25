@@ -166,3 +166,7 @@ PROMPT_COMMAND='PWD=$(pwd)'
 eval "$(zoxide init bash)"
 
 echo "bashrc sourced"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/jordan/.local/bin:$PATH"
