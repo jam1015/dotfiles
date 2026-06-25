@@ -5,8 +5,6 @@
   :init
   (setq lazy-highlight-cleanup nil)
   (setq lazy-highlight-max-at-a-time nil)
-  (setq evil-want-keybinding nil
-	evil-want-integration t)
   (setq evil-default-state 'normal)
 
   :custom

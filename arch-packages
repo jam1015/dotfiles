@@ -373,7 +373,6 @@ gdb-common
 gdbm
 gdk-pixbuf2
 geckodriver
-gemini-cli
 geoclue
 geos
 gettext

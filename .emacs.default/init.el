@@ -26,7 +26,7 @@
 (require 'evil-textobj-entire-config)
 (require 'evil-leader-config)
 (require 'evil-search-highlight-persist-config)
-(require 'evil-overrides-config)
+(require 'evil-overrides)
 
 ;;; elisp
 (require 'flycheck-config)
