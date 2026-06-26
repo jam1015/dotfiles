@@ -79,5 +79,10 @@ Self-removes from `window-buffer-change-functions' after firing."
     (remove-hook 'window-buffer-change-functions
                  #'my/kill-scratch-when-other-buffers)))
 
+(defun my/open-scratch ()
+  "Switch to *scratch*, creating it (with the usual setup) if needed."
+  (interactive)
+  (pop-to-buffer-same-window (get-scratch-buffer-create)))
+
 (provide 'hook-functions)
 ;;; end hook-functions.el

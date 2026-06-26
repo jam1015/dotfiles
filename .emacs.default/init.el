@@ -46,6 +46,7 @@
 (require 'corfu-config)
 (require 'corfu-terminal-config)
 (require 'paredit-config)
+(require 'evil-cleverparens-config)
 
 ;;; lisp
 (require 'sly-config)

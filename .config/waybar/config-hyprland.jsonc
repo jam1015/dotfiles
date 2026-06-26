@@ -28,6 +28,7 @@
     "battery#bat2",
     "clock",
     "tray",
+    "custom/swaync",
     "custom/power"
   ],
 
@@ -175,6 +176,27 @@
     "format-icons": { "default": "🎜 " },
     "escape": true,
     "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
+  },
+
+  "custom/swaync": {
+    "tooltip": true,
+    "format": "{icon} {text}",
+    "format-icons": {
+      "notification":             "󰖟 <span foreground='#f53c3c'><sup>●</sup></span>",
+      "none":                     "󰖟",
+      "dnd-notification":         "󰖟 <span foreground='#f53c3c'><sup>●</sup></span>",
+      "dnd-none":                 "󰖟",
+      "inhibited-notification":   "󰖟 <span foreground='#f53c3c'><sup>●</sup></span>",
+      "inhibited-none":           "󰖟",
+      "dnd-inhibited-notification": "󰖟 <span foreground='#f53c3c'><sup>●</sup></span>",
+      "dnd-inhibited-none":       "󰖟"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   },
 
   "custom/power": {

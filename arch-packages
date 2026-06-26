@@ -427,6 +427,7 @@ gpick
 gpm
 gpsd
 granatier
+granite7
 grantlee-editor
 grantleetheme
 graphene
@@ -1245,6 +1246,7 @@ libfyaml
 libgcc
 libgccjit
 libgcrypt
+libgee
 libgeotiff
 libgfortran
 libgirepository
@@ -2369,6 +2371,7 @@ svt-av1
 svt-hevc
 swayidle
 swaylock
+swaync
 sweeper
 sxhkd
 sxiv
