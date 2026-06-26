@@ -13,7 +13,7 @@
       (evil-local-mode -1)
       (evil-local-mode 1))))
 
-(defvar my/default-theme 'doom-tokyo-night)
+(defvar my/default-theme 'modus-vivendi)
 
 (defvar my/default-font-family "InputMono Nerd Font")
 (defvar my/default-font-height 100)
@@ -29,7 +29,8 @@ typically resets the default face."
 (defun my/elpaca-after-init ()
   "Run after Elpaca has finished processing init queues.
 Add additional one-shot startup work here as needed."
-  (unless (memq my/default-theme custom-enabled-themes)
+  (unless (or (eq my/default-theme 'default)
+              (memq my/default-theme custom-enabled-themes))
     (when (or (daemonp) (display-graphic-p) (display-color-p))
       (load-theme my/default-theme t)))
   (my/apply-default-font))
