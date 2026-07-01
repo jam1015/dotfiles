@@ -69,6 +69,7 @@
 (require 'anisochromatic-theme-config)
 (require 'solarized-theme-config)
 (require 'doom-themes-config)
+(require 'forget-me-not-config)
 (require 'all-the-icons-config)
 
 

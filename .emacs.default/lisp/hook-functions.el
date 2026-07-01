@@ -13,7 +13,7 @@
       (evil-local-mode -1)
       (evil-local-mode 1))))
 
-(defvar my/default-theme 'modus-vivendi)
+(defvar my/default-theme 'doom-one)
 
 (defvar my/default-font-family "InputMono Nerd Font")
 (defvar my/default-font-height 100)

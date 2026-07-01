@@ -18,12 +18,15 @@
   (inhibit-startup-screen t)
   (visible-bell t)
   (cursor-in-non-selected-windows nil)
+	(tab-width 2)
   (xterm-mouse-mode t)
  
   ;; Scrolling behavior
   (scroll-margin 3)
   (scroll-conservatively 10000)
 
+  (custom-unlispify-tag-names nil)
+  (custom-unlispify-menu-entries nil)
   ;; Completion and interaction
   (tab-always-indent 'complete)
   (read-extended-command-predicate #'command-completion-default-include-p)
@@ -37,6 +40,9 @@
   ;(add-to-list 'default-frame-alist '(font . "CMU Typewriter Slashed-9"))
   ;; Disable cursor blinking
   (blink-cursor-mode 0)
+	
+  (setopt custom-unlispify-tag-names nil)
+  (setopt custom-unlispify-menu-entries nil)
 
 
   (global-auto-revert-mode 1)

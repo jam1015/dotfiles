@@ -1,5 +1,19 @@
+;; Override the codeberg-hosted menu recipe for the popon transitive dep.
+;; To revert, comment out this whole use-package form.
+(use-package popon
+  :ensure
+  (popon
+   :host github :repo "JasZhe/emacs-popon-mirror"
+   :files ("*" (:exclude ".git"))))
+
 (use-package corfu-terminal
-  :ensure t
+  ;; To revert to the codeberg menu recipe, comment the :ensure (...) lines
+  ;; below and uncomment `:ensure t'.
+  ;; :ensure t
+  :ensure
+  (corfu-terminal
+   :host github :repo "cimisc/emacs-corfu-terminal"
+   :files ("*" (:exclude ".git")))
   :if (not (display-graphic-p))
   :config
   (corfu-terminal-mode +1)

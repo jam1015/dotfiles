@@ -4,7 +4,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(corfu)))
+ '(custom-safe-themes
+	 '("f6ea954a9544b0174a876d195387f444da441535ee88c7fb0fc346af08b0d228"
+		 default)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
