@@ -142,7 +142,6 @@ function M.hereterm()
 	wk.add({
 		{ "<C-;>", "<cmd>lua require('here-term').toggle_terminal()<CR>", desc = "here.term toggle", mode = "n" },
 		{ "<C-;>", "<cmd>lua require('here-term').toggle_terminal()<CR>", desc = "here.term toggle", mode = "t" },
-		{ "<leader>tt", "<cmd>lua require('here-term').toggle_terminal()<CR>", desc = "Terminal toggle", mode = "n" },
 	})
 end
 

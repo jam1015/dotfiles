@@ -270,14 +270,16 @@
 (defun my/mappings-perspective ()
   (with-eval-after-load 'evil-leader
     (evil-leader/set-key
-      "ps" #'persp-switch
+      "ps" #'persp-frame-switch          ; switch *this frame's* perspective
+      "pS" #'persp-switch                 ; same, but persp-mode's generic entry point
       "pk" #'persp-kill
       "pn" #'persp-next
       "pp" #'persp-prev
       "pr" #'persp-rename
       "pA" #'persp-add-buffer
+      "pR" #'persp-remove-buffer
       "pb" #'persp-switch-to-buffer
-      "pm" #'persp-merge)))
+      "pi" #'persp-import-buffers)))     ; replaces perspective.el's `persp-merge'
 
 
 (provide 'package-mappings)

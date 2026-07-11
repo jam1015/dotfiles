@@ -102,7 +102,7 @@ require('lualine').setup {
     -- Include checkSwapFile and our new star function in lualine_a.
     lualine_a = { checkSwapFile },
     lualine_b = {
-      { 'branch', padding = { left = 0, right = 0 }, icon = "⎇" },
+      { 'branch', padding = { left = 0, right = 1 }, icon = "⎇" },
       { 'diff', padding = { left = 1, right = 0 } },
       { 'diagnostics', padding = { left = 1, right = 0 } }
     },
@@ -117,7 +117,7 @@ require('lualine').setup {
   inactive_sections = {
     lualine_a = { checkSwapFile},
     lualine_b = {
-      { 'branch', padding = { left = 0, right = 0, }, icon = "⎇" },
+      { 'branch', padding = { left = 0, right = 1 }, icon = "⎇" },
       { 'diff', padding = { left = 1, right = 0 } },
       { 'diagnostics', padding = { left = 1, right = 0 } }
     },

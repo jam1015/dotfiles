@@ -30,6 +30,18 @@ local in_comment = function()
 end
 local luasnip = require("luasnip") -- Set up nvim-cmp.
 
+-- Build a sources list from a common base + filetype-specific extras.
+-- Extras are inserted after nvim_lsp/luasnip and before buffer/path.
+local function base_sources(extras)
+  local sources = { { name = "nvim_lsp" }, { name = "luasnip" } }
+  for _, s in ipairs(extras or {}) do
+    table.insert(sources, s)
+  end
+  table.insert(sources, { name = "buffer" })
+  table.insert(sources, { name = "path" })
+  return sources
+end
+
 local lspkind = require('lspkind')
 require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -111,22 +123,11 @@ cmp.setup({
     end,
 
   },
-  sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    {name = "conjure"},
-
-    {
-      name = "lazydev",
-      group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-    },
-
+  sources = cmp.config.sources(base_sources({
+    { name = "conjure" },
+    { name = "lazydev", group_index = 0 },
     { name = "nvim_lua" },
-    { name = "latex_symbols", option = { strategy = 2 } },
-    { name = "buffer" },
-    { name = "path" },
-    { name = "cmp_r" },
-  }),
+  })),
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
@@ -154,6 +155,18 @@ cmp.setup({
   },
 
   preselect = cmp.PreselectMode.Item
+})
+
+cmp.setup.filetype({ 'tex', 'latex', 'plaintex' }, {
+  sources = cmp.config.sources(base_sources({
+    { name = "latex_symbols", option = { strategy = 2 } },
+  }))
+})
+
+cmp.setup.filetype({ 'r', 'rmd', 'quarto', 'rprofile' }, {
+  sources = cmp.config.sources(base_sources({
+    { name = "cmp_r" },
+  }))
 })
 
 --Set configuration for specific filetype.

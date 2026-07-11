@@ -19,9 +19,7 @@ else
 		-- *CLAUDE CHANGE* removed duplicate `<leader>tn = tabnew` — kept the `tabnext`
 		-- definition lower down; use `<leader>to` for new tab.
 		--{ "<leader>tn", "<cmd>tabnew<cr>", desc = "New Tab" },
-		-- *CLAUDE CHANGE* removed `<leader>tt = :terminal` — collides with hereterm + smart_termsplit.
-		-- here.term toggle (in plugin_keymaps.hereterm) now owns <leader>tt.
-		--{ "<leader>tt", "<cmd>terminal<cr>", desc = "Open Terminal" },
+		{ "<leader>tt", "<cmd>terminal<cr>", desc = "Open Terminal" },
 		-- *CLAUDE CHANGE* removed `<leader>tv = vsplit-terminal` — smart_termsplit now owns <leader>tv.
 		--{ "<leader>tv", "<C-w>v<cmd>terminal<cr>", desc = "Open Terminal Vsplit" },
 

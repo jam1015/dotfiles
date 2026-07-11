@@ -1,10 +1,20 @@
-(use-package perspective
+;; persp-mode.el (Bad-ptr / Kulikov), NOT perspective.el (Nex3).
+;; Perspectives are global; each frame holds a pointer to one via a
+;; frame parameter, so multiple frames can share a perspective (and thus
+;; a buffer list) or each frame can sit on its own perspective.
+
+(use-package persp-mode
+  :ensure t
   :demand t
   :custom
-  (persp-sort 'name)
+  (persp-nil-name "none")                  ; the catch-all perspective (sees every buffer)
+  (persp-auto-resume-time -1)              ; don't autoload perspectives at startup
+  (persp-auto-save-opt 0)                  ; don't autosave on exit
+  (persp-set-last-persp-for-new-frame nil) ; new frames start in `persp-nil-name', not the last-used persp
+  (persp-add-buffer-on-after-change-major-mode t)
   (persp-suppress-no-prefix-key-warning t)
   :config
-  (persp-mode)
+  (persp-mode 1)
   (my/mappings-perspective)
 
   (with-eval-after-load 'consult
@@ -17,24 +27,14 @@
         :state ,#'consult--buffer-state
         :default t
         :items ,(lambda ()
-                  (let ((persp-bufs (persp-current-buffers)))
+                  (let ((persp-bufs (persp-buffer-list-restricted)))
                     (consult--buffer-query
                      :sort 'visibility
                      :predicate (lambda (buf) (memq buf persp-bufs))
                      :as #'consult--buffer-pair))))
-      "Consult source for current perspective buffers.")
+      "Consult source for the current frame's perspective buffers.")
     (add-to-list 'consult-buffer-sources 'consult--source-perspective-buffer)
-    (consult-customize consult-source-buffer :hidden t :default nil))
-
-  (with-eval-after-load 'project
-    (defun my/persp-switch-for-project (&rest _)
-      "Switch to a perspective named after the current project root."
-      (when-let* ((proj (project-current nil))
-                  (root (project-root proj))
-                  (name (file-name-nondirectory
-                         (directory-file-name root))))
-        (persp-switch name)))
-    (advice-add 'project-switch-project :after #'my/persp-switch-for-project)))
+    (consult-customize consult-source-buffer :hidden t :default nil)))
 
 (provide 'perspective-config)
 ;;;end perspective-config.el
