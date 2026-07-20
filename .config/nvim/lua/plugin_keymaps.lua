@@ -69,6 +69,7 @@
 --   <leader>]b  → <leader>b]    (buffer history forward)
 -- =============================================================================
 
+-- "~/.config/nvim/lua/plugin_configs/nvim-surround.lua"
 M = {}
 
 function M.harpoon(harpoon)
