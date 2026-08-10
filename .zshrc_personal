@@ -39,7 +39,7 @@ export GPG_TTY=$(tty)
 # Platform-specific settings
 case "$OSTYPE" in
   darwin*)
-    export VISUAL='/usr/local/bin/nvim --cmd "let g:flatten_allow_nesting = v:true"'
+    export VISUAL='/usr/local/bin/nvim --cmd "let g:flatten_allow_nesting = v:true" --cmd "let g:unception_disable=1"'
     # Add Homebrew paths if they exist
     [[ -d /opt/homebrew/bin ]] && path=(/opt/homebrew/bin $path)
     ;;
@@ -123,7 +123,7 @@ bindkey -a -r ':' 2>/dev/null
 # Editor aliases (simplified and consistent)
 if command -v nvim >/dev/null 2>&1; then
   alias vi='nvim'
-  alias vin='nvim --cmd "let g:flatten_allow_nesting = v:true"'
+  alias vin='nvim --cmd "let g:flatten_allow_nesting = v:true" --cmd "let g:unception_disable=1"'
   export MANPAGER='nvim --clean -c Man! -u ~/.man_nvimrc'
 fi
 

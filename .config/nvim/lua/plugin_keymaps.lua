@@ -681,6 +681,14 @@ function M.telescope()
 		},
 		{ "<leader>teg", builtin.live_grep, mode = "n", desc = "Live grep" },
 		{ "<leader>teb", builtin.buffers, mode = "n", desc = "Buffers" },
+		{
+			"<leader>bb",
+			function()
+				builtin.buffers(require("telescope.themes").get_ivy())
+			end,
+			mode = "n",
+			desc = "Buffers (telescope ivy)",
+		},
 		{ "<leader>teq", builtin.quickfix, mode = "n", desc = "Quickfix" },
 	}, { silent = true })
 	wk.add({
@@ -717,14 +725,6 @@ function M.snipe()
 	wk.add({
 		-- *CLAUDE CHANGE* group already declared in M.bufjump(); dedupe.
 		--{ "<leader>b", group = "buffers" },
-		{
-			"<leader>bb",
-			function()
-				require("snipe").open_buffer_menu()
-			end,
-			desc = "Buffer menu (snipe)",
-			mode = "n",
-		},
 	})
 end
 

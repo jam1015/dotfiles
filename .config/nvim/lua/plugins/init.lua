@@ -3,7 +3,7 @@ return
 
   {
     "romus204/tree-sitter-manager.nvim",
-    dependencies = {}, -- tree-sitter CLI must be installed system-wide
+    dependencies = {},  -- tree-sitter CLI must be installed system-wide
     event = "VeryLazy", -- *CLAUDE CHANGE* defer until UI ready (was loading at startup, ~10ms)
     config = function()
       require("plugin_configs.tree-sitter-manager")
@@ -54,7 +54,7 @@ return
         opts = {},
         config = function() require("plugin_configs.which-key") end
       },
-    },   -- "RRethy/vim-illuminate" ,
+    }, -- "RRethy/vim-illuminate" ,
     config = function()
       require("plugin_configs.lsp")
     end
@@ -152,8 +152,8 @@ return
     config = function()
       -- Minimal config
       require("themery").setup({
-        themes = { "paper", "tokyonight", },   -- Your list of installed colorschemes.
-        livePreview = true,                    -- Apply theme while picking. Default to true.
+        themes = { "paper", "tokyonight", }, -- Your list of installed colorschemes.
+        livePreview = true,                  -- Apply theme while picking. Default to true.
       })
       --require("plugin_configs.themery")
     end
@@ -207,11 +207,11 @@ return
   {
     "folke/lazydev.nvim",
     --event = "VeryLazy",
-    ft = "lua",                                     -- only load on lua files
-    opts = require("plugin_configs.lazydev_nvim")   --enabled = false
+    ft = "lua",                                   -- only load on lua files
+    opts = require("plugin_configs.lazydev_nvim") --enabled = false
 
   },
-  { "Bilal2453/luvit-meta",     lazy = true,                                              event = "VeryLazy" },   -- optional `vim.uv` typings
+  { "Bilal2453/luvit-meta",     lazy = true, event = "VeryLazy" },                                              -- optional `vim.uv` typings
   {
     "leath-dub/snipe.nvim",
     event = "VeryLazy",
@@ -263,7 +263,7 @@ return
     end,
     dependencies = {
       --'nvim-treesitter/nvim-treesitter', -- optional
-      'nvim-tree/nvim-web-devicons',   -- optional
+      'nvim-tree/nvim-web-devicons', -- optional
     }
   },
 
@@ -341,7 +341,7 @@ return
     "iguanacucumber/magazine.nvim",
     event = "InsertEnter",
     name = "nvim-cmp",
-    cond = function()   --also done vi autocmd in the cmp config
+    cond = function() --also done vi autocmd in the cmp config
       return (vim.bo.filetype ~= "lisp" and vim.bo.filetype ~= "el" and vim.bo.filetype ~= "elisp")
     end,
     dependencies = {
@@ -354,7 +354,7 @@ return
       { "hrsh7th/cmp-cmdline", },
       { "kdheepak/cmp-latex-symbols", ft = "tex" },
       {
-        "L3MON4D3/LuaSnip",   -- tag = "v<CurrentMajor>.*",
+        "L3MON4D3/LuaSnip", -- tag = "v<CurrentMajor>.*",
         event = "InsertEnter",
         build = "make install_jsregexp",
         dependencies = { "rafamadriz/friendly-snippets" },
@@ -406,10 +406,10 @@ return
     "dhananjaylatkar/cscope_maps.nvim",
     event = "VeryLazy",
     dependencies = {
-      "folke/which-key.nvim",          -- optional [for whichkey hints]
+      "folke/which-key.nvim",        -- optional [for whichkey hints]
       --"nvim-telescope/telescope.nvim", -- optional [for picker="telescope"]
-      "ibhagwan/fzf-lua",              -- optional [for picker="fzf-lua"]
-      "nvim-tree/nvim-web-devicons",   -- optional [for devicons in telescope or fzf]
+      "ibhagwan/fzf-lua",            -- optional [for picker="fzf-lua"]
+      "nvim-tree/nvim-web-devicons", -- optional [for devicons in telescope or fzf]
     },
     opts = require("plugin_configs.cscope_maps.options")
     ,
@@ -590,7 +590,7 @@ return
     ft = { "js", "ts", "html", "htm", "tsx", "jsx", "md" },
   }),
 
-  ({   -- run 'call firenvim#install(0)' to perhaps fix issues when it is not running in browser
+  ({ -- run 'call firenvim#install(0)' to perhaps fix issues when it is not running in browser
     "glacambre/firenvim",
     build = function()
       vim.fn["firenvim#install"](0)
@@ -797,7 +797,7 @@ return
     "kwkarlwang/bufjump.nvim",
     event = "VeryLazy",
     dependencies = {
-      "folke/which-key.nvim",   -- optional [for whichkey hints]
+      "folke/which-key.nvim", -- optional [for whichkey hints]
     },
     config = function()
       require("plugin_configs.bufjump")
@@ -819,7 +819,7 @@ return
 
   {
     "kylechui/nvim-surround",
-    version = "^3.0.0",   -- Use for stability; omit to use `main` branch for the latest features
+    version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = function()
       require("plugin_configs.nvim-surround")

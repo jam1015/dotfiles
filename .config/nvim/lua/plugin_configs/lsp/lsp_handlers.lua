@@ -57,8 +57,8 @@ local function local_keymaps(bufnr)
     vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
   end
 
-  local function map(lhs, rhs, desc)
-    vim.keymap.set("n", lhs, rhs, { buffer = bufnr, silent = false, desc = desc })
+  local function map(lhs, rhs, desc, mode)
+    vim.keymap.set(mode or { "n", "x" }, lhs, rhs, { buffer = bufnr, silent = false, desc = desc })
   end
 
   -- g-prefixed navigation
@@ -69,7 +69,7 @@ local function local_keymaps(bufnr)
 
   -- <leader>l = LSP
   map("<leader>lh", vim.lsp.buf.hover, "Hover")
-  map("<leader>ls", vim.lsp.buf.signature_help, "Signature Help")
+  map("<leader>lk", vim.lsp.buf.signature_help, "Signature Help")
   map("<leader>ld", vim.lsp.buf.type_definition, "Type Definition")
   map("<leader>lr", vim.lsp.buf.rename, "Rename Symbol")
   map("<leader>la", vim.lsp.buf.code_action, "Code Action")
@@ -113,7 +113,7 @@ local function local_keymaps(bufnr)
       { "<leader>l",  group = "LSP",       buffer = bufnr },
       { "<leader>lw", group = "Workspace", buffer = bufnr },
       { "<leader>lt", group = "Toggles",   buffer = bufnr },
-    }, { mode = "n" })
+    }, { mode = { "n", "x" } })
   end
 end
 

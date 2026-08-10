@@ -18,3 +18,5 @@
 	editor = nvim --clean
 [push]
 	followTags = true
+[advice]
+	addIgnoredFile = false
