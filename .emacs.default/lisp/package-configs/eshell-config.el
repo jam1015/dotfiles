@@ -49,9 +49,17 @@
     (setq eshell-config--initialized-buffers
           (delq (current-buffer) eshell-config--initialized-buffers)))
 
+  (defun eshell-config--find-files (args)
+    (let ((files (flatten-tree args)))
+      (if (null files)
+          (call-interactively #'find-file)
+        (dolist (file files)
+          (find-file file)))
+      nil))
+
   (defun eshell-config-define-aliases ()
-    (dolist (pair '(("ff" . "find-file $1")
-                    ("vi" . "find-file $1")
+    (dolist (pair '(("ff" . "eshell-config--find-files $*")
+                    ("vi" . "eshell-config--find-files $*")
                     ("ll" . "ls -la $*")
                     ("la" . "ls -a $*")))
       (eshell/alias (car pair) (cdr pair))))

@@ -75,6 +75,7 @@ avogadro-molecules
 avogadrolibs
 avogadrolibs-qt
 awesome-terminal-fonts
+ayatana-ido
 b43-fwcutter
 baloo
 baloo-widgets
@@ -493,6 +494,7 @@ haskell-ansi-terminal
 haskell-ansi-terminal-types
 haskell-ansi-wl-pprint
 haskell-appar
+haskell-asciidoc
 haskell-asn1-encoding
 haskell-asn1-parse
 haskell-asn1-types
@@ -535,6 +537,7 @@ haskell-conduit-extra
 haskell-constraints
 haskell-contravariant
 haskell-cookie
+haskell-cryptohash-md5
 haskell-crypton
 haskell-crypton-connection
 haskell-crypton-socks
@@ -607,6 +610,7 @@ haskell-lexer
 haskell-libyaml
 haskell-lpeg
 haskell-lua
+haskell-lua-arbitrary
 haskell-memory
 haskell-mime-types
 haskell-mmorph
@@ -659,6 +663,7 @@ haskell-skylighting-format-ansi
 haskell-skylighting-format-blaze-html
 haskell-skylighting-format-context
 haskell-skylighting-format-latex
+haskell-skylighting-format-typst
 haskell-socks
 haskell-some
 haskell-sop-core
@@ -671,6 +676,8 @@ haskell-syb
 haskell-tagged
 haskell-tagsoup
 haskell-tasty
+haskell-tasty-hunit
+haskell-tasty-lua
 haskell-temporary
 haskell-texmath
 haskell-text-conversions
@@ -1166,6 +1173,8 @@ libatomic_ops
 libavc1394
 libavif
 libavtp
+libayatana-appindicator
+libayatana-indicator
 libb2
 libblake3
 libblastrampoline
@@ -1199,6 +1208,7 @@ libcolord
 libconfig
 libcups
 libcupsfilters
+libcurl-gnutls
 libcutl
 libdaemon
 libdatrie
@@ -1265,6 +1275,7 @@ libgudev
 libgusb
 libhandy
 libheif
+libhwasan
 libical
 libice
 libidn
@@ -1370,6 +1381,7 @@ libotf
 libp11-kit
 libpagemaker
 libpaper
+libpathrs
 libpcap
 libpciaccess
 libpeas
@@ -1543,6 +1555,7 @@ linux-firmware-radeon
 linux-firmware-realtek
 linux-firmware-whence
 linux-headers
+litehtml
 lld
 lld18
 lld19
@@ -1686,6 +1699,7 @@ nss
 nss-mdns
 ntfs-3g
 ntp
+ntsync-autoload
 numactl
 numlockx
 nvm
@@ -1827,6 +1841,7 @@ perl-lwp-mediatypes
 perl-lwp-protocol-https
 perl-mailtools
 perl-math-round
+perl-mime-base32
 perl-mime-charset
 perl-module-implementation
 perl-module-runtime
@@ -2355,6 +2370,7 @@ speexdsp
 spglib
 spirv-tools
 splix
+spotify
 sqlite
 sratom
 srt
