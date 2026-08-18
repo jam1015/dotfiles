@@ -284,8 +284,15 @@ if [[ $ZSH_LAUNCHER = 1 ]]; then
   fi
 
   preexec() {
-    # Get the first word of the command to check what's being run
-    local cmd="${1%% *}"
+    # Strip leading whitespace before extracting the first word — HIST_IGNORE_SPACE
+    # habit or autosuggest can prefix a space, which would make ${1%% *} empty.
+    local line="$1"
+    # Step 1: measure the leading-whitespace prefix by removing everything
+    # from the first non-space character onward.
+    local leading_ws="${line%%[![:space:]]*}"
+    # Step 2: remove exactly that prefix from the front of line.
+    line="${line#$leading_ws}"
+    local cmd="${line%% *}"
 
     # List of commands that should NOT cause exit (directory navigation, etc.)
     local -a no_exit_cmds=(
@@ -302,8 +309,10 @@ if [[ $ZSH_LAUNCHER = 1 ]]; then
       return
     fi
 
-    # For all other commands, run in background and exit
-    (eval "$1" &) &>/dev/null
+    # Detach into a new session so the child survives the launcher's exit.
+    # setsid --fork gives it its own session/pgroup, cutting the SIGHUP path
+    # from kitty's pty teardown.
+    setsid -f zsh -c "$line" </dev/null >/dev/null 2>&1
     exit
   }
 fi

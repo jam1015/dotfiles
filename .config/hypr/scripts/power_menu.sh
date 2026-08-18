@@ -29,7 +29,7 @@ case "$choice" in
   Lock)      swaylock -f --color 000000 ;;
   Suspend)   systemctl suspend ;;
   Hibernate) systemctl hibernate ;;
-  "Log out") hyprctl dispatch exit ;;
+  "Log out") hyprctl dispatch 'hl.dsp.exit()' ;;
   Reboot)    systemctl reboot ;;
   Shutdown)  systemctl poweroff ;;
 esac

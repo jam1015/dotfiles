@@ -33,8 +33,8 @@ IDX=0
 for MON in $MONITORS; do
     OFFSET=$((IDX * 10))
     WS=$((N + OFFSET))
-    hyprctl dispatch focusmonitor "$MON"
-    hyprctl dispatch workspace "$WS"
+    hyprctl dispatch "hl.dsp.focus({ monitor = \"$MON\" })"
+    hyprctl dispatch "hl.dsp.focus({ workspace = \"$WS\" })"
     IDX=$((IDX + 1))
 done
 

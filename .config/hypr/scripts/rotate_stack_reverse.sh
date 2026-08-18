@@ -10,13 +10,13 @@ COUNT=$(hyprctl clients -j | jq "[.[] | select(.workspace.id == $WS_ID)] | lengt
 
 # Focus A (master), then swapnext COUNT-1 times: A bubbles to end
 # [A,B,C,D] → [B,A,C,D] → [B,C,A,D] → [B,C,D,A]
-hyprctl dispatch layoutmsg focusmaster
+hyprctl dispatch 'hl.dsp.layout("focusmaster")'
 
 i=1
 while [ "$i" -le "$((COUNT - 1))" ]; do
-    hyprctl dispatch layoutmsg swapnext
+    hyprctl dispatch 'hl.dsp.layout("swapnext")'
     i=$((i + 1))
 done
 
-hyprctl dispatch focuswindow "address:$ORIG"
+hyprctl dispatch "hl.dsp.focus({ window = \"address:$ORIG\" })"
 

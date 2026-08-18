@@ -35,8 +35,8 @@ set_orientations() {
         fi
 
         echo "$name: ${eff_w}x${eff_h} → $orientation" >> "$LOG"
-        hyprctl dispatch focusmonitor "$name"
-        hyprctl dispatch layoutmsg "$orientation"
+        hyprctl dispatch "hl.dsp.focus({ monitor = \"$name\" })"
+        hyprctl dispatch "hl.dsp.layout(\"$orientation\")"
     done
     echo "Orientations set." >> "$LOG"
 }

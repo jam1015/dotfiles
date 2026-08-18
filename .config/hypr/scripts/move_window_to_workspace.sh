@@ -12,16 +12,16 @@ mon_idx=$(( (ws - 1) / 10 ))
 mon=$(hyprctl monitors -j | jq -r ".[$mon_idx].name")
 
 if [ "$warp" = "1" ]; then
-    hyprctl dispatch movetoworkspace "$ws"
+    hyprctl dispatch "hl.dsp.window.move({ workspace = \"$ws\" })"
 else
     # doesn't warp focus
-    hyprctl dispatch movetoworkspacesilent "$ws"
+    hyprctl dispatch "hl.dsp.window.move({ workspace = \"$ws\", follow = false })"
 fi
 
 # Re-anchor the (now non-empty) workspace to the correct monitor in case
 # it had drifted, or was just created on the wrong one.
-hyprctl dispatch moveworkspacetomonitor "$ws $mon"
+hyprctl dispatch "hl.dsp.workspace.move({ workspace = \"$ws\", monitor = \"$mon\" })"
 
 if [ "$warp" = "1" ]; then
-    hyprctl dispatch focusmonitor "$mon"
+    hyprctl dispatch "hl.dsp.focus({ monitor = \"$mon\" })"
 fi
