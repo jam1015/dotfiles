@@ -282,5 +282,19 @@
       "pi" #'persp-import-buffers)))     ; replaces perspective.el's `persp-merge'
 
 
+;;; ============================================================
+;;; UNIMPAIRED
+;;; ============================================================
+
+(defun my/mappings-unimpaired ()
+  (evil-collection-define-key 'normal 'evil-collection-unimpaired-mode-map
+    "[t" #'tab-bar-switch-to-prev-tab
+    "]t" #'tab-bar-switch-to-next-tab)
+  (with-eval-after-load 'evil-leader
+    (evil-leader/set-key
+      "[t" #'xref-go-back
+      "]t" #'xref-find-definitions)))
+
+
 (provide 'package-mappings)
 ;;; end package-mappings.el

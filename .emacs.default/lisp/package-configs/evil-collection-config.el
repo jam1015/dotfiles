@@ -9,7 +9,8 @@
   (evil-collection-repl-submit-state 'insert)
   :config
   (setq evil-overriding-maps nil)
-  (evil-collection-init))
+  (evil-collection-init)
+  (my/mappings-unimpaired))
 (provide 'evil-collection-config)
 ;;;end evil-collection-config.el
 

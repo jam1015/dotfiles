@@ -414,6 +414,10 @@ function M.unimpaired()
 	wk.add({
 		{ "]a", "<Cmd>Anext<cr>", desc = "Arg next" },
 		{ "[a", "<Cmd>Aprev<cr>", desc = "Arg prev" },
+		{ "]t", "<Cmd>tabnext<cr>", desc = "Tab next" },
+		{ "[t", "<Cmd>tabprevious<cr>", desc = "Tab prev" },
+		{ "<leader>]t", "<Cmd>tnext<cr>", desc = "Tag next" },
+		{ "<leader>[t", "<Cmd>tprevious<cr>", desc = "Tag prev" },
 	}, { mode = "n", silent = true })
 end
 
