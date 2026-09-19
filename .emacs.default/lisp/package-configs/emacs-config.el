@@ -45,9 +45,11 @@
   (setopt custom-unlispify-menu-entries nil)
 
 
+
   (global-auto-revert-mode 1)
   ;; Optional: also revert non-file buffers like Dired
   (setq global-auto-revert-non-file-buffers t)
+  (setq auto-revert-interval 1)
   ;; Remember cursor positions across sessions
   (save-place-mode 1)
 

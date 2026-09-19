@@ -9,3 +9,13 @@ require("tree-sitter-manager").setup({
   parser_dir = vim.fn.stdpath("data") .. "/site/parser",
   query_dir = vim.fn.stdpath("data") .. "/site/queries",
 })
+
+-- Incremental node selection: use Neovim 0.12's built-in vim.treesitter._select
+-- (default keybinds are an/in/[n/]n; we also want Tab/S-Tab in visual mode).
+vim.keymap.set("x", "<Tab>", function()
+  require("vim.treesitter._select").select_parent(vim.v.count1)
+end, { desc = "TS: expand selection to parent node" })
+
+vim.keymap.set("x", "<S-Tab>", function()
+  require("vim.treesitter._select").select_child(vim.v.count1)
+end, { desc = "TS: shrink selection to child node" })
