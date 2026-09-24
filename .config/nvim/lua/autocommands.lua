@@ -103,6 +103,19 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 
 require('term_autocmds')
 
+-- Treesitter-based folding (Neovim 0.12 native). Enable per-buffer only when a
+-- parser is available; leaves folding untouched for buffers without one.
+vim.o.foldlevelstart = 99  -- open files fully unfolded
+api.nvim_create_autocmd("FileType", {
+  group = api.nvim_create_augroup("ts_folding", { clear = true }),
+  callback = function(args)
+    if vim.treesitter.get_parser(args.buf, nil, { error = false }) then
+      vim.api.nvim_set_option_value("foldmethod", "expr", { win = 0 })
+      vim.api.nvim_set_option_value("foldexpr", "v:lua.vim.treesitter.foldexpr()", { win = 0 })
+    end
+  end,
+})
+
 
 --vim.api.nvim_create_autocmd("ModeChanged", {
 --    pattern = "*",
