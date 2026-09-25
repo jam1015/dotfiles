@@ -299,7 +299,7 @@ if [[ $ZSH_LAUNCHER = 1 ]]; then
       'cd' 'z' 'zoxide' 'pushd' 'popd' 'dirs'
       'pwd' 'ls' 'll' 'la' 'tree' 'exa' 'eza'
       'source' '.' 'alias' 'unalias' 'export'
-      'echo' 'printf' 'cat' 'less' 'more'
+      'echo' 'printf' 'cat' 'less' 'more' 'mv'
       'fg' 'bg' 'jobs' 'exit' 'clear' 'rm' 'kill' 'pkill'
     )
 
