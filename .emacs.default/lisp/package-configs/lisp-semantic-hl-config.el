@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package lisp-semantic-hl
   :load-path "/home/jordan/emacs-packages/mainline/lisp-semantic-hl.el/"
   :hook ((emacs-lisp-mode . lisp-semantic-hl-mode)

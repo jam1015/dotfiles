@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package anzu
   :config
   (global-anzu-mode +1)) ;; turn on match counting globally

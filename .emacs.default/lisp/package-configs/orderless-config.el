@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package orderless
   ;;:ensure (:tag "1.6")
   :custom

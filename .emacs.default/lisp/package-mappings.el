@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; package-mappings.el --- Centralized keybindings for all installed packages
 ;;
 ;; Each package's :config block calls (my/mappings-PACKAGE).

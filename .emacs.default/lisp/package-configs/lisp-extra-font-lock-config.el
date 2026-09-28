@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package lisp-extra-font-lock
   :hook ((lisp-mode . lisp-extra-font-lock-mode)
          (emacs-lisp-mode . lisp-extra-font-lock-mode)

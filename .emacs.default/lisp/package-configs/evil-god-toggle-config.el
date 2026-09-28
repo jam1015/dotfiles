@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package evil-god-toggle
   :ensure (:host github
            :repo "jam1015/evil-god-toggle"

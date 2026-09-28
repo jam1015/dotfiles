@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; hook-functions.el --- Named functions for use in hook registrations
 
 (defun my/startup-open-eshell ()

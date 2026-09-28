@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package cursor-contraster
   :ensure (:host github
                  :repo "jam1015/cursor-contraster"

@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package evil-textobj-entire
   :ensure t
   :after evil

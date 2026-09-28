@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; persp-mode.el (Bad-ptr / Kulikov), NOT perspective.el (Nex3).
 ;; Perspectives are global; each frame holds a pointer to one via a
 ;; frame parameter, so multiple frames can share a perspective (and thus

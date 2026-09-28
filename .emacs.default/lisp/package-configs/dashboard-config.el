@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package dashboard
   :if (< (length command-line-args) 2)
   :disabled t

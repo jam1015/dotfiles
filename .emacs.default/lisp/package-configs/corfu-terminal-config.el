@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; Override the codeberg-hosted menu recipe for the popon transitive dep.
 ;; To revert, comment out this whole use-package form.
 (use-package popon

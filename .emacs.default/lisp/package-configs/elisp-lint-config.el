@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package elisp-lint
   :ensure t
   :commands (elisp-lint-files-batch)

@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package r-ts-mode
   :ensure (:host github :repo "nverno/r-ts-mode")
   :mode (("\\.R\\'" . r-ts-mode)

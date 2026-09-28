@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; Core Emacs Settings
 (use-package emacs
   :ensure nil

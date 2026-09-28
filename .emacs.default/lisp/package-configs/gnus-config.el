@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package gnus
   :defer t
   :ensure nil

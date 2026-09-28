@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;(setq debug-on-error t)
 (setq package-enable-at-startup nil)
 (setq evil-want-keybinding nil

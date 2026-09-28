@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package evil-cleverparens
   :hook ((emacs-lisp-mode
           lisp-mode

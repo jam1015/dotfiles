@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package sly
   :init
   ;(setq inferior-lisp-program "sbcl")

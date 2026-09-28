@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; ;;in init.el, before any `require` calls:
 ;; Add lisp directory and all its subdirectories to load-path
 (let ((default-directory (expand-file-name "lisp" user-emacs-directory)))

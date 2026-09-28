@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package undo-tree
   :config
   (global-undo-tree-mode 1)

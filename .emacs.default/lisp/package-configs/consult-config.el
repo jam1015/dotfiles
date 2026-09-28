@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package consult
   ;;:ensure (:tag "3.4")
   :after vertico

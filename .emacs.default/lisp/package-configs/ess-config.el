@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package ess
   :defer t
   :commands (R R-mode ess-mode)

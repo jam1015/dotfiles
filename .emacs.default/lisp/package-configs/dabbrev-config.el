@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package dabbrev
   :ensure nil
   :config

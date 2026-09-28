@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;;; Remove straight.el setup
 ;;(message "Removing Straight")
 ;;(setq straight-use-package-by-default nil)

@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (use-package cape
   :after (corfu geiser)  
   ;:ensure (:tag "2.6")
