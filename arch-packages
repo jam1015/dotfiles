@@ -59,6 +59,7 @@ at-spi2-core
 atkmm
 attica
 attr
+aubio
 audex
 audiocd-kio
 audiofile
@@ -248,6 +249,7 @@ dpkg
 dracut
 dragon
 drkonqi
+dsfmt
 duf
 duktape
 dunst
@@ -595,6 +597,7 @@ haskell-http-client
 haskell-http-client-tls
 haskell-http-date
 haskell-http-media
+haskell-http-semantics
 haskell-http-types
 haskell-http2
 haskell-hunit
@@ -917,9 +920,12 @@ kdialog
 kdiamond
 kdnssd
 kdoctools
+kdominate
+kdsingleapplication
 kdsoap
 kdsoap-ws-discovery-client
 keditbookmarks
+keepsecret
 kernel-install-for-dracut
 kexec-tools
 keysmith
@@ -964,6 +970,7 @@ kio-zeroconf
 kio5
 kirigami
 kirigami-addons
+kirigami-app-components
 kirigami-gallery
 kiriki
 kitemmodels
@@ -1202,6 +1209,7 @@ libcbor
 libcdio
 libcdio-paranoia
 libcdr
+libcgif
 libcheese
 libcloudproviders
 libcmis
@@ -1327,6 +1335,7 @@ libmad
 libmakepkg-dropins
 libmalcontent
 libmanette
+libmatio
 libmatroska
 libmaxminddb
 libmbim
@@ -1476,6 +1485,7 @@ libuv
 libva
 libvdpau
 libverto
+libvips
 libvisio
 libvlc
 libvncserver
@@ -1544,6 +1554,7 @@ lilv
 linux
 linux-api-headers
 linux-firmware
+linux-firmware-amd
 linux-firmware-amdgpu
 linux-firmware-atheros
 linux-firmware-broadcom
@@ -1554,6 +1565,7 @@ linux-firmware-nvidia
 linux-firmware-other
 linux-firmware-radeon
 linux-firmware-realtek
+linux-firmware-ti
 linux-firmware-whence
 linux-headers
 litehtml
@@ -1774,6 +1786,7 @@ pciutils
 pcre
 pcre2
 pcsclite
+pdfio
 perl
 perl-alien-build
 perl-alien-libxml2
@@ -1856,6 +1869,7 @@ perl-number-compare
 perl-package-deprecationmanager
 perl-package-stash
 perl-package-stash-xs
+perl-params-someutil
 perl-params-util
 perl-params-validate
 perl-params-validationcompiler
@@ -2094,7 +2108,6 @@ python-propcache
 python-proton-core
 python-proton-keyring-linux
 python-proton-vpn-api-core
-python-proton-vpn-local-agent
 python-psutil
 python-ptyprocess
 python-pure-eval
