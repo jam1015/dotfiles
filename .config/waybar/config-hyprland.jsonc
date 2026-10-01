@@ -40,7 +40,10 @@
     //   mon1 → 1-10, mon2 → 11-20, mon3 → 21-30
     // persistent-workspaces keeps the buttons visible even when empty.
     "format": "{id}",
-    "on-click": "activate",
+    // Re-anchor the clicked workspace to this bar's monitor, then focus it.
+    // Needed because after an unplug, workspaces 11–30 pile onto eDP-1 and
+    // plain "activate" would just focus them wherever they currently live.
+    "on-click": "~/.config/hypr/scripts/waybar_focus_workspace.sh {id}",
     "sort-by-number": true,
     "active-only": false,
     "show-special": false

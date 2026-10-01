@@ -4,9 +4,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-	 '("f6ea954a9544b0174a876d195387f444da441535ee88c7fb0fc346af08b0d228"
-		 default)))
+ '(package-selected-packages
+	 '(all-the-icons cape consult corfu-terminal dirvish doom-themes eat
+									 elisp-lint embark embark-consult ess evil-anzu
+									 evil-cleverparens evil-goggles evil-leader
+									 evil-surround evil-textobj-entire flycheck kkp
+									 lisp-extra-font-lock marginalia markdown-mode
+									 orderless package-lint paredit persp-mode sly
+									 solarized-theme treesit-auto undo-tree vertico
+									 wgrep)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -168,6 +168,9 @@ hl.define_submap("prefix", "reset", function()
   hl.bind("slash", hl.dsp.exec_cmd("kitty --class=KeybindViewer ~/.config/hypr/scripts/show_keybinds.sh"))
   hl.bind("w", hl.dsp.exec_cmd("~/.config/hypr/scripts/switch_workspace.sh"))
 
+  -- Pull a workspace onto the current output (wofi prompt).
+  hl.bind("m", hl.dsp.exec_cmd("~/.config/hypr/scripts/focus_workspace_here.sh"))
+
   -- Double-tap Super → prefix2. Uses submap_universal-style pattern:
   -- inside prefix, Super isn't held, so bare key.
   hl.bind("SUPER_L", hl.dsp.submap("prefix2"))
