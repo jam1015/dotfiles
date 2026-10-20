@@ -15,7 +15,8 @@
   (corfu-terminal
    :host github :repo "cimisc/emacs-corfu-terminal"
    :files ("*" (:exclude ".git")))
-  :if (not (display-graphic-p))
+  :if (and (not (display-graphic-p))
+           (< emacs-major-version 31))
   :config
   (corfu-terminal-mode +1)
   (advice-add 'corfu--popup-show :before-while

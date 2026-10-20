@@ -58,6 +58,7 @@ window#waybar.hidden { opacity: 0.1; }
 #submap,
 #window,
 #custom-output_name,
+#custom-ws-picker,
 #custom-media,
 #mpd,
 #pulseaudio,
@@ -200,6 +201,13 @@ window#waybar.hidden { opacity: 0.1; }
     font-family: "InputMono Nerd Font", "Symbols Nerd Font", "FontAwesome", monospace;
     font-size: 15px;
     padding: 0 12px;
+}
+
+#custom-ws-picker {
+    color: @muted;
+    font-family: "Symbols Nerd Font", "InputMono Nerd Font", monospace;
+    font-size: 16px;
+    padding: 0 10px;
 }
 
 /* ── Battery states ────────────────────────────────────────────────────── */

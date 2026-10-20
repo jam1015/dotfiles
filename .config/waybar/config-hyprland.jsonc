@@ -7,6 +7,7 @@
 
   "modules-left": [
     "hyprland/workspaces",
+    "custom/ws-picker",
     "hyprland/submap",
     "custom/media"
   ],
@@ -39,14 +40,24 @@
     // With the offset scheme in set_global_workspace.sh:
     //   mon1 → 1-10, mon2 → 11-20, mon3 → 21-30
     // persistent-workspaces keeps the buttons visible even when empty.
+    // NOTE: button clicks on this module are hardcoded in waybar to call the
+    // legacy `dispatch workspace N`, which errors under the lua-based Hyprland
+    // config (see Waybar #5008, Hyprland #15887). So this module is display-
+    // only. Use the custom/ws-picker button below (or prefix+m) to jump to a
+    // workspace via wofi.
     "format": "{id}",
-    // Re-anchor the clicked workspace to this bar's monitor, then focus it.
-    // Needed because after an unplug, workspaces 11–30 pile onto eDP-1 and
-    // plain "activate" would just focus them wherever they currently live.
-    "on-click": "~/.config/hypr/scripts/waybar_focus_workspace.sh {id}",
     "sort-by-number": true,
     "active-only": false,
     "show-special": false
+  },
+
+  "custom/ws-picker": {
+    // Clicking opens the same wofi workspace picker that prefix+m uses:
+    // the chosen workspace is pulled onto this bar's monitor and focused.
+    "format": "󰓩",
+    "tooltip": true,
+    "tooltip-format": "Pick workspace (also: prefix+m)",
+    "on-click": "/home/jordan/.config/hypr/scripts/focus_workspace_here.sh"
   },
 
   "hyprland/submap": {

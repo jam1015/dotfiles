@@ -1,14 +1,19 @@
 -- ~/.config/hypr/hyprland.lua
 -- Ported from hyprland.conf (river-classic modal keybind scheme).
+---@diagnostic disable: undefined-global
+-- `hl` is injected by Hyprland's lua runtime (see /usr/share/hypr/stubs/hl.meta.lua).
+-- If your LSP picks up the stub via .luarc.json, you can delete the diagnostic pragma.
 
 hl.config({
   debug = { disable_logs = false },
 })
 
 -- ─── A) Monitors ──────────────────────────────────────────────────────────────
-hl.monitor({ output = "DP-11", mode = "1920x1080@60", position = "0x0", scale = 1, transform = 1 })
-hl.monitor({ output = "DP-13", mode = "1920x1080@60", position = "1080x0", scale = 1 })
-hl.monitor({ output = "eDP-1", mode = "2880x1920@60", position = "1080x1080", scale = 1.6 })
+-- Match by EDID description (make model serial) so dock port shuffling
+-- doesn't break the layout. Try #1: 672FY43 = portrait/left, 8JY0FZ2 = landscape/right.
+hl.monitor({ output = "desc:Dell Inc. DELL P2419H 672FY43", mode = "1920x1080@60", position = "0x0",      scale = 1, transform = 1 })
+hl.monitor({ output = "desc:Dell Inc. DELL P2419H 8JY0FZ2", mode = "1920x1080@60", position = "1080x0",   scale = 1 })
+hl.monitor({ output = "eDP-1",                              mode = "2880x1920@60", position = "1080x1080", scale = 1.6 })
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
 
 -- ─── B) Environment Variables ─────────────────────────────────────────────────
@@ -27,10 +32,17 @@ hl.env("XCURSOR_THEME", "Breeze5")
 hl.env("XCURSOR_SIZE", "24")
 
 -- ─── C) Autostart ─────────────────────────────────────────────────────────────
+-- Re-apply master-layout orientation whenever a monitor is attached.
+-- (monitor_setup.sh handles the one-shot startup case; this handles re-plugs.)
+hl.on("monitor.added", function()
+  hl.exec_cmd("~/.config/hypr/scripts/set_orientations.sh")
+end)
+
 hl.on("hyprland.start", function()
   hl.exec_cmd("~/.config/hypr/scripts/monitor_setup.sh")
   hl.exec_cmd("dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XAUTHORITY")
   hl.exec_cmd("sh -c 'killall fcitx5; fcitx5 -d'")
+  hl.exec_cmd("hyprpaper")
   hl.exec_cmd("swaync")
   hl.exec_cmd("sh -c 'sleep 2 && swaync-client --dnd-on'")
   hl.exec_cmd(
@@ -252,6 +264,12 @@ hl.define_submap("prefix2", "reset", function()
   -- Move window to workspace (wofi prompt)
   hl.bind("m", hl.dsp.exec_cmd("~/.config/hypr/scripts/move_window_to_workspace.sh 0"))
   hl.bind("l", hl.dsp.exec_cmd("~/.config/hypr/scripts/move_window_to_workspace.sh 1"))
+
+  -- Re-anchor workspaces to their offset-scheme monitors after a re-plug.
+  hl.bind("r", hl.dsp.exec_cmd("~/.config/hypr/scripts/reanchor_workspaces.sh"))
+
+  -- Graphical monitor layout tool (for ad-hoc setups while away from home).
+  hl.bind("o", hl.dsp.exec_cmd("nwg-displays"))
 
   -- Apps
   hl.bind("e", hl.dsp.exec_cmd("emacsclient -c"))

@@ -1,6 +1,8 @@
 #!/bin/bash
 warp=${1:-1}
-ws=$(echo "" | wofi --dmenu --prompt "Move window to workspace:" --lines 1 --width 400)
+ws=$(echo "" | wofi --dmenu --prompt "Move window to workspace:" --lines 1 --width 400 \
+  --conf  ~/.config/wofi/workspace.conf \
+  --style ~/.config/wofi/workspace.css)
 [ -z "$ws" ] && exit 0
 
 # Treat "0" as workspace 10 (matches the keyboard "0" → slot 10 convention).

@@ -1,0 +1,14 @@
+/* Hide the GtkSearchEntry magnifier icon that wofi inherits from the GTK theme. */
+#input image,
+#input .icon {
+    -gtk-icon-source: none;
+    opacity: 0;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+/* Zero-row list → no flicker when the only "entry" is the empty echo from the
+   calling scripts; the user is typing a workspace number, not picking a row. */
+#inner-box { min-height: 0; }
