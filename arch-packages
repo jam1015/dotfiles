@@ -84,6 +84,7 @@ baloo-widgets
 base
 base-devel
 bash
+bash-app-translate
 bash-completion
 bashtop
 bat
@@ -1348,6 +1349,7 @@ libmbim
 libmd
 libmfx
 libmicrodns
+libmicrohttpd
 libmm-glib
 libmng
 libmnl
@@ -1429,6 +1431,7 @@ libraw
 libraw1394
 libreoffice-fresh
 librevenge
+librist
 librsvg
 librsync
 librttopo
@@ -1638,6 +1641,7 @@ marisa
 markdownpart
 massif-visualizer
 mathjax2
+mbedtls3
 mbox-importer
 md4c
 mdadm
@@ -1653,6 +1657,7 @@ messagelib
 milou
 mimalloc
 mimetreeparser
+ministream
 minizip
 minuet
 mit-scheme

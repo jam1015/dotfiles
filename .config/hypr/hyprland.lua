@@ -94,7 +94,7 @@ hl.config({
   misc = {
     background_color         = "rgb(02091c)",
     disable_hyprland_logo    = true,
-    disable_splash_rendering = false,
+    disable_splash_rendering = true,
   },
 
   master = {
