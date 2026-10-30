@@ -15,13 +15,7 @@
 ;; the mode is idempotent.
 
 (use-package eat
-  ;; To revert to the codeberg menu recipe, comment the :ensure (...) lines
-  ;; below and uncomment `:ensure t'.
-  ;; :ensure t
-  :ensure
-  (eat
-   :host github :repo "emacsmirror/eat"
-   :files ("*" (:exclude ".git")))
+  :ensure t
   :hook (eshell-load . eat-eshell-mode)
   :config
   (eat-eshell-mode 1))

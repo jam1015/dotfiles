@@ -1,8 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 (use-package cursor-contraster
-  :ensure (:host github
-                 :repo "jam1015/cursor-contraster"
-                 )
+  :vc (:url "https://github.com/jam1015/cursor-contraster"
+       :rev :newest)
   :after (evil god-mode)
   :config
 (cursor-contraster-mode 1)

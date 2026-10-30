@@ -27,8 +27,8 @@ typically resets the default face."
                         :family my/default-font-family
                         :height my/default-font-height)))
 
-(defun my/elpaca-after-init ()
-  "Run after Elpaca has finished processing init queues.
+(defun my/after-init ()
+  "Run after init.el has finished loading.
 Add additional one-shot startup work here as needed."
   (unless (or (eq my/default-theme 'default)
               (memq my/default-theme custom-enabled-themes))

@@ -1,10 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 (use-package auctex
-  :ensure (auctex
-           :build ((:before elpaca-build-link +elpaca/build-step-make)
-                   (:not elpaca-build-docs))
-           :files (:defaults "doc/*.info" "doc/dir"
-                             "etc" "images" "latex" "style"))
+  :ensure t
   :defer t
   :mode ("\\.tex\\'" . LaTeX-mode)
   :init
@@ -60,7 +56,8 @@
             (lambda ()
               (add-hook 'after-save-hook #'my/latex-rebuild-on-save nil t)))
 
-  (my/mappings-auctex))
+  (my/mappings-auctex)
+	)
 
 (provide 'auctex-config)
 ;;;end auctex-config.el
