@@ -1,8 +1,10 @@
 ;; -*- lexical-binding: t; -*-
 (use-package auctex
-  :ensure (auctex :pre-build (("make"))
-                  :files (:defaults "doc/*.info" "doc/dir"
-                                    "etc" "images" "latex" "style"))
+  :ensure (auctex
+           :build ((:before elpaca-build-link +elpaca/build-step-make)
+                   (:not elpaca-build-docs))
+           :files (:defaults "doc/*.info" "doc/dir"
+                             "etc" "images" "latex" "style"))
   :defer t
   :mode ("\\.tex\\'" . LaTeX-mode)
   :init
@@ -15,6 +17,8 @@
         TeX-output-dir "out")
   (setq-default TeX-master nil)
   :config
+  (require 'tex)
+  (require 'latex)
   ;; latexmk engine flag mirrors AUCTeX's TeX-engine (set by `%! TeX program').
   (defun my/latexmk-engine-flag ()
     (pcase TeX-engine

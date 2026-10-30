@@ -33,6 +33,8 @@ Add additional one-shot startup work here as needed."
   (unless (or (eq my/default-theme 'default)
               (memq my/default-theme custom-enabled-themes))
     (when (or (daemonp) (display-graphic-p) (display-color-p))
+      (when (string-prefix-p "doom-" (symbol-name my/default-theme))
+        (require 'doom-themes nil t))
       (load-theme my/default-theme t)))
   (my/apply-default-font))
 

@@ -25,6 +25,9 @@
      (reusable-frames . visible)
      (inhibit-same-window . t)))
   :config
+  (unless (and pdf-info-epdfinfo-program
+               (file-executable-p pdf-info-epdfinfo-program))
+    (pdf-tools-install :no-query))
   (add-to-list 'display-buffer-alist
                `(my/pdf-view-buffer-p
                  (display-buffer-reuse-window display-buffer-pop-up-frame)

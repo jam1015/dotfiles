@@ -107,6 +107,29 @@
     (elpaca--continue-build e))
 
 
+(defun +elpaca/run-make (e &rest args)
+  "Run \"make ARGS\" in E's repo dir, then `elpaca-continue' on success.
+Shared implementation for the named build-step functions below. Replaces
+the dropped `:pre-build' recipe keyword."
+  (let ((cmd (cons "make" args)))
+    (elpaca-note e (format "Running %s" (string-join cmd " ")))
+    (let ((default-directory (elpaca<-source-dir e)))
+      (elpaca--make-process e
+        :name "make"
+        :command cmd
+        :sentinel
+        (lambda (process event)
+          (let* ((e (process-get process :elpaca))
+                 (ok (equal event "finished\n")))
+            (elpaca--propertize-subprocess process)
+            (elpaca-note e (if ok "make succeeded"
+                             (concat "make failed: " (string-trim event))))
+            (unless ok (setf (elpaca<-status e) 'failed))
+            (elpaca-continue e)))))))
+
+(defun +elpaca/build-step-make (e)       "Run plain `make'."       (+elpaca/run-make e))
+(defun +elpaca/build-step-make-doc (e)   "Run `make doc'."         (+elpaca/run-make e "doc"))
+
 (defun +elpaca/audit-missing-info ()
   "List elpaca packages that ship .texi sources but have no built .info files.
 Flags packages whose manuals are missing from Info because `:pre-build' did
@@ -115,7 +138,7 @@ displays it in a buffer."
   (interactive)
   (let (missing)
     (pcase-dolist (`(,id . ,e) (elpaca--queued))
-      (let ((repo  (ignore-errors (elpaca<-repo-dir e)))
+      (let ((repo  (ignore-errors (elpaca<-source-dir e)))
             (build (ignore-errors (elpaca<-build-dir e))))
         (when (and repo (file-directory-p repo))
           (let ((has-texi (directory-files-recursively repo "\\.texi\\'" nil nil t))
