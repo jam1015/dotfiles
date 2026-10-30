@@ -77,6 +77,7 @@
 ;;; utilities
 (require 'perspective-config)
 (require 'eat-config)
+(require 'slime-eat-config)
 (require 'dirvish-config)
 (require 'gnus-config)
 (require 'erc-config)
@@ -88,5 +89,7 @@
 (require 'markdown-mode-config)
 (require 'ess-config)
 (require 'r-ts-mode-config)
+(require 'pdf-tools-config)
+(require 'auctex-config)
 
 ;;;end init.el

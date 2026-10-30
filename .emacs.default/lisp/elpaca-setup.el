@@ -107,6 +107,34 @@
     (elpaca--continue-build e))
 
 
+(defun +elpaca/audit-missing-info ()
+  "List elpaca packages that ship .texi sources but have no built .info files.
+Flags packages whose manuals are missing from Info because `:pre-build' did
+not run or produced no output. Returns the list of package names and
+displays it in a buffer."
+  (interactive)
+  (let (missing)
+    (pcase-dolist (`(,id . ,e) (elpaca--queued))
+      (let ((repo  (ignore-errors (elpaca<-repo-dir e)))
+            (build (ignore-errors (elpaca<-build-dir e))))
+        (when (and repo (file-directory-p repo))
+          (let ((has-texi (directory-files-recursively repo "\\.texi\\'" nil nil t))
+                (has-info (and build (file-directory-p build)
+                               (directory-files-recursively build "\\.info\\'" nil nil t))))
+            (when (and has-texi (not has-info))
+              (push (symbol-name id) missing))))))
+    (setq missing (sort (delete-dups missing) #'string<))
+    (with-current-buffer (get-buffer-create "*elpaca-missing-info*")
+      (erase-buffer)
+      (if missing
+          (progn
+            (insert (format "%d package(s) ship .texi but have no built .info:\n\n"
+                            (length missing)))
+            (dolist (p missing) (insert "  " p "\n")))
+        (insert "All elpaca packages with .texi sources have built .info files.\n"))
+      (display-buffer (current-buffer)))
+    missing))
+
 (message "Finished setting up elpaca")
 (provide 'elpaca-setup)
 ;;;end elpaca-setup.el

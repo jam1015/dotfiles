@@ -632,6 +632,14 @@ return
     "andymass/vim-matchup",
     --event = "VeryLazy", event = { "VeryLazy" },
     event = "BufReadPost", -- *CLAUDE CHANGE* defer until a file is loaded (was ~4.8ms at startup)
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "html", "xml", "svg", "htmldjango" },
+        callback = function(args)
+          vim.b[args.buf].matchup_matchparen_enabled = 0
+        end,
+      })
+    end,
   },
   {
     "numToStr/Comment.nvim",

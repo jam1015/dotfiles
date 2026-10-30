@@ -42,7 +42,6 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("~/.config/hypr/scripts/monitor_setup.sh")
   hl.exec_cmd("dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XAUTHORITY")
   hl.exec_cmd("sh -c 'killall fcitx5; fcitx5 -d'")
-  hl.exec_cmd("hyprpaper")
   hl.exec_cmd("swaync")
   hl.exec_cmd("sh -c 'sleep 2 && swaync-client --dnd-on'")
   hl.exec_cmd(

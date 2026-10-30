@@ -16,6 +16,15 @@ vim.g.vimtex_compiler_latexmk = {
 vim.g.vimtex_compiler_method = 'latexmk'
 vim.g.vimtex_compiler_bib = 'biber'
 
+vim.g.vimtex_syntax_enabled = 1
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "tex", "plaintex", "context" },
+  callback = function()
+    vim.treesitter.stop()
+  end,
+})
+
 
 local latex_textobjects = vim.api.nvim_create_augroup("LatexTextObjects", { clear = true })
 

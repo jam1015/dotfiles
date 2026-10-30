@@ -57,6 +57,10 @@
 ;; more common: redirect to a real but ignored file
 (setq custom-file (expand-file-name "custom-dump.el" user-emacs-directory))
 
+  ;; Ensure Info-directory-list is populated from INFOPATH so manuals
+  ;; installed via ELPA/elpaca (e.g. AUCTeX) are discoverable in `C-h i'.
+  (with-eval-after-load 'info
+    (info-initialize))
   )
 
 

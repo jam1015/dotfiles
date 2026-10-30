@@ -109,7 +109,8 @@ vim.o.foldlevelstart = 99  -- open files fully unfolded
 api.nvim_create_autocmd("FileType", {
   group = api.nvim_create_augroup("ts_folding", { clear = true }),
   callback = function(args)
-    if vim.treesitter.get_parser(args.buf, nil, { error = false }) then
+    local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+    if lang and pcall(vim.treesitter.language.add, lang) then
       vim.api.nvim_set_option_value("foldmethod", "expr", { win = 0 })
       vim.api.nvim_set_option_value("foldexpr", "v:lua.vim.treesitter.foldexpr()", { win = 0 })
     end

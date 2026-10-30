@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 (use-package ess
+  :ensure (ess :pre-build (("make" "doc"))
+               :files (:defaults "doc/info/*.info" "doc/info/dir"
+                                 "etc" "lisp" "obsolete"))
   :defer t
   :commands (R R-mode ess-mode)
   :init

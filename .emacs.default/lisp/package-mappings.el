@@ -297,5 +297,40 @@
       "]t" #'xref-find-definitions)))
 
 
+;;; ============================================================
+;;; SLIME-EAT
+;;; ============================================================
+
+(defun my/mappings-slime-eat ()
+  ;; `gz' is an evil operator; evil handles `gzz' as "operator on current
+  ;; line" automatically (same convention as dd/yy/cc), so no separate binding.
+  (evil-define-key '(normal visual) slime-eat-mode-map
+    "gz" #'slime-eat-send-op))
+
+
+;;; ============================================================
+;;; AUCTEX
+;;; ============================================================
+
+(defun my/mappings-auctex ()
+  ;; Mirrors vimtex's LatexTextObjects: ad/id = whole buffer in tex/bib.
+  (with-eval-after-load 'evil-textobj-entire
+    (add-hook 'LaTeX-mode-hook
+              (lambda ()
+                (evil-define-key '(visual operator) 'local
+                  (kbd "ad") #'evil-entire-entire-buffer
+                  (kbd "id") #'evil-entire-entire-buffer)))
+    (add-hook 'bibtex-mode-hook
+              (lambda ()
+                (evil-define-key '(visual operator) 'local
+                  (kbd "ad") #'evil-entire-entire-buffer
+                  (kbd "id") #'evil-entire-entire-buffer))))
+  (with-eval-after-load 'evil-leader
+    (evil-leader/set-key
+      "mc" #'my/latex-latexmk
+      "mv" #'TeX-view
+      "mk" #'TeX-kill-job)))
+
+
 (provide 'package-mappings)
 ;;; end package-mappings.el
