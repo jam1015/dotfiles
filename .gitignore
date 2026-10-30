@@ -268,3 +268,4 @@ cscope.out.files
 .authinfo.gpg
 
 .emacs.default/ielm-history.eld
+*.eld
