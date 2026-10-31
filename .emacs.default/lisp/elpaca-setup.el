@@ -99,10 +99,10 @@
 
   (defun +elpaca/build-if-new (e)
     (setf (elpaca<-build-steps e)
-          (if-let ((default-directory (elpaca<-build-dir e))
-                   (main (ignore-errors (elpaca--main-file e)))
-                   (compiled (expand-file-name (concat (file-name-base main) ".elc")))
-                   ((file-newer-than-file-p main compiled)))
+          (if-let* ((default-directory (elpaca<-build-dir e))
+                    (main (ignore-errors (elpaca--main-file e)))
+                    (compiled (expand-file-name (concat (file-name-base main) ".elc")))
+                    ((file-newer-than-file-p main compiled)))
               (progn (elpaca--signal e "Rebuilding due to source changes")
                      (cl-set-difference elpaca-build-steps
                                         '(elpaca--clone elpaca--configure-remotes elpaca--checkout-ref)))
