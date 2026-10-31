@@ -82,11 +82,15 @@
 ;;     This handles MELPA packages, NonGNU-ELPA packages, and any
 ;;     straggler not covered by (2).
 ;;
-;; (4) `elpaca--directory-files-recursively' is overridden to follow
-;;     symlinks, so autoload generation can see into subdirectories
-;;     (e.g. `lisp/') that build-link symlinked as a whole.  Without
-;;     this, packages with a NonGNU-ELPA-style :files ("*" ...)
-;;     recipe fail autoload generation with "No elisp files".
+;; (4) Fix autoload generation for packages whose source keeps elisp
+;;     under `lisp/'.  elpaca-build-link symlinks `lisp/' as a whole
+;;     when :files is ("*" ...) (the NonGNU-ELPA default), but
+;;     `elpaca--directory-files-recursively' refuses to follow
+;;     symlinks -- so autoload gen fails with "No elisp files".
+;;     Two-part fix: (a) override the recursor to follow symlinks,
+;;     and (b) replace `elpaca-build-autoloads' (which runs in an
+;;     `emacs -Q' subprocess that bypasses init-file advice) with an
+;;     in-process version that uses our advised recursor.
 
 (setq elpaca-menu-functions
       '( elpaca-menu-lock-file elpaca-menu-extensions elpaca-menu-org
@@ -144,15 +148,18 @@ when any .info was produced so a dir entry gets generated."
                     step))
                 elpaca-default-build-steps)))
 
-;; (4) elpaca's `elpaca--directory-files-recursively' refuses to
-;;     follow symlinks.  elpaca-build-link links whole subdirectories
-;;     (e.g. `lisp/') as single symlinks when a recipe uses :files
-;;     ("*" ...) -- the NonGNU-ELPA default for most packages.  The
-;;     autoload step then can't see inside, failing with "No elisp
-;;     files in <build-dir>".  Override to recurse through symlinks.
-;;     Safe because the function filters `.'-prefixed entries (so
-;;     .git is skipped) and build-dir symlinks are one-way into
-;;     sources/, so no cycle is possible.
+;; Fix autoload generation for packages whose source keeps elisp
+;; under `lisp/'.  elpaca-build-link symlinks `lisp/' as a whole when
+;; :files is ("*" ...) (the NonGNU-ELPA default), but
+;; `elpaca--directory-files-recursively' refuses to follow symlinks
+;; -- so autoload gen fails with "No elisp files".  Two-part fix:
+;;   (a) override the recursor to follow symlinks, and
+;;   (b) replace `elpaca-build-autoloads' (which runs in an `emacs -Q'
+;;       subprocess that bypasses init-file advice) with an
+;;       in-process version that uses our advised recursor.
+;; Safe because the recursor filters `.'-prefixed entries (so .git is
+;; skipped) and build-dir symlinks are one-way into sources/, so no
+;; cycle is possible.
 (defun +elpaca/directory-files-recursively-follow (directory regexp)
   "Like `elpaca--directory-files-recursively', but follow symlinks."
   (let ((default-directory (expand-file-name directory)))
@@ -167,6 +174,35 @@ when any .info was produced so a dir entry gets generated."
 (with-eval-after-load 'elpaca
   (advice-add 'elpaca--directory-files-recursively :override
               #'+elpaca/directory-files-recursively-follow))
+
+(defun +elpaca/build-autoloads-local (e)
+  "Replacement for `elpaca-build-autoloads' that runs in-process.
+Needed so our advice on `elpaca--directory-files-recursively'
+(which follows symlinks) applies -- the stock version spawns an
+`emacs -Q' subprocess that never sees init-file advice."
+  (if-let* ((recipe (elpaca<-recipe e))
+            (autoloads (let ((member (plist-member recipe :autoloads)))
+                         (if member (cadr member) t)))
+            (build-dir (elpaca<-build-dir e)))
+      (progn
+        (elpaca-note e (concat "Generating autoloads: " build-dir))
+        (let ((generated-autoload-file (and (stringp autoloads) autoloads)))
+          (condition-case err
+              (progn (elpaca-generate-autoloads (elpaca<-package e) build-dir)
+                     (elpaca-continue e))
+            (error
+             (elpaca-note e (format "Autoload generation failed: %S" err))
+             (setf (elpaca<-status e) 'failed)
+             (elpaca-continue e)))))
+    (elpaca-continue e)))
+
+(with-eval-after-load 'elpaca
+  (setq elpaca-default-build-steps
+        (mapcar (lambda (step)
+                  (if (eq step 'elpaca-build-autoloads)
+                      '+elpaca/build-autoloads-local
+                    step))
+                elpaca-default-build-steps)))
 
 ;;;; ============================================================
 ;;;; 4. Custom build steps
