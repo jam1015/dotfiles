@@ -5,7 +5,8 @@
   (add-to-list 'load-path default-directory)
   (normal-top-level-add-subdirs-to-load-path))
 
-(require 'package-setup)
+;; remember elpaca-after-init-hook  and :ensure (:build (+elpaca/build-if-new))
+(require 'elpaca-setup)
 (require 'emacs-config)
 (require 'package-mappings)
 (require 'eshell-config)
@@ -25,6 +26,7 @@
 (require 'god-mode-config)
 (require 'evil-textobj-entire-config)
 (require 'evil-leader-config)
+(require 'evil-search-highlight-persist-config)
 (require 'evil-surround-config)
 (require 'evil-overrides)
 
@@ -68,6 +70,7 @@
 (require 'anisochromatic-theme-config)
 (require 'solarized-theme-config)
 (require 'doom-themes-config)
+(require 'forget-me-not-config)
 (require 'all-the-icons-config)
 
 

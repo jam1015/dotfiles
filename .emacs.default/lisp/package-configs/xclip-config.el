@@ -1,8 +1,11 @@
 ;;; -*- lexical-binding: t; -*-
 (use-package xclip
-  :vc (:url "https://github.com/jam1015/xclip"
-       :branch "master"
-       :rev :newest)
+
+    :ensure (:host github
+                 :repo "jam1015/xclip"
+           :build (:sub elpaca--clone +elpaca/build-if-new)
+                  :branch "master")
+
   :config
   (xclip-mode 1))
 

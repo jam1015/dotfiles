@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 (use-package r-ts-mode
-  :vc (:url "https://github.com/nverno/r-ts-mode"
-       :rev :newest)
+  :ensure (:host github :repo "nverno/r-ts-mode")
   :mode (("\\.R\\'" . r-ts-mode)
          ("\\.r\\'" . r-ts-mode)))
 

@@ -1,5 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
 (use-package evil-collection
+  :ensure (:host github
+           :repo "jam1015/evil-collection"
+           :branch "sync_dev"
+           :build (:sub elpaca--clone +elpaca/build-if-new)
+           )
   :after evil which-key
   :custom
   (evil-collection-repl-submit-state 'insert)
