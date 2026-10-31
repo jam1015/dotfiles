@@ -59,60 +59,37 @@
 (setq use-package-always-ensure t)
 
 ;;;; ============================================================
-;;;; 3. Recipe fixes (info pages, source layout)
+;;;; 3. GNU-ELPA mirror redirect (for prebuilt .info)
 ;;;; ============================================================
-;; One hook that resolves every problem we've hit:
+;; GNU-ELPA packages like auctex and ess need their `make elpa'
+;; target run to generate .info files and the version.texi that
+;; auctex.texi @includes.  Rather than re-run that build locally,
+;; redirect :repo to github.com/emacs-straight/<pkg> -- a plain git
+;; mirror whose contents are the released ELPA tarball applied as
+;; commits.  That ships the prebuilt .info files and any generated
+;; .el, so no build dance is needed.  Same trick straight.el uses by
+;; default.
 ;;
-;; GNU-ELPA packages (auctex, ess, ...) -- redirect :repo to the
-;; matching github.com/emacs-straight/<pkg> mirror.  Those mirrors
-;; are the released ELPA tarball applied as git commits, so they
-;; ship with .info files already built, generated .el already
-;; produced, and a flat top-level layout.  Everything "just works"
-;; downstream: no makeinfo, no @include-fragment confusion, no
-;; symlinked subdirs tripping autoload generation.
-;;
-;; NonGNU-ELPA packages (eat, pdf-tools, ...) -- NonGNU-ELPA's
-;; default :files directive is ("*" (:exclude ...)), which tells
-;; elpaca "link every top-level entry."  For packages whose elisp
-;; lives under `lisp/', this symlinks the whole subdir and breaks
-;; autoload generation; it also drags along license .texi fragments
-;; (fdl.texi, gpl.texi) that aren't standalone manuals but still get
-;; fed to makeinfo, triggering elpaca #241 (the -o batching bug).
-;; Rewriting :files to a MELPA-style flat directive fixes both: elisp
-;; from lisp/ gets flattened to the build dir top level, and the
-;; license fragments are excluded.
+;; Menu order: GNU-ELPA first so this hook fires for anything in it;
+;; MELPA before NonGNU-ELPA because MELPA carries curated :files
+;; directives (e.g. "modes/*/*.el" for evil-collection,
+;; "lisp/*.el" + "server/epdfinfo" for pdf-tools) while NonGNU-ELPA
+;; uses a flat ("*" ...) that doesn't flatten subdirs.
 
 (setq elpaca-menu-functions
       '( elpaca-menu-lock-file elpaca-menu-extensions elpaca-menu-org
-         elpaca-menu-gnu-elpa elpaca-menu-nongnu-elpa elpaca-menu-melpa
+         elpaca-menu-gnu-elpa elpaca-menu-melpa elpaca-menu-nongnu-elpa
          elpaca-menu-declarations))
 
-(defun +elpaca/fix-recipe (recipe)
-  "Hook for `elpaca-recipe-functions'.  See section 3 commentary."
-  (pcase (plist-get recipe :source)
-    ("GNU ELPA"
-     (let ((pkg (plist-get recipe :package)))
-       (list :repo (cons (format "https://github.com/emacs-straight/%s.git" pkg) pkg)
-             :host nil
-             :branch nil)))
-    ("NonGNU ELPA"
-     (let ((f (plist-get recipe :files)))
-       (when (and (consp f) (equal (car f) "*"))
-         (list :files
-               '("*.el" "*.el.in" "dir" "*.info" "*.texi" "*.texinfo"
-                 "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
-                 "lisp/*.el"
-                 "docs/dir" "docs/*.info" "docs/*.texi" "docs/*.texinfo"
-                 (:exclude ".dir-locals.el" "test.el" "tests.el"
-                           "*-test.el" "*-tests.el" "LICENSE"
-                           "README*" "*-pkg.el"
-                           ;; @include-only license fragments that
-                           ;; break makeinfo -o batching (elpaca #241)
-                           "fdl.texi" "gpl.texi" "license.texi"
-                           "doc/fdl.texi" "doc/gpl.texi"
-                           "doc/license.texi"))))))))
+(defun +elpaca/use-emacs-straight-mirror (recipe)
+  "Hook for `elpaca-recipe-functions'."
+  (when (equal (plist-get recipe :source) "GNU ELPA")
+    (let ((pkg (plist-get recipe :package)))
+      (list :repo (cons (format "https://github.com/emacs-straight/%s.git" pkg) pkg)
+            :host nil
+            :branch nil))))
 
-(add-hook 'elpaca-recipe-functions #'+elpaca/fix-recipe)
+(add-hook 'elpaca-recipe-functions #'+elpaca/use-emacs-straight-mirror)
 
 ;;;; ============================================================
 ;;;; 4. Custom build steps
