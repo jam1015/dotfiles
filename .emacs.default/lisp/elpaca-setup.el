@@ -91,6 +91,47 @@
 
 (add-hook 'elpaca-recipe-functions #'+elpaca/use-emacs-straight-mirror)
 
+;; elpaca-build-link symlinks whole subdirectories into the build dir
+;; (e.g. `modes/' from evil-collection, `lisp/' from pdf-tools).
+;; elpaca's autoload generator runs in an `emacs -Q' subprocess that
+;; uses `elpaca--directory-files-recursively', which refuses to follow
+;; symlinks -- so the resulting autoloads file misses everything in
+;; those subdirs.  Replace the step with one that injects a
+;; symlink-following recursor into the subprocess.
+(defun +elpaca/build-autoloads-with-follow (e)
+  "Replacement for `elpaca-build-autoloads' that follows symlinks."
+  (if-let* ((recipe (elpaca<-recipe e))
+            (autoloads (let ((member (plist-member recipe :autoloads)))
+                         (if member (cadr member) t)))
+            (default-directory (elpaca<-build-dir e))
+            (elpaca (expand-file-name "elpaca/" elpaca-sources-directory)))
+      (progn
+        (elpaca-note e (concat "Generating autoloads: " default-directory))
+        (elpaca-with-emacs e
+          (:name "autoloads" :args ("-L" elpaca "-l" (expand-file-name "elpaca.el" elpaca)))
+          (defun +elpaca/dfr-follow (directory regexp)
+            (let ((default-directory (expand-file-name directory)))
+              (flatten-tree
+               (cl-loop for file in (directory-files ".")
+                        unless (string-match-p "\\(?:\\`\\.\\)" file)
+                        collect (if (file-directory-p file)
+                                    (+elpaca/dfr-follow file regexp)
+                                  (when (string-match-p regexp file)
+                                    (expand-file-name file)))))))
+          (advice-add 'elpaca--directory-files-recursively :override
+                      #'+elpaca/dfr-follow)
+          ,@(when (stringp autoloads) `((setq generated-autoload-file ,autoloads)))
+          (elpaca-generate-autoloads ,(elpaca<-package e) ,default-directory)))
+    (elpaca-continue e)))
+
+(with-eval-after-load 'elpaca
+  (setq elpaca-default-build-steps
+        (mapcar (lambda (step)
+                  (if (eq step 'elpaca-build-autoloads)
+                      '+elpaca/build-autoloads-with-follow
+                    step))
+                elpaca-default-build-steps)))
+
 ;;;; ============================================================
 ;;;; 4. Custom build steps
 ;;;; ============================================================
@@ -166,19 +207,25 @@ too lossy or already truncated."
 
 (defun +elpaca/audit-missing-info ()
   "List elpaca packages that ship .texi sources but have no built .info files.
-Flags packages whose manuals are missing from Info because `:pre-build' did
-not run or produced no output. Returns the list of package names and
-displays it in a buffer."
+Flags packages whose manuals are missing from Info."
   (interactive)
   (let (missing)
     (pcase-dolist (`(,id . ,e) (elpaca--queued))
       (let ((repo  (ignore-errors (elpaca<-source-dir e)))
             (build (ignore-errors (elpaca<-build-dir e))))
         (when (and repo (file-directory-p repo))
-          (let ((has-texi (directory-files-recursively repo "\\.texi\\'" nil nil t))
-                (has-info (and build (file-directory-p build)
-                               (directory-files-recursively build "\\.info\\'" nil nil t))))
-            (when (and has-texi (not has-info))
+          (let* ((all-texi (directory-files-recursively repo "\\.texi\\'" nil nil t))
+                 ;; Skip test fixtures and sibling-package sources.
+                 (doc-texi (cl-remove-if
+                            (lambda (f)
+                              (string-match-p
+                               "/\\(tests?\\|resources?\\|fixtures?\\|examples?\\)/"
+                               f))
+                            all-texi))
+                 (has-info (and build (file-directory-p build)
+                                (directory-files-recursively
+                                 build "\\.info\\'" nil nil t))))
+            (when (and doc-texi (not has-info))
               (push (symbol-name id) missing))))))
     (setq missing (sort (delete-dups missing) #'string<))
     (with-current-buffer (get-buffer-create "*elpaca-missing-info*")
