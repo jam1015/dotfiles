@@ -161,6 +161,32 @@ the dropped `:pre-build' recipe keyword."
 ;;;; 5. Diagnostics
 ;;;; ============================================================
 
+(defcustom +elpaca/log-file "/tmp/elpaca.log"
+  "Where `+elpaca/dump-logs' writes." :type 'file)
+
+(defun +elpaca/dump-logs ()
+  "Dump every queued elpaca's status and build log to `+elpaca/log-file'.
+Share that file to diagnose first-run failures when the UI log is
+too lossy or already truncated."
+  (interactive)
+  (with-temp-buffer
+    (insert (format ";; Elpaca log dump %s\n;; emacs %s\n\n"
+                    (format-time-string "%F %T") emacs-version))
+    (pcase-dolist (`(,id . ,e) (elpaca--queued))
+      (insert (format "=== %s === status=%s\n" id (elpaca<-status e)))
+      (insert (format "    recipe: %S\n" (elpaca<-recipe e)))
+      ;; Pull this package's events out of the global log.
+      (dolist (ev (nreverse (elpaca-event-log id)))
+        (let ((payload (elpaca-event<-payload ev)))
+          (insert (format "    [%s] %s %s\n"
+                          (format-time-string "%T" (elpaca-event<-time ev))
+                          (or (plist-get payload :status)
+                              (elpaca-event<-type ev))
+                          (or (plist-get payload :info) "")))))
+      (insert "\n"))
+    (write-region (point-min) (point-max) +elpaca/log-file))
+  (message "Elpaca log → %s" +elpaca/log-file))
+
 (defun +elpaca/audit-missing-info ()
   "List elpaca packages that ship .texi sources but have no built .info files.
 Flags packages whose manuals are missing from Info because `:pre-build' did
