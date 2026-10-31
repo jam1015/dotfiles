@@ -59,162 +59,60 @@
 (setq use-package-always-ensure t)
 
 ;;;; ============================================================
-;;;; 3. Info-pages fix
+;;;; 3. Recipe fixes (info pages, source layout)
 ;;;; ============================================================
-;; Make info pages work out of the box the way straight.el does.
+;; One hook that resolves every problem we've hit:
 ;;
-;; (1) Resolve recipes via GNU/NonGNU ELPA before MELPA.  For packages
-;;     available from both, this picks up the ELPA metadata (:tar <ver>,
-;;     :source "GNU ELPA").
+;; GNU-ELPA packages (auctex, ess, ...) -- redirect :repo to the
+;; matching github.com/emacs-straight/<pkg> mirror.  Those mirrors
+;; are the released ELPA tarball applied as git commits, so they
+;; ship with .info files already built, generated .el already
+;; produced, and a flat top-level layout.  Everything "just works"
+;; downstream: no makeinfo, no @include-fragment confusion, no
+;; symlinked subdirs tripping autoload generation.
 ;;
-;; (2) For GNU-ELPA recipes, redirect :repo to the matching
-;;     github.com/emacs-straight/<pkg> mirror -- a plain git repo whose
-;;     contents are the released ELPA tarball applied as commits.  Those
-;;     tarballs ship built .info files and the generated .el that only
-;;     the package's Makefile would otherwise produce (notably auctex).
-;;     Still :type git, no tarballs.
-;;
-;; (3) `+elpaca/build-info-robust' replaces elpaca's own info build
-;;     step for anything that reaches it with raw .texi.  Fixes:
-;;      - the makeinfo -o batching behavior (elpaca #241),
-;;      - .texi only present under doc/,
-;;      - @include-fragment .texi being fed as standalone manuals.
-;;     This handles MELPA packages, NonGNU-ELPA packages, and any
-;;     straggler not covered by (2).
-;;
-;; (4) Fix autoload generation for packages whose source keeps elisp
-;;     under `lisp/'.  elpaca-build-link symlinks `lisp/' as a whole
-;;     when :files is ("*" ...) (the NonGNU-ELPA default), but
-;;     `elpaca--directory-files-recursively' refuses to follow
-;;     symlinks -- so autoload gen fails with "No elisp files".
-;;     Fix in two parts: (a) override the recursor in-process (used
-;;     by `elpaca--main-file' and other synchronous callers), and
-;;     (b) replace `elpaca-build-autoloads' with a version that
-;;     still spawns the stock `emacs -Q' subprocess (keeping a clean
-;;     environment so `loaddefs-generate' doesn't collide with
-;;     jka-compr etc.) but injects the override into the subprocess.
+;; NonGNU-ELPA packages (eat, pdf-tools, ...) -- NonGNU-ELPA's
+;; default :files directive is ("*" (:exclude ...)), which tells
+;; elpaca "link every top-level entry."  For packages whose elisp
+;; lives under `lisp/', this symlinks the whole subdir and breaks
+;; autoload generation; it also drags along license .texi fragments
+;; (fdl.texi, gpl.texi) that aren't standalone manuals but still get
+;; fed to makeinfo, triggering elpaca #241 (the -o batching bug).
+;; Rewriting :files to a MELPA-style flat directive fixes both: elisp
+;; from lisp/ gets flattened to the build dir top level, and the
+;; license fragments are excluded.
 
 (setq elpaca-menu-functions
       '( elpaca-menu-lock-file elpaca-menu-extensions elpaca-menu-org
          elpaca-menu-gnu-elpa elpaca-menu-nongnu-elpa elpaca-menu-melpa
          elpaca-menu-declarations))
 
-(defun +elpaca/use-emacs-straight-mirror (recipe)
-  "Hook for `elpaca-recipe-functions'.
-If RECIPE came from GNU ELPA, rewrite :repo to the matching
-`github.com/emacs-straight/<package>' git mirror, which carries
-built .info and generated .el.  Returns a plist merged over RECIPE."
-  (when (equal (plist-get recipe :source) "GNU ELPA")
-    (let ((pkg (plist-get recipe :package)))
-      (list :repo (cons (format "https://github.com/emacs-straight/%s.git" pkg) pkg)
-            :host nil
-            :branch nil))))
+(defun +elpaca/fix-recipe (recipe)
+  "Hook for `elpaca-recipe-functions'.  See section 3 commentary."
+  (pcase (plist-get recipe :source)
+    ("GNU ELPA"
+     (let ((pkg (plist-get recipe :package)))
+       (list :repo (cons (format "https://github.com/emacs-straight/%s.git" pkg) pkg)
+             :host nil
+             :branch nil)))
+    ("NonGNU ELPA"
+     (let ((f (plist-get recipe :files)))
+       (when (and (consp f) (equal (car f) "*"))
+         (list :files
+               '("*.el" "*.el.in" "dir" "*.info" "*.texi" "*.texinfo"
+                 "doc/dir" "doc/*.info" "doc/*.texi" "doc/*.texinfo"
+                 "lisp/*.el"
+                 "docs/dir" "docs/*.info" "docs/*.texi" "docs/*.texinfo"
+                 (:exclude ".dir-locals.el" "test.el" "tests.el"
+                           "*-test.el" "*-tests.el" "LICENSE"
+                           "README*" "*-pkg.el"
+                           ;; @include-only license fragments that
+                           ;; break makeinfo -o batching (elpaca #241)
+                           "fdl.texi" "gpl.texi" "license.texi"
+                           "doc/fdl.texi" "doc/gpl.texi"
+                           "doc/license.texi"))))))))
 
-(add-hook 'elpaca-recipe-functions #'+elpaca/use-emacs-straight-mirror)
-
-(defun +elpaca/build-info-robust (e)
-  "Replacement for `elpaca-build-docs'.
-Scans the source repo for standalone .texi/.texinfo files (those
-with @setfilename), runs makeinfo once per file from each file's
-own directory so @include resolves, writes .info into the build
-dir.  Pushes `elpaca--install-info' onto E's remaining build steps
-when any .info was produced so a dir entry gets generated."
-  (let* ((repo  (elpaca<-source-dir e))
-         (build (elpaca<-build-dir  e))
-         (built nil))
-    (when (and repo build (file-directory-p repo) (file-directory-p build))
-      (dolist (texi (directory-files-recursively repo "\\.texi\\(nfo\\)?\\'"))
-        (when-let* ((setname (with-temp-buffer
-                               (insert-file-contents texi nil 0 4096)
-                               (when (re-search-forward
-                                      "^@setfilename[ \t]+\\(\\S-+\\)" nil t)
-                                 (match-string 1))))
-                    (out (expand-file-name
-                          (file-name-nondirectory setname) build))
-                    ((not (file-exists-p out))))
-          (let ((default-directory (file-name-directory texi)))
-            (when (eq 0 (call-process "makeinfo" nil nil nil
-                                      "--no-split"
-                                      (file-name-nondirectory texi)
-                                      "-o" out))
-              (setq built t))))))
-    (when built
-      (cl-pushnew 'elpaca--install-info (elpaca<-build-steps e))))
-  (elpaca-continue e))
-
-(with-eval-after-load 'elpaca
-  (setq elpaca-default-build-steps
-        (mapcar (lambda (step)
-                  (if (eq step 'elpaca-build-docs)
-                      '+elpaca/build-info-robust
-                    step))
-                elpaca-default-build-steps)))
-
-;; Fix autoload generation for packages whose source keeps elisp
-;; under `lisp/'.  elpaca-build-link symlinks `lisp/' as a whole when
-;; :files is ("*" ...) (the NonGNU-ELPA default), but
-;; `elpaca--directory-files-recursively' refuses to follow symlinks
-;; -- so autoload gen fails with "No elisp files".  Two-part fix:
-;;   (a) override the recursor to follow symlinks, and
-;;   (b) replace `elpaca-build-autoloads' (which runs in an `emacs -Q'
-;;       subprocess that bypasses init-file advice) with an
-;;       in-process version that uses our advised recursor.
-;; Safe because the recursor filters `.'-prefixed entries (so .git is
-;; skipped) and build-dir symlinks are one-way into sources/, so no
-;; cycle is possible.
-(defun +elpaca/directory-files-recursively-follow (directory regexp)
-  "Like `elpaca--directory-files-recursively', but follow symlinks."
-  (let ((default-directory (expand-file-name directory)))
-    (flatten-tree
-     (cl-loop for file in (directory-files ".")
-              unless (string-match-p "\\(?:\\`\\.\\)" file)
-              collect (if (file-directory-p file)
-                          (+elpaca/directory-files-recursively-follow file regexp)
-                        (when (string-match-p regexp file)
-                          (expand-file-name file)))))))
-
-(with-eval-after-load 'elpaca
-  (advice-add 'elpaca--directory-files-recursively :override
-              #'+elpaca/directory-files-recursively-follow))
-
-(defun +elpaca/build-autoloads-with-follow (e)
-  "Replacement for `elpaca-build-autoloads'.
-Same subprocess strategy as the stock version (keeps a clean
-`emacs -Q' environment so `loaddefs-generate' doesn't collide
-with jka-compr etc. in the parent process), but injects the
-symlink-following override into the subprocess so autoload
-discovery can see into symlinked subdirs like `lisp/'."
-  (if-let* ((recipe (elpaca<-recipe e))
-            (autoloads (let ((member (plist-member recipe :autoloads)))
-                         (if member (cadr member) t)))
-            (default-directory (elpaca<-build-dir e))
-            (elpaca (expand-file-name "elpaca/" elpaca-sources-directory)))
-      (progn
-        (elpaca-note e (concat "Generating autoloads: " default-directory))
-        (elpaca-with-emacs e
-          (:name "autoloads" :args ("-L" elpaca "-l" (expand-file-name "elpaca.el" elpaca)))
-          (defun +elpaca/dfr-follow (directory regexp)
-            (let ((default-directory (expand-file-name directory)))
-              (flatten-tree
-               (cl-loop for file in (directory-files ".")
-                        unless (string-match-p "\\(?:\\`\\.\\)" file)
-                        collect (if (file-directory-p file)
-                                    (+elpaca/dfr-follow file regexp)
-                                  (when (string-match-p regexp file)
-                                    (expand-file-name file)))))))
-          (advice-add 'elpaca--directory-files-recursively :override
-                      #'+elpaca/dfr-follow)
-          ,@(when (stringp autoloads) `((setq generated-autoload-file ,autoloads)))
-          (elpaca-generate-autoloads ,(elpaca<-package e) ,default-directory)))
-    (elpaca-continue e)))
-
-(with-eval-after-load 'elpaca
-  (setq elpaca-default-build-steps
-        (mapcar (lambda (step)
-                  (if (eq step 'elpaca-build-autoloads)
-                      '+elpaca/build-autoloads-with-follow
-                    step))
-                elpaca-default-build-steps)))
+(add-hook 'elpaca-recipe-functions #'+elpaca/fix-recipe)
 
 ;;;; ============================================================
 ;;;; 4. Custom build steps
