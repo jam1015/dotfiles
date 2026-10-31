@@ -87,10 +87,12 @@
 ;;     when :files is ("*" ...) (the NonGNU-ELPA default), but
 ;;     `elpaca--directory-files-recursively' refuses to follow
 ;;     symlinks -- so autoload gen fails with "No elisp files".
-;;     Two-part fix: (a) override the recursor to follow symlinks,
-;;     and (b) replace `elpaca-build-autoloads' (which runs in an
-;;     `emacs -Q' subprocess that bypasses init-file advice) with an
-;;     in-process version that uses our advised recursor.
+;;     Fix in two parts: (a) override the recursor in-process (used
+;;     by `elpaca--main-file' and other synchronous callers), and
+;;     (b) replace `elpaca-build-autoloads' with a version that
+;;     still spawns the stock `emacs -Q' subprocess (keeping a clean
+;;     environment so `loaddefs-generate' doesn't collide with
+;;     jka-compr etc.) but injects the override into the subprocess.
 
 (setq elpaca-menu-functions
       '( elpaca-menu-lock-file elpaca-menu-extensions elpaca-menu-org
@@ -175,32 +177,42 @@ when any .info was produced so a dir entry gets generated."
   (advice-add 'elpaca--directory-files-recursively :override
               #'+elpaca/directory-files-recursively-follow))
 
-(defun +elpaca/build-autoloads-local (e)
-  "Replacement for `elpaca-build-autoloads' that runs in-process.
-Needed so our advice on `elpaca--directory-files-recursively'
-(which follows symlinks) applies -- the stock version spawns an
-`emacs -Q' subprocess that never sees init-file advice."
+(defun +elpaca/build-autoloads-with-follow (e)
+  "Replacement for `elpaca-build-autoloads'.
+Same subprocess strategy as the stock version (keeps a clean
+`emacs -Q' environment so `loaddefs-generate' doesn't collide
+with jka-compr etc. in the parent process), but injects the
+symlink-following override into the subprocess so autoload
+discovery can see into symlinked subdirs like `lisp/'."
   (if-let* ((recipe (elpaca<-recipe e))
             (autoloads (let ((member (plist-member recipe :autoloads)))
                          (if member (cadr member) t)))
-            (build-dir (elpaca<-build-dir e)))
+            (default-directory (elpaca<-build-dir e))
+            (elpaca (expand-file-name "elpaca/" elpaca-sources-directory)))
       (progn
-        (elpaca-note e (concat "Generating autoloads: " build-dir))
-        (let ((generated-autoload-file (and (stringp autoloads) autoloads)))
-          (condition-case err
-              (progn (elpaca-generate-autoloads (elpaca<-package e) build-dir)
-                     (elpaca-continue e))
-            (error
-             (elpaca-note e (format "Autoload generation failed: %S" err))
-             (setf (elpaca<-status e) 'failed)
-             (elpaca-continue e)))))
+        (elpaca-note e (concat "Generating autoloads: " default-directory))
+        (elpaca-with-emacs e
+          (:name "autoloads" :args ("-L" elpaca "-l" (expand-file-name "elpaca.el" elpaca)))
+          (defun +elpaca/dfr-follow (directory regexp)
+            (let ((default-directory (expand-file-name directory)))
+              (flatten-tree
+               (cl-loop for file in (directory-files ".")
+                        unless (string-match-p "\\(?:\\`\\.\\)" file)
+                        collect (if (file-directory-p file)
+                                    (+elpaca/dfr-follow file regexp)
+                                  (when (string-match-p regexp file)
+                                    (expand-file-name file)))))))
+          (advice-add 'elpaca--directory-files-recursively :override
+                      #'+elpaca/dfr-follow)
+          ,@(when (stringp autoloads) `((setq generated-autoload-file ,autoloads)))
+          (elpaca-generate-autoloads ,(elpaca<-package e) ,default-directory)))
     (elpaca-continue e)))
 
 (with-eval-after-load 'elpaca
   (setq elpaca-default-build-steps
         (mapcar (lambda (step)
                   (if (eq step 'elpaca-build-autoloads)
-                      '+elpaca/build-autoloads-local
+                      '+elpaca/build-autoloads-with-follow
                     step))
                 elpaca-default-build-steps)))
 
