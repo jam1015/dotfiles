@@ -81,15 +81,28 @@
          elpaca-menu-gnu-elpa elpaca-menu-melpa elpaca-menu-nongnu-elpa
          elpaca-menu-declarations))
 
-(defun +elpaca/use-emacs-straight-mirror (recipe)
-  "Hook for `elpaca-recipe-functions'."
-  (when (equal (plist-get recipe :source) "GNU ELPA")
-    (let ((pkg (plist-get recipe :package)))
-      (list :repo (cons (format "https://github.com/emacs-straight/%s.git" pkg) pkg)
-            :host nil
-            :branch nil))))
+(defun +elpaca/fix-recipe (recipe)
+  "Hook for `elpaca-recipe-functions'.
+GNU ELPA: redirect :repo to the emacs-straight mirror (ships
+prebuilt .info / generated .el).  NonGNU ELPA: exclude
+@include-only license .texi fragments that otherwise poison
+elpaca's batched makeinfo call (elpaca #241)."
+  (pcase (plist-get recipe :source)
+    ("GNU ELPA"
+     (let ((pkg (plist-get recipe :package)))
+       (list :repo (cons (format "https://github.com/emacs-straight/%s.git" pkg) pkg)
+             :host nil :branch nil)))
+    ("NonGNU ELPA"
+     (let ((f (plist-get recipe :files)))
+       (when (and (consp f) (equal (car f) "*")
+                  (consp (cadr f)) (eq (car (cadr f)) :exclude))
+         (list :files
+               `("*" (:exclude ,@(cdr (cadr f))
+                               "fdl.texi" "gpl.texi" "license.texi"
+                               "doc/fdl.texi" "doc/gpl.texi"
+                               "doc/license.texi"))))))))
 
-(add-hook 'elpaca-recipe-functions #'+elpaca/use-emacs-straight-mirror)
+(add-hook 'elpaca-recipe-functions #'+elpaca/fix-recipe)
 
 ;; elpaca-build-link symlinks whole subdirectories into the build dir
 ;; (e.g. `modes/' from evil-collection, `lisp/' from pdf-tools).
