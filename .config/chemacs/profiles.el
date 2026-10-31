@@ -18,8 +18,7 @@
             (env . (("DOOMDIR" . "~/.doom.d")))
             )
   )
-
-
+ ("elpaca" . ((user-emacs-directory . "~/.emacs.elpaca")))
  ("default" . ((user-emacs-directory . "~/.emacs.default")))
  ("vanilla" . ((user-emacs-directory . "~/.emacs.vanilla")))
  ("evil" . ((user-emacs-directory . "~/.emacs.evil")))
