@@ -56,7 +56,8 @@
             (lambda ()
               (add-hook 'after-save-hook #'my/latex-rebuild-on-save nil t)))
 
-  (my/mappings-auctex))
+  (my/mappings-auctex)
+	)
 
 (provide 'auctex-config)
 ;;;end auctex-config.el

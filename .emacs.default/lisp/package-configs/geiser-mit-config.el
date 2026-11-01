@@ -1,21 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
-;; Override the codeberg-hosted menu recipe for the geiser transitive dep.
-;; To revert, comment out this whole use-package form.
 (use-package geiser
-  :ensure
-  (geiser
-   :host gitlab :repo "emacs-geiser/geiser"
-   :files ("elisp/*.el" "doc/dir" "doc/geiser.texi")))
+  :ensure t)
 
 (use-package geiser-mit
-  ;; To revert to the codeberg MELPA recipe, comment the :ensure (...) lines
-  ;; below and uncomment `:ensure t'.
-  ;; :ensure t
-  :ensure
-  (geiser-mit
-   :host gitlab :repo "emacs-geiser/mit"
-   :files (:defaults "src" "src/*"))
-  :after ( corfu evil)
+  :ensure t
+  :after (corfu evil)
   :config
   (dolist (hook '(geiser-repl-mode-hook
                   geiser-mode-hook    ; for Scheme source buffers

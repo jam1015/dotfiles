@@ -1,10 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 (use-package evil-god-toggle
-  :ensure (:host github
-           :repo "jam1015/evil-god-toggle"
-           :branch "main"
-           :build (:sub elpaca--clone +elpaca/build-if-new)
-           )
+  :vc (:url "https://github.com/jam1015/evil-god-toggle"
+       :branch "main"
+       :rev :newest)
   :after (evil god-mode cursor-contraster which-key)
   :init
   

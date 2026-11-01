@@ -9,7 +9,7 @@
   :hook ((emacs-startup               . my/startup-open-eshell)
          (emacs-startup               . my/startup-reinit-evil-messages)
          (server-after-make-frame     . my/startup-open-eshell)
-         (elpaca-after-init           . my/elpaca-after-init)
+         (after-init                  . my/after-init)
          (window-buffer-change-functions . my/kill-scratch-when-other-buffers)
          (after-change-major-mode-hook   . my/repl-unify-return-bindings))
   :bind ([remap list-buffers] . ibuffer)

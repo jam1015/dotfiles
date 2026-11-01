@@ -5,8 +5,7 @@
   (add-to-list 'load-path default-directory)
   (normal-top-level-add-subdirs-to-load-path))
 
-;; remember elpaca-after-init-hook  and :ensure (:build (+elpaca/build-if-new))
-(require 'elpaca-setup)
+(require 'package-setup)
 (require 'emacs-config)
 (require 'package-mappings)
 (require 'eshell-config)

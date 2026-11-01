@@ -19,7 +19,6 @@
             )
   )
  ("elpaca" . ((user-emacs-directory . "~/.emacs.elpaca")))
- ("straight" . ((user-emacs-directory . "~/.emacs.straight")))
  ("default" . ((user-emacs-directory . "~/.emacs.default")))
  ("vanilla" . ((user-emacs-directory . "~/.emacs.vanilla")))
  ("evil" . ((user-emacs-directory . "~/.emacs.evil")))
