@@ -20,6 +20,7 @@
   )
  ("elpaca" . ((user-emacs-directory . "~/.emacs.elpaca")))
  ("elpaca-fixed" . ((user-emacs-directory . "~/.emacs.elpaca-fixed")))
+ ("straight" . ((user-emacs-directory . "~/.emacs.straight")))
  ("default" . ((user-emacs-directory . "~/.emacs.default")))
  ("vanilla" . ((user-emacs-directory . "~/.emacs.vanilla")))
  ("evil" . ((user-emacs-directory . "~/.emacs.evil")))

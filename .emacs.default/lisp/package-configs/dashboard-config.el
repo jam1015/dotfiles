@@ -6,8 +6,8 @@
   (require 'cl-lib)
   :config
 
-  (add-hook 'after-init-hook #'dashboard-insert-startupify-lists)
-  (add-hook 'after-init-hook #'dashboard-initialize)
+  (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
+  (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
   (dashboard-setup-startup-hook))
 
 (provide 'dashboard-config)
