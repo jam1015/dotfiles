@@ -56,9 +56,9 @@
 				 :repo "jam1015/elpaca-build-augment"
 				 :wait t)
 	(elpaca-build-augment-enable)
-	(require 'elpaca-build-augment-test)
-	;;(setq elpaca-build-augment-test-watch '(auctex ess eat))
-	(elpaca-build-augment-test-enable)
+	(require 'elpaca-build-augment-audit)
+	;;(setq elpaca-build-augment-audit-watch '(auctex ess eat))
+	(elpaca-build-augment-audit-enable)
 	)
 
 
