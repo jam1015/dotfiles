@@ -1,0 +1,118 @@
+;;; -*- lexical-binding: t; -*-
+(use-package corfu
+  :ensure t
+  :init
+  (global-corfu-mode)
+
+  :custom
+  (corfu-count 25)
+  (corfu-cycle t)                      ;; wrap at ends
+  (corfu-auto t)                       ;; popup as you type
+  (corfu-auto-delay 0.1)
+  (corfu-auto-prefix 1)                ;; start completing after 1 char
+  (corfu-preselect 'prompt)
+  (corfu-quit-at-boundary 'separator)  ;; stay open on "/" boundary
+  (corfu-quit-no-match 'separator)     ;; stay open even when no match
+
+  :config
+  (corfu-history-mode)
+  (corfu-popupinfo-mode)
+;; Silence Corfu's continue-predicate when evil-ex sees a partial/unknown command
+(with-eval-after-load 'evil
+  (advice-add 'evil-ex-completion-at-point :around
+    (lambda (orig &rest args)
+      (condition-case nil
+          (apply orig args)
+        (user-error nil)))))
+ (defun my/evil-ex-corfu-send-and-execute ()
+    "In Evil ex minibuffer, accept Corfu completion and execute."
+    (interactive)
+    (if (and (minibufferp)
+             (string-match-p "^:" (or (minibuffer-prompt) "")))
+        (progn
+          (when (>= corfu--index 0)
+            (corfu-insert))
+          (exit-minibuffer))
+      (corfu-send)))
+
+
+;; ─── Debug Corfu popup ─────────────────────────────────────────────────
+;;(advice-add 'corfu--show :before (lambda (&rest _) (message "⟫ Corfu popup SHOW")))
+;;(advice-add 'corfu--hide :before (lambda (&rest _) (message "⟪ Corfu popup HIDE")))
+
+(defun my/eshell-corfu-return ()
+  "In Eshell, if Corfu popup is visible insert completion, then send input.
+When a visual command is running under `eat-eshell-mode', forward RET to
+the terminal via `eat-self-input' instead of submitting eshell input."
+  (interactive)
+  (cond
+   ((or (bound-and-true-p eat--eshell-semi-char-mode)
+        (bound-and-true-p eat--eshell-char-mode))
+    (call-interactively #'eat-self-input))
+   ((and (bound-and-true-p corfu-mode)
+         (fboundp 'corfu--popup-visible-p)
+         (corfu--popup-visible-p))
+    (corfu-insert)
+    (eshell-send-input))
+   (t
+    (eshell-send-input))))
+
+;; ─── Helper to inspect what RET is bound to ──────────────────────────────────
+
+;;(defun my/debug-ret-key ()
+;;  (interactive)
+;;  (message "DEBUG: RET maps to %S"
+;;           (key-binding (kbd "RET"))))
+;;
+;;;; Bind C-c RET in corfu-popup and in all minibuffers
+;;(define-key corfu-map  (kbd "C-c RET") #'my/debug-ret-key)
+;;(add-hook 'minibuffer-setup-hook
+;;          (lambda () (local-set-key (kbd "C-c RET") #'my/debug-ret-key)))
+
+
+(defgroup my/corfu-strip nil
+  "Strip trailing slash from real-directory completions in Corfu."
+  :group 'corfu)
+
+(defun my/corfu--strip-slash (s)
+  "If S ends in “/” and is a real directory, drop the slash."
+  (if (and (stringp s)
+           (string-suffix-p "/" s)
+           (file-directory-p s))
+      (directory-file-name s)
+    s))
+
+(defun my/corfu--replace-advice (orig beg end str)
+  "Advice around `corfu--replace' to drop trailing “/” on directories."
+  (funcall orig beg end (my/corfu--strip-slash str)))
+
+(defun my/corfu--preview-advice (&rest _)
+  "Advice after `corfu--preview-current' to drop trailing “/” in the inline preview."
+  (when (overlayp corfu--preview-ov)
+    (let* ((ov   corfu--preview-ov)
+           (disp (overlay-get ov 'display))
+           (clean (and (stringp disp) (my/corfu--strip-slash disp))))
+      (when clean
+        (overlay-put ov 'display clean)))))
+
+;;;###autoload
+(define-minor-mode my/corfu-dir-strip-mode
+  "Toggle stripping trailing slash for directory candidates in Corfu."
+  :global t
+  :group 'my/corfu-strip
+  (if my/corfu-dir-strip-mode
+      (progn
+        ;; enable
+        (advice-add 'corfu--replace         :around #'my/corfu--replace-advice)
+        (advice-add 'corfu--preview-current :after  #'my/corfu--preview-advice))
+    (progn
+      ;; disable
+      (advice-remove 'corfu--replace         #'my/corfu--replace-advice)
+      (advice-remove 'corfu--preview-current #'my/corfu--preview-advice))))
+;; Turn it on by default:
+(my/corfu-dir-strip-mode 1)
+(my/mappings-corfu)
+)
+
+(provide 'corfu-config)
+;;;end corfu-config.el

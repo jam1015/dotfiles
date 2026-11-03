@@ -1,0 +1,10 @@
+;;; -*- lexical-binding: t; -*-
+(use-package evil-leader
+  :after evil
+  :config
+  (global-evil-leader-mode)
+  (my/mappings-evil-leader))
+
+(provide 'evil-leader-config)
+
+;;;end evil-leader-config.el

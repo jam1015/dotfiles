@@ -1,0 +1,9 @@
+;;; -*- lexical-binding: t; -*-
+(use-package orderless
+  ;;:ensure (:tag "1.6")
+  :custom
+  (completion-styles '(orderless basic partial-completion))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file ( styles partial-completion)))))
+(provide 'orderless-config)
+;;;end orderless-config.el
