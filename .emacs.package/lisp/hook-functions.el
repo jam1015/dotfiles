@@ -14,7 +14,7 @@
       (evil-local-mode -1)
       (evil-local-mode 1))))
 
-(defvar my/default-theme 'doom-one)
+(defvar my/default-theme 'doom-acario-dark)
 
 (defvar my/default-font-family "InputMono Nerd Font")
 (defvar my/default-font-height 100)
