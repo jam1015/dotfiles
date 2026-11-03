@@ -271,3 +271,7 @@ cscope.out.files
 .emacs.default/custom-dump.el
 *.eld
 
+/.emacs.package/custom-dump.el  
+/.emacs.package/eshell-whereami 
+/.emacs.package/eshell/         
+/.emacs.package/history         
