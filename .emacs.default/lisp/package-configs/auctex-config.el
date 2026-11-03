@@ -1,6 +1,10 @@
 ;; -*- lexical-binding: t; -*-
 (use-package auctex
-  :ensure t
+  :ensure (:host github
+           :repo "emacsmirror/auctex"
+           :branch "master"
+           :build (:sub elpaca--clone +elpaca/build-if-new)
+           )
   :defer t
   :mode ("\\.tex\\'" . LaTeX-mode)
   :init
