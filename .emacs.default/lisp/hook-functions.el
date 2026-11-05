@@ -2,9 +2,21 @@
 ;;; hook-functions.el --- Named functions for use in hook registrations
 
 (defun my/startup-open-eshell ()
-  "Open eshell on startup if no files were passed as arguments."
-  (when (not (cdr command-line-args))
-    (eshell)))
+  "Open eshell on startup if no files were passed as arguments.
+For `server-after-make-frame', the new frame's selected buffer already
+reflects the files requested by `emacsclient'; skip eshell when such a
+buffer is visible so we don't displace the user's file.
+If elpaca is still processing its queues, defer the eshell open to
+`elpaca-after-init-hook' so we don't hijack the elpaca-log window."
+  (when (and (not (cdr command-line-args))
+             (not (buffer-file-name)))
+    (if (and (featurep 'elpaca) (not elpaca-after-init-time))
+        (let ((fn (lambda () (my/startup-open-eshell))))
+          (add-hook 'elpaca-after-init-hook fn)
+          (add-hook 'elpaca-after-init-hook
+                    (lambda () (remove-hook 'elpaca-after-init-hook fn))
+                    90))
+      (eshell))))
 
 (defun my/startup-reinit-evil-messages ()
   ;; *Messages* is created before packages load, so evil hooks fire before
