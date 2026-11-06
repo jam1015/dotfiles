@@ -28,7 +28,7 @@ If elpaca is still processing its queues, defer the eshell open to
 
 (defvar my/default-theme 'doom-one)
 
-(defvar my/default-font-family "InputMono Nerd Font")
+(defvar my/default-font-family "Iosevka Slab")
 (defvar my/default-font-height 100)
 
 (defun my/apply-default-font (&rest _)

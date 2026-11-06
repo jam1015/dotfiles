@@ -30,19 +30,19 @@ TERM = "xterm-256color"
 size = 10
 
 [font.bold]
-family = "InputMono Nerd Font"
+family = "Iosevka Slab"
 style = "Bold"
 
 [font.bold_italic]
-family = "InputMonoIta Nerd Font"
-style = "Bold"
+family = "Iosevka Slab"
+style = "Bold Italic"
 
 [font.italic]
-family = "InputMonoIta Nerd Font"
-style = "Regular"
+family = "Iosevka Slab"
+style = "Italic"
 
 [font.normal]
-family = "InputMono Nerd Font"
+family = "Iosevka Slab"
 style = "Regular"
 
 [font.offset]

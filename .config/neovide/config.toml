@@ -14,5 +14,8 @@ vsync = true
 wsl = false
 
 [font]
-normal = ["InputMono Nerd Font"]
+normal = ["Iosevka Slab"]
+bold = ["Iosevka Slab:Bold"]
+italic = ["Iosevka Slab:Italic"]
+bold_italic = ["Iosevka Slab:Bold:Italic"]
 size = 10.0

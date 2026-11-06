@@ -66,7 +66,7 @@ if &t_Co > 2 || has("gui_running")
   "set completeopt-=menu
   "set completeopt-=menuone
   syntax on
-  set guifont=InputMono\ Nerd\ Font\ 8
+  set guifont=Iosevka\ Slab\ 8
   "
   " I like highlighting strings inside C comments.
   " Revert with ":unlet c_comment_strings".

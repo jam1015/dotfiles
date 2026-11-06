@@ -33,7 +33,7 @@
 @define-color red           #ef4444;
 
 * {
-    font-family: "InputMono Nerd Font", "Symbols Nerd Font", "FontAwesome", monospace;
+    font-family: "Iosevka Slab", "Symbols Nerd Font", "FontAwesome", monospace;
     font-size: 13px;
     font-weight: 600;
     min-height: 0;
@@ -198,14 +198,14 @@ window#waybar.hidden { opacity: 0.1; }
 
 #custom-power {
     color: @red;
-    font-family: "InputMono Nerd Font", "Symbols Nerd Font", "FontAwesome", monospace;
+    font-family: "Iosevka Slab", "Symbols Nerd Font", "FontAwesome", monospace;
     font-size: 15px;
     padding: 0 12px;
 }
 
 #custom-ws-picker {
     color: @muted;
-    font-family: "Symbols Nerd Font", "InputMono Nerd Font", monospace;
+    font-family: "Symbols Nerd Font", "Iosevka Slab", monospace;
     font-size: 16px;
     padding: 0 10px;
 }

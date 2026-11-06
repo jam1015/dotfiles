@@ -28,7 +28,8 @@
     :group 'eshell-config)
 
   :hook ((eshell-mode . eshell-config-initialize)
-         (eshell-mode . my/setup-eshell-evil-window-keys))
+         (eshell-mode . my/setup-eshell-evil-window-keys)
+         (eshell-mode . (lambda () (display-line-numbers-mode -1))))
   :config
   (defvar eshell-config--initialized-buffers nil
     "List of eshell buffers that have been initialized.")
@@ -126,7 +127,10 @@ re-entering `eshell-mode' keeps them active."
       (add-hook 'kill-buffer-hook #'eshell-config--cleanup-buffer-list nil t)
       (goto-char (point-max)))
     (add-hook 'eshell-post-command-hook #'eshell-config-write-pwd nil t)
-    (eshell-config-define-aliases))
+    (eshell-config-define-aliases)
+    (when (require 'with-editor nil t)
+      (with-editor-export-editor)
+      (with-editor-export-git-editor)))
 
   (defun my/eshell-enter-insert-after-prompt ()
     "Go to end of Eshell and enter insert mode after prompt."

@@ -34,7 +34,7 @@ set $alt Mod1
  
  # Font for window titles. Will also be used by the bar unless a different font
  # is used in the bar {} block below.
- font pango:InputMonoNerdFont 12
+ font pango:Iosevka Slab 12
  
  # This font is widely installed, provides lots of unicode glyphs, right-to-left
  # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -312,7 +312,7 @@ client.focused_inactive  $taupe  $taupe $palebeige   $darktaupe  $balancedgrey  
 client.urgent            $calmcyan   $calmcyan    $pureblack  $balancedgrey  $electricblue
 
 bar {
-		font pango: InputMonoNerdFont 12
+		font pango: Iosevka Slab 12
 		status_command i3blocks -c ~/.config/i3/endeavour_untouched/i3blocks.conf
 	    position top
 #	    i3bar_command i3bar --transparency
