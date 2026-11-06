@@ -17,13 +17,19 @@
   :custom
   (pdf-view-display-size 'fit-page)
   (pdf-sync-backward-display-action
-   '((display-buffer-reuse-window)
+   '((display-buffer-reuse-window display-buffer-pop-up-frame)
      (reusable-frames . visible)
-     (inhibit-same-window . t)))
+     (inhibit-same-window . t)
+     (pop-up-frame-parameters . ((width . 100) (height . 50)
+                                 (unsplittable . t)
+                                 (no-other-window . t)))))
   (pdf-sync-forward-display-action
-   '((display-buffer-reuse-window)
+   '((display-buffer-reuse-window display-buffer-pop-up-frame)
      (reusable-frames . visible)
-     (inhibit-same-window . t)))
+     (inhibit-same-window . t)
+     (pop-up-frame-parameters . ((width . 100) (height . 50)
+                                 (unsplittable . t)
+                                 (no-other-window . t)))))
   :config
   (unless (and pdf-info-epdfinfo-program
                (file-executable-p pdf-info-epdfinfo-program))
@@ -32,7 +38,9 @@
                `(my/pdf-view-buffer-p
                  (display-buffer-reuse-window display-buffer-pop-up-frame)
                  (reusable-frames . visible)
-                 (pop-up-frame-parameters . ((width . 100) (height . 50))))))
+                 (pop-up-frame-parameters . ((width . 100) (height . 50)
+                                             (unsplittable . t)
+                                             (no-other-window . t))))))
 
 (provide 'pdf-tools-config)
 ;;;end pdf-tools-config.el

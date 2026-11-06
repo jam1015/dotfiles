@@ -9,6 +9,7 @@
 (require 'elpaca-setup)
 (require 'emacs-config)
 (require 'package-mappings)
+(require 'magit-config)
 (require 'eshell-config)
 (require 'dired-config)
 
@@ -75,7 +76,7 @@
 
 
 ;;; utilities
-(require 'perspective-config)
+;; (require 'perspective-config)
 (require 'eat-config)
 (require 'slime-eat-config)
 (require 'dirvish-config)

@@ -116,6 +116,32 @@ each is replaced with a generated Elisp wrapper function capture."
                  query)
                eager))))
 
+;; Silently drop font-lock rules whose queries don't compile against the
+;; installed grammar, instead of emitting `treesit-font-lock-rules-mismatch'.
+;; Each rule is test-compiled; failures are filtered out. Surviving features
+;; still fontify normally.
+(define-advice treesit-font-lock-recompute-features
+    (:before (&rest _) my-ts-prune-broken-rules)
+  (when (and (bound-and-true-p treesit-font-lock-settings)
+             (fboundp 'treesit-font-lock-setting-query)
+             (fboundp 'treesit-font-lock-setting-language))
+    (setq treesit-font-lock-settings
+          (seq-filter
+           (lambda (s)
+             (condition-case err
+                 (progn (treesit-query-compile
+                         (treesit-font-lock-setting-language s)
+                         (treesit-font-lock-setting-query s)
+                         t)
+                        t)
+               (error
+                (message "pruned treesit rule: feature=%s lang=%s err=%S"
+                         (treesit-font-lock-setting-feature s)
+                         (treesit-font-lock-setting-language s)
+                         err)
+                nil)))
+           treesit-font-lock-settings))))
+
 (provide 'treesit-auto-config)
 
 ;;; end treesit-auto-config.el

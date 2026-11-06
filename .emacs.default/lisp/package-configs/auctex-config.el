@@ -29,6 +29,14 @@
                  "latexmk %(latexmk-engine) -auxdir=aux -outdir=out -synctex=1 -interaction=nonstopmode -view=none %t"
                  TeX-run-TeX t (latex-mode LaTeX-mode)
                  :help "Run latexmk once"))
+  ;; AUCTeX's built-in Biber entry uses TeX-output-dir ("out"), but the .bcf
+  ;; lives in aux/. Point direct Biber invocations at aux/ as a safety net;
+  ;; LatexMk still handles biber itself in the normal flow.
+  (with-eval-after-load 'tex
+    (setf (alist-get "Biber" TeX-command-list nil nil #'string=)
+          '("biber --output-directory=aux %s"
+            TeX-run-Biber nil t :help "Run Biber")))
+
   (setq TeX-command-default "LatexMk")
   (add-hook 'LaTeX-mode-hook
             (lambda () (setq-local TeX-command-default "LatexMk")))

@@ -1,3 +1,3 @@
-$pdf_mode = 1;
+$pdf_mode = 5;
 $bibtex_use = 2;
 

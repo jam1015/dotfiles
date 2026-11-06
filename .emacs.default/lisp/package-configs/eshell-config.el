@@ -18,6 +18,25 @@
   (defvar eshell-config--initialized-buffers nil
     "List of eshell buffers that have been initialized.")
 
+  (defun eshell-config--git-branch ()
+    (when (fboundp 'magit-get-current-branch)
+      (magit-get-current-branch)))
+
+  (defun eshell-config-prompt ()
+    (let ((branch (eshell-config--git-branch)))
+      (concat
+       (propertize (concat (system-name) ":"
+                           (abbreviate-file-name (eshell/pwd)))
+                   'face '(:foreground "magenta" :weight bold))
+       (when branch
+         (propertize (format " ⎇ %s" branch)
+                     'face '(:foreground "yellow")))
+       (propertize " > " 'face '(:foreground "magenta")))))
+
+  (setq eshell-prompt-function #'eshell-config-prompt
+        eshell-prompt-regexp "^[^#$\n]* [>#] "
+        eshell-highlight-prompt nil)
+
   (defun eshell-config--ensure-whereami-dir ()
     (let ((dir (file-name-directory eshell-config-whereami-file)))
       (unless (file-directory-p dir)
