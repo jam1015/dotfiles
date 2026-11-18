@@ -8,6 +8,7 @@ application/x-zerosize=org.pwmt.zathura.desktop;libreoffice-writer.desktop;
 application/xhtml+xml=firefox.desktop;
 image/jpeg=feh-3.desktop;feh-2.desktop;
 text/html=firefox-developer-edition.desktop;firefox.desktop;
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 
 [Default Applications]
 application/xhtml+xml=firefox.desktop;

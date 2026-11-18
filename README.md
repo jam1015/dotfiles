@@ -41,7 +41,9 @@ ssh-keygen -t ed25519 -C "jordan.mandel@live.com"
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 # copy the public key, then paste it into GitHub > Settings > SSH keys
-xclip -selection clipboard < ~/.ssh/id_ed25519.pub   # or: cat ~/.ssh/id_ed25519.pub
+wl-copy < ~/.ssh/id_ed25519.pub                      # Wayland (wl-clipboard)
+xclip -selection clipboard < ~/.ssh/id_ed25519.pub   # X11 (or: xsel -ib)
+cat ~/.ssh/id_ed25519.pub                            # bare tty: print and copy by hand
 ```
 
 ## Credential helper (gopass)
@@ -186,11 +188,22 @@ chsh -s /bin/zsh
 # Boot to a console
 
 These settings make the system boot to a text console instead of a graphical
-login screen. Use the section for your bootloader, then:
+login screen. Use the section for your bootloader, then disable whichever
+display manager is enabled (lightdm, sddm, plasma-login-manager, ...).
+`display-manager.service` is an alias for the active one:
 
 ```bash
-sudo systemctl disable lightdm.service
+sudo systemctl disable display-manager.service
 sudo systemctl set-default multi-user.target
+```
+
+After logging in on the console, start a graphical session by hand:
+
+```bash
+startx              # X11: runs ~/.xinitrc (i3, bspwm, ...)
+Hyprland            # Wayland compositors are launched directly
+river
+startplasma-wayland # KDE Plasma on Wayland (X11: put startplasma-x11 in ~/.xinitrc)
 ```
 
 ## GRUB
@@ -274,15 +287,28 @@ sudo systemctl daemon-reload
 sudo systemctl enable update-timezone.service
 ```
 
-## Geoclue for redshift
+## Night light (redshift / gammastep / wlsunset)
 
-Add to `/etc/geoclue/geoclue.conf`:
+- **X11:** redshift
+- **Wayland:** gammastep (also works on X11) or wlsunset
+- **KDE Plasma:** use the built-in Night Light instead (System Settings >
+  Display & Monitor), on either X11 or Wayland
+
+redshift and gammastep can get your location from geoclue. Add a section for
+each one you use to `/etc/geoclue/geoclue.conf`:
 
 ```
 [redshift]
 allowed=true
 system=true
+
+[gammastep]
+allowed=true
+system=true
 ```
+
+wlsunset doesn't use geoclue; pass coordinates instead, e.g.
+`wlsunset -l 40.7 -L -74.0`.
 
 # Machine-specific fixes
 
