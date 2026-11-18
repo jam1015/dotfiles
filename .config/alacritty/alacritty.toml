@@ -30,19 +30,19 @@ TERM = "xterm-256color"
 size = 10
 
 [font.bold]
-family = "Iosevka Slab"
+family = "Iosevka Fixed Slab"
 style = "Bold"
 
 [font.bold_italic]
-family = "Iosevka Slab"
+family = "Iosevka Fixed Slab"
 style = "Bold Italic"
 
 [font.italic]
-family = "Iosevka Slab"
+family = "Iosevka Fixed Slab"
 style = "Italic"
 
 [font.normal]
-family = "Iosevka Slab"
+family = "Iosevka Fixed Slab"
 style = "Regular"
 
 [font.offset]

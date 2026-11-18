@@ -14,8 +14,8 @@ vsync = true
 wsl = false
 
 [font]
-normal = ["Iosevka Slab"]
-bold = ["Iosevka Slab:Bold"]
-italic = ["Iosevka Slab:Italic"]
-bold_italic = ["Iosevka Slab:Bold:Italic"]
+normal = ["Iosevka Fixed Slab"]
+bold = ["Iosevka Fixed Slab:Bold"]
+italic = ["Iosevka Fixed Slab:Italic"]
+bold_italic = ["Iosevka Fixed Slab:Bold:Italic"]
 size = 10.0

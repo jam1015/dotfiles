@@ -16,8 +16,10 @@ plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.image
 
 [Containments][2]
+ItemGeometries-1080x1920=
 ItemGeometries-1920x1080=
 ItemGeometriesHorizontal=
+ItemGeometriesVertical=
 activityId=ffbc1c92-3c01-417a-b608-6cfe32a67e79
 formfactor=0
 immutability=1
@@ -81,7 +83,7 @@ immutability=1
 plugin=org.kde.plasma.icontasks
 
 [Containments][4][Applets][7][Configuration][General]
-launchers=applications:systemsettings.desktop,applications:org.kde.discover.desktop,preferred://browser
+launchers=applications:systemsettings.desktop,applications:org.kde.discover.desktop,preferred://browser,applications:kitty.desktop
 
 [Containments][4][Applets][8]
 immutability=1
@@ -128,11 +130,11 @@ plugin=org.kde.plasma.keyboardlayout
 
 [Containments][4][Applets][9][Applets][19]
 immutability=1
-plugin=org.kde.plasma.battery
+plugin=org.kde.kdeconnect
 
 [Containments][4][Applets][9][Applets][20]
 immutability=1
-plugin=org.kde.plasma.brightness
+plugin=org.kde.plasma.vault
 
 [Containments][4][Applets][9][Applets][21]
 immutability=1
@@ -164,6 +166,14 @@ migrated=true
 [Containments][4][Applets][9][Applets][27]
 immutability=1
 plugin=org.kde.plasma.printmanager
+
+[Containments][4][Applets][9][Applets][28]
+immutability=1
+plugin=org.kde.plasma.battery
+
+[Containments][4][Applets][9][Applets][29]
+immutability=1
+plugin=org.kde.plasma.brightness
 
 [Containments][4][Applets][9][General]
 extraItems=org.kde.plasma.cameraindicator,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.manage-inputmethod,org.kde.plasma.mediacontroller,org.kde.plasma.notifications,org.kde.plasma.battery,org.kde.plasma.brightness,org.kde.plasma.dwellclicker,org.kde.plasma.keyboardlayout,org.kde.plasma.kclock_1x2,org.kde.kdeconnect,org.kde.plasma.vault,org.kde.plasma.bluetooth,org.kde.merkuro.contact.applet,org.kde.plasma.keyboardindicator,org.kde.plasma.weather,org.kde.kscreen,org.kde.kupapplet,org.kde.plasma.networkmanagement,org.kde.plasma.volume,org.kde.plasma.printmanager

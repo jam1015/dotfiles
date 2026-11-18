@@ -33,7 +33,7 @@
 @define-color red           #ef4444;
 
 * {
-    font-family: "Iosevka Slab", "Symbols Nerd Font", "FontAwesome", monospace;
+    font-family: "Iosevka Fixed Slab", "Symbols Nerd Font", "FontAwesome", monospace;
     font-size: 13px;
     font-weight: 600;
     min-height: 0;
@@ -60,7 +60,6 @@ window#waybar.hidden { opacity: 0.1; }
 #custom-output_name,
 #custom-ws-picker,
 #custom-media,
-#mpd,
 #pulseaudio,
 #network,
 #power-profiles-daemon,
@@ -198,14 +197,14 @@ window#waybar.hidden { opacity: 0.1; }
 
 #custom-power {
     color: @red;
-    font-family: "Iosevka Slab", "Symbols Nerd Font", "FontAwesome", monospace;
+    font-family: "Iosevka Fixed Slab", "Symbols Nerd Font", "FontAwesome", monospace;
     font-size: 15px;
     padding: 0 12px;
 }
 
 #custom-ws-picker {
     color: @muted;
-    font-family: "Symbols Nerd Font", "Iosevka Slab", monospace;
+    font-family: "Symbols Nerd Font", "Iosevka Fixed Slab", monospace;
     font-size: 16px;
     padding: 0 10px;
 }
@@ -238,13 +237,6 @@ window#waybar.hidden { opacity: 0.1; }
 #power-profiles-daemon.performance { color: @orange; }
 #power-profiles-daemon.balanced    { color: @blue; }
 #power-profiles-daemon.power-saver { color: @green; }
-
-/* ── MPD states ────────────────────────────────────────────────────────── */
-
-#mpd                { color: @green; }
-#mpd.disconnected   { color: @red; }
-#mpd.stopped        { color: @muted; }
-#mpd.paused         { color: @orange; }
 
 /* ── Privacy ───────────────────────────────────────────────────────────── */
 

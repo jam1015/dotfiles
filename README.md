@@ -202,17 +202,18 @@ chsh -s /bin/zsh
 
 # Boot to a console
 
-These settings make the system boot to a text console instead of a graphical
-login screen. Use the section for your bootloader, then disable whichever
-display manager is enabled (lightdm, sddm, plasma-login-manager, ...).
-`display-manager.service` is an alias for the active one:
+This makes the system boot to a text console instead of a graphical login
+screen. Disable whichever display manager is enabled (lightdm, sddm,
+plasma-login-manager, ...); `display-manager.service` is an alias for the
+active one. Then make the text-mode target the default:
 
 ```bash
 sudo systemctl disable display-manager.service
 sudo systemctl set-default multi-user.target
 ```
 
-After logging in on the console, start a graphical session by hand:
+No bootloader changes are needed. After logging in on the console, start a
+graphical session by hand:
 
 ```bash
 startx              # X11: runs ~/.xinitrc (i3, bspwm, ...)
@@ -221,30 +222,12 @@ river
 startplasma-wayland # KDE Plasma on Wayland (X11: put startplasma-x11 in ~/.xinitrc)
 ```
 
-## GRUB
-
-In `/etc/default/grub`:
-
-```
-GRUB_CMDLINE_LINUX="systemd.unit=multi-user.target"
-```
-
-Then regenerate the config:
+To go back to a graphical login screen, re-enable your display manager by
+name and restore the graphical target:
 
 ```bash
-sudo grub-mkconfig -o /boot/grub/grub.cfg            # BIOS
-sudo grub-mkconfig -o /boot/efi/EFI/grub/grub.cfg    # UEFI
-```
-
-## systemd-boot
-
-In `/boot/loader/entries/<entry>.conf`:
-
-```
-title   Linux
-linux   /vmlinuz-linux
-initrd  /initramfs-linux.img
-options root=UUID=your-root-partition-uuid rw systemd.unit=multi-user.target
+sudo systemctl enable sddm.service   # or lightdm.service, etc.
+sudo systemctl set-default graphical.target
 ```
 
 # Console (tty) font
@@ -329,9 +312,19 @@ wlsunset doesn't use geoclue; pass coordinates instead, e.g.
 
 ## Framework: microphone
 
-Edit `/usr/share/alsa-card-profile/mixer/paths/analog-input-internal-mic.conf`
-and set the volume to zero under both `[element Internal Mic Boost]` and
-`[element Int Mic Boost]`.
+Edit `/usr/share/alsa-card-profile/mixer/paths/analog-input-internal-mic.conf`.
+Under both `[Element Internal Mic Boost]` and `[Element Int Mic Boost]`,
+change `volume = merge` to:
+
+```
+volume = zero
+```
+
+`zero` is a keyword meaning "always 0 dB", i.e. no boost. Don't write `0`: a
+number is a raw hardware volume step, which isn't guaranteed to be 0 dB.
+
+The file belongs to the `alsa-card-profiles` package (pulled in by PipeWire),
+so an upgrade can overwrite it. Re-check it after updates.
 
 ## MacBook Pro: webcam
 
