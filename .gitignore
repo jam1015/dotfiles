@@ -270,6 +270,11 @@ cscope.out.files
 .emacs.default/ielm-history.eld
 .emacs.default/custom-dump.el
 *.eld
+.local/share/klipper/
+.local/share/klipper/*
+.local/share/klipper/**
+.local/share/klipper/**/*
+.local/share/klipper
 
 /.emacs.package/custom-dump.el  
 /.emacs.package/eshell-whereami 
