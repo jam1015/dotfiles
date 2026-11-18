@@ -78,7 +78,12 @@ change, so commit the result.
 If a submodule URL in `.gitmodules` changes, run `git submodule sync --recursive`
 to copy the new URLs into `.git`.
 
-I usually also set this in this repo only:
+Don't set `submodule.recurse = true` for this repo. With it on, `git pull`,
+`checkout`, `switch` and `reset` also move every submodule back to the commit
+pinned here. Most of these submodules update themselves (oh-my-zsh's updater,
+`doom upgrade`, spacemacs tracking `develop`, tpm), so recursing would keep
+undoing those updates and make every pull slower. It's off by default; if
+your global git config turns it on, override it for this repo only:
 
 ```bash
 git config --local submodule.recurse false
@@ -139,9 +144,19 @@ Exec = /bin/bash -c 'pacman -Qqe > "$(getent passwd 1000 | cut -d: -f6)/dotfiles
 ```
 
 `pacman -Qqe` records only explicitly installed packages, not their
-dependencies. That keeps the list short, lets orphan cleanup
-(`pacman -Qdtq`) keep working after a reinstall, and avoids failures from
-dependencies that have since been dropped from the repos.
+dependencies. This matters on a reinstall: everything installed from the list
+gets marked as explicitly installed. If the list included dependencies, they
+would all become "explicit" too, and pacman would never treat them as
+orphans, even after nothing needs them. Keeping dependencies out of the list
+means they're reinstalled as dependencies, so this still finds and removes
+unneeded ones:
+
+```bash
+sudo pacman -Rns $(pacman -Qdtq)   # remove orphaned dependencies
+```
+
+It also keeps the list short and avoids install failures from dependencies
+that have since been dropped from the repos.
 
 Pacman hooks run as root, so `~` and `$HOME` would point at `/root`. The
 command looks up the home directory of the first regular user (UID 1000)
