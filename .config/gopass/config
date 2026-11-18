@@ -1,2 +1,4 @@
 [mounts]
 	path = ~/.local/share/gopass/stores/root
+[recipients]
+	hash = fdbd57ac255b9019a652aad21ff0f1f7d4bb537128122918c0f6d30a99da3a37
