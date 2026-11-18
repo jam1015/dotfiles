@@ -1,0 +1,2 @@
+[mounts]
+	path = ~/.local/share/gopass/stores/root
