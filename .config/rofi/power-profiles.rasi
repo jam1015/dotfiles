@@ -3,7 +3,7 @@
  * Maintainer: joekamprad [joekamprad //a_t// endeavouros.com]
  *******************************************************/
 configuration {
-    font:             "Iosevka Slab 10";
+    font:             "Noto Sans 10";
     show-icons:       false;
     icon-theme:       "Qogir";
     scroll-method:    0;

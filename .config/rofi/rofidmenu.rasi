@@ -3,7 +3,7 @@
  * Maintainer: joekamprad [joekamprad //a_t// endeavouros.com]
  *******************************************************/
 configuration {
-    font:                "Iosevka Slab 14";
+    font:                "Noto Sans 14";
     show-icons:          true;
     icon-theme:          "Qogir";
     display-drun:        "Apps";

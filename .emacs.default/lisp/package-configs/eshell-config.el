@@ -107,12 +107,18 @@ flatten it first.  With no arguments, prompt interactively."
       nil))
 
   (defun eshell-config-define-aliases ()
-    "Register the personal set of Eshell aliases for this buffer."
+    "Ensure the personal set of Eshell aliases is defined.
+Eshell already loads `eshell-aliases-file' into every new buffer, and
+`eshell/alias' rewrites that file through a file-visiting buffer
+(~500ms each, since it fires vc/undo-tree/etc. hooks).  So only call
+it for aliases that are missing or changed; normally this is a no-op."
     (dolist (pair '(("ff" . "eshell-config--find-files $*")
                     ("vi" . "eshell-config--find-files $*")
                     ("ll" . "ls -la $*")
                     ("la" . "ls -a $*")))
-      (eshell/alias (car pair) (cdr pair))))
+      (unless (equal (cadr (assoc (car pair) eshell-command-aliases-list))
+                     (cdr pair))
+        (eshell/alias (car pair) (cdr pair)))))
 
   (defun eshell-config-initialize ()
     "One-shot plus per-buffer Eshell setup, run from `eshell-mode-hook'.
