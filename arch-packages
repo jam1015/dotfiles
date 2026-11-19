@@ -2409,6 +2409,7 @@ tree-sitter-query
 tree-sitter-vim
 tree-sitter-vimdoc
 tslib
+ttc-iosevka-slab
 ttf-bitstream-vera
 ttf-dejavu
 ttf-fantasque-nerd
@@ -2556,6 +2557,7 @@ wireless-regdb
 wireless_tools
 wireplumber
 wl-clipboard
+wlogout
 wlr-randr
 wlroots0.20
 wlsunset

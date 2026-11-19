@@ -46,7 +46,7 @@ then a magenta `> ' separator."
     (let ((branch (eshell-config--git-branch)))
       (concat (system-name) ":"
               (abbreviate-file-name (eshell/pwd))
-              (when branch (format " ⎇ %s" branch))
+              (when branch (format "⎇%s" branch))
               " > ")))
 
   (setq eshell-prompt-function #'eshell-config-prompt

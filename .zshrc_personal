@@ -203,7 +203,7 @@ fif() {
 # VCS info setup
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git svn hg
-zstyle ':vcs_info:git*' formats "⎇ %b"
+zstyle ':vcs_info:git*' formats "⎇%b"
 
 # Vi mode indicators
 vim_ins_mode=">"

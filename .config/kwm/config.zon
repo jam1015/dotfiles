@@ -66,7 +66,7 @@
     .bar = .{
         .show_default = true,
         .position = .top,
-        .font = "monospace:size=10",
+        .font = "Iosevka Slab:size=10",
         .color = .{
             .normal = .{
                 .fg = 0xc8d3f5ff,

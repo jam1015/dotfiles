@@ -69,7 +69,7 @@
   },
 
   "hyprland/window": {
-    "format": "▣{}",
+    "format": "󰖯 {}",
     "max-length": 60,
     "separate-outputs": true     // each bar shows its own monitor's window
   },
@@ -196,7 +196,7 @@
   },
 
   "custom/power": {
-    "format": "⏻",
+    "format": "󰐥",
     "tooltip": false,
     "on-click": "pgrep -x wlogout >/dev/null && pkill -x wlogout || wlogout"
   },
