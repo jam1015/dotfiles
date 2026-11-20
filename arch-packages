@@ -7,6 +7,7 @@ accessibility-inspector
 accountsservice
 acl
 acpi
+ada
 adobe-source-code-pro-fonts
 adwaita-cursors
 adwaita-fonts
@@ -114,6 +115,7 @@ breeze-cursors
 breeze-gtk
 breeze-icons
 brightnessctl
+brlaser
 broadcom-wl-dkms
 brotli
 bspwm
@@ -138,6 +140,7 @@ cblas
 cdparanoia
 cfitsio
 chromaprint
+chromium
 chrpath
 cifs-utils
 cjson
@@ -411,6 +414,7 @@ go
 gobject-introspection
 gobject-introspection-runtime
 gocryptfs
+google-chrome
 gopass
 gperftools
 gpgme
@@ -1679,7 +1683,7 @@ nilfs-utils
 ninja
 nm-connection-editor
 node-gyp
-nodejs-lts-jod
+nodejs
 nodejs-nopt
 noto-fonts
 noto-fonts-cjk
@@ -2289,6 +2293,8 @@ signon-kwallet-extension
 signon-plugin-oauth2
 signon-ui
 signond
+simdjson
+simdutf
 skanlite
 skanpage
 skia-sharp

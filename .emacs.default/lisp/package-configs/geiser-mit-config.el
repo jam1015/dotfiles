@@ -5,7 +5,8 @@
   :ensure
   (geiser
    :host gitlab :repo "emacs-geiser/geiser"
-   :files ("elisp/*.el" "doc/dir" "doc/geiser.texi")))
+   :files ("elisp/*.el" "doc/dir" "doc/geiser.texi"))
+  :defer t)
 
 (use-package geiser-mit
   ;; To revert to the codeberg MELPA recipe, comment the :ensure (...) lines
@@ -15,8 +16,11 @@
   (geiser-mit
    :host gitlab :repo "emacs-geiser/mit"
    :files (:defaults "src" "src/*"))
-  :after ( corfu evil)
-  :config
+  ;; Deferred: geiser's autoloads hook into scheme-mode and provide run-mit.
+  ;; The hooks/mappings below are cheap and only take effect once those
+  ;; modes load, so they live in :init.
+  :defer t
+  :init
   (dolist (hook '(geiser-repl-mode-hook
                   geiser-mode-hook    ; for Scheme source buffers
                   scheme-mode-hook))  ; if you ever open plain scheme-mode

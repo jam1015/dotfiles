@@ -35,9 +35,26 @@
     "List of eshell buffers that have been initialized.")
 
   (defun eshell-config--git-branch ()
-    "Return the current git branch via Magit, or nil if unavailable."
-    (when (fboundp 'magit-get-current-branch)
-      (magit-get-current-branch)))
+    "Return the current git branch, or nil outside a repo / when detached.
+Reads HEAD directly instead of going through Magit, so it needs no
+package loaded and spawns no git process.  Handles worktrees and
+submodules (where `.git' is a file pointing at the real gitdir).
+Skipped on remote directories to avoid TRAMP round-trips."
+    (unless (file-remote-p default-directory)
+      (when-let* ((root (locate-dominating-file default-directory ".git"))
+                  (dotgit (expand-file-name ".git" root))
+                  (gitdir (if (file-directory-p dotgit)
+                              dotgit
+                            (with-temp-buffer
+                              (insert-file-contents dotgit)
+                              (when (re-search-forward "^gitdir: \\(.+\\)$" nil t)
+                                (expand-file-name (match-string 1) root)))))
+                  (head (expand-file-name "HEAD" gitdir))
+                  ((file-readable-p head)))
+        (with-temp-buffer
+          (insert-file-contents head)
+          (when (looking-at "ref: refs/heads/\\(.+\\)$")
+            (match-string 1))))))
 
   (defun eshell-config-prompt ()
     "Build the Eshell prompt string.

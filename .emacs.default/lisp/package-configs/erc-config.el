@@ -1,6 +1,14 @@
 ;;; -*- lexical-binding: t; -*-
 (use-package erc
   :ensure nil
+  :defer t
+  :init
+  ;; Defined in :init so the command exists before erc loads; `erc-tls'
+  ;; is autoloaded and pulls in erc on first use.
+  (defun irc-libera ()
+    (interactive)
+    ;;identify via /msg NickServ IDENTIFY badamkulfi <password>
+    (erc-tls :server "irc.libera.chat" :port 6697 :nick "badamkulfi"))
   :custom
   (erc-join-buffer 'switch-to-buffer)
   (erc-user-full-name "Jordan Mandel")
@@ -12,11 +20,7 @@
   ;; (erc-modules '(autojoin button completion fill irccontrols list match
   ;;                move-to-prompt netsplit networks noncommands readonly
   ;;                ring stamp track)))
-  :config
-  (defun irc-libera ()
-    (interactive)
-    ;;identify via /msg NickServ IDENTIFY badamkulfi <password>
-    (erc-tls :server "irc.libera.chat" :port 6697 :nick "badamkulfi")))
+  )
 
 (use-package erc-sasl
   :ensure nil
