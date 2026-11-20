@@ -2,6 +2,7 @@
 (use-package flycheck
   :defer t
   :init
+  (my/mappings-flycheck)
   ;;(global-flycheck-mode)
   :config ;;(add-hook 'after-init-hook #'global-flycheck-mode)
  ;; optional

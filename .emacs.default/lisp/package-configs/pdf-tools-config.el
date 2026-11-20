@@ -42,5 +42,27 @@
                                              (unsplittable . t)
                                              (no-other-window . t))))))
 
+;; Make evil-collection's pdf `y' behave like `evil-yank-characters':
+;; always `kill-new' (=> clipboard via xclip-mode) unless the register is
+;; `_', also fill a named register when given one, and update "0 when
+;; yanked without a register.  Upstream only sets the register, so "ay
+;; never reached the kill ring/clipboard and "0 was never updated.
+(defun my/evil-collection-pdf-yank ()
+  "Yank the active pdf-view region the same way `evil-yank' would."
+  (interactive)
+  (pdf-view-assert-active-region)
+  (let ((text (mapconcat #'identity (pdf-view-active-region-text) nil))
+        (register evil-this-register))
+    (pdf-view-deactivate-region)
+    (when register
+      (evil-set-register register text))
+    (unless register
+      (evil-set-register ?0 text))
+    (unless (eq register ?_)
+      (kill-new text))))
+
+(with-eval-after-load 'evil-collection-pdf
+  (advice-add 'evil-collection-pdf-yank :override #'my/evil-collection-pdf-yank))
+
 (provide 'pdf-tools-config)
 ;;;end pdf-tools-config.el
