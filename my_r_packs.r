@@ -3,6 +3,12 @@
 
 options(repos = c(CRAN = "https://cloud.r-project.org"))
 
+# Ensure the per-version user library exists (R only adds it to .libPaths()
+# if it already exists, and Rscript won't offer to create it).
+user_lib <- Sys.getenv("R_LIBS_USER")
+if (!dir.exists(user_lib)) dir.create(user_lib, recursive = TRUE)
+.libPaths(c(user_lib, .libPaths()))
+
 pkg_dir <- "~/dotfiles/r_packages"
 
 read_manifest <- function(file) {

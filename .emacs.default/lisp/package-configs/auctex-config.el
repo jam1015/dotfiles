@@ -12,6 +12,7 @@
         LaTeX-biblatex-use-Biber t
         TeX-output-dir "out")
   (setq-default TeX-master nil)
+  (setq-default TeX-engine 'xetex)
   :config
   (require 'tex)
   (require 'latex)

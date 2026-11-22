@@ -31,6 +31,12 @@
 (require 'evil-surround-config)
 (require 'evil-overrides)
 
+;;; lsp
+(require 'eglot-config)
+
+;;; python
+(require 'pyvenv-config)
+
 ;;; elisp
 (require 'flycheck-config)
 (require 'package-lint-config)

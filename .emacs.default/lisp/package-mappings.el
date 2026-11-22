@@ -277,7 +277,10 @@
     (eshell-reset)))
 
 (defun my/mappings-dired ()
-  (define-key dired-mode-map (kbd "M-e") #'my/dired-open-eshell-here))
+  (define-key dired-mode-map (kbd "M-e") #'my/dired-open-eshell-here)
+  (with-eval-after-load 'evil-leader
+    (evil-leader/set-key-for-mode 'dired-mode
+      "+" #'dired-create-empty-file)))
 
 
 ;;; ============================================================
@@ -303,6 +306,112 @@
   ;; line" automatically (same convention as dd/yy/cc), so no separate binding.
   (evil-define-key '(normal visual) slime-eat-mode-map
     "gz" #'slime-eat-send-op))
+
+
+;;; ============================================================
+;;; EGLOT  (mirrors nvim LSP keymap)
+;;; ============================================================
+;; Layout:
+;;   gd / gD / gi / gr        buffer-local in eglot-managed buffers
+;;   [d / ]d                  prev/next diagnostic (eglot buffers only)
+;;   <leader>l*               LSP actions (global; no-op if no server)
+;;   <leader>lw*              workspace folders
+;;   <leader>lt*              toggles (inlay hints, diagnostics)
+;;   <leader>d*               diagnostics (open float, loclist)
+;;
+;; Conflict audit vs existing leader keys ("ee" "bb" "bk" "nh" ":"
+;; "SPC :" "[t" "]t"): none — `l' and `d' are unused at top level.
+;;
+;; `gi' and `gd' are default evil bindings (insert-resume,
+;; goto-definition); we rebind them only inside eglot-managed buffers
+;; via `evil-define-key' on `eglot-mode-map', so normal evil behavior
+;; is preserved everywhere else.
+
+(defun my/eglot-diagnostic-open-float ()
+  "Show flymake diagnostics at point in a popup (nvim :diagnostic.open_float)."
+  (interactive)
+  (if (fboundp 'flymake-show-buffer-diagnostics)
+      (flymake-show-buffer-diagnostics)
+    (message "no flymake")))
+
+(defun my/eglot-format-buffer-or-region ()
+  "Format region if active, else whole buffer (async)."
+  (interactive)
+  (if (use-region-p)
+      (eglot-format (region-beginning) (region-end))
+    (eglot-format-buffer)))
+
+(defun my/eglot-toggle-inlay-hints ()
+  "Toggle eglot inlay-hints in the current buffer."
+  (interactive)
+  (if (bound-and-true-p eglot-inlay-hints-mode)
+      (progn (eglot-inlay-hints-mode -1) (message "Inlay hints disabled"))
+    (eglot-inlay-hints-mode 1) (message "Inlay hints enabled")))
+
+(defun my/eglot-toggle-diagnostics ()
+  "Toggle flymake (eglot's diagnostics backend) in the current buffer."
+  (interactive)
+  (if (bound-and-true-p flymake-mode)
+      (progn (flymake-mode -1) (message "Diagnostics disabled"))
+    (flymake-mode 1) (message "Diagnostics enabled")))
+
+(defun my/eglot-list-workspace-folders ()
+  "Print the project root serving as eglot's workspace folder."
+  (interactive)
+  (if (not (eglot-current-server))
+      (message "no eglot server")
+    (let ((proj (project-current)))
+      (message "project: %s" (and proj (project-root proj))))))
+
+(defun my/mappings-eglot ()
+  ;; Buffer-local navigation + diagnostic-nav inside eglot buffers.
+  ;;
+  ;; Keys marked [e-c] are also set by evil-collection's eglot module
+  ;; (modes/eglot/evil-collection-eglot.el); listed here redundantly so
+  ;; the full in-eglot keymap is visible in one place. Our definitions
+  ;; run after evil-collection's, so these overrides win — most are
+  ;; identical so the override is a no-op.
+  (evil-define-key '(normal visual) eglot-mode-map
+    ;;                                                     ;; source
+    (kbd "gd")  #'xref-find-definitions                    ; [e-c] same
+    (kbd "gD")  #'xref-find-references                     ; [e-c sets: xref-find-definitions-other-window]
+                                                           ;   ours diverges — nvim parity (gD = declaration ≈ refs)
+    (kbd "g5")  #'xref-find-definitions-other-frame        ; [e-c] redundant
+    (kbd "C-t") #'xref-go-back                             ; [e-c sets: xref-pop-marker-stack, deprecated alias]
+    (kbd "K")   #'eldoc-doc-buffer                         ; [e-c] redundant
+    (kbd "gr")  #'xref-find-references                     ; [e-c] only when `evil-collection-want-find-usages-bindings'
+    ;; Extras not in evil-collection:
+    (kbd "gi")  #'eglot-find-implementation                ; ours
+    (kbd "[d")  #'flymake-goto-prev-error                  ; ours
+    (kbd "]d")  #'flymake-goto-next-error)                 ; ours
+
+  ;; Global leader bindings (safe: commands error cleanly when no
+  ;; server is attached, matching vim.lsp.buf.* behavior).
+  (with-eval-after-load 'evil-leader
+    (evil-leader/set-key
+     ;; <leader>d — Diagnostics
+     "de" #'my/eglot-diagnostic-open-float
+     "dq" #'flymake-show-project-diagnostics
+
+     ;; <leader>l — LSP
+     "lh" #'eldoc-doc-buffer             ; hover
+     "lk" #'eldoc                        ; signature help (eldoc shows it)
+     "ld" #'eglot-find-typeDefinition
+     "lr" #'eglot-rename
+     "la" #'eglot-code-actions
+     "lf" #'my/eglot-format-buffer-or-region
+
+     ;; <leader>lw — workspace / server lifecycle
+     ;; (eglot has no interactive add/remove-workspace-folder; closest
+     ;; analogues are reconnect and shutdown-all.)
+     "lws" #'eglot-shutdown-all
+     "lwr" #'eglot-reconnect
+     "lwl" #'my/eglot-list-workspace-folders
+
+     ;; <leader>lt — toggles
+     "lti" #'my/eglot-toggle-inlay-hints
+     "ltl" #'eglot-code-action-quickfix ; eglot has no codelens UX; use QF
+     "ltd" #'my/eglot-toggle-diagnostics)))
 
 
 ;;; ============================================================

@@ -81,6 +81,7 @@ baloo
 baloo-widgets
 base
 base-devel
+basedpyright
 bash
 bash-app-translate
 bash-completion
@@ -1927,6 +1928,7 @@ plasma5support
 plasmatube
 playerctl
 plocate
+pnpm
 podman
 polkit
 polkit-gnome
@@ -2368,6 +2370,7 @@ tesseract-data-afr
 tesseract-data-osd
 tevent
 texinfo
+texlab
 texlive-basic
 texlive-bibtexextra
 texlive-bin
@@ -2453,6 +2456,7 @@ usbmuxd
 usbutils
 util-linux
 util-linux-libs
+uv
 uwsm
 v4l-utils
 vala

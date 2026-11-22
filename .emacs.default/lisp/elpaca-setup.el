@@ -48,6 +48,38 @@
 (elpaca `(,@elpaca-order))
 
 ;;;; ============================================================
+;;;;  MELPA default-branch workaround (remove once PR #586 lands)
+;;;; ============================================================
+;; MELPA renamed master -> main; upstream `elpaca-menu-melpa--clone'
+;; still hardcodes "master". See https://github.com/progfolio/elpaca/pull/586
+(with-eval-after-load 'elpaca-menu-melpa
+  (defun my/elpaca-menu-melpa--clone (path)
+    "Clone MELPA recipes repo to PATH."
+    (let ((default-directory path))
+      (make-directory path t)
+      (make-directory (expand-file-name ".git/info/" path) t)
+      (message "Downloading MELPA recipes...")
+      (let* ((process-environment (append '("GIT_CONFIG_SYSTEM=/dev/null"
+                                            "GIT_CONFIG_GLOBAL=/dev/null")
+                                          process-environment))
+             (processes
+              (list
+               (elpaca-process-call "git" "init")
+               (elpaca-process-call "git" "config" "core.sparseCheckout" "true")
+               (with-temp-buffer
+                 (insert "recipes")
+                 (append-to-file (point-min) (point-max)
+                                 (expand-file-name ".git/info/sparse-checkout" path)))
+               (elpaca-process-call "git" "remote" "add" "origin" "https://github.com/melpa/melpa.git")
+               (elpaca-process-call "git" "pull" "--depth=1" "origin" "main")
+               (elpaca-process-call "git" "checkout" "main")
+               (elpaca-process-call "git" "branch" "--set-upstream-to" "origin/main" "main")))
+             (err (car (cl-remove-if #'zerop (delq nil processes) :key #'car))))
+        (when err (error "Unable to clone MELPA: %S" err))
+        (message "Downloading MELPA recipes...100%%"))))
+  (advice-add 'elpaca-menu-melpa--clone :override #'my/elpaca-menu-melpa--clone))
+
+;;;; ============================================================
 ;;;;  elpaca-build-augment
 ;;;; ============================================================
 
